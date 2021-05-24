@@ -5,7 +5,9 @@ PyAnsys Sphinx Documentation Theme
    :hidden:
    :maxdepth: 3
 
-   examples
+   usage
+   style
+   class_documentation
 
 
 Introduction and Purpose

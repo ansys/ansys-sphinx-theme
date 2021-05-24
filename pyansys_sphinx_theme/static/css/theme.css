@@ -1,8 +1,19 @@
+@font-face {
+    font-family: "Source Sans Pro Light";
+    src: url(../fonts/SourceSansPro-Light.ttf);
+}
+
+@font-face {
+    font-family: "Source Sans Pro";
+    src: url(../fonts/SourceSansPro-Regular.ttf);
+}
+
+
 :root {
   /* Ansys colors */
-  --ansysGold: #FFB71B;
-  --ansysBronze: #C89211;
-  --pythonBlue: #3972a1;
+  --ansysGold: 255, 183, 27; /* #FFB71B */
+  --ansysBronze: 200, 146, 17; /* #C89211 */
+  --pythonBlue: 57, 114, 161; /* #3972a1 */
 
 
   /*****************************************************************************
@@ -38,9 +49,13 @@
   --pst-font-family-monospace-system: "SFMono-Regular", Menlo, Consolas, Monaco,
     Liberation Mono, Lucida Console, monospace;
 
-  --pst-font-family-base: var(--pst-font-family-base-system);
-  --pst-font-family-heading: var(--pst-font-family-base);
-  --pst-font-family-monospace: var(--pst-font-family-monospace-system);
+  --pst-font-family-base: 'Source Sans Pro', sans-serif, var(--pst-font-family-base-system);
+  --pst-font-family-heading: 'Source Sans Pro', sans-serif, var(--pst-font-family-base-system);
+  --pst-font-family-monospace: Courier, var(--pst-font-family-monospace-system);
+
+  /* --pst-font-family-base: var(--pst-font-family-base-system); */
+  /* --pst-font-family-heading: var(--pst-font-family-base); */
+  /* --pst-font-family-monospace: var(--pst-font-family-monospace-system); */
 
   /*****************************************************************************
   * Color
@@ -54,12 +69,12 @@
   --pst-color-danger: 220, 53, 69;
   --pst-color-text-base: 51, 51, 51;
 
-  --pst-color-h1: var(--pst-color-primary);
-  --pst-color-h2: var(--pst-color-primary);
-  --pst-color-h3: var(--pst-color-text-base);
-  --pst-color-h4: var(--pst-color-text-base);
-  --pst-color-h5: var(--pst-color-text-base);
-  --pst-color-h6: var(--pst-color-text-base);
+  --pst-color-h1: var(--pythonBlue);
+  --pst-color-h2: var(--pythonBlue);
+  --pst-color-h3: var(--pythonBlue);
+  --pst-color-h4: var(--pythonBlue);
+  --pst-color-h5: var(--pythonBlue);
+  --pst-color-h6: var(--pythonBlue);
   --pst-color-paragraph: var(--pst-color-text-base);
   --pst-color-link: 0, 91, 129;
   --pst-color-link-hover: 227, 46, 0;
@@ -69,10 +84,10 @@
   --pst-color-preformatted-background: 250, 250, 250;
   --pst-color-inline-code: 232, 62, 140;
 
-  --pst-color-active-navigation: 0, 0, 0;
-  --pst-color-navbar-link: 0, 0, 0;
-  --pst-color-navbar-link-hover: var(--pst-color-active-navigation);
-  --pst-color-navbar-link-active: var(--pst-color-active-navigation);
+  --pst-color-active-navigation: 255, 255,255;
+  --pst-color-navbar-link: 255, 255, 255;
+  --pst-color-navbar-link-hover: var(--ansysGold);
+  --pst-color-navbar-link-active: var(--ansysGold);
 
   /* .navbar-light:hover .navbar-nav:hover .nav-link:hover { */
   /*     color: var(--ansysGold); */
@@ -127,6 +142,47 @@
 
 }
 
-/* .navbar-toggler-icon { */
-/*     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important; */
-/* } */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+}
+
+
+.navbar-light:hover .navbar-nav:hover .nav-link:hover {
+    color: #FFB71B;
+}
+
+.navbar-nav>.active>.nav-link {
+    color: #FFB71B !important;
+}
+
+.docutils {
+    color: #C89211;
+    font-family: "Source Code Pro", "Courier New", monospace;
+    font-weight: bold;
+}
+
+.sig-prename {
+    color: #C89211;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.sig-name {
+    color: #C89211;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+
+/*FOR HELP SITE COMPATIBILITY. DO NOT EDIT*/
+body {
+ font-family: 'Source Sans Pro', sans-serif;
+ color: black;
+ padding-top:calc(var(--pst-header-height))
+}
+footer{display:none}
+main{
+  overflow: auto;
+  height: calc(100vh - 3.8rem);
+  overflow-y: scroll;
+  }  
+.prev-next-bottom{margin-bottom: 6rem}
+/*----------------------------------------*/
