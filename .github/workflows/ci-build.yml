@@ -47,11 +47,11 @@ jobs:
           FOLDER: docs/build/html
           CLEAN: true
 
-    - name: Upload to PyPi
-      if: startsWith(github.ref, 'refs/tags/')
-      run: |
-        pip install twine
-        twine upload --skip-existing dist/pyansys*
-      env:
-        TWINE_USERNAME: __token__
-        TWINE_PASSWORD: ${{ secrets.TWINE_TOKEN }}
+      - name: Upload to PyPi
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          pip install twine
+          twine upload --skip-existing dist/pyansys*
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TWINE_TOKEN }}
