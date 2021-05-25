@@ -1,5 +1,5 @@
-PyAnsys Sphinx Documentation Theme
-==================================
+PyAnsys Sphinx Theme
+====================
 
 Introduction and Purpose
 ------------------------
@@ -14,8 +14,7 @@ all PyAnsys packages.
 
 Documentation
 ~~~~~~~~~~~~~
-Full documentation for the theme can found at `PyAnsys Sphinx
-Documentation <https://sphinxdocs.pyansys.com>`_.  The webpage was
+Full documentation for the theme can found at `PyAnsys Sphinx Documentation <https://sphinxdocs.pyansys.com>`_.  The webpage was
 also built using the ``pyansys-sphinx-theme``, so visit the site for a
 preview of the theme.
 
@@ -35,5 +34,5 @@ Next, modify your sphinx ``conf.py`` to use ``html_theme =
 sphinx, follow the directions at `Sphinx Quickstart
 <https://www.sphinx-doc.org/en/master/usage/quickstart.html>`_.
 
-For further details, visit `PyAnsys Sphinx Documentation
+For further details, visit `PyAnsys Sphinx Theme Usage
 <https://sphinxdocs.pyansys.com/usage.html>`_
