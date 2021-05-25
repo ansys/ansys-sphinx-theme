@@ -69,12 +69,12 @@
   --pst-color-danger: 220, 53, 69;
   --pst-color-text-base: 51, 51, 51;
 
-  --pst-color-h1: var(--pythonBlue);
-  --pst-color-h2: var(--pythonBlue);
-  --pst-color-h3: var(--pythonBlue);
-  --pst-color-h4: var(--pythonBlue);
-  --pst-color-h5: var(--pythonBlue);
-  --pst-color-h6: var(--pythonBlue);
+  --pst-color-h1: 57, 114, 161;  /*pythonBlue*/
+  --pst-color-h2: 57, 114, 161;  /*pythonBlue*/
+  --pst-color-h3: 57, 114, 161;  /*pythonBlue*/
+  --pst-color-h4: 57, 114, 161;  /*pythonBlue*/
+  --pst-color-h5: 57, 114, 161;  /*pythonBlue*/
+  --pst-color-h6: 57, 114, 161;  /*pythonBlue*/
   --pst-color-paragraph: var(--pst-color-text-base);
   --pst-color-link: 0, 91, 129;
   --pst-color-link-hover: 227, 46, 0;
@@ -84,19 +84,15 @@
   --pst-color-preformatted-background: 250, 250, 250;
   --pst-color-inline-code: 232, 62, 140;
 
-  --pst-color-active-navigation: 255, 255,255;
+  --pst-color-active-navigation: 200, 146, 17;  /* --ansysBronze */
   --pst-color-navbar-link: 255, 255, 255;
-  --pst-color-navbar-link-hover: var(--ansysGold);
-  --pst-color-navbar-link-active: var(--ansysGold);
-
-  /* .navbar-light:hover .navbar-nav:hover .nav-link:hover { */
-  /*     color: var(--ansysGold); */
-  /* } */
+  --pst-color-navbar-link-hover: 255, 183, 27;  /* --ansysBronze */
+  --pst-color-navbar-link-active: 255, 183, 27;  /* --ansysBronze */
 
   --pst-color-sidebar-link: 77, 77, 77;
   --pst-color-sidebar-link-hover: var(--pst-color-active-navigation);
   --pst-color-sidebar-link-active: var(--pst-color-active-navigation);
-  --pst-color-sidebar-expander-background-hover: 244, 244, 244;
+  --pst-color-sidebar-expander-background-hover: 255, 183, 27;  /* --ansysGold */
   --pst-color-sidebar-caption: 77, 77, 77;
   --pst-color-toc-link: 119, 117, 122;
   --pst-color-toc-link-hover: var(--pst-color-active-navigation);
@@ -140,19 +136,6 @@
   --pst-icon-admonition-tip: var(--pst-icon-lightbulb);
   --pst-icon-admonition-important: var(--pst-icon-exclamation-circle);
 
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 0.9)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
-}
-
-
-.navbar-light:hover .navbar-nav:hover .nav-link:hover {
-    color: #FFB71B;
-}
-
-.navbar-nav>.active>.nav-link {
-    color: #FFB71B !important;
 }
 
 .docutils {

@@ -6,8 +6,15 @@ copyright = '2021, ANSYS'
 author = 'PyAnsys Open Source Developers'
 release = version = __version__
 
-# optionally the default pyansys logo
+# optionally use the default pyansys logo
 html_logo = 'https://docs.pyansys.com/_static/pyansys-logo-black-cropped.png'
+
+html_theme = 'pyansys_sphinx_theme'
+
+# specify the location of your github repo
+html_theme_options = {
+    "github_url": "https://github.com/pyansys/pyansys-sphinx-theme",
+}
 
 # Sphinx extensions
 extensions = [
@@ -22,7 +29,3 @@ source_suffix = '.rst'
 # The master toctree document.
 master_doc = 'index'
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
-# a list of builtin themes.
-#
-html_theme = 'pyansys_sphinx_theme'
