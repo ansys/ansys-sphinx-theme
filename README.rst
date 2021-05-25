@@ -18,7 +18,12 @@ Full documentation for the theme can found at `PyAnsys Sphinx Documentation <htt
 also built using the ``pyansys-sphinx-theme``, so visit the site for a
 preview of the theme.
 
-Other Sites Using the PyAnsys theme
+Other Sites Using the PyAnsys theme:
+
+- `PyMAPDL <https://mapdldocs.pyansys.com/>`__
+- `DPF-Core <https://dpfdocs.pyansys.com/>`__
+- `DPF-Post <https://postdocs.pyansys.com/>`__
+- `Legacy PyMAPDL Reader <https://readerdocs.pyansys.com/>`__
 
 
 Getting Started

@@ -170,19 +170,3 @@
     color: #C89211;
     font-family: 'Source Sans Pro', sans-serif;
 }
-
-
-/*FOR HELP SITE COMPATIBILITY. DO NOT EDIT*/
-body {
- font-family: 'Source Sans Pro', sans-serif;
- color: black;
- padding-top:calc(var(--pst-header-height))
-}
-footer{display:none}
-main{
-  overflow: auto;
-  height: calc(100vh - 3.8rem);
-  overflow-y: scroll;
-  }  
-.prev-next-bottom{margin-bottom: 6rem}
-/*----------------------------------------*/
