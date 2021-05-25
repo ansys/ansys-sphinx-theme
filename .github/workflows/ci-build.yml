@@ -46,6 +46,7 @@ jobs:
           BRANCH: gh-pages
           FOLDER: docs/build/html
           CLEAN: true
+          single-commit: true
 
       - name: Upload to PyPi
         if: startsWith(github.ref, 'refs/tags/')
