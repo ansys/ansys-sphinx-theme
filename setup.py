@@ -6,7 +6,7 @@ from io import open as io_open
 from setuptools import setup
 
 
-# loosly from https://packaging.python.org/guides/single-sourcing-package-version/
+# loosely from https://packaging.python.org/guides/single-sourcing-package-version/
 HERE = os.path.abspath(os.path.dirname(__file__))
 
 __version__ = None
