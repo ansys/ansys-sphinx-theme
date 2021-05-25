@@ -22,7 +22,7 @@ jobs:
   
       - name: Build Documentation
         run: |
-          pip install -r docs/requirements.txt
+          pip install -r requirements_docs.txt
           make -C docs html
           touch docs/build/html/.nojekyll
           echo "sphinxdocs.pyansys.com" > docs/build/html/CNAME
