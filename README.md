@@ -1,3 +1,0 @@
-## PyAnsys Sphinx Documentation Theme
-
-Install with ...

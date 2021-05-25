@@ -1,5 +1,7 @@
-PyAnsys Sphinx Documentation Theme
-==================================
+..
+   Simply reuse the root readme
+
+.. include:: ../../README.rst
 
 .. toctree::
    :hidden:
@@ -10,17 +12,11 @@ PyAnsys Sphinx Documentation Theme
    class_documentation
 
 
-Introduction and Purpose
-------------------------
-The PyAnsys documentation theme is an extension of the popular `PyData
-Sphinx Theme <https://pydata-sphinx-theme.readthedocs.io/>`_ used by
-`numpy <https://numpy.org/doc/stable/>`_, `pandas
-<https://pandas.pydata.org/docs/>`_, `PyVista
-<https://docs.pyvista.org>`_ and a variety other packages.  This theme
-was packaged a consistent documentation pattern and "feel" across the
-all PyAnsys packages.
-
-
+Code Examples
+~~~~~~~~~~~~~
+Here's a quick preview for how Python code looks using the
+``pyansys-sphinx-theme``.  For more examples, click the links at the
+top of the page to see function, method, and class documentation.
 
 Rendered Python Code
 --------------------
@@ -35,3 +31,4 @@ Rendered Python Code
    ... else:
    ...     print("Negative number")
    Positive number
+

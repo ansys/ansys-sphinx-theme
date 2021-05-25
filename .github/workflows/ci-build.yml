@@ -20,6 +20,11 @@ jobs:
           python setup.py sdist
           pip install dist/pyansys*.tar.gz --disable-pip-version-check
   
+      - name: lint package
+        run: |
+          pip install twine
+          twine check dist/pyansys*
+
       - name: Build Documentation
         run: |
           pip install -r requirements_docs.txt --disable-pip-version-check
@@ -34,11 +39,19 @@ jobs:
           path: docs/build/html
           retention-days: 7
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@3.7.1
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1        
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: docs/build/html
           CLEAN: true
+
+    - name: Upload to PyPi
+      if: startsWith(github.ref, 'refs/tags/')
+      run: |
+        pip install twine
+        twine upload --skip-existing dist/pyansys*
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.TWINE_TOKEN }}
