@@ -25,12 +25,6 @@ with open(os.path.join(HERE, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 
-tests_require = [
-    line.strip()
-    for line in read(os.path.join("docs", "requirements.txt")).splitlines()
-    if not line.strip().startswith("#")
-]
-
 setup(
     name="pyansys-sphinx-theme",
     version=__version__,
