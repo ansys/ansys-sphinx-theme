@@ -6,7 +6,7 @@ from io import open as io_open
 from setuptools import setup
 
 
-# loosly from https://packaging.python.org/guides/single-sourcing-package-version/
+# loosely from https://packaging.python.org/guides/single-sourcing-package-version/
 HERE = os.path.abspath(os.path.dirname(__file__))
 
 __version__ = None
@@ -21,22 +21,16 @@ def read(rel_path):
 
 
 # Get the long description from the README file
-with open(os.path.join(HERE, "README.md"), encoding="utf-8") as f:
+with open(os.path.join(HERE, "README.rst"), encoding="utf-8") as f:
     long_description = f.read()
 
-
-tests_require = [
-    line.strip()
-    for line in read(os.path.join("docs", "requirements.txt")).splitlines()
-    if not line.strip().startswith("#")
-]
 
 setup(
     name="pyansys-sphinx-theme",
     version=__version__,
     description="PyData-based Sphinx theme from the PyAnsys community",
     long_description=long_description,
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/x-rst",
     url="https://github.com/pyansys/pyansys-sphinx-theme",
     license="MIT",
     maintainer="Alexander Kaszynski",
@@ -47,12 +41,8 @@ setup(
     # See http://www.sphinx-doc.org/en/stable/theming.html#distribute-your-theme-as-a-python-package
     entry_points={"sphinx.html_themes": ["pyansys_sphinx_theme = pyansys_sphinx_theme"]},
     install_requires=["sphinx",
-                      "pydata-sphinx-theme==0.5.0",
+                      "pydata-sphinx-theme==0.6.3",
                       ],
-    extras_require={
-        "test": tests_require,
-        "coverage": ["pytest-cov", "codecov", *tests_require],
-    },
     python_requires=">=3.5",
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -63,4 +53,3 @@ setup(
         "Operating System :: OS Independent",
     ],
 )
-

@@ -1,0 +1,5 @@
+
+include pyansys_sphinx_theme/docs-navbar.html
+include pyansys_sphinx_theme/theme.conf
+
+graft pyansys_sphinx_theme/static

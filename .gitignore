@@ -2,6 +2,8 @@
 ###################
 *.pyc
 
+# packages
+dist/*
 
 # Pip generated folders #
 #########################

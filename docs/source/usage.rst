@@ -16,16 +16,25 @@ sphinx, follow the directions at `Sphinx Quickstart
 
 .. code:: python
 
-    from <your_package> import __version__
+    from <your-package> import __version__
 
     # Project information
-    project = '<your_package>'
+    project = '<your-package>'
     copyright = '2021, ANSYS'
     author = 'PyAnsys Open Source Developers'
     release = version = __version__
 
-    # optionally the default pyansys logo
+    # use the pyansys sphinx theme
+    html_theme = 'pyansys_sphinx_theme'
+
+    # specify the location of your github repo
+    html_theme_options = {
+        "github_url": "https://github.com/pyansys/pyansys-sphinx-theme",
+    }
+
+    # optionally use the default pyansys logo
     html_logo = 'https://docs.pyansys.com/_static/pyansys-logo-black-cropped.png'
+
 
     # Sphinx extensions
     extensions = [
@@ -40,8 +49,6 @@ sphinx, follow the directions at `Sphinx Quickstart
     # The master toctree document.
     master_doc = 'index'
 
-    # The theme to use for HTML and HTML Help pages
-    html_theme = 'pyansys_sphinx_theme'
 
 
 For additional configuration options, see `Configuring The PyData Sphinx Theme
@@ -58,7 +65,6 @@ file.  For example:
 
 .. code::
 
-   /*FOR HELP SITE COMPATIBILITY. */
    body {
     font-family: 'Source Sans Pro', sans-serif;
     color: black;
@@ -69,9 +75,8 @@ file.  For example:
      overflow: auto;
      height: calc(100vh - 3.8rem);
      overflow-y: scroll;
-     }  
+   }  
    .prev-next-bottom{margin-bottom: 6rem}
-   /*----------------------------------------*/
 
 
 Next, add the following to ``conf.py``:
