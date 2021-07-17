@@ -11,4 +11,4 @@ dist/*
 
 
 build/*
-docs/build/
+doc/build/

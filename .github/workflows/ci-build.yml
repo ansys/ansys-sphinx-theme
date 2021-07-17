@@ -29,14 +29,14 @@ jobs:
         run: |
           pip install -r requirements_docs.txt --disable-pip-version-check
           make -C docs html
-          touch docs/build/html/.nojekyll
-          echo "sphinxdocs.pyansys.com" > docs/build/html/CNAME
+          touch doc/build/html/.nojekyll
+          echo "sphinxdocs.pyansys.com" > doc/build/html/CNAME
   
       - name: Upload Documentation
         uses: actions/upload-artifact@v2.2.1
         with:
           name: Documentation
-          path: docs/build/html
+          path: doc/build/html
           retention-days: 7
 
       - name: Deploy to gh-pages
@@ -44,7 +44,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: docs/build/html
+          FOLDER: doc/build/html
           CLEAN: true
           single-commit: true
 
