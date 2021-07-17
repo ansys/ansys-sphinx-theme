@@ -10,6 +10,7 @@
    usage
    style
    class_documentation
+   coding_style
 
 
 Code Examples
@@ -17,6 +18,7 @@ Code Examples
 Here's a quick preview for how Python code looks using the
 ``pyansys-sphinx-theme``.  For more examples, click the links at the
 top of the page to see function, method, and class documentation.
+
 
 Rendered Python Code
 --------------------
