@@ -1,7 +1,7 @@
 ********************************
 Coding Style and Best Practices
 ********************************
-.. node::
+.. note::
    Until we have a site up for our best practices and coding style,
    the sphinx documentation site will host the coding style as well.
 

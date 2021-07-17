@@ -28,7 +28,7 @@ jobs:
       - name: Build Documentation
         run: |
           pip install -r requirements_docs.txt --disable-pip-version-check
-          make -C docs html
+          make -C doc html SPHINXOPTS="-W"
           touch doc/build/html/.nojekyll
           echo "sphinxdocs.pyansys.com" > doc/build/html/CNAME
   
