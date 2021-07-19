@@ -55,7 +55,7 @@ and then using an error after a minor release or two.
 
             # raise a DeprecationWarning.  User won't have to change anything
             warnings.warn('assignmaterial is deprecated.  Please use assign_material instead',
-                          warnings.DeprecationWarning)
+                          DeprecationWarning)
             self.assign_material(obj, mat)
 
             # or raise an AttributeError (could also make a custom DeprecationError)
@@ -66,7 +66,7 @@ and then using an error after a minor release or two.
             ...
 
 
-If a method is outright removed, there's no change to provide a link
+If a method is outright removed, there's no reason to provide a link
 to the old method, and we should simply raise an ``AttributeError``
 should this be part of a class, or simply an ``Exception``.  For
 example:
