@@ -137,13 +137,18 @@ multiple "release branches" in a repository, the number of active
 release branches should be between one and three.
 
 Docstring Examples Best-Practice
----------------------------------
+--------------------------------
 Defining docstring examples for methods and classes are extremely 
 useful. The examples give users an easy place to start when trying 
 out the API, by showing them exactly how to operate on a method or 
 class. By using ``doctest`` through ``pytest``, docstring examples can 
 also be used to perform regression testing to verify that the code is 
 executing as expected.
+
+This is an important feature of maintainable documentation as examples
+must always match the API they are documenting, and any changes within
+the API without a corresponding change in the documentation will
+trigger doctest failures.
 
 Setting Up ``doctest``
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -164,10 +169,10 @@ execute them to verify that they function as written.
 
 Using ``pytest`` Fixtures
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-To define a set up sequence before the ``doctest`` run or before a given 
+To define a setup sequence before the ``doctest`` run or before a given 
 module is tested, ``pytest`` fixtures can be used. Fixtures allow docstring 
-examples to access shared objects, so there is no need to repeat the set 
-up in each example.
+examples to access shared objects, so there is no need to repeat the setup
+in each example.
 
 ``pytest`` fixtures can defined in a ``conftest.py`` file next to the source 
 code. The following example shows a fixture that is run automatically for 
@@ -293,13 +298,13 @@ To allow this, ``doctest`` must be run with the option set to allow ellipses.
     pytest --doctest-modules -o ELLIPSIS file.py
 
 ``doctest`` Skip
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
 The directive ``# doctest: +SKIP`` can be added to any line of a
-docstring example so that it is not executed. This is useful for examples
-that have really random output or that may cause problems with other tests
+docstring example so that it is not executed in ``doctest-modules``. This is useful for examples
+that cannot run within ``pytest`` or have side-effects that will affect the other tests
 if they are run during the ``doctest`` session.
 
-.. code ::
+.. code :: python
 
     Examples
     --------
