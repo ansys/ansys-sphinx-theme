@@ -274,10 +274,10 @@ example, by referencing the key ``icepak``.
         """
 
 Useful Features
----------------
+~~~~~~~~~~~~~~~
 
 Ellipses For Random Output
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+**************************
 If the output of some operation in an example cannot be verified exactly,
 an ellipsis (``...``) can be used in the expected output. This allows it
 to match any substring in the actual output.
@@ -298,7 +298,7 @@ To allow this, ``doctest`` must be run with the option set to allow ellipses.
     pytest --doctest-modules -o ELLIPSIS file.py
 
 ``doctest`` Skip
-~~~~~~~~~~~~~~~~
+****************
 The directive ``# doctest: +SKIP`` can be added to any line of a
 docstring example so that it is not executed in ``doctest-modules``. This is useful for examples
 that cannot run within ``pytest`` or have side-effects that will affect the other tests
