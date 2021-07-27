@@ -64,6 +64,7 @@ and then using an error after a minor release or two.
         def assign_material(self, obj, mat):
             """Assign a material to one or more objects.
             ...
+            """
 
 
 If a method is outright removed, there's no reason to provide a link
