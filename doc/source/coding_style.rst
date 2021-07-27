@@ -53,13 +53,13 @@ and then using an error after a minor release or two.
             """
             # one of the following:
 
-            # raise a DeprecationWarning.  User won't have to change anything
-            warnings.warn('assignmaterial is deprecated.  Please use assign_material instead',
+            # raise a DeprecationWarning. User won't have to change anything
+            warnings.warn('assignmaterial is deprecated. Use assign_material instead.',
                           DeprecationWarning)
             self.assign_material(obj, mat)
 
             # or raise an AttributeError (could also make a custom DeprecationError)
-            raise AttributeError('assignmaterial is deprecated.  Please use assign_material instead')
+            raise AttributeError('assignmaterial is deprecated. Use assign_material instead.')
 
         def assign_material(self, obj, mat):
             """Assign a material to one or more objects.
