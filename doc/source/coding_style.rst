@@ -108,6 +108,65 @@ Then simply use that inplace of ``Exception``
         """
         raise DeprecationError('`my_function` has been deprecated')
 
+Imports Best-Practice
+---------------------
+
+Imports should be added at the top of the file and should be grouped in the following order:
+
+1. Standard library imports.
+2. Related third party imports.
+3. Local application/library specific imports.
+
+For example, consider the unorganized imports below:
+
+.. code:: python
+
+    import time
+    import glob
+    import re
+    import numpy as np
+    from ansys.mapdl.core.plotting import general_plotter
+    from ansys.mapdl.core.post import PostProcessing
+    import os
+    import logging
+    from shutil import rmtree, copyfile
+    import weakref
+
+    from ansys.mapdl.core.errors import MapdlRuntimeError, MapdlInvalidRoutineError
+    from ansys.mapdl.core.commands import Commands
+    from ansys.mapdl.core.inline_functions import Query
+
+Organizing those same imports into groups vastly improves readibilty:
+
+.. code:: python
+
+    import time
+    import glob
+    import re
+    import os
+    import logging
+    from shutil import rmtree, copyfile
+    import weakref
+
+    import numpy as np
+
+    from ansys.mapdl.core.plotting import general_plotter
+    from ansys.mapdl.core.post import PostProcessing
+    from ansys.mapdl.core.errors import MapdlRuntimeError, MapdlInvalidRoutineError
+    from ansys.mapdl.core.commands import Commands
+    from ansys.mapdl.core.inline_functions import Query
+
+Additionally, it is recommended to use absolute imports over relative imports, since they are 
+more readable and are usually more reliable:
+
+.. code:: python
+
+    # Not recommended
+    from core.plotting import general_plotter
+
+    # Recommended
+    from ansys.mapdl.core.plotting import general_plotter
+
 
 Notes Regarding Semantic Versioning and API Changes
 ---------------------------------------------------
