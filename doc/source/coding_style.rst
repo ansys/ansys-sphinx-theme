@@ -131,7 +131,6 @@ For example, consider the unorganized imports below:
     import logging
     from shutil import rmtree, copyfile
     import weakref
-
     from ansys.mapdl.core.errors import MapdlRuntimeError, MapdlInvalidRoutineError
     from ansys.mapdl.core.commands import Commands
     from ansys.mapdl.core.inline_functions import Query
