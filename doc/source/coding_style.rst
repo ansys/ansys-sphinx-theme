@@ -111,7 +111,8 @@ Then simply use that inplace of ``Exception``
 Imports Best-Practice
 ---------------------
 
-Imports should be added at the top of the file and should be grouped in the following order:
+Following the `PEP8 guidelines <https://www.python.org/dev/peps/pep-0008/#imports>`_,
+imports should be added at the top of the file and should be grouped in the following order:
 
 1. Standard library imports.
 2. Related third party imports.
@@ -155,6 +156,28 @@ Organizing those same imports into groups vastly improves readibilty:
     from ansys.mapdl.core.errors import MapdlRuntimeError, MapdlInvalidRoutineError
     from ansys.mapdl.core.commands import Commands
     from ansys.mapdl.core.inline_functions import Query
+
+It is also recommended that the imports within a section be organized alphabetically.
+Following this convention makes imports easily searchable. This standard is optional 
+and will not be enforced, but it may be preferred in some projects.
+
+.. code:: python
+
+    import glob
+    import logging
+    import os
+    import re
+    import time
+    import weakref
+    from shutil import copyfile, rmtree
+
+    import numpy as np
+    
+    from ansys.mapdl.core.commands import Commands
+    from ansys.mapdl.core.errors import MapdlInvalidRoutineError, MapdlRuntimeError
+    from ansys.mapdl.core.inline_functions import Query
+    from ansys.mapdl.core.plotting import general_plotter
+    from ansys.mapdl.core.post import PostProcessing
 
 Additionally, it is recommended to use absolute imports over relative imports, since they are 
 more readable and reliable:
