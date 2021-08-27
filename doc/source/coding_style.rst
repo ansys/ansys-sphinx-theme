@@ -162,7 +162,7 @@ more readable and are usually more reliable:
 .. code:: python
 
     # Not recommended
-    from core.plotting import general_plotter
+    from .core.plotting import general_plotter
 
     # Recommended
     from ansys.mapdl.core.plotting import general_plotter
