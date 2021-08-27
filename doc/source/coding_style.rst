@@ -157,7 +157,7 @@ Organizing those same imports into groups vastly improves readibilty:
     from ansys.mapdl.core.inline_functions import Query
 
 Additionally, it is recommended to use absolute imports over relative imports, since they are 
-more readable and are usually more reliable:
+more readable and reliable:
 
 .. code:: python
 
