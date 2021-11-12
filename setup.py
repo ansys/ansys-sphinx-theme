@@ -41,7 +41,6 @@ setup(
     # See http://www.sphinx-doc.org/en/stable/theming.html#distribute-your-theme-as-a-python-package
     entry_points={"sphinx.html_themes": ["pyansys_sphinx_theme = pyansys_sphinx_theme"]},
     install_requires=["sphinx",
-                      "pydata-sphinx-theme==0.6.3",
                       ],
     python_requires=">=3.5",
     classifiers=[
