@@ -1,0 +1,2 @@
+Sphinx
+https://github.com/numpy/numpydoc/archive/main.zip  # need latest

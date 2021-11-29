@@ -1,14 +1,17 @@
+"""Sphinx documentation configuration file."""
+import os
+from datetime import datetime
+
 from pyansys_sphinx_theme import __version__
 
 # Project information
 project = 'pyansys_sphinx_theme'
-copyright = '2021, ANSYS'
-author = 'PyAnsys Open Source Developers'
+copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
+author = "Ansys Inc."
 release = version = __version__
 
 # optionally use the default pyansys logo
-html_logo = 'https://docs.pyansys.com/_static/pyansys-logo-black-cropped.png'
-
+html_logo = os.path.join("_static", "pyansys-logo-black-cropped.png")
 html_theme = 'pyansys_sphinx_theme'
 
 # specify the location of your github repo
@@ -20,8 +23,8 @@ html_theme_options = {
 # Sphinx extensions
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.napoleon',
     'sphinx.ext.autosummary',
+    "numpydoc",
 ]
 
 # The suffix(es) of source filenames.
@@ -29,4 +32,3 @@ source_suffix = '.rst'
 
 # The master toctree document.
 master_doc = 'index'
-
