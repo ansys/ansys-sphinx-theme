@@ -21,6 +21,7 @@ preview of the theme.
 Other Sites Using the PyAnsys theme:
 
 - `PyMAPDL <https://mapdldocs.pyansys.com/>`__
+- `PyAEDT <https://aedtdocs.pyansys.com/>`__
 - `DPF-Core <https://dpfdocs.pyansys.com/>`__
 - `DPF-Post <https://postdocs.pyansys.com/>`__
 - `Legacy PyMAPDL Reader <https://readerdocs.pyansys.com/>`__

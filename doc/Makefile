@@ -19,6 +19,7 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 
-# customized clean due to examples gallery
+# customized clean due to api examples
 clean:
 	rm -rf build
+	find . -type d -name "_autosummary" -exec rm -rf {} +

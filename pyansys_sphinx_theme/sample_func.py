@@ -13,7 +13,6 @@ def func(arg1, arg2):
     ----------
     arg1 : int
         Description of arg1.
-
     arg2 : str
         Description of arg2.
 

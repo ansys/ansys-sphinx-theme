@@ -16,11 +16,7 @@ modify your sphinx ``conf.py`` to use ``html_theme =
 
 .. literalinclude:: ./conf.py
    :language: python
-
-.. note::
-   As of ``Sphinx>4.0.3``, you must include a static logo image. Be
-   sure to copy the image to the ``_static`` directory in the same
-   directory as your ``conf.py``.
+   
 
 For additional configuration options, see `Configuring The PyData
 Sphinx Theme

@@ -1,8 +1,7 @@
-import math
 from math import sqrt
 
 
-class ExampleClass(object):
+class ExampleClass:
     """The summary line for a class docstring should fit on one line.
 
     Attributes should be documented inline with the attribute's
@@ -15,11 +14,9 @@ class ExampleClass(object):
     ----------
     param1 : str
         Description of `param1`.
-
     param2 : :obj:`list` of :obj:`str`
         Description of `param2`. Multiple
         lines are supported.
-
     param3 : :obj:`int`, optional
         Description of `param3`.
 
@@ -35,17 +32,14 @@ class ExampleClass(object):
     def __init__(self, param1, param2, param3=0):
         self.attr1 = param1
         self.attr2 = param2
-        self.attr3 = param3  #: Doc comment *inline* with attribute
-
-        #: list of str: Doc comment *before* attribute, with type specified
+        self.attr3 = param3
         self.attr4 = ["attr4"]
         self.attr5 = None
         self._value = "readwrite_property"
 
     @property
-    def readonly_property(self):
-        """str: Properties should be documented in their getter method.
-
+    def readonly_property(self) -> str:
+        """Properties should be documented in their getter method.
 
         Examples
         --------
@@ -57,7 +51,7 @@ class ExampleClass(object):
 
     @property
     def readwrite_property(self):
-        """:obj:`list` of :obj:`str`: Properties with both a getter and setter
+        """Properties with both a getter and setter
         should only be documented in their getter method.
 
         If the setter method contains notable behavior, it should be
@@ -82,10 +76,6 @@ class ExampleClass(object):
     def example_method(self, param1, param2):
         """Class methods are similar to regular functions.
 
-        Note
-        ----
-        Do not include the `self` parameter in the ``Parameters`` section.
-
         Parameters
         ----------
         param1 : str
@@ -98,6 +88,10 @@ class ExampleClass(object):
         -------
         bool
             True if successful, False otherwise.
+
+        Notes
+        -----
+        Do not include the `self` parameter in the ``Parameters`` section.
 
         Examples
         --------
