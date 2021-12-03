@@ -2,13 +2,13 @@ import os
 
 from ._version import __version__
 
-# get location of this folder and the example files
+# get location of this directory
 _this_path = os.path.dirname(os.path.realpath(__file__))
 
+# make logo paths available
 pyansys_logo_black = os.path.join(
     _this_path, 'static', 'pyansys-logo-black-cropped.png'
 )
-
 pyansys_logo_white = os.path.join(
     _this_path, 'static', 'pyansys-logo-white-cropped.png'
 )
