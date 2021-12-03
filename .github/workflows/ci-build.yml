@@ -1,9 +1,24 @@
-# Build documentation
-name: Documentation Build
+name: Build
 
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
+  stylecheck:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2.2.2
+        with:
+          python-version: 3.9
+
+      - name: Check Style
+        run: |
+          pip install -r requirements_style.txt --disable-pip-version-check
+          make
+
   docs_build:
     runs-on: ubuntu-latest
 
@@ -13,7 +28,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2.2.2
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: Install pyansys_sphinx_theme
         run: |
@@ -23,7 +38,7 @@ jobs:
       - name: lint package
         run: |
           pip install twine
-          twine check dist/pyansys*
+          twine check dist/*
 
       - name: Build Documentation
         run: |
@@ -49,11 +64,28 @@ jobs:
           CLEAN: true
           single-commit: true
 
-      - name: Upload to PyPi
-        if: startsWith(github.ref, 'refs/tags/')
+  Release:
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    needs: [check_style, doc_build, build, mac_build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+
+      - name: Generate package
+        run: python setup.py sdist
+
+      - name: Upload to Public PyPi
         run: |
           pip install twine
-          twine upload --skip-existing dist/pyansys*
+          twine upload --skip-existing dist/*
         env:
           TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.TWINE_TOKEN }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
