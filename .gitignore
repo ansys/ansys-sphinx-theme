@@ -10,5 +10,7 @@ dist/*
 *.egg-info/
 
 
+# sphinx auto-generated
 build/*
 doc/build/
+doc/source/_autosummary/

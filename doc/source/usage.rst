@@ -8,52 +8,20 @@ Install this theme with:
 
    pip install pyansys-sphinx-theme
 
-Next, modify your sphinx ``conf.py`` to use ``html_theme =
-'pyansys_sphinx_theme'``.  If you are just getting started using
-sphinx, follow the directions at `Sphinx Quickstart
-<https://www.sphinx-doc.org/en/master/usage/quickstart.html>`_.
+If you are just getting started using sphinx, follow the directions at
+`Sphinx Quickstart
+<https://www.sphinx-doc.org/en/master/usage/quickstart.html>`_.  Next,
+modify your sphinx ``conf.py`` to use ``html_theme =
+'pyansys_sphinx_theme'``.  Consider using the following ``conf.py`` used in this repository:
 
+.. literalinclude:: ./conf.py
+   :language: python
+   
 
-.. code:: python
-
-    from <your-package> import __version__
-
-    # Project information
-    project = '<your-package>'
-    copyright = '2021, ANSYS'
-    author = 'PyAnsys Open Source Developers'
-    release = version = __version__
-
-    # use the pyansys sphinx theme
-    html_theme = 'pyansys_sphinx_theme'
-
-    # specify the location of your github repo
-    html_theme_options = {
-        "github_url": "https://github.com/pyansys/pyansys-sphinx-theme",
-    }
-
-    # optionally use the default pyansys logo
-    html_logo = 'https://docs.pyansys.com/_static/pyansys-logo-black-cropped.png'
-
-
-    # Sphinx extensions
-    extensions = [
-        'sphinx.ext.autodoc',
-        'sphinx.ext.napoleon',
-        'sphinx.ext.autosummary',
-    ]
-
-    # The suffix(es) of source filenames.
-    source_suffix = '.rst'
-
-    # The master toctree document.
-    master_doc = 'index'
-
-
-
-For additional configuration options, see `Configuring The PyData Sphinx Theme
-<https://pydata-sphinx-theme.readthedocs.io/en/latest/user_guide/configuring.html>`_, which forms the basis
-for the style of this theme.
+For additional configuration options, see `Configuring The PyData
+Sphinx Theme
+<https://pydata-sphinx-theme.readthedocs.io/en/latest/user_guide/configuring.html>`_,
+which forms the basis for the style of this theme.
 
 
 Editing the CSS
