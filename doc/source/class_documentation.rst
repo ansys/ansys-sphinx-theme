@@ -1,6 +1,6 @@
-***************************
-Generate APIs Documentation
-***************************
+*****************
+API Documentation
+*****************
 
 User Guide Documentation Method
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -62,27 +62,18 @@ documented via the ``autosummary`` directive.  For example,
 
 .. code::
 
-   .. autoclass:: pyansys_sphinx_theme.samples.Complex
-
    .. autosummary::
-      :toctree: api/
+      :toctree: _autosummary
 
-      pyansys_sphinx_theme.samples.Complex.real
-      pyansys_sphinx_theme.samples.Complex.imag
-      pyansys_sphinx_theme.samples.Complex.abs
+      pyansys_sphinx_theme.samples.Complex
 
 
 Will generate the following documentation:
 
-.. autoclass:: pyansys_sphinx_theme.samples.Complex
-
-
 .. autosummary::
-   :toctree: api/
+   :toctree: _autosummary
 
-   pyansys_sphinx_theme.samples.Complex.real
-   pyansys_sphinx_theme.samples.Complex.imag
-   pyansys_sphinx_theme.samples.Complex.abs
+   pyansys_sphinx_theme.samples.Complex
 
-
-Note how each method or attribute has its own page.
+Each class will have its own dedicated page, and each method and
+attribute in that class will also have its own page.

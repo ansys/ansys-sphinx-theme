@@ -1,3 +1,6 @@
+/* Provided by the Sphinx base theme template at build time */
+@import "../basic.css";
+
 @font-face {
     font-family: "Source Sans Pro Light";
     src: url(../fonts/SourceSansPro-Light.ttf);
@@ -149,11 +152,17 @@
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.sig-name.descname {
+    color: #C89211;
+    /* font-family: 'Source Sans Pro', sans-serif; */
+}
+
 .sig-name {
     color: #C89211;
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+/* make the github logo white */
 i.fa-github-square:before {
     color: #ffffff !important;
 }
