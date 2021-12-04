@@ -75,6 +75,8 @@ jobs:
     needs: [stylecheck, build]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
@@ -89,7 +91,7 @@ jobs:
           twine upload --skip-existing dist/*
         env:
           TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_TOKEN }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
