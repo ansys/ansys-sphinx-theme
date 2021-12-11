@@ -166,3 +166,16 @@
 i.fa-github-square:before {
     color: #ffffff !important;
 }
+
+/* Increase empty-space around classes, methods, properties, etc. that are descendants
+ of other items */
+dl.class dl.py {
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
+}
+
+/* Reduce empty-space around Notes and Examples headings */
+p.rubric {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+}
