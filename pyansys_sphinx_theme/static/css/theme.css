@@ -181,82 +181,102 @@ p.rubric {
 }
 
 
+
 /*
-#############
+###############
+   table 
+###############
 */
+
 table {
-        width:100%;
-        max-width: 100%; 
-        border-spacing: 0;
-        border-collapse: collapse;
-        overflow: hidden;
-        z-index: 1;
-        font-size: 16px;
-        text-align: center;
-        
-        /* Disabling scroll bars */
-        overflow-y: scroll;
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  width:100%;
+  max-width: 100%; 
+  border-spacing: 0;
+  border-collapse: collapse;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+
+  /* Disabling scroll bars */
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  }
+
+tr { 
+  background-color: white;  
+  text-align: center;
+}
+
+th {
+  text-align: center;
+  background-color: rgb(255, 183, 27, 0.55);
+}
+
+tr:nth-child(odd){ 
+  background-color: white;  
+  text-align: center;
+}
+
+tr:nth-child(even){
+background-color: rgb(255, 183, 27, 0.15); 
+text-align: center;
+}
+
+
+/*
+###############
+   longtable 
+###############
+*/
+
+table.longtable tr:hover td {
+  background-color: rgb(255, 183, 27, 0.6);
+}
+
+/*
+###############
+   DataFrame 
+###############
+Not sure why the odd columns (white) are rendered gray.
+*/
+
+.dataframe tr{ 
+    background-color: white;  
+    text-align: center;
+  }
+
+.dataframe tr:nth-child(odd){ 
+    background-color: white;  
+  }
+
+.dataframe tr:nth-child(even){
+  background-color: rgb(255, 183, 27, 0.15);
+}
+
+.dataframe tr:hover td {
+  background-color: rgb(255, 183, 27, 0.6);
+}
+
+
+
+/*
+###############
+   Autosummary 
+###############
+*/
+.autosummary {
+        text-align: left;
         }
 
+.autosummary  tr:nth-child(odd){ 
+    background-color: white;  
+    text-align: center;
+  }
 
- /* Disabling scroll bars */
-table::-webkit-scrollbar { /* WebKit */
-    width: 0;
-    height: 0;
-}    
-
-/* Headers and data cells format */
-    td, th {
-        cursor: pointer;
-        padding: 10px;
-        position: relative;
-        background-color: white;
-        text-align: center;
-        font-size: 16px;
-    }
-    
-
-/* Highlighting columns and rows */
-    td:hover::before { 
-        background-color: rgb(200, 146, 17, 0.15);
-        content: '\00a0';  
-        height: 100%;
-        left: -5000px;
-        position: absolute;  
-        top: 0;
-        width: 10000px;    
-        z-index: 10;        
-    }
-    
-    td:hover::after { 
-        background-color: rgba(200, 146, 17, 0.15);
-        content: '\00a0';   
-        height: 10000px;   
-        left: 0;
-        position: absolute;  
-        top: -5000px;
-        width: 100%;
-        z-index: 10; 
-        text-shadow: 1px 0px 2px #000;
-    }
-
-    /* Highlighting headers */
-    th {
-      text-align: center;
-      background-color: rgb(255, 183, 27, 0.55);
-    }
-
-    /* This should highlight the even and odd rows differently. */
-     tr:nth-child(odd){
-       background-color: rgb(255, 183, 27, 0.25);    
-       z-index: 0;
-      text-align: center;
-      }
-
- tr:nth-child(even){
-       background-color: rgb(255, 183, 27, 0.25);    
-        z-index: 0;  
-      text-align: center;
+.autosummary tr:nth-child(even){
+  background-color: white;  
+  text-align: center;
 }
+
+
