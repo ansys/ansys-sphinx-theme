@@ -194,7 +194,6 @@ table {
   border-spacing: 0;
   border-collapse: collapse;
   overflow: hidden;
-  text-align: center;
   vertical-align: middle;
 
   /* Disabling scroll bars */
@@ -204,23 +203,19 @@ table {
   }
 
 tr { 
-  background-color: white;  
-  text-align: center;
+  background-color: white;
 }
 
 th {
-  text-align: center;
   background-color: rgb(255, 183, 27, 0.55);
 }
 
 tr:nth-child(odd){ 
-  background-color: white;  
-  text-align: center;
+  background-color: white;
 }
 
 tr:nth-child(even){
 background-color: rgb(255, 183, 27, 0.15); 
-text-align: center;
 }
 
 
@@ -242,8 +237,7 @@ Not sure why the odd columns (white) are rendered gray.
 */
 
 .dataframe tr{ 
-    background-color: white;  
-    text-align: center;
+    background-color: white;
   }
 
 .dataframe tr:nth-child(odd){ 
@@ -265,18 +259,16 @@ Not sure why the odd columns (white) are rendered gray.
    Autosummary 
 ###############
 */
-.autosummary {
+/* .autosummary {
         text-align: left;
-        }
+        } */
 
 .autosummary  tr:nth-child(odd){ 
-    background-color: white;  
-    text-align: center;
+    background-color: white;
   }
 
 .autosummary tr:nth-child(even){
-  background-color: white;  
-  text-align: center;
+  background-color: white;
 }
 
 
