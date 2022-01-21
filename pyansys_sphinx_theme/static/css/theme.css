@@ -218,6 +218,56 @@ tr:nth-child(even){
 background-color: rgb(255, 183, 27, 0.15); 
 }
 
+/*
+###############
+   longtable 
+###############
+
+Use as:
+
+.. table:: 
+  :class: table-centered
+
+  +---------------------------+-------------------+
+  |                           | MAPDL Command     |
+  +===========================+===================+
+  | **GUI commands**          | * ``*ASK``        |
+  |                           +-------------------+
+  |   ...
+  |   ...
+
+
+*/
+table.table-centered {
+  width:100%;
+  max-width: 100%; 
+  border-spacing: 0;
+  border-collapse: collapse;
+  overflow: hidden;
+  vertical-align: middle;
+
+  /* Disabling scroll bars */
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  }
+
+.table-centered tr { 
+  background-color: white;
+}
+
+.table-centered th {
+  background-color: rgb(255, 183, 27, 0.55);
+}
+
+.table-centered tr:nth-child(odd){ 
+  background-color: white;
+}
+
+.table-centered tr:nth-child(even){
+background-color: rgb(255, 183, 27, 0.15); 
+}
+
 
 /*
 ###############
@@ -230,26 +280,58 @@ table.longtable tr:hover td {
 }
 
 /*
-###############
-   DataFrame 
-###############
-Not sure why the odd columns (white) are rendered gray.
+#########################
+   longtable-centered
+#########################
+
+Use as:
+
+
+.. table:: 
+  :class: longtable-centered
+
+  +---------------------------+-------------------+
+  |                           | MAPDL Command     |
+  +===========================+===================+
+  | **GUI commands**          | * ``*ASK``        |
+  |                           +-------------------+
+  |   ...
+  |   ...
+
 */
 
-.dataframe tr{ 
-    background-color: white;
-  }
-
-.dataframe tr:nth-child(odd){ 
-    background-color: white;  
-  }
-
-.dataframe tr:nth-child(even){
-  background-color: rgb(255, 183, 27, 0.15);
+table.longtable-centered tr:hover td {
+  background-color: rgb(255, 183, 27, 0.6);
+  text-align: center;
 }
 
-.dataframe tr:hover td {
+/*
+#########################
+   DataFrame-centered
+#########################
+Not sure why the odd columns (white) are rendered gray.
+
+I do not think we will be able to call this class.
+*/
+
+.dataframe-centered tr{ 
+    background-color: white;
+    text-align: center;
+  }
+
+.dataframe-centered tr:nth-child(odd){ 
+    background-color: white;  
+    text-align: center;
+  }
+
+.dataframe-centered tr:nth-child(even){
+  background-color: rgb(255, 183, 27, 0.15);
+  text-align: center;
+}
+
+.dataframe-centered tr:hover td {
   background-color: rgb(255, 183, 27, 0.6);
+  text-align: center;
 }
 
 
@@ -270,5 +352,7 @@ Not sure why the odd columns (white) are rendered gray.
 .autosummary tr:nth-child(even){
   background-color: white;
 }
+
+
 
 
