@@ -179,3 +179,34 @@ p.rubric {
     margin-top: 0.75em;
     margin-bottom: 0.75em;
 }
+/*
+Table style for the DataFrame representation
+*/
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  text-align: center;
+  padding: 8px;
+  font-size: 16px;
+}
+
+td {
+  text-align: left;
+  padding: 8px;
+  font-size: 16px;
+}
+
+td:hover {
+  background-color: #ffb71b;
+}
+
+tr:nth-child(even){background-color: #ffdf99}
+
+th {
+  text-align: center;
+  background-color: #ffb71b;
+  color: black;
+}
