@@ -219,9 +219,11 @@ background-color: rgb(255, 183, 27, 0.15);
 }
 
 /*
-###############
-   longtable 
-###############
+#####################
+   Table-centered 
+#####################
+Same as table but with horizontally centered text.
+
 
 Use as:
 
@@ -245,6 +247,7 @@ table.table-centered {
   border-collapse: collapse;
   overflow: hidden;
   vertical-align: middle;
+  text-align: center;
 
   /* Disabling scroll bars */
   overflow-y: scroll;
@@ -254,18 +257,22 @@ table.table-centered {
 
 .table-centered tr { 
   background-color: white;
+  text-align: center;
 }
 
 .table-centered th {
   background-color: rgb(255, 183, 27, 0.55);
+  text-align: center;
 }
 
 .table-centered tr:nth-child(odd){ 
+  text-align: center;
   background-color: white;
 }
 
 .table-centered tr:nth-child(even){
-background-color: rgb(255, 183, 27, 0.15); 
+  background-color: rgb(255, 183, 27, 0.15); 
+  text-align: center;
 }
 
 
@@ -300,10 +307,56 @@ Use as:
 
 */
 
+table.longtable-centered {
+  text-align: center;
+  }
+
+.longtable-centered tr { 
+  text-align: center;
+}
+
+.longtable-centered th {
+  text-align: center;
+}
+
+.longtable-centered tr:nth-child(odd){ 
+  text-align: center;
+}
+
+.longtable-centered tr:nth-child(even){
+  text-align: center;
+}
+
 table.longtable-centered tr:hover td {
   background-color: rgb(255, 183, 27, 0.6);
   text-align: center;
 }
+
+/*
+##############
+   DataFrame
+##############
+Not sure why the odd columns (white) are rendered gray.
+
+I do not think we will be able to call this class.
+*/
+
+.dataframe tr{ 
+    background-color: white;
+  }
+
+.dataframe tr:nth-child(odd){ 
+    background-color: white !important;
+  }
+
+.dataframe tr:nth-child(even){
+  background-color: rgb(255, 183, 27, 0.15);
+}
+
+.dataframe tr:hover td {
+  background-color: rgb(255, 183, 27, 0.6);
+}
+
 
 /*
 #########################
@@ -320,7 +373,7 @@ I do not think we will be able to call this class.
   }
 
 .dataframe-centered tr:nth-child(odd){ 
-    background-color: white;  
+    background-color: white !important;  
     text-align: center;
   }
 
@@ -332,6 +385,10 @@ I do not think we will be able to call this class.
 .dataframe-centered tr:hover td {
   background-color: rgb(255, 183, 27, 0.6);
   text-align: center;
+}
+
+.dataframe thead th {
+    text-align: center;
 }
 
 
