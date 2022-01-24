@@ -1,5 +1,7 @@
 /* Provided by the Sphinx base theme template at build time */
 @import "../basic.css";
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap');
+
 
 @font-face {
     font-family: "Source Sans Pro Light";
@@ -10,7 +12,6 @@
     font-family: "Source Sans Pro";
     src: url(../fonts/SourceSansPro-Regular.ttf);
 }
-
 
 :root {
   /* Ansys colors */
@@ -143,9 +144,9 @@
 
 .docutils {
     color: #C89211;
-    font-family: "Source Code Pro", "Courier New", monospace;
+    font-family: 'Inconsolata';
     font-weight: bold;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .sig-prename {
@@ -155,7 +156,7 @@
 
 .sig-name.descname {
     color: #C89211;
-    /* font-family: 'Source Sans Pro', sans-serif; */
+    /* font-family: '   Source Sans Pro', sans-serif; */
 }
 
 .sig-name {
