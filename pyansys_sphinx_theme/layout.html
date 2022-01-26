@@ -1,0 +1,25 @@
+{%- extends "pydata_sphinx_theme/layout.html" -%}
+
+{% set rellinks = [] %}
+
+{% block rootrellink %}
+    <li><a href="https://docs.pyansys.com">pyAnsys</a> {{ reldelim1 }} </li>
+    {% if pagename != 'index' %}
+        <li><a href="{{ pathto(root_doc) }}">{{ shorttitle }}</a> {{ reldelim1 }} </li>
+    {% endif %}
+{% endblock %}
+
+{%- block relbaritems %}{% endblock %}
+
+{% block docs_navbar %}
+<nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+  {%- include "docs-navbar.html" %}
+</nav>
+
+<div class="container-xl">
+    <div class="row">
+      {{ relbar() }}
+  </div>
+</div>
+
+{% endblock %}
