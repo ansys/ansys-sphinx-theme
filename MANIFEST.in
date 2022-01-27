@@ -1,5 +1,6 @@
 
 include pyansys_sphinx_theme/layout.html
+include pyansys_sphinx_theme/breadcrumbs.html
 include pyansys_sphinx_theme/docs-navbar.html
 include pyansys_sphinx_theme/theme.conf
 

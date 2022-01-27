@@ -1,25 +1,26 @@
 {%- extends "pydata_sphinx_theme/layout.html" -%}
 
+{# Append our custom CSS after the bootstrap stylesheet so we can override where necessary #}
+{%- block css %}
+    {{ super() }}
+     <link href="{{ pathto('_static/css/pyansys.css', 1) }}" rel="stylesheet">
+{%- endblock %}
+
+{# Suppress previous/next links #}
 {% set rellinks = [] %}
 
+{% set reldelim1 = ' » ' %}
+
+{# The list of breadcrumbs is defined as a <ul/>, below we add additional root items #}
 {% block rootrellink %}
-    <li><a href="https://docs.pyansys.com">pyAnsys</a> {{ reldelim1 }} </li>
+    <li class="nav-item nav-item-pyansys"><a href="{{ theme_logo_link }}">PyAnsys</a>{{ reldelim1 }}</li>
     {% if pagename != 'index' %}
-        <li><a href="{{ pathto(root_doc) }}">{{ shorttitle }}</a> {{ reldelim1 }} </li>
+        <li class="nav-item nav-item-0"><a href="{{ pathto(root_doc) }}">{{ shorttitle }}</a>{{ reldelim1 }}</li>
     {% endif %}
 {% endblock %}
 
-{%- block relbaritems %}{% endblock %}
-
+{# Add the breadcrumbs underneath the navbar #}
 {% block docs_navbar %}
-<nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
-  {%- include "docs-navbar.html" %}
-</nav>
-
-<div class="container-xl">
-    <div class="row">
-      {{ relbar() }}
-  </div>
-</div>
-
+    {{ super() }}
+    {% include 'breadcrumbs.html' %}
 {% endblock %}
