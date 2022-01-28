@@ -4,23 +4,31 @@
 {%- block css %}
     {{ super() }}
      <link href="{{ pathto('_static/css/pyansys.css', 1) }}" rel="stylesheet">
+    {% if theme_show_breadcrumbs %}
+        <link href="{{ pathto('_static/css/breadcrumbs.css', 1) }}" rel="stylesheet">
+    {% endif %}
 {%- endblock %}
 
-{# Suppress previous/next links #}
-{% set rellinks = [] %}
+{% if not theme_show_prev_next %}
+    {% set rellinks = [] %}
+{% endif %}
 
 {% set reldelim1 = ' » ' %}
 
 {# The list of breadcrumbs is defined as a <ul/>, below we add additional root items #}
 {% block rootrellink %}
-    <li class="nav-item nav-item-pyansys"><a href="{{ theme_logo_link }}">PyAnsys</a>{{ reldelim1 }}</li>
+    {% for (name, href) in theme_additional_breadcrumbs %}
+        <li class="nav-item nav-item-additional-breadcrumb"><a href="{{ href }}">{{ name }}</a>{{ reldelim1 }}</li>
+    {% endfor %}
     {% if pagename != 'index' %}
         <li class="nav-item nav-item-0"><a href="{{ pathto(root_doc) }}">{{ shorttitle }}</a>{{ reldelim1 }}</li>
     {% endif %}
 {% endblock %}
 
-{# Add the breadcrumbs underneath the navbar #}
 {% block docs_navbar %}
     {{ super() }}
-    {% include 'breadcrumbs.html' %}
+    {% if theme_show_breadcrumbs %}
+        {% include 'breadcrumbs.html' %}
+    {% endif %}
 {% endblock %}
+
