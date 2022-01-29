@@ -1,6 +1,4 @@
-============================================
-PyAnsys Sphinx Theme Documentation |version|
-============================================
+Documentation Version: |version|
 
 ..
    Simply reuse the root readme

@@ -1,4 +1,4 @@
-Sphinx
-https://github.com/numpy/numpydoc/archive/main.zip  # need latest
+Sphinx==4.4.0
+numpydoc==1.2
 pyansys_sphinx_theme
-sphinx-copybutton
+sphinx-copybutton==0.4.0

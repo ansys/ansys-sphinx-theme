@@ -14,3 +14,7 @@ dist/*
 build/*
 doc/build/
 doc/source/_autosummary/
+
+# Node
+.nodeenv/
+node_modules/

@@ -1,0 +1,58 @@
+[build-system]
+requires = ["sphinx-theme-builder >= 0.2.0a7"]
+build-backend = "sphinx_theme_builder"
+
+[tool.sphinx-theme-builder]
+node-version = "16.13.2"
+theme-name = "pyansys_sphinx_theme"
+additional-compiled-static-assets = [
+  "webpack-macros.html",
+  "vendor/",
+]
+
+[project]
+name = "pyansys-sphinx-theme"
+description = "PyData-based Sphinx theme from the PyAnsys community"
+dynamic = ["version"]
+readme = "README.rst"
+
+requires-python = ">=3.7"
+dependencies = [
+  "sphinx>=4.0.0",
+  "pydata-sphinx-theme==0.8.0",
+]
+
+license = { file = "LICENSE" }
+maintainers = [
+  { name = "PyAnsys maintainers", email = "pyansys.maintainers@ansys.com" },
+]
+
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Framework :: Sphinx",
+  "Framework :: Sphinx :: Theme",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+doc = [
+  "Sphinx==4.4.0",
+  "numpydoc==1.2",
+  "sphinx-copybutton==0.4.0",
+]
+test = [
+  "pytest==6.2.5",
+  "pytest-cov==3.0.0",
+]
+style = [
+  "codespell==2.0.0",
+  "flake8==3.9.2",
+]
+
+[project.entry-points]
+"sphinx.html_themes" = { pyansys_sphinx_theme = "pyansys_sphinx_theme" }
+
+[project.urls]
+Home = "https://github.com/pyansys/pyansys-sphinx-theme"
