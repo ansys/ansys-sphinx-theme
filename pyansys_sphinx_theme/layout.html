@@ -1,0 +1,33 @@
+{%- extends "pydata_sphinx_theme/layout.html" -%}
+
+{# Append our custom CSS after the bootstrap stylesheet so we can override where necessary #}
+{%- block css %}
+    {{ super() }}
+    {% if theme_show_breadcrumbs %}
+        <link href="{{ pathto('_static/css/breadcrumbs.css', 1) }}" rel="stylesheet">
+    {% endif %}
+{%- endblock %}
+
+{% if not theme_show_prev_next %}
+    {% set rellinks = [] %}
+{% endif %}
+
+{% set reldelim1 = ' » ' %}
+
+{# The list of breadcrumbs is defined as a <ul/>, below we add additional root items #}
+{% block rootrellink %}
+    {% for (name, href) in theme_additional_breadcrumbs %}
+        <li class="nav-item nav-item-additional-breadcrumb"><a href="{{ href }}">{{ name }}</a>{{ reldelim1 }}</li>
+    {% endfor %}
+    {% if pagename != 'index' %}
+        <li class="nav-item nav-item-0"><a href="{{ pathto(root_doc) }}">{{ shorttitle }}</a>{{ reldelim1 }}</li>
+    {% endif %}
+{% endblock %}
+
+{% block docs_navbar %}
+    {{ super() }}
+    {% if theme_show_breadcrumbs %}
+        {% include 'breadcrumbs.html' %}
+    {% endif %}
+{% endblock %}
+
