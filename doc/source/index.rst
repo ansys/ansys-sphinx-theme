@@ -1,7 +1,3 @@
-====================
-PyAnsys Sphinx Theme
-====================
-
 ..
    Simply reuse the root readme
 
@@ -55,3 +51,13 @@ Tables
    * - Row 2, column 1
      - Row 2, column 2
      - Row 2, column 3
+
+
+API Documentation
+~~~~~~~~~~~~~~~~~
+
+.. currentmodule:: pyansys_sphinx_theme.samples
+
+.. autosummary::
+
+   Complex

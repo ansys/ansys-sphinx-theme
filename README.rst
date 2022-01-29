@@ -1,3 +1,4 @@
+====================
 PyAnsys Sphinx Theme
 ====================
 
@@ -14,9 +15,9 @@ all PyAnsys packages.
 
 Documentation
 ~~~~~~~~~~~~~
-Full documentation for the theme can found at `PyAnsys Sphinx Documentation <https://sphinxdocs.pyansys.com>`_.  The webpage was
-also built using the ``pyansys-sphinx-theme``, so visit the site for a
-preview of the theme.
+Full documentation for the theme can found at `PyAnsys Sphinx Documentation
+<https://sphinxdocs.pyansys.com>`_.  The webpage was also built using the
+``pyansys-sphinx-theme``, so visit the site for a preview of the theme.
 
 Other Sites Using the PyAnsys theme:
 

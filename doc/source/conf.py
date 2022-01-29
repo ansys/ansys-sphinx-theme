@@ -12,6 +12,7 @@ release = version = __version__
 # use the default pyansys logo
 html_logo = pyansys_logo_black
 html_theme = 'pyansys_sphinx_theme'
+html_title = 'PyAnsys Sphinx Theme'
 
 # specify the location of your github repo
 html_theme_options = {
