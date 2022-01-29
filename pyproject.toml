@@ -42,10 +42,6 @@ doc = [
   "numpydoc==1.2",
   "sphinx-copybutton==0.4.0",
 ]
-test = [
-  "pytest==6.2.5",
-  "pytest-cov==3.0.0",
-]
 style = [
   "codespell==2.0.0",
   "flake8==3.9.2",

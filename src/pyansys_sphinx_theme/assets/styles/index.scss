@@ -978,42 +978,10 @@ I do not think we will be able to call this class.
     text-align: center;
 }
 
-
-
-/*
-###############
-   Autosummary 
-###############
-*/
-/* .autosummary {
-        text-align: left;
-        } */
-
 .autosummary  tr:nth-child(odd){ 
     background-color: white;
   }
 
 .autosummary tr:nth-child(even){
   background-color: white;
-}
-
-
-#breadcrumbs{
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 3rem;
-    border-bottom: 1px solid rgba(0,0,0,.1);
-
-}
-
-#breadcrumbs-spacer{
-  border-right: 1px solid rgba(0,0,0,.1);
-}
-
-div.related > ul {
-    padding-left: 0;
-}
-
-body {
-    padding-top: var(--pst-header-height);
 }

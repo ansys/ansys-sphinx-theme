@@ -36,11 +36,18 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install pyansys_sphinx_theme
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+          cache: "pip"
+          cache-dependency-path: "pyproject.toml"
+
+      - name: Install dependencies
         run: |
-          python setup.py sdist
-          pip install dist/pyansys*.tar.gz --disable-pip-version-check
-  
+          python -m pip install --upgrade pip
+          python -m pip install -e .[doc]
+
       - name: lint package
         run: |
           pip install twine
@@ -48,7 +55,6 @@ jobs:
 
       - name: Build Documentation
         run: |
-          pip install -r requirements_docs.txt
           make -C doc html SPHINXOPTS="-W"
           touch doc/build/html/.nojekyll
           echo "sphinxdocs.pyansys.com" > doc/build/html/CNAME
@@ -76,21 +82,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python
+      - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
           python-version: 3.9
 
-      - name: Generate package
-        run: python setup.py sdist
-
-      - name: Upload to Public PyPi
+      - name: Build package
         run: |
-          pip install twine
-          twine upload --skip-existing dist/*
-        env:
-          TWINE_USERNAME: __token__
-          TWINE_PASSWORD: ${{ secrets.TWINE_TOKEN }}
+          pip install -U pip build
+          python -m build
+
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@v1.1.0
+        with:
+          user: __token__
+          password: ${{ secrets.TWINE_TOKEN }}
 
       - name: Release
         uses: softprops/action-gh-release@v1
