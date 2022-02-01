@@ -413,5 +413,15 @@ I do not think we will be able to call this class.
 }
 
 
-
-
+/*
+########################
+   ReST :download: links
+########################
+*/
+a > code.download
+{
+    font-family: var(--pst-font-family-base);
+    color: var(--pst-color-link);
+    text-decoration: none;
+    font-weight: normal;
+}
