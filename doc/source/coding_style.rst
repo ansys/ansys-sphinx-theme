@@ -23,7 +23,7 @@ Aside from pyansys specific directives, the best coding practice is to simply
 follow established guidelines from `PEP8 <https://www.python.org/dev/peps/pep-0008/>`__.
 
 
-Deprecation Best-Practice
+Deprecation Best Practice
 -------------------------
 Whenever a method, class, or function is deprecated, we must provide
 an old method that calls the new method and raises a warning, or raise
@@ -108,11 +108,11 @@ Then simply use that inplace of ``Exception``
         """
         raise DeprecationError('`my_function` has been deprecated')
 
-Imports Best-Practice
+Imports Best Practice
 ---------------------
 
 Following the `PEP8 guidelines <https://www.python.org/dev/peps/pep-0008/#imports>`_,
-imports should be added at the top of the file and should be grouped in the following order:
+imports should be added at the top of the file and should be grouped in this order:
 
 1. Standard library imports.
 2. Related third party imports.
@@ -136,7 +136,7 @@ For example, consider the unorganized imports below:
     from ansys.mapdl.core.commands import Commands
     from ansys.mapdl.core.inline_functions import Query
 
-Organizing those same imports into groups vastly improves readibilty:
+Organizing these same imports into groups vastly improves readibilty:
 
 .. code:: python
 
@@ -156,9 +156,9 @@ Organizing those same imports into groups vastly improves readibilty:
     from ansys.mapdl.core.commands import Commands
     from ansys.mapdl.core.inline_functions import Query
 
-It is also recommended that the imports within a section be organized alphabetically.
-Following this convention makes imports easily searchable. This standard is optional 
-and will not be enforced, but it may be preferred in some projects.
+We also recommend that the imports within a section be organized alphabetically.
+Following this convention makes imports easily searchable. While this standard is optional,
+it may be preferred in some projects.
 
 .. code:: python
 
@@ -178,7 +178,7 @@ and will not be enforced, but it may be preferred in some projects.
     from ansys.mapdl.core.plotting import general_plotter
     from ansys.mapdl.core.post import PostProcessing
 
-Additionally, it is recommended to use absolute imports over relative imports, since they are 
+Additionally, we recommend to use absolute imports over relative imports because they are 
 more readable and reliable:
 
 .. code:: python
@@ -201,7 +201,7 @@ method or feature is added, changed, or removed, the minor version
 should be bumped.
 
 To avoid constantly bumping the minor version, one approach to for
-source-control branching is to create release branches where only
+source control branching is to create release branches where only
 patch fixes are pushed to, and API changes occur between minor
 releases.  See `Trunk Based Development
 <https://trunkbaseddevelopment.com/>`_.  In summary, the mainline
@@ -218,7 +218,7 @@ update any projects dependent on the API while still being treated as
 multiple "release branches" in a repository, the number of active
 release branches should be between one and three.
 
-Docstring Examples Best-Practice
+Docstring Examples Best Practice
 --------------------------------
 Defining docstring examples for methods and classes are extremely 
 useful. The examples give users an easy place to start when trying 
@@ -228,7 +228,7 @@ also be used to perform regression testing to verify that the code is
 executing as expected.
 
 This is an important feature of maintainable documentation as examples
-must always match the API they are documenting, and any changes within
+must always match the API that they are documenting. Any changes within
 the API without a corresponding change in the documentation will
 trigger doctest failures.
 
@@ -252,11 +252,11 @@ execute them to verify that they function as written.
 Using ``pytest`` Fixtures
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 To define a setup sequence before the ``doctest`` run or before a given 
-module is tested, ``pytest`` fixtures can be used. Fixtures allow docstring 
-examples to access shared objects, so there is no need to repeat the setup
+module is tested, you can use ``pytest`` fixtures. Because fixtures allow docstring 
+examples to access shared objects, there is no need to repeat the setup
 in each example.
 
-``pytest`` fixtures can defined in a ``conftest.py`` file next to the source 
+You can define ``pytest`` fixtures in a ``conftest.py`` file next to the source 
 code. The following example shows a fixture that is run automatically for 
 each ``doctest`` session.
 
@@ -276,7 +276,7 @@ each ``doctest`` session.
         yield desktop
         desktop.force_close_desktop()
 
-Fixtures can also be defined in a separate Python file from 
+You can also define fixtures in a separate Python file from 
 ``conftest.py``. This may help keep the fixtures more organized. Fixtures 
 from other files need to be imported in the main ``conftest.py`` file. The 
 following example shows how to import fixtures defined in an 
@@ -345,7 +345,7 @@ example, by referencing the key ``icepak``.
         Examples
         --------
 
-        Create an opening boundary for the faces of the "USB_GND" object.
+        Create an opening boundary for the faces of the ``USB_GND`` object.
 
         >>> faces = icepak.modeler.primitives["USB_GND"].faces
         >>> face_names = [face.id for face in faces]
@@ -358,7 +358,7 @@ example, by referencing the key ``icepak``.
 Useful Features
 ~~~~~~~~~~~~~~~
 
-Ellipses For Random Output
+Ellipses for Random Output
 **************************
 If the output of some operation in an example cannot be verified exactly,
 an ellipsis (``...``) can be used in the expected output. This allows it
