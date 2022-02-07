@@ -59,16 +59,18 @@ Use your ``custom.css`` file to override the CSS style of this theme.
 Adding Breadcrumbs
 ~~~~~~~~~~~~~~~~~~
 The PyAnsys Sphinx theme supports the display of breadcrumbs on
-the body of documentation pages to make navigation easier. To add
-breadcrumbs to the pages of your documentation, in the ``theme.conf``
-file, set ``html_theme_option`` to ``"show_breadcrumbs": True``.
+the body of documentation pages to make navigation easier. These 
+breadcrumbs are disabled by default. To add
+breadcrumbs to the pages of your documentation, in the ``conf.py``
+file, add ``"show_breadcrumbs": True`` to the ``html_theme_options`` dictionary.
 
 If you want to add additional 'root' breadcrumbs, such as to the 
-PyAnsys root page, you set ``html_theme_option`` to
-``"additional_breadcrumbs": [("Link text", "href")]``.
+PyAnsys Documentation homepage, add them to the ``html_theme_options`` dictionary as a list of tuples
+with the ``"additional_breadcrumbs"`` key. The tuples are of the form ``("Link text", "url")``.
 
-You must manually add the breadcrumb that links to the module homepage when on
-a page within the documentation. Because there is no way to get the title of the
-``index.rst`` page, you must use the ``html_title`` set in the ``conf.py``
-file. The problem is that this isn't necessarily the same as the title of the
-``index.rst`` page.
+When on the module homepage, a breadcrumb will be displayed with the homepage title.
+However, this title is not accessible to Sphinx from other documentation pages. Therefore, the ``html_short_title``
+is used as the display text for the documentation homepage breadcrumb. To ensure a consistent user experience
+you should ensure the ``html_short_title`` (or optionally ``html_title`` if ``html_short_title`` is not used)
+is set to the same value as the title of the ``index.rst`` page. If you want to use the version number
+in the ``index.rst`` title, use ``|version|`` to include the package version number. 
