@@ -43,3 +43,28 @@ documentation.
 
 For usage information, seee `Using this Theme
 <https://sphinxdocs.pyansys.com/usage.html>`_
+
+
+Development and Contributing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Feel free to add features or post issues. To develop this theme::
+
+   git clone https://github.com/pyansys/pyansys-sphinx-theme.git
+   pip install -r requirements_docs.txt
+   make -C doc html
+
+Or for Windows::
+
+   cd doc
+   ./make.bat
+
+We use `pre-commit <https://pre-commit.com/>`_ to simplfy style checks. You can
+optionally use this by following the `installation
+<https://pre-commit.com/#install>`_ and `usage
+<https://pre-commit.com/#usage>`_ guides.
+
+
+License
+~~~~~~~
+This theme is licened under the `MIT License
+<https://raw.githubusercontent.com/pyansys/pyansys-sphinx-theme/main/LICENSE>`_.

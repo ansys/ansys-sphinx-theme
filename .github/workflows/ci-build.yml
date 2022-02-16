@@ -69,7 +69,7 @@ jobs:
           BRANCH: gh-pages
           FOLDER: doc/build/html
           CLEAN: true
-          single-commit: true
+          SINGLE-COMMIT: true
 
   Release:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
