@@ -1,17 +1,18 @@
 """Sphinx documentation configuration file."""
 from datetime import datetime
 
-from pyansys_sphinx_theme import __version__, pyansys_logo_black
+from pyansys_sphinx_theme import __version__
+from pyansys_sphinx_theme import pyansys_logo_black
 
 # Project information
-project = 'pyansys_sphinx_theme'
+project = "pyansys_sphinx_theme"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
 
 # use the default pyansys logo
 html_logo = pyansys_logo_black
-html_theme = 'pyansys_sphinx_theme'
+html_theme = "pyansys_sphinx_theme"
 
 # specify the location of your github repo
 html_theme_options = {
@@ -23,13 +24,13 @@ html_theme_options = {
     ],
 }
 
-html_short_title = html_title = 'PyAnsys Sphinx Theme'
+html_short_title = html_title = "PyAnsys Sphinx Theme"
 
 
 # Sphinx extensions
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
     "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
@@ -38,9 +39,7 @@ extensions = [
 # Intersphinx mapping
 intersphinx_mapping = {
     "python": ("https://docs.python.org/dev", None),
-
     # kept here as an example
-
     # "scipy": ("https://docs.scipy.org/doc/scipy/reference", None),
     # "numpy": ("https://numpy.org/devdocs", None),
     # "matplotlib": ("https://matplotlib.org/stable", None),
@@ -78,7 +77,7 @@ html_static_path = ["_static"]
 templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
-source_suffix = '.rst'
+source_suffix = ".rst"
 
 # The master toctree document.
-master_doc = 'index'
+master_doc = "index"

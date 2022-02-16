@@ -1,3 +1,6 @@
+"""Sample functions for pyansys-sphinx-theme."""
+
+
 def func(arg1, arg2):
     """Summary line <should be one one line>.
 
