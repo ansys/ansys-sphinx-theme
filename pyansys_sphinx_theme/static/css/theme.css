@@ -149,7 +149,7 @@
     font-size: 107%;
 }
 
-.std-ref {
+.xref.std.std-ref {
     color: #C89211;
     font-family: 'Inconsolata';
     font-weight: bold;
