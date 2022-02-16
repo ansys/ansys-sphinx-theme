@@ -146,7 +146,15 @@
     color: #C89211;
     font-family: 'Inconsolata';
     font-weight: bold;
-    font-size: 15.5px;
+    font-size: 107%;
+}
+
+.xref.std.std-ref {
+    color: #C89211;
+    font-family: 'Inconsolata';
+    font-weight: bold;
+    font-style: italic;
+    font-size: 107%;
 }
 
 .sig-prename {

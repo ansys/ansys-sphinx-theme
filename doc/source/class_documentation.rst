@@ -9,9 +9,7 @@ There are two main ways of documenting a class using Sphinx.  The
 first approach is to detail its usage via a "User Guide", or manually
 created example designed to be read within documentation. This
 approach works when demonstrating the usage of a class.  For example,
-using the ``.. code:: python`` directive:
-
-.. code::
+using the ``.. code:: python`` directive::
 
    Initialize ``my_module.MyClass`` with initial parameters.  These
    parameters are automatically assigned to the class.

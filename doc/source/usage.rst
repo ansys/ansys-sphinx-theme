@@ -64,13 +64,34 @@ breadcrumbs are disabled by default. To add
 breadcrumbs to the pages of your documentation, in the ``conf.py``
 file, add ``"show_breadcrumbs": True`` to the ``html_theme_options`` dictionary.
 
-If you want to add additional 'root' breadcrumbs, such as to the 
-PyAnsys Documentation homepage, add them to the ``html_theme_options`` dictionary as a list of tuples
-with the ``"additional_breadcrumbs"`` key. The tuples are of the form ``("Link text", "url")``.
+If you want to add additional 'root' breadcrumbs, such as to the PyAnsys
+Documentation homepage, add them to the ``html_theme_options`` dictionary as a
+list of tuples with the ``"additional_breadcrumbs"`` key. The tuples are of the
+form ``("Link text", "url")``.
 
-When on the module homepage, a breadcrumb will be displayed with the homepage title.
-However, this title is not accessible to Sphinx from other documentation pages. Therefore, the ``html_short_title``
-is used as the display text for the documentation homepage breadcrumb. To ensure a consistent user experience
-you should ensure the ``html_short_title`` (or optionally ``html_title`` if ``html_short_title`` is not used)
-is set to the same value as the title of the ``index.rst`` page. If you want to use the version number
-in the ``index.rst`` title, use ``|version|`` to include the package version number. 
+For example, this theme uses the following ``html_theme_options``:
+
+.. code:: python
+
+   html_theme_options = {
+       "github_url": "https://github.com/pyansys/pyansys-sphinx-theme",
+       "show_prev_next": False,
+       "show_breadcrumbs": True,
+       "additional_breadcrumbs": 
+   }
+
+When on the module homepage, a breadcrumb will be displayed with the homepage
+title.  However, this title is not accessible to Sphinx from other
+documentation pages. Therefore, the ``html_short_title`` is used as the display
+text for the documentation homepage breadcrumb. To ensure a consistent user
+experience you should ensure the ``html_short_title`` (or optionally
+``html_title`` if ``html_short_title`` is not used) is set to the same value as
+the title of the ``index.rst`` page. For example:
+
+.. code:: python
+
+   html_short_title = html_title = 'PyAnsys Sphinx Theme'
+
+If you want to use the version number in
+the ``index.rst`` title, use ``|version|`` to include the package version
+number.
