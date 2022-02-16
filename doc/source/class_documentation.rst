@@ -7,11 +7,9 @@ User Guide Documentation Method
 
 There are two main ways of documenting a class using Sphinx.  The
 first approach is to detail its usage via a "User Guide", or manually
-created example designed to be read within documentation.  This
+created example designed to be read within documentation. This
 approach works when demonstrating the usage of a class.  For example,
-using the ``.. code:: python`` directive:
-
-.. code::
+using the ``.. code:: python`` directive::
 
    Initialize ``my_module.MyClass`` with initial parameters.  These
    parameters are automatically assigned to the class.
@@ -38,7 +36,7 @@ parameters are automatically assigned to the class.
 Autoclass Directive
 ~~~~~~~~~~~~~~~~~~~
 
-The "user guide" approach works for explaining the "why" and "how" of a class.  As
+The "User Guide" approach works for explaining the "why" and "how" of a class.  As
 for the "what" of a class, you can describe the API automatically
 using the ``autoclass`` directive:
 
@@ -57,8 +55,8 @@ using the ``autoclass`` directive:
 Autosummary Directive
 ~~~~~~~~~~~~~~~~~~~~~
 Simple classes can be easily represented using the ``autoclass``
-directive, but more complex classes with many methods should be
-documented via the ``autosummary`` directive.  For example,
+directive. However, more complex classes with many methods should be
+documented via the ``autosummary`` directive.  For example:
 
 .. code::
 
@@ -68,7 +66,7 @@ documented via the ``autosummary`` directive.  For example,
       pyansys_sphinx_theme.samples.Complex
 
 
-Will generate the following documentation:
+This code will generate the following documentation:
 
 .. autosummary::
    :toctree: _autosummary

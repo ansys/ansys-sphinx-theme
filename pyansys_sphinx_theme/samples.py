@@ -1,3 +1,4 @@
+"""Sample classes and functions for pyansys-sphinx-theme."""
 from math import sqrt
 
 
@@ -30,6 +31,7 @@ class ExampleClass:
     """
 
     def __init__(self, param1, param2, param3=0):
+        """Initialize the ExampleClass."""
         self.attr1 = param1
         self.attr2 = param2
         self.attr3 = param3
@@ -51,11 +53,13 @@ class ExampleClass:
 
     @property
     def readwrite_property(self):
-        """Properties with both a getter and setter
-        should only be documented in their getter method.
+        """Set or return the readwrite property.
 
-        If the setter method contains notable behavior, it should be
-        mentioned here.
+        Properties with both a getter and setter should only be documented in
+        their getter method.
+
+        If the setter method contains notable behavior, it should be mentioned
+        here.
 
         Examples
         --------
@@ -87,11 +91,11 @@ class ExampleClass:
         Returns
         -------
         bool
-            True if successful, False otherwise.
+            ``True`` if successful, ``False`` otherwise.
 
         Notes
         -----
-        Do not include the `self` parameter in the ``Parameters`` section.
+        Do not include the ``self`` parameter in the ``Parameters`` section.
 
         Examples
         --------
@@ -117,7 +121,7 @@ class ExampleClass:
         """
         pass
 
-    def __special_without_docstring__(self):
+    def __special_without_docstring__(self):  # noqa: D105
         pass
 
     def _private(self):
@@ -159,6 +163,7 @@ class Complex(object):
     """
 
     def __init__(self, real, imag=0.0):
+        """Initialize the complex number."""
         self._real = float(real)
         self._imag = float(imag)
 
@@ -203,33 +208,41 @@ class Complex(object):
         self._imag = float(imag)
 
     def __add__(self, other):
+        """Add two complex numbers."""
         return Complex(self._real + other.real, self._imag + other.imag)
 
     def __sub__(self, other):
+        """Subtract two complex numbers."""
         return Complex(self._real - other.real, self._imag - other.imag)
 
     def __mul__(self, other):
-        return Complex((self._real * other.real) - (self._imag * other.imag),
-            (self._imag * other.real) + (self._real * other.imag))
+        """Multiply two complex numbers."""
+        return Complex(
+            (self._real * other.real) - (self._imag * other.imag),
+            (self._imag * other.real) + (self._real * other.imag),
+        )
 
     def __truediv__(self, other):
-        r = (other.real**2 + other.imag**2)
-        return Complex((self._real*other.real - self._imag*other.imag)/r,
-            (self._imag*other.real + self._real*other.imag)/r)
+        """Divide two complex numbers."""
+        r = other.real ** 2 + other.imag ** 2
+        return Complex(
+            (self._real * other.real - self._imag * other.imag) / r,
+            (self._imag * other.real + self._real * other.imag) / r,
+        )
 
     @property
     def abs(self):
-        """Absolute value of this number
+        """Return the absolute value of this number.
 
         Examples
         --------
         >>> my_num = Complex(real=1, imag=1.0)
         >>> my_num.abs
         """
-        new = self._real**2 + self._imag**2
+        new = self._real ** 2 + self._imag ** 2
         return Complex(sqrt(new.real))
 
-    def __repr__(self):
+    def __repr__(self):  # noqa: D105
         if self._imag < 0:
-            return f'({self._real} - {abs(self._imag)}j)'
-        return f'({self._real} + {self._imag}j)'
+            return f"({self._real} - {abs(self._imag)}j)"
+        return f"({self._real} + {self._imag}j)"

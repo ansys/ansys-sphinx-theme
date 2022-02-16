@@ -146,7 +146,15 @@
     color: #C89211;
     font-family: 'Inconsolata';
     font-weight: bold;
-    font-size: 15.5px;
+    font-size: 107%;
+}
+
+.xref.std.std-ref {
+    color: #C89211;
+    font-family: 'Inconsolata';
+    font-weight: bold;
+    font-style: italic;
+    font-size: 107%;
 }
 
 .sig-prename {
@@ -413,5 +421,15 @@ I do not think we will be able to call this class.
 }
 
 
-
-
+/*
+########################
+   ReST :download: links
+########################
+*/
+a > code.download
+{
+    font-family: var(--pst-font-family-base);
+    color: var(--pst-color-link);
+    text-decoration: none;
+    font-weight: normal;
+}

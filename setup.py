@@ -10,13 +10,14 @@ from setuptools import setup
 HERE = os.path.abspath(os.path.dirname(__file__))
 
 __version__ = None
-version_file = os.path.join(HERE, 'pyansys_sphinx_theme', '_version.py')
-with io_open(version_file, mode='r') as fd:
+version_file = os.path.join(HERE, "pyansys_sphinx_theme", "_version.py")
+with io_open(version_file, mode="r") as fd:
     exec(fd.read())
 
 
 def read(rel_path):
-    with codecs.open(os.path.join(HERE, rel_path), 'r') as fp:
+    """Read a raw file."""
+    with codecs.open(os.path.join(HERE, rel_path), "r") as fp:
         return fp.read()
 
 
@@ -39,7 +40,9 @@ setup(
     packages=["pyansys_sphinx_theme"],
     include_package_data=True,
     # See http://www.sphinx-doc.org/en/stable/theming.html#distribute-your-theme-as-a-python-package
-    entry_points={"sphinx.html_themes": ["pyansys_sphinx_theme = pyansys_sphinx_theme"]},
+    entry_points={
+        "sphinx.html_themes": ["pyansys_sphinx_theme = pyansys_sphinx_theme"]
+    },
     install_requires=["sphinx>=4.0.0", "pydata-sphinx-theme==0.7.2"],
     python_requires=">=3.5",
     classifiers=[
