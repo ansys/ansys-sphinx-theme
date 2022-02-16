@@ -146,6 +146,14 @@
     color: #C89211;
     font-family: 'Inconsolata';
     font-weight: bold;
+    font-size: 100%;
+}
+
+.std-ref {
+    color: #C89211;
+    font-family: 'Inconsolata';
+    font-weight: bold;
+    font-style: italic;
     font-size: 15.5px;
 }
 

@@ -91,11 +91,11 @@ class ExampleClass:
         Returns
         -------
         bool
-            True if successful, False otherwise.
+            ``True`` if successful, ``False`` otherwise.
 
         Notes
         -----
-        Do not include the `self` parameter in the ``Parameters`` section.
+        Do not include the ``self`` parameter in the ``Parameters`` section.
 
         Examples
         --------
