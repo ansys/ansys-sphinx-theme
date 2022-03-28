@@ -43,7 +43,7 @@ setup(
     entry_points={
         "sphinx.html_themes": ["pyansys_sphinx_theme = pyansys_sphinx_theme"]
     },
-    install_requires=["sphinx>=4.0.0", "pydata-sphinx-theme==0.7.2"],
+    install_requires=["sphinx>=4.0.0", "pydata-sphinx-theme==0.8.1"],
     python_requires=">=3.5",
     classifiers=[
         "Development Status :: 4 - Beta",
