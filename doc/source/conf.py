@@ -81,3 +81,6 @@ source_suffix = ".rst"
 
 # The master toctree document.
 master_doc = "index"
+
+# Favicon
+html_favicon = "favicon.png"
