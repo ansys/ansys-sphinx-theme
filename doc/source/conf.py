@@ -69,6 +69,8 @@ numpydoc_validation_checks = {
     # type, unless multiple values are being returned"
 }
 
+# Favicon
+html_favicon = "favicon.png"
 
 # static path
 html_static_path = ["_static"]
@@ -81,6 +83,3 @@ source_suffix = ".rst"
 
 # The master toctree document.
 master_doc = "index"
-
-# Favicon
-html_favicon = "favicon.png"
