@@ -224,7 +224,7 @@ class Complex(object):
 
     def __truediv__(self, other):
         """Divide two complex numbers."""
-        r = other.real ** 2 + other.imag ** 2
+        r = other.real**2 + other.imag**2
         return Complex(
             (self._real * other.real - self._imag * other.imag) / r,
             (self._imag * other.real + self._real * other.imag) / r,
@@ -239,7 +239,7 @@ class Complex(object):
         >>> my_num = Complex(real=1, imag=1.0)
         >>> my_num.abs
         """
-        new = self._real ** 2 + self._imag ** 2
+        new = self._real**2 + self._imag**2
         return Complex(sqrt(new.real))
 
     def __repr__(self):  # noqa: D105
