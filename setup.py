@@ -1,10 +1,9 @@
 """Sphinx Bootstrap Theme package with pyansys-css."""
 import codecs
-import os
 from io import open as io_open
+import os
 
 from setuptools import setup
-
 
 # loosely from https://packaging.python.org/guides/single-sourcing-package-version/
 HERE = os.path.abspath(os.path.dirname(__file__))

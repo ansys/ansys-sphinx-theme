@@ -13,6 +13,8 @@ pyansys_logo_black = os.path.join(
 pyansys_logo_white = os.path.join(
     _this_path, "static", "pyansys-logo-white-cropped.png"
 )
+ansys_favicon = os.path.join(_this_path, "static", "ansys-favicon.png")
+
 
 html_logo = pyansys_logo_black
 

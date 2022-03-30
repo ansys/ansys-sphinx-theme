@@ -1,8 +1,7 @@
 """Sphinx documentation configuration file."""
 from datetime import datetime
 
-from pyansys_sphinx_theme import __version__
-from pyansys_sphinx_theme import pyansys_logo_black
+from pyansys_sphinx_theme import __version__, ansys_favicon, pyansys_logo_black
 
 # Project information
 project = "pyansys_sphinx_theme"
@@ -17,8 +16,6 @@ html_theme = "pyansys_sphinx_theme"
 # specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/pyansys/pyansys-sphinx-theme",
-    "show_prev_next": False,
-    "show_breadcrumbs": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
     ],
@@ -70,7 +67,7 @@ numpydoc_validation_checks = {
 }
 
 # Favicon
-html_favicon = "favicon.png"
+html_favicon = ansys_favicon
 
 # static path
 html_static_path = ["_static"]
