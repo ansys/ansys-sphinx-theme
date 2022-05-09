@@ -1,0 +1,129 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    tags:
+      - "*"
+    branches:
+      - main
+
+jobs:
+
+  style:
+    name: Code style
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip tox
+      - name: Test with tox
+        run: tox -e style
+
+  docs:
+    name: Documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip tox
+      - name: Build documentation
+        run: tox -e doc
+
+      - name: Upload Documentation
+        uses: actions/upload-artifact@v2.2.1
+        with:
+          name: Documentation
+          path: .tox/doc_out/
+          retention-days: 7
+
+      - name: Deploy to gh-pages
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: .tox/doc_out/
+          CLEAN: true
+          SINGLE_COMMIT: true
+
+      - name: Deploy to gh-pages
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+        uses: JamesIves/github-pages-deploy-action@3.7.1        
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: doc/build/html
+          CLEAN: true
+          SINGLE-COMMIT: true
+
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip pipx
+          python -m pip install -r requirements/requirements_build.txt
+      - name: Build wheel and sdist
+        run: |
+          python -m build && python -m twine check dist/*
+      - name: Upload wheel and sdist to artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: pyasys-templates-packages
+          path: dist/
+          retention-days: 7
+
+  release:
+    name: Release
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    needs: [style, docs, build]
+    runs-on: ubuntu-latest
+  
+    steps:
+      - uses: actions/download-artifact@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Display structure of downloaded files
+        run: ls -R
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip twine
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.TWINE_TOKEN }}
+        run: |
+          python -m twine upload --skip-existing ./**/*.whl
+          python -m twine upload --skip-existing ./**/*.tar.gz
+      - name: Publish to GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            ./**/*.whl
+            ./**/*.tar.gz
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          generate_release_notes: true
