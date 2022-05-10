@@ -28,6 +28,7 @@
       {% endfor %}
     </div>
 
+    {% if theme_show_icons %}
     <div id="navbar-end">
       {% for navbar_item in theme_navbar_end %}
       <div class="navbar-end-item">
@@ -35,5 +36,6 @@
       </div>
       {% endfor %}
     </div>
+    {% endif %}
   </div>
 </div>
