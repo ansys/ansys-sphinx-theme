@@ -95,3 +95,57 @@ the title of the ``index.rst`` page. For example:
 If you want to use the version number in
 the ``index.rst`` title, use ``|version|`` to include the package version
 number.
+
+
+Custom Icons
+------------
+
+This theme allows you to have a huge control over the icons displayed in the
+navigation bar.
+
+
+Adding New Icons
+----------------
+
+To add a new icon you will need to specify its ``name``, the associated ``URL``
+and the ``icon`` and ``type``. As an example, consider the following source code
+which adds an icon for sending an email:
+
+.. code-block:: python
+
+   html_theme_options = {
+    "icon_links": [dict(name="Mail", url="mailto:me", icon="fas fa-envelope")]
+    ...
+   }
+
+For more information about custom icons, refer to `Configure icon links
+<https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/configuring.html?highlight=icons#configure-icon-links>`_
+section in `PyData Sphinx Theme Docs
+<https://pydata-sphinx-theme.readthedocs.io/en/stable>`_. Regarding
+``FontAwesome`` usage, please visit `Find and Add Icons
+<https://fontawesome.com/v5/docs/web/setup/get-started>`_.
+
+
+Hiding Icons
+------------
+
+You can also select which icons should be displayed or not. To do so, add their
+names to the ``hidden_icons`` list:
+
+.. code-block:: python
+
+   html_theme_options = {
+       "hidden_icons": ["GitHub"],
+       ...
+   }
+
+
+If you want to hide all icons, you can also use the ``show_icons`` boolean
+variable:
+
+.. code-block:: python
+
+   html_theme_options = {
+       "show_icons": False,
+       ...
+   }
