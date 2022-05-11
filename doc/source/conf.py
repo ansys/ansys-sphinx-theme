@@ -2,6 +2,7 @@
 from datetime import datetime
 
 from pyansys_sphinx_theme import __version__, ansys_favicon, pyansys_logo_black
+from pyansys_sphinx_theme import ansys_coverpage_logo, ansys_logo
 
 # Project information
 project = "pyansys_sphinx_theme"
@@ -69,6 +70,9 @@ numpydoc_validation_checks = {
 # Favicon
 html_favicon = ansys_favicon
 
+#coverpage logo set as latex logo
+latex_logo = ansys_coverpage_logo
+
 # static path
 html_static_path = ["_static"]
 
@@ -80,3 +84,24 @@ source_suffix = ".rst"
 
 # The master toctree document.
 master_doc = "index"
+
+#customised model for cover page 
+latex_maketitle = r'''
+\begin{titlepage}
+\sphinxlogo
+\custitle
+\end{titlepage}
+'''
+#additional style file for coverpage
+latex_additional_files = ["cover.sty", ansys_logo ]
+
+#change the preamble of latex with latex_maketitle
+latex_elements = {
+    'sphinxsetup': '',
+    'passoptionstopackages': r'\PassOptionsToPackage{table}{xcolor}',
+    'preamble': r'''\usepackage{cover}''',
+    'maketitle': latex_maketitle,
+}
+
+
+
