@@ -24,11 +24,11 @@ html_theme_options = {
 
 html_short_title = html_title = "PyAnsys Sphinx Theme"
 
-
 # Sphinx extensions
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
+    'sphinx.ext.imgconverter',
     "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
