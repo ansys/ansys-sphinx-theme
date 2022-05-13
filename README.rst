@@ -26,7 +26,7 @@ PyAnsys Sphinx Theme
    :target: https://opensource.org/licenses/MIT
    :alt: MIT
 
-.. |black| image:: https://img.shields.io/badge/code%20style-black-000000.svg?style=flat
+.. |black| image:: https://img.shields.io/badge/code_style-black-000000.svg?style=flat
    :target: https://github.com/psf/black
    :alt: Black
 
@@ -71,7 +71,7 @@ Sphinx, see `Sphinx Getting Started
 <https://www.sphinx-doc.org/en/master/usage/quickstart.html>`_
 documentation.
 
-For usage information, seee `Using this Theme
+For usage information, see `Using this Theme
 <https://sphinxdocs.pyansys.com/usage.html>`_
 
 
