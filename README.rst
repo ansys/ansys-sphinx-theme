@@ -1,7 +1,7 @@
 PyAnsys Sphinx Theme
 ====================
 
-.. only:: html
+.. only:: not latex
 
    |pyansys| |python| |pypi| |GH-CI| |codecov| |MIT| |black|
  
