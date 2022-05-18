@@ -54,11 +54,15 @@ jobs:
           sudo apt update
           sudo apt-get install zip pandoc texlive-latex-extra latexmk
 
-      - name: Upload pdf Documentation
-        uses: actions/upload-artifact@v2.2.1
+      - name: Build PDF Documentation
+        working-directory: doc
+        run: make pdf
+
+      - name: Upload PDF Documentation
+        uses: actions/upload-artifact@v2
         with:
           name: PDF-Documentation
-          path: .tox/doc_out_pdf/
+          path: doc/build/latex/pyansys*.pdf
           retention-days: 7
 
       - name: Deploy to gh-pages
