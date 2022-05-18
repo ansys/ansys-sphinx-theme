@@ -2,10 +2,16 @@
 from datetime import datetime
 
 from sphinx.builders.latex import LaTeXBuilder
-LaTeXBuilder.supported_image_types = ['image/png', 'image/pdf','image/svg+xml' ]
 
-from pyansys_sphinx_theme import __version__, ansys_favicon, pyansys_logo_black
-from pyansys_sphinx_theme import ansys_coverpage_logo, ansys_logo
+LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
+
+from pyansys_sphinx_theme import (
+    __version__,
+    ansys_coverpage_logo,
+    ansys_favicon,
+    ansys_logo,
+    pyansys_logo_black,
+)
 
 # Project information
 project = "pyansys_sphinx_theme"
@@ -72,7 +78,7 @@ numpydoc_validation_checks = {
 # Favicon
 html_favicon = ansys_favicon
 
-#coverpage logo set as latex logo
+# coverpage logo set as latex logo
 latex_logo = ansys_coverpage_logo
 
 # static path
@@ -87,21 +93,21 @@ source_suffix = ".rst"
 # The master toctree document.
 master_doc = "index"
 
-#customised model for cover page 
-latex_maketitle = r'''
+# customised model for cover page
+latex_maketitle = r"""
 \begin{titlepage}
 \sphinxlogo
 \custitle
 \end{titlepage}
-'''
-#additional style file for coverpage
-latex_additional_files = ["cover.sty", ansys_logo ]
+"""
+# additional style file for coverpage
+latex_additional_files = ["cover.sty", ansys_logo]
 
-#change the preamble of latex with latex_maketitle
+# change the preamble of latex with latex_maketitle
 latex_elements = {
-    'sphinxsetup': '',
-    'passoptionstopackages': r'\PassOptionsToPackage{table}{xcolor}',
-    'preamble': r'''\usepackage{cover}''',
-    'maketitle': latex_maketitle,
+    "sphinxsetup": "",
+    "passoptionstopackages": r"""
+    \PassOptionsToPackage{table}{xcolor}""",
+    "preamble": r"""\usepackage{cover}""",
+    "maketitle": latex_maketitle,
 }
-

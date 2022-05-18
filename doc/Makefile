@@ -2,7 +2,7 @@
 #
 
 # You can set these variables from the command line.
-SPHINXOPTS    = -j auto
+SPHINXOPTS    = 
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
@@ -23,8 +23,8 @@ clean:
 	rm -rf build
 	find . -type d -name "_autosummary" -exec rm -rf {} +
 
-# customized pdf due to svg isssue
+# customized pdf due to svg issue
 pdf:
 	@$(SPHINXBUILD) -M latex "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 	cd build/latex && latexmk -r latexmkrc -pdf *.tex -interaction=nonstopmode || true
-	(test -f build/latex/*.pdf && echo pdf exists) || exit
+	(test -f build/latex/*.pdf && echo pdf exists) || exit 1
