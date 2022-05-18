@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v2.2.1
         with:
           name: HTML-Documentation
-          path: .tox/doc_out_html/
+          path: .tox/doc_out/
           retention-days: 7
 
       - name: Install OS packages
