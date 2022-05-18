@@ -2,7 +2,7 @@
 #
 
 # You can set these variables from the command line.
-SPHINXOPTS    =
+SPHINXOPTS    = -j auto
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = build
@@ -17,9 +17,14 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-
-
+	
 # customized clean due to api examples
 clean:
 	rm -rf build
 	find . -type d -name "_autosummary" -exec rm -rf {} +
+
+# customized pdf due to svg isssue
+pdf:
+	@$(SPHINXBUILD) -M latex "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	cd build/latex && latexmk -r latexmkrc -pdf *.tex -interaction=nonstopmode || true
+	(test -f build/latex/*.pdf && echo pdf exists) || exit

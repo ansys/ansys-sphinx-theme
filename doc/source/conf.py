@@ -1,6 +1,9 @@
 """Sphinx documentation configuration file."""
 from datetime import datetime
 
+from sphinx.builders.latex import LaTeXBuilder
+LaTeXBuilder.supported_image_types = ['image/png', 'image/pdf','image/svg+xml' ]
+
 from pyansys_sphinx_theme import __version__, ansys_favicon, pyansys_logo_black
 from pyansys_sphinx_theme import ansys_coverpage_logo, ansys_logo
 
@@ -28,7 +31,6 @@ html_short_title = html_title = "PyAnsys Sphinx Theme"
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
-    "sphinx.ext.imgconverter",
     "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
@@ -102,6 +104,4 @@ latex_elements = {
     'preamble': r'''\usepackage{cover}''',
     'maketitle': latex_maketitle,
 }
-
-
 
