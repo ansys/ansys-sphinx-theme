@@ -44,7 +44,7 @@ consistently.
 
 Documentation
 ~~~~~~~~~~~~~
-Full documentation can found at `PyAnsys Sphinx Theme Documentation <https://sphinxdocs.pyansys.com>`_. The webpage was
+Full documentation can be found at `PyAnsys Sphinx Theme Documentation <https://sphinxdocs.pyansys.com>`_. The webpage was
 also built using the ``pyansys-sphinx-theme``, so visit the site for a
 preview of the theme.
 
@@ -83,7 +83,7 @@ Feel free to add features or post issues. To develop this theme::
    pip install -U pip tox
    tox -e style,doc
 
-We use `pre-commit <https://pre-commit.com/>`_ to simplfy style checks. You can
+We use `pre-commit <https://pre-commit.com/>`_ to simplify style checks. You can
 optionally use this by following the `installation
 <https://pre-commit.com/#install>`_ and `usage
 <https://pre-commit.com/#usage>`_ guides.
@@ -91,5 +91,5 @@ optionally use this by following the `installation
 
 License
 ~~~~~~~
-This theme is licened under the `MIT License
+This theme is licensed under the `MIT License
 <https://raw.githubusercontent.com/pyansys/pyansys-sphinx-theme/main/LICENSE>`_.
