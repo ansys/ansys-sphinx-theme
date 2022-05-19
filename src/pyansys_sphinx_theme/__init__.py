@@ -10,8 +10,6 @@ _this_path = os.path.dirname(os.path.realpath(__file__))
 pyansys_logo_black = os.path.join(_this_path, "static", "pyansys-logo-black-cropped.png")
 pyansys_logo_white = os.path.join(_this_path, "static", "pyansys-logo-white-cropped.png")
 ansys_favicon = os.path.join(_this_path, "static", "ansys-favicon.png")
-ansys_logo = os.path.join(_this_path, "static", "ansys_logo.jpg")
-ansys_coverpage_logo = os.path.join(_this_path, "static", "ansys_coverpage_logo.jpg")
 
 
 html_logo = pyansys_logo_black
