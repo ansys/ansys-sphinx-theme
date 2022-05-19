@@ -38,26 +38,24 @@ jobs:
 
       - name: Install dependencies
         run: |
+          sudo apt update
+          sudo apt-get install -y build-essential zip pandoc texlive-latex-extra latexmk texlive-pstricks
           python -m pip install --upgrade pip tox
-      - name: Build documentation
+          python -m pip install -r requirements/requirements_doc.txt
+          python -m pip install --editable .
+      - name: Build HTML documentation
         run: tox -e doc
 
-      - name: Upload html Documentation
+      - name: Upload HTML Documentation
         uses: actions/upload-artifact@v2.2.1
         with:
           name: HTML-Documentation
           path: .tox/doc_out/
           retention-days: 7
 
-      - name: Install OS packages
-        run: |
-          sudo apt update
-          sudo apt-get install zip pandoc texlive-latex-extra latexmk
-
       - name: Build PDF Documentation
-        working-directory: doc
-        run: make pdf
-
+        run: |
+          make -C doc pdf
       - name: Upload PDF Documentation
         uses: actions/upload-artifact@v2
         with:
