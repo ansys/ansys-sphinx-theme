@@ -144,7 +144,7 @@ latex_elements = {
             \hfil%
             %hfil pushes the right box to the right
             %we needed the vbox since we are stacking two objects on the right side
-            \vbox{\hbox {December 2021} \vskip 0.5\baselineskip%\footnotesize
+            \vbox{\hbox {\@date} \vskip 0.5\baselineskip%\footnotesize
             %fbox is a horizontal box, so we need to put a vbox in it to get multiple lines.
             %the fbox is wrapped in an hbox so we can control where it goes.
             %we stack the hboxes in the vbox. We need the hboxes because otherwise the fbox had
