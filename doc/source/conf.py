@@ -92,8 +92,12 @@ source_suffix = ".rst"
 # The master toctree document.
 master_doc = "index"
 
+# additional logos for the latex coverpage
 latex_additional_files = [drawing, ansys_logo_1, ansys_logo_2]
 
+# Grouping the document tree into LaTeX files. List of tuples
+# (source start file, target name, title,
+#  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (
         master_doc,
