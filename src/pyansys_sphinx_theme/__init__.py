@@ -10,9 +10,9 @@ _this_path = os.path.dirname(os.path.realpath(__file__))
 pyansys_logo_black = os.path.join(_this_path, "static", "pyansys-logo-black-cropped.png")
 pyansys_logo_white = os.path.join(_this_path, "static", "pyansys-logo-white-cropped.png")
 ansys_favicon = os.path.join(_this_path, "static", "ansys-favicon.png")
-ansys_logo_1 = os.path.join(_this_path, "static", "ansys_logo_1.pdf")
-ansys_logo_2 = os.path.join(_this_path, "static", "ansys_logo_2.pdf")
-drawing = os.path.join(_this_path, "static", "drawing.pdf")
+ansys_logo_white = os.path.join(_this_path, "static", "ansys_logo_white.pdf")
+ansys_logo_white_cropped = os.path.join(_this_path, "static", "ansys_logo_white_cropped.pdf")
+watermark = os.path.join(_this_path, "static", "watermark.pdf")
 
 html_logo = pyansys_logo_black
 
@@ -66,14 +66,14 @@ latex_elements = {
         %
         % load the graphics into a LaTeX (not TeX) "savebox". We use this load
         % to obtain the height later, and to insert it into the doc later
-        \sbox{\imagebox}{\includegraphics{drawing}}%
+        \sbox{\imagebox}{\includegraphics{watermark}}%
         %
         % put the picture in a zero sized box to get a "background effect"
         % everything else will draw over it
         \hbox to 0in {\vbox to 0in {\usebox{\imagebox}}}
         %
         % how it worked before savebox method
-        %\hbox to 0in {\vbox to 0in {\includegraphics{drawing}}} %
+        %\hbox to 0in {\vbox to 0in {\includegraphics{watermark}}} %
         % Where the right boundary of the title block goes
         %
         % Define "ansysBlockWidth" <-- exactly what its name implies
@@ -94,7 +94,7 @@ latex_elements = {
             %
             % draw the box
             \parbox[b]{\ansysBlockWidth}{\raggedleft {
-                \includegraphics{ansys_logo_1}} \\
+                \includegraphics{ansys_logo_white}} \\
                 \footnotesize
                 \textcolor{lightgray}
                 \hrule
@@ -131,7 +131,7 @@ latex_elements = {
             \hskip 1in%
             %left block
             \parbox[b]{2in}{
-                {\includegraphics{ansys_logo_2}} \\
+                {\includegraphics{ansys_logo_white_cropped}} \\
                 ANSYS, Inc.\\
                 Southpointe\\
                 2600 Ansys Drive\\

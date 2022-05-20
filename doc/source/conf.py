@@ -8,11 +8,11 @@ LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 from pyansys_sphinx_theme import (
     __version__,
     ansys_favicon,
-    ansys_logo_1,
-    ansys_logo_2,
-    drawing,
+    ansys_logo_white,
+    ansys_logo_white_cropped,
     latex_elements,
     pyansys_logo_black,
+    watermark,
 )
 
 # Project information
@@ -93,7 +93,7 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # additional logos for the latex coverpage
-latex_additional_files = [drawing, ansys_logo_1, ansys_logo_2]
+latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
