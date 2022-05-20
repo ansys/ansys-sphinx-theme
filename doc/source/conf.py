@@ -94,5 +94,15 @@ master_doc = "index"
 
 latex_additional_files = [drawing, ansys_logo_1, ansys_logo_2]
 
+latex_documents = [
+    (
+        master_doc,
+        f"{project}.tex",
+        f"{html_title}",
+        author,
+        "manual",
+    ),
+]
+
 # change the preamble of latex with customized title page
 latex_elements = latex_elements
