@@ -10,7 +10,7 @@ from pyansys_sphinx_theme import (
     ansys_favicon,
     ansys_logo_white,
     ansys_logo_white_cropped,
-    latex_elements,
+    latex,
     pyansys_logo_black,
     watermark,
 )
@@ -95,18 +95,6 @@ master_doc = "index"
 # additional logos for the latex coverpage
 latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
 
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title,
-#  author, documentclass [howto, manual, or own class]).
-latex_documents = [
-    (
-        master_doc,
-        f"{project}.tex",
-        f"{html_title}",
-        author,
-        "manual",
-    ),
-]
-
 # change the preamble of latex with customized title page
-latex_elements = latex_elements
+# variables are the title of pdf, watermark
+latex_elements = {"preamble": latex.generate_preamble(html_title)}
