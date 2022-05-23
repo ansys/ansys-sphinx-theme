@@ -19,14 +19,14 @@
         %
         % load the graphics into a LaTeX (not TeX) "savebox". We use this load
         % to obtain the height later, and to insert it into the doc later
-        \sbox{\imagebox}{\includegraphics{\VAR{Watermark}}}%
+        \sbox{\imagebox}{\includegraphics{\pyvar{_watermark}}}%
         %
         % put the picture in a zero sized box to get a "background effect"
         % everything else will draw over it
         \hbox to 0in {\vbox to 0in {\usebox{\imagebox}}}
         %
         % how it worked before savebox method
-        %\hbox to 0in {\vbox to 0in {\includegraphics{\VAR{Watermark}}}} %
+        %\hbox to 0in {\vbox to 0in {\includegraphics{\pyvar{_watermark}}}} %
         % Where the right boundary of the title block goes
         %
         % Define "ansysBlockWidth" <-- exactly what its name implies
@@ -61,7 +61,7 @@
         %vskip skips down a specified distance from the previous Ansys block and picture
         \vskip 1in
         %title
-        \centerline{\huge \bfseries {\VAR{Project_title}}}
+        \centerline{\huge \bfseries {\pyvar{_title}}}
         \vskip 6pt
         %line under title
         \centerline{\vrule height 0.0625in  width 6.5in}
