@@ -1,4 +1,4 @@
-"""This is module to create coverpage to the latex pdf."""
+"""This module creates the title page for a LaTeX pdf."""
 import os
 from pathlib import Path
 
