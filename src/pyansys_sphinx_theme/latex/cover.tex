@@ -52,7 +52,7 @@
                 \textcolor{lightgray}
                 \hrule
                 \vskip 6pt
-                \textcopyright{} {\pyvar{_year}} ANSYS, Inc. or affiliated companies\\
+                \textcopyright{} {\pyvar{_date.year}} ANSYS, Inc. or affiliated companies\\
                 Unauthorized use, distribution, or duplication prohibited.}
         } %
         %we use a save box method so that we can get draw the bottom material with respect
@@ -97,7 +97,7 @@
             \hfil%
             %hfil pushes the right box to the right
             %we needed the vbox since we are stacking two objects on the right side
-            \vbox{\hbox {\@date} \vskip 0.5\baselineskip%\footnotesize
+            \vbox{\hbox {\pyvar{_date.strftime('%b %d, %Y').capitalize()}} \vskip 0.5\baselineskip%\footnotesize
             %fbox is a horizontal box, so we need to put a vbox in it to get multiple lines.
             %the fbox is wrapped in an hbox so we can control where it goes.
             %we stack the hboxes in the vbox. We need the hboxes because otherwise the fbox had

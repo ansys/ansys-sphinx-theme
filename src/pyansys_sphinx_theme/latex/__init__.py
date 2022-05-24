@@ -9,11 +9,28 @@ LATEX_SUBPKG = Path(os.path.dirname(os.path.realpath(__file__)))
 COVER_TEX = LATEX_SUBPKG / "cover.tex"
 
 
-def generate_preamble(title, watermark="watermark", year=None):
+def generate_preamble(title, watermark="watermark", date=None):
+    """Generate the preamble for the PDF documentation.
+    
+    Parameters
+    ----------
+    title : str
+        Title of the document.
+    watermark : str, optional
+        Name of the watermark image.
+    date : ~datetime.datetime, optional
+        Date of document generation. If not provided, today's date is used.
+        
+    Returns
+    -------
+    str
+        A string representing the LaTeX source code for the preamble.
+    
+    """
     """Return the latex macros for the title page."""
-    if year is None:
-        year = datetime.today().year
-    variables = dict(_title=title, _watermark=watermark, _year=year)
+    if date is None:
+        date = datetime.today()
+    variables = dict(_title=title, _watermark=watermark, _date=date)
 
     latex_jinja_env = jinja2.Environment(
         block_start_string="\BLOCK{",
