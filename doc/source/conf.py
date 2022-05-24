@@ -1,7 +1,19 @@
 """Sphinx documentation configuration file."""
 from datetime import datetime
 
-from pyansys_sphinx_theme import __version__, ansys_favicon, pyansys_logo_black
+from sphinx.builders.latex import LaTeXBuilder
+
+LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
+
+from pyansys_sphinx_theme import (
+    __version__,
+    ansys_favicon,
+    ansys_logo_white,
+    ansys_logo_white_cropped,
+    latex,
+    pyansys_logo_black,
+    watermark,
+)
 
 # Project information
 project = "pyansys_sphinx_theme"
@@ -22,7 +34,6 @@ html_theme_options = {
 }
 
 html_short_title = html_title = "PyAnsys Sphinx Theme"
-
 
 # Sphinx extensions
 extensions = [
@@ -80,3 +91,10 @@ source_suffix = ".rst"
 
 # The master toctree document.
 master_doc = "index"
+
+# additional logos for the latex coverpage
+latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
+
+# change the preamble of latex with customized title page
+# variables are the title of pdf, watermark
+latex_elements = {"preamble": latex.generate_preamble(html_title)}

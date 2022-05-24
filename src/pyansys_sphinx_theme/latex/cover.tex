@@ -1,0 +1,111 @@
+\renewcommand{\sphinxmaketitle}{%
+    \newsavebox\imagebox
+    \newsavebox\myTitle
+    % native LaTeX command. Specifies a page with no formatting.
+    % Page number restarts after this page
+    \begin{titlepage}
+    % san serif
+    \sffamily
+    %
+    % set to 0 so that we don't have any blank space at the top of the page
+    \topskip0pt
+    %
+    % removes all margins
+    \advance\voffset -1in %
+    \advance\hoffset -1in %
+    \advance\vsize 2in %
+    \advance\hsize 2in %
+    %
+    % load the graphics into a LaTeX (not TeX) "savebox". We use this load
+    % to obtain the height later, and to insert it into the doc later
+    \sbox{\imagebox}{\includegraphics{\pyvar{_watermark}}}%
+    %
+    % put the picture in a zero sized box to get a "background effect"
+    % everything else will draw over it
+    \hbox to 0in {\vbox to 0in {\usebox{\imagebox}}}
+    %
+    % how it worked before savebox method
+    %\hbox to 0in {\vbox to 0in {\includegraphics{\pyvar{_watermark}}}} %
+    % Where the right boundary of the title block goes
+    %
+    % Define "ansysBlockWidth" <-- exactly what its name implies
+    \newdimen\ansysBlockWidth\ansysBlockWidth = 3in %
+    % Define "ansysBlockDistanceFromRightEdge" <-- exactly what its name implies
+    \newdimen\ansysBlockDistanceFromRightEdge \ansysBlockDistanceFromRightEdge = 0.5in %
+    % Define "distanceToBottomOfAnsysBox" <-- length from top of page to bottom of title box
+    \newdimen\distanceToBottomOfAnsysBox %
+    \distanceToBottomOfAnsysBox=\ht\imagebox %
+    \advance\distanceToBottomOfAnsysBox -\lineskip %
+    \advance\distanceToBottomOfAnsysBox -0.125in %
+    % Define "myHBoxWidth" <-- distance from left edge of page to right edge Ansys box
+    \newdimen\myHBoxWidth
+    \myHBoxWidth=\hsize \advance\myHBoxWidth-\ansysBlockDistanceFromRightEdge
+    % implement the Ansys block
+    \hbox to \myHBoxWidth {\vbox to \distanceToBottomOfAnsysBox {}  %
+        \hfil
+        %
+        % draw the box
+        \parbox[b]{\ansysBlockWidth}{\raggedleft {
+            \includegraphics{ansys_logo_white}} \\
+            \footnotesize
+            \textcolor{lightgray}
+            \hrule
+            \vskip 6pt
+            \textcopyright{} {\pyvar{_date.year}} ANSYS, Inc. or affiliated companies\\
+            Unauthorized use, distribution, or duplication prohibited.}
+    } %
+    %we use a save box method so that we can get draw the bottom material with respect
+    %to the bottom of the page
+    \sbox{\myTitle}{\vbox{
+    %vskip skips down a specified distance from the previous Ansys block and picture
+    \vskip 1in
+    %title
+    \centerline{\huge \bfseries {\pyvar{_title}}}
+    \vskip 6pt
+    %line under title
+    \centerline{\vrule height 0.0625in  width 6.5in}
+    }
+    }
+    \usebox{\myTitle} \\%
+    \newdimen\toBottom%
+    %trying to calculate distance from the bottom of the line under the title
+    %to the bottom of the page, used to construct a strut (0 width vbox)
+    \toBottom=\vsize%
+    \advance\toBottom -\ht\myTitle %
+    \advance\toBottom -\distanceToBottomOfAnsysBox%
+    \advance\toBottom -\baselineskip%
+    \advance\toBottom -\lineskip%
+    \advance\toBottom -0.5in
+    \hbox to \hsize{%
+        %0 width vbox (empty vbox)
+        \vbox to \toBottom {}%
+        %distance from the left side
+        \hskip 1in%
+        %left block
+        \parbox[b]{2in}{
+            {\includegraphics{ansys_logo_white_cropped}} \\
+            ANSYS, Inc.\\
+            Southpointe\\
+            2600 Ansys Drive\\
+            Canonsburg, PA 15317\\
+            \href{mailto:ansysinfo@ansys.com}{ansysinfo@ansys.com}\\
+            \url{http://www.ansys.com}\\
+            (T) 724-746-3304\\
+            (F) 724-514-9494
+        }%
+        \hfil%
+        %hfil pushes the right box to the right
+        %we needed the vbox since we are stacking two objects on the right side
+        \vbox{\hbox {\pyvar{_date.strftime('%b %d, %Y').capitalize()}} \vskip 0.5\baselineskip%\footnotesize
+        %fbox is a horizontal box, so we need to put a vbox in it to get multiple lines.
+        %the fbox is wrapped in an hbox so we can control where it goes.
+        %we stack the hboxes in the vbox. We need the hboxes because otherwise the fbox had
+        %a huge width
+            \hbox{\fbox{\vbox{\hbox{ANSYS, Inc. and}\hbox{ANSYS Europe,}
+            \hbox{Ltd. are UL}\hbox{registered ISO}\hbox{9001:2015}\hbox{companies.}}}}%
+        }
+        %1in of space between the right box and the right edge of the page
+        \hskip 1in%
+    }
+    \end{titlepage}
+}
