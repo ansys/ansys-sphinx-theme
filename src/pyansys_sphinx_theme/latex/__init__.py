@@ -11,7 +11,7 @@ COVER_TEX = LATEX_SUBPKG / "cover.tex"
 
 def generate_preamble(title, watermark="watermark", date=None):
     """Generate the preamble for the PDF documentation.
-    
+
     Parameters
     ----------
     title : str
@@ -20,14 +20,13 @@ def generate_preamble(title, watermark="watermark", date=None):
         Name of the watermark image.
     date : ~datetime.datetime, optional
         Date of document generation. If not provided, today's date is used.
-        
+
     Returns
     -------
     str
         A string representing the LaTeX source code for the preamble.
-    
+
     """
-    """Return the latex macros for the title page."""
     if date is None:
         date = datetime.today()
     variables = dict(_title=title, _watermark=watermark, _date=date)
