@@ -1,7 +1,7 @@
 """This is the pyansys-sphinx-theme module."""
 import os
 
-__version__ = "0.3.dev0"
+__version__ = "0.3.0"
 
 # get location of this directory
 _this_path = os.path.dirname(os.path.realpath(__file__))
