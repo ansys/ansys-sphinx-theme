@@ -27,9 +27,7 @@ def setup(app):
     """Connect to the sphinx theme app."""
     theme_path = get_html_theme_path()[0]
     app.add_html_theme("pyansys_sphinx_theme", theme_path)
-    theme_css_path = os.path.join(theme_path, "static", "css", "pyansys_sphinx_theme.css")
-    if not os.path.isfile(theme_css_path):
-        raise FileNotFoundError(f"Unable to locate pyansys-sphinx theme at {theme_css_path}")
+    theme_css_path = os.path.join("css", "pyansys_sphinx_theme.css")
     app.add_css_file(theme_css_path)
 
     # add templates for autosummary
