@@ -22,7 +22,7 @@ CSS_FILENAME = "pyansys_sphinx_theme.css"
 
 def get_html_theme_path():
     """Return list of HTML theme paths."""
-    return Path(__file__).parents[0].absolute()))
+    return Path(__file__).parents[0].absolute()
 
 
 def setup(app):
