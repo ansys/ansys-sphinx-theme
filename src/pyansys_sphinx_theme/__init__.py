@@ -30,7 +30,7 @@ def setup(app):
     theme_path = get_html_theme_path()
     app.add_html_theme("pyansys_sphinx_theme", theme_path)
     theme_css_path = theme_path / "static" / "css" / CSS_FILENAME
-    if not os.path.isfile(theme_css_path):
+    if not theme_css_path.exists():
         raise FileNotFoundError(f"Unable to locate pyansys-sphinx theme at {theme_css_path}")
     app.add_css_file(str(theme_css_path.relative_to(theme_path / "static")))
 
