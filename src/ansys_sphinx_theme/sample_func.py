@@ -1,4 +1,4 @@
-"""Sample functions for pyansys-sphinx-theme."""
+"""Sample functions for ansys-sphinx-theme."""
 
 
 def func(arg1, arg2):

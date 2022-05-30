@@ -33,7 +33,7 @@ html_theme_options = {
     ],
 }
 
-html_short_title = html_title = "PyAnsys Sphinx Theme"
+html_short_title = html_title = "Ansys Sphinx Theme"
 
 # Sphinx extensions
 extensions = [
@@ -42,6 +42,7 @@ extensions = [
     "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
+    "ansys_sphinx_theme",
 ]
 
 # Intersphinx mapping

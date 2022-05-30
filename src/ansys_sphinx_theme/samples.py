@@ -1,4 +1,4 @@
-"""Sample classes and functions for pyansys-sphinx-theme."""
+"""Sample classes and functions for ansys-sphinx-theme."""
 from math import sqrt
 
 
@@ -25,7 +25,7 @@ class ExampleClass:
     --------
     An example of how to initialize this class should be given.
 
-    >>> from pyansys_sphinx_theme import samples
+    >>> from ansys_sphinx_theme import samples
     >>> example = samples.ExampleClass('mystr', ['apple', 'orange'], 3)
 
     """

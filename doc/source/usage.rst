@@ -58,7 +58,7 @@ Use your ``custom.css`` file to override the CSS style of this theme.
 
 Adding Breadcrumbs
 ~~~~~~~~~~~~~~~~~~
-The PyAnsys Sphinx theme supports the display of breadcrumbs on
+The Ansys Sphinx theme supports the display of breadcrumbs on
 the body of documentation pages to make navigation easier. These 
 breadcrumbs are disabled by default. To add
 breadcrumbs to the pages of your documentation, in the ``conf.py``
@@ -90,7 +90,7 @@ the title of the ``index.rst`` page. For example:
 
 .. code:: python
 
-   html_short_title = html_title = 'PyAnsys Sphinx Theme'
+   html_short_title = html_title = 'Ansys Sphinx Theme'
 
 If you want to use the version number in
 the ``index.rst`` title, use ``|version|`` to include the package version
