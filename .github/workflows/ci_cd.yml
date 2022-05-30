@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: PDF-Documentation
-          path: doc/build/latex/ansys*.pdf
+          path: doc/build/latex/ansys_sphinx_theme.pdf
           retention-days: 7
 
       - name: Deploy to gh-pages
@@ -92,7 +92,7 @@ jobs:
       - name: Upload wheel and sdist to artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: pyasys-sphinx-theme
+          name: pyansys-sphinx-theme
           path: dist/
           retention-days: 7
 
