@@ -1,5 +1,5 @@
-PyAnsys Sphinx Theme
-====================
+Ansys Sphinx Theme
+==================
 |pyansys| |python| |pypi| |GH-CI| |MIT| |black|
 
 .. |pyansys| image:: https://img.shields.io/badge/Py-Ansys-ffc107.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABDklEQVQ4jWNgoDfg5mD8vE7q/3bpVyskbW0sMRUwofHD7Dh5OBkZGBgW7/3W2tZpa2tLQEOyOzeEsfumlK2tbVpaGj4N6jIs1lpsDAwMJ278sveMY2BgCA0NFRISwqkhyQ1q/Nyd3zg4OBgYGNjZ2ePi4rB5loGBhZnhxTLJ/9ulv26Q4uVk1NXV/f///////69du4Zdg78lx//t0v+3S88rFISInD59GqIH2esIJ8G9O2/XVwhjzpw5EAam1xkkBJn/bJX+v1365hxxuCAfH9+3b9/+////48cPuNehNsS7cDEzMTAwMMzb+Q2u4dOnT2vWrMHu9ZtzxP9vl/69RVpCkBlZ3N7enoDXBwEAAA+YYitOilMVAAAAAElFTkSuQmCC
@@ -29,7 +29,7 @@ PyAnsys Sphinx Theme
 
 Introduction and Purpose
 ------------------------
-The PyAnsys Sphinx theme is an extension of the popular `PyData
+The Ansys Sphinx theme is an extension of the popular `PyData
 Sphinx Theme <https://pydata-sphinx-theme.readthedocs.io/>`_ used by
 `numpy <https://numpy.org/doc/stable/>`_, `pandas
 <https://pandas.pydata.org/docs/>`_, `PyVista
@@ -41,7 +41,7 @@ consistently.
 Documentation
 ~~~~~~~~~~~~~
 Full documentation can be found at `PyAnsys Sphinx Theme Documentation <https://sphinxdocs.pyansys.com>`_. The webpage was
-also built using the ``pyansys-sphinx-theme``, so visit the site for a
+also built using the ``ansys-sphinx-theme``, so visit the site for a
 preview of the theme.
 
 Other PyAnsys packages using the PyAnsys theme include:
@@ -59,10 +59,10 @@ Install this theme with:
 
 .. code::
 
-   pip install pyansys-sphinx-theme
+   pip install ansys-sphinx-theme
 
 Next, modify your sphinx ``conf.py`` to use ``html_theme =
-'pyansys_sphinx_theme'``.  If you are new to using
+'ansys_sphinx_theme'``.  If you are new to using
 Sphinx, see `Sphinx Getting Started
 <https://www.sphinx-doc.org/en/master/usage/quickstart.html>`_
 documentation.
