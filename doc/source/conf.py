@@ -16,12 +16,12 @@ from ansys_sphinx_theme import (
 )
 
 # Project information
-project = "pyansys_sphinx_theme"
+project = "ansys_sphinx_theme"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
 
-# use the default pyansys logo
+# use the default ansys logo
 html_logo = ansys_logo_black
 html_theme = "ansys_sphinx_theme"
 

@@ -60,7 +60,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: PDF-Documentation
-          path: doc/build/latex/pyansys*.pdf
+          path: doc/build/latex/ansys*.pdf
           retention-days: 7
 
       - name: Deploy to gh-pages
@@ -126,7 +126,7 @@ jobs:
           files: |
             ./**/*.whl
             ./**/*.tar.gz
-            ./PDF-Documentation/pyansys_sphinx_theme.pdf
+            ./PDF-Documentation/ansys_sphinx_theme.pdf
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
