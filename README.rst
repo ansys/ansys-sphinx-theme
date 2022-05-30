@@ -44,7 +44,7 @@ Full documentation can be found at `PyAnsys Sphinx Theme Documentation <https://
 also built using the ``ansys-sphinx-theme``, so visit the site for a
 preview of the theme.
 
-Other PyAnsys packages using the PyAnsys theme include:
+Other PyAnsys packages using the Ansys theme include:
 
 - `PyMAPDL <https://mapdldocs.pyansys.com/>`__
 - `PyAEDT <https://aedtdocs.pyansys.com/>`__

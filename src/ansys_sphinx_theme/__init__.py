@@ -18,7 +18,7 @@ ansys_logo_black = os.path.join(_this_path, "static", "ansys_logo_black_cropped.
 
 html_logo = pyansys_logo_black
 
-CSS_FILENAME = "pyansys_sphinx_theme.css"
+CSS_FILENAME = "ansys_sphinx_theme.css"
 
 
 def get_html_theme_path():
