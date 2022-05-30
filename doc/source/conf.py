@@ -5,13 +5,13 @@ from sphinx.builders.latex import LaTeXBuilder
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
-from pyansys_sphinx_theme import (
+from ansys_sphinx_theme import (
     __version__,
     ansys_favicon,
+    ansys_logo_black,
     ansys_logo_white,
     ansys_logo_white_cropped,
     latex,
-    pyansys_logo_black,
     watermark,
 )
 
@@ -22,8 +22,8 @@ author = "Ansys Inc."
 release = version = __version__
 
 # use the default pyansys logo
-html_logo = pyansys_logo_black
-html_theme = "pyansys_sphinx_theme"
+html_logo = ansys_logo_black
+html_theme = "ansys_sphinx_theme"
 
 # specify the location of your github repo
 html_theme_options = {

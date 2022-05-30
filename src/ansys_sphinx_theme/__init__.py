@@ -14,6 +14,7 @@ ansys_favicon = os.path.join(_this_path, "static", "ansys-favicon.png")
 ansys_logo_white = os.path.join(_this_path, "static", "ansys_logo_white.pdf")
 ansys_logo_white_cropped = os.path.join(_this_path, "static", "ansys_logo_white_cropped.pdf")
 watermark = os.path.join(_this_path, "static", "watermark.pdf")
+ansys_logo_black = os.path.join(_this_path, "static", "ansys_logo_black.jpg")
 
 html_logo = pyansys_logo_black
 
@@ -28,7 +29,7 @@ def get_html_theme_path():
 def setup(app):
     """Connect to the sphinx theme app."""
     theme_path = get_html_theme_path()
-    app.add_html_theme("pyansys_sphinx_theme", theme_path)
+    app.add_html_theme("ansys_sphinx_theme", theme_path)
     theme_css_path = theme_path / "static" / "css" / CSS_FILENAME
     if not theme_css_path.exists():
         raise FileNotFoundError(f"Unable to locate pyansys-sphinx theme at {theme_css_path}")
