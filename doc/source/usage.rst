@@ -21,7 +21,7 @@ Next, modify your Sphinx ``conf.py`` file to use ``html_theme =
 For additional configuration options, see the `Configuration
 <https://pydata-sphinx-theme.readthedocs.io/en/latest/user_guide/configuring.html>`_
 topic for the PyData Sphinx theme, which is the basis for the style of this 
-ansys theme.
+theme.
 
 
 Editing the CSS
