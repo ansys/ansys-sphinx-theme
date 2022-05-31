@@ -58,13 +58,13 @@ Use your ``custom.css`` file to override the CSS style of this theme.
 
 Adding Breadcrumbs
 ~~~~~~~~~~~~~~~~~~
-The Ansys Sphinx theme supports the display of breadcrumbs on
+The ``ansys-sphinx-theme`` supports the display of breadcrumbs on
 the body of documentation pages to make navigation easier. These 
 breadcrumbs are disabled by default. To add
 breadcrumbs to the pages of your documentation, in the ``conf.py``
 file, add ``"show_breadcrumbs": True`` to the ``html_theme_options`` dictionary.
 
-If you want to add additional 'root' breadcrumbs, such as to the ansys
+If you want to add additional 'root' breadcrumbs, such as to the Ansys
 Documentation homepage, add them to the ``html_theme_options`` dictionary as a
 list of tuples with the ``"additional_breadcrumbs"`` key. The tuples are of the
 form ``("Link text", "url")``.
