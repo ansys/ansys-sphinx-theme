@@ -7,15 +7,15 @@ Ansys Sphinx Theme
    :alt: Ansys
 
 .. |python| image:: https://img.shields.io/badge/Python-3.7%20%7C%203.8%20%7C%203.9%20%7C%203.10-blue
-   :target: https://pypi.org/project/pyansys-sphinx-theme/
+   :target: https://pypi.org/project/ansys-sphinx-theme/
    :alt: Python
 
 .. |pypi| image:: https://img.shields.io/pypi/v/ansys-templates.svg?logo=python&logoColor=white
-   :target: https://pypi.org/project/pyansys-sphinx-theme
+   :target: https://pypi.org/project/ansys-sphinx-theme
    :alt: PyPI
 
-.. |GH-CI| image:: https://github.com/pyansys/pyansys-sphinx-theme/actions/workflows/ci_cd.yml/badge.svg
-   :target: https://github.com/pyansys/pyansys-sphinx-theme/actions/workflows/ci_cd.yml
+.. |GH-CI| image:: https://github.com/pyansys/ansys-sphinx-theme/actions/workflows/ci_cd.yml/badge.svg
+   :target: https://github.com/pyansys/ansys-sphinx-theme/actions/workflows/ci_cd.yml
    :alt: CH-CI
 
 .. |MIT| image:: https://img.shields.io/badge/License-MIT-yellow.svg
@@ -40,7 +40,7 @@ consistently.
 
 Documentation
 ~~~~~~~~~~~~~
-Full documentation can be found at `PyAnsys Sphinx Theme Documentation <https://sphinxdocs.pyansys.com>`_. The webpage was
+Full documentation can be found at `Ansys Sphinx Theme Documentation <https://sphinxdocs.pyansys.com>`_. The webpage was
 also built using the ``ansys-sphinx-theme``, so visit the site for a
 preview of the theme.
 
@@ -75,7 +75,7 @@ Development and Contributing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Feel free to add features or post issues. To develop this theme::
 
-   git clone https://github.com/pyansys/pyansys-sphinx-theme.git
+   git clone https://github.com/pyansys/ansys-sphinx-theme.git
    pip install -U pip tox
    tox -e style,doc
 
@@ -88,4 +88,4 @@ optionally use this by following the `installation
 License
 ~~~~~~~
 This theme is licensed under the `MIT License
-<https://raw.githubusercontent.com/pyansys/pyansys-sphinx-theme/main/LICENSE>`_.
+<https://raw.githubusercontent.com/pyansys/ansys-sphinx-theme/main/LICENSE>`_.
