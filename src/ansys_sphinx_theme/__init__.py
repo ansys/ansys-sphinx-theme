@@ -1,4 +1,4 @@
-"""This is the pyansys-sphinx-theme module."""
+"""This is the ansys-sphinx-theme module."""
 import os
 from pathlib import Path
 
@@ -14,10 +14,11 @@ ansys_favicon = os.path.join(_this_path, "static", "ansys-favicon.png")
 ansys_logo_white = os.path.join(_this_path, "static", "ansys_logo_white.pdf")
 ansys_logo_white_cropped = os.path.join(_this_path, "static", "ansys_logo_white_cropped.pdf")
 watermark = os.path.join(_this_path, "static", "watermark.pdf")
+ansys_logo_black = os.path.join(_this_path, "static", "ansys_logo_black_cropped.jpg")
 
 html_logo = pyansys_logo_black
 
-CSS_FILENAME = "pyansys_sphinx_theme.css"
+CSS_FILENAME = "ansys_sphinx_theme.css"
 
 
 def get_html_theme_path():
@@ -28,10 +29,10 @@ def get_html_theme_path():
 def setup(app):
     """Connect to the sphinx theme app."""
     theme_path = get_html_theme_path()
-    app.add_html_theme("pyansys_sphinx_theme", theme_path)
+    app.add_html_theme("ansys_sphinx_theme", theme_path)
     theme_css_path = theme_path / "static" / "css" / CSS_FILENAME
     if not theme_css_path.exists():
-        raise FileNotFoundError(f"Unable to locate pyansys-sphinx theme at {theme_css_path}")
+        raise FileNotFoundError(f"Unable to locate ansys-sphinx theme at {theme_css_path}")
     app.add_css_file(str(theme_css_path.relative_to(theme_path / "static")))
 
     # add templates for autosummary

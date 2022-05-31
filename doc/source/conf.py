@@ -5,25 +5,25 @@ from sphinx.builders.latex import LaTeXBuilder
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
-from pyansys_sphinx_theme import (
+from ansys_sphinx_theme import (
     __version__,
     ansys_favicon,
+    ansys_logo_black,
     ansys_logo_white,
     ansys_logo_white_cropped,
     latex,
-    pyansys_logo_black,
     watermark,
 )
 
 # Project information
-project = "pyansys_sphinx_theme"
+project = "ansys_sphinx_theme"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
 
-# use the default pyansys logo
-html_logo = pyansys_logo_black
-html_theme = "pyansys_sphinx_theme"
+# use the default ansys logo
+html_logo = ansys_logo_black
+html_theme = "ansys_sphinx_theme"
 
 # specify the location of your github repo
 html_theme_options = {
@@ -33,7 +33,7 @@ html_theme_options = {
     ],
 }
 
-html_short_title = html_title = "PyAnsys Sphinx Theme"
+html_short_title = html_title = "Ansys Sphinx Theme"
 
 # Sphinx extensions
 extensions = [
@@ -42,6 +42,7 @@ extensions = [
     "numpydoc",
     "sphinx.ext.intersphinx",
     "sphinx_copybutton",
+    "ansys_sphinx_theme",
 ]
 
 # Intersphinx mapping

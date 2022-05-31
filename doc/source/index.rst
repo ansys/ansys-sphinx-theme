@@ -1,6 +1,6 @@
-============================================
-PyAnsys Sphinx Theme Documentation |version|
-============================================
+==========================================
+Ansys Sphinx Theme Documentation |version|
+==========================================
 
 ..
    Simply reuse the root readme
@@ -20,7 +20,7 @@ PyAnsys Sphinx Theme Documentation |version|
 Code Examples
 ~~~~~~~~~~~~~
 Here's a quick preview for how Python code looks using the
-``pyansys-sphinx-theme``.  For more examples, click the links at the
+``ansys-sphinx-theme``.  For more examples, click the links at the
 top of the page to see function, method, and class documentation.
 
 

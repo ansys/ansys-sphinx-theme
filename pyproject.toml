@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 # Check https://flit.readthedocs.io/en/latest/pyproject_toml.html for all available sections
-name = "pyansys-sphinx-theme"
+name = "ansys-sphinx-theme"
 dynamic = ["version", "description"]
 readme = "README.rst"
 requires-python = ">=3.5"
@@ -30,19 +30,19 @@ dependencies = [
 ]
 
 [project.entry-points."sphinx.html_themes"]
-pyansys_sphinx_theme = "pyansys_sphinx_theme"
+ansys_sphinx_theme = "ansys_sphinx_theme"
 
 [tool.flit.module]
-name = "pyansys_sphinx_theme"
+name = "ansys_sphinx_theme"
 
 [tool.flit.sdist]
 include = [
-    "src/pyansys_sphinx_theme/layout.html",
-    "src/pyansys_sphinx_theme/breadcrumbs.html",
-    "src/pyansys_sphinx_theme/docs-navbar.html",
-    "src/pyansys_sphinx_theme/theme.conf",
-    "src/pyansys_sphinx_theme/_templates/",
-    "src/pyansys_sphinx_theme/static/",
+    "src/ansys_sphinx_theme/layout.html",
+    "src/ansys_sphinx_theme/breadcrumbs.html",
+    "src/ansys_sphinx_theme/docs-navbar.html",
+    "src/ansys_sphinx_theme/theme.conf",
+    "src/ansys_sphinx_theme/_templates/",
+    "src/ansys_sphinx_theme/static/",
 ]
 
 [project.urls]

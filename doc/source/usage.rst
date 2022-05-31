@@ -6,13 +6,13 @@ Install this theme with:
 
 .. code::
 
-   pip install pyansys-sphinx-theme
+   pip install ansys-sphinx-theme
 
 If you are are new to Sphinx, see the
 `Sphinx Getting Started
 <https://www.sphinx-doc.org/en/master/usage/quickstart.html>`_ documentation.
 Next, modify your Sphinx ``conf.py`` file to use ``html_theme =
-'pyansys_sphinx_theme'``. Consider using the following ``conf.py`` for this repository:
+'ansys_sphinx_theme'``. Consider using the following ``conf.py`` for this repository:
 
 .. literalinclude:: ./conf.py
    :language: python
@@ -21,7 +21,7 @@ Next, modify your Sphinx ``conf.py`` file to use ``html_theme =
 For additional configuration options, see the `Configuration
 <https://pydata-sphinx-theme.readthedocs.io/en/latest/user_guide/configuring.html>`_
 topic for the PyData Sphinx theme, which is the basis for the style of this 
-PyAnsys theme.
+theme.
 
 
 Editing the CSS
@@ -58,13 +58,13 @@ Use your ``custom.css`` file to override the CSS style of this theme.
 
 Adding Breadcrumbs
 ~~~~~~~~~~~~~~~~~~
-The PyAnsys Sphinx theme supports the display of breadcrumbs on
+The ``ansys-sphinx-theme`` supports the display of breadcrumbs on
 the body of documentation pages to make navigation easier. These 
 breadcrumbs are disabled by default. To add
 breadcrumbs to the pages of your documentation, in the ``conf.py``
 file, add ``"show_breadcrumbs": True`` to the ``html_theme_options`` dictionary.
 
-If you want to add additional 'root' breadcrumbs, such as to the PyAnsys
+If you want to add additional 'root' breadcrumbs, such as to the Ansys
 Documentation homepage, add them to the ``html_theme_options`` dictionary as a
 list of tuples with the ``"additional_breadcrumbs"`` key. The tuples are of the
 form ``("Link text", "url")``.
@@ -90,7 +90,7 @@ the title of the ``index.rst`` page. For example:
 
 .. code:: python
 
-   html_short_title = html_title = 'PyAnsys Sphinx Theme'
+   html_short_title = html_title = 'Ansys Sphinx Theme'
 
 If you want to use the version number in
 the ``index.rst`` title, use ``|version|`` to include the package version

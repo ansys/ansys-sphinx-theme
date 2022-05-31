@@ -12,18 +12,18 @@ Methods and functions should generally be documented with the
 ``Examples`` docstring section to make the usage of the method or
 function clear.  Here is a sample function:
 
-.. literalinclude:: ../../src/pyansys_sphinx_theme/sample_func.py
+.. literalinclude:: ../../src/ansys_sphinx_theme/sample_func.py
 
 To include the docstring of function within sphinx, use the
 ``autofunction::`` directive:
 
 .. code::
 
-   .. autofunction:: pyansys_sphinx_theme.sample_func.func
+   .. autofunction:: ansys_sphinx_theme.sample_func.func
 
 Which causes the function to be rendered as:
 
-.. autofunction:: pyansys_sphinx_theme.sample_func.func
+.. autofunction:: ansys_sphinx_theme.sample_func.func
 
 
 More Details

@@ -43,11 +43,11 @@ using the ``autoclass`` directive:
 
 .. code::
 
-   .. autoclass:: pyansys_sphinx_theme.samples.ExampleClass
+   .. autoclass:: ansys_sphinx_theme.samples.ExampleClass
        :members:
 
 
-.. autoclass:: pyansys_sphinx_theme.samples.ExampleClass
+.. autoclass:: ansys_sphinx_theme.samples.ExampleClass
     :members:
 
 
@@ -63,7 +63,7 @@ documented via the ``autosummary`` directive.  For example:
    .. autosummary::
       :toctree: _autosummary
 
-      pyansys_sphinx_theme.samples.Complex
+      ansys_sphinx_theme.samples.Complex
 
 
 This code will generate the following documentation:
@@ -71,7 +71,7 @@ This code will generate the following documentation:
 .. autosummary::
    :toctree: _autosummary
 
-   pyansys_sphinx_theme.samples.Complex
+   ansys_sphinx_theme.samples.Complex
 
 Each class will have its own dedicated page, and each method and
 attribute in that class will also have its own page.
