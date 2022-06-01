@@ -10,7 +10,7 @@ Ansys Sphinx Theme
    :target: https://pypi.org/project/ansys-sphinx-theme/
    :alt: Python
 
-.. |pypi| image:: https://img.shields.io/pypi/v/ansys-templates.svg?logo=python&logoColor=white
+.. |pypi| image:: https://img.shields.io/pypi/v/ansys-sphinx-theme.svg?logo=python&logoColor=white
    :target: https://pypi.org/project/ansys-sphinx-theme
    :alt: PyPI
 
