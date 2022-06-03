@@ -2,7 +2,7 @@
 Documentation Style
 *******************
 
-Ansys packages should pick either the Google or Numpy documentation
+PyAnsys packages should pick either the Google or Numpy documentation
 style when writing their docstrings.  Adhering to this style permits
 the usage of the `sphinx.ext.napoleon
 <https://www.sphinx-doc.org/en/master/usage/extensions/napoleon.html>`_
