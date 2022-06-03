@@ -155,7 +155,7 @@ PDF coverpage
 
 If you want to use a customized coverpage for the PDF,
 add the preamble of the coverpage using ``latex elements``.
-For using the ansys coverpage, you can set latex elements as:
+For using the Ansys coverpage, you can set LaTeX elements as:
 
 .. code-block:: python
 
