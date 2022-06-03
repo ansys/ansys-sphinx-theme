@@ -46,9 +46,9 @@ include = [
 ]
 
 [project.urls]
-Home = "https://docs.pyansys.com/"
-Source = "https://github.com/pyansys/pyansys-sphinx-theme"
-Tracker = "https://github.com/pyansys/pyansys-sphinx-theme/issues"
+Home = "https://dev.docs.ansys.com/"
+Source = "https://github.com/ansys/ansys-sphinx-theme"
+Tracker = "https://github.com/ansys/ansys-sphinx-theme/issues"
 
 [tool.black]
 line-length = 100

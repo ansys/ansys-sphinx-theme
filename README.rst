@@ -14,9 +14,9 @@ Ansys Sphinx Theme
    :target: https://pypi.org/project/ansys-sphinx-theme
    :alt: PyPI
 
-.. |GH-CI| image:: https://github.com/pyansys/ansys-sphinx-theme/actions/workflows/ci_cd.yml/badge.svg
-   :target: https://github.com/pyansys/ansys-sphinx-theme/actions/workflows/ci_cd.yml
-   :alt: CH-CI
+.. |GH-CI| image:: https://github.com/ansys/ansys-sphinx-theme/actions/workflows/ci_cd.yml/badge.svg
+   :target: https://github.com/ansys/ansys-sphinx-theme/actions/workflows/ci_cd.yml
+   :alt: GH-CI
 
 .. |MIT| image:: https://img.shields.io/badge/License-MIT-yellow.svg
    :target: https://opensource.org/licenses/MIT
@@ -75,7 +75,7 @@ Development and Contributing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Feel free to add features or post issues. To develop this theme::
 
-   git clone https://github.com/pyansys/ansys-sphinx-theme.git
+   git clone https://github.com/ansys/ansys-sphinx-theme.git
    pip install -U pip tox
    tox -e style,doc
 
@@ -88,4 +88,4 @@ optionally use this by following the `installation
 License
 ~~~~~~~
 This theme is licensed under the `MIT License
-<https://raw.githubusercontent.com/pyansys/ansys-sphinx-theme/main/LICENSE>`_.
+<https://raw.githubusercontent.com/ansys/ansys-sphinx-theme/main/LICENSE>`_.

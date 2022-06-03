@@ -5,10 +5,10 @@ Coding Style and Best Practices
    Until we have a site up for our best practices and coding style,
    the sphinx documentation site will host the coding style as well.
 
-This page describes coding best practices applicable to the `pyansys
+This page describes coding best practices applicable to the `PyAnsys
 <https://pypi.org/project/pyansys/>`_ project.  The purpose of this
 page is not to repeat coding style documentation, but rather to state
-the approach used by the pyansys project when there are any
+the approach used by the PyAnsys project when there are any
 delineations, clarifications, or additional procedures above and
 beyond `PEP8 <https://www.python.org/dev/peps/pep-0008/>`__.
 
@@ -19,7 +19,7 @@ there's even a `Deprecation library
 guidance regarding deprecating features in an API within Python.  This
 document seeks to clarify this issue and others.
 
-Aside from pyansys specific directives, the best coding practice is to simply
+Aside from PyAnsys specific directives, the best coding practice is to simply
 follow established guidelines from `PEP8 <https://www.python.org/dev/peps/pep-0008/>`__.
 
 
