@@ -27,9 +27,9 @@ html_theme = "ansys_sphinx_theme"
 
 # specify the location of your github repo
 html_theme_options = {
-    "github_url": "https://github.com/pyansys/pyansys-sphinx-theme",
+    "github_url": "https://github.com/ansys/ansys-sphinx-theme",
     "additional_breadcrumbs": [
-        ("PyAnsys", "https://docs.pyansys.com/"),
+        ("Ansys Internal Developer Portal", "https://dev.docs.ansys.com"),
     ],
 }
 

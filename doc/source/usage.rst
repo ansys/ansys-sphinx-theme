@@ -74,7 +74,7 @@ For example, this theme uses the following ``html_theme_options``:
 .. code:: python
 
    html_theme_options = {
-       "github_url": "https://github.com/pyansys/pyansys-sphinx-theme",
+       "github_url": "https://github.com/ansys/ansys-sphinx-theme",
        "show_prev_next": False,
        "show_breadcrumbs": True,
        "additional_breadcrumbs": 
