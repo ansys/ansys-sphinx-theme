@@ -162,8 +162,9 @@ For using the ansys coverpage, you can set latex elements as:
    latex_elements = {
    "preamble": ansys_sphinx_theme.latex.generate_preamble(
       <title_of_coverpage>,
-      <date_to_be_printed>,
-      <watermark_for_titlepage>)}
+      <watermark_for_titlepage>,
+      <date_to_be_printed>,)
+   }
 
 The default date will be current date and watermark will be
 the Ansys watermark.
