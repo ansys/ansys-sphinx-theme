@@ -149,3 +149,36 @@ variable:
        "show_icons": False,
        ...
    }
+
+PDF coverpage
+-------------
+
+If you want to use a customized coverpage for the PDF,
+add the preamble of the coverpage using ``latex elements``.
+For using the Ansys coverpage, you can set LaTeX elements as:
+
+.. code-block:: python
+
+   latex_elements = {
+   "preamble": ansys_sphinx_theme.latex.generate_preamble(
+      <title_of_coverpage>,
+      <watermark_for_titlepage>,
+      <date_to_be_printed>,)
+   }
+
+The default date will be current date and watermark will be
+the Ansys watermark.
+To use the Ansys' logo and watermark in the LaTeX coverpage, you should import it and
+add it in ``latex_additional_files``.
+
+.. code-block:: python
+
+   from ansys_sphinx_theme import (
+      ansys_logo_white,
+      ansys_logo_white_cropped,
+      watermark,
+   )
+.. code-block:: python
+
+   latex_additional_files = [
+      watermark, ansys_logo_white, ansys_logo_white_cropped]
