@@ -97,26 +97,26 @@ the ``index.rst`` title, use ``|version|`` to include the package version
 number.
 
 
-Custom Icons
-------------
-
+Customizing Icons
+~~~~~~~~~~~~~~~~~
 This theme allows you to have a huge control over the icons displayed in the
 navigation bar.
 
 
 Adding New Icons
 ----------------
-
 To add a new icon you will need to specify its ``name``, the associated ``URL``
 and the ``icon`` and ``type``. As an example, consider the following source code
 which adds an icon for sending an email:
 
 .. code-block:: python
 
-   html_theme_options = {
-    "icon_links": [dict(name="Mail", url="mailto:me", icon="fas fa-envelope")]
-    ...
-   }
+    html_theme_options = {
+     "icon_links": [
+         dict(name="Mail", url="mailto:me", icon="fas fa-envelope")
+     ],
+     ...
+    }
 
 For more information about custom icons, refer to `Configure icon links
 <https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/configuring.html?highlight=icons#configure-icon-links>`_
@@ -128,16 +128,15 @@ section in `PyData Sphinx Theme Docs
 
 Hiding Icons
 ------------
-
 You can also select which icons should be displayed or not. To do so, add their
 names to the ``hidden_icons`` list:
 
 .. code-block:: python
 
-   html_theme_options = {
-       "hidden_icons": ["GitHub"],
-       ...
-   }
+    html_theme_options = {
+        "hidden_icons": ["GitHub"],
+        ...
+    }
 
 
 If you want to hide all icons, you can also use the ``show_icons`` boolean
@@ -145,40 +144,45 @@ variable:
 
 .. code-block:: python
 
-   html_theme_options = {
-       "show_icons": False,
-       ...
-   }
+    html_theme_options = {
+        "show_icons": False,
+        ...
+    }
 
-PDF coverpage
--------------
+Customizing Cover Page
+~~~~~~~~~~~~~~~~~~~~~~
+The ``generate_preamble`` function is provided in the
+``ansys_sphinx_theme.latex`` module for customizing the cover page of the
+``PDF`` documentation:
 
-If you want to use a customized coverpage for the PDF,
-add the preamble of the coverpage using ``latex elements``.
-For using the Ansys coverpage, you can set LaTeX elements as:
+.. autofunction:: ansys_sphinx_theme.latex.generate_preamble
 
-.. code-block:: python
-
-   latex_elements = {
-   "preamble": ansys_sphinx_theme.latex.generate_preamble(
-      <title_of_coverpage>,
-      <watermark_for_titlepage>,
-      <date_to_be_printed>,)
-   }
-
-The default date will be current date and watermark will be
-the Ansys watermark.
-To use the Ansys' logo and watermark in the LaTeX coverpage, you should import it and
-add it in ``latex_additional_files``.
+This function can be used to generate the value for the ``preamble`` key in the
+``latex_elements`` variable declared in the ``conf.py`` file:
 
 .. code-block:: python
 
-   from ansys_sphinx_theme import (
-      ansys_logo_white,
-      ansys_logo_white_cropped,
-      watermark,
-   )
+    latex_elements = {
+        "preamble": ansys_sphinx_theme.latex.generate_preamble(
+            <title_of_coverpage>,
+            <watermark_for_titlepage>,
+            <date_to_be_printed>,
+        )
+    }
+
+To use the logo and watermark provided by Ansys in the cover page, you need to
+import and add them in the ``latex_additional_files``:
+
 .. code-block:: python
 
-   latex_additional_files = [
-      watermark, ansys_logo_white, ansys_logo_white_cropped]
+    from ansys_sphinx_theme import (
+       ansys_logo_white,
+       ansys_logo_white_cropped,
+       watermark,
+    )
+
+.. code-block:: python
+
+    latex_additional_files = [
+       watermark, ansys_logo_white, ansys_logo_white_cropped
+    ]
