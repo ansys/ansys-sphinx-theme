@@ -168,7 +168,7 @@ For using the Ansys coverpage, you can set LaTeX elements as:
 
 The default date will be current date and watermark will be
 the Ansys watermark.
-To use Ansys logo and watermark to the latex coverpage, you should import it
+To use the Ansys' logo and watermark in the LaTeX coverpage, you should import it and
 add it in ``latex_additional_files``.
 
 .. code-block:: python
