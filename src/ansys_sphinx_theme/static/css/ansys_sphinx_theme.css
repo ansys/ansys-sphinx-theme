@@ -97,7 +97,7 @@ html[data-theme="dark"] {
   --pst-color-border: rgb(192, 192, 192);
   --pst-color-shadow: var(--pst-color-background);
   --pst-color-background: rgb(18, 18, 18);
-  --pst-color-on-background: rgb(30, 30, 30);
+  --pst-color-on-background: rgb(0, 0, 0);
   --pst-color-surface: rgb(41, 41, 41);
   --pst-color-on-surface: rgb(55, 55, 55);
 
