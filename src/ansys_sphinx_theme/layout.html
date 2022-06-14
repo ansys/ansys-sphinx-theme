@@ -4,7 +4,9 @@
 {%- block css %}
     {{ super() }}
     {# adding support for plotly in gallery examples #}
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    {% if theme_use_plotly %}
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    {% endif %}
     {% if theme_show_breadcrumbs %}
         <link href="{{ pathto('_static/css/breadcrumbs.css', 1) }}" rel="stylesheet">
     {% endif %}
