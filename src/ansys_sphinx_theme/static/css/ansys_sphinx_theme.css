@@ -45,6 +45,85 @@
 
 }
 
+html[data-theme="light"] {
+  /*****************************************************************************
+  * main colors
+  */
+  --pst-color-primary: rgb(255, 183, 27);
+  --pst-color-secondary: rgb(200, 146, 17);
+  --pst-color-success: rgb(40, 167, 69);
+  --pst-color-text-base: rgb(51, 51, 51);
+  --pst-color-text-muted: rgb(26, 24, 24);
+  --pst-color-border: rgb(201, 201, 201);
+  --pst-color-shadow: rgb(216, 216, 216);
+
+  /*****************************************************************************
+  * depth colors
+  *
+  * background: the more in depth color
+  * on-background: the object directly set on the background, use of shadows in light theme
+  * surface: object set on the background (without shadows)
+  * on_surface: object set on surface object (without shadows)
+  */
+  --pst-color-on-background: rgb(0, 0, 0);
+  --pst-color-on-surface: rgb(255, 255, 255);
+
+  /*****************************************************************************
+  * extensions
+  */
+
+  --pst-color-panel-background: var(--pst-color-on-background);
+
+  /*****************************************************************************
+  * layout
+  */
+
+  --pst-color-link: rgb( 57, 114, 161);
+  --pst-color-link-hover: #005B81;
+  --pst-color-inline-code: rgb(232, 62, 140);
+  --pst-color-target: rgb(255, 255, 255);
+}
+
+html[data-theme="dark"] {
+  /*****************************************************************************
+  * main colors
+  */
+  --pst-color-primary: rgb(255, 183, 27);
+  --pst-color-secondary: rgb(200, 146, 17);
+  --pst-color-success: rgb(72, 135, 87);
+  --pst-color-text-base: rgb(201, 209, 217);
+  --pst-color-text-muted: rgb(192, 192, 192);
+  --pst-color-border: rgb(192, 192, 192);
+  --pst-color-shadow: var(--pst-color-background);
+  --pst-color-background: rgb(18, 18, 18);
+  --pst-color-on-background: rgb(0, 0, 0);
+  --pst-color-surface: rgb(41, 41, 41);
+  --pst-color-on-surface: rgb(55, 55, 55);
+
+  /*****************************************************************************
+  * extensions
+  */
+
+  --pst-color-panel-background: var(--pst-color-on-background);
+
+  /*****************************************************************************
+  * layout
+  */
+
+  --pst-color-link: rgb( 57, 114, 161);
+  --pst-color-link-hover: #005B81;
+  --pst-color-inline-code: rgb(221, 158, 194);
+  --pst-color-target: rgb(71, 39, 0);
+}
+
+.admonition, div.admonition{
+  background-color:var( --pst-color-on-surface);
+}
+
+.bd-header.navbar-light#navbar-main .navbar-nav li a.nav-link {
+  color:#ffffff;
+}
+
 .docutils {
     color: #C89211;
     font-family: 'Inconsolata';
@@ -116,7 +195,7 @@ table {
   }
 
 tr { 
-  background-color: white;
+  background-color: var(--pst-color-background);
 }
 
 th {
@@ -124,7 +203,7 @@ th {
 }
 
 tr:nth-child(odd){ 
-  background-color: white;
+  background-color: var(--pst-color-background);
 }
 
 tr:nth-child(even){
@@ -169,7 +248,7 @@ table.table-centered {
   }
 
 .table-centered tr { 
-  background-color: white;
+  background-color: var(--pst-color-background);
   text-align: center;
 }
 
@@ -180,7 +259,7 @@ table.table-centered {
 
 .table-centered tr:nth-child(odd){ 
   text-align: center;
-  background-color: white;
+  background-color: var(--pst-color-background);
 }
 
 .table-centered tr:nth-child(even){
@@ -255,11 +334,11 @@ I do not think we will be able to call this class.
 */
 
 .dataframe tr{ 
-    background-color: white;
+    background-color: var(--pst-color-background);
   }
 
 .dataframe tr:nth-child(odd){ 
-    background-color: white !important;
+    background-color: var(--pst-color-background) !important;
   }
 
 .dataframe tr:nth-child(even){
@@ -281,12 +360,12 @@ I do not think we will be able to call this class.
 */
 
 .dataframe-centered tr{ 
-    background-color: white;
+    background-color: var(--pst-color-background);
     text-align: center;
   }
 
 .dataframe-centered tr:nth-child(odd){ 
-    background-color: white !important;  
+    background-color: var(--pst-color-background) !important;  
     text-align: center;
   }
 
@@ -316,11 +395,11 @@ I do not think we will be able to call this class.
         } */
 
 .autosummary  tr:nth-child(odd){ 
-    background-color: white;
+    background-color: var(--pst-color-background);
   }
 
 .autosummary tr:nth-child(even){
-  background-color: white;
+  background-color: var(--pst-color-background);
 }
 
 
