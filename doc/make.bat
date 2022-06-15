@@ -35,7 +35,8 @@ goto end
 :pdf
 	%SPHINXBUILD% -M latex %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 	cd "%BUILDDIR%\latex"
-	pdflatex ansys_sphinx_theme.tex --interaction=nonstopmode
+	for %%f in (*.tex) do (
+	pdflatex "%%f" --interaction=nonstopmode)
 	
 :end
 popd
