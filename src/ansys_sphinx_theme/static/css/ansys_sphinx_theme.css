@@ -2,6 +2,7 @@
 @import "../basic.css";
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap');
 @import "../tabs.css";
+@import "../sg_gallery.css";
 
 
 @font-face {
@@ -83,6 +84,8 @@ html[data-theme="light"] {
   --pst-color-link-hover: #005B81;
   --pst-color-inline-code: rgb(232, 62, 140);
   --pst-color-target: rgb(255, 255, 255);
+  /* color for sphinx-gallery-code output*/
+  --pst-color-codeout: #fafae2;
 }
 
 html[data-theme="dark"] {
@@ -92,7 +95,7 @@ html[data-theme="dark"] {
   --pst-color-primary: rgb(255, 183, 27);
   --pst-color-secondary: rgb(200, 146, 17);
   --pst-color-success: rgb(72, 135, 87);
-  --pst-color-text-base: rgb(201, 209, 217);
+  --pst-color-text-base: rgb(217, 215, 201);
   --pst-color-text-muted: rgb(192, 192, 192);
   --pst-color-border: rgb(192, 192, 192);
   --pst-color-shadow: var(--pst-color-background);
@@ -115,6 +118,8 @@ html[data-theme="dark"] {
   --pst-color-link-hover: #005B81;
   --pst-color-inline-code: rgb(221, 158, 194);
   --pst-color-target: rgb(71, 39, 0);
+  /* color for sphinx-gallery-code output*/
+  --pst-color-codeout: #6c757d;
 }
 
 .admonition, div.admonition{
@@ -428,3 +433,12 @@ a > code.download
     text-decoration: none;
     font-weight: normal;
 }
+
+/*
+########################
+   Sphinx gallery output
+########################
+*/
+.sphx-glr-script-out .highlight pre{
+  background-color:  var(--pst-color-codeout) !important;
+  }
