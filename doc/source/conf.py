@@ -12,6 +12,7 @@ from ansys_sphinx_theme import (
     ansys_logo_white,
     ansys_logo_white_cropped,
     latex,
+    page_404,
     watermark,
 )
 
@@ -28,6 +29,7 @@ html_theme = "ansys_sphinx_theme"
 # specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
+    "contact_mail": "pyansys.support@ansys.com",
     "additional_breadcrumbs": [
         ("Ansys Internal Developer Portal", "https://dev.docs.ansys.com"),
     ],
@@ -41,6 +43,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "numpydoc",
     "sphinx.ext.intersphinx",
+    "notfound.extension",
     "sphinx_copybutton",
     "ansys_sphinx_theme",
 ]
@@ -99,3 +102,6 @@ latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
 # change the preamble of latex with customized title page
 # variables are the title of pdf, watermark
 latex_elements = {"preamble": latex.generate_preamble(html_title)}
+
+# Not found page
+notfound_template = page_404

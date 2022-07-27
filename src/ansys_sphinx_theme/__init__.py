@@ -16,6 +16,9 @@ ansys_logo_white_cropped = os.path.join(_this_path, "static", "ansys_logo_white_
 watermark = os.path.join(_this_path, "static", "watermark.pdf")
 ansys_logo_black = os.path.join(_this_path, "static", "ansys_logo_black_cropped.jpg")
 
+# Enable default 404 page
+page_404 = os.path.join(_this_path, "static", "404.rst")
+
 html_logo = pyansys_logo_black
 
 CSS_FILENAME = "ansys_sphinx_theme.css"
