@@ -1,4 +1,4 @@
-Ansys Sphinx Theme
+Ansys Sphinx theme
 ==================
 |ansys| |python| |pypi| |GH-CI| |MIT| |black|
 
@@ -27,63 +27,70 @@ Ansys Sphinx Theme
    :alt: Black
 
 
-Introduction and Purpose
-------------------------
-The Ansys Sphinx theme is an extension of the popular `PyData
-Sphinx Theme <https://pydata-sphinx-theme.readthedocs.io/>`_ used by
-`numpy <https://numpy.org/doc/stable/>`_, `pandas
-<https://pandas.pydata.org/docs/>`_, `PyVista
-<https://docs.pyvista.org>`_ and a variety other packages.  This theme
-was packaged so that all PyAnsys packages would look and behave
-consistently. 
+Introduction
+------------
+The Ansys Sphinx theme is an extension of the popular
+`PyData Sphinx theme <https://github.com/pydata/pydata-sphinx-theme>`_ 
+that is used by `numpy <https://numpy.org/doc/stable/>`_,
+`pandas <https://pandas.pydata.org/docs/>`_,
+`PyVista <https://docs.pyvista.org>`_, and many other
+packages.
 
+You use the Ansys Sphinx theme with `Sphinx <https://www.sphinx-doc.org/en/master/>`_.
+a Python documentation generator, to create documentation.
+The theme's objective is to ensure that Ansys documentation
+looks and behaves consistently.
 
-Documentation
-~~~~~~~~~~~~~
-Full documentation can be found at `Ansys Sphinx Theme Documentation <https://sphinxdocs.pyansys.com>`_. The webpage was
-also built using the ``ansys-sphinx-theme``, so visit the site for a
-preview of the theme.
+While this theme is primarily used to create documentation
+for PyAnsys libraries, you can also use it to create
+documentation for any Ansys project with content in
+reStructuredText (RST) and Markdown (files).
 
-Other PyAnsys packages using the Ansys theme include:
+If you are new to using Sphinx, see `Sphinx Getting Started
+<https://www.sphinx-doc.org/en/master/usage/quickstart.html>`_.
 
-- `PyMAPDL <https://mapdldocs.pyansys.com/>`__
-- `PyAEDT <https://aedtdocs.pyansys.com/>`__
-- `DPF-Core <https://dpfdocs.pyansys.com/>`__
-- `DPF-Post <https://postdocs.pyansys.com/>`__
-- `Legacy PyMAPDL Reader <https://readerdocs.pyansys.com/>`__
+Documentation and issues
+~~~~~~~~~~~~~~~~~~~~~~~~
+In addition to installation information, the
+`Ansys Sphinx theme documentation <https://sphinxdocs.pyansys.com>`_
+provides information on how you can customize the theme. Because
+this documentation is created using this theme, viewing it is
+an easy way to preview the theme itself.
 
+On the `Issues page <https://github.com/ansys/ansys-sphinx-theme/issues>`_
+for this repository, you can create issues to submit questions, report bugs,
+and request new features. To reach the PyAnsys support team, email
+`pyansys.support@ansys.com <pyansys.support@ansys.com>`_.
 
-Getting Started
+Getting started
 ~~~~~~~~~~~~~~~
-Install this theme with:
+Install the ``ansys_sphinx_theme`` package with:
 
 .. code::
 
    pip install ansys-sphinx-theme
 
-Next, modify your sphinx ``conf.py`` to use ``html_theme =
-'ansys_sphinx_theme'``.  If you are new to using
-Sphinx, see `Sphinx Getting Started
-<https://www.sphinx-doc.org/en/master/usage/quickstart.html>`_
-documentation.
+Modify your Sphinx ``conf.py`` file to use ``html_theme =
+'ansys_sphinx_theme'``.
 
-For usage information, see `Using this Theme
-<https://sphinxdocs.pyansys.com/usage.html>`_
-
-
-Development and Contributing
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Feel free to add features or post issues. To develop this theme::
+Development and contributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If you want to contribute to the PyAnsys Sphinx theme, install
+the ``ansys-sphinx-theme`` package in development mode with::
 
    git clone https://github.com/ansys/ansys-sphinx-theme.git
    pip install -U pip tox
    tox -e style,doc
 
-We use `pre-commit <https://pre-commit.com/>`_ to simplify style checks. You can
-optionally use this by following the `installation
-<https://pre-commit.com/#install>`_ and `usage
-<https://pre-commit.com/#usage>`_ guides.
+To simplify checks, this repository uses `pre-commit <https://pre-commit.com/>`_.
+You can optionally install and use this tool. For more information, see its
+`installation <https://pre-commit.com/#install>`_ and `usage
+<https://pre-commit.com/#usage>`_ documentation.
 
+Before contributing to a PyAnsys library, see
+`Contributing <https://dev.docs.pyansys.com/overview/contributing.html>`_ 
+in the *PyAnsys Developer's Guide* for overall guidance, paying particular
+attention to `Guidelines and Best Practices <https://dev.docs.pyansys.com/guidelines/index.html>`_. 
 
 License
 ~~~~~~~
