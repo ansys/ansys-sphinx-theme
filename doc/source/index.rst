@@ -1,5 +1,5 @@
 ==========================================
-Ansys Sphinx Theme Documentation |version|
+Ansys Sphinx theme documentation |version|
 ==========================================
 
 ..
@@ -11,30 +11,10 @@ Ansys Sphinx Theme Documentation |version|
    :hidden:
    :maxdepth: 3
 
-   usage
-   style
-   class_documentation
-   coding_style
+   installation
+   css
+   options
+   404_page
 
 
-Code Examples
-~~~~~~~~~~~~~
-Here's a quick preview for how Python code looks using the
-``ansys-sphinx-theme``.  For more examples, click the links at the
-top of the page to see function, method, and class documentation.
-
-
-Rendered Python Code
---------------------
-
-.. code:: python
-
-   >>> num = 10
-   >>> if num > 0:
-   ...     print("Positive number")
-   ... elif num == 0:
-   ...     print("Zero")
-   ... else:
-   ...     print("Negative number")
-   Positive number
 
