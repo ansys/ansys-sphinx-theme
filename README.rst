@@ -36,7 +36,7 @@ that is used by `numpy <https://numpy.org/doc/stable/>`_,
 `PyVista <https://docs.pyvista.org>`_, and many other
 packages.
 
-You use the Ansys Sphinx theme with `Sphinx <https://www.sphinx-doc.org/en/master/>`_.
+You use the Ansys Sphinx theme with `Sphinx <https://www.sphinx-doc.org/en/master/>`_,
 a Python documentation generator, to create documentation.
 The theme's objective is to ensure that Ansys documentation
 looks and behaves consistently.
@@ -68,7 +68,7 @@ Install the ``ansys_sphinx_theme`` package with:
 
 .. code::
 
-   pip install ansys-sphinx-theme
+   python -m pip install ansys-sphinx-theme
 
 Modify your Sphinx ``conf.py`` file to use ``html_theme =
 'ansys_sphinx_theme'``.
@@ -79,7 +79,7 @@ If you want to contribute to the PyAnsys Sphinx theme, install
 the ``ansys-sphinx-theme`` package in development mode with::
 
    git clone https://github.com/ansys/ansys-sphinx-theme.git
-   pip install -U pip tox
+   python -m pip install -U pip tox
    tox -e style,doc
 
 To simplify checks, this repository uses `pre-commit <https://pre-commit.com/>`_.
