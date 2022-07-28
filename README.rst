@@ -64,7 +64,7 @@ and request new features. To reach the PyAnsys support team, email
 
 Getting started
 ~~~~~~~~~~~~~~~
-Install the ``ansys_sphinx_theme`` package with:
+Install the ``ansys-sphinx-theme`` package with:
 
 .. code::
 
