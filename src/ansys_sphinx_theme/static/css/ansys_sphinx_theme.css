@@ -80,12 +80,13 @@ html[data-theme="light"] {
   * layout
   */
 
-  --pst-color-link: rgb( 57, 114, 161);
-  --pst-color-link-hover: #005B81;
+  --pst-color-link: #0088CC;
+  --pst-color-link-hover:#32cfea;
   --pst-color-inline-code: rgb(232, 62, 140);
   --pst-color-target: rgb(255, 255, 255);
   /* color for sphinx-gallery-code output*/
   --pst-color-codeout: #fafae2;
+  --pst-color-sig:#2a1ed6;
 }
 
 html[data-theme="dark"] {
@@ -95,7 +96,7 @@ html[data-theme="dark"] {
   --pst-color-primary: rgb(255, 183, 27);
   --pst-color-secondary: rgb(200, 146, 17);
   --pst-color-success: rgb(72, 135, 87);
-  --pst-color-text-base: rgb(217, 215, 201);
+  --pst-color-text-base: rgb(201, 209, 217);
   --pst-color-text-muted: rgb(192, 192, 192);
   --pst-color-border: rgb(192, 192, 192);
   --pst-color-shadow: var(--pst-color-background);
@@ -114,12 +115,17 @@ html[data-theme="dark"] {
   * layout
   */
 
-  --pst-color-link: rgb( 57, 114, 161);
-  --pst-color-link-hover: #005B81;
+  --pst-color-link: #0088CC;
+  --pst-color-link-hover:#32cfea;
   --pst-color-inline-code: rgb(221, 158, 194);
   --pst-color-target: rgb(71, 39, 0);
   /* color for sphinx-gallery-code output*/
   --pst-color-codeout: #6c757d;
+  --pst-color-sig:#d6ab1e;
+}
+
+h1, h2 {
+  color: var(--pst-color-text-base);
 }
 
 .admonition, div.admonition{
@@ -131,7 +137,7 @@ html[data-theme="dark"] {
 }
 
 .docutils {
-    color: #C89211;
+    color: var(--pst-color-inline-code);
     font-family: 'Inconsolata';
     font-weight: bold;
     font-size: 107%;
@@ -146,17 +152,17 @@ html[data-theme="dark"] {
 }
 
 .sig-prename {
-    color: #C89211;
+    color: var(--pst-color-sig);
     font-family: 'Source Sans Pro', sans-serif;
 }
 
 .sig-name.descname {
-    color: #C89211;
+    color: var(--pst-color-sig);
     /* font-family: '   Source Sans Pro', sans-serif; */
 }
 
 .sig-name {
-    color: #C89211;
+    color: var(--pst-color-sig);
     font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -442,3 +448,19 @@ a > code.download
 .sphx-glr-script-out .highlight pre{
   background-color:  var(--pst-color-codeout) !important;
   }
+
+.prev-next-area a p.prev-next-title {
+  color: var(--pst-color-link);
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+html[data-theme="light"] .highlight .s1 {
+  color: #519312;
+}
+
+.navbar button.navbar-toggler {
+    margin-right: 1em;
+    border-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
