@@ -350,9 +350,9 @@ table.longtable-centered tr:hover td {
 }
 
 /*
-##############
-   DataFrame
-##############
+#########
+DataFrame
+#########
 Not sure why the odd columns (white) are rendered gray.
 
 I do not think we will be able to call this class.
@@ -373,7 +373,6 @@ I do not think we will be able to call this class.
 .dataframe tr:hover td {
   background-color: rgb(255, 183, 27, 0.6);
 }
-
 
 /*
 #########################
@@ -407,8 +406,6 @@ I do not think we will be able to call this class.
 .dataframe thead th {
     text-align: center;
 }
-
-
 
 /*
 ###############
@@ -460,6 +457,12 @@ html[data-theme="light"] .highlight .s1 {
   color: #519312;
 }
 
+/*
+###############
+Dropdown button
+###############
+*/
+
 .navbar button.navbar-toggler {
     margin-right: 1em;
     border-color: rgb(255, 255, 255);
@@ -486,6 +489,11 @@ a.headerlink {
   color: var(--pst-color-text-base);
 }
 
+/*
+#################################
+Right side toctree color and font
+#################################
+*/
 
 .toc-entry>.nav-link.active {
     font-weight: 200;
@@ -505,4 +513,21 @@ a.headerlink {
 
 .toc-h4 {
   font-size: .88rem;
+}
+
+.toc-entry a:hover {
+  color: var(--pst-color-link);
+  text-decoration: none;
+}
+
+/*
+###########################################
+Navigation colomn(according to side colomn)
+###########################################
+*/
+.col-lg-9 {
+  flex: 0 0 80%;
+  max-width: 80%;
+  padding-right: 25px;
+  padding-left: 40px;
 }
