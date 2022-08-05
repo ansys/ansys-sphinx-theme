@@ -69,7 +69,7 @@ html[data-theme="light"] {
   * on_surface: object set on surface object (without shadows)
   */
   --pst-color-on-background: rgb(0, 0, 0);
-  --pst-color-on-surface: rgb(255, 255, 255);
+  --pst-color-on-surface: #e9e7e7;
 
   /*****************************************************************************
   * extensions
@@ -142,6 +142,17 @@ h1, h2 {
     font-family: 'Inconsolata';
     font-weight: bold;
     font-size: 107%;
+}
+
+code.literal {
+  padding: .1rem .25rem;
+  padding-top: 0.1rem;
+  padding-right: 0.25rem;
+  padding-bottom: 0.1rem;
+  padding-left: 0.25rem;
+  background-color: var(--pst-color-on-surface);
+  border: 1px solidvar(--pst-color-border);
+  border-radius: .25rem;
 }
 
 .xref.std.std-ref {
