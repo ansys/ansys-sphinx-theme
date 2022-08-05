@@ -464,3 +464,19 @@ html[data-theme="light"] .highlight .s1 {
     border-color: rgb(255, 255, 255);
     color: rgb(255, 255, 255);
 }
+
+/*
+###################################################
+Side colomn size(first and second colomn from left)
+###################################################
+*/
+
+.col-md-3 {
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+.col-xl-7 {
+  flex: 0 0 63.33333%;
+  max-width: 63.33333%;
+}
