@@ -44,6 +44,7 @@
   --pst-color-navbar-link: 255, 255, 255;
   --pst-color-navbar-link-hover: 255, 183, 27;  /* --ansysBronze */
   --pst-color-navbar-link-active: 255, 183, 27;  /* --ansysBronze */
+  --pst-font-size-h1: 40px;
 
 }
 
@@ -479,4 +480,29 @@ Side colomn size(first and second colomn from left)
 .col-xl-7 {
   flex: 0 0 63.33333%;
   max-width: 63.33333%;
+}
+
+a.headerlink {
+  color: var(--pst-color-text-base);
+}
+
+
+.toc-entry>.nav-link.active {
+    font-weight: 200;
+    color: var(--pst-color-text-muted);
+    background-color: transparent;
+    border-left: 2px solid var(--pst-color-text-muted);
+}
+
+
+.toc-h2 {
+  font-size: 1.1rem;
+}
+
+.toc-h3 {
+  font-size: .98rem;
+}
+
+.toc-h4 {
+  font-size: .88rem;
 }
