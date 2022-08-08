@@ -481,9 +481,9 @@ Dropdown button
 }
 
 /*
-###################################################
-Side colomn size(first and second colomn from left)
-###################################################
+####################################################
+Side column size (first and second column from left)
+####################################################
 */
 
 .col-md-3 {
@@ -532,9 +532,9 @@ Right side toctree color and font
 }
 
 /*
-###########################################
-Navigation colomn(according to side colomn)
-###########################################
+############################################
+Navigation column (according to side column)
+############################################
 */
 .col-lg-9 {
   flex: 0 0 80%;
