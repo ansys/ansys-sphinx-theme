@@ -57,7 +57,7 @@ html[data-theme="light"] {
   --pst-color-success: rgb(40, 167, 69);
   --pst-color-text-base: rgb(51, 51, 51);
   --pst-color-text-muted: rgb(26, 24, 24);
-  --pst-color-border: rgb(201, 201, 201);
+  --pst-color-border: #c9c9c9;;
   --pst-color-shadow: rgb(216, 216, 216);
 
   /*****************************************************************************
@@ -81,9 +81,9 @@ html[data-theme="light"] {
   * layout
   */
 
-  --pst-color-link: #0088CC;
+  --pst-color-link:#0077B3;
   --pst-color-link-hover:#32cfea;
-  --pst-color-inline-code: rgb(232, 62, 140);
+  --pst-color-inline-code: #CD186D;
   --pst-color-target: rgb(255, 255, 255);
   /* color for sphinx-gallery-code output*/
   --pst-color-codeout: #fafae2;
@@ -116,7 +116,7 @@ html[data-theme="dark"] {
   * layout
   */
 
-  --pst-color-link: #0088CC;
+  --pst-color-link: #0077B3;
   --pst-color-link-hover:#32cfea;
   --pst-color-inline-code: rgb(221, 158, 194);
   --pst-color-target: rgb(71, 39, 0);
@@ -541,4 +541,15 @@ Navigation column (according to side column)
   max-width: 80%;
   padding-right: 25px;
   padding-left: 40px;
+}
+
+/*
+############################################
+Navigation column (according to side column)
+############################################
+*/
+
+html[data-theme="light"] .highlight .o {
+  color: #B35000;
+  font-weight: bold;
 }
