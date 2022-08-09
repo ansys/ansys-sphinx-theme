@@ -2,8 +2,6 @@
 Ansys Sphinx theme documentation |version|
 ==========================================
 
-..
-   Simply reuse the root readme
 
 .. include:: ../../README.rst
 

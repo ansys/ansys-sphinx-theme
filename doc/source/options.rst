@@ -31,7 +31,7 @@ Here is how you use ``html_theme_options`` to add breadcrumbs to the Ansys Sphin
 When you are on the module homepage, the breadcrumb displays the homepage
 title.  However, this title is not accessible to Sphinx from other
 documentation pages. Therefore, the ``html_short_title`` is used as the display
-text for the bread crumb on the documentation homepage. To ensure a consistent user
+text for the breadcrumb on the documentation homepage. To ensure a consistent user
 experience, you should ensure that the ``html_short_title`` (or optionally
 ``html_title`` if ``html_short_title`` is not used) is set to the same value as
 the title of the ``index.rst`` page. For example:
@@ -46,7 +46,7 @@ use ``|version|``.
 
 Customize icons
 ~~~~~~~~~~~~~~~
-The Ansys Sphinx themme allows you to control what icons are shown in the
+The Ansys Sphinx theme allows you to control what icons are shown in the
 navigation bar.
 
 - Conprehensive information on customizing icons is available in
@@ -62,7 +62,7 @@ Add icons
 ---------
 To add icons to the navigation bar, in ``html_theme_options``, you add them to the ``icon_links``
 dictionary. For each icon to add, you must specify its ``name``, the associated ``url``,
-the ``icon``, and the ``type``. This examle adds an icon for sending an email:
+the ``icon``, and the ``type``. This example adds an icon for sending an email:
 
 .. code-block:: python
 
