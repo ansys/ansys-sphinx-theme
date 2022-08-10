@@ -44,6 +44,7 @@
   --pst-color-navbar-link: 255, 255, 255;
   --pst-color-navbar-link-hover: 255, 183, 27;  /* --ansysBronze */
   --pst-color-navbar-link-active: 255, 183, 27;  /* --ansysBronze */
+  --pst-font-size-h1: 40px;
 
 }
 
@@ -56,7 +57,7 @@ html[data-theme="light"] {
   --pst-color-success: rgb(40, 167, 69);
   --pst-color-text-base: rgb(51, 51, 51);
   --pst-color-text-muted: rgb(26, 24, 24);
-  --pst-color-border: rgb(201, 201, 201);
+  --pst-color-border: #c9c9c9;
   --pst-color-shadow: rgb(216, 216, 216);
 
   /*****************************************************************************
@@ -68,7 +69,7 @@ html[data-theme="light"] {
   * on_surface: object set on surface object (without shadows)
   */
   --pst-color-on-background: rgb(0, 0, 0);
-  --pst-color-on-surface: rgb(255, 255, 255);
+  --pst-color-on-surface: #f2f2f2;
 
   /*****************************************************************************
   * extensions
@@ -80,12 +81,13 @@ html[data-theme="light"] {
   * layout
   */
 
-  --pst-color-link: rgb( 57, 114, 161);
-  --pst-color-link-hover: #005B81;
-  --pst-color-inline-code: rgb(232, 62, 140);
+  --pst-color-link:#0077B3;
+  --pst-color-link-hover:#32cfea;
+  --pst-color-inline-code: #CD186D;
   --pst-color-target: rgb(255, 255, 255);
   /* color for sphinx-gallery-code output*/
   --pst-color-codeout: #fafae2;
+  --pst-color-sig:#0965C8;
 }
 
 html[data-theme="dark"] {
@@ -95,7 +97,7 @@ html[data-theme="dark"] {
   --pst-color-primary: rgb(255, 183, 27);
   --pst-color-secondary: rgb(200, 146, 17);
   --pst-color-success: rgb(72, 135, 87);
-  --pst-color-text-base: rgb(217, 215, 201);
+  --pst-color-text-base: rgb(201, 209, 217);
   --pst-color-text-muted: rgb(192, 192, 192);
   --pst-color-border: rgb(192, 192, 192);
   --pst-color-shadow: var(--pst-color-background);
@@ -114,12 +116,17 @@ html[data-theme="dark"] {
   * layout
   */
 
-  --pst-color-link: rgb( 57, 114, 161);
-  --pst-color-link-hover: #005B81;
+  --pst-color-link: #0088CC;
+  --pst-color-link-hover:#32cfea;
   --pst-color-inline-code: rgb(221, 158, 194);
   --pst-color-target: rgb(71, 39, 0);
   /* color for sphinx-gallery-code output*/
   --pst-color-codeout: #6c757d;
+  --pst-color-sig:#d6ab1e;
+}
+
+h1, h2 {
+  color: var(--pst-color-text-base);
 }
 
 .admonition, div.admonition{
@@ -131,10 +138,21 @@ html[data-theme="dark"] {
 }
 
 .docutils {
-    color: #C89211;
-    font-family: 'Inconsolata';
-    font-weight: bold;
-    font-size: 107%;
+    color: var(--pst-color-inline-code);
+    font-family:var(--font-family-monospace);
+    font-weight: 500;
+    font-size: 87.5%;
+}
+
+code.literal {
+  padding: .1rem .25rem;
+  padding-top: 0.1rem;
+  padding-right: 0.25rem;
+  padding-bottom: 0.1rem;
+  padding-left: 0.25rem;
+  background-color: var(--pst-color-on-surface);
+  border: 1px solid var(--pst-color-border);
+  border-radius: .25rem;
 }
 
 .xref.std.std-ref {
@@ -146,17 +164,16 @@ html[data-theme="dark"] {
 }
 
 .sig-prename {
-    color: #C89211;
     font-family: 'Source Sans Pro', sans-serif;
 }
 
 .sig-name.descname {
-    color: #C89211;
+    color: var(--pst-color-inline-code);
     /* font-family: '   Source Sans Pro', sans-serif; */
 }
 
 .sig-name {
-    color: #C89211;
+    color: var(--pst-color-sig);
     font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -343,9 +360,9 @@ table.longtable-centered tr:hover td {
 }
 
 /*
-##############
-   DataFrame
-##############
+#########
+DataFrame
+#########
 Not sure why the odd columns (white) are rendered gray.
 
 I do not think we will be able to call this class.
@@ -366,7 +383,6 @@ I do not think we will be able to call this class.
 .dataframe tr:hover td {
   background-color: rgb(255, 183, 27, 0.6);
 }
-
 
 /*
 #########################
@@ -400,8 +416,6 @@ I do not think we will be able to call this class.
 .dataframe thead th {
     text-align: center;
 }
-
-
 
 /*
 ###############
@@ -442,3 +456,100 @@ a > code.download
 .sphx-glr-script-out .highlight pre{
   background-color:  var(--pst-color-codeout) !important;
   }
+
+.prev-next-area a p.prev-next-title {
+  color: var(--pst-color-link);
+  font-weight: 600;
+  font-size: 1.1em;
+}
+
+html[data-theme="light"] .highlight .s1 {
+  color: #519312;
+}
+
+/*
+###############
+Dropdown button
+###############
+*/
+
+.navbar button.navbar-toggler {
+    margin-right: 1em;
+    border-color: rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+}
+
+/*
+####################################################
+Side column size (first and second column from left)
+####################################################
+*/
+
+.col-md-3 {
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+.col-xl-7 {
+  flex: 0 0 63.33333%;
+  max-width: 63.33333%;
+}
+
+a.headerlink {
+  color: var(--pst-color-text-base);
+}
+
+/*
+#################################
+Right side toctree color and font
+#################################
+*/
+
+.toc-entry>.nav-link.active {
+    font-weight: 500;
+    color: var(--pst-color-link);
+    background-color: transparent;
+    border-left: 2px solid var(--pst-color-text-muted);
+}
+
+
+.toc-h2 {
+  font-size: 0.98rem;
+}
+
+.toc-h3 {
+  font-size: .96rem;
+}
+
+.toc-h4 {
+  font-size: .90rem;
+}
+
+.toc-entry a:hover {
+  color: var(--pst-color-link);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/*
+############################################
+Navigation column (according to side column)
+############################################
+*/
+.col-lg-9 {
+  flex: 0 0 80%;
+  max-width: 80%;
+  padding-right: 25px;
+  padding-left: 40px;
+}
+
+/*
+#################################
+Syntax highlighting in code block
+#################################
+*/
+
+html[data-theme="light"] .highlight .o {
+  color: #B35000;
+  font-weight: bold;
+}
