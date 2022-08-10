@@ -57,7 +57,7 @@ html[data-theme="light"] {
   --pst-color-success: rgb(40, 167, 69);
   --pst-color-text-base: rgb(51, 51, 51);
   --pst-color-text-muted: rgb(26, 24, 24);
-  --pst-color-border: #c9c9c9;;
+  --pst-color-border: #c9c9c9;
   --pst-color-shadow: rgb(216, 216, 216);
 
   /*****************************************************************************
@@ -139,9 +139,9 @@ h1, h2 {
 
 .docutils {
     color: var(--pst-color-inline-code);
-    font-family: 'Inconsolata';
-    font-weight: bold;
-    font-size: 107%;
+    font-family:var(--font-family-monospace);
+    font-weight: 500;
+    font-size: 87.5%;
 }
 
 code.literal {
@@ -507,28 +507,29 @@ Right side toctree color and font
 */
 
 .toc-entry>.nav-link.active {
-    font-weight: 200;
-    color: var(--pst-color-text-muted);
+    font-weight: 500;
+    color: var(--pst-color-link);
     background-color: transparent;
     border-left: 2px solid var(--pst-color-text-muted);
 }
 
 
 .toc-h2 {
-  font-size: 1.1rem;
+  font-size: 0.98rem;
 }
 
 .toc-h3 {
-  font-size: .98rem;
+  font-size: .96rem;
 }
 
 .toc-h4 {
-  font-size: .88rem;
+  font-size: .90rem;
 }
 
 .toc-entry a:hover {
   color: var(--pst-color-link);
   text-decoration: none;
+  font-weight: 600;
 }
 
 /*
