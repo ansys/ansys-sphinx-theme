@@ -87,7 +87,7 @@ html[data-theme="light"] {
   --pst-color-target: rgb(255, 255, 255);
   /* color for sphinx-gallery-code output*/
   --pst-color-codeout: #fafae2;
-  --pst-color-sig:#2a1ed6;
+  --pst-color-sig:#0965C8;
 }
 
 html[data-theme="dark"] {
@@ -164,12 +164,11 @@ code.literal {
 }
 
 .sig-prename {
-    color: var(--pst-color-sig);
     font-family: 'Source Sans Pro', sans-serif;
 }
 
 .sig-name.descname {
-    color: var(--pst-color-sig);
+    color: var(--pst-color-inline-code);
     /* font-family: '   Source Sans Pro', sans-serif; */
 }
 
