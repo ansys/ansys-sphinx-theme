@@ -553,3 +553,7 @@ html[data-theme="light"] .highlight .o {
   color: #B35000;
   font-weight: bold;
 }
+
+b, strong {
+  font-weight: 900;
+}
