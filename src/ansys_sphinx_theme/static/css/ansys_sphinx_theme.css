@@ -309,16 +309,6 @@ table.table-centered {
 
 
 /*
-###############
-   longtable 
-###############
-*/
-
-table.longtable tr:hover td {
-  background-color: rgb(255, 183, 27, 0.6);
-}
-
-/*
 #########################
    longtable-centered
 #########################
