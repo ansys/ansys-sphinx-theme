@@ -88,9 +88,10 @@ You can optionally install and use this tool. For more information, see its
 <https://pre-commit.com/#usage>`_ documentation.
 
 Before contributing to a PyAnsys library, see
-`Contributing <https://dev.docs.pyansys.com/overview/contributing.html>`_ 
+`Contributing <https://dev.docs.pyansys.com/how-to/contributing.html>`_ 
 in the *PyAnsys Developer's Guide* for overall guidance, paying particular
-attention to `Guidelines and Best Practices <https://dev.docs.pyansys.com/guidelines/index.html>`_. 
+attention to `How-to <https://dev.docs.pyansys.com/how-to/index.html>`_  for 
+guidelines and best practices. 
 
 License
 ~~~~~~~
