@@ -1,6 +1,6 @@
 /* Provided by the Sphinx base theme template at build time */
 @import "../basic.css";
-/*@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
 @import "../tabs.css";
 @import "../sg_gallery.css";
