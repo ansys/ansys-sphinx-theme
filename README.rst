@@ -90,7 +90,7 @@ You can optionally install and use this tool. For more information, see its
 Before contributing to a PyAnsys library, see
 `Contributing <https://dev.docs.pyansys.com/how-to/contributing.html>`_ 
 in the *PyAnsys Developer's Guide* for overall guidance, paying particular
-attention to `How-to <https://dev.docs.pyansys.com/how-to/index.html>`_  for 
+attention to `How-to <https://dev.docs.pyansys.com/how-to/index.html>`_ for 
 guidelines and best practices. 
 
 License
