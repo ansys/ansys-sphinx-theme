@@ -1,6 +1,7 @@
 /* Provided by the Sphinx base theme template at build time */
 @import "../basic.css";
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
 @import "../tabs.css";
 @import "../sg_gallery.css";
 
@@ -42,20 +43,24 @@
 
   --pst-color-active-navigation: 200, 146, 17;  /* --ansysBronze */
   --pst-color-navbar-link: 255, 255, 255;
-  --pst-color-navbar-link-hover: 255, 183, 27;  /* --ansysBronze */
+  --pst-color-navbar-link-hover: 200, 146, 17;  /* --ansysBronze */
   --pst-color-navbar-link-active: 255, 183, 27;  /* --ansysBronze */
-  --pst-font-size-h1: 40px;
-
+  --pst-font-size-h1: 48px;
+  --pst-font-size-h2: 36px;
+  --pst-font-size-h3: 28px;
+  --pst-font-size-h4: 20px;
+  --pst-font-size-h5: 14px;
+  --pst-font-size-h6: 11px;
 }
 
 html[data-theme="light"] {
   /*****************************************************************************
   * main colors
   */
-  --pst-color-primary: rgb(255, 183, 27);
+  --pst-color-primary: #fff;
   --pst-color-secondary: rgb(200, 146, 17);
   --pst-color-success: rgb(40, 167, 69);
-  --pst-color-text-base: rgb(51, 51, 51);
+  --pst-color-text-base: rgb(0, 0, 0);
   --pst-color-text-muted: rgb(26, 24, 24);
   --pst-color-border: #c9c9c9;
   --pst-color-shadow: rgb(216, 216, 216);
@@ -81,7 +86,7 @@ html[data-theme="light"] {
   * layout
   */
 
-  --pst-color-link:#0077B3;
+  --pst-color-link:#1E6DDC;
   --pst-color-link-hover:#32cfea;
   --pst-color-inline-code: #CD186D;
   --pst-color-target: rgb(255, 255, 255);
@@ -134,7 +139,7 @@ h1, h2 {
 }
 
 .bd-header.navbar-light#navbar-main .navbar-nav li a.nav-link {
-  color:#ffffff;
+  color: #a2a2a2;
 }
 
 .docutils {
@@ -201,8 +206,8 @@ p.rubric {
    Sphinx-tab 
 ###############
 */
-.sphinx-tabs-panel, p{
-  font-weight: 100;
+.sphinx-tabs-panel p{
+  font-weight: 400;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 1rem;
   font-style: var(--pst-font-family-base-system);
@@ -302,16 +307,6 @@ table.table-centered {
   text-align: center;
 }
 
-
-/*
-###############
-   longtable 
-###############
-*/
-
-table.longtable tr:hover td {
-  background-color: rgb(255, 183, 27, 0.6);
-}
 
 /*
 #########################
@@ -496,7 +491,7 @@ Side column size (first and second column from left)
 }
 
 a.headerlink {
-  color: var(--pst-color-text-base);
+  color: #222;
 }
 
 /*
@@ -504,10 +499,14 @@ a.headerlink {
 Right side toctree color and font
 #################################
 */
+.toc-entry a {
+  padding: .125rem 1.5rem;
+  color: var(--pst-color-link);
+}
 
 .toc-entry>.nav-link.active {
-    font-weight: 500;
-    color: var(--pst-color-link);
+    font-weight: bold;
+    color: var(--pst-color-text-base);
     background-color: transparent;
     border-left: 2px solid var(--pst-color-text-muted);
 }
@@ -562,4 +561,32 @@ Bold font weight for **code**
 
 b, strong {
   font-weight: 900;
+}
+
+#theme-switch {
+  border-color: #fff;
+  border: 2px solid #898A8D;
+  margin-right: .4rem;
+}
+
+#theme-switch:hover {
+  background-color: #fff
+}
+
+.bd-header.navbar-light#navbar-main .navbar-nav li a.nav-link:hover {
+  color: #fff;
+}
+
+.bd-header.navbar-light#navbar-main .navbar-nav>.active>.nav-link {
+  border-bottom: 2px solid #fff;
+}
+
+/*
+#############################
+Padding of main content block 
+#############################
+*/
+
+.bd-content {
+  padding: 1.5rem 1.5rem 2rem 3rem;
 }
