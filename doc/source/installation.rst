@@ -1,7 +1,7 @@
 ************
 Installation
 ************
-`Sphinx <https://www.sphinx-doc.org/en/master/>`_. is a Python
+`Sphinx <https://www.sphinx-doc.org/en/master/>`_ is a Python
 documentation generator for creating documentation. If you are new to
 using Sphinx, see `Sphinx Getting Started <https://www.sphinx-doc.org/en/master/usage/quickstart.html>`_.
 
