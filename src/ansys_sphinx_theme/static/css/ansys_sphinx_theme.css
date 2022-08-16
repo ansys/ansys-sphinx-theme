@@ -590,3 +590,26 @@ Padding of main content block
 .bd-content {
   padding: 1.5rem 1.5rem 2rem 3rem;
 }
+
+
+/*
+###########################
+Left side toc-tree hovering 
+###########################
+*/
+
+nav.bd-links .active:hover>a {
+  font-weight: bold;
+  color: var(--pst-color-link);
+  border-left: 2px solid var(--pst-color-link);
+}
+
+nav.bd-links .active>a {
+  font-weight: bold;
+  color: var(--pst-color-link);
+}
+
+nav.bd-links li>a:hover {
+  font-weight: 900;
+  color: var(--pst-color-text-muted);
+}
