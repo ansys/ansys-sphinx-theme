@@ -2,7 +2,7 @@ PDF cover page
 ==============
 For generating a PDF of your documentation, Sphinx uses a default cover
 page. However, you can use the ``generate_preamble`` function in the
-``ansys_sphinx_theme.latex`` module to use a customize cover page:
+``ansys_sphinx_theme.latex`` module to create and use a custom cover page:
 
 .. autofunction:: ansys_sphinx_theme.latex.generate_preamble
 
@@ -20,7 +20,7 @@ You use this function to generate the value for the ``preamble`` key in the
     }
 
 To use the logo and watermark provided by Ansys on the cover page, you must
-import them and then add them in ``latex_additional_files``:
+import them and then add them to the ``latex_additional_files`` dictionary:
 
 .. code-block:: python
 

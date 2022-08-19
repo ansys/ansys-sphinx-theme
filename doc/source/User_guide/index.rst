@@ -3,10 +3,16 @@
 ==========
 User guide
 ==========
-The Ansys Sphinx theme is based on the PyData theme. For more information, see
+The Ansys Sphinx theme is based on the `PyData Sphinx theme <https://github.com/pydata/pydata-sphinx-theme>`_.
+For more information on its configuration, see
 `Configuration <https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/configuring.html>`_.
 
-The Ansys Sphinx theme is generally used as is. However, you can customize it.
+While the Ansys Sphinx theme is often used as is, you can customize the following:
+
+- CSS
+- HTML theme options
+- PDF cover page
+- 404 page
 
 .. toctree::
    :hidden:
@@ -15,5 +21,5 @@ The Ansys Sphinx theme is generally used as is. However, you can customize it.
    css
    options
    pdf
-   404_pages
+   404_page
 

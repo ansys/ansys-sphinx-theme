@@ -7,6 +7,9 @@ Getting started
 generator for creating documentation. If you are new to using Sphinx, see
 `Sphinx Getting Started <https://www.sphinx-doc.org/en/master/usage/quickstart.html>`_.
 
+This section explains how to install the Ansys Sphinx theme and then set up your
+Sphinx ``conf.py`` file to use this theme to generate your documentation.
+
 Install the theme
 -----------------
 Install the Ansys Sphinx theme with:
@@ -23,22 +26,11 @@ To use this theme, modify your Sphinx ``conf.py`` file::
 
 Consider using the ``conf.py`` for this repository:
 
-.. literalinclude:: ./conf.py
+.. literalinclude:: ../conf.py
    :language: python
    
-Customization
--------------
-The other sections of this guide provide information on how you can
-customize the Ansys Sphinx theme. For more information, see `Configuration
-<https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/configuring.html>`_
-for the PyData Sphinx theme on which the Ansys Sphinx theme is based.
-
-
 .. toctree::
    :hidden:
    :maxdepth: 2
 
-   install
-   configure
-   customize
 

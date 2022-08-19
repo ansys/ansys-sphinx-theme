@@ -78,7 +78,7 @@ This example adds an icon for sending an email:
     }
 
 Hide icons
-----------
+~~~~~~~~~~
 To hide icons so that they do not show in the navigation bar, add their names
 to the ``hidden_icons`` list:
 

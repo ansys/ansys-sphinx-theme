@@ -1,6 +1,6 @@
-*********
-404 pages
-*********
+********
+404 page
+********
 Because Sphinx does not create a 404 page by default, you can use the
 `sphinx-notfound-page
 <https://sphinx-notfound-page.readthedocs.io/en/latest/index.html>`_ extension
