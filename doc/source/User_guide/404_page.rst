@@ -8,8 +8,8 @@ for 404 pages. While originally developed to be used with `Read the Docs <https:
 this extension can be used in other hosting services. For more
 information, see the extension's `documentation <https://sphinx-notfound-page.readthedocs.io/en/latest/how-it-works.html>`_. 
 
-Installation 
-------------
+Install the extension
+---------------------
 Install and enable the ``sphinx-notfound-page`` extension with:
 
 .. code-block:: text
@@ -18,8 +18,8 @@ Install and enable the ``sphinx-notfound-page`` extension with:
 
 Consider adding this extension to your ``requirements_doc.txt`` file.
 
-Configuration
--------------
+Add the extension to the ``conf.py`` file
+-----------------------------------------
 After installing the ``sphinx-notfound-page`` extension, add it to
 your ``conf.py`` file:
 
@@ -37,10 +37,14 @@ your ``conf.py`` file:
         "contact_mail": "pyansys.support@ansys.com",
     }
 
-Default 404 page
-----------------
-To use the default 404 page that the ``ansys-sphinx-theme`` package supplies,
-add the following lines in ``conf.py``:
+Configure your 404 page
+-----------------------
+You can use the default 404 page that the ``ansys-sphinx-theme`` package supplies
+or create and use a custom 404 page. 
+
+Use the default 404 page
+~~~~~~~~~~~~~~~~~~~~~~~~
+To use the default 404 page, add the following lines in the ``conf.py`` file:
 
 .. code-block:: 
 
@@ -52,25 +56,26 @@ add the following lines in ``conf.py``:
 
 .. _sphinx-notfound-page: https://sphinx-notfound-page.readthedocs.io/en/latest/index.html
 
-Custom 404 page
----------------
-To create a custom 404 page for your project, start by creating a ``404.rst``
-file next to the ``conf.py`` file. Make sure you include the ``:orphan:`` attribute
-at the top of this ``404.rst`` file to suppress the spurious ``document isn't
-included in any toctree`` Sphinx warning.
+Create and use a custom 404 page
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+To create and use a custom 404 page, do the following:
 
-.. code-block:: rst
+#. Create a ``404.rst`` file next to the ``conf.py`` file.
+#. To suppress the spurious ``document isn't included in any toctree`` Sphinx
+   warning, include the ``:orphan:`` attribute at the top of this ``404.rst`` file:
+   
+   .. code-block:: rst
 
-    :orphan:
-    
-    Error 404 Not Found
-    ===================
-    The page you are requesting does not exist.
+        :orphan:
+        
+        Error 404 Not Found
+        ===================
+        The page you are requesting does not exist.
 
-Update the ``notfound_template`` variable in the ``conf.py`` to the location of your
-``404.rst`` file:
+#. Update the ``notfound_template`` variable in the ``conf.py`` to the location of
+   your ``404.rst`` file:
+   
+   .. code-block:: rst
 
-.. code-block:: rst
-
-    # Configure sphinx-notfound-page
-    notfound_template = "path/to/404.rst"
+        # Configure sphinx-notfound-page
+        notfound_template = "path/to/404.rst"

@@ -1,15 +1,14 @@
-***
 CSS
-***
+---
 If you need to edit or append to the CSS for the Ansys Sphinx theme,
 create a directory named ``_static/css`` next to your ``conf.py`` file and
 then create a ``custom.css`` file in this directory.
 
 In this file, place the code for editing or appending to the CSS.
-CSS styles in the ``custom.css`` file override CSS styles for the
+CSS styles in the ``custom.css`` file override the CSS styles in the
 Ansys Sphinx theme.
 
-Here is an example that edits the ``body`` CSS style:
+Here is an example that edits the ``body`` element:
 
 .. code::
 

@@ -33,8 +33,8 @@ The Ansys Sphinx theme is an extension of the popular
 `PyData Sphinx theme <https://github.com/pydata/pydata-sphinx-theme>`_ 
 that is used by `numpy <https://numpy.org/doc/stable/>`_,
 `pandas <https://pandas.pydata.org/docs/>`_,
-`PyVista <https://docs.pyvista.org>`_, and many other
-packages.
+`pyvista <https://docs.pyvista.org>`_, and many more
+scientific Python packages.
 
 You use the Ansys Sphinx theme with `Sphinx <https://www.sphinx-doc.org/en/master/>`_,
 a Python documentation generator, to create documentation.
