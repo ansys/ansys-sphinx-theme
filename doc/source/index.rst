@@ -1,5 +1,5 @@
 ==========================================
-Ansys Sphinx theme documentation |version|
+Ansys Sphinx Theme documentation |version|
 ==========================================
 
 

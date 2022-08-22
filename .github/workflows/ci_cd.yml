@@ -14,9 +14,9 @@ jobs:
     name: Code style
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.9
       - name: Install dependencies
@@ -25,14 +25,33 @@ jobs:
       - name: Test with tox
         run: tox -e style
 
+  docs-style:
+    name: Documentation Style Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+  
+      - name: Running Vale
+        uses: errata-ai/vale-action@reviewdog
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          files: doc
+          reporter: github-pr-check
+          level: error
+          filter_mode: nofilter
+          fail_on_error: true
+          vale_flags: "--config=doc/.vale.ini"
+
   docs:
     name: Documentation
     runs-on: ubuntu-latest
+    needs: docs-style
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.9
 
@@ -47,7 +66,7 @@ jobs:
         run: tox -e doc
 
       - name: Upload HTML Documentation
-        uses: actions/upload-artifact@v2.2.1
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: HTML-Documentation
           path: .tox/doc_out/
@@ -57,7 +76,7 @@ jobs:
         run: |
           make -C doc pdf
       - name: Upload PDF Documentation
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: PDF-Documentation
           path: doc/build/latex/ansys_sphinx_theme.pdf
@@ -65,7 +84,7 @@ jobs:
 
       - name: Deploy to gh-pages
         if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-        uses: JamesIves/github-pages-deploy-action@3.7.1
+        uses: JamesIves/github-pages-deploy-action@v4.4.0
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
@@ -76,10 +95,11 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    needs: style
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.9
       - name: Install dependencies
@@ -90,7 +110,7 @@ jobs:
         run: |
           python -m build && python -m twine check dist/*
       - name: Upload wheel and sdist to artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: ansys-sphinx-theme
           path: dist/
@@ -99,13 +119,13 @@ jobs:
   release:
     name: Release
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-    needs: [style, docs, build]
+    needs: [style, docs-style, docs, build]
     runs-on: ubuntu-latest
   
     steps:
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: 3.9
       - name: Display structure of downloaded files
