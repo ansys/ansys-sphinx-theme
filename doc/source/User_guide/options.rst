@@ -24,7 +24,9 @@ For example:
        "github_url": "https://github.com/ansys/ansys-sphinx-theme",
        "show_prev_next": False,
        "show_breadcrumbs": True,
-       "additional_breadcrumbs": 
+       "additional_breadcrumbs": [
+        ("Ansys", "https://www.ansys.com/"),
+        ],
    }
 
 When you are on the documentation's homepage, the breadcrumb shows the homepage
