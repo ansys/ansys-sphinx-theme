@@ -29,7 +29,7 @@ Here is how you use ``html_theme_options`` to add breadcrumbs to the Ansys Sphin
    }
 
 When you are on the module homepage, the breadcrumb displays the homepage
-title.  However, this title is not accessible to Sphinx from other
+title. However, this title is not accessible to Sphinx from other
 documentation pages. Therefore, the ``html_short_title`` is used as the display
 text for the breadcrumb on the documentation homepage. To ensure a consistent user
 experience, you should ensure that the ``html_short_title`` (or optionally
@@ -49,7 +49,7 @@ Customize icons
 The Ansys Sphinx theme allows you to control what icons are shown in the
 navigation bar.
 
-- Conprehensive information on customizing icons is available in
+- Comprehensive information on customizing icons is available in
   `Configure icon links <https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/configuring.html?highlight=icons#configure-icon-links>`_
   in the documentation for the PyData Sphinx theme.
 - For information on using `Font Awesome <https://fontawesome.com/>`, an icon
