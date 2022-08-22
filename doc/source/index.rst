@@ -9,10 +9,6 @@ Ansys Sphinx Theme documentation |version|
    :hidden:
    :maxdepth: 3
 
-   installation
-   css
-   options
-   404_page
-
-
+   getting_started/index.rst
+   user_guide/index.rst
 
