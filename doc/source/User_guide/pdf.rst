@@ -1,3 +1,5 @@
+.. _ref_user_guide_pdf_cover:
+
 PDF cover page
 ==============
 For generating a PDF of your documentation, Sphinx uses a default cover

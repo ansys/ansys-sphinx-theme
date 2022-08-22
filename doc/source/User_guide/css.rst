@@ -1,3 +1,5 @@
+.. _ref_user_guide_css:
+
 CSS
 ---
 If you need to edit or append to the CSS for the Ansys Sphinx theme,

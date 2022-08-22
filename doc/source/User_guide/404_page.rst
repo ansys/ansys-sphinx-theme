@@ -1,3 +1,5 @@
+.. _ref_user_guide_404_page:
+
 ********
 404 page
 ********

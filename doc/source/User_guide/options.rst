@@ -1,3 +1,5 @@
+.. _ref_user_guide_html_theme:
+
 HTML theme options
 ==================
 In the ``conf.py`` file for Sphinx, you can use the ``html_theme_options`` dictionary
@@ -25,7 +27,7 @@ For example:
        "additional_breadcrumbs": 
    }
 
-When you are on the documenatation's homepage, the breadcrumb shows the homepage
+When you are on the documentation's homepage, the breadcrumb shows the homepage
 title. Because Sphinx cannot access this title from other documentation pages,
 you must use ``html_short_title`` to specify the display text for this breadcrumb.
 

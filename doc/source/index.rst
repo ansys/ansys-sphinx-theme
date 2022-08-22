@@ -9,6 +9,6 @@ Ansys Sphinx Theme documentation |version|
    :hidden:
    :maxdepth: 3
 
-   Getting_started/index.rst
-   User_guide/index.rst
+   getting_started/index.rst
+   user_guide/index.rst
 
