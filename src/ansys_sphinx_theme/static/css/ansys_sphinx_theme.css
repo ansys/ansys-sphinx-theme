@@ -64,6 +64,7 @@ html[data-theme="light"] {
   --pst-color-text-muted: rgb(26, 24, 24);
   --pst-color-border: #c9c9c9;
   --pst-color-shadow: rgb(216, 216, 216);
+  --pst-color-info: var(--pst-color-link);
 
   /*****************************************************************************
   * depth colors
@@ -110,6 +111,7 @@ html[data-theme="dark"] {
   --pst-color-on-background: rgb(0, 0, 0);
   --pst-color-surface: rgb(41, 41, 41);
   --pst-color-on-surface: rgb(55, 55, 55);
+  --pst-color-info: var(--pst-color-link);
 
   /*****************************************************************************
   * extensions
@@ -135,7 +137,7 @@ h1, h2 {
 }
 
 .admonition, div.admonition{
-  background-color:var( --pst-color-on-surface);
+  background-color: var( --pst-color-on-surface);
 }
 
 .bd-header.navbar-light#navbar-main .navbar-nav li a.nav-link {
