@@ -640,8 +640,13 @@ image padding before and after
 */
 
 img {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+img.logo__image {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
 }
 
 /*
