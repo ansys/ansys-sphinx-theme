@@ -64,6 +64,7 @@ html[data-theme="light"] {
   --pst-color-text-muted: rgb(26, 24, 24);
   --pst-color-border: #c9c9c9;
   --pst-color-shadow: rgb(216, 216, 216);
+  --pst-color-info: var(--pst-color-link);
 
   /*****************************************************************************
   * depth colors
@@ -110,6 +111,7 @@ html[data-theme="dark"] {
   --pst-color-on-background: rgb(0, 0, 0);
   --pst-color-surface: rgb(41, 41, 41);
   --pst-color-on-surface: rgb(55, 55, 55);
+  --pst-color-info: var(--pst-color-link);
 
   /*****************************************************************************
   * extensions
@@ -135,11 +137,11 @@ h1, h2 {
 }
 
 .admonition, div.admonition{
-  background-color:var( --pst-color-on-surface);
+  background-color: var( --pst-color-on-surface);
 }
 
 .bd-header.navbar-light#navbar-main .navbar-nav li a.nav-link {
-  color: #a2a2a2;
+  color: #ddd;
 }
 
 .docutils {
@@ -213,6 +215,13 @@ p.rubric {
   font-style: var(--pst-font-family-base-system);
 }
 
+.sphinx-tabs-tab[aria-selected="true"] {
+  background-color: var(--pst-color-background);
+}
+
+.sphinx-tabs-panel {
+    background: var(--pst-color-background);
+}
 
 /*
 ###############
@@ -514,6 +523,7 @@ Right side toctree color and font
 
 .toc-h2 {
   font-size: 0.98rem;
+  padding: 0.05em;
 }
 
 .toc-h3 {
@@ -600,16 +610,64 @@ Left side toc-tree hovering
 
 nav.bd-links .active:hover>a {
   font-weight: bold;
-  color: var(--pst-color-link);
-  border-left: 2px solid var(--pst-color-link);
+  color: var(--pst-color-text-base);
+  border-left: 2px solid var(--pst-color-text-base);
 }
 
 nav.bd-links .active>a {
   font-weight: bold;
-  color: var(--pst-color-link);
+  color: var(--pst-color-text-muted);
+  border-left: 2px solid var(--pst-color-text-base);
 }
 
 nav.bd-links li>a:hover {
   font-weight: 900;
-  color: var(--pst-color-text-muted);
+  color: var(--pst-color-link);
+}
+
+/*
+######################
+Search bar button text 
+######################
+*/
+
+button, input, optgroup, select, textarea {
+  color: var(--pst-color-text-base)!important;
+}
+
+/*
+##############################
+image padding before and after 
+##############################
+*/
+
+img {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+img.logo__image {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
+/*
+##########################
+Nav-bar entity right side. 
+##########################
+*/
+
+nav.bd-links li>a {
+  color: var(--pst-color-link);
+  font-size: .98rem;
+}
+
+html[data-theme="light"] .highlight pre {
+  line-height: 125%;
+  font-size: 0.98em;
+}
+
+html[data-theme="dark"] .highlight pre {
+  line-height: 125%;
+  font-size: 0.98em;
 }
