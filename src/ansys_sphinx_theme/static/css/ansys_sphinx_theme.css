@@ -495,8 +495,7 @@ Side column size (first and second column from left)
 }
 
 .col-xl-7 {
-  flex: 0 0 63.33333%;
-  max-width: 63.33333%;
+  max-width: fit-content;
 }
 
 a.headerlink {
