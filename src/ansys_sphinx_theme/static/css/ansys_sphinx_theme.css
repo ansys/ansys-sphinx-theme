@@ -495,7 +495,12 @@ Side column size (first and second column from left)
 }
 
 .col-xl-7 {
+  flex: none;
   max-width: fit-content;
+}
+
+.bd-toc {
+  padding-top: 5em;
 }
 
 a.headerlink {
