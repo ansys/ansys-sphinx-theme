@@ -490,13 +490,12 @@ Side column size (first and second column from left)
 */
 
 .col-md-3 {
-    flex: 0 0 20%;
-    max-width: 20%;
+  flex: none;
+  max-width: fit-content;
 }
 
 .col-xl-7 {
-  flex: 0 0 63.33333%;
-  max-width: 63.33333%;
+  max-width: fit-content;
 }
 
 a.headerlink {
