@@ -163,7 +163,7 @@ code.literal {
 }
 
 .xref.std.std-ref {
-    color: #C89211;
+    color: var(--pst-color-inline-code);
     font-family: 'Inconsolata';
     font-weight: bold;
     font-style: italic;
