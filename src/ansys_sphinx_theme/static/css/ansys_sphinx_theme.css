@@ -2,7 +2,6 @@
 @import "../basic.css";
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
-@import "../tabs.css";
 @import "../sg_gallery.css";
 
 
@@ -89,7 +88,7 @@ html[data-theme="light"] {
 
   --pst-color-link:#1E6DDC;
   --pst-color-link-hover:#32cfea;
-  --pst-color-inline-code: #CD186D;
+  --pst-color-inline-code: #000;
   --pst-color-target: rgb(255, 255, 255);
   /* color for sphinx-gallery-code output*/
   --pst-color-codeout: #fafae2;
@@ -125,7 +124,7 @@ html[data-theme="dark"] {
 
   --pst-color-link: #0088CC;
   --pst-color-link-hover:#32cfea;
-  --pst-color-inline-code: rgb(221, 158, 194);
+  --pst-color-inline-code: #fff;
   --pst-color-target: rgb(71, 39, 0);
   /* color for sphinx-gallery-code output*/
   --pst-color-codeout: #6c757d;
@@ -142,6 +141,10 @@ h1, h2 {
 
 .bd-header.navbar-light#navbar-main .navbar-nav li a.nav-link {
   color: #ddd;
+}
+
+dt:target, span.highlighted {
+   background-color: var(--pst-color-border); 
 }
 
 .docutils {
