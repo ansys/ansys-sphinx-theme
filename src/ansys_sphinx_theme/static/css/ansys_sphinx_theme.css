@@ -165,9 +165,17 @@ code.literal {
 .xref.std.std-ref {
     color: var(--pst-color-inline-code);
     font-family: 'Inconsolata';
-    font-weight: bold;
+    font-weight: normal;
     font-style: italic;
-    font-size: 107%;
+    padding: .1rem .25rem;
+    padding-top: 0.1rem;
+    padding-right: 0.25rem;
+    padding-bottom: 0.1rem;
+    padding-left: 0.25rem;
+    font-size: 90%;
+    background-color: var(--pst-color-on-surface);
+    border: 1px solid var(--pst-color-border);
+    border-radius: .25rem;
 }
 
 .sig-prename {
