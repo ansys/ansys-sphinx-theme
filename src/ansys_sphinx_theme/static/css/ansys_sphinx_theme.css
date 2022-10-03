@@ -2,8 +2,8 @@
 @import "../basic.css";
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
-@import "../tabs.css";
 @import "../sg_gallery.css";
+@import "../design-style.4045f2051d55cab465a707391d5b2007.min.css";
 
 
 @font-face {
@@ -216,24 +216,53 @@ p.rubric {
 
 
 /*
-###############
-   Sphinx-tab 
-###############
+#################
+   Sphinx-design 
+#################
 */
-.sphinx-tabs-panel p{
-  font-weight: 400;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 1rem;
-  font-style: var(--pst-font-family-base-system);
+
+.sd-tab-set>input:not(.focus-visible)+label {
+    outline: none;
+    font-size: large;
+    -webkit-tap-highlight-color: transparent;
+    color: var(--pst-color-text-base);
 }
 
-.sphinx-tabs-tab[aria-selected="true"] {
-  background-color: var(--pst-color-background);
+
+.sd-tab-set>input:checked+label+.sd-tab-content {
+    display: block;
+    font-size: medium;
 }
 
-.sphinx-tabs-panel {
-    background: var(--pst-color-background);
+.sd-tab-set>input:checked+label+.sd-tab-content {
+    display: block;
+    font-size: .9rem;
 }
+
+.sd-tab-content {
+    font-family: var(--pst-font-family-base);
+}
+
+.bd-content .sd-tab-set>input:checked+label, .bd-content .sd-tab-set>input:not(:checked)+label:hover {
+    color: var(--pst-color-text-base);
+}
+
+.sd-row-cols-lg-4>* {
+    flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    width: 25%;
+}
+
+.sd-sphinx-override, .sd-sphinx-override * {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: var(--pst-color-background)!important;
+    font-family: var(--pst-font-family-base)!important;
+    font-size: small;
+    color: var(--pst-color-text-base)!important;
+}
+
 
 /*
 ###############
