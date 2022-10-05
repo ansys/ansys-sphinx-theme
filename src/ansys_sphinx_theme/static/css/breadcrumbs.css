@@ -5,8 +5,8 @@
 
 }
 
-#breadcrumbs-spacer{
-  border-right: 1px solid rgba(0,0,0,.1);
+#breadcrumbs-spacer {
+    border-right: 10rem solid #fff;
 }
 
 div.related > ul {
