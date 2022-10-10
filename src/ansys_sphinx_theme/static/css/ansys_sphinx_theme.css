@@ -133,7 +133,7 @@ html[data-theme="dark"] {
 }
 
 body {
-  font-family: 'Open Sans', sans-serif; /* numpy.org body color */
+  font-family: 'Open Sans', sans-serif;
 }
 
 body::-webkit-scrollbar {
@@ -238,18 +238,16 @@ code.literal {
     border-radius: .25rem;
 }
 
-.sig-prename {
-    font-family: 'Source Sans Pro', sans-serif;
+.sig {
+  font-family: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
 }
 
 .sig-name.descname {
-    color: var(--pst-color-inline-code);
-    /* font-family: '   Source Sans Pro', sans-serif; */
+  color: var(--pst-color-inline-code);
 }
 
 .sig-name {
-    color: var(--pst-color-sig);
-    font-family: 'Source Sans Pro', sans-serif;
+  color: var(--pst-color-sig);
 }
 
 /* make the github logo white */
