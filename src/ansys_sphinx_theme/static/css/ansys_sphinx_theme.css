@@ -1,9 +1,9 @@
 /* Provided by the Sphinx base theme template at build time */
 @import "../basic.css";
-@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 @import "../sg_gallery.css";
 @import "../design-style.4045f2051d55cab465a707391d5b2007.min.css";
+@import "../styles/pydata-sphinx-theme.css";
 
 
 @font-face {
@@ -106,7 +106,7 @@ html[data-theme="dark"] {
   --pst-color-text-base: rgb(201, 209, 217);
   --pst-color-text-muted: rgb(192, 192, 192);
   --pst-color-border: rgb(192, 192, 192);
-  --pst-color-shadow: var(--pst-color-background);
+  --pst-color-shadow: rgb(104, 102, 102);
   --pst-color-background: rgb(18, 18, 18);
   --pst-color-on-background: rgb(0, 0, 0);
   --pst-color-surface: rgb(41, 41, 41);
@@ -130,6 +130,62 @@ html[data-theme="dark"] {
   /* color for sphinx-gallery-code output*/
   --pst-color-codeout: #6c757d;
   --pst-color-sig:#d6ab1e;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body::-webkit-scrollbar {
+  width: 1rem;
+  height: 1rem;
+}
+
+body:not(:hover)::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--pst-color-background);
+}
+
+.bd-sidebar::-webkit-scrollbar {
+  width: 1rem;
+  height: 1rem;
+}
+
+.bd-sidebar:not(:hover)::-webkit-scrollbar-thumb {
+  visibility: visible;
+}
+
+.bd-sidebar::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+}
+
+.bd-sidebar::-webkit-scrollbar-track {
+  background: var(--pst-color-background);
+}
+
+.bd-toc:not(:hover)::-webkit-scrollbar-thumb{visibility:visible}
+
+.bd-toc::-webkit-scrollbar {
+  width: .5rem;
+  height: .5rem;
+}
+
+.bd-toc::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+}
+
+.bd-toc::-webkit-scrollbar-track {
+  background: var(--pst-color-background);
 }
 
 h1, h2 {
@@ -182,18 +238,16 @@ code.literal {
     border-radius: .25rem;
 }
 
-.sig-prename {
-    font-family: 'Source Sans Pro', sans-serif;
+.sig {
+  font-family: 'Consolas', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', monospace;
 }
 
 .sig-name.descname {
-    color: var(--pst-color-inline-code);
-    /* font-family: '   Source Sans Pro', sans-serif; */
+  color: var(--pst-color-inline-code);
 }
 
 .sig-name {
-    color: var(--pst-color-sig);
-    font-family: 'Source Sans Pro', sans-serif;
+  color: var(--pst-color-sig);
 }
 
 /* make the github logo white */
