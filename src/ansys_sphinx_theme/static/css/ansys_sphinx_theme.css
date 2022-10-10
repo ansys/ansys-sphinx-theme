@@ -136,11 +136,6 @@ body {
   font-family: 'Open Sans', sans-serif; /* numpy.org body color */
 }
 
-pre, code {
-  font-size: 100%;
-  line-height: 155%;
-}
-
 body::-webkit-scrollbar {
   width: 1rem;
   height: 1rem;
