@@ -156,7 +156,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 body::-webkit-scrollbar-track {
-  background: var(--pst-color-on-background);
+  background: var(--pst-color-background);
 }
 
 .bd-sidebar::-webkit-scrollbar {
@@ -174,7 +174,7 @@ body::-webkit-scrollbar-track {
 }
 
 .bd-sidebar::-webkit-scrollbar-track {
-  background: var(--pst-color-on-background));
+  background: var(--pst-color-background);
 }
 
 .bd-toc:not(:hover)::-webkit-scrollbar-thumb{visibility:visible}
@@ -190,7 +190,7 @@ body::-webkit-scrollbar-track {
 }
 
 .bd-toc::-webkit-scrollbar-track {
-  background: var(--pst-color-on-background));
+  background: var(--pst-color-background);
 }
 
 h1, h2 {
