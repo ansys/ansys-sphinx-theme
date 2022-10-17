@@ -1,9 +1,7 @@
 from typing import Union
 
 
-def type_hint_func(
-    param1: int = 1, param2: str = "test", param3: Union[int, float] = 1
-) -> bool:
+def type_hint_func(param1: int = 1, param2: str = "test", param3: Union[int, float] = 1) -> bool:
     """Function description.
 
     Extended description of function.  Can span multiple lines and
