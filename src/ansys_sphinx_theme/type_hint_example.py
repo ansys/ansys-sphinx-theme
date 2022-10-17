@@ -4,7 +4,7 @@ from typing import Union
 def type_hint_func(param1: int = 1, param2: str = "test", param3: Union[int, float] = 1) -> bool:
     """Function description.
 
-    Extended description of function.  Can span multiple lines and
+    Extended description of the function. Can span multiple lines and
     provides a general overview of the function.
 
     Parameters
@@ -19,7 +19,7 @@ def type_hint_func(param1: int = 1, param2: str = "test", param3: Union[int, flo
     Returns
     -------
     bool
-        Description of return value.
+        Description of the returned value.
 
     Examples
     --------
