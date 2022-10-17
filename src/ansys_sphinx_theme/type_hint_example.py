@@ -1,8 +1,9 @@
+"""Module containing an example function using type hinting."""
 from typing import Union
 
 
 def type_hint_func(param1: int = 1, param2: str = "test", param3: Union[int, float] = 1) -> bool:
-    """Function description.
+    """Summary containing the function description.
 
     Extended description of the function. Can span multiple lines and
     provides a general overview of the function.
