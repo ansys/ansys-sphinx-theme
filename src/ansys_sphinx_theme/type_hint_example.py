@@ -14,7 +14,7 @@ def type_hint_func(
     param1 :
         Description of an integer parameter.
     param2 :
-        Descriptin of a string parameter.
+        Description of a string parameter.
     param3 :
         Parameter that can be either int or float using Union (typing).
 
