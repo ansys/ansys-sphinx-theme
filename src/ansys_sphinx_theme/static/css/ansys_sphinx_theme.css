@@ -761,3 +761,7 @@ html[data-theme="dark"] .highlight pre {
   line-height: 125%;
   font-size: 0.98em;
 }
+
+.bd-toc {
+  padding-top: 5em;
+}
