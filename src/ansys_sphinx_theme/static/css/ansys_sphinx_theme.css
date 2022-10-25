@@ -696,6 +696,7 @@ b, strong {
   border-color: #fff;
   border: 2px solid #898A8D;
   margin-right: .4rem;
+  margin-left: .4rem;
 }
 
 #theme-switch:hover {
@@ -793,4 +794,8 @@ html[data-theme="dark"] .highlight pre {
 
 .bd-toc {
   padding-top: 5em;
+}
+
+#version_switcher_button {
+  background-color: var(--pst-color-background);
 }
