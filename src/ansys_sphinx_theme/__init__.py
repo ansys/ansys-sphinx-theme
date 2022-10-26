@@ -2,7 +2,7 @@
 import os
 from pathlib import Path
 
-__version__ = "0.7.dev0"
+__version__ = "0.7.0"
 
 # get location of this directory
 _this_path = os.path.dirname(os.path.realpath(__file__))
