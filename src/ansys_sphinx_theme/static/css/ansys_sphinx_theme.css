@@ -799,3 +799,7 @@ html[data-theme="dark"] .highlight pre {
 #version_switcher_button {
   background-color: var(--pst-color-background);
 }
+
+.editthispage a {
+  color: var(--pst-color-text-base);
+}

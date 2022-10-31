@@ -26,9 +26,16 @@ release = version = __version__
 html_logo = ansys_logo_black
 html_theme = "ansys_sphinx_theme"
 
+html_context = {
+    "github_user": "ansys",
+    "github_repo": "ansys-sphinx-theme",
+    "github_version": "main",
+}
+
 # specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
+    "use_edit_page_button": True,
     "contact_mail": "pyansys.support@ansys.com",
     "additional_breadcrumbs": [
         ("Ansys Internal Developer Portal", "https://dev.docs.ansys.com"),
