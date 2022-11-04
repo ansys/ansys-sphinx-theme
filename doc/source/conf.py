@@ -30,6 +30,7 @@ html_context = {
     "github_user": "ansys",
     "github_repo": "ansys-sphinx-theme",
     "github_version": "main",
+    "doc_path": "doc/source",
 }
 
 # specify the location of your github repo
