@@ -52,7 +52,7 @@ If you are new to using Sphinx, see `Sphinx Getting Started
 Documentation and issues
 ~~~~~~~~~~~~~~~~~~~~~~~~
 In addition to installation information, the
-`Ansys Sphinx theme documentation <https://sphinxdocs.pyansys.com>`_
+`Ansys Sphinx theme documentation <https://sphinxdocs.ansys.com>`_
 provides information on how you can customize the theme. Because
 this documentation is created using this theme, viewing it is
 an easy way to preview the theme itself.
