@@ -42,7 +42,9 @@ your ``conf.py`` file:
 Configure your 404 page
 -----------------------
 You can use the default 404 page that the ``ansys-sphinx-theme`` package supplies
-or create and use a custom 404 page. 
+or create and use a custom 404 page.
+
+.. autofunction:: ansys_sphinx_theme.latex.generate_404
 
 Use the default 404 page
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -50,11 +52,13 @@ To use the default 404 page, add the following lines in the ``conf.py`` file:
 
 .. code-block:: 
 
-    from ansys_sphinx_theme import page_404
+    from ansys_sphinx_theme import generate_404
 
 
     # Configure sphinx-notfound-page
-    notfound_template = page_404
+    notfound_context = {
+    'body': generate_404()
+    }
 
 .. _sphinx-notfound-page: https://sphinx-notfound-page.readthedocs.io/en/latest/index.html
 

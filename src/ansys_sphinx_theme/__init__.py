@@ -2,6 +2,8 @@
 import os
 from pathlib import Path
 
+from .latex import generate_404
+
 __version__ = "0.8.dev0"
 
 # get location of this directory

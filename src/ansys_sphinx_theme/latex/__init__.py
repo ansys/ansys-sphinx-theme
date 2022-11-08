@@ -7,6 +7,7 @@ import jinja2
 
 LATEX_SUBPKG = Path(os.path.dirname(os.path.realpath(__file__)))
 COVER_TEX = LATEX_SUBPKG / "cover.tex"
+PAGE_404 = LATEX_SUBPKG / "404.html"
 
 
 def generate_preamble(title, watermark="watermark", date=None):
@@ -45,4 +46,37 @@ def generate_preamble(title, watermark="watermark", date=None):
         loader=jinja2.FileSystemLoader(COVER_TEX),
     )
     template = latex_jinja_env.get_template(".")
+    return template.render(variables)
+
+
+def generate_404(
+    issue_page="https://github.com/ansys/ansys-sphinx-theme/issues",
+    project_name="ansys-sphinx-theme",
+    mail_id="pyansys.support@ansys.com",
+    team_name="PyAnsys",
+):
+    """Generate the html body for 404 page.
+
+    Parameters
+    ----------
+    issue_page : str
+        Link to the issue page.
+    page_name : str
+        Name of the project.
+    mail_id : str, optional
+        Mail id for the not found page mail, default is pyansys.support@ansys.com.
+    team_name : str, optional
+       Name of the team, default is PyAnsys
+
+    Returns
+    -------
+    str
+        A string representing the html source code for the 404 page.
+
+    """
+    variables = dict(
+        issue_page=issue_page, project_name=project_name, mail_id=mail_id, team_name=team_name
+    )
+    html_env = jinja2.Environment(loader=jinja2.FileSystemLoader(PAGE_404))
+    template = html_env.get_template(".")
     return template.render(variables)
