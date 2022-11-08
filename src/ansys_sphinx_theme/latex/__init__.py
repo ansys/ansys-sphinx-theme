@@ -66,7 +66,7 @@ def generate_404(
     mail_id : str, optional
         Mail id for the not found page mail, default is pyansys.support@ansys.com.
     team_name : str, optional
-       Name of the team, default is PyAnsys
+       Name of the team, default is PyAnsys.
 
     Returns
     -------
