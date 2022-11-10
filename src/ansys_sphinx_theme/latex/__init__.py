@@ -66,7 +66,7 @@ def generate_404(
     mail_id : str, default: "pyansys.support@ansys.com"
         E-mail address to contact.
     team_name : str, default: "PyAnsys"
-       Name of the team
+       Name of the team.
 
     Returns
     -------
