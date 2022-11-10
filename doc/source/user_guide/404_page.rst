@@ -33,12 +33,6 @@ your ``conf.py`` file:
         "notfound.extension",
     ]
 
-    # Add a contact mail to the theme options
-    html_theme_options = {
-        ...,
-        "contact_mail": "pyansys.support@ansys.com",
-    }
-
 Configure your 404 page
 -----------------------
 You can use the default 404 page that the ``ansys-sphinx-theme`` package supplies
@@ -56,7 +50,7 @@ To use the default 404 page, you can use the ``generate_404`` function in the
 
     # Configure sphinx-notfound-page
     notfound_context = {
-    'body': generate_404(<issue_page_of_project to direct>,
+    'body': generate_404(<organisation_which_the_project_belongs_to>,
             <name_of_the_project>,
             <mail_id_for_the_project>,
             <name_of_team_managing_the_project>
