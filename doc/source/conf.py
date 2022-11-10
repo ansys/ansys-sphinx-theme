@@ -41,6 +41,12 @@ html_theme_options = {
     "additional_breadcrumbs": [
         ("Ansys Internal Developer Portal", "https://dev.docs.ansys.com"),
     ],
+    "external_links": [
+        {
+            "url": "https://github.com/ansys/ansys-sphinx-theme/releases",
+            "name": "Changelog",
+        },
+    ],
 }
 
 html_short_title = html_title = "Ansys Sphinx Theme"
@@ -112,5 +118,7 @@ latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
 latex_elements = {"preamble": latex.generate_preamble(html_title)}
 
 # Not found page
-notfound_context = {"body": generate_404()}
+notfound_context = {
+    "body": generate_404(),
+}
 notfound_no_urls_prefix = True

@@ -50,7 +50,7 @@ def generate_preamble(title, watermark="watermark", date=None):
 
 
 def generate_404(
-    issue_page="https://github.com/ansys/ansys-sphinx-theme/issues",
+    owner="ansys",
     project_name="ansys-sphinx-theme",
     mail_id="pyansys.support@ansys.com",
     team_name="PyAnsys",
@@ -59,14 +59,14 @@ def generate_404(
 
     Parameters
     ----------
-    issue_page : str
-        Link to the issue page.
-    page_name : str
+    owner : str, default: "ansys"
+        GitHub organisation in which the project belongs to.
+    project_name : str, default: "ansys-sphinx-theme"
         Name of the project.
-    mail_id : str, optional
-        Mail id for the not found page mail, default is pyansys.support@ansys.com.
-    team_name : str, optional
-       Name of the team, default is PyAnsys.
+    mail_id : str, default: "pyansys.support@ansys.com"
+        E-mail address to contact.
+    team_name : str, default: "PyAnsys"
+       Name of the team
 
     Returns
     -------
@@ -74,6 +74,7 @@ def generate_404(
         A string representing the html source code for the 404 page.
 
     """
+    issue_page = f"https://github.com/{owner}/{project_name}/issues/"
     variables = dict(
         issue_page=issue_page, project_name=project_name, mail_id=mail_id, team_name=team_name
     )
