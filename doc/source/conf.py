@@ -11,8 +11,8 @@ from ansys_sphinx_theme import (
     ansys_logo_black,
     ansys_logo_white,
     ansys_logo_white_cropped,
+    generate_404,
     latex,
-    page_404,
     watermark,
 )
 
@@ -40,6 +40,12 @@ html_theme_options = {
     "contact_mail": "pyansys.support@ansys.com",
     "additional_breadcrumbs": [
         ("Ansys Internal Developer Portal", "https://dev.docs.ansys.com"),
+    ],
+    "external_links": [
+        {
+            "url": "https://github.com/ansys/ansys-sphinx-theme/releases",
+            "name": "Changelog",
+        },
     ],
 }
 
@@ -112,4 +118,7 @@ latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
 latex_elements = {"preamble": latex.generate_preamble(html_title)}
 
 # Not found page
-notfound_template = page_404
+notfound_context = {
+    "body": generate_404(),
+}
+notfound_no_urls_prefix = True
