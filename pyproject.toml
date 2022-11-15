@@ -47,9 +47,10 @@ include = [
 ]
 
 [project.urls]
-Home = "https://dev.docs.ansys.com/"
+Home = "https://sphinxdocs.ansys.com/"
 Source = "https://github.com/ansys/ansys-sphinx-theme"
 Tracker = "https://github.com/ansys/ansys-sphinx-theme/issues"
+Documentation = "https://sphinxdocs.ansys.com/"
 
 [tool.black]
 line-length = 100
