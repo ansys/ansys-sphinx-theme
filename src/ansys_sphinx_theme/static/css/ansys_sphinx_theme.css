@@ -799,3 +799,19 @@ html[data-theme="dark"] .highlight pre {
 #version_switcher_button {
   background-color: var(--pst-color-background);
 }
+
+
+.editthispage a {
+  color: var(--pst-color-text-base);
+}
+
+#version_switcher_menu a.list-group-item.active {
+  background-color: #D09735!important;
+  border-color: var(--pst-color-text-base)!important;
+  color: var(--pst-color-text-base)!important;
+}
+
+.list-group-item.active {
+  z-index: 2;
+  color: var(--pst-color-text-base)!important;
+}
