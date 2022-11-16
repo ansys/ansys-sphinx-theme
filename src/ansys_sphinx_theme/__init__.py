@@ -4,7 +4,7 @@ from pathlib import Path
 
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
-__version__ = "0.7.1"
+__version__ = "0.7.2"
 
 # get location of this directory
 _this_path = os.path.dirname(os.path.realpath(__file__))
