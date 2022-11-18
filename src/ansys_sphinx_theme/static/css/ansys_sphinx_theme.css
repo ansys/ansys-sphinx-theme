@@ -2,7 +2,6 @@
 @import "../basic.css";
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 @import "../sg_gallery.css";
-@import "../design-style.4045f2051d55cab465a707391d5b2007.min.css";
 @import "../styles/pydata-sphinx-theme.css";
 
 
@@ -268,6 +267,24 @@ p.rubric {
     margin-bottom: 0.75em;
 }
 
+/*
+##############################
+image padding before and after 
+##############################
+*/
+
+img {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-top: var(--pst-color-background);
+  padding-bottom: var(--pst-color-background);
+}
+
+img.logo__image {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
 
 /*
 #################
@@ -301,22 +318,71 @@ p.rubric {
     color: var(--pst-color-text-base);
 }
 
-.sd-row-cols-lg-4>* {
-    flex: 0 0 auto;
-    -ms-flex: 0 0 auto;
-    width: 25%;
-}
-
 .sd-sphinx-override, .sd-sphinx-override * {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
     background-color: var(--pst-color-background)!important;
     font-family: var(--pst-font-family-base)!important;
-    font-size: small;
+    font-size: medium;
     color: var(--pst-color-text-base)!important;
 }
 
+
+.sd-card {
+  background: #fff;
+  border-radius: 0;
+  padding: 30px 10px 20px 10px;
+  margin: 10px 0px;
+}
+
+.sd-card .sd-card-header {
+  text-align: center;
+}
+
+.sd-card .sd-card-header .sd-card-text {
+  margin: 0px;
+}
+
+.sd-card .sd-card-header {
+  border: none;
+  background-color:white;
+  color: #150458 !important;
+  font-size: var(--pst-font-size-h5);
+  font-weight: bold;
+  padding: 2.5rem 0rem 0.5rem 0rem;
+}
+
+.sd-card .sd-card-footer {
+  border: none;
+  background-color:white;
+}
+
+.sd-card .sd-card-footer .sd-card-text{
+  max-width: 220px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1rem;
+  font-family: var(--font-family-monospace);
+}
+
+html[data-theme=dark] .sd-card {
+  background-color:var(--pst-color-background);
+}
+
+html[data-theme=dark] .sd-shadow-sm {
+    box-shadow: 0 .1rem 1rem rgba(250, 250, 250, .6) !important
+}
+
+html[data-theme=dark] .sd-card .sd-card-header {
+  background-color:var(--pst-color-background);
+  color: #150458 !important;
+}
+
+html[data-theme=dark] .sd-card .sd-card-footer {
+  background-color:var(--pst-color-background);
+}
+
+html[data-theme=dark] .sd-card-img-top[src*='.png'] {
+  filter: invert(0.82) brightness(0.8) contrast(1.2);
+}
 
 /*
 ###############
@@ -671,6 +737,7 @@ Navigation column (according to side column)
   padding-left: 40px;
 }
 
+
 /*
 #################################
 Syntax highlighting in code block
@@ -756,22 +823,6 @@ button, input, optgroup, select, textarea {
 }
 
 /*
-##############################
-image padding before and after 
-##############################
-*/
-
-img {
-  padding-top: 1em;
-  padding-bottom: 1em;
-}
-
-img.logo__image {
-  padding-top: 0rem;
-  padding-bottom: 0rem;
-}
-
-/*
 ##########################
 Nav-bar entity right side. 
 ##########################
@@ -814,3 +865,6 @@ html[data-theme="dark"] .highlight pre {
   z-index: 2;
   color: var(--pst-color-text-base)!important;
 }
+
+button.sd-bg-secondary:focus,button.sd-bg-secondary:hover{background-color:var(--pst-color-background) !important}
+a.sd-bg-secondary:focus,a.sd-bg-secondary:hover{background-color:var(--pst-color-background) !important}

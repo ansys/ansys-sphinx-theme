@@ -18,7 +18,3 @@ div.related > ul {
 body {
     padding-top: var(--pst-header-height);
 }
-
-*, :after, :before {
-    box-sizing: border-box;
-}
