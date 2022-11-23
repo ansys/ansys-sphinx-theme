@@ -48,7 +48,7 @@ html_theme_options = {
     "use_edit_page_button": True,
     "contact_mail": "pyansys.support@ansys.com",
     "switcher": {
-        "json_url": "https://raw.githubusercontent.com/ansys/ansys-templates/gh-pages/release/versions.json",  # noqa: E501
+        "json_url": "https://raw.githubusercontent.com/ansys/ansys-sphinx-theme/gh-pages/release/versions.json",  # noqa: E501
         "version_match": get_version_match(__version__),
     },
     "additional_breadcrumbs": [
