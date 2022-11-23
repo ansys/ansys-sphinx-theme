@@ -5,13 +5,12 @@ from sphinx.builders.latex import LaTeXBuilder
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
-from ansys_sphinx_theme import (  # noqa: F401
+from ansys_sphinx_theme import (
     __version__,
     ansys_favicon,
     ansys_logo_black,
     ansys_logo_white,
     ansys_logo_white_cropped,
-    assets,
     generate_404,
     latex,
     watermark,

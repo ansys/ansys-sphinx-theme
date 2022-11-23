@@ -3,7 +3,6 @@ import os
 from pathlib import Path
 
 from ansys_sphinx_theme.latex import generate_404
-from ansys_sphinx_theme.static.assets import __all__ as assets
 
 __version__ = "0.8.dev0"
 

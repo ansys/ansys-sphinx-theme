@@ -10,7 +10,7 @@ Ansys Sphinx Theme documentation
    user_guide/index.rst
 
 
-**version**: |version|
+**Version**: |version|
 
 **Download documentation**:
 `PDF Version <https://github.com/ansys/ansys-sphinx-theme/releases/latest/download/ansys_sphinx_theme.pdf>`_ 
