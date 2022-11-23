@@ -22,6 +22,15 @@ copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
 
+
+def get_version_match(semver):
+    """Evaluate the version match for the multi-documentation."""
+    if semver.endswith("dev0"):
+        return "dev"
+    major, minor, _ = semver.split(".")
+    return ".".join([major, minor])
+
+
 # use the default ansys logo
 html_logo = ansys_logo_black
 html_theme = "ansys_sphinx_theme"
@@ -38,6 +47,10 @@ html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
     "use_edit_page_button": True,
     "contact_mail": "pyansys.support@ansys.com",
+    "switcher": {
+        "json_url": "https://raw.githubusercontent.com/ansys/ansys-templates/gh-pages/release/versions.json",  # noqa: E501
+        "version_match": get_version_match(__version__),
+    },
     "additional_breadcrumbs": [
         ("Ansys Internal Developer Portal", "https://dev.docs.ansys.com"),
     ],
