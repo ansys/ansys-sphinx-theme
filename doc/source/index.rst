@@ -38,7 +38,7 @@ scientific Python packages.
 
             +++
 
-            .. button-link:: getting_started
+            .. button-link:: getting_started/index
                :color: secondary
                :expand:
                :outline:
@@ -59,7 +59,7 @@ scientific Python packages.
             key concepts of ansys-sphinx-theme.
 
             +++
-            .. button-link:: user_guide
+            .. button-link:: user_guide/index
                :color: secondary
                :expand:
                :outline:
