@@ -11,6 +11,7 @@ from ansys_sphinx_theme import (
     ansys_logo_black,
     ansys_logo_white,
     ansys_logo_white_cropped,
+    assets,
     generate_404,
     latex,
     watermark,
@@ -60,6 +61,7 @@ extensions = [
     "notfound.extension",
     "sphinx_copybutton",
     "ansys_sphinx_theme",
+    "sphinx_design",
 ]
 
 # Intersphinx mapping
@@ -122,3 +124,5 @@ notfound_context = {
     "body": generate_404(),
 }
 notfound_no_urls_prefix = True
+
+assets = assets
