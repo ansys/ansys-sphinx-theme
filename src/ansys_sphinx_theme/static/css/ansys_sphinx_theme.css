@@ -319,7 +319,7 @@ img.logo__image {
 }
 
 .sd-sphinx-override, .sd-sphinx-override * {
-    background-color: var(--pst-color-background)!important;
+    background-color: transparent !important;
     font-family: var(--pst-font-family-base)!important;
     font-size: medium;
     color: var(--pst-color-text-base)!important;
@@ -868,3 +868,10 @@ html[data-theme="dark"] .highlight pre {
 
 button.sd-bg-secondary:focus,button.sd-bg-secondary:hover{background-color:var(--pst-color-background) !important}
 a.sd-bg-secondary:focus,a.sd-bg-secondary:hover{background-color:var(--pst-color-background) !important}
+
+.sd-card .sd-card-img-top {
+  height: 52px;
+  width: 52px;
+  margin-left: auto;
+  margin-right: auto;
+}
