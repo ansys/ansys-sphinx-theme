@@ -2,6 +2,14 @@
 Ansys Sphinx Theme documentation
 ================================
 
+.. toctree::
+   :hidden:
+   :maxdepth: 3
+
+   getting_started/index.rst
+   user_guide/index.rst
+
+
 **version**: |version|
 
 **Download documentation**:
@@ -19,6 +27,8 @@ scientific Python packages.
    .. grid-item::
         .. card:: 
             :img-top: _static/assets/index_getting_started.png
+            :link: getting_started/index
+            :link-type: doc
 
             Getting started
             ^^^^^^^^^^^^^^^
@@ -28,7 +38,7 @@ scientific Python packages.
 
             +++
 
-            .. button-link:: getting_started/index
+            .. button-link:: getting_started
                :color: secondary
                :expand:
                :outline:
@@ -39,6 +49,8 @@ scientific Python packages.
    .. grid-item::
         .. card:: 
             :img-top: _static/assets/index_user_guide.png
+            :link: user_guide/index
+            :link-type: doc
 
             User Guide
             ^^^^^^^^^^
@@ -47,7 +59,7 @@ scientific Python packages.
             key concepts of ansys-sphinx-theme.
 
             +++
-            .. button-link:: user_guide/index
+            .. button-link:: user_guide
                :color: secondary
                :expand:
                :outline:
@@ -55,11 +67,3 @@ scientific Python packages.
 
                   To the user guide 
 
-
-
-.. toctree::
-   :hidden:
-   :maxdepth: 3
-
-   getting_started/index.rst
-   user_guide/index.rst
