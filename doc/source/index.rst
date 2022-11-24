@@ -2,7 +2,6 @@
 Ansys Sphinx Theme documentation |version|
 ==========================================
 
-
 .. include:: ../../README.rst
 
 .. toctree::
