@@ -13,6 +13,10 @@ env:
   PACKAGE_NAMESPACE: 'ansys_sphinx_theme'
   DOCUMENTATION_CNAME: 'sphinxdocs.ansys.com'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
 
   code-style:
