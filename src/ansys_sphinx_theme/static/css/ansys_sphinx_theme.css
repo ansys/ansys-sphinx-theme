@@ -866,9 +866,14 @@ html[data-theme="dark"] .highlight pre {
   color: var(--pst-color-text-base)!important;
 }
 
+
 .sd-card .sd-card-img-top {
   height: 52px;
   width: 52px;
   margin-left: auto;
   margin-right: auto;
+
+table.dataframe {
+  table-layout: auto !important;
+
 }
