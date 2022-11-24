@@ -12,7 +12,6 @@ from ansys_sphinx_theme import (
     ansys_logo_white,
     ansys_logo_white_cropped,
     generate_404,
-    get_version_match,
     latex,
     watermark,
 )
@@ -39,10 +38,6 @@ html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
     "use_edit_page_button": True,
     "contact_mail": "pyansys.support@ansys.com",
-    "switcher": {
-        "json_url": "https://raw.githubusercontent.com/ansys/ansys-sphinx-theme/gh-pages/release/versions.json",  # noqa: E501
-        "version_match": get_version_match(__version__),
-    },
     "additional_breadcrumbs": [
         ("Ansys Internal Developer Portal", "https://dev.docs.ansys.com"),
     ],

@@ -38,20 +38,19 @@ def get_version_match(semver):
     return ".".join([major, minor])
 
 
-def prepare_html_configration(app, pagename, templatename, theme_options, doctree):
+def prepare_html_configration(app, pagename, templatename, context, doctree):
     """Prepare some configuration values for the HTML build.
 
     For some reason (in most of repo) switcher might not be there, so we manually adding in that
     case.
     """
-    theme_switcher = theme_options.get("switcher")
-    if not theme_switcher or theme_switcher is None:
-        theme_switcher = {"version_match": "dev-stable"}
+    theme_switcher = context.get("switcher")
+    if not theme_switcher:
+        theme_switcher = {
+            "version_match": get_version_match(__version__),
+        }
 
-    if not isinstance(theme_switcher, dict):
-        raise ValueError(f"Incorrect switcher config type: {type(theme_switcher)}")
-
-    theme_options["theme_switcher"] = theme_switcher
+    context["theme_switcher"] = theme_switcher
 
 
 def setup(app):
