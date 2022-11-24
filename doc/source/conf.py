@@ -1,5 +1,7 @@
 """Sphinx documentation configuration file."""
+
 from datetime import datetime
+import os
 
 from sphinx.builders.latex import LaTeXBuilder
 
@@ -12,6 +14,7 @@ from ansys_sphinx_theme import (
     ansys_logo_white,
     ansys_logo_white_cropped,
     generate_404,
+    get_version_match,
     latex,
     watermark,
 )
@@ -21,6 +24,7 @@ project = "ansys_sphinx_theme"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
+cname = os.getenv("DOCUMENTATION_CNAME", "nocname.com")
 
 # use the default ansys logo
 html_logo = ansys_logo_black
@@ -47,6 +51,11 @@ html_theme_options = {
             "name": "Changelog",
         },
     ],
+    "switcher": {
+        "json_url": f"https://{cname}/release/versions.json",
+        "version_match": get_version_match(__version__),
+    },
+    "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
 }
 
 html_short_title = html_title = "Ansys Sphinx Theme"
