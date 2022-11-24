@@ -815,3 +815,7 @@ html[data-theme="dark"] .highlight pre {
   z-index: 2;
   color: var(--pst-color-text-base)!important;
 }
+
+table.dataframe {
+  table-layout: auto !important;
+}
