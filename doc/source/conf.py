@@ -12,6 +12,7 @@ from ansys_sphinx_theme import (
     ansys_logo_white,
     ansys_logo_white_cropped,
     generate_404,
+    get_version_match,
     latex,
     watermark,
 )
@@ -21,15 +22,6 @@ project = "ansys_sphinx_theme"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "Ansys Inc."
 release = version = __version__
-
-
-def get_version_match(semver):
-    """Evaluate the version match for the multi-documentation."""
-    if semver.endswith("dev0"):
-        return "dev"
-    major, minor, _ = semver.split(".")
-    return ".".join([major, minor])
-
 
 # use the default ansys logo
 html_logo = ansys_logo_black
