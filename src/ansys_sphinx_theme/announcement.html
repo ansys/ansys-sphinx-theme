@@ -3,7 +3,15 @@
     <div class="row"></div>
         <div class="col-12 col-md-10" id="header-announcement">
         <div class="col-12 col-md-13 col-xl-7" id="header-announcement-spacer">
-            <object data="announcements.html" width="500" height="200"></object>
+            <p id="demo">Fetch a file to change this text.</p>
+            <script>
+            getText("announcements.txt");   
+            async function getText(file) {
+                  let x = await fetch(file);
+                  let y = await x.text();
+                  document.getElementById("demo").innerHTML = y;
+                }
+            </script>
         </div>
   </div>
 </div>
