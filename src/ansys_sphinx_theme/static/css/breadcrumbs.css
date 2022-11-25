@@ -22,3 +22,12 @@ body {
 *, :after, :before {
     box-sizing: border-box;
 }
+
+#header-announcement{
+    background-color: blueviolet;
+
+}
+
+#header-announcement-spacer {
+    border-left: 13rem solid var(--pst-color-background);
+}

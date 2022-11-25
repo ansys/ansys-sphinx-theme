@@ -24,6 +24,12 @@
     {% endif %}
 {% endblock %}
 
+
+{% block extrahead %}
+    {{ super() }}
+    {% include 'announcement.html' %}
+{% endblock %}
+
 {% block docs_navbar %}
     {{ super() }}
     {% if theme_show_breadcrumbs %}
