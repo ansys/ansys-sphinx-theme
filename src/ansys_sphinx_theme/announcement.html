@@ -3,14 +3,12 @@
     <div class="row"></div>
         <div class="col-12 col-md-10" id="header-announcement">
         <div class="col-12 col-md-13 col-xl-7" id="header-announcement-spacer">
-            <p id="demo">Fetch a file to change this text.</p>
+            <p id="announce"></p>
             <script>
-            getText("announcements.txt");   
-            async function getText(file) {
-                  let x = await fetch(file);
-                  let y = await x.text();
-                  document.getElementById("demo").innerHTML = y;
-                }
+            let file = "announcement.html"
+            fetch (file)
+            .then(res => res.text())
+            .then(y => document.getElementById("announce").innerHTML = y);
             </script>
         </div>
   </div>
