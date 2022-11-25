@@ -1,9 +1,9 @@
-{% if  theme_switcher and theme_switcher.get('preferred')== True %} 
+{% if theme_switcher %} 
 <div class="container-xl">
     <div class="row"></div>
         <div class="col-12 col-md-10" id="header-announcement">
         <div class="col-12 col-md-13 col-xl-7" id="header-announcement-spacer">
-            {% include 'announcements.html' %}
+            <object data="announcements.html" width="500" height="200"></object>
         </div>
   </div>
 </div>
