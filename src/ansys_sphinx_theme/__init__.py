@@ -22,13 +22,20 @@ ansys_logo_black = os.path.join(_this_path, "static", "ansys_logo_black_cropped.
 page_404 = os.path.join(_this_path, "static", "404.rst")
 
 html_logo = pyansys_logo_black
-
 CSS_FILENAME = "ansys_sphinx_theme.css"
 
 
 def get_html_theme_path():
     """Return list of HTML theme paths."""
     return Path(__file__).parents[0].absolute()
+
+
+def get_version_match(semver):
+    """Evaluate the version match for the multi-documentation."""
+    if semver.endswith("dev0"):
+        return "dev"
+    major, minor, _ = semver.split(".")
+    return ".".join([major, minor])
 
 
 def setup(app):
