@@ -301,22 +301,22 @@ p.rubric {
     color: var(--pst-color-text-base);
 }
 
-.sd-row-cols-lg-4>* {
-    flex: 0 0 auto;
-    -ms-flex: 0 0 auto;
-    width: 25%;
-}
 
 .sd-sphinx-override, .sd-sphinx-override * {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    background-color: var(--pst-color-background)!important;
+    background-color: transparent !important;
     font-family: var(--pst-font-family-base)!important;
-    font-size: small;
+    font-size: medium;
     color: var(--pst-color-text-base)!important;
+    flex: auto;
 }
 
+html[data-theme=dark] .sd-shadow-sm {
+  box-shadow: 0 .1rem 1rem rgba(250, 250, 250, .6) !important
+}
+
+html[data-theme=dark] .sd-card-img-top[src*='.png'] {
+  filter: invert(0.82) brightness(0.8) contrast(1.2);
+}
 
 /*
 ###############
