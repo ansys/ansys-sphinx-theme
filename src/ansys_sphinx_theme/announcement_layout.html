@@ -1,11 +1,11 @@
 {% if theme_switcher %} 
-<div class="container-xl">
+<div class="container-md">
     <div class="row"></div>
-        <div class="col-12 col-md-10" id="header-announcement">
-        <div class="col-12 col-md-13 col-xl-7" id="header-announcement-spacer">
+        <div id="header-announcement-spacer"></div>
+        <div class="col-lg-12 col-sm-6" id="header-announcement">
             <p id="announce"></p>
             <script>
-            let file = "announcement.txt"
+            let file = "announcement.html"
             fetch (file)
             .then(res => res.text())
             .then(y => document.getElementById("announce").innerHTML = y);

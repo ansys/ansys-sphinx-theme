@@ -24,10 +24,14 @@ body {
 }
 
 #header-announcement{
-    background-color: blueviolet;
-
+    background-color: lightpink;
+    border: 1px solid black;
+    padding: 2px;
+    margin-left: 20px solid var(--pst-color-background);
+    margin-right: 20px solid var(--pst-color-background);
+    padding-left: 3rem;
 }
 
 #header-announcement-spacer {
-    border-left: 13rem solid var(--pst-color-background);
+    padding-left: 10rem solid var(--pst-color-background);
 }
