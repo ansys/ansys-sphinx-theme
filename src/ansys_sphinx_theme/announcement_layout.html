@@ -1,16 +1,13 @@
 {% if theme_switcher %} 
-<div class="container-md">
-    <div class="row"></div>
-        <div id="header-announcement-spacer"></div>
-        <div class="col-lg-12 col-sm-6" id="header-announcement">
-            <p id="announce"></p>
-            <script>
-            let file = "{{ pathto(announcement.html, 1) }}"
-            fetch (file)
-            .then(res => res.text())
-            .then(y => document.getElementById("announce").innerHTML = y);
-            </script>
-        </div>
-  </div>
-</div>
+<script>
+    fetch("{{ announcement }}")
+      .then(res => {return res.text();})
+      .then(data => {
+        div = document.querySelector("#header-announcement");
+        div.innerHTML = `<div class="bd-header-announcement__content">${data}</div>`;
+      })
+      .catch(error => {
+        console.log("[PST]: Failed to load announcement at: {{ announcement }}");
+      });
+</script>
 {% endif %}

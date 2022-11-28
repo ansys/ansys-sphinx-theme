@@ -24,12 +24,12 @@ body {
 }
 
 #header-announcement{
-    background-color: lightpink;
+    background-color: var(--pst-color-background);
     border: 1px solid black;
-    padding: 2px;
     margin-left: 20px solid var(--pst-color-background);
     margin-right: 20px solid var(--pst-color-background);
     padding-left: 3rem;
+    color: brown;
 }
 
 #header-announcement-spacer {

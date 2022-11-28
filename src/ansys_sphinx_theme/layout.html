@@ -25,8 +25,11 @@
 {% endblock %}
 
 
-{% block extrahead %}
-    {% include 'announcement_layout.html' %}
+{%- block content %}
+    <div class="bd-header-announcement container-fluid"
+    id="header-announcement">
+        {% include 'announcement_layout.html' %}
+    </div>
     {{ super() }}
 {% endblock %}
 
