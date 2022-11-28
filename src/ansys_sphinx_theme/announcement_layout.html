@@ -1,0 +1,16 @@
+{% if theme_switcher %} 
+<div class="container-xl">
+    <div class="row"></div>
+        <div class="col-12 col-md-10" id="header-announcement">
+        <div class="col-12 col-md-13 col-xl-7" id="header-announcement-spacer">
+            <p id="announce"></p>
+            <script>
+            let file = "announcement.html"
+            fetch (file)
+            .then(res => res.text())
+            .then(y => document.getElementById("announce").innerHTML = y);
+            </script>
+        </div>
+  </div>
+</div>
+{% endif %}
