@@ -26,10 +26,6 @@ author = "Ansys Inc."
 release = version = __version__
 cname = os.getenv("DOCUMENTATION_CNAME", "nocname.com")
 
-version_mapper = (
-    "https://raw.githubusercontent.com/ansys/ansys-sphinx-theme/gh-pages/release/versions.json"
-)
-
 # use the default ansys logo
 html_logo = ansys_logo_black
 html_theme = "ansys_sphinx_theme"
@@ -56,7 +52,7 @@ html_theme_options = {
         },
     ],
     "switcher": {
-        "json_url": version_mapper,
+        "json_url": f"https://{cname}/release/versions.json",
         "version_match": get_version_match(__version__),
     },
     "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
