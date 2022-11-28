@@ -1,13 +1,14 @@
 {% if theme_switcher %} 
+<div id="announce"></div>
 <script>
-    fetch("{{ announcement }}")
-      .then(res => {return res.text();})
-      .then(data => {
-        div = document.querySelector("#header-announcement");
-        div.innerHTML = `<div class="bd-header-announcement__content">${data}</div>`;
-      })
-      .catch(error => {
-        console.log("[PST]: Failed to load announcement at: {{ announcement }}");
-      });
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(text => document.getElementById("announce").innerHTML = text)
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
 </script>
 {% endif %}
