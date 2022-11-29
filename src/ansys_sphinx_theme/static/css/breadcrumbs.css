@@ -24,7 +24,6 @@ body {
 }
 
 #announcement_msg {
-    background-color: lightpink;
     display: flex;
     justify-content: center;
     position: relative;
@@ -39,7 +38,7 @@ body {
     height: 100%;
     left: 0;
     top: 0;
-    background-color: var(--pst-color-info);
+    background-color: lightpink;
     opacity: 0.2;
     content: "";
     z-index: -1; 
