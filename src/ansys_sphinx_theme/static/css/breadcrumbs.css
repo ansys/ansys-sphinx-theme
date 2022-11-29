@@ -23,15 +23,36 @@ body {
     box-sizing: border-box;
 }
 
-#header-announcement{
-    background-color: var(--pst-color-background);
-    border: 1px solid black;
-    margin-left: 20px solid var(--pst-color-background);
-    margin-right: 20px solid var(--pst-color-background);
-    padding-left: 3rem;
-    color: brown;
+#announcement_msg {
+    background-color: lightpink;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    padding: 0.5rem 12.5%;
+    text-align: center;
 }
 
-#header-announcement-spacer {
-    padding-left: 10rem solid var(--pst-color-background);
+#announcement_msg :after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: var(--pst-color-info);
+    opacity: 0.2;
+    content: "";
+    z-index: -1; 
 }
+
+#announcement_msg :empty {
+    display: none;
+  }
+        
+#announcement_msg p {
+    font-weight: bold;
+    margin: auto;
+    color:black;
+    }
+    
+    

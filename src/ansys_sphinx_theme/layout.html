@@ -25,16 +25,9 @@
 {% endblock %}
 
 
-{%- block content %}
-    <div class="bd-header-announcement container-fluid"
-    id="header-announcement">
-        {% include 'announcement_layout.html' %}
-    </div>
-    {{ super() }}
-{% endblock %}
-
 {% block docs_navbar %}
     {{ super() }}
+    {% include 'announcement_layout.html' %}
     {% if theme_show_breadcrumbs %}
         {% include 'breadcrumbs.html' %}
     {% endif %}
