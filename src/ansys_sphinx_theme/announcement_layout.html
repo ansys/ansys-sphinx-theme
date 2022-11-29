@@ -1,7 +1,7 @@
 {% if theme_switcher %} 
 <div id="announcement_msg"></div>
 <script>
-  fetch("https://templates.ansys.com/release/0.1/announcement.html")
+  fetch("announcement.html")
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
