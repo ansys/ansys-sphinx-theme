@@ -38,7 +38,7 @@ body {
     height: 100%;
     left: 0;
     top: 0;
-    background-color:lightcoral;
+    background-color:lightpink;
     opacity: 0.2;
     content: "";
     z-index: -1; 
