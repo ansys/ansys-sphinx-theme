@@ -38,7 +38,7 @@ body {
     height: 100%;
     left: 0;
     top: 0;
-    background-color:lightpink;
+    background-color:rgb(223, 95, 114);
     opacity: 0.2;
     content: "";
     z-index: -1; 
@@ -53,3 +53,12 @@ body {
     margin: auto;
     color:black;
     }
+
+html[data-theme="dark"] #announcement_msg :after{
+    background-color:lightpink;
+    opacity: 0.5;
+}
+
+#announcement_msg a {
+    color:#1E6DDC
+}
