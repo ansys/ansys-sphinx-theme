@@ -46,13 +46,13 @@ body {
 
 #announcement_msg :empty {
     display: none;
-  }
+}
         
 #announcement_msg p {
     font-weight: bold;
     margin: auto;
     color:black;
-    }
+}
 
 html[data-theme="dark"] #announcement_msg :after{
     background-color:lightpink;
