@@ -307,7 +307,6 @@ p.rubric {
     background-color: transparent !important;
     font-family: var(--pst-font-family-base)!important;
     font-size: medium;
-    color: var(--pst-color-text-base)!important;
     flex: auto;
 }
 
@@ -818,4 +817,9 @@ html[data-theme="dark"] .highlight pre {
 
 table.dataframe {
   table-layout: auto !important;
+}
+
+details.sd-dropdown .sd-summary-title {
+  border: 1px solid var(--pst-color-text-base) !important;
+  color: var(--sd-color-card-text) !important;
 }
