@@ -30,7 +30,7 @@
 
   --pst-font-family-base: 'Source Sans Pro', sans-serif, var(--pst-font-family-base-system);
   --pst-font-family-heading: 'Source Sans Pro', sans-serif, var(--pst-font-family-base-system);
-  --pst-font-family-monospace: Courier, var(--pst-font-family-monospace-system);
+  --pst-font-family-monospace: monospace, Courier, var(--pst-font-family-monospace-system);
 
   /*****************************************************************************
   * Ansys compatible colors
