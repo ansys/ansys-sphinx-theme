@@ -831,7 +831,6 @@ details.sd-dropdown .sd-summary-title {
 }
 
 .sd-card  .sd-card-text {
-  text-align: center;
   font-family: var(--pst-font-family-base)!important;
 }
 
@@ -843,7 +842,6 @@ font-size: var(--pst-font-size-h5);
 font-weight: bold;
 font-family: var(--pst-font-family-base);
 padding: .5rem 0rem 0.5rem 0rem;
-text-align: center;
 }
 
 .sd-card .sd-card-footer .sd-card-text {
