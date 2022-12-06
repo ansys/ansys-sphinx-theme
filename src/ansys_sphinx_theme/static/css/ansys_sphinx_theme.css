@@ -828,6 +828,7 @@ details.sd-dropdown .sd-summary-title {
   border: 1px solid var(--pst-color-text-base) !important;
   color: var(--sd-color-card-text) !important;
   font-family: var(monospace)!important;
+  font-size: medium;
   text-align: left;
   padding-left: 1rem;
 }
