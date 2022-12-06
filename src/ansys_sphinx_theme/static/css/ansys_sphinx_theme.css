@@ -30,7 +30,7 @@
 
   --pst-font-family-base: 'Source Sans Pro', sans-serif, var(--pst-font-family-base-system);
   --pst-font-family-heading: 'Source Sans Pro', sans-serif, var(--pst-font-family-base-system);
-  --pst-font-family-monospace: Courier, var(--pst-font-family-monospace-system);
+  --pst-font-family-monospace: monospace, Courier, var(--pst-font-family-monospace-system);
 
   /*****************************************************************************
   * Ansys compatible colors
@@ -206,7 +206,7 @@ dt:target, span.highlighted {
 
 .docutils {
     color: var(--pst-color-inline-code);
-    font-family:var(--font-family-monospace);
+    font-family:var(--pst-font-family-monospace);
     font-weight: 500;
     font-size: 87.5%;
 }
@@ -304,9 +304,7 @@ p.rubric {
 
 .sd-sphinx-override, .sd-sphinx-override * {
     background-color: transparent !important;
-    font-family: var(--pst-font-family-base)!important;
     font-size: medium;
-    color: var(--pst-color-text-base)!important;
     flex: auto;
 }
 
@@ -784,12 +782,12 @@ nav.bd-links li>a {
 
 html[data-theme="light"] .highlight pre {
   line-height: 125%;
-  font-size: 0.98em;
+  font-size: 0.9em;
 }
 
 html[data-theme="dark"] .highlight pre {
   line-height: 125%;
-  font-size: 0.98em;
+  font-size: 0.9em;
 }
 
 .bd-toc {
@@ -817,4 +815,40 @@ html[data-theme="dark"] .highlight pre {
 }
 table.dataframe {
   table-layout: auto !important;
+}
+
+.sd-card {
+  border-radius: 0;
+  padding: 10px 10px 10px 10px;
+  font-family: var(--pst-font-family-base)!important;
+}
+
+details.sd-dropdown .sd-summary-title {
+  border: 1px solid var(--pst-color-text-base) !important;
+  color: var(--sd-color-card-text) !important;
+  font-family: var(monospace)!important;
+  font-size: medium;
+  text-align: left;
+  padding-left: 1rem;
+}
+
+.sd-card  .sd-card-text {
+  font-family: var(--pst-font-family-base)!important;
+}
+
+.sd-card .sd-card-header {
+border: none;
+background-color:white;
+color: #150458 !important;
+font-size: var(--pst-font-size-h5);
+font-weight: bold;
+font-family: var(--pst-font-family-base);
+padding: .5rem 0rem 0.5rem 0rem;
+}
+
+.sd-card .sd-card-footer .sd-card-text {
+max-width: 220px;
+margin-left: auto;
+margin-right: auto;
+font-family: var(--pst-font-family-base);
 }
