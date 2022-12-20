@@ -129,7 +129,7 @@ html[data-theme="dark"] {
   --pst-color-inline-code: #fff;
   --pst-color-target: rgb(71, 39, 0);
   /* color for sphinx-gallery-code output*/
-  --pst-color-codeout: #6c757d ;
+  --pst-color-codeout: #495057 ;
   --pst-color-sig:#d6ab1e;
 }
 
