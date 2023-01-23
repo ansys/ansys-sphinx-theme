@@ -28,7 +28,7 @@ Consider using the ``conf.py`` for this repository:
 
 .. literalinclude:: ../conf.py
    :language: python
-   
+
 .. toctree::
    :hidden:
    :maxdepth: 2
