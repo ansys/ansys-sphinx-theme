@@ -26,6 +26,7 @@
 
 {% block docs_navbar %}
     {{ super() }}
+    {% include 'announcement_layout.html' %}
     {% if theme_show_breadcrumbs %}
         {% include 'breadcrumbs.html' %}
     {% endif %}

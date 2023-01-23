@@ -30,7 +30,7 @@
 
   --pst-font-family-base: 'Source Sans Pro', sans-serif, var(--pst-font-family-base-system);
   --pst-font-family-heading: 'Source Sans Pro', sans-serif, var(--pst-font-family-base-system);
-  --pst-font-family-monospace: Courier, var(--pst-font-family-monospace-system);
+  --pst-font-family-monospace: monospace, Courier, var(--pst-font-family-monospace-system);
 
   /*****************************************************************************
   * Ansys compatible colors
@@ -92,7 +92,8 @@ html[data-theme="light"] {
   --pst-color-inline-code: #000;
   --pst-color-target: rgb(255, 255, 255);
   /* color for sphinx-gallery-code output*/
-  --pst-color-codeout: #fafae2;
+  --pst-color-codecell: #fafae2;
+  --pst-color-codeout:var(--pst-color-inline-code);
   --pst-color-sig:#0965C8;
 }
 
@@ -111,7 +112,8 @@ html[data-theme="dark"] {
   --pst-color-on-background: rgb(0, 0, 0);
   --pst-color-surface: rgb(41, 41, 41);
   --pst-color-on-surface: rgb(55, 55, 55);
-  --pst-color-info: var(--pst-color-link);
+  --pst-color-info: var(--pst-color-secondary);
+
 
   /*****************************************************************************
   * extensions
@@ -128,7 +130,8 @@ html[data-theme="dark"] {
   --pst-color-inline-code: #fff;
   --pst-color-target: rgb(71, 39, 0);
   /* color for sphinx-gallery-code output*/
-  --pst-color-codeout: #929FAA;
+  --pst-color-codecell: #495057;
+  --pst-color-codeout: #f2f4f6;
   --pst-color-sig:#d6ab1e;
 }
 
@@ -206,7 +209,7 @@ dt:target, span.highlighted {
 
 .docutils {
     color: var(--pst-color-inline-code);
-    font-family:var(--font-family-monospace);
+    font-family:var(--pst-font-family-monospace);
     font-weight: 500;
     font-size: 87.5%;
 }
@@ -301,22 +304,20 @@ p.rubric {
     color: var(--pst-color-text-base);
 }
 
-.sd-row-cols-lg-4>* {
-    flex: 0 0 auto;
-    -ms-flex: 0 0 auto;
-    width: 25%;
-}
 
 .sd-sphinx-override, .sd-sphinx-override * {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    background-color: var(--pst-color-background)!important;
-    font-family: var(--pst-font-family-base)!important;
-    font-size: small;
-    color: var(--pst-color-text-base)!important;
+    background-color: transparent !important;
+    font-size: medium;
+    flex: auto;
 }
 
+html[data-theme=dark] .sd-shadow-sm {
+  box-shadow: 0 .1rem 1rem rgba(250, 250, 250, .6) !important
+}
+
+html[data-theme=dark] .sd-card-img-top[src*='.png'] {
+  filter: invert(0.82) brightness(0.8) contrast(1.2);
+}
 
 /*
 ###############
@@ -553,7 +554,8 @@ a > code.download
 ########################
 */
 .sphx-glr-script-out .highlight pre{
-  background-color:  var(--pst-color-codeout) !important;
+  background-color:  var(--pst-color-codecell) !important;
+  color: var(--pst-color-codeout);
   }
 
 .prev-next-area a p.prev-next-title {
@@ -667,8 +669,8 @@ Navigation column (according to side column)
 .col-lg-9 {
   flex: 0 0 80%;
   max-width: 80%;
-  padding-right: 25px;
-  padding-left: 40px;
+  padding-right: 5px;
+  padding-left: 20px;
 }
 
 /*
@@ -784,12 +786,12 @@ nav.bd-links li>a {
 
 html[data-theme="light"] .highlight pre {
   line-height: 125%;
-  font-size: 0.98em;
+  font-size: 0.9em;
 }
 
 html[data-theme="dark"] .highlight pre {
   line-height: 125%;
-  font-size: 0.98em;
+  font-size: 0.9em;
 }
 
 .bd-toc {
@@ -817,4 +819,50 @@ html[data-theme="dark"] .highlight pre {
 
 table.dataframe {
   table-layout: auto !important;
+}
+
+.sd-card {
+  border-radius: 0;
+  padding: 10px 10px 10px 10px;
+  font-family: var(--pst-font-family-base)!important;
+}
+
+details.sd-dropdown .sd-summary-title {
+  border: 1px solid var(--pst-color-text-base) !important;
+  color: var(--sd-color-card-text) !important;
+  font-family: var(monospace)!important;
+  font-size: medium;
+  text-align: left;
+  padding-left: 1rem;
+}
+
+.sd-card  .sd-card-text {
+  font-family: var(--pst-font-family-base)!important;
+}
+
+.sd-card .sd-card-header {
+border: none;
+background-color:white;
+color: #150458 !important;
+font-size: var(--pst-font-size-h5);
+font-weight: bold;
+font-family: var(--pst-font-family-base);
+padding: .5rem 0rem 0.5rem 0rem;
+}
+
+.sd-card .sd-card-footer .sd-card-text {
+max-width: 220px;
+margin-left: auto;
+margin-right: auto;
+font-family: var(--pst-font-family-base);
+}
+
+div.deprecated {
+  border-color: var(--pst-color-danger);
+  background-color: #dc354514;
+}
+
+div.versionadded {
+  border-color: var(--pst-color-success);
+  background: #88ca881f;
 }
