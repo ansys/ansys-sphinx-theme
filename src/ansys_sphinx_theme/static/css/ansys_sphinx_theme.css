@@ -856,3 +856,13 @@ margin-left: auto;
 margin-right: auto;
 font-family: var(--pst-font-family-base);
 }
+
+div.deprecated {
+  border-color: var(--pst-color-danger);
+  background-color: #dc354514;
+}
+
+div.versionadded {
+  border-color: var(--pst-color-success);
+  background: #88ca881f;
+}
