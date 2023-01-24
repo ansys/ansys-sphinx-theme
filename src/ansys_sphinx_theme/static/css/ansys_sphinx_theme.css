@@ -199,7 +199,7 @@ h1, h2 {
   background-color: var( --pst-color-on-surface);
 }
 
-.bd-header.navbar-light#navbar-main .navbar-nav li a.nav-link {
+.bd-header .navbar-nav li a.nav-link {
   color: #ddd;
 }
 
@@ -714,17 +714,6 @@ b, strong {
 }
 
 /*
-#############################
-Padding of main content block 
-#############################
-*/
-
-.bd-content {
-  padding: 1.5rem 1.5rem 2rem 3rem;
-}
-
-
-/*
 ###########################
 Left side toc-tree hovering 
 ###########################
@@ -754,7 +743,7 @@ Search bar button text
 */
 
 button, input, optgroup, select, textarea {
-  color: var(--pst-color-text-base)!important;
+  color: #ddd;
 }
 
 /*
