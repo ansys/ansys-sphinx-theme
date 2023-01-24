@@ -8,7 +8,7 @@ name = "ansys-sphinx-theme"
 dynamic = ["version"]
 description = "A theme devised by ANSYS, Inc. for Sphinx documentation."
 readme = "README.rst"
-requires-python = ">=3.5"
+requires-python = ">=3.7"
 license = {file = "LICENSE"}
 authors = [
     {name = "ANSYS, Inc.", email = "pyansys.support@ansys.com"},
@@ -25,8 +25,8 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "Sphinx>=4.0.0",
-    "pydata-sphinx-theme==0.9.0",
+    "Sphinx>=4.2.0",
+    "pydata-sphinx-theme==0.12.0",
     "Jinja2>=3.1.2",
 ]
 
@@ -68,7 +68,7 @@ profile = "black"
 force_sort_within_sections = true
 line_length = 100
 default_section = "THIRDPARTY"
-src_paths = ["doc", "src", "tests"]
+src_paths = ["doc", "src"]
 
 [tool.coverage.run]
 source = ["src"]
