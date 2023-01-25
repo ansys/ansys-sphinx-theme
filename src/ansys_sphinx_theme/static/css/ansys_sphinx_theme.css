@@ -760,7 +760,10 @@ button.version-switcher__button {
 
 html[data-theme="light"].theme-switch-button {
   color: #f8f9fa;
-  background-color: #f8f9fa;
+}
+
+.theme-switch-button span {
+  color: #f8f9fa;
 }
 
 /*
@@ -772,6 +775,10 @@ image padding before and after
 img {
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+html[data-theme=dark] .bd-content img:not(.only-dark):not(.dark-light) {
+  background: transparent; 
 }
 
 img.logo__image {
