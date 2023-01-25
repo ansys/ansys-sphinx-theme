@@ -758,8 +758,9 @@ button.version-switcher__button {
   color: #f8f9fa;
 }
 
-.theme-switch-button {
+html[data-theme="light"].theme-switch-button {
   color: #f8f9fa;
+  background-color: #f8f9fa;
 }
 
 /*
