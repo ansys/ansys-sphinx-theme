@@ -883,10 +883,12 @@ Right side toctree color and font
 }
 
 .version-switcher__menu a.list-group-item {
-  background-color: #f8f9fa;
+  background-color: #f8f9fa !important;
+  border-color: var(--pst-color-border);
+  color: var(--pst-color-text-base);
 }
 
-#version_switcher_menu a.list-group-item.active {
+.version_switcher_menu a.list-group-item.active {
   background-color: #D09735!important;
   border-color: var(--pst-color-text-base)!important;
   color: var(--pst-color-text-base)!important;
