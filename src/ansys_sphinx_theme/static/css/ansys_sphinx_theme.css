@@ -734,6 +734,10 @@ kbd {
   color: #f8f9fa;
 }
 
+html[data-theme=light] .theme-switch-button span:hover {
+  color: #0d0d0d;
+}
+
 /*
 ##############################
 image padding before and after 
