@@ -5,7 +5,7 @@ User guide
 ==========
 The Ansys Sphinx theme is based on the `PyData Sphinx theme <https://github.com/pydata/pydata-sphinx-theme>`_.
 For more information on its configuration, see
-`Configuration <https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/configuring.html>`_.
+`Configuration <https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/>`_.
 
 While the Ansys Sphinx theme is often used as is, you can customize the following:
 

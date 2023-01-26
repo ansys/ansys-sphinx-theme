@@ -273,42 +273,42 @@ p.rubric {
 
 
 /*
-#################
-   Sphinx-design 
-#################
+##############
+Sphinx-design 
+##############
 */
 
 .sd-tab-set>input:not(.focus-visible)+label {
-    outline: none;
-    font-size: large;
-    -webkit-tap-highlight-color: transparent;
-    color: var(--pst-color-text-base);
+  outline: none;
+  font-size: large;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--pst-color-text-base);
 }
 
 
 .sd-tab-set>input:checked+label+.sd-tab-content {
-    display: block;
-    font-size: medium;
+  display: block;
+  font-size: medium;
 }
 
 .sd-tab-set>input:checked+label+.sd-tab-content {
-    display: block;
-    font-size: .9rem;
+  display: block;
+  font-size: .9rem;
 }
 
 .sd-tab-content {
-    font-family: var(--pst-font-family-base);
+  font-family: var(--pst-font-family-base);
 }
 
 .bd-content .sd-tab-set>input:checked+label, .bd-content .sd-tab-set>input:not(:checked)+label:hover {
-    color: var(--pst-color-text-base);
+  color: var(--pst-color-text-base);
 }
 
 
 .sd-sphinx-override, .sd-sphinx-override * {
-    background-color: transparent !important;
-    font-size: medium;
-    flex: auto;
+  background-color: transparent !important;
+  font-size: medium;
+  flex: auto;
 }
 
 html[data-theme=dark] .sd-shadow-sm {
@@ -337,7 +337,7 @@ table {
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  }
+}
 
 tr { 
   background-color: var(--pst-color-background);
@@ -877,4 +877,24 @@ Right side toctree color and font
   background-color: #D09735!important;
   border-color: var(--pst-color-text-base)!important;
   color: var(--pst-color-text-base)!important;
+}
+
+@media (min-width:1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+      max-width: 1200px
+  }
+}
+
+@media (min-width:1600px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+      max-width: 1600px
+  }
 }
