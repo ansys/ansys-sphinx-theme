@@ -625,43 +625,6 @@ a.headerlink {
 }
 
 /*
-#################################
-Right side toctree color and font
-#################################
-*/
-.toc-entry a {
-  padding: .125rem 1.5rem;
-  color: var(--pst-color-link);
-}
-
-.toc-entry>.nav-link.active {
-    font-weight: bold;
-    color: var(--pst-color-text-base);
-    background-color: transparent;
-    border-left: 2px solid var(--pst-color-text-muted);
-}
-
-
-.toc-h2 {
-  font-size: 0.98rem;
-  padding: 0.05em;
-}
-
-.toc-h3 {
-  font-size: .96rem;
-}
-
-.toc-h4 {
-  font-size: .90rem;
-}
-
-.toc-entry a:hover {
-  color: var(--pst-color-link);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-/*
 ############################################
 Navigation column (according to side column)
 ############################################
@@ -729,6 +692,7 @@ nav.bd-links .active>a {
   font-weight: bold;
   color: var(--pst-color-text-muted);
   border-left: 2px solid var(--pst-color-text-base);
+  padding-left: 0.5rem;
 }
 
 nav.bd-links li>a:hover {
@@ -742,9 +706,13 @@ icon styles button
 ##################
 */
 
-/*button, input, optgroup, select, textarea,button:hover {
+button, input, optgroup, select, textarea,button:hover {
   color: #ddd;
-}*/
+}
+
+.theme-switch-button {
+  border-color: #f8f9fa;
+}
 
 button.version-switcher__button:hover {
   color: #f8f8f2;
@@ -755,11 +723,11 @@ button.version-switcher__button {
 }
 
 .search-button {
-  color: #f8f9fa;
+  color: #ddd;
 }
 
-html[data-theme="light"].theme-switch-button {
-  color: #f8f9fa;
+kbd {
+  background-color: #f8f9fa;
 }
 
 .theme-switch-button span {
@@ -878,4 +846,40 @@ div.deprecated {
 div.versionadded {
   border-color: var(--pst-color-success);
   background: #88ca881f;
+}
+
+/*
+#################################
+Right side toctree color and font
+#################################
+*/
+.toc-entry a.nav-link {
+  padding: .125rem 1.5rem;
+  color: var(--pst-color-link);
+}
+
+.toc-entry a.nav-link.active {
+    font-weight: bold;
+    color: var(--pst-color-text-base);
+    background-color: transparent;
+    border-left: 2px solid var(--pst-color-text-muted);
+}
+
+.toc-h2 {
+  font-size: 0.98rem;
+  padding: 0.05em;
+}
+
+.toc-h3 {
+  font-size: .96rem;
+}
+
+.toc-h4 {
+  font-size: .90rem;
+}
+
+.toc-entry a.nav-link:hover {
+  color: var(--pst-color-link);
+  text-decoration: none;
+  font-weight: 600;
 }
