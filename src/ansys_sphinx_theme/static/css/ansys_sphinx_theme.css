@@ -791,12 +791,6 @@ html[data-theme="dark"] .highlight pre {
   color: var(--pst-color-text-base);
 }
 
-#version_switcher_menu a.list-group-item.active {
-  background-color: #D09735!important;
-  border-color: var(--pst-color-text-base)!important;
-  color: var(--pst-color-text-base)!important;
-}
-
 .list-group-item.active {
   z-index: 2;
   color: var(--pst-color-text-base)!important;
@@ -886,4 +880,14 @@ Right side toctree color and font
   color: var(--pst-color-link);
   text-decoration: none;
   font-weight: 600;
+}
+
+.version-switcher__menu a.list-group-item {
+  background-color: #f8f9fa;
+}
+
+#version_switcher_menu a.list-group-item.active {
+  background-color: #D09735!important;
+  border-color: var(--pst-color-text-base)!important;
+  color: var(--pst-color-text-base)!important;
 }
