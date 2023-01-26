@@ -398,7 +398,7 @@ table.table-centered {
 }
 
 .table-centered th {
-  background-color: rgb(255, 183, 27, 0.55);
+  background-color: var(--pst-color-border);
   text-align: center;
 }
 
@@ -408,7 +408,7 @@ table.table-centered {
 }
 
 .table-centered tr:nth-child(even){
-  background-color: rgb(255, 183, 27, 0.15); 
+  background-color: var(--pst-color-border); 
   text-align: center;
 }
 
@@ -455,7 +455,7 @@ table.longtable-centered {
 }
 
 table.longtable-centered tr:hover td {
-  background-color: rgb(255, 183, 27, 0.6);
+  background-color: var(--pst-color-border);
   text-align: center;
 }
 
@@ -477,11 +477,11 @@ I do not think we will be able to call this class.
   }
 
 .dataframe tr:nth-child(even){
-  background-color: rgb(255, 183, 27, 0.15);
+  background-color: var(--pst-color-border);
 }
 
 .dataframe tr:hover td {
-  background-color: rgb(255, 183, 27, 0.6);
+  background-color: var(--pst-color-border);
 }
 
 /*
@@ -504,12 +504,12 @@ I do not think we will be able to call this class.
   }
 
 .dataframe-centered tr:nth-child(even){
-  background-color: rgb(255, 183, 27, 0.15);
+  background-color: var(--pst-color-border);
   text-align: center;
 }
 
 .dataframe-centered tr:hover td {
-  background-color: rgb(255, 183, 27, 0.6);
+  background-color: var(--pst-color-border);
   text-align: center;
 }
 
@@ -897,4 +897,9 @@ Right side toctree color and font
   .container-xl {
       max-width: 1600px
   }
+}
+
+.fa-wrench:before {
+  content: "\f0ad";
+  color: white;
 }
