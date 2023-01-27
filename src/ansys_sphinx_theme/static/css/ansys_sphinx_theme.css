@@ -161,7 +161,7 @@ body::-webkit-scrollbar-track {
 .bd-sidebar::-webkit-scrollbar-thumb {
   background: var(--pst-color-border);
   border-radius: inherit;
-  visibility: hidden !important
+  visibility: hidden !important;
 }
 
 .bd-sidebar::-webkit-scrollbar-track {
