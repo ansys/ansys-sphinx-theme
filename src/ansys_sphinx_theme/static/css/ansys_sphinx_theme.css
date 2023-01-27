@@ -144,10 +144,6 @@ body::-webkit-scrollbar {
   height: 1rem;
 }
 
-body:not(:hover)::-webkit-scrollbar-thumb {
-  visibility: visible;
-}
-
 body::-webkit-scrollbar-thumb {
   background: var(--pst-color-border);
   border-radius: inherit;
@@ -162,10 +158,6 @@ body::-webkit-scrollbar-track {
   height: 1rem;
 }
 
-.bd-sidebar:not(:hover)::-webkit-scrollbar-thumb {
-  visibility: visible;
-}
-
 .bd-sidebar::-webkit-scrollbar-thumb {
   background: var(--pst-color-border);
   border-radius: inherit;
@@ -174,8 +166,6 @@ body::-webkit-scrollbar-track {
 .bd-sidebar::-webkit-scrollbar-track {
   background: var(--pst-color-border);
 }
-
-.bd-toc:not(:hover)::-webkit-scrollbar-thumb{visibility:visible}
 
 .bd-toc::-webkit-scrollbar {
   width: .5rem;
@@ -876,7 +866,13 @@ Right side toctree color and font
 .version_switcher_menu a.list-group-item.active {
   background-color: #D09735!important;
   border-color: var(--pst-color-text-base)!important;
-  color: var(--pst-color-text-base)!important;
+  color: #000!important;
+}
+
+.version-switcher__menu a.list-group-item {
+  background-color: #f8f9fa !important;
+  border-color: var(--pst-color-border);
+  color: #000;
 }
 
 @media (min-width:1200px) {
