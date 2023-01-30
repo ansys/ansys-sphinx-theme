@@ -247,7 +247,7 @@ code.literal {
 
 /* make the github logo white */
 
-.fa-github-square:before, .fa-square-github:before {
+i.fa-github-square:before, i.fa-square-github:before {
   color: white;
   font-size: 2rem;
 }
