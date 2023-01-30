@@ -897,3 +897,10 @@ Right side toctree color and font
   content: "\f0ad";
   color: white;
 }
+
+.bd-main .bd-content .bd-article-container {
+  max-width: 50em;
+  overflow-x: auto;
+  padding: 0.2rem;
+  width: 70%;
+}
