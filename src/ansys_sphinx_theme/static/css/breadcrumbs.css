@@ -1,53 +1,34 @@
-@import "ansys-sphinx-theme.css";
+@import "../ansys-sphinx-theme.css";
 
-#breadcrumbs-spacer {
-    border-right: 10rem solid var(--pst-color-background);
-}
-
-div.related > ul {
-    padding-left: 0;
-}
-
-*, :after, :before {
-    box-sizing: border-box;
-}
-
-#announcement_msg {
+status{
+    background: transparent;
+    border: 2px solid var(--pst-color-warning);
+    color: var(--pst-color-text-base);
+    line-height: 20px;
+    position: inherit;
+    text-transform: uppercase;
+    bottom: 2rem;
+    left: 12rem;
     display: flex;
-    justify-content: center;
-    position: relative;
-    width: 100%;
-    padding: 0.5rem 12.5%;
-    text-align: center;
+    
 }
-
-#announcement_msg :after {
+status:before {
+    content:'';
+    width: 10px; 
+    height: 10px; 
+    border-top: 10px solid transparent; 
+    border-bottom: 10px solid transparent; /* 40px height (20+20) */
+    border-right: 10px solid var(--pst-color-warning);
     position: absolute;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    background-color:rgb(223, 95, 114);
-    opacity: 0.2;
-    content: "";
-    z-index: -1; 
+    left: -21px;
+    margin-left: 10px;
+    
+}
+p{
+    position:relative;
+    cursor:pointer;
 }
 
-#announcement_msg :empty {
-    display: none;
-}
-        
-#announcement_msg p {
-    font-weight: bold;
-    margin: auto;
-    color:black;
-}
-
-html[data-theme="dark"] #announcement_msg :after{
-    background-color:lightpink;
-    opacity: 0.5;
-}
-
-#announcement_msg a {
-    color:#1E6DDC
+p:hover status{
+    display: block;
 }
