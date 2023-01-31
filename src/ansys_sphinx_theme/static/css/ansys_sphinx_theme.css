@@ -903,3 +903,8 @@ Right side toctree color and font
   height: 100%;
   justify-content: end;
 }
+
+.bd-main .bd-content .bd-article-container .bd-article {
+    padding-left: 1rem;
+    padding-top: 1rem;
+}

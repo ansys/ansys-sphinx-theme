@@ -6,6 +6,7 @@
 
 div.related > ul {
     padding-left: 0;
+    padding-bottom: 1.5rem;
 }
 
 *, :after, :before {
