@@ -898,7 +898,7 @@ Right side toctree color and font
   color: white;
 }
 
-.bd-main .bd-content .bd-article-container {
+.bd-main .bd-content .bd-article-container .bd-article  {
   max-width: 50em;
   overflow-x: auto;
   padding: 0.2rem;
