@@ -68,7 +68,6 @@ extensions = [
     "sphinx.ext.intersphinx",
     "notfound.extension",
     "sphinx_copybutton",
-    "ansys_sphinx_theme",
 ]
 
 # Intersphinx mapping

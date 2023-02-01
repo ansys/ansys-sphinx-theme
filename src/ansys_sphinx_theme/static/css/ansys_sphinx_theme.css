@@ -144,10 +144,6 @@ body::-webkit-scrollbar {
   height: 1rem;
 }
 
-body:not(:hover)::-webkit-scrollbar-thumb {
-  visibility: visible;
-}
-
 body::-webkit-scrollbar-thumb {
   background: var(--pst-color-border);
   border-radius: inherit;
@@ -158,24 +154,20 @@ body::-webkit-scrollbar-track {
 }
 
 .bd-sidebar::-webkit-scrollbar {
-  width: 1rem;
-  height: 1rem;
-}
-
-.bd-sidebar:not(:hover)::-webkit-scrollbar-thumb {
-  visibility: visible;
+  width: .5rem;
+  height: .5rem;
 }
 
 .bd-sidebar::-webkit-scrollbar-thumb {
   background: var(--pst-color-border);
   border-radius: inherit;
+  visibility: hidden !important;
 }
 
 .bd-sidebar::-webkit-scrollbar-track {
-  background: var(--pst-color-background);
+  background: var(--pst-color-border);
+  visibility: hidden !important;
 }
-
-.bd-toc:not(:hover)::-webkit-scrollbar-thumb{visibility:visible}
 
 .bd-toc::-webkit-scrollbar {
   width: .5rem;
@@ -188,7 +180,7 @@ body::-webkit-scrollbar-track {
 }
 
 .bd-toc::-webkit-scrollbar-track {
-  background: var(--pst-color-background);
+  background: var(--pst-color-border);
 }
 
 h1, h2 {
@@ -199,7 +191,7 @@ h1, h2 {
   background-color: var( --pst-color-on-surface);
 }
 
-.bd-header.navbar-light#navbar-main .navbar-nav li a.nav-link {
+.bd-header .navbar-nav li a.nav-link {
   color: #ddd;
 }
 
@@ -254,8 +246,10 @@ code.literal {
 }
 
 /* make the github logo white */
-i.fa-github-square:before {
-    color: #ffffff !important;
+
+i.fa-github-square:before, i.fa-square-github:before {
+  color: white;
+  font-size: 2rem;
 }
 
 /* Increase empty-space around classes, methods, properties, etc. that are descendants
@@ -273,42 +267,42 @@ p.rubric {
 
 
 /*
-#################
-   Sphinx-design 
-#################
+##############
+Sphinx-design 
+##############
 */
 
 .sd-tab-set>input:not(.focus-visible)+label {
-    outline: none;
-    font-size: large;
-    -webkit-tap-highlight-color: transparent;
-    color: var(--pst-color-text-base);
+  outline: none;
+  font-size: large;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--pst-color-text-base);
 }
 
 
 .sd-tab-set>input:checked+label+.sd-tab-content {
-    display: block;
-    font-size: medium;
+  display: block;
+  font-size: medium;
 }
 
 .sd-tab-set>input:checked+label+.sd-tab-content {
-    display: block;
-    font-size: .9rem;
+  display: block;
+  font-size: .9rem;
 }
 
 .sd-tab-content {
-    font-family: var(--pst-font-family-base);
+  font-family: var(--pst-font-family-base);
 }
 
 .bd-content .sd-tab-set>input:checked+label, .bd-content .sd-tab-set>input:not(:checked)+label:hover {
-    color: var(--pst-color-text-base);
+  color: var(--pst-color-text-base);
 }
 
 
 .sd-sphinx-override, .sd-sphinx-override * {
-    background-color: transparent !important;
-    font-size: medium;
-    flex: auto;
+  background-color: transparent !important;
+  font-size: medium;
+  flex: auto;
 }
 
 html[data-theme=dark] .sd-shadow-sm {
@@ -337,7 +331,7 @@ table {
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  }
+}
 
 tr { 
   background-color: var(--pst-color-background);
@@ -398,7 +392,7 @@ table.table-centered {
 }
 
 .table-centered th {
-  background-color: rgb(255, 183, 27, 0.55);
+  background-color: var(--pst-color-border);
   text-align: center;
 }
 
@@ -408,7 +402,7 @@ table.table-centered {
 }
 
 .table-centered tr:nth-child(even){
-  background-color: rgb(255, 183, 27, 0.15); 
+  background-color: var(--pst-color-border); 
   text-align: center;
 }
 
@@ -455,7 +449,7 @@ table.longtable-centered {
 }
 
 table.longtable-centered tr:hover td {
-  background-color: rgb(255, 183, 27, 0.6);
+  background-color: var(--pst-color-border);
   text-align: center;
 }
 
@@ -477,11 +471,11 @@ I do not think we will be able to call this class.
   }
 
 .dataframe tr:nth-child(even){
-  background-color: rgb(255, 183, 27, 0.15);
+  background-color: var(--pst-color-border);
 }
 
 .dataframe tr:hover td {
-  background-color: rgb(255, 183, 27, 0.6);
+  background-color: var(--pst-color-border);
 }
 
 /*
@@ -504,12 +498,12 @@ I do not think we will be able to call this class.
   }
 
 .dataframe-centered tr:nth-child(even){
-  background-color: rgb(255, 183, 27, 0.15);
+  background-color: var(--pst-color-border);
   text-align: center;
 }
 
 .dataframe-centered tr:hover td {
-  background-color: rgb(255, 183, 27, 0.6);
+  background-color: var(--pst-color-border);
   text-align: center;
 }
 
@@ -625,43 +619,6 @@ a.headerlink {
 }
 
 /*
-#################################
-Right side toctree color and font
-#################################
-*/
-.toc-entry a {
-  padding: .125rem 1.5rem;
-  color: var(--pst-color-link);
-}
-
-.toc-entry>.nav-link.active {
-    font-weight: bold;
-    color: var(--pst-color-text-base);
-    background-color: transparent;
-    border-left: 2px solid var(--pst-color-text-muted);
-}
-
-
-.toc-h2 {
-  font-size: 0.98rem;
-  padding: 0.05em;
-}
-
-.toc-h3 {
-  font-size: .96rem;
-}
-
-.toc-h4 {
-  font-size: .90rem;
-}
-
-.toc-entry a:hover {
-  color: var(--pst-color-link);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-/*
 ############################################
 Navigation column (according to side column)
 ############################################
@@ -694,35 +651,9 @@ b, strong {
   font-weight: 900;
 }
 
-#theme-switch {
-  border-color: #fff;
-  border: 2px solid #898A8D;
-  margin-right: .4rem;
-  margin-left: .4rem;
-}
-
-#theme-switch:hover {
-  background-color: #fff
-}
-
-.bd-header.navbar-light#navbar-main .navbar-nav li a.nav-link:hover {
-  color: #fff;
-}
-
-.bd-header.navbar-light#navbar-main .navbar-nav>.active>.nav-link {
+.bd-header .navbar-nav>.active>.nav-link {
   border-bottom: 2px solid #fff;
 }
-
-/*
-#############################
-Padding of main content block 
-#############################
-*/
-
-.bd-content {
-  padding: 1.5rem 1.5rem 2rem 3rem;
-}
-
 
 /*
 ###########################
@@ -740,6 +671,7 @@ nav.bd-links .active>a {
   font-weight: bold;
   color: var(--pst-color-text-muted);
   border-left: 2px solid var(--pst-color-text-base);
+  padding-left: 0.5rem;
 }
 
 nav.bd-links li>a:hover {
@@ -748,13 +680,41 @@ nav.bd-links li>a:hover {
 }
 
 /*
-######################
-Search bar button text 
-######################
+##################
+icon styles button  
+##################
 */
 
-button, input, optgroup, select, textarea {
-  color: var(--pst-color-text-base)!important;
+button, input, optgroup, select, textarea,button:hover {
+  color: #ddd;
+}
+
+.theme-switch-button {
+  border-color: #f8f9fa;
+}
+
+button.version-switcher__button:hover {
+  color: #f8f8f2;
+}
+
+button.version-switcher__button {
+  color: #f8f9fa;
+}
+
+.search-button {
+  color: #ddd;
+}
+
+kbd {
+  background-color: #f8f9fa;
+}
+
+.theme-switch-button span {
+  color: #f8f9fa;
+}
+
+html[data-theme=light] .theme-switch-button span:hover {
+  color: #0d0d0d;
 }
 
 /*
@@ -766,6 +726,10 @@ image padding before and after
 img {
   padding-top: 1em;
   padding-bottom: 1em;
+}
+
+html[data-theme=dark] .bd-content img:not(.only-dark):not(.dark-light) {
+  background: transparent; 
 }
 
 img.logo__image {
@@ -804,12 +768,6 @@ html[data-theme="dark"] .highlight pre {
 
 .editthispage a {
   color: var(--pst-color-text-base);
-}
-
-#version_switcher_menu a.list-group-item.active {
-  background-color: #D09735!important;
-  border-color: var(--pst-color-text-base)!important;
-  color: var(--pst-color-text-base)!important;
 }
 
 .list-group-item.active {
@@ -865,4 +823,88 @@ div.deprecated {
 div.versionadded {
   border-color: var(--pst-color-success);
   background: #88ca881f;
+}
+
+/*
+#################################
+Right side toctree color and font
+#################################
+*/
+.toc-entry a.nav-link {
+  padding: .125rem 1.5rem;
+  color: var(--pst-color-link);
+}
+
+.toc-entry a.nav-link.active {
+    font-weight: bold;
+    color: var(--pst-color-text-base);
+    background-color: transparent;
+    border-left: 2px solid var(--pst-color-text-muted);
+}
+
+.toc-h2 {
+  font-size: 0.98rem;
+  padding: 0.05em;
+}
+
+.toc-h3 {
+  font-size: .96rem;
+}
+
+.toc-h4 {
+  font-size: .90rem;
+}
+
+.toc-entry a.nav-link:hover {
+  color: var(--pst-color-link);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.version-switcher__menu a.list-group-item:hover {
+  background-color: #D09735!important;
+  border-color: var(--pst-color-text-base)!important;
+  color: #000!important;
+}
+
+.version-switcher__menu a.list-group-item {
+  background-color: #f8f9fa;
+  border-color: var(--pst-color-border);
+  color: #000;
+}
+
+@media (min-width:1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+      max-width: 1200px
+  }
+}
+
+@media (min-width:1600px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+      max-width: 1600px
+  }
+}
+
+.fa-wrench:before {
+  content: "\f0ad";
+  color: white;
+}
+
+.bd-main .bd-content {
+  display: flex;
+  height: 100%;
+  justify-content: end;
+}
+
+.bd-main .bd-content .bd-article-container .bd-article {
+    padding-left: 1rem;
+    padding-top: 1rem;
 }
