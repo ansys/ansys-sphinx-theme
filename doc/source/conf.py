@@ -22,7 +22,7 @@ from ansys_sphinx_theme import (
 # Project information
 project = "ansys_sphinx_theme"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
-author = "Ansys Inc."
+author = "ANSYS, Inc."
 release = version = __version__
 cname = os.getenv("DOCUMENTATION_CNAME", "nocname.com")
 
@@ -54,7 +54,6 @@ html_theme_options = {
         "json_url": f"https://{cname}/release/versions.json",
         "version_match": get_version_match(__version__),
     },
-    "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
 }
 
 html_short_title = html_title = "Ansys Sphinx Theme"

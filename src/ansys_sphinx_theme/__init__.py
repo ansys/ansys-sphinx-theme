@@ -40,7 +40,6 @@ def get_html_theme_path() -> pathlib.Path:
     """
     return THEME_PATH.resolve()
 
-
 def get_version_match(semver: str) -> str:
     """Evaluate the version match for the multi-documentation.
 
@@ -79,6 +78,13 @@ def setup(app: sphinx.application.Sphinx) -> Dict:
     theme_path = get_html_theme_path()
     app.add_html_theme("ansys_sphinx_theme", theme_path)
     app.config.templates_path.append(str(THEME_PATH / "components"))
+
+    # Add default configuration
+    for key, value in app.config.html_theme_options.items():
+        print(f"Key {key} has value {value}")
+
+    # Add default configuration
+    app.config.html_theme_options.setdefault("navbar_end", ["version-switcher", "theme-switcher", "navbar-icon-links"])
 
     # Verify that the main CSS file exists
     if not CSS_PATH.exists():
