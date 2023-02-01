@@ -6,7 +6,6 @@ import sphinx
 
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
-
 __version__ = "0.9.dev0"
 
 
@@ -28,7 +27,6 @@ page_404 = str((STATIC_PATH / "404.rst").absolute())
 pyansys_logo_black = str((STATIC_PATH / "pyansys-logo-black-cropped.png").absolute())
 pyansys_logo_white = str((STATIC_PATH / "pyansys-logo-white-cropped.png").absolute())
 watermark = str((STATIC_PATH / "watermark.pdf").absolute())
-
 
 
 def get_html_theme_path() -> pathlib.Path:
@@ -74,7 +72,7 @@ def setup(app: sphinx.application.Sphinx) -> Dict:
     Returns
     -------
     Dict
-        Dictionary containig application status.
+        Dictionary containing application status.
 
     """
     # Add the theme configuration
