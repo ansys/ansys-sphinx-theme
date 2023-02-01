@@ -61,6 +61,27 @@ def get_version_match(semver: str) -> str:
     return ".".join([major, minor])
 
 
+def setup_default_html_theme_options(app):
+    """Set up the default configuration for the HTML options.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+
+    Notes
+    -----
+    This function is the only way to overwrite ``pydata-sphinx-theme``
+    configuration. Variables declared in the ``theme.conf`` do not include
+    inherited ones.
+
+    """
+    # Place all switchers and icons at the end of the navigation bar
+    app.config.html_theme_options.setdefault(
+        "navbar_end", ["version-switcher", "theme-switcher", "navbar-icon-links"]
+    )
+
+
 def setup(app: sphinx.application.Sphinx) -> Dict:
     """Connect to the sphinx theme app.
 
@@ -80,14 +101,8 @@ def setup(app: sphinx.application.Sphinx) -> Dict:
     app.add_html_theme("ansys_sphinx_theme", theme_path)
     app.config.templates_path.append(str(THEME_PATH / "components"))
 
-    # Add default configuration
-    for key, value in app.config.html_theme_options.items():
-        print(f"Key {key} has value {value}")
-
-    # Add default configuration
-    app.config.html_theme_options.setdefault(
-        "navbar_end", ["version-switcher", "theme-switcher", "navbar-icon-links"]
-    )
+    # Add default HTML configuration
+    setup_default_html_theme_options(app)
 
     # Verify that the main CSS file exists
     if not CSS_PATH.exists():
