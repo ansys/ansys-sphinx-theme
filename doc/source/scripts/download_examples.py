@@ -9,7 +9,7 @@ archive_url = "https://github.com/executablebooks/sphinx-design/tree/main/docs/s
 
 THIS_PATH = Path(__file__).parent.resolve()
 
-example_path = str((THIS_PATH / "examples.rst").absolute())
+example_path = str((THIS_PATH / "sphinx_examples.rst").absolute())
 
 
 def get_example_links():
