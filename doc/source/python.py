@@ -1,9 +1,14 @@
 """Sample module to download examples."""
+from pathlib import Path
+
 from bs4 import BeautifulSoup
 import requests
 
 # specify the URL of the archive here
 archive_url = "https://github.com/executablebooks/sphinx-design/tree/main/docs/snippets/rst"
+
+this_path = Path(__file__).parents[0].absolute()
+example_path = str((this_path / "examples" / "examples.rst").absolute())
 
 
 def get_example_links():
@@ -22,18 +27,14 @@ def get_example_links():
 
 def download_example_series(example_links):
     """Initialize to download examples."""
-    file_name = "some_file.rst"
-    with open(file_name, "wb") as f:
+    with open(example_path, "wb") as f:
         for link in example_links:
-            print("Downloading file:%s" % file_name)
             r = requests.get(link)
             f.write(r.content)
             print("%s downloaded!\n" % link)
     print("All examples downloaded!")
     return
 
-
-#
 
 if __name__ == "__main__":
 

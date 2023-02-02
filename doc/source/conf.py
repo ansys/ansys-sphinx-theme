@@ -68,6 +68,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "notfound.extension",
     "sphinx_copybutton",
+    "sphinx_design",
 ]
 
 # Intersphinx mapping
