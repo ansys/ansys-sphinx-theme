@@ -22,7 +22,6 @@ ansys_favicon = str((STATIC_PATH / "ansys-favicon.png").absolute())
 ansys_logo_black = str((STATIC_PATH / "ansys_logo_black_cropped.jpg").absolute())
 ansys_logo_white = str((STATIC_PATH / "ansys_logo_white.pdf").absolute())
 ansys_logo_white_cropped = str((STATIC_PATH / "ansys_logo_white_cropped.pdf").absolute())
-html_logo = ansys_logo_black
 page_404 = str((STATIC_PATH / "404.rst").absolute())
 pyansys_logo_black = str((STATIC_PATH / "pyansys-logo-black-cropped.png").absolute())
 pyansys_logo_white = str((STATIC_PATH / "pyansys-logo-white-cropped.png").absolute())
