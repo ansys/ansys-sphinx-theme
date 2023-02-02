@@ -32,6 +32,7 @@ def download_example_series(example_links):
         for link in example_links:
             r = requests.get(link)
             f.write(r.content)
+            f.write(b"\n")
     return
 
 
