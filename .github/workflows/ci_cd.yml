@@ -45,7 +45,8 @@ jobs:
       - name: "Run Ansys documentation building action"
         uses: pyansys/actions/doc-build@v3
         with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }} 
+          sphinxopts: '-j auto'
 
   doc-deploy-development:
     name: Doc dev version deploy
