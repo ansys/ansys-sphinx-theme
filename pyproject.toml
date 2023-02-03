@@ -47,12 +47,11 @@ name = "ansys_sphinx_theme"
 
 [tool.flit.sdist]
 include = [
-    "src/ansys_sphinx_theme/layout.html",
-    "src/ansys_sphinx_theme/breadcrumbs.html",
-    "src/ansys_sphinx_theme/docs-navbar.html",
-    "src/ansys_sphinx_theme/theme.conf",
-    "src/ansys_sphinx_theme/_templates/",
-    "src/ansys_sphinx_theme/static/",
+    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/layout.html",
+    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/components/breadcrumbs.html",
+    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/theme.conf",
+    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/_templates/",
+    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/",
 ]
 
 [project.urls]
