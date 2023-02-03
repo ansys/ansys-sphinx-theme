@@ -26,9 +26,12 @@
 
 {% block docs_navbar %}
     {{ super() }}
-    {% include 'announcement_layout.html' %}
+
+    {% if theme_switcher %}
+    {% include 'components/announcement_version.html' %}
+    {% endif %}
+
     {% if theme_show_breadcrumbs %}
-        {% include 'breadcrumbs.html' %}
+    {% include 'components/breadcrumbs.html' %}
     {% endif %}
 {% endblock %}
-
