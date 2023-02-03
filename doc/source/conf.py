@@ -2,7 +2,10 @@
 
 from datetime import datetime
 import os
+from pathlib import Path
 
+from bs4 import BeautifulSoup
+import requests
 from sphinx.builders.latex import LaTeXBuilder
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
@@ -18,6 +21,10 @@ from ansys_sphinx_theme import (
     latex,
     watermark,
 )
+
+THIS_PATH = Path(__file__).parent.resolve()
+
+EXAMPLE_PATH = str((THIS_PATH / "examples" / "sphinx_examples.rst").absolute())
 
 # Project information
 project = "ansys_sphinx_theme"
@@ -131,3 +138,40 @@ notfound_context = {
     "body": generate_404(),
 }
 notfound_no_urls_prefix = True
+
+# specify the URL of the archive here
+archive_url = "https://github.com/executablebooks/sphinx-design/tree/main/docs/snippets/rst"
+
+
+def get_example_links():
+    """Initialize to get examples link."""
+    r = requests.get(archive_url)
+    soup = BeautifulSoup(r.content, "html5lib")
+    links = soup.findAll("a")
+    example_links = [
+        "https://raw.githubusercontent.com" + link["href"]
+        for link in links
+        if link["href"].endswith("txt")
+    ]
+    raw_link = [w.replace("/blob/", "/") for w in example_links]
+    return raw_link
+
+
+def download_example_series(example_links):
+    """Initialize to download examples."""
+    with open(EXAMPLE_PATH, "wb") as f:
+        for link in example_links:
+            if link.endswith("article-info.txt"):
+                continue
+            else:
+                r = requests.get(link)
+                f.write(r.content)
+                f.write(b"\n")
+        f.write(b"")
+    return
+
+
+example_links = get_example_links()
+
+# download all examples
+download_example_series(example_links)

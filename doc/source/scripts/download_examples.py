@@ -7,9 +7,9 @@ import requests
 # specify the URL of the archive here
 archive_url = "https://github.com/executablebooks/sphinx-design/tree/main/docs/snippets/rst"
 
-THIS_PATH = Path(__file__).parent.resolve()
+THIS_PATH = Path(__file__).parents[1].resolve()
 
-example_path = str((THIS_PATH / "sphinx_examples.rst").absolute())
+example_path = str((THIS_PATH / "examples" / "sphinx_examples.rst").absolute())
 
 
 def get_example_links():
