@@ -1,4 +1,3 @@
-{% if theme_switcher %} 
 <div id="announcement_msg"></div>
 <script>
   fetch("announcement.html")
@@ -11,4 +10,3 @@
     .then(text => document.getElementById("announcement_msg").innerHTML = text)
     .catch((error) => console.error(`Fetch problem: ${error.message}`));
 </script>
-{% endif %}

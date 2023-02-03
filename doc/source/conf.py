@@ -29,7 +29,7 @@ EXAMPLE_PATH = str((THIS_PATH / "examples" / "sphinx_examples.rst").absolute())
 # Project information
 project = "ansys_sphinx_theme"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
-author = "Ansys Inc."
+author = "ANSYS, Inc."
 release = version = __version__
 cname = os.getenv("DOCUMENTATION_CNAME", "nocname.com")
 
@@ -47,7 +47,6 @@ html_context = {
 # specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
-    "use_edit_page_button": True,
     "contact_mail": "pyansys.support@ansys.com",
     "additional_breadcrumbs": [
         ("Ansys Internal Developer Portal", "https://dev.docs.ansys.com"),
@@ -62,7 +61,6 @@ html_theme_options = {
         "json_url": f"https://{cname}/release/versions.json",
         "version_match": get_version_match(__version__),
     },
-    "navbar_end": ["version-switcher", "theme-switcher", "navbar-icon-links"],
 }
 
 html_short_title = html_title = "Ansys Sphinx Theme"
