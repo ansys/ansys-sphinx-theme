@@ -25,7 +25,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "Sphinx>=4.2.0",
+    "Sphinx>=4.2.0,<6",
     "pydata-sphinx-theme==0.12.0",
     "Jinja2>=3.1.2",
 ]
