@@ -6,8 +6,9 @@ the full document of `sphinx design <https://sphinx-design.readthedocs.io/en/lat
 .. jinja:: examples
 
     {% for filename in inputs_examples %}
+    {% set title = filename.split('.')[0] %}
 
-    {{filename.upper().split('.')[0]}}
+    {{ title[0].upper() }}{{ title[1:] }}
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         .. literalinclude:: sphinx_examples/{{ filename }}
