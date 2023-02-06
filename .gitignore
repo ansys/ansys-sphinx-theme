@@ -158,4 +158,3 @@ cython_debug/
 
 # Sphinx auto-generated
 doc/source/_autosummary/
-doc/source/examples/sphinx_examples/

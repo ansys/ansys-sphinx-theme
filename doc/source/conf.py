@@ -165,9 +165,8 @@ def get_example_links():
     return raw_link
 
 
-def download_example_series():
+def download_example_series(example_links):
     """Download the example series and save the file."""
-    example_links = get_example_links()
     for link in example_links:
         file_name = link.split("/")[-1]
         if link.endswith("article-info.txt"):
@@ -182,4 +181,6 @@ def download_example_series():
     return file_names
 
 
-jinja_contexts = {"examples": {"inputs_examples": download_example_series()}}
+example_links = get_example_links()
+
+jinja_contexts = {"examples": {"inputs_examples": download_example_series(example_links)}}
