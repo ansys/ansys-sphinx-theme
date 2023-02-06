@@ -26,9 +26,7 @@
    .. autosummary::
       :toctree:
    {% for item in attributes %}
-      {% if item.0 != item.upper().0 %}
       {{ name }}.{{ item }}
-      {% endif %}
    {%- endfor %}
    {% endif %}
    {% endblock %}
