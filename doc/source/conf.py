@@ -140,19 +140,25 @@ notfound_no_urls_prefix = True
 
 
 # specify the URL of the archive here
+# Url for sphinx-design
 archive_url = "https://github.com/executablebooks/sphinx-design/tree/main/docs/snippets/rst"
 
 file_names = []
 
 
 def get_example_links():
-    """Initialize to get examples link."""
-    r = requests.get(archive_url)
-    soup = BeautifulSoup(r.content, "html5lib")
-    links = soup.findAll("a")
+    """Get all the file links from the url.
+
+    Returns
+    -------
+    list
+        list of links of files.
+    """
+    request = requests.get(archive_url)
+    soup = BeautifulSoup(request.content, "html5lib").findAll("a")
     example_links = [
         "https://raw.githubusercontent.com" + link["href"]
-        for link in links
+        for link in soup
         if link["href"].endswith("txt")
     ]
     raw_link = [w.replace("/blob/", "/") for w in example_links]
@@ -160,7 +166,7 @@ def get_example_links():
 
 
 def download_example_series():
-    """Initialize to download examples."""
+    """Download the example series and save the file."""
     example_links = get_example_links()
     for link in example_links:
         file_name = link.split("/")[-1]

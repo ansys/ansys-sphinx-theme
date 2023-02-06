@@ -14,7 +14,7 @@ the full document of `sphinx design <https://sphinx-design.readthedocs.io/en/lat
         .. literalinclude:: sphinx_examples/{{ filename }}
            :language: bash
         
-    This directive renders the above code as:
+    This directive renders the as follow:
 
         .. include:: sphinx_examples/{{ filename }}
 
