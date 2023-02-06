@@ -40,6 +40,7 @@ doc = [
     "bs4==0.0.1",
     "html5lib",
     "requests==2.28.2",
+    "sphinx-jinja",
 ]
 
 [project.entry-points."sphinx.html_themes"]

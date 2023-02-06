@@ -24,7 +24,7 @@ from ansys_sphinx_theme import (
 
 THIS_PATH = Path(__file__).parent.resolve()
 
-EXAMPLE_PATH = str((THIS_PATH / "examples" / "sphinx_examples.rst").absolute())
+EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 
 # Project information
 project = "ansys_sphinx_theme"
@@ -74,6 +74,7 @@ extensions = [
     "notfound.extension",
     "sphinx_copybutton",
     "sphinx_design",
+    "sphinx_jinja",
 ]
 
 # Intersphinx mapping
@@ -137,8 +138,11 @@ notfound_context = {
 }
 notfound_no_urls_prefix = True
 
+
 # specify the URL of the archive here
 archive_url = "https://github.com/executablebooks/sphinx-design/tree/main/docs/snippets/rst"
+
+file_names = []
 
 
 def get_example_links():
@@ -155,21 +159,21 @@ def get_example_links():
     return raw_link
 
 
-def download_example_series(example_links):
+def download_example_series():
     """Initialize to download examples."""
-    with open(EXAMPLE_PATH, "wb") as f:
-        for link in example_links:
-            if link.endswith("article-info.txt"):
-                continue
-            else:
+    example_links = get_example_links()
+    for link in example_links:
+        file_name = link.split("/")[-1]
+        if link.endswith("article-info.txt"):
+            continue
+        else:
+            file_path = str((EXAMPLE_PATH / file_name).absolute())
+            with open(file_path, "wb") as f:
                 r = requests.get(link)
                 f.write(r.content)
                 f.write(b"\n")
-        f.write(b"")
-    return
+            file_names.append(file_name)
+    return file_names
 
 
-example_links = get_example_links()
-
-# download all examples
-download_example_series(example_links)
+jinja_contexts = {"examples": {"inputs_examples": download_example_series()}}

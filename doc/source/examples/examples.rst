@@ -3,4 +3,18 @@ Sphinx design
 The rendering of sphinx design with ansys sphinx theme. To use this see 
 the full document of `sphinx design <https://sphinx-design.readthedocs.io/en/latest/index.html>`_.
 
-.. include:: sphinx_examples.rst
+.. jinja:: examples
+
+    {% for filename in inputs_examples %}
+
+    {{filename.upper().split('.')[0]}}
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        .. literalinclude:: sphinx_examples/{{ filename }}
+           :language: bash
+        
+    This directive renders the above code as:
+
+        .. include:: sphinx_examples/{{ filename }}
+
+    {% endfor %}
