@@ -1,3 +1,0 @@
-bs4==0.0.1
-html5lib
-requests==2.28.2
