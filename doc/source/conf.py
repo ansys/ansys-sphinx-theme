@@ -3,6 +3,7 @@
 from datetime import datetime
 import os
 from pathlib import Path
+from typing import List
 
 from bs4 import BeautifulSoup
 import requests
@@ -143,44 +144,62 @@ notfound_no_urls_prefix = True
 # Url for sphinx-design
 archive_url = "https://github.com/executablebooks/sphinx-design/tree/main/docs/snippets/rst"
 
-file_names = []
 
+def extract_example_links(archive_url: str) -> List[str]:
+    """
+    Extract example links from a specific URL.
 
-def get_example_links():
-    """Get all the file links from the url.
+    Parameters
+    ----------
+    archive_url : str
+        The URL of the archive to retrieve the example links from.
 
     Returns
     -------
     list
-        list of links of files.
+        List of example links.
     """
-    request = requests.get(archive_url)
-    soup = BeautifulSoup(request.content, "html5lib").findAll("a")
+    response = requests.get(archive_url)
+    soup = BeautifulSoup(response.content, "html5lib")
+    links = soup.find_all("a")
     example_links = [
-        "https://raw.githubusercontent.com" + link["href"]
-        for link in soup
-        if link["href"].endswith("txt")
+        "https://raw.githubusercontent.com" + link["href"].replace("/blob/", "/")
+        for link in links
+        if link["href"].endswith(".txt") and not "article-info.txt" in link["href"]
     ]
-    raw_link = [w.replace("/blob/", "/") for w in example_links]
-    return raw_link
+    return example_links
 
 
-def download_example_series(example_links):
-    """Download the example series and save the file."""
+def download_and_process_files(example_links: List[str]) -> List[str]:
+    """Download and process a series of example files.
+
+    This function downloads a series of example files using a
+    list of links and processes each file.
+
+    Parameters
+    ----------
+    example_links : List[str]
+        List of links to the example files to be downloaded.
+
+    Returns
+    -------
+    list
+        List of the names of the processed files.
+    """
+    file_names = []
     for link in example_links:
         file_name = link.split("/")[-1]
-        if link.endswith("article-info.txt"):
-            continue
-        else:
-            file_path = str((EXAMPLE_PATH / file_name).absolute())
-            with open(file_path, "wb") as f:
-                r = requests.get(link)
-                f.write(r.content)
-                f.write(b"\n")
-            file_names.append(file_name)
+        file_path = str((EXAMPLE_PATH / file_name).absolute())
+        with open(file_path, "wb") as f:
+            response = requests.get(link)
+            content = response.content.decode()
+            lines = content.splitlines()
+            f.write(b"\n".join([line.replace("target", file_name).encode() for line in lines]))
+        file_names.append(file_name)
     return file_names
 
 
-example_links = get_example_links()
+example_links = extract_example_links(archive_url)
+file_names = download_and_process_files(example_links)
 
-jinja_contexts = {"examples": {"inputs_examples": download_example_series(example_links)}}
+jinja_contexts = {"examples": {"inputs_examples": file_names}}
