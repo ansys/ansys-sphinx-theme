@@ -194,7 +194,15 @@ def download_and_process_files(example_links: List[str]) -> List[str]:
             response = requests.get(link)
             content = response.content.decode()
             lines = content.splitlines()
-            f.write(b"\n".join([line.replace("target", file_name).encode() for line in lines]))
+            # Customised only to remove the warnings on docs build.
+            filtered_lines = [
+                line
+                for line in lines
+                if not line.startswith("Cards Clickable") and not line.startswith("...............")
+            ]
+            f.write(
+                b"\n".join([line.replace("target", file_name).encode() for line in filtered_lines])
+            )
         file_names.append(file_name)
     return file_names
 
