@@ -54,9 +54,9 @@ def get_version_match(semver: str) -> str:
         Matching version number in the form of a string.
 
     """
-    if semver.endswith("dev0"):
+    if "dev" in semver:
         return "dev"
-    major, minor, _ = semver.split(".")
+    major, minor, *_ = semver.split(".")
     return ".".join([major, minor])
 
 
