@@ -79,6 +79,7 @@ def setup_default_html_theme_options(app):
     app.config.html_theme_options.setdefault(
         "navbar_end", ["version-switcher", "theme-switcher", "navbar-icon-links"]
     )
+    app.config.html_theme_options.setdefault("collapse_navigation", "True")
 
 
 def setup(app: sphinx.application.Sphinx) -> Dict:
