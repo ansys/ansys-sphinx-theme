@@ -10,3 +10,4 @@ Ansys Sphinx Theme documentation |version|
 
    getting_started/index.rst
    user_guide/index.rst
+   examples/index.rst

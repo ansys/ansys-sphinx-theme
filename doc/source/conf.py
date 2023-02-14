@@ -2,7 +2,11 @@
 
 from datetime import datetime
 import os
+from pathlib import Path
+from typing import List
 
+from bs4 import BeautifulSoup
+import requests
 from sphinx.builders.latex import LaTeXBuilder
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
@@ -18,6 +22,10 @@ from ansys_sphinx_theme import (
     latex,
     watermark,
 )
+
+THIS_PATH = Path(__file__).parent.resolve()
+
+EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 
 # Project information
 project = "ansys_sphinx_theme"
@@ -66,6 +74,8 @@ extensions = [
     "sphinx.ext.intersphinx",
     "notfound.extension",
     "sphinx_copybutton",
+    "sphinx_design",
+    "sphinx_jinja",
 ]
 
 # Intersphinx mapping
@@ -128,3 +138,74 @@ notfound_context = {
     "body": generate_404(),
 }
 notfound_no_urls_prefix = True
+
+
+def extract_example_links(archive_url: str, exclude_files: List[str]) -> List[str]:
+    """
+    Extract example links from a specific URL.
+
+    Parameters
+    ----------
+    archive_url : str
+        The URL of the archive to retrieve the example links from.
+    exclude_files : list of str
+        A list of files to exclude from the returned example links.
+
+    Returns
+    -------
+    list
+        List of example links.
+    """
+    response = requests.get(archive_url)
+    soup = BeautifulSoup(response.content, "html5lib")
+    links = soup.find_all("a")
+    example_links = [
+        f"https://raw.githubusercontent.com{link['href'].replace('/blob/', '/')}"
+        for link in links
+        if link["href"].endswith(".txt") and all(file not in link["href"] for file in exclude_files)
+    ]
+    return example_links
+
+
+def download_and_process_files(example_links: List[str]) -> List[str]:
+    """Download and process a series of example files.
+
+    This function downloads a series of example files using a
+    list of links and processes each file.
+
+    Parameters
+    ----------
+    example_links : List[str]
+        List of links to the example files to be downloaded.
+
+    Returns
+    -------
+    list
+        List of the names of the processed files.
+    """
+    file_names = []
+    for link in example_links:
+        file_name = link.split("/")[-1]
+        file_path = str((EXAMPLE_PATH / file_name).absolute())
+        with open(file_path, "wb") as f:
+            response = requests.get(link)
+            content = response.content.decode()
+            lines = content.splitlines()
+            # Customised only to remove the warnings on docs build.
+            filtered_lines = [
+                line
+                for line in lines
+                if not line.startswith("Cards Clickable") and not line.startswith("...............")
+            ]
+            f.write(
+                b"\n".join([line.replace("target", file_name).encode() for line in filtered_lines])
+            )
+        file_names.append(file_name)
+    return file_names
+
+
+URL_ARCHIVE = "https://github.com/executablebooks/sphinx-design/tree/main/docs/snippets/rst"
+example_links = extract_example_links(URL_ARCHIVE, exclude_files=["article-info.txt"])
+file_names = download_and_process_files(example_links)
+
+jinja_contexts = {"examples": {"inputs_examples": file_names}}
