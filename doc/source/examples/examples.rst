@@ -12,7 +12,7 @@ the full document of `sphinx design <https://sphinx-design.readthedocs.io/en/lat
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         .. literalinclude:: sphinx_examples/{{ filename }}
-           :language: bash
+           :language: rst
         
     This directive renders the as follow:
 
