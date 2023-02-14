@@ -111,7 +111,8 @@ def setup(app: sphinx.application.Sphinx) -> Dict:
         raise FileNotFoundError(f"Unable to locate ansys-sphinx theme at {CSS_PATH.absolute()}")
     app.add_css_file(str(CSS_PATH.relative_to(STATIC_PATH)))
     app.add_js_file(str(JS_FILE.relative_to(STATIC_PATH)))
-
+    app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
+    app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     # Add templates for autosummary
     app.config.templates_path.append(str(TEMPLATES_PATH))
 
