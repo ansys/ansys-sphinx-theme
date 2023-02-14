@@ -140,7 +140,7 @@ notfound_context = {
 notfound_no_urls_prefix = True
 
 
-def extract_example_links(archive_url: str) -> List[str]:
+def extract_example_links(archive_url: str, exclude_files: List[str]) -> List[str]:
     """
     Extract example links from a specific URL.
 
@@ -148,6 +148,8 @@ def extract_example_links(archive_url: str) -> List[str]:
     ----------
     archive_url : str
         The URL of the archive to retrieve the example links from.
+    exclude_files : list of str
+        A list of files to exclude from the returned example links.
 
     Returns
     -------
@@ -157,7 +159,6 @@ def extract_example_links(archive_url: str) -> List[str]:
     response = requests.get(archive_url)
     soup = BeautifulSoup(response.content, "html5lib")
     links = soup.find_all("a")
-    exclude_files = ["article-info.txt"]
     example_links = [
         f"https://raw.githubusercontent.com{link['href'].replace('/blob/', '/')}"
         for link in links
@@ -205,6 +206,6 @@ def download_and_process_files(example_links: List[str]) -> List[str]:
 
 URL_ARCHIVE = "https://github.com/executablebooks/sphinx-design/tree/main/docs/snippets/rst"
 example_links = extract_example_links(URL_ARCHIVE)
-file_names = download_and_process_files(example_links)
+file_names = download_and_process_files(example_links, exclude_files=["article-info.txt"])
 
 jinja_contexts = {"examples": {"inputs_examples": file_names}}

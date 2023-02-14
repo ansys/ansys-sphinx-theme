@@ -137,66 +137,27 @@ html[data-theme="dark"] {
   --pst-color-sig:#d6ab1e;
   --pst-color-table-hover: var(--pst-color-target);
 }
+/*
+#################
+body and content
+#################
+*/
 
 body {
   font-family: 'Open Sans', sans-serif;
-}
-
-body::-webkit-scrollbar {
-  width: 1rem;
-  height: 1rem;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-}
-
-body::-webkit-scrollbar-track {
-  background: var(--pst-color-background);
-}
-
-.bd-sidebar::-webkit-scrollbar {
-  width: .5rem;
-  height: .5rem;
-}
-
-.bd-sidebar::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-  visibility: hidden !important;
-}
-
-.bd-sidebar::-webkit-scrollbar-track {
-  background: var(--pst-color-border);
-  visibility: hidden !important;
-}
-
-.bd-toc::-webkit-scrollbar {
-  width: .5rem;
-  height: .5rem;
-}
-
-.bd-toc::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-}
-
-.bd-toc::-webkit-scrollbar-track {
-  background: var(--pst-color-border);
 }
 
 h1, h2 {
   color: var(--pst-color-text-base);
 }
 
-.admonition, div.admonition{
-  background-color: var( --pst-color-on-surface);
-}
 
-.bd-header .navbar-nav li a.nav-link {
-  color: #ddd;
-}
+
+/*
+##########
+Codecell
+##########
+*/
 
 dt:target, span.highlighted {
   background-color: var(--pst-color-border)!important; 
@@ -248,13 +209,6 @@ code.literal {
   color: var(--pst-color-sig);
 }
 
-/* make the github logo white */
-
-i.fa-github-square:before, i.fa-square-github:before {
-  color: white;
-  font-size: 2rem;
-}
-
 /* Increase empty-space around classes, methods, properties, etc. that are descendants
  of other items */
 dl.class dl.py {
@@ -268,58 +222,10 @@ p.rubric {
     margin-bottom: 0.75em;
 }
 
-
 /*
-##############
-Sphinx-design 
-##############
-*/
-
-.sd-tab-set>input:not(.focus-visible)+label {
-  outline: none;
-  font-size: large;
-  -webkit-tap-highlight-color: transparent;
-  color: var(--pst-color-text-base);
-}
-
-.sd-tab-set>input:checked+label+.sd-tab-content {
-  display: block;
-  font-size: medium;
-}
-
-.sd-tab-set>input:checked+label+.sd-tab-content {
-  display: block;
-  font-size: .9rem;
-}
-
-.sd-tab-content {
-  font-family: var(--pst-font-family-base);
-}
-
-.bd-content .sd-tab-set>input:checked+label, .bd-content .sd-tab-set>input:not(:checked)+label:hover {
-  color: var(--pst-color-text-base);
-  border-color: var(--pst-color-text-base);
-}
-
-
-.sd-sphinx-override, .sd-sphinx-override * {
-  background-color: transparent !important;
-  font-size: medium;
-  flex: auto;
-}
-
-html[data-theme=dark] .sd-shadow-sm {
-  box-shadow: 0 .1rem 1rem rgba(250, 250, 250, .6) !important
-}
-
-html[data-theme=dark] .sd-card-img-top[src*='.png'] {
-  filter: invert(0.82) brightness(0.8) contrast(1.2);
-}
-
-/*
-###############
-   table 
-###############
+########
+Table 
+########
 */
 
 table {
@@ -353,26 +259,12 @@ tr:nth-child(odd), tr:nth-child(even){
 }
 
 /*
-#####################
-   Table-centered 
-#####################
+###############
+Table-centered 
+################
 Same as table but with horizontally centered text.
 
-
-Use as:
-
-.. table:: 
-  :class: table-centered
-
-  +---------------------------+-------------------+
-  |                           | MAPDL Command     |
-  +===========================+===================+
-  | **GUI commands**          | * ``*ASK``        |
-  |                           +-------------------+
-  |   ...
-  |   ...
-
-
+see examples.
 */
 table.table-centered {
   width:100%;
@@ -409,25 +301,14 @@ table.table-centered {
   text-align: center;
 }
 
+table.dataframe {
+  table-layout: auto !important;
+}
+
 /*
-#########################
-   longtable-centered
-#########################
-
-Use as:
-
-
-.. table:: 
-  :class: longtable-centered
-
-  +---------------------------+-------------------+
-  |                           | MAPDL Command     |
-  +===========================+===================+
-  | **GUI commands**          | * ``*ASK``        |
-  |                           +-------------------+
-  |   ...
-  |   ...
-
+###################
+longtable-centered
+####################
 */
 
 table.longtable-centered {
@@ -459,9 +340,6 @@ table.longtable-centered tr:hover td {
 #########
 DataFrame
 #########
-Not sure why the odd columns (white) are rendered gray.
-
-I do not think we will be able to call this class.
 */
 
 .dataframe tr{ 
@@ -477,12 +355,9 @@ I do not think we will be able to call this class.
 }
 
 /*
-#########################
-   DataFrame-centered
-#########################
-Not sure why the odd columns (white) are rendered gray.
-
-I do not think we will be able to call this class.
+###################
+DataFrame-centered
+###################
 */
 
 .dataframe-centered tr{ 
@@ -510,27 +385,69 @@ I do not think we will be able to call this class.
 }
 
 /*
-###############
-   Autosummary 
-###############
+##########
+Scroll-bar
+##########
 */
-/* .autosummary {
-        text-align: left;
-        } */
 
-.autosummary  tr:nth-child(odd){ 
-    background-color: var(--pst-color-background);
-  }
-
-.autosummary tr:nth-child(even){
-  background-color: var(--pst-color-background);
+body::-webkit-scrollbar {
+  width: 1rem;
+  height: 1rem;
 }
 
+body::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--pst-color-background);
+}
+
+.bd-sidebar::-webkit-scrollbar {
+  width: .5rem;
+  height: .5rem;
+}
+
+.bd-sidebar::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+  visibility: hidden !important;
+}
+
+.bd-sidebar::-webkit-scrollbar-track {
+  background: var(--pst-color-border);
+  visibility: hidden !important;
+}
+
+.bd-toc::-webkit-scrollbar {
+  width: .5rem;
+  height: .5rem;
+}
+
+.bd-toc::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+}
+
+.bd-toc::-webkit-scrollbar-track {
+  background: var(--pst-color-border);
+}
 
 /*
-########################
-   ReST :download: links
-########################
+############
+Autosummary 
+############
+*/
+
+.autosummary  tr:nth-child(odd), .autosummary tr:nth-child(even){ 
+    background-color: var(--pst-color-background);
+}
+
+/*
+#####################
+ReST :download: links
+#####################
 */
 a > code.download
 {
@@ -541,9 +458,9 @@ a > code.download
 }
 
 /*
-########################
-   Sphinx gallery output
-########################
+#####################
+Sphinx gallery output
+#####################
 */
 .sphx-glr-script-out .highlight pre{
   background-color:  var(--pst-color-codecell) !important;
@@ -616,6 +533,26 @@ a.headerlink {
   color: #222;
 }
 
+@media (min-width:1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+      max-width: 1200px
+  }
+}
+
+@media (min-width:1600px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+      max-width: 1600px
+  }
+}
+
 /*
 ############################################
 Navigation column (according to side column)
@@ -626,6 +563,19 @@ Navigation column (according to side column)
   max-width: 80%;
   padding-right: 5px;
   padding-left: 20px;
+}
+.bd-main .bd-content {
+  display: flex;
+  height: 100%;
+  justify-content: end;
+}
+
+.bd-main .bd-content .bd-article-container .bd-article {
+    padding-left: 1rem;
+    padding-top: 1rem;
+}
+.bd-header .navbar-nav li a.nav-link {
+  color: #ddd;
 }
 
 /*
@@ -679,7 +629,7 @@ nav.bd-links li>a:hover {
 
 /*
 ##################
-icon styles button  
+icon, button, logo  
 ##################
 */
 
@@ -713,6 +663,30 @@ kbd {
 
 html[data-theme=light] .theme-switch-button span:hover {
   color: #0d0d0d;
+}
+
+/* make the github logo white */
+
+i.fa-github-square:before, i.fa-square-github:before {
+  color: white;
+  font-size: 2rem;
+}
+
+.version-switcher__menu a.list-group-item:hover {
+  background-color: #D09735!important;
+  border-color: var(--pst-color-text-base)!important;
+  color: #000!important;
+}
+
+.version-switcher__menu a.list-group-item {
+  background-color: #f8f9fa;
+  border-color: var(--pst-color-border);
+  color: #000;
+}
+
+.fa-wrench:before {
+  content: "\f0ad";
+  color: white;
 }
 
 /*
@@ -773,24 +747,50 @@ html[data-theme="dark"] .highlight pre {
   color: var(--pst-color-text-base)!important;
 }
 
-table.dataframe {
-  table-layout: auto !important;
-}
 
-.sd-card {
-  border-radius: 0;
-  padding: 10px 10px 10px 10px;
-  font-family: var(--pst-font-family-base)!important;
-}
-
-details.sd-dropdown .sd-summary-title {
-  border: 1px solid var(--pst-color-text-base) !important;
-  color: var(--sd-color-card-text) !important;
-  font-family: var(monospace)!important;
+/*
+##############
+Sphinx design
+##############
+*/
+.sd-sphinx-override, .sd-sphinx-override * {
+  background-color: transparent !important;
   font-size: medium;
-  text-align: left;
-  padding-left: 1rem;
+  flex: auto;
 }
+/*
+Sphinx-design tab
+*/
+
+.sd-tab-set>input:not(.focus-visible)+label {
+  outline: none;
+  font-size: large;
+  -webkit-tap-highlight-color: transparent;
+  color: var(--pst-color-text-base);
+}
+
+.sd-tab-set>input:checked+label+.sd-tab-content {
+  display: block;
+  font-size: medium;
+}
+
+.sd-tab-set>input:checked+label+.sd-tab-content {
+  display: block;
+  font-size: .9rem;
+}
+
+.sd-tab-content {
+  font-family: var(--pst-font-family-base);
+}
+
+.bd-content .sd-tab-set>input:checked+label, .bd-content .sd-tab-set>input:not(:checked)+label:hover {
+  color: var(--pst-color-text-base);
+  border-color: var(--pst-color-text-base);
+}
+
+/*
+Sphinx-design card
+*/
 
 .sd-card  .sd-card-text {
   font-family: var(--pst-font-family-base)!important;
@@ -813,14 +813,31 @@ margin-right: auto;
 font-family: var(--pst-font-family-base);
 }
 
-div.deprecated {
-  border-color: var(--pst-color-danger);
-  background-color: #dc354514;
+html[data-theme=dark] .sd-shadow-sm {
+  box-shadow: 0 .1rem 1rem rgba(250, 250, 250, .6) !important
 }
 
-div.versionadded {
-  border-color: var(--pst-color-success);
-  background: #88ca881f;
+html[data-theme=dark] .sd-card-img-top[src*='.png'] {
+  filter: invert(0.82) brightness(0.8) contrast(1.2);
+}
+
+.sd-card {
+  border-radius: 0;
+  padding: 10px 10px 10px 10px;
+  font-family: var(--pst-font-family-base)!important;
+}
+
+/*
+Sphinx-design dropdown
+*/
+
+details.sd-dropdown .sd-summary-title {
+  border: 1px solid var(--pst-color-text-base) !important;
+  color: var(--sd-color-card-text) !important;
+  font-family: var(monospace)!important;
+  font-size: medium;
+  text-align: left;
+  padding-left: 1rem;
 }
 
 /*
@@ -859,50 +876,22 @@ Right side toctree color and font
   font-weight: 600;
 }
 
-.version-switcher__menu a.list-group-item:hover {
-  background-color: #D09735!important;
-  border-color: var(--pst-color-text-base)!important;
-  color: #000!important;
+/*
+###########
+Directives
+###########
+*/
+
+div.deprecated {
+  border-color: var(--pst-color-danger);
+  background-color: #dc354514;
 }
 
-.version-switcher__menu a.list-group-item {
-  background-color: #f8f9fa;
-  border-color: var(--pst-color-border);
-  color: #000;
+div.versionadded {
+  border-color: var(--pst-color-success);
+  background: #88ca881f;
 }
 
-@media (min-width:1200px) {
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl {
-      max-width: 1200px
-  }
-}
-
-@media (min-width:1600px) {
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl {
-      max-width: 1600px
-  }
-}
-
-.fa-wrench:before {
-  content: "\f0ad";
-  color: white;
-}
-
-.bd-main .bd-content {
-  display: flex;
-  height: 100%;
-  justify-content: end;
-}
-
-.bd-main .bd-content .bd-article-container .bd-article {
-    padding-left: 1rem;
-    padding-top: 1rem;
+.admonition, div.admonition{
+  background-color: var( --pst-color-on-surface);
 }

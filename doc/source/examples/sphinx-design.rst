@@ -2,8 +2,9 @@
 
 Sphinx design
 =============
-The rendering of sphinx design with ansys sphinx theme. To use this see 
-the full document of `sphinx design <https://sphinx-design.readthedocs.io/en/latest/index.html>`_.
+The rendering of sphinx design with ansys sphinx theme.
+To access the full documentation for the sphinx design package,
+please refer `sphinx design <https://sphinx-design.readthedocs.io/en/latest/index.html>`_.
 
 .. jinja:: examples
 
