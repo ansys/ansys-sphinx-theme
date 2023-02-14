@@ -6,7 +6,7 @@ This show how the different extensions get rendered in ansys-sphinx-theme. This 
 .. grid:: 2
 
    .. grid-item::
-      .. card:: Sphinx Table
+      .. card:: Sphinx design
          :link: sphinx-design
          :link-type: ref
 
