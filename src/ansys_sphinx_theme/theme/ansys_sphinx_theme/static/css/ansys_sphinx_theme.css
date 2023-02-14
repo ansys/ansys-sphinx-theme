@@ -1,4 +1,5 @@
 /* Provided by the Sphinx base theme template at build time */
+
 @import "../basic.css";
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 @import "../sg_gallery.css";
@@ -39,12 +40,12 @@
   **/
   --ansysGold: rgb(255, 183, 27); /* #FFB71B */
   --ansysBronze: rgb(200, 146, 17); /* #C89211 */
-  --pythonBlue: 57, 114, 161; /* #3972a1 */
+  --pythonBlue: rgb(57, 114, 161); /* #3972a1 */
 
-  --pst-color-active-navigation: 200, 146, 17;  /* --ansysBronze */
-  --pst-color-navbar-link: 255, 255, 255;
-  --pst-color-navbar-link-hover: 200, 146, 17;  /* --ansysBronze */
-  --pst-color-navbar-link-active: 255, 183, 27;  /* --ansysBronze */
+  --pst-color-active-navigation: var(--ansysBronze);  /* --ansysBronze */
+  --pst-color-navbar-link: rgb(255, 255, 255);
+  --pst-color-navbar-link-hover: var(--ansysBronze);  /* --ansysBronze */
+  --pst-color-navbar-link-active: var(--ansysGold);  /* --ansysBronze */
   --pst-font-size-h1: 48px;
   --pst-font-size-h2: 36px;
   --pst-font-size-h3: 28px;
@@ -68,11 +69,6 @@ html[data-theme="light"] {
 
   /*****************************************************************************
   * depth colors
-  *
-  * background: the more in depth color
-  * on-background: the object directly set on the background, use of shadows in light theme
-  * surface: object set on the background (without shadows)
-  * on_surface: object set on surface object (without shadows)
   */
   --pst-color-on-background: rgb(0, 0, 0);
   --pst-color-on-surface: #f2f2f2;
@@ -91,11 +87,21 @@ html[data-theme="light"] {
   --pst-color-link-hover:#32cfea;
   --pst-color-inline-code: #000;
   --pst-color-target: rgb(255, 255, 255);
-  /* color for sphinx-gallery-code output*/
+
+  /*****************************************************************************
+  * color for sphinx-gallery-code output
+  */
   --pst-color-codecell: #fafae2;
   --pst-color-codeout: var(--pst-color-inline-code);
   --pst-color-sig: #0965C8;
+  /*****************************************************************************
+  * sphinx design primary color
+  */
   --sd-color-primary : var(--pst-color-text-base);
+
+  /*****************************************************************************
+  * table hovering
+  */
   --pst-color-table-hover: var(--pst-color-border);
 }
 
@@ -131,12 +137,20 @@ html[data-theme="dark"] {
   --pst-color-link-hover:#12B2E2;
   --pst-color-inline-code: #fff;
   --pst-color-target: rgb(71, 39, 0);
-  /* color for sphinx-gallery-code output*/
+
+  /*****************************************************************************
+  * color for sphinx-gallery-code output
+  */
   --pst-color-codecell: #495057;
   --pst-color-codeout: #f2f4f6;
   --pst-color-sig:#d6ab1e;
+
+  /*****************************************************************************
+  * table hovering
+  */
   --pst-color-table-hover: var(--pst-color-target);
 }
+
 /*
 #################
 body and content
@@ -150,8 +164,6 @@ body {
 h1, h2 {
   color: var(--pst-color-text-base);
 }
-
-
 
 /*
 ##########
