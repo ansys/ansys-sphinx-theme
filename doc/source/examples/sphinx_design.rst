@@ -9,7 +9,7 @@ the full document of `sphinx design <https://sphinx-design.readthedocs.io/en/lat
     {% set title = filename.split('.')[0] %}
 
     {{ title[0].upper() }}{{ title[1:] }}
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    {{ '~' * (title | length) }}
 
         .. literalinclude:: sphinx_examples/{{ filename }}
            :language: rst
