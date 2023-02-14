@@ -32,5 +32,3 @@ Consider using the ``conf.py`` for this repository:
 .. toctree::
    :hidden:
    :maxdepth: 2
-
-
