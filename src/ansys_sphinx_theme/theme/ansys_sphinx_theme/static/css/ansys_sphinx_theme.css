@@ -93,8 +93,9 @@ html[data-theme="light"] {
   --pst-color-target: rgb(255, 255, 255);
   /* color for sphinx-gallery-code output*/
   --pst-color-codecell: #fafae2;
-  --pst-color-codeout:var(--pst-color-inline-code);
-  --pst-color-sig:#0965C8;
+  --pst-color-codeout: var(--pst-color-inline-code);
+  --pst-color-sig: #0965C8;
+  --sd-color-primary : var(--pst-color-text-base)
 }
 
 html[data-theme="dark"] {
@@ -296,6 +297,7 @@ Sphinx-design
 
 .bd-content .sd-tab-set>input:checked+label, .bd-content .sd-tab-set>input:not(:checked)+label:hover {
   color: var(--pst-color-text-base);
+  border-color: var(--pst-color-text-base);
 }
 
 
