@@ -1,3 +1,5 @@
+.. _sphinx-design:
+
 Sphinx design
 =============
 The rendering of sphinx design with ansys sphinx theme. To use this see 

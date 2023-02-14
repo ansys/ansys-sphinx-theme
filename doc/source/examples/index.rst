@@ -7,7 +7,7 @@ This show how the different extensions get rendered in ansys-sphinx-theme. This 
 
    .. grid-item::
       .. card:: sphinx-design
-         :link: sphinx_design.rst
+         :link: sphinx-design
          :link-type: ref
 
             Examples rendered with sphinx design.
@@ -17,4 +17,4 @@ This show how the different extensions get rendered in ansys-sphinx-theme. This 
    :hidden:
    :maxdepth: 2
 
-   sphinx_design
+   sphinx-design
