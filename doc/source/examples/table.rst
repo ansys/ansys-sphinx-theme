@@ -36,7 +36,7 @@ Here is the data table.
 
 Longtable-centered
 ------------------
-Here is the longtable. 
+Here is the long table. 
 
 .. code:: rst
 
