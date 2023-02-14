@@ -205,7 +205,7 @@ def download_and_process_files(example_links: List[str]) -> List[str]:
 
 
 URL_ARCHIVE = "https://github.com/executablebooks/sphinx-design/tree/main/docs/snippets/rst"
-example_links = extract_example_links(URL_ARCHIVE)
-file_names = download_and_process_files(example_links, exclude_files=["article-info.txt"])
+example_links = extract_example_links(URL_ARCHIVE, exclude_files=["article-info.txt"])
+file_names = download_and_process_files(example_links)
 
 jinja_contexts = {"examples": {"inputs_examples": file_names}}
