@@ -42,17 +42,8 @@ cname = os.getenv("DOCUMENTATION_CNAME", "nocname.com")
 html_logo = ansys_logo_black
 html_theme = "ansys_sphinx_theme"
 
-MEILISEARCH = {
-    "host": os.environ.get("MEILISEARCH_HOST_NAME", ""),
-    "api_key": os.environ.get("MEILISEARCH_API_KEY", ""),
-    "index_uids": {
-        "pyansys-docs-all-public": "PyAnsys",
-        "pyaedt": "pyaedt",
-        "ansys-sphinx-theme": "ansys",
-    },
-}
-# In the html_context dictionary in conf.py
 
+# In the html_context dictionary in conf.py
 html_context = {
     "github_user": "ansys",
     "github_repo": "ansys-sphinx-theme",
@@ -77,7 +68,15 @@ html_theme_options = {
         "json_url": f"https://{cname}/release/versions.json",
         "version_match": get_version_match(__version__),
     },
-    "meilisearch": MEILISEARCH,
+    "meilisearch": {
+        "host": os.getenv("MEILISEARCH_HOST_NAME"),
+        "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
+        "index_uids": {
+            "pyansys-docs-all-public": "PyAnsys",
+            "pyaedt": "pyaedt",
+            "pymapdl": "ansys",
+        },
+    },
 }
 
 html_short_title = html_title = "Ansys Sphinx Theme"

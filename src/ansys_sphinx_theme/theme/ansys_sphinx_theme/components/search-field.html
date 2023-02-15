@@ -1,0 +1,102 @@
+<!-- Debugging: html_theme_options = {{ html_theme_options }} -->
+<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.css"
+      />
+
+    <style>
+
+      div [data-ds-theme] .searchbox {
+          margin: auto;
+          display: block;
+          width: 600px;
+      }
+
+      .dsb-suggestions {
+          width: 580px;
+      }
+
+      .docs-searchbar-suggestion--category-header {
+          background-color: #e6eeff;
+          border-radius: 7px;
+          text-align: center;
+      }
+
+      .docs-searchbar-suggestion--subcategory-column-text {
+          color: black;
+      }
+
+      div [data-ds-theme] .searchbox input {
+          height: 32px;
+          border-radius: 8px;
+          font-size: 18px;
+          font-family: "Open Sans", sans-serif;
+          box-shadow: 0px 0px 8px darkgrey;
+      }
+
+      .docs-searchbar-footer {
+          display: none;
+      }
+
+      [class*="docs-searchbar-suggestion"] {
+          text-decoration: none;
+      }
+
+      .docs-searchbar-suggestion--highlight {
+          box-shadow: none !important;
+      }
+
+      .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+
+      .index-select {
+          color: #555;
+          background: #fff;
+          height: 32px;
+          border-radius: 8px;
+          font-size: 18px;
+          font-family: "Open Sans", sans-serif;
+          border: 0;
+          box-shadow: 0px 0px 8px darkgrey;
+          padding: 0 10px 0px 10px;
+      }
+
+    </style>
+ </head>
+ <form class="bd-search d-flex align-items-center"
+ action="{{ pathto('search') }}"
+ method="get">
+  <div class="col-md-18">
+    <input type="search" placeholder="Search" class="form-control" id="search-bar-input" autofocus />
+    {% if theme_meilisearch.index_uids %}
+    <select id="indexUidSelector" style="margin-left: 20px;" class="index-select">
+      {% for index_uid, index_name in theme_meilisearch.index_uids.items() %}
+      <option value="{{ index_uid }}">{{ index_name }}</option>
+      {% endfor %}
+    </select>
+    {% endif %}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.js"></script>
+  {% if theme_meilisearch %}
+  <script>
+    let theSearchBar = docsSearchBar({
+      hostUrl: "{{ theme_meilisearch.host }}" ,
+      apiKey: "{{ theme_meilisearch.api_key }}" ,
+      indexUid: 'pyansys-docs-all-public',
+      inputSelector: '#search-bar-input',
+      enableDarkMode: 'auto',
+      debug: true // Set debug to true if you want to inspect the dropdown
+    });
+    document.getElementById('indexUidSelector').addEventListener('change', function() {
+      theSearchBar.indexUid = this.value;
+      index = client.index(this.value);
+      theSearchBar.inputSelector = '#docs-searchbar-suggestion';
+      });
+
+      document.getElementById('docs-searchbar-suggestion').focus();
+  </script>
+  {% endif %}
+</form>
