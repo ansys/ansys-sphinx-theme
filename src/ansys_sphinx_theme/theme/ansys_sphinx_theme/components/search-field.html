@@ -1,7 +1,5 @@
 <!-- Debugging: html_theme_options = {{ html_theme_options }} -->
-<form class="bd-search d-flex align-items-center"
- action="{{ pathto('search') }}"
- method="get">
+<form class="bd-search d-flex align-items-center"action="{{ pathto('search') }}"method="get">
   <div class="col-md-18">
     <input type="search" placeholder="Search" class="form-control" id="search-bar-input" autofocus />
     {% if theme_meilisearch.index_uids %}
