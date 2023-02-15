@@ -1,6 +1,5 @@
 <!-- Debugging: html_theme_options = {{ html_theme_options }} -->
 <form class="bd-search d-flex align-items-center"action="{{ pathto('search') }}"method="get">
-  <div class="col-md-18">
     <input type="search" placeholder="Search" class="form-control" id="search-bar-input" autofocus />
     {% if theme_meilisearch.index_uids %}
     <select id="indexUidSelector" style="margin-left: 20px;" class="index-select">
@@ -9,7 +8,6 @@
       {% endfor %}
     </select>
     {% endif %}
-  </div>
   <script src="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.js"></script>
   {% if theme_meilisearch %}
   <script>
