@@ -1,21 +1,19 @@
 <form class="bd-search d-flex align-items-center" action="{{ pathto('search') }}" method="get">
 
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.css"
-      />
-    </head>
-  
-  
+    <script src="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.css"></script>
+    {% if html_theme_options.meilisearch_index_uid %}
     <input type="search" id="search-bar-input" />
     <script>
-    docsSearchBar({
-        hostUrl: '{{HOST}}:7700',
-        apiKey: '{{KEY}}',
-        indexUid: '{{index_uid}}',
-        inputSelector: '#search-bar-input',
-        enableDarkMode: 'auto',
-        debug: true, // Set debug to true if you want to inspect the dropdown
-    });
+        const client = new MeiliSearch({ host: '{{ html_theme_options.meilisearch_host }}', apiKey: '{{ html_theme_options.meilisearch_api_key }}' });
+        const index = client.index('{{ html_theme_options.meilisearch_index_uid }}');
+        docsSearchBar({
+            hostUrl: '{{ html_theme_options.meilisearch_host }}',
+            apiKey: '{{ html_theme_options.meilisearch_api_key }}',
+            indexUid: '{{ html_theme_options.meilisearch_index_uid }}',
+            inputSelector: '#search-bar-input',
+            enableDarkMode: 'auto',
+            debug: true // Set debug to true if you want to inspect the dropdown
+        });
     </script>
+    {% endif %}
   </form>

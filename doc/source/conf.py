@@ -5,6 +5,10 @@ import os
 from pathlib import Path
 from typing import List
 
+from sphinx.util import logging
+
+logger = logging.getLogger(__name__)
+
 from bs4 import BeautifulSoup
 import requests
 from sphinx.builders.latex import LaTeXBuilder
@@ -37,6 +41,11 @@ cname = os.getenv("DOCUMENTATION_CNAME", "nocname.com")
 # use the default ansys logo
 html_logo = ansys_logo_black
 html_theme = "ansys_sphinx_theme"
+meilisearch_index_uid = "ansys-ansys-sphinx-theme-sphinx-docs"
+meilisearch_host = os.environ.get("MEILISEARCH_HOST")
+meilisearch_api_key = os.environ.get("MEILISEARCH_API_KEY")
+
+# In the html_context dictionary in conf.py
 
 html_context = {
     "github_user": "ansys",
@@ -44,7 +53,7 @@ html_context = {
     "github_version": "main",
     "doc_path": "doc/source",
 }
-
+logger.info("Setting custom theme options...")
 # specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
@@ -62,6 +71,9 @@ html_theme_options = {
         "json_url": f"https://{cname}/release/versions.json",
         "version_match": get_version_match(__version__),
     },
+    "meilisearch_host": meilisearch_host,
+    "meilisearch_api_key": meilisearch_api_key,
+    "meilisearch_index_uid": meilisearch_index_uid,
 }
 
 html_short_title = html_title = "Ansys Sphinx Theme"
