@@ -1,20 +1,48 @@
-<form class="bd-search d-flex align-items-center" action="{{ pathto('search') }}" method="get">
+<body>
+    
+    <h2 align="center">Example Search </h2>
 
-    <script src="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.css"></script>
+    <div class="container">
+    <div class="col-md-18">
+        <input type="search" placeholder="docs-searchbar input" class="form-control" id="search-bar-input" autofocus />
+      </div>
+
+      {% if html_theme_options.meilisearch_index_uids %}
+        <select id="indexUidSelector" style="margin-left: 20px;" class="index-select">
+          {% for index_uid, index_name in html_theme_options.meilisearch_index_uids.items() %}
+            <option value="{{ index_uid }}">{{ index_name }}</option>
+          {% endfor %}
+        </select>
+      {% endif %}
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/docs-searchbar.js@2.4.1/dist/cdn/docs-searchbar.min.js"></script>
     {% if html_theme_options.meilisearch %}
     <input type="search" id="search-bar-input" />
     <script>
         const searchConfig = '{{ html_theme_options.meilisearch}}' | tojson ;
-        const client = new MeiliSearch({ host: searchConfig.host, apiKey: searchConfig.api_key });
-        const index = client.index(searchConfig.index_uid);
-        docsSearchBar({
+        const index = client.index(searchConfig.index_uids[Object.keys(searchConfig.index_uids)[0]]);
+        let theSearchBar = docsSearchBar({
             hostUrl: searchConfig.host,
             apiKey: searchConfig.api_key,
-            indexUid: searchConfig.index_uid,
+            indexUid: searchConfig.index_uids[Object.keys(searchConfig.index_uids)[0]],
             inputSelector: '#search-bar-input',
             enableDarkMode: 'auto',
             debug: true // Set debug to true if you want to inspect the dropdown
         });
-    </script>
+        document.getElementById('indexUidSelector').addEventListener('change', function() {
+          theSearchBar.indexUid = this.value;
+          theSearchBar.inputSelector = '#docs-searchbar-suggestion';
+      });
+
+      document.getElementById('indexUidSelector').addEventListener('change', function() {
+          theSearchBar.indexUid = this.value;
+          theSearchBar.inputSelector = '#docs-searchbar-suggestion';
+          index = client.index(this.value);
+        });
+
+        document.getElementById('docs-searchbar-suggestion').focus();
+      </script>
     {% endif %}
-  </form>
+    </form>

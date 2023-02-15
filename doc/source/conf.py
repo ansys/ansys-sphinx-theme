@@ -45,7 +45,11 @@ html_theme = "ansys_sphinx_theme"
 MEILISEARCH = {
     "host": os.environ.get("MEILISEARCH_HOST_NAME", ""),
     "api_key": os.environ.get("MEILISEARCH_API_KEY", ""),
-    "index_uid": "ansys-ansys-sphinx-theme-sphinx-docs",
+    "index_uids": {
+        "pyansys-docs-all-public": "PyAnsys",
+        "pyaedt": "pyaedt",
+        "ansys-sphinx-theme": "ansys",
+    },
 }
 # In the html_context dictionary in conf.py
 
