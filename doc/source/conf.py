@@ -41,10 +41,12 @@ cname = os.getenv("DOCUMENTATION_CNAME", "nocname.com")
 # use the default ansys logo
 html_logo = ansys_logo_black
 html_theme = "ansys_sphinx_theme"
-meilisearch_index_uid = "ansys-ansys-sphinx-theme-sphinx-docs"
-meilisearch_host = os.environ.get("MEILISEARCH_HOST")
-meilisearch_api_key = os.environ.get("MEILISEARCH_API_KEY")
 
+MEILISEARCH = {
+    "host": os.environ.get("MEILISEARCH_HOST_NAME", ""),
+    "api_key": os.environ.get("MEILISEARCH_API_KEY", ""),
+    "index_uid": os.environ.get("ansys-ansys-sphinx-theme-sphinx-docs", ""),
+}
 # In the html_context dictionary in conf.py
 
 html_context = {
@@ -71,9 +73,7 @@ html_theme_options = {
         "json_url": f"https://{cname}/release/versions.json",
         "version_match": get_version_match(__version__),
     },
-    "meilisearch_host": meilisearch_host,
-    "meilisearch_api_key": meilisearch_api_key,
-    "meilisearch_index_uid": meilisearch_index_uid,
+    "meilisearch": MEILISEARCH,
 }
 
 html_short_title = html_title = "Ansys Sphinx Theme"
