@@ -2,7 +2,6 @@
 styles exclusively for the ansys-sphinx-theme classes. */
 
 @import "ansys-sphinx-theme.css";
-@import "https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.css";
 
 /*
 ############
@@ -67,62 +66,4 @@ html[data-theme="dark"] #announcement_msg :after{
 
 #announcement_msg a {
     color:#1E6DDC
-}
-
-div [data-ds-theme] .searchbox {
-    margin: auto;
-    display: block;
-    width: 600px;
-}
-
-.dsb-suggestions {
-    width: 580px;
-}
-
-.docs-searchbar-suggestion--category-header {
-    background-color: #e6eeff;
-    border-radius: 7px;
-    text-align: center;
-}
-
-.docs-searchbar-suggestion--subcategory-column-text {
-    color: black;
-}
-
-div [data-ds-theme] .searchbox input {
-    height: 32px;
-    border-radius: 8px;
-    font-size: 18px;
-    font-family: "Open Sans", sans-serif;
-    box-shadow: 0px 0px 8px darkgrey;
-}
-
-.docs-searchbar-footer {
-    display: none;
-}
-
-[class*="docs-searchbar-suggestion"] {
-    text-decoration: none;
-}
-
-.docs-searchbar-suggestion--highlight {
-    box-shadow: none !important;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.index-select {
-    color: #555;
-    background: #fff;
-    height: 32px;
-    border-radius: 8px;
-    font-size: 18px;
-    font-family: "Open Sans", sans-serif;
-    border: 0;
-    box-shadow: 0px 0px 8px darkgrey;
-    padding: 0 10px 0px 10px;
 }
