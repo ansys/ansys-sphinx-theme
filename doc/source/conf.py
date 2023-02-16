@@ -5,10 +5,6 @@ import os
 from pathlib import Path
 from typing import List
 
-from sphinx.util import logging
-
-logger = logging.getLogger(__name__)
-
 from bs4 import BeautifulSoup
 import requests
 from sphinx.builders.latex import LaTeXBuilder
@@ -50,7 +46,7 @@ html_context = {
     "github_version": "main",
     "doc_path": "doc/source",
 }
-logger.info("Setting custom theme options...")
+
 # specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
@@ -68,13 +64,14 @@ html_theme_options = {
         "json_url": f"https://{cname}/release/versions.json",
         "version_match": get_version_match(__version__),
     },
-    "meilisearch": {
+    "use_meilisearch": {
         "host": os.getenv("MEILISEARCH_HOST_NAME"),
         "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
         "index_uids": {
+            "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
             "pyansys-docs-all-public": "PyAnsys",
             "pyaedt": "pyaedt",
-            "pymapdl": "ansys",
+            "pymapdl": "pymapdl",
         },
     },
 }
