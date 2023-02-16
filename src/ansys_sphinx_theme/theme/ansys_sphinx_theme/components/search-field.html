@@ -22,7 +22,7 @@
     let theSearchBar = docsSearchBar({
       hostUrl: "{{ theme_use_meilisearch.host }}" ,
       apiKey: "{{ theme_use_meilisearch.api_key }}" ,
-      indexUid: "ansys-ansys-sphinx-theme-sphinx-docs",
+      indexUid: "{{ theme_use_meilisearch.index_uids.items()|first|first }}",
       inputSelector: '#search-bar-input, #indexUidSelector',
       enableDarkMode: 'auto',
       debug: true // Set debug to true if you want to inspect the dropdown
