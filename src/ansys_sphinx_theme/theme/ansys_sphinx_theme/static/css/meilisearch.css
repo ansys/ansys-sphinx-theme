@@ -1,5 +1,5 @@
 @import "https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.css";
-
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css";
 
 div [data-ds-theme] .searchbox {
     margin: auto;
@@ -12,7 +12,7 @@ div [data-ds-theme] .searchbox {
 }
 
 .docs-searchbar-suggestion--category-header {
-    background-color: #e6eeff;
+    background-color: #d9d9d9;
     border-radius: 7px;
     text-align: center;
 }
@@ -57,4 +57,66 @@ div [data-ds-theme] .searchbox input {
     border: 0;
     box-shadow: 0px 0px 8px darkgrey;
     padding: 0 10px 0px 10px;
+}
+
+.meilisearch-autocomplete {
+    text-align: center;
+    color: var(--pst-color-text-base);
+}
+
+#search-bar-input{
+    width: 150%;
+    background-color: var(--pst-color-background);
+    border: 1px solid var(--pst-color-border);
+    border-radius: .25rem;
+    color: var(--pst-color-text-base);
+    font-size: var(--pst-font-size-icon);
+    position: relative;
+}
+
+.meilisearch-autocomplete::before {
+  content: "\f002";
+  font-family: "Font Awesome 6 Free"; /* The Font Awesome font family */
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: var(--pst-color-border);
+}
+
+.index-select {
+    color: #555;
+    flex-direction: column;
+    background: #fff;
+    height: 2.5rem;
+    border-radius: 8px;
+    font-size: 20px;
+    font-family: "Open Sans", sans-serif;
+    box-shadow: 0px 0px 20px darkgrey;
+    margin-left: 13rem;
+}
+
+.meilisearch-autocomplete .dsb-dropdown-menu [class^=dsb-dataset-] {
+    position: relative;
+    border: 1px solid #d9d9d9;
+    background: #fff;
+    border-radius: 4px;
+    overflow: auto;
+    padding: 0 8px 8px;
+    width: 130%;
+}
+
+.meilisearch-autocomplete .docs-searchbar-suggestion {
+    width: 130%;
+}
+
+.meilisearch-autocomplete .docs-searchbar-suggestion--highlight {
+    color: var(--pst-color-info);
+    background: var(--pst-color-background);
+    padding: 0 .05em;
+}
+
+.meilisearch-autocomplete .docs-searchbar-suggestion--subcategory-column {
+    width: 50%;
 }

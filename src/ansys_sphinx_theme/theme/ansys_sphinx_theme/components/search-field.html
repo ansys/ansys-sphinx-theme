@@ -8,13 +8,13 @@
     <input type="search" placeholder="Search" class="form-control" id="search-bar-input" autofocus />
 
     {% if theme_use_meilisearch.index_uids %}
-      <select id="indexUidSelector" style="margin-left: 20px;" class="index-select">
+      <select id="indexUidSelector" class="index-select">
       {% for index_uid, index_name in theme_use_meilisearch.index_uids.items() %}
         <option value="{{ index_uid }}">{{ index_name }}</option>
       {% endfor %}
       </select>
     {% endif %}
-
+    <i class="fa-solid fa-magnifying-glass"></i>
   <!-- Include the MeiliSearch JavaScript library for the search bar -->
   <script src="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.js"></script>
   <script>
@@ -23,15 +23,14 @@
       hostUrl: "{{ theme_use_meilisearch.host }}" ,
       apiKey: "{{ theme_use_meilisearch.api_key }}" ,
       indexUid: "ansys-ansys-sphinx-theme-sphinx-docs",
-      inputSelector: '#search-bar-input, #indexUidSelecto',
+      inputSelector: '#search-bar-input, #indexUidSelector',
       enableDarkMode: 'auto',
       debug: true // Set debug to true if you want to inspect the dropdown
     });
 
     document.getElementById('indexUidSelector').addEventListener('change', function() {
       theSearchBar.indexUid = this.value;
-      index = client.index(this.value);
-      theSearchBar.inputSelector = '#docs-searchbar-suggestion';
+      theSearchBar.inputSelector = '#docs-searchbar-suggestion, #indexUidSelector';
     });
 
     // Set the focus on the search bar input
