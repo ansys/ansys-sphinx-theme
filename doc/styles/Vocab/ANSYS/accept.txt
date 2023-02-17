@@ -4,3 +4,4 @@ ansys
 Ansys Sphinx Theme
 boolean
 datatable
+MeiliSearch

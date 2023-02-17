@@ -65,7 +65,7 @@ html_theme_options = {
         "version_match": get_version_match(__version__),
     },
     "use_meilisearch": {
-        "host": os.getenv("MEILISEARCH_HOST_NAME"),
+        "host": os.getenv("MEILISEARCH_HOST_NAME", ""),
         "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
         "index_uids": {
             "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",

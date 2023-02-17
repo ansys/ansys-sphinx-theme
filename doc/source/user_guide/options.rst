@@ -103,3 +103,50 @@ If you want to hide all icons, use the ``show_icons`` boolean variable:
         ...
     }
 
+Use MeiliSearch
+----------------
+
+MeiliSearch is an open-source search engine that allows developers to 
+easily integrate search functionality into their applications.
+
+To use MeiliSearch in your Sphinx project, you can add a child 
+dictionary called ``use_meilisearch`` to the ``html_theme_options``
+dictionary in the ``conf.py`` file. 
+
+This dictionary should contain the following keys:
+
+#. ``host``: The host name of your MeiliSearch instance.
+    You can set this to an environment variable using 
+    ``os.getenv()`` for added security.
+
+#. ``api_key``: The API key for your MeiliSearch instance.
+   You can also set this to an environment variable using ``os.getenv()``.
+
+#. ``index_uids``: A dictionary that maps index UID to user-friendly index names.
+   Each key-value pair represents an index, with the key
+   being the index UID and the value being the index name.
+
+Here is an example configuration for using MeiliSearch in ``conf.py`` file:
+
+.. code-block:: python
+
+    import os 
+
+    use_meilisearch = {
+        "host": os.getenv("MEILISEARCH_HOST_NAME", ""),
+        "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
+        "index_uids": {
+            "index-uid of current project": "index name to be displayed",
+            "another-index-uid": "index name to be displayed"
+        }
+    }
+
+With these options set, your Sphinx project can use MeiliSearch 
+to provide search functionality for your documentation.
+
+.. note::
+
+    If you do not set the "use_meilisearch" option,
+    ansys-sphinx-theme uses the default search functionality 
+    inherited from the PyData Sphinx Theme.
+
