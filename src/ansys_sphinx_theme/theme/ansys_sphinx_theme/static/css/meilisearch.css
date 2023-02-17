@@ -60,6 +60,7 @@ div [data-ds-theme] .searchbox input {
     color: var(--pst-color-text-base);
     font-size: var(--pst-font-size-icon);
     position: relative;
+    padding-left: 3rem;
 }
 
 .meilisearch-autocomplete::before {
