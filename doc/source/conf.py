@@ -70,8 +70,6 @@ html_theme_options = {
         "index_uids": {
             "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
             "pyansys-docs-all-public": "PyAnsys",
-            "pyaedt": "pyaedt",
-            "pymapdl": "pymapdl",
         },
     },
 }

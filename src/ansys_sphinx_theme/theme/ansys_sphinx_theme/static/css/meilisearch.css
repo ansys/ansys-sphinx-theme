@@ -53,7 +53,7 @@ div [data-ds-theme] .searchbox input {
 }
 
 #search-bar-input{
-    width: 175%;
+    width: 173%;
     background-color: var(--pst-color-background);
     border: 1px solid var(--pst-color-border);
     border-radius: .25rem;
