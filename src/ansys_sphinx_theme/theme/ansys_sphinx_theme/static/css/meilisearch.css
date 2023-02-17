@@ -101,7 +101,7 @@ div [data-ds-theme] .searchbox input {
 
 .meilisearch-autocomplete .docs-searchbar-suggestion--highlight {
     color: var(--pst-color-info);
-    background: var(--pst-color-background);
+    background: rgb(255 255 255 / 49%);
     padding: 0 .05em;
 }
 
