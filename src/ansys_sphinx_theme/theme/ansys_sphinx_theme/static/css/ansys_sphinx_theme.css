@@ -94,6 +94,8 @@ html[data-theme="light"] {
   --pst-color-codecell: #fafae2;
   --pst-color-codeout: var(--pst-color-inline-code);
   --pst-color-sig: #0965C8;
+  --pst-color-code-s1: #b35000;
+  --pst-color-code-c1: #095D0A;
   /*****************************************************************************
   * sphinx design primary color
   */
@@ -144,6 +146,8 @@ html[data-theme="dark"] {
   --pst-color-codecell: #495057;
   --pst-color-codeout: #f2f4f6;
   --pst-color-sig:#d6ab1e;
+  --pst-color-code-s1: #D79A60;
+  --pst-color-code-c1: #8FB842;
 
   /*****************************************************************************
   * table hovering
@@ -511,12 +515,8 @@ Sphinx gallery output
   font-size: 1.1em;
 }
 
-html[data-theme="light"] .highlight .s1, .kc {
-  color: #753E0B !important;
-}
-
-html[data-theme="dark"] .highlight .s1, .s2, .kc {
-  color: #D79A60 !important;
+.highlight .s1, .s2, .kc {
+  color: var(--pst-color-code-s1)!important;
 }
 
 html[data-theme="dark"] .highlight .kn {
@@ -524,16 +524,8 @@ html[data-theme="dark"] .highlight .kn {
   font-weight: normal;
 }
 
-html[data-theme="light"] .highlight .c1 {
-  color: #095D0A;
-}
-
-html[data-theme="dark"] .highlight .c1 {
-  color: #8FB842;
-}
-
-html[data-theme="light"] .highlight .s2 {
-  color: #753E0B !important;
+.highlight .c1 {
+  color: var(--pst-color-code-c1);
 }
 
 html[data-theme="dark"] .highlight .n {
