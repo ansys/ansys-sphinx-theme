@@ -172,7 +172,7 @@ Codecell
 */
 
 dt:target, span.highlighted {
-  background-color: var(--pst-color-border)!important; 
+  background-color: var(--pst-color-codecell)!important; 
 }
 
 .docutils {
