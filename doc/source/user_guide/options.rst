@@ -147,6 +147,6 @@ to provide search functionality for your documentation.
 .. note::
 
     If you do not set the "use_meilisearch" option,
-    ansys-sphinx-theme uses the default search functionality 
+    ``ansys-sphinx-theme`` uses the default search functionality 
     inherited from the PyData Sphinx Theme.
 
