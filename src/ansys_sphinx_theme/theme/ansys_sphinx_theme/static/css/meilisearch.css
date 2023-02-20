@@ -53,7 +53,7 @@ div [data-ds-theme] .searchbox input {
 }
 
 #search-bar-input{
-    width: 173%;
+    width: 182%;
     background-color: var(--pst-color-background);
     border: 1px solid var(--pst-color-border);
     border-radius: .25rem;
@@ -75,14 +75,16 @@ div [data-ds-theme] .searchbox input {
 }
 
 .index-select {
-    color:  var(--pst-color-text-base);
+    color: var(--pst-color-text-base);
     background: var(--pst-color-background);
-    height: 2.5rem;
-    border-radius: 8px;
+    height: 3rem;
+    border: 1px solid var(--pst-color-border);
+    border-radius: .25rem;
     font-size: 20px;
     font-family: "Open Sans", sans-serif;
     box-shadow: 0px 0px 20px var(--pst-color-border);
     padding: 0 10px 0px 10px;
+    width: 25%
 }
 
 .meilisearch-autocomplete .dsb-dropdown-menu [class^=dsb-dataset-] {
@@ -92,11 +94,11 @@ div [data-ds-theme] .searchbox input {
     border-radius: 4px;
     overflow: auto;
     padding: 0 8px 8px;
-    width: 130%;
+    width: 99%;
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion {
-    width: 130%;
+    width: 99%;
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion--highlight {
@@ -106,7 +108,7 @@ div [data-ds-theme] .searchbox input {
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion--subcategory-column {
-    width: 50%;
+    width: 30%;
 }
 
 .search-button__wrapper.show form.bd-search {
