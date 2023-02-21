@@ -1,0 +1,45 @@
+<!-- Debugging: html_theme_options = {{ html_theme_options }} -->
+{% if theme_use_meilisearch %}
+  <!-- Include the MeiliSearch CSS stylesheet only if theme present -->
+  <link href="{{ pathto('_static/css/meilisearch.css', 1) }}" rel="stylesheet">
+
+  <!-- Create a search bar form with a text input and a dropdown selector for the search index -->
+  <form class="bd-search d-flex align-items-center" action="{{ pathto('search') }}" method="get">
+    <input type="search" placeholder="Search" class="form-control" id="search-bar-input" autofocus />
+
+    {% if theme_use_meilisearch.index_uids %}
+      <select id="indexUidSelector" class="index-select">
+      {% for index_uid, index_name in theme_use_meilisearch.index_uids.items() %}
+        <option value="{{ index_uid }}">{{ index_name }}</option>
+      {% endfor %}
+      </select>
+    {% endif %}
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <!-- Include the MeiliSearch JavaScript library for the search bar -->
+    <script src="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.js"></script>
+    <script>
+      // Initialize the MeiliSearch bar with the given API key and host
+      // inspect the first value of index UID as default
+      let theSearchBar = docsSearchBar({
+        hostUrl: "{{ theme_use_meilisearch.host }}" ,
+        apiKey: "{{ theme_use_meilisearch.api_key }}" ,
+        indexUid: "{{ theme_use_meilisearch.index_uids.items()|first|first }}",
+        inputSelector: '#search-bar-input, #indexUidSelector',
+        enableDarkMode: 'auto',
+        debug: true // Set debug to true if you want to inspect the dropdown
+      });
+
+      document.getElementById('indexUidSelector').addEventListener('change', function() {
+        theSearchBar.indexUid = this.value;
+        theSearchBar.inputSelector = '#docs-searchbar-suggestion';
+      });
+
+      // Set the focus on the search bar input
+      document.getElementById('docs-searchbar-suggestion').focus();
+    </script>
+  </form>
+{% else %}
+  <!-- If there is no MiliSearch enabled, use the PyData search -->
+  {%- extends "pydata_sphinx_theme/components/search-field.html" -%}
+{% endif %}
+

@@ -38,6 +38,8 @@ cname = os.getenv("DOCUMENTATION_CNAME", "nocname.com")
 html_logo = ansys_logo_black
 html_theme = "ansys_sphinx_theme"
 
+
+# In the html_context dictionary in conf.py
 html_context = {
     "github_user": "ansys",
     "github_repo": "ansys-sphinx-theme",
@@ -61,6 +63,14 @@ html_theme_options = {
     "switcher": {
         "json_url": f"https://{cname}/release/versions.json",
         "version_match": get_version_match(__version__),
+    },
+    "use_meilisearch": {
+        "host": os.getenv("MEILISEARCH_HOST_NAME", ""),
+        "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
+        "index_uids": {
+            "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
+            "pyansys-docs-all-public": "PyAnsys",
+        },
     },
 }
 
