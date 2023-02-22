@@ -2,7 +2,7 @@
 import pathlib
 from typing import Dict
 
-import sphinx
+from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
@@ -67,7 +67,7 @@ def setup_default_html_theme_options(app):
 
     Parameters
     ----------
-    app : sphinx.application.Sphinx
+    app : ~sphinx.application.Sphinx
         Application instance for rendering the documentation.
 
     Notes
@@ -84,12 +84,12 @@ def setup_default_html_theme_options(app):
     app.config.html_theme_options.setdefault("collapse_navigation", "True")
 
 
-def setup(app: sphinx.application.Sphinx) -> Dict:
+def setup(app: Sphinx) -> Dict:
     """Connect to the sphinx theme app.
 
     Parameters
     ----------
-    app : sphinx.application.Sphinx
+    app : ~sphinx.application.Sphinx
         Application instance for rendering the documentation.
 
     Returns
