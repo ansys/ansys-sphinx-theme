@@ -123,7 +123,7 @@ This dictionary should contain the following keys:
 
 #. ``api_key``: The API key for your MeiliSearch instance.
    You can also set this to an environment variable using ``os.getenv()``. If no
-   value is provided, the default API public API key for PyAnsys is used.
+   value is provided, the default public API key for PyAnsys is used.
 
 #. ``index_uids``: A dictionary that provides a mapping between the unique
    identifier (UID) of an index and its 
