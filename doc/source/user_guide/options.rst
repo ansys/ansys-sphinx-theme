@@ -149,6 +149,7 @@ Here is an example configuration for using MeiliSearch in the ``conf.py`` file:
 
 Here is the example configuration of using MeiliSearch in 
 ``conf.py`` file of ``ansys-sphinx-theme``:
+
 .. code-block:: python
 
     import os 
@@ -172,4 +173,3 @@ to provide search functionality for your documentation.
     If you do not set the "use_meilisearch" option,
     ``ansys-sphinx-theme`` uses the default search functionality 
     inherited from the PyData Sphinx Theme.
-
