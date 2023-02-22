@@ -115,18 +115,24 @@ dictionary in the ``conf.py`` file.
 
 This dictionary should contain the following keys:
 
-#. ``host``: The host name of your MeiliSearch instance.
+#. ``host``: The host name of your MeiliSearch instance. It’s hosted at
+    https://search.pyansys.com on port 443 (default).
     You can set this to an environment variable using 
     ``os.getenv()`` for added security.
 
 #. ``api_key``: The API key for your MeiliSearch instance.
    You can also set this to an environment variable using ``os.getenv()``.
 
-#. ``index_uids``: A dictionary that maps index UID to user-friendly index names.
+#. ``index_uids``: A dictionary that provides a mapping between the unique
+   identifier (UID) of an index and its 
+   corresponding user-friendly name. Each key-value pair in the dictionary 
    Each key-value pair represents an index, with the key
    being the index UID and the value being the index name.
+   The index UID points to an index on the server.
+   The list of all available indices can be found 
+   at `Active Public Indices <https://stunning-adventure-k6g9rqj.pages.github.io/active_indices.html>`.
 
-Here is an example configuration for using MeiliSearch in ``conf.py`` file:
+Here is an example configuration for using MeiliSearch in the ``conf.py`` file:
 
 .. code-block:: python
 
@@ -139,6 +145,23 @@ Here is an example configuration for using MeiliSearch in ``conf.py`` file:
             "index-uid of current project": "index name to be displayed",
             "another-index-uid": "index name to be displayed"
         }
+    }
+
+Here is the example configuration of using MeiliSearch in 
+``conf.py`` file of ``ansys-sphinx-theme``:
+.. code-block:: python
+
+    import os 
+    
+    html_theme_options = {
+    "use_meilisearch": {
+        "host": os.getenv("MEILISEARCH_HOST_NAME", ""),
+        "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
+        "index_uids": {
+            "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
+            "pyansys-docs-all-public": "PyAnsys",
+        },
+    },
     }
 
 With these options set, your Sphinx project can use MeiliSearch 
