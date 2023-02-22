@@ -115,7 +115,7 @@ dictionary in the ``conf.py`` file.
 
 This dictionary should contain the following keys:
 
-#. ``host``: The host name of your MeiliSearch instance. It’s hosted at
+#. ``host``: The host name of your MeiliSearch instance. It is hosted at
     https://search.pyansys.com on port 443 (default).
     You can set this to an environment variable using 
     ``os.getenv()`` for added security.
@@ -126,9 +126,8 @@ This dictionary should contain the following keys:
 #. ``index_uids``: A dictionary that provides a mapping between the unique
    identifier (UID) of an index and its 
    corresponding user-friendly name. Each key-value pair in the dictionary 
-   Each key-value pair represents an index, with the key
-   being the index UID and the value being the index name.
-   The index UID points to an index on the server.
+   represents an index, with the key being the index UID and the value
+   being the index name. The index UID points to an index on the server.
    The list of all available indices can be found 
    at `Active Public Indices <https://stunning-adventure-k6g9rqj.pages.github.io/active_indices.html>`.
 
