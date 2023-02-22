@@ -86,7 +86,7 @@ div [data-ds-theme] .searchbox input {
     padding: 0 10px 0px 10px;
     width: 25%;
     position: absolute;
-    margin-left: 40rem;
+    margin-left: 820px;
 }
 
 .meilisearch-autocomplete .dsb-dropdown-menu [class^=dsb-dataset-] {
