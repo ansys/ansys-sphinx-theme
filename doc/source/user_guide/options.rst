@@ -25,8 +25,8 @@ For example:
        "show_prev_next": False,
        "show_breadcrumbs": True,
        "additional_breadcrumbs": [
-        ("Ansys", "https://www.ansys.com/"),
-        ],
+           ("Ansys", "https://www.ansys.com/"),
+       ],
    }
 
 When you are on the documentation's homepage, the breadcrumb shows the homepage
@@ -118,10 +118,12 @@ This dictionary should contain the following keys:
 #. ``host``: The host name of your MeiliSearch instance. It is hosted at
     https://search.pyansys.com on port 443 (default).
     You can set this to an environment variable using 
-    ``os.getenv()`` for added security.
+    ``os.getenv()`` for added security. If no value is provided, the default
+    public host for PyAnsys is used.
 
 #. ``api_key``: The API key for your MeiliSearch instance.
-   You can also set this to an environment variable using ``os.getenv()``.
+   You can also set this to an environment variable using ``os.getenv()``. If no
+   value is provided, the default API public API key for PyAnsys is used.
 
 #. ``index_uids``: A dictionary that provides a mapping between the unique
    identifier (UID) of an index and its 
@@ -155,8 +157,6 @@ Here is the example configuration of using MeiliSearch in
     
     html_theme_options = {
     "use_meilisearch": {
-        "host": os.getenv("MEILISEARCH_HOST_NAME", ""),
-        "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
         "index_uids": {
             "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
             "pyansys-docs-all-public": "PyAnsys",
