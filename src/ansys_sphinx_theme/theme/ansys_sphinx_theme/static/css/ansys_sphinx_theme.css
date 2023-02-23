@@ -607,6 +607,10 @@ Navigation column (according to side column)
 .bd-header .navbar-nav li a.nav-link {
   color: #ddd;
 }
+.bd-header .navbar-nav .dropdown button {
+  color: #ddd;
+  display: unset;
+}
 
 /*
 #################################
@@ -631,6 +635,15 @@ b, strong {
 
 .bd-header .navbar-nav>.active>.nav-link {
   border-bottom: 2px solid #fff;
+}
+
+.navbar-nav li a:focus, .navbar-nav li a:hover, .navbar-nav li.current>a {
+  color: white !important;
+  border-bottom: 2px solid #fff;
+}
+
+.bd-header .navbar-nav .dropdown .dropdown-menu{
+  min-width: 250px;
 }
 
 /*
