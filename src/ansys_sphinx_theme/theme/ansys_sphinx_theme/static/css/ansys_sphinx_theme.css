@@ -642,6 +642,10 @@ b, strong {
   border-bottom: 2px solid #fff;
 }
 
+.bd-header .navbar-nav .dropdown .dropdown-menu{
+  min-width: 250px;
+}
+
 /*
 ###########################
 Left side toc-tree hovering 
