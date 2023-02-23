@@ -11,13 +11,14 @@ from sphinx.builders.latex import LaTeXBuilder
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
-from ansys_sphinx_theme import (  # get_version_match,
+from ansys_sphinx_theme import (
     __version__,
     ansys_favicon,
     ansys_logo_black,
     ansys_logo_white,
     ansys_logo_white_cropped,
     generate_404,
+    get_version_match,
     latex,
     watermark,
 )
@@ -59,10 +60,10 @@ html_theme_options = {
             "name": "Changelog",
         },
     ],
-    # "switcher": {
-    #    "json_url": f"https://{cname}/release/versions.json",
-    #    "version_match": get_version_match(__version__),
-    # },
+    "switcher": {
+        "json_url": f"https://{cname}/release/versions.json",
+        "version_match": get_version_match(__version__),
+    },
     "use_meilisearch": {
         "index_uids": {
             "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
