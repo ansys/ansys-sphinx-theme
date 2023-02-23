@@ -637,6 +637,11 @@ b, strong {
   border-bottom: 2px solid #fff;
 }
 
+.navbar-nav li a:focus, .navbar-nav li a:hover, .navbar-nav li.current>a {
+  color: white !important;
+  border-bottom: 2px solid #fff;
+}
+
 /*
 ###########################
 Left side toc-tree hovering 
