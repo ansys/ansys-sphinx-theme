@@ -6,7 +6,7 @@ from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
-__version__ = "0.9.2"
+__version__ = "0.9.3"
 
 
 # Declare the fundamental paths of the theme
@@ -78,9 +78,10 @@ def setup_default_html_theme_options(app):
 
     """
     # Place all switchers and icons at the end of the navigation bar
-    app.config.html_theme_options.setdefault(
-        "navbar_end", ["version-switcher", "theme-switcher", "navbar-icon-links"]
-    )
+    if app.config.html_theme_options.get("switcher"):
+        app.config.html_theme_options.setdefault(
+            "navbar_end", ["version-switcher", "theme-switcher", "navbar-icon-links"]
+        )
     app.config.html_theme_options.setdefault("collapse_navigation", "True")
 
 
