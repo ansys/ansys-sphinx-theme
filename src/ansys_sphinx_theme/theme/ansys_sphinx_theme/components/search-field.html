@@ -17,7 +17,7 @@
     <i class="fa-solid fa-magnifying-glass"></i>
     <!-- Include the MeiliSearch JavaScript library for the search bar -->
     <script src="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.js"></script>
-    <script>
+    
       // If no credentials provided, use the default ones
       {% if not theme_use_meilisearch.host and not theme_use_meilisearch.api_key %}
         {% set HOST_URL = "https://search.pyansys.com" %}
@@ -26,7 +26,7 @@
         {% set HOST_URL = theme_use_meilisearch.host %}
         {% set API_KEY = theme_use_meilisearch.api_key %}
       {% endif %}
-      
+      <script>
       // Initialize the MeiliSearch bar with the given API key and host
       // inspect the first value of index UID as default
       let theSearchBar = docsSearchBar({
