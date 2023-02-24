@@ -84,7 +84,7 @@ div [data-ds-theme] .searchbox input {
     font-family: "Open Sans", sans-serif;
     box-shadow: 0px 0px 20px var(--pst-color-border);
     padding: 0 10px 0px 10px;
-    width: 100px;
+    width: auto;
     margin-left: 5px;
 }
 
