@@ -131,7 +131,7 @@ This dictionary should contain the following keys:
    represents an index, with the key being the index UID and the value
    being the index name. The index UID points to an index on the server.
    The list of all available indices can be found 
-   at `Active Public Indices <https://stunning-adventure-k6g9rqj.pages.github.io/active_indices.html>`.
+   at `Active Public Indices <https://stunning-adventure-k6g9rqj.pages.github.io/active_indices.html>`_ .
 
 Here is an example configuration for using MeiliSearch in the ``conf.py`` file:
 
