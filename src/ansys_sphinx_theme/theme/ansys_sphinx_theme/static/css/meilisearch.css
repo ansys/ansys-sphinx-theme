@@ -115,7 +115,7 @@ div [data-ds-theme] .searchbox input {
 .search-button__wrapper.show form.bd-search {
     flex-grow: 2;
     width : 1000px;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
 }
 
 .d-flex {
@@ -124,3 +124,20 @@ div [data-ds-theme] .searchbox input {
     justify-content: space-between;
     flex-wrap: nowrap;
 }
+
+@media only screen and (max-width: 1000px) {
+    .index-select {
+        margin-bottom: 100px;
+        position: absolute;
+        margin-left: 0px;
+        width: fit-content;
+    }
+    .search-button__wrapper.show form.bd-search {
+        flex-grow: 2;
+        width : 1000px;
+        margin-bottom: 0px;
+    }
+    .meilisearch-autocomplete .dsb-dropdown-menu{
+        max-width: 750px;
+    }
+    }
