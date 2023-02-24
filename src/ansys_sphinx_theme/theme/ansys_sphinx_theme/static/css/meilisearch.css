@@ -115,6 +115,7 @@ div [data-ds-theme] .searchbox input {
 .search-button__wrapper.show form.bd-search {
     flex-grow: 2;
     width : 1000px;
+    margin-bottom: 150px;
 }
 
 .d-flex {
