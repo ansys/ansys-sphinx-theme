@@ -53,7 +53,7 @@ div [data-ds-theme] .searchbox input {
 }
 
 #search-bar-input{
-    width: 750px;
+    width: 550px;
     background-color: var(--pst-color-background);
     border: 1px solid var(--pst-color-border);
     border-radius: .25rem;
@@ -84,7 +84,7 @@ div [data-ds-theme] .searchbox input {
     font-family: "Open Sans", sans-serif;
     box-shadow: 0px 0px 20px var(--pst-color-border);
     padding: 0 10px 0px 10px;
-    width: auto;
+    width: 250px;
     margin-left: 5px;
 }
 
@@ -95,7 +95,7 @@ div [data-ds-theme] .searchbox input {
     border-radius: 4px;
     overflow: auto;
     padding: 0 8px 8px;
-    width: 750px;
+    width: 805px;
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion {
@@ -111,33 +111,3 @@ div [data-ds-theme] .searchbox input {
 .meilisearch-autocomplete .docs-searchbar-suggestion--subcategory-column {
     width: 30%;
 }
-
-.search-button__wrapper.show form.bd-search {
-    flex-grow: 2;
-    width : 1000px;
-    margin-bottom: 50px;
-}
-
-.d-flex {
-    display: flex!important;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-}
-
-@media only screen and (max-width: 1000px) {
-    .index-select {
-        margin-bottom: 100px;
-        position: absolute;
-        margin-left: 0px;
-        width: fit-content;
-    }
-    .search-button__wrapper.show form.bd-search {
-        flex-grow: 2;
-        width : 1000px;
-        margin-bottom: 0px;
-    }
-    .meilisearch-autocomplete .dsb-dropdown-menu{
-        max-width: 750px;
-    }
-    }
