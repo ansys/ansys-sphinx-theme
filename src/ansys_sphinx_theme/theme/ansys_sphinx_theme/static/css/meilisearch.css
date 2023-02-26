@@ -53,7 +53,7 @@ div [data-ds-theme] .searchbox input {
 }
 
 #search-bar-input{
-    width: 170%;
+    width: 550px;
     background-color: var(--pst-color-background);
     border: 1px solid var(--pst-color-border);
     border-radius: .25rem;
@@ -84,7 +84,7 @@ div [data-ds-theme] .searchbox input {
     font-family: "Open Sans", sans-serif;
     box-shadow: 0px 0px 20px var(--pst-color-border);
     padding: 0 10px 0px 10px;
-    width: 25%;
+    width: 250px;
     margin-left: 5px;
 }
 
@@ -95,11 +95,11 @@ div [data-ds-theme] .searchbox input {
     border-radius: 4px;
     overflow: auto;
     padding: 0 8px 8px;
-    width: 99%;
+    width: 805px;
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion {
-    width: 99%;
+    width: 735px;
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion--highlight {
@@ -110,15 +110,4 @@ div [data-ds-theme] .searchbox input {
 
 .meilisearch-autocomplete .docs-searchbar-suggestion--subcategory-column {
     width: 30%;
-}
-
-.search-button__wrapper.show form.bd-search {
-    flex-grow: 2;
-}
-
-.d-flex {
-    display: flex!important;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: nowrap;
 }
