@@ -32,7 +32,7 @@ project = "ansys_sphinx_theme"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "ANSYS, Inc."
 release = version = __version__
-cname = os.getenv("DOCUMENTATION_CNAME", "nocname.com")
+cname = os.getenv("DOCUMENTATION_CNAME", "sphinxdocs.ansys.com")
 
 # use the default ansys logo
 html_logo = ansys_logo_black
