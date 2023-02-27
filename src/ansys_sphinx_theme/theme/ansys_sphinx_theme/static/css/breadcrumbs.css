@@ -14,8 +14,7 @@ breadcrumbs
 }
 
 div.related > ul {
-    padding-left: 0;
-    padding-bottom: 1.5rem;
+    padding: 10px 0 20px 0;
 }
 
 *, :after, :before {
