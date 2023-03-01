@@ -930,9 +930,8 @@ div.deprecated {
   background-color: #dc354514;
 }
 
-div.versionadded {
-  border-color: var(--pst-color-success);
-  background: #88ca881f;
+div.deprecated, div.versionadded, div.versionchanged{
+  background-color: transparent;
 }
 
 .admonition, div.admonition{
