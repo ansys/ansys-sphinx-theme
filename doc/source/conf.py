@@ -38,8 +38,7 @@ cname = os.getenv("DOCUMENTATION_CNAME", "sphinxdocs.ansys.com")
 html_logo = ansys_logo_black
 html_theme = "ansys_sphinx_theme"
 
-# Favicon
-html_favicon = ansys_favicon
+
 # In the html_context dictionary in conf.py
 html_context = {
     "github_user": "ansys",
@@ -50,14 +49,7 @@ html_context = {
 
 # specify the location of your github repo
 html_theme_options = {
-    "icon_links": [
-        {
-            "name": "GitHub",
-            "url": "https://github.com/ansys/ansys-sphinx-theme",
-            "icon": "fa-brands fa-square-github",
-            "type": "fontawesome",
-        }
-    ],
+    "github_url": "https://github.com/ansys/ansys-sphinx-theme",
     "contact_mail": "pyansys.support@ansys.com",
     "additional_breadcrumbs": [
         ("Ansys Internal Developer Portal", "https://dev.docs.ansys.com"),
@@ -127,6 +119,8 @@ numpydoc_validation_checks = {
     # type, unless multiple values are being returned"
 }
 
+# Favicon
+html_favicon = ansys_favicon
 
 # static path
 html_static_path = ["_static"]
