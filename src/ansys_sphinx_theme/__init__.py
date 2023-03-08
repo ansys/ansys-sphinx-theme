@@ -83,7 +83,6 @@ def setup_default_html_theme_options(app):
             "navbar_end", ["version-switcher", "theme-switcher", "navbar-icon-links"]
         )
     app.config.html_theme_options.setdefault("collapse_navigation", True)
-    app.config.html_theme_options.setdefault("icon_links", [])
 
 
 def setup(app: Sphinx) -> Dict:
