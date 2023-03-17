@@ -684,6 +684,11 @@ button, input, optgroup, select, textarea,button:hover {
   border-color: #f8f9fa;
 }
 
+button.btn.version-switcher__button {
+  border-color: var(--pst-color-border);
+  color: #ddd;
+}
+
 button.version-switcher__button:hover {
   color: #f8f8f2;
 }
