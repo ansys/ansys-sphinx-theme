@@ -8,7 +8,6 @@ from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
 __version__ = "0.9.6"
 
-
 # Declare the fundamental paths of the theme
 THIS_PATH = pathlib.Path(__file__).parent.resolve()
 THEME_PATH = THIS_PATH / "theme" / "ansys_sphinx_theme"
