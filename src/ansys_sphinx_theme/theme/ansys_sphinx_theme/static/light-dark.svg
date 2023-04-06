@@ -1,0 +1,12 @@
+<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @media (prefers-color-scheme: dark) {
+      .light-mode { display: none; }
+    }
+    @media (prefers-color-scheme: light) {
+      .dark-mode { display: none; }
+    }
+  </style>
+  <image class="light-mode" href="light-mode-image.png" width="100" height="100" />
+  <image class="dark-mode" href="dark-mode-image.png" width="100" height="100" />
+</svg>
