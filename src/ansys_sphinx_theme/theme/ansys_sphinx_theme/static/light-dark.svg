@@ -7,6 +7,6 @@
       .dark-mode { display: none; }
     }
   </style>
-  <image class="light-mode" href="light-mode-image.png" width="100" height="100" />
-  <image class="dark-mode" href="dark-mode-image.png" width="100" height="100" />
+  <image class="light-mode" href="pyansys-logo-white-cropped.png" width="100" height="100" />
+  <image class="dark-mode" href="pyansys-logo-black-cropped.png" width="100" height="100" />
 </svg>
