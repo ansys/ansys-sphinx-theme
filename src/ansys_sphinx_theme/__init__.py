@@ -1,7 +1,8 @@
 """This is the ansys-sphinx-theme module."""
 import pathlib
-from typing import Dict
+from typing import Any, Dict
 
+from docutils.nodes import document
 from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
@@ -85,7 +86,9 @@ def setup_default_html_theme_options(app):
     app.config.html_theme_options.setdefault("collapse_navigation", True)
 
 
-def update_footer_theme(app: Sphinx, pagename: str, templatename: str, context, doctree) -> None:
+def update_footer_theme(
+    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: document
+) -> None:
     """Update the version number of the Ansys Sphinx theme in the footer.
 
     Connect to the Sphinx application instance for rendering the documentation,
