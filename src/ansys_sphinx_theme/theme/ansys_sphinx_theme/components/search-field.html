@@ -1,8 +1,6 @@
 <!-- Debugging: html_theme_options = {{ html_theme_options }} -->
 {% if theme_use_meilisearch %}
   {% set API_KEY = theme_use_meilisearch.api_key %}
-  {% set INDEX_UIDS = theme_use_meilisearch.index_uids.items() %}
-  {% set DEFAULT_INDEX_UID = INDEX_UIDS|first|first %}
   <!-- Include the MeiliSearch CSS stylesheet only if theme present -->
   <link href="{{ pathto('_static/css/meilisearch.css', 1) }}" rel="stylesheet">
 
@@ -12,7 +10,7 @@
 
     {% if theme_use_meilisearch.index_uids %}
         <select id="indexUidSelector" class="index-select">
-          {% for index_uid, index_name in INDEX_UIDS %}
+          {% for index_uid, index_name in theme_use_meilisearch.index_uids.items() %}
             <option value="{{ index_uid }}">{{ index_name }}</option>
           {% endfor %}
         </select>
@@ -33,7 +31,7 @@
       let theSearchBar = docsSearchBar({
           hostUrl: "{{ HOST_URL }}",
           apiKey: "{{ API_KEY }}",
-          indexUid: '#indexUidSelector',
+          indexUid: "{{ theme_use_meilisearch.index_uids.items()|first|first }}",
           inputSelector: '#search-bar-input, #indexUidSelector',
           enableDarkMode: 'auto',
           debug: true // Set debug to true if you want to inspect the dropdown
