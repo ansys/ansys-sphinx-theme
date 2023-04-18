@@ -1,6 +1,5 @@
 <!-- Debugging: html_theme_options = {{ html_theme_options }} -->
 {% if theme_use_meilisearch %}
-  {% set HOST_URL = theme_use_meilisearch.host %}
   {% set API_KEY = theme_use_meilisearch.api_key %}
   {% set INDEX_UIDS = theme_use_meilisearch.index_uids.items() %}
   {% set DEFAULT_INDEX_UID = INDEX_UIDS|first|first %}
@@ -21,6 +20,12 @@
     <i class="fa-solid fa-magnifying-glass"></i>
     <!-- Include the MeiliSearch JavaScript library for the search bar -->
     <script src="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.js"></script>
+
+    {% if not theme_use_meilisearch.host %}
+        {% set HOST_URL = "https://backend.search.pyansys.com" %}
+      {% else %}
+        {% set HOST_URL = theme_use_meilisearch.host %}
+      {% endif %}
     
       <script>
       // Initialize the MeiliSearch bar with the given API key and host

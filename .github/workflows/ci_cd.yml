@@ -13,6 +13,7 @@ env:
   PACKAGE_NAME: 'ansys-sphinx-theme'
   PACKAGE_NAMESPACE: 'ansys_sphinx_theme'
   DOCUMENTATION_CNAME: 'sphinxdocs.ansys.com'
+  MEILISEARCH_API_KEY: ${{ secrets.MEILISEARCH_API_KEY}}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
