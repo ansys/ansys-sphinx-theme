@@ -1,5 +1,4 @@
 """This is the ansys-sphinx-theme module."""
-from datetime import datetime
 import pathlib
 from typing import Any, Dict
 
@@ -110,8 +109,6 @@ def update_footer_theme(
         The document tree for the page.
     """
     context["ansys_sphinx_theme_version"] = __version__
-    now = datetime.now()
-    context["build_date"] = now.strftime("%B %d, %Y")
 
 
 def setup(app: Sphinx) -> Dict:
