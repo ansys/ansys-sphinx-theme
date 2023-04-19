@@ -1,0 +1,10 @@
+<p class="theme-version">
+    {% trans theme_version=ansys_sphinx_theme_version|e %}Built with the <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a> {{ ansys_sphinx_theme_version }}.{% endtrans %}
+    <br>Last updated on <span id="date"></span></br>
+</p>
+<script>
+  var options = { day: 'numeric', month: 'long', year: 'numeric' };
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString('en-US', options);
+  document.getElementById("date").innerHTML = date;
+</script>

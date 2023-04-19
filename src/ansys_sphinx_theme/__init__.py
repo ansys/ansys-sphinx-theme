@@ -1,12 +1,13 @@
 """This is the ansys-sphinx-theme module."""
 import pathlib
-from typing import Dict
+from typing import Any, Dict
 
+from docutils.nodes import document
 from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
-__version__ = "0.9.7"
+__version__ = "0.9.8"
 
 # Declare the fundamental paths of the theme
 THIS_PATH = pathlib.Path(__file__).parent.resolve()
@@ -84,6 +85,31 @@ def setup_default_html_theme_options(app):
     app.config.html_theme_options.setdefault("collapse_navigation", True)
 
 
+def update_footer_theme(
+    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: document
+) -> None:
+    """Update the version number of the Ansys Sphinx theme in the footer.
+
+    Connect to the Sphinx application instance for rendering the documentation,
+    and add the current version number of the Ansys Sphinx theme to the page context.
+    This allows the theme to update the footer with the current version number.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    pagename : str
+        The name of the current page.
+    templatename : str
+        The name of the template being used.
+    context : dict
+        The context dictionary for the page.
+    doctree : ~docutils.nodes.document
+        The document tree for the page.
+    """
+    context["ansys_sphinx_theme_version"] = __version__
+
+
 def setup(app: Sphinx) -> Dict:
     """Connect to the sphinx theme app.
 
@@ -113,6 +139,7 @@ def setup(app: Sphinx) -> Dict:
     app.add_js_file(str(JS_FILE.relative_to(STATIC_PATH)))
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
+    app.connect("html-page-context", update_footer_theme)
     # Add templates for autosummary
     app.config.templates_path.append(str(TEMPLATES_PATH))
 
