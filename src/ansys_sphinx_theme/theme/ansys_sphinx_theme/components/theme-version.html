@@ -4,7 +4,7 @@
 </p>
 <script>
   var options = { day: 'numeric', month: 'long', year: 'numeric' };
-  var today = new Date();
-  var date = today.toLocaleDateString('en-US', options);
+  var lastModifiedDate = new Date(document.lastModified);
+  var date = lastModifiedDate.toLocaleDateString('en-US', options);
   document.getElementById("date").innerHTML = date;
 </script>
