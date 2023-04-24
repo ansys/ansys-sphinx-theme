@@ -28,7 +28,7 @@
       <script>
       // Initialize the MeiliSearch bar with the given API key and host
       // inspect the first value of index UID as default
-      let theSearchBar = docsSearchBar({
+      var theSearchBar = docsSearchBar({
           hostUrl: "{{ HOST_URL }}",
           apiKey: "{{ API_KEY }}",
           indexUid: "{{ theme_use_meilisearch.index_uids.items()|first|first }}",
