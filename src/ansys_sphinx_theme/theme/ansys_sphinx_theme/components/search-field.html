@@ -32,7 +32,7 @@
           hostUrl: "{{ HOST_URL }}",
           apiKey: "{{ API_KEY }}",
           indexUid: "{{ theme_use_meilisearch.index_uids.items()|first|first }}",
-          inputSelector: '#search-bar-input, #indexUidSelector',
+          inputSelector: '#search-bar-input',
           enableDarkMode: 'auto',
           debug: true // Set debug to true if you want to inspect the dropdown
       });
