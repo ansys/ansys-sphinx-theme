@@ -25,7 +25,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "Sphinx>=4.2.0,<6",
+    "Sphinx>=4.2.0",
     "pydata-sphinx-theme==0.13.3",
     "Jinja2>=3.1.2",
 ]
@@ -33,7 +33,7 @@ dependencies = [
 [project.optional-dependencies]
 doc = [
     "numpydoc==1.5.0",
-    "Sphinx==5.3.0",
+    "Sphinx==6.2.0",
     "sphinx-copybutton==0.5.2",
     "sphinx-notfound-page==0.8.3",
     "sphinx-design==0.4.1",
