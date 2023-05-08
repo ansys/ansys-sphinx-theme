@@ -1,5 +1,6 @@
 <!-- Debugging: html_theme_options = {{ html_theme_options }} -->
 {% if theme_use_meilisearch %}
+  {% set API_KEY = theme_use_meilisearch.api_key %}
   <!-- Include the MeiliSearch CSS stylesheet only if theme present -->
   <link href="{{ pathto('_static/css/meilisearch.css', 1) }}" rel="stylesheet">
 
@@ -8,47 +9,45 @@
     <input type="search" placeholder="Search" class="form-control" id="search-bar-input" autofocus />
 
     {% if theme_use_meilisearch.index_uids %}
-      <select id="indexUidSelector" class="index-select">
-      {% for index_uid, index_name in theme_use_meilisearch.index_uids.items() %}
-        <option value="{{ index_uid }}">{{ index_name }}</option>
-      {% endfor %}
-      </select>
-    {% endif %}
+        <select id="indexUidSelector" class="index-select">
+          {% for index_uid, index_name in theme_use_meilisearch.index_uids.items() %}
+            <option value="{{ index_uid }}">{{ index_name }}</option>
+          {% endfor %}
+        </select>
+      {% endif %}
     <i class="fa-solid fa-magnifying-glass"></i>
     <!-- Include the MeiliSearch JavaScript library for the search bar -->
     <script src="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.js"></script>
+
+    {% if not theme_use_meilisearch.host %}
+      {% set HOST_URL = "https://backend.search.pyansys.com/" %}
+    {% else %}
+      {% set HOST_URL = theme_use_meilisearch.host %}
+    {% endif %}
     
-      <!-- If no credentials provided, use the default ones  -->
-      {% if not theme_use_meilisearch.host and not theme_use_meilisearch.api_key %}
-        {% set HOST_URL = "https://search.pyansys.com" %}
-        {% set API_KEY = "A1Qxly2sls6g1rb1sIKEVEtE7R1UsHad0VgqnvKhD5nhBNf5de" %}
-      {% else %}
-        {% set HOST_URL = theme_use_meilisearch.host %}
-        {% set API_KEY = theme_use_meilisearch.api_key %}
-      {% endif %}
       <script>
       // Initialize the MeiliSearch bar with the given API key and host
       // inspect the first value of index UID as default
-      let theSearchBar = docsSearchBar({
-        hostUrl: "{{ HOST_URL }}",
-        apiKey: "{{ API_KEY }}",
-        indexUid: "{{ theme_use_meilisearch.index_uids.items()|first|first }}",
-        inputSelector: '#search-bar-input, #indexUidSelector',
-        enableDarkMode: 'auto',
-        debug: true // Set debug to true if you want to inspect the dropdown
+      var theSearchBar = docsSearchBar({
+          hostUrl: "{{ HOST_URL }}",
+          apiKey: "{{ API_KEY }}",
+          indexUid: "{{ theme_use_meilisearch.index_uids.items()|first|first }}",
+          inputSelector: '#search-bar-input',
+          enableDarkMode: 'auto',
+          debug: true // Set debug to true if you want to inspect the dropdown
       });
 
       document.getElementById('indexUidSelector').addEventListener('change', function() {
         theSearchBar.indexUid = this.value;
-        theSearchBar.inputSelector = '#docs-searchbar-suggestion';
+        theSearchBar.inputSelector = '#search-bar-input';
       });
 
       // Set the focus on the search bar input
-      document.getElementById('docs-searchbar-suggestion').focus();
+      document.getElementById('search-bar-input').focus();
     </script>
   </form>
 {% else %}
   <!-- If there is no MiliSearch enabled, use the PyData search -->
-  {%- extends "pydata_sphinx_theme/components/search-field.html" -%}
+  {%- include "pydata_sphinx_theme/components/search-field.html" -%}
 {% endif %}
 
