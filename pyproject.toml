@@ -33,13 +33,13 @@ dependencies = [
 [project.optional-dependencies]
 doc = [
     "numpydoc==1.5.0",
-    "Sphinx==6.2.1",
+    "Sphinx==6.2.1", # BLOCKED BY sphinx-design - Cannot upgrade to Sphinx 7 for now
     "sphinx-copybutton==0.5.2",
     "sphinx-notfound-page==0.8.3",
     "sphinx-design==0.4.1",
     "bs4==0.0.1",
     "html5lib==1.1",
-    "requests==2.29.0",
+    "requests==2.30.0",
     "sphinx-jinja==2.0.2",
 ]
 
