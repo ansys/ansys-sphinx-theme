@@ -1,0 +1,72 @@
+{% if theme_use_meilisearch %}
+  {%- extends "page.html" %}
+  {%- block content %}
+  {# checkbox to toggle primary sidebar #}
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  {# Checkboxes to toggle the secondary sidebar #}
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  {%- if theme_announcement -%}
+    {% include "sections/announcement.html" %}
+  {%- endif %}
+  {% block docs_navbar %}
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+      {%- include "sections/header.html" %}
+    </nav>
+  {% endblock docs_navbar %}
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      {# Primary sidebar #}
+      <div class="bd-sidebar-primary bd-sidebar{% if not sidebars %} hide-on-wide{% endif %}">
+        {% include "sections/sidebar-primary.html" %}
+      </div>
+      {# Using an ID here so that the skip-link works #}
+      <main id="main-content" class="bd-main">
+        {# Main content area #}
+        {% block docs_main %}
+          <div class="bd-content">
+            <div class="bd-article-container">
+              {# Article header #}
+              <div class="bd-header-article">{% include "sections/header-article.html" %}</div>
+              {# Article content #}
+              {% block docs_body %}
+              <div class="bd-search-container">
+                <h1>{{ _("Search") }}</h1>
+                {% include "components/search-field.html" %}
+              </div>
+              {% endblock docs_body %}
+              {# Article Footer #}
+              {% if theme_show_prev_next %}
+                <footer class="bd-footer-article">
+                  {% include "sections/footer-article.html" %}
+                </footer>
+              {% endif %}
+            </div>
+            {# Secondary sidebar #}
+            {% block docs_toc %}
+              {% if not remove_sidebar_secondary %}
+                <div class="bd-sidebar-secondary bd-toc">{% include "sections/sidebar-secondary.html" %}</div>
+              {% endif %}
+            {% endblock docs_toc %}
+          </div>
+          <footer class="bd-footer-content">
+            {% include "sections/footer-content.html" %}
+          </footer>
+        {% endblock docs_main %}
+      </main>
+    </div>
+  </div>
+  {# Scripts placed at the end of the page to cut down on time to first content #}
+  {%- block scripts_end %}{{ _webpack.body_post() }}{%- endblock scripts_end %}
+{%- endblock content %}
+{% else %}
+  <!-- If there is no MeiliSearch enabled, use the PyData search -->
+  {%- include "pydata_sphinx_theme/search.html" -%}
+{% endif %}

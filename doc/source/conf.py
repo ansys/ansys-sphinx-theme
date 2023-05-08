@@ -65,9 +65,10 @@ html_theme_options = {
         "version_match": get_version_match(__version__),
     },
     "use_meilisearch": {
+        "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
         "index_uids": {
-            "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
-            "pyansys-docs-all-public": "PyAnsys",
+            "ansys-internal-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
+            "pyansys-pyaedt-sphinx-docs": "PyAEDT",
         },
     },
 }
@@ -88,7 +89,7 @@ extensions = [
 
 # Intersphinx mapping
 intersphinx_mapping = {
-    "python": ("https://docs.python.org/dev", None),
+    "python": ("https://docs.python.org/3", None),
     # kept here as an example
     # "scipy": ("https://docs.scipy.org/doc/scipy/reference", None),
     # "numpy": ("https://numpy.org/devdocs", None),
