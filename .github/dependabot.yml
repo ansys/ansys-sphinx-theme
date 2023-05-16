@@ -13,3 +13,7 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    labels:
+      - "maintenance"
+    commit-message:
+      prefix: "maint"
