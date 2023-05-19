@@ -7,6 +7,8 @@
       }
       return response.text();
     })
-    .then(text => document.getElementById("announcement_msg").innerHTML = text)
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
     .catch((error) => console.error(`Fetch problem: ${error.message}`));
 </script>
