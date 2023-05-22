@@ -29,7 +29,7 @@ repos:
   rev: 'v3.0.0-alpha.9-for-vscode'
   hooks:
   - id: prettier
-    types_or: [css, javascript]
+    types_or: [css, javascript, html]
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.4.0
