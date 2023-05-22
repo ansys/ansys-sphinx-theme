@@ -976,5 +976,5 @@ Border lines
 */
 .bd-sidebar-primary,
 .bd-sidebar-secondary {
-  max-height: calc(100vh - var(--pst-header-height)-1vh);
+  max-height: calc(100vh - var(--pst-header-height) - 1vh);
 }
