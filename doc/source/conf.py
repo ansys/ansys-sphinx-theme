@@ -50,9 +50,6 @@ html_context = {
 
 version_match = get_version_match(__version__)
 
-# will change with instant scraping
-# changes to index_uid = "ansys-sphinx-theme-{version-match}-sphinx-docs"
-
 index_uid = "ansys-sphinx-theme-{}-sphinx-docs".format(version_match).replace(".", "-")
 
 # specify the location of your github repo
