@@ -47,6 +47,13 @@ html_context = {
     "doc_path": "doc/source",
 }
 
+version_match = get_version_match(__version__)
+
+if "dev" in version_match:
+    index_uid = "ansys-sphinx-theme-dev-sphinx-docs"
+else:
+    index_uid = "ansys-sphinx-theme-sphinx-docs"  # will change with instant scraping
+
 # specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
@@ -62,13 +69,12 @@ html_theme_options = {
     ],
     "switcher": {
         "json_url": f"https://{cname}/versions.json",
-        "version_match": get_version_match(__version__),
+        "version_match": f"{version_match}",
     },
     "use_meilisearch": {
         "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
         "index_uids": {
-            "ansys-internal-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
-            "pyansys-pyaedt-sphinx-docs": "PyAEDT",
+            f"{index_uid}": "ansys-sphinx-theme",
         },
     },
 }
