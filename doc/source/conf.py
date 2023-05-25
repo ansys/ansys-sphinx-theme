@@ -52,7 +52,9 @@ version_match = get_version_match(__version__)
 if "dev" in version_match:
     index_uid = "ansys-sphinx-theme-dev-sphinx-docs"
 else:
-    index_uid = "ansys-sphinx-theme-sphinx-docs"  # will change with instant scraping
+    # will change with instant scraping
+    # changes to index_uid = "ansys-sphinx-theme-{version-match}-sphinx-docs"
+    index_uid = "ansys-sphinx-theme-sphinx-docs"
 
 # specify the location of your github repo
 html_theme_options = {
