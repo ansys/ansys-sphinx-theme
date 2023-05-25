@@ -47,14 +47,13 @@ html_context = {
     "doc_path": "doc/source",
 }
 
+
 version_match = get_version_match(__version__)
 
-if "dev" in version_match:
-    index_uid = "ansys-sphinx-theme-dev-sphinx-docs"
-else:
-    # will change with instant scraping
-    # changes to index_uid = "ansys-sphinx-theme-{version-match}-sphinx-docs"
-    index_uid = "ansys-sphinx-theme-sphinx-docs"
+# will change with instant scraping
+# changes to index_uid = "ansys-sphinx-theme-{version-match}-sphinx-docs"
+
+index_uid = "ansys-sphinx-theme-{}-sphinx-docs".format(version_match).replace(".", "-")
 
 # specify the location of your github repo
 html_theme_options = {
