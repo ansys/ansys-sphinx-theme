@@ -48,10 +48,6 @@ html_context = {
 }
 
 
-version_match = get_version_match(__version__)
-
-index_uid = "ansys-sphinx-theme-{}-sphinx-docs".format(version_match).replace(".", "-")
-
 # specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
@@ -67,12 +63,12 @@ html_theme_options = {
     ],
     "switcher": {
         "json_url": f"https://{cname}/versions.json",
-        "version_match": f"{version_match}",
+        "version_match": get_version_match(__version__),
     },
     "use_meilisearch": {
         "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
         "index_uids": {
-            f"{index_uid}": "ansys-sphinx-theme",
+            f"ansys-sphinx-theme-{get_version_match(__version__)}": "ansys-sphinx-theme",
         },
     },
 }
