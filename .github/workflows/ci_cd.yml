@@ -25,7 +25,7 @@ jobs:
     name: Code style
     runs-on: ubuntu-latest
     steps:
-      - name: "Run PyAnsys code style checks"
+      - name: "Run Ansys code style checks"
         uses: ansys/actions/code-style@v4
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
@@ -129,6 +129,6 @@ jobs:
           twine-token: ${{ secrets.PYPI_TOKEN }}
 
       - name: "Release to GitHub"
-        uses: pyansys/actions/release-github@v4
+        uses: ansys/actions/release-github@v4
         with:
           library-name: ${{ env.PACKAGE_NAME }}
