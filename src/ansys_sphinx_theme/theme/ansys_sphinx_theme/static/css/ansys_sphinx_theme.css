@@ -108,6 +108,11 @@ html[data-theme="light"] {
   * table hovering
   */
   --pst-color-table-hover: var(--pst-color-border);
+
+  /*****************************************************************************
+  * search hide match
+  */
+  --pst-color-search-match: #91969b;
 }
 
 html[data-theme="dark"] {
@@ -155,6 +160,11 @@ html[data-theme="dark"] {
   * table hovering
   */
   --pst-color-table-hover: var(--pst-color-target);
+
+  /*****************************************************************************
+  * search hide match
+  */
+  --pst-color-search-match: var(--pst-color-primary);
 }
 
 /*
@@ -977,4 +987,14 @@ Border lines
 .bd-sidebar-primary,
 .bd-sidebar-secondary {
   max-height: calc(100vh - var(--pst-header-height) - 1vh);
+}
+
+/*
+#################
+search hide match
+#################
+*/
+
+div#searchbox p.highlight-link a {
+  background-color: var(--pst-color-search-match);
 }
