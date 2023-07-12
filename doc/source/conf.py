@@ -67,8 +67,8 @@ html_theme_options = {
     "use_meilisearch": {
         "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
         "index_uids": {
-            "ansys-internal-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
-            "pyansys-pyaedt-sphinx-docs": "PyAEDT",
+            "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
+            "ansys-pyaedt-sphinx-docs": "PyAEDT",
         },
     },
 }
