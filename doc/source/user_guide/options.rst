@@ -158,7 +158,7 @@ Here is the example configuration of using MeiliSearch in
     html_theme_options = {
         "use_meilisearch": {
             "index_uids": {
-                "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
+                "ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
                 "pyansys-docs-all-public": "PyAnsys",
             },
         },
