@@ -2,6 +2,7 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css";
 
 div [data-ds-theme] .searchbox {
+  overflow-y: scroll;
   margin: auto;
   display: block;
   width: 600px;
@@ -93,7 +94,9 @@ div [data-ds-theme] .searchbox input {
   border: 1px solid #d9d9d9;
   background: #fff;
   border-radius: 4px;
-  overflow: scroll;
+  overflow: scroll !important;
+  max-width: 800px;
+  min-width: 500px;
   padding: 0 8px 8px;
   width: 805px;
 }
@@ -103,8 +106,9 @@ div [data-ds-theme] .searchbox input {
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion--highlight {
-  color: var(--pst-color-info);
-  background: rgb(255 255 255 / 49%);
+  color: var(--pst-color-info) !important;
+  font-weight: 900;
+  background: transparent;
   padding: 0 0.05em;
 }
 
@@ -116,4 +120,42 @@ div [data-ds-theme] .searchbox input {
   .docs-searchbar-suggestion
   .docs-searchbar-suggestion--subcategory-column {
   display: none;
+}
+
+.meilisearch-autocomplete .docs-searchbar-suggestion--content {
+  display: block;
+  width: 100% !important;
+}
+
+.meilisearch-autocomplete .dsb-dropdown-menu {
+  max-width: 800px;
+}
+
+.meilisearch-autocomplete .docs-searchbar-suggestion--title {
+  margin-bottom: 4px;
+  color: #02060c;
+  font-size: 0.9em;
+  font-weight: 700;
+  width: 100%;
+}
+
+.meilisearch-autocomplete .docs-searchbar-suggestion--text {
+  width: 100%;
+}
+
+.meilisearch-autocomplete .dsb-dropdown-menu::-webkit-scrollbar {
+  width: 1rem;
+  height: 1rem;
+}
+
+.meilisearch-autocomplete .dsb-dropdown-menu::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+}
+
+.meilisearch-autocomplete .dsb-dropdown-menu::-webkit-scrollbar-track {
+  background: var(--pst-color-background);
+}
+.bd-search {
+  margin-bottom: 200px;
 }

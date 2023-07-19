@@ -33,6 +33,7 @@
   theme_use_meilisearch.host %} {% endif %}
 
   <script>
+    document.body.style.overflow = "hidden !important";
     // Initialize the MeiliSearch bar with the given API key and host
     // inspect the first value of index UID as default
     var theSearchBar = docsSearchBar({
