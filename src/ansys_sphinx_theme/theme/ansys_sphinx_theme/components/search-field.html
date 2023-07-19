@@ -42,6 +42,9 @@
       inputSelector: "#search-bar-input",
       enableDarkMode: "auto",
       debug: true, // Set debug to true if you want to inspect the dropdown
+      meilisearchOptions: {
+        limit: 10,
+      },
     });
 
     // Listen for changes in the dropdown selector and update the index uid and suggestion accordingly

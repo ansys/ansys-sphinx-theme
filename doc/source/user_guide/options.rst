@@ -39,14 +39,14 @@ to the same value as the title for the main ``index.rst`` page:
 
 .. code:: python
 
-   html_short_title = html_title = 'Ansys Sphinx Theme'
+   html_short_title = html_title = "Ansys Sphinx Theme"
 
 If you want to title for the main ``index.rst`` file to show the package version,
 include ``|version|`` in the title:
 
 .. code:: python
 
-   html_short_title = html_title = 'Ansys Sphinx Theme |version|'
+   html_short_title = html_title = "Ansys Sphinx Theme |version|"
 
 Customize icons
 ---------------
@@ -72,7 +72,7 @@ the ``icon``, and the ``type``.
 
 This example adds an icon for sending an email:
 
-.. code-block:: python
+.. code-block:: pycon
 
     html_theme_options = {
      "icon_links": [
@@ -86,7 +86,7 @@ Hide icons
 To hide icons so that they do not show in the navigation bar, add their names
 to the ``hidden_icons`` list:
 
-.. code-block:: python
+.. code-block:: pycon
 
     html_theme_options = {
         "hidden_icons": ["GitHub"],
@@ -96,7 +96,7 @@ to the ``hidden_icons`` list:
 
 If you want to hide all icons, use the ``show_icons`` boolean variable:
 
-.. code-block:: python
+.. code-block:: pycon
 
     html_theme_options = {
         "show_icons": False,
@@ -137,15 +137,15 @@ Here is an example configuration for using MeiliSearch in the ``conf.py`` file:
 
 .. code-block:: python
 
-    import os 
+    import os
 
     use_meilisearch = {
         "host": os.getenv("MEILISEARCH_HOST_NAME", ""),
         "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
         "index_uids": {
             "index-uid of current project": "index name to be displayed",
-            "another-index-uid": "index name to be displayed"
-        }
+            "another-index-uid": "index name to be displayed",
+        },
     }
 
 Here is the example configuration of using MeiliSearch in 
@@ -153,15 +153,15 @@ Here is the example configuration of using MeiliSearch in
 
 .. code-block:: python
 
-    import os 
-    
+    import os
+
     html_theme_options = {
-    "use_meilisearch": {
-        "index_uids": {
-            "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
-            "pyansys-docs-all-public": "PyAnsys",
+        "use_meilisearch": {
+            "index_uids": {
+                "ansys-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
+                "pyansys-docs-all-public": "PyAnsys",
+            },
         },
-    },
     }
 
 With these options set, your Sphinx project can use MeiliSearch 

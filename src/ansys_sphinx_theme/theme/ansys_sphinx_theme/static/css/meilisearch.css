@@ -14,11 +14,11 @@ div [data-ds-theme] .searchbox {
 .docs-searchbar-suggestion--category-header {
   background-color: var(--pst-color-border);
   border-radius: 7px;
-  text-align: center;
+  text-align: left;
 }
 
 .docs-searchbar-suggestion--subcategory-column-text {
-  color: (var(--pst-color-text-base));
+  color: var(--pst-color-text-base);
 }
 
 div [data-ds-theme] .searchbox input {
@@ -93,7 +93,7 @@ div [data-ds-theme] .searchbox input {
   border: 1px solid #d9d9d9;
   background: #fff;
   border-radius: 4px;
-  overflow: auto;
+  overflow: scroll;
   padding: 0 8px 8px;
   width: 805px;
 }
@@ -109,5 +109,11 @@ div [data-ds-theme] .searchbox input {
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion--subcategory-column {
-  width: 30%;
+  width: None;
+  text-align: left;
+}
+.meilisearch-autocomplete
+  .docs-searchbar-suggestion
+  .docs-searchbar-suggestion--subcategory-column {
+  display: none;
 }
