@@ -11,7 +11,7 @@ page. However, you can use the ``generate_preamble`` function in the
 You use this function to generate the value for the ``preamble`` key in the
 ``latex_elements`` variable declared in the ``conf.py`` file:
 
-.. code-block:: python
+.. code-block:: pycon
 
     latex_elements = {
         "preamble": ansys_sphinx_theme.latex.generate_preamble(
@@ -27,13 +27,11 @@ import them and then add them to the ``latex_additional_files`` dictionary:
 .. code-block:: python
 
     from ansys_sphinx_theme import (
-       ansys_logo_white,
-       ansys_logo_white_cropped,
-       watermark,
+        ansys_logo_white,
+        ansys_logo_white_cropped,
+        watermark,
     )
 
 .. code-block:: python
 
-    latex_additional_files = [
-       watermark, ansys_logo_white, ansys_logo_white_cropped
-    ]
+    latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]

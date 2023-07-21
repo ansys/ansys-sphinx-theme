@@ -32,6 +32,6 @@ Next, in your ``conf.py`` file, add the following:
 
 .. code:: python
 
-    html_static_path = ['_static']
-    html_css_files = ['css/custom.css']
+    html_static_path = ["_static"]
+    html_css_files = ["css/custom.css"]
 
