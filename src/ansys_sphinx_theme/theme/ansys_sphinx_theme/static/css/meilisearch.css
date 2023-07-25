@@ -1,10 +1,9 @@
 @import "https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.css";
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css";
 
-div [data-ds-theme] .searchbox {
+div[data-ds-theme] .searchbox {
   overflow-y: scroll;
   margin: auto;
-  display: block;
   width: 600px;
 }
 
@@ -18,16 +17,76 @@ div [data-ds-theme] .searchbox {
   text-align: left;
 }
 
-.docs-searchbar-suggestion--subcategory-column-text {
-  color: var(--pst-color-text-base);
+/* Styles for screens with a width of 1200px or less */
+@media screen and (max-width: 768px) {
+  div[data-ds-theme] .searchbox {
+    max-width: 800px;
+  }
+
+  .dsb-suggestions {
+    width: 100%;
+    max-width: 580px;
+  }
+
+  .meilisearch-autocomplete .dsb-dropdown-menu {
+    /* Adjust styles for suggestion items in smaller screens */
+    max-width: 800px;
+    min-width: 500px;
+    width: 805px;
+  }
+  .bd-search input {
+    width: 600px !important;
+  }
+  .index-select {
+    width: 250px;
+  }
+
+  .meilisearch-autocomplete .docs-searchbar-suggestion {
+    width: 735px;
+  }
 }
 
-div [data-ds-theme] .searchbox input {
+/* Styles for screens with a width of 576px or less */
+@media screen and (max-width: 576px) {
+  div[data-ds-theme] .searchbox {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .dsb-suggestions {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .meilisearch-autocomplete .dsb-dropdown-menu [class^="dsb-dataset-"] {
+    /* Adjust styles for suggestion items in even smaller screens */
+    max-width: 70%;
+    width: 60%;
+  }
+
+  .bd-search input {
+    width: 250px !important;
+  }
+
+  .index-select {
+    width: 180px;
+  }
+
+  .meilisearch-autocomplete .docs-searchbar-suggestion {
+    width: 400px;
+  }
+}
+
+div[data-ds-theme] .searchbox input {
   height: 32px;
   border-radius: 8px;
   font-size: 18px;
   font-family: "Open Sans", sans-serif;
   box-shadow: 0px 0px 8px darkgrey;
+}
+
+.docs-searchbar-footer {
+  display: none;
 }
 
 .docs-searchbar-footer {
@@ -54,7 +113,6 @@ div [data-ds-theme] .searchbox input {
 }
 
 #search-bar-input {
-  width: 550px;
   background-color: var(--pst-color-background);
   border: 1px solid var(--pst-color-border);
   border-radius: 0.25rem;
@@ -66,7 +124,7 @@ div [data-ds-theme] .searchbox input {
 
 .meilisearch-autocomplete::before {
   content: "\f002";
-  font-family: "Font Awesome 6 Free"; /* The Font Awesome font family */
+  font-family: "Font Awesome 6 Free";
   position: absolute;
   left: 8px;
   top: 50%;
@@ -85,7 +143,6 @@ div [data-ds-theme] .searchbox input {
   font-family: "Open Sans", sans-serif;
   box-shadow: 0px 0px 20px var(--pst-color-border);
   padding: 0 10px 0px 10px;
-  width: 250px;
   margin-left: 5px;
 }
 
@@ -94,19 +151,15 @@ div [data-ds-theme] .searchbox input {
   border: 1px solid #d9d9d9;
   background: var(--pst-color-background);
   border-radius: 4px;
-  max-width: 800px;
-  min-width: 500px;
   padding: 0 8px 8px;
-  width: 805px;
 }
 .meilisearch-autocomplete .dsb-dropdown-menu {
-  max-height: 600px !important; /* Set a fixed maximum height to trigger the scrollbar */
-  overflow-y: auto !important; /* Enable the vertical scrollbar */
+  max-height: 600px !important;
+  overflow-y: auto !important;
   border: 1px solid #ccc;
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion {
-  width: 735px;
   background: var(--pst-color-background);
 }
 
