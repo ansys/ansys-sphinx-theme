@@ -838,10 +838,9 @@ Sphinx design
   font-size: medium;
   flex: auto;
 }
-/*
-Sphinx-design tab
-*/
+/* Sphinx-design tab */
 
+/* Common styles for all screen sizes */
 .sd-tab-set > input:not(.focus-visible) + label {
   outline: none;
   font-size: large;
@@ -869,10 +868,23 @@ Sphinx-design tab
   border-color: var(--pst-color-text-base);
 }
 
-/*
-Sphinx-design card
-*/
+/* Media query for medium-sized screens */
+@media screen and (max-width: 768px) {
+  .sd-tab-set > input:not(.focus-visible) + label {
+    font-size: medium;
+  }
+}
 
+/* Media query for small-sized screens */
+@media screen and (max-width: 576px) {
+  .sd-tab-set > input:not(.focus-visible) + label {
+    font-size: small;
+  }
+}
+
+/* Sphinx-design card */
+
+/* Common styles for all screen sizes */
 .sd-card .sd-card-text {
   font-family: var(--pst-font-family-base) !important;
 }
@@ -902,10 +914,26 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
   filter: invert(0.82) brightness(0.8) contrast(1.2);
 }
 
+/* Common styles for all screen sizes */
 .sd-card {
   border-radius: 0;
   padding: 10px 10px 10px 10px;
   font-family: var(--pst-font-family-base) !important;
+}
+
+/* Media query for medium-sized screens */
+@media screen and (max-width: 768px) {
+  .sd-card .sd-card-header {
+    font-size: var(--pst-font-size-h6);
+  }
+}
+
+/* Media query for small-sized screens */
+@media screen and (max-width: 576px) {
+  .sd-card .sd-card-header {
+    font-size: var(--pst-font-size-h6);
+    padding: 0.3rem 0rem 0.3rem 0rem;
+  }
 }
 
 /*

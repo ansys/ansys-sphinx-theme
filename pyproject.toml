@@ -37,8 +37,6 @@ doc = [
     "sphinx-copybutton==0.5.2",
     "sphinx-notfound-page==0.8.3",
     "sphinx-design==0.4.1",
-    "bs4==0.0.1",
-    "html5lib==1.1",
     "requests==2.31.0",
     "sphinx-jinja==2.0.2",
 ]

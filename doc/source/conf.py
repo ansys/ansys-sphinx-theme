@@ -5,7 +5,6 @@ import os
 from pathlib import Path
 from typing import List
 
-from bs4 import BeautifulSoup
 import requests
 from sphinx.builders.latex import LaTeXBuilder
 
@@ -149,7 +148,9 @@ notfound_context = {
 notfound_no_urls_prefix = True
 
 
-def extract_example_links(archive_url: str, exclude_files: List[str]) -> List[str]:
+def extract_example_links(
+    archive_url: str, archive_base_url: str, exclude_files: List[str]
+) -> List[str]:
     """
     Extract example links from a specific URL.
 
@@ -166,13 +167,16 @@ def extract_example_links(archive_url: str, exclude_files: List[str]) -> List[st
         List of example links.
     """
     response = requests.get(archive_url)
-    soup = BeautifulSoup(response.content, "html5lib")
-    links = soup.find_all("a")
-    example_links = [
-        f"https://raw.githubusercontent.com{link['href'].replace('/blob/', '/')}"
-        for link in links
-        if link["href"].endswith(".txt") and all(file not in link["href"] for file in exclude_files)
+    json_data = response.json()
+    items = json_data.get("payload", {}).get("tree", {}).get("items", [])
+
+    txt_file_paths = [
+        item["path"]
+        for item in items
+        if item["name"].endswith(".txt") and all(file not in item["path"] for file in exclude_files)
     ]
+    example_links = [f"{archive_base_url}{path.replace('/blob/', '/')}" for path in txt_file_paths]
+
     return example_links
 
 
@@ -207,14 +211,18 @@ def download_and_process_files(example_links: List[str]) -> List[str]:
                 if not line.startswith("Cards Clickable") and not line.startswith("...............")
             ]
             f.write(
-                b"\n".join([line.replace("target", file_name).encode() for line in filtered_lines])
+                "\n".join([line.replace("target", file_name) for line in filtered_lines]).encode()
             )
         file_names.append(file_name)
+
     return file_names
 
 
 URL_ARCHIVE = "https://github.com/executablebooks/sphinx-design/tree/main/docs/snippets/rst"
-example_links = extract_example_links(URL_ARCHIVE, exclude_files=["article-info.txt"])
+ARCHIVE_BASE_URL = f"https://raw.githubusercontent.com/executablebooks/sphinx-design/main/"
+example_links = extract_example_links(
+    URL_ARCHIVE, ARCHIVE_BASE_URL, exclude_files=["article-info.txt"]
+)
 file_names = download_and_process_files(example_links)
 
 jinja_contexts = {"examples": {"inputs_examples": file_names}}

@@ -17,7 +17,7 @@ please refer `sphinx design <https://sphinx-design.readthedocs.io/en/latest/inde
         .. literalinclude:: sphinx_examples/{{ filename }}
            :language: rst
         
-    This directive renders the as follow:
+        This directive renders as follows:
 
         .. include:: sphinx_examples/{{ filename }}
 
