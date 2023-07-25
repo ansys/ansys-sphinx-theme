@@ -931,8 +931,14 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
 /* Media query for small-sized screens */
 @media screen and (max-width: 576px) {
   .sd-card .sd-card-header {
-    font-size: var(--pst-font-size-h6);
-    padding: 0.3rem 0rem 0.3rem 0rem;
+    font-size: var(--pst-font-size-h5);
+  }
+  .sd-card {
+    padding: 5px 5px 5px 5px;
+  }
+  .sd-sphinx-override,
+  .sd-sphinx-override * {
+    box-sizing: content-box !important;
   }
 }
 
