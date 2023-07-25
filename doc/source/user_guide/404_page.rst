@@ -43,7 +43,7 @@ Use the default 404 page
 To use the default 404 page, you can use the ``generate_404`` function in the
 ``ansys_sphinx_theme`` module to create and use a custom cover page:
 
-.. code-block:: python
+.. code-block:: pycon
 
     from ansys_sphinx_theme import generate_404
 

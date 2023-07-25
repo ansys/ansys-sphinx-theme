@@ -22,7 +22,7 @@ Modify the ``conf.py`` file
 ---------------------------
 To use this theme, modify your Sphinx ``conf.py`` file::
 
-   html_theme ='ansys_sphinx_theme'
+   html_theme = "ansys_sphinx_theme"
 
 Consider using the ``conf.py`` for this repository:
 

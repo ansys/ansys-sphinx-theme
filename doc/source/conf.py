@@ -46,6 +46,7 @@ html_context = {
     "doc_path": "doc/source",
 }
 
+
 # specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
@@ -66,8 +67,7 @@ html_theme_options = {
     "use_meilisearch": {
         "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
         "index_uids": {
-            "ansys-internal-ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
-            "pyansys-pyaedt-sphinx-docs": "PyAEDT",
+            f"ansys-sphinx-theme-v{get_version_match(__version__)}": "ansys-sphinx-theme",
         },
     },
 }

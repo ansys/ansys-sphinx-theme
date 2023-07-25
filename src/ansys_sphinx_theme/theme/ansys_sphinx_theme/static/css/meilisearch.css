@@ -2,6 +2,7 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css";
 
 div [data-ds-theme] .searchbox {
+  overflow-y: scroll;
   margin: auto;
   display: block;
   width: 600px;
@@ -14,11 +15,11 @@ div [data-ds-theme] .searchbox {
 .docs-searchbar-suggestion--category-header {
   background-color: var(--pst-color-border);
   border-radius: 7px;
-  text-align: center;
+  text-align: left;
 }
 
 .docs-searchbar-suggestion--subcategory-column-text {
-  color: (var(--pst-color-text-base));
+  color: var(--pst-color-text-base);
 }
 
 div [data-ds-theme] .searchbox input {
@@ -91,23 +92,72 @@ div [data-ds-theme] .searchbox input {
 .meilisearch-autocomplete .dsb-dropdown-menu [class^="dsb-dataset-"] {
   position: relative;
   border: 1px solid #d9d9d9;
-  background: #fff;
+  background: var(--pst-color-background);
   border-radius: 4px;
-  overflow: auto;
+  max-width: 800px;
+  min-width: 500px;
   padding: 0 8px 8px;
   width: 805px;
+}
+.meilisearch-autocomplete .dsb-dropdown-menu {
+  height: 500px !important; /* Set a fixed height to trigger the scrollbar */
+  overflow-y: auto !important; /* Enable the vertical scrollbar */
+  border: 1px solid #ccc;
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion {
   width: 735px;
+  background: var(--pst-color-background);
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion--highlight {
-  color: var(--pst-color-info);
-  background: rgb(255 255 255 / 49%);
+  color: var(--pst-color-info) !important;
+  font-weight: 900;
+  background: transparent;
   padding: 0 0.05em;
 }
 
 .meilisearch-autocomplete .docs-searchbar-suggestion--subcategory-column {
-  width: 30%;
+  width: None;
+  text-align: left;
+}
+
+.meilisearch-autocomplete .docs-searchbar-suggestion--content {
+  display: block;
+  width: 100% !important;
+}
+
+.meilisearch-autocomplete .dsb-dropdown-menu {
+  max-width: 800px;
+}
+
+.meilisearch-autocomplete .docs-searchbar-suggestion--title {
+  margin-bottom: 4px;
+  color: var(--pst-color-text-base);
+  font-size: 0.9em;
+  font-weight: 700;
+  width: 100%;
+}
+
+.meilisearch-autocomplete .docs-searchbar-suggestion--text {
+  width: 100%;
+}
+
+/* Styling the scrollbar */
+.meilisearch-autocomplete .dsb-dropdown-menu::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.meilisearch-autocomplete .dsb-dropdown-menu::-webkit-scrollbar-thumb {
+  background: var(--pst-color-text-base);
+  border-radius: inherit;
+}
+
+.meilisearch-autocomplete .dsb-dropdown-menu::-webkit-scrollbar-track {
+  background: var(--pst-color-background);
+}
+
+.bd-search {
+  margin-bottom: 200px;
 }
