@@ -28,6 +28,7 @@ Consider using the ``conf.py`` for this repository:
 
 .. literalinclude:: ../conf.py
    :language: python
+   :end-before: # ONLY FOR ANSYS-SPHINX-THEME
 
 .. toctree::
    :hidden:
