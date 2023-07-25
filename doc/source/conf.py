@@ -2,10 +2,7 @@
 
 from datetime import datetime
 import os
-from pathlib import Path
-from typing import List
 
-import requests
 from sphinx.builders.latex import LaTeXBuilder
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
@@ -21,10 +18,6 @@ from ansys_sphinx_theme import (
     latex,
     watermark,
 )
-
-THIS_PATH = Path(__file__).parent.resolve()
-
-EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 
 # Project information
 project = "ansys_sphinx_theme"
@@ -145,7 +138,19 @@ latex_elements = {"preamble": latex.generate_preamble(html_title)}
 notfound_context = {
     "body": generate_404(),
 }
+
 notfound_no_urls_prefix = True
+
+# ONLY FOR ANSYS-SPHINX-THEME
+
+from pathlib import Path
+from typing import List
+
+import requests
+
+THIS_PATH = Path(__file__).parent.resolve()
+
+EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 
 
 def extract_example_links(
