@@ -769,6 +769,11 @@ i.fa-square-github:before {
   color: white;
 }
 
+.navbar-icon-links {
+  font-size: 1.5rem;
+  color: white;
+}
+
 /*
 ##############################
 image padding before and after 
