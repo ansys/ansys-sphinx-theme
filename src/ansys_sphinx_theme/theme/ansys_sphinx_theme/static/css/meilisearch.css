@@ -100,7 +100,7 @@ div [data-ds-theme] .searchbox input {
   width: 805px;
 }
 .meilisearch-autocomplete .dsb-dropdown-menu {
-  height: 500px !important; /* Set a fixed height to trigger the scrollbar */
+  max-height: 600px !important; /* Set a fixed maximum height to trigger the scrollbar */
   overflow-y: auto !important; /* Enable the vertical scrollbar */
   border: 1px solid #ccc;
 }
