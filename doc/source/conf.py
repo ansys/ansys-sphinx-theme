@@ -60,7 +60,7 @@ html_theme_options = {
     "use_meilisearch": {
         "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
         "index_uids": {
-            f"ansys-sphinx-theme-v{get_version_match(__version__)}": "ansys-sphinx-theme",
+            f"ansys-sphinx-theme-v{get_version_match(__version__).replace('.', '-')}": "ansys-sphinx-theme",  # noqa: E501
         },
     },
 }
