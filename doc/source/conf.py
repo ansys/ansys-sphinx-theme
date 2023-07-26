@@ -13,6 +13,7 @@ from ansys_sphinx_theme import (
     ansys_logo_black,
     ansys_logo_white,
     ansys_logo_white_cropped,
+    convert_version_to_pymeilisearch,
     generate_404,
     get_version_match,
     latex,
@@ -60,7 +61,7 @@ html_theme_options = {
     "use_meilisearch": {
         "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
         "index_uids": {
-            f"ansys-sphinx-theme-v{get_version_match(__version__).replace('.', '-')}": "ansys-sphinx-theme",  # noqa: E501
+            f"ansys-sphinx-theme-v{convert_version_to_pymeilisearch(__version__)}": "ansys-sphinx-theme",  # noqa: E501
         },
     },
 }
