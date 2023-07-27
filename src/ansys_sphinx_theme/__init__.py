@@ -63,6 +63,27 @@ def get_version_match(semver: str) -> str:
     return ".".join([major, minor])
 
 
+def convert_version_to_pymeilisearch(semver: str) -> str:
+    """Convert a semantic version number to pymeilisearch-compatible format.
+
+    This function evaluates the given semantic version number and returns a
+    version number that is compatible with `pymeilisearch`, where dots are
+    replaced with hyphens.
+
+    Parameters
+    ----------
+    semver : str
+        Semantic version number in the form of a string.
+
+    Returns
+    -------
+    str
+        pymeilisearch-compatible version number.
+    """
+    version = get_version_match(semver).replace(".", "-")
+    return version
+
+
 def setup_default_html_theme_options(app):
     """Set up the default configuration for the HTML options.
 
