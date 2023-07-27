@@ -7,7 +7,7 @@ from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
-__version__ = "0.10.dev0"
+__version__ = "0.11.dev0"
 
 
 # Declare the fundamental paths of the theme
