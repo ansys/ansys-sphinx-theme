@@ -36,7 +36,7 @@ doc = [
     "Sphinx==7.1.1", # BLOCKED BY sphinx-design - Cannot upgrade to Sphinx 7 for now
     "sphinx-copybutton==0.5.2",
     "sphinx-notfound-page==0.8.3",
-    "sphinx-design==0.4.1",
+    "sphinx-design==0.5.0",
     "requests==2.31.0",
     "sphinx-jinja==2.0.2",
 ]
