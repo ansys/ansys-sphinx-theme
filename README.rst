@@ -3,7 +3,7 @@ Ansys Sphinx theme
 |ansys| |python| |pypi| |GH-CI| |MIT| |black|
 
 .. |ansys| image:: https://img.shields.io/badge/Ansys-ffc107.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABDklEQVQ4jWNgoDfg5mD8vE7q/3bpVyskbW0sMRUwofHD7Dh5OBkZGBgW7/3W2tZpa2tLQEOyOzeEsfumlK2tbVpaGj4N6jIs1lpsDAwMJ278sveMY2BgCA0NFRISwqkhyQ1q/Nyd3zg4OBgYGNjZ2ePi4rB5loGBhZnhxTLJ/9ulv26Q4uVk1NXV/f///////69du4Zdg78lx//t0v+3S88rFISInD59GqIH2esIJ8G9O2/XVwhjzpw5EAam1xkkBJn/bJX+v1365hxxuCAfH9+3b9/+////48cPuNehNsS7cDEzMTAwMMzb+Q2u4dOnT2vWrMHu9ZtzxP9vl/69RVpCkBlZ3N7enoDXBwEAAA+YYitOilMVAAAAAElFTkSuQmCC
-   :target: https://ansys.github.io/
+   :target: https://github.com/ansys
    :alt: Ansys
 
 .. |python| image:: https://img.shields.io/badge/Python-%3E%3D3.7-blue
@@ -88,9 +88,9 @@ You can optionally install and use this tool. For more information, see its
 <https://pre-commit.com/#usage>`_ documentation.
 
 Before contributing to a PyAnsys library, see
-`Contributing <https://dev.docs.pyansys.com/dev/how-to/contributing.html>`_ 
+`Contributing <https://dev.docs.pyansys.com//how-to/contributing.html>`_ 
 in the *PyAnsys Developer's Guide* for overall guidance, paying particular
-attention to `How-to <https://dev.docs.pyansys.com/dev/how-to/index.html>`_ for 
+attention to `How-to <https://dev.docs.pyansys.com//how-to/index.html>`_ for 
 guidelines and best practices. 
 
 License
