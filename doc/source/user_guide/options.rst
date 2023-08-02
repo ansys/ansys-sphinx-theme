@@ -116,7 +116,7 @@ dictionary in the ``conf.py`` file.
 This dictionary should contain the following keys:
 
 #. ``host``: The host name of your MeiliSearch instance. It is hosted at
-    https://backend.search.pyansys.com on port 443 (default).
+    https://backend.search.pyansys.com on port 7700 (default).
     You can set this to an environment variable using 
     ``os.getenv()`` for added security. If no value is provided, the default
     public host for PyAnsys is used.
