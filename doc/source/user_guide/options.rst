@@ -55,7 +55,7 @@ switching between light and dark modes. The second is for going to the library's
 GitHub repository.
 
 - For comprehensive information on customizing icons, see
-  `Configure icon links <https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/configuring.html?highlight=icons#configure-icon-links>`_
+  `Configure icon links <https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/header-links.html#add-custom-attributes-to-icon-links>`_
   in the *PyData Theme* documentation.
 - For comprehensive information on `Font Awesome <https://fontawesome.com/>`_, an icon
   library and toolkit, see its `documentation <https://fontawesome.com/v6/docs>`_,
@@ -116,7 +116,7 @@ dictionary in the ``conf.py`` file.
 This dictionary should contain the following keys:
 
 #. ``host``: The host name of your MeiliSearch instance. It is hosted at
-    https://search.pyansys.com on port 443 (default).
+    https://backend.search.pyansys.com on port 443 (default).
     You can set this to an environment variable using 
     ``os.getenv()`` for added security. If no value is provided, the default
     public host for PyAnsys is used.
