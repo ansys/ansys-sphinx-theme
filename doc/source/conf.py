@@ -46,7 +46,7 @@ html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
     "contact_mail": "pyansys.support@ansys.com",
     "additional_breadcrumbs": [
-        ("Ansys Internal Developer Portal", "https://dev.docs.ansys.com"),
+        ("PyAnsys", "https://docs.pyansys.com/"),
     ],
     "external_links": [
         {
