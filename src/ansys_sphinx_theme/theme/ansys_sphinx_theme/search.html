@@ -16,6 +16,17 @@ endif %} {% block docs_navbar %}
   {%- include "sections/header.html" %}
 </nav>
 {% endblock docs_navbar %}
+<style>
+  .bd-main .bd-content .bd-article-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    max-width: 70em;
+    overflow-x: auto;
+    padding: 1rem;
+    width: 100%;
+  }
+</style>
 <div class="bd-container">
   <div class="bd-container__inner bd-page-width">
     {# Primary sidebar #}
