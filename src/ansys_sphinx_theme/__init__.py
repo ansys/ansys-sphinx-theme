@@ -111,7 +111,7 @@ def setup_default_html_theme_options(app):
 def pv_html_page_context(app, pagename: str, templatename: str, context, doctree) -> None:
     """Add a function that Jinja can access for returning an "edit this page" link .
 
-    This function will create an "edit this page" link for any library, not just PyVista.
+    This function will create an "edit this page" link for any library.
     The link will point to the corresponding file on the main branch.
 
     Parameters
