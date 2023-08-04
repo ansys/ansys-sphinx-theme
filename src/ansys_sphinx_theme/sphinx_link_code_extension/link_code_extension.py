@@ -1,10 +1,13 @@
-"""Module containing linkcode extension."""
-
+"""link code file."""
 import inspect
+import os
 import os.path as op
+import sys
+
+from sphinx.application import Sphinx
 
 
-def linkcode_resolve(domain, info, library, edit=False):
+def linkcode_resolve(domain, info, edit=False, version=None, app: Sphinx = None):
     """Determine the URL corresponding to a Python object.
 
     Parameters
@@ -16,11 +19,12 @@ def linkcode_resolve(domain, info, library, edit=False):
         Dictionary containing the information about the object.
         It must have the keys 'module' and 'fullname'.
 
-    library : module
-        The module representing the library for which the code link is generated.
-
     edit : bool, default=False
         If True, the link should point to the edit page.
+
+    app : Sphinx, optional
+        The Sphinx application instance for rendering the documentation.
+        This argument is optional, but if not provided, the library version check will be skipped.
 
     Returns
     -------
@@ -69,8 +73,10 @@ def linkcode_resolve(domain, info, library, edit=False):
             return None
         return None
 
-    fn = op.relpath(fn, start=op.dirname(library.__file__))
-    fn = "/".join(op.normpath(fn).split(os.sep))  # in case on Windows
+    fn = op.relpath(fn, start=os.path.dirname(os.path.abspath(__file__)))
+    fn_components = op.normpath(fn).split(os.sep)
+    repo_index = fn_components.index("src")
+    fn = "/".join(fn_components[repo_index:])  # in case on Windows
 
     try:
         source, lineno = inspect.getsourcelines(obj)
@@ -82,13 +88,9 @@ def linkcode_resolve(domain, info, library, edit=False):
     else:
         linespec = ""
 
-    # Get the library version from the module's '__version__' attribute
-    version = getattr(library, "__version__", "")
-    if "dev" in version:
-        kind = "main"
-    else:  # pragma: no cover
-        kind = "release/%s" % (".".join(version.split(".")[:2]))
+    repository = "ansys/pypim"  # Replace with your repository owner/repo
+    kind = "main"  # Or any versioning convention you want
+    print(fn)
 
     blob_or_edit = "edit" if edit else "blob"
-
-    return f"http://github.com/{library}/{blob_or_edit}/{kind}/{fn}{linespec}"
+    return f"http://github.com/{repository}/{blob_or_edit}/{kind}/{fn}{linespec}"

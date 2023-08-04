@@ -6,7 +6,7 @@ from docutils.nodes import document
 from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
-from ansys_sphinx_theme.sphinx_link_code_extension import link_code_extension
+from ansys_sphinx_theme.sphinx_link_code_extension.link_code_extension import linkcode_resolve
 
 __version__ = "0.11.dev0"
 
@@ -149,13 +149,17 @@ def pv_html_page_context(app, pagename: str, templatename: str, context, doctree
         """
         github_user = context.get("github_user", "")
         github_repo = context.get("github_repo", "")
+        version = context.get("version", "")
         if pagename.startswith("examples") and "index" not in pagename:
             return f"http://github.com/{github_user}/{github_repo}/edit/main/{pagename}.py"
         elif "_autosummary" in pagename:
             # This is an API example
             fullname = pagename.split("_autosummary")[1][1:]
-            return link_code_extension.linkcode_resolve(
-                "py", {"module": f"{github_repo}", "fullname": fullname}, edit=True
+            return linkcode_resolve(
+                "py",
+                {"module": f"{github_repo}", "fullname": fullname},
+                edit=True,
+                version=version,
             )
         else:
             return link
