@@ -107,57 +107,60 @@ def setup_default_html_theme_options(app):
         )
     app.config.html_theme_options.setdefault("collapse_navigation", True)
 
-    def pv_html_page_context(app, pagename: str, templatename: str, context, doctree) -> None:
-        """Add a function that Jinja can access for returning an "edit this page" link .
 
-        This function will create an "edit this page" link for any library, not just PyVista.
-        The link will point to the corresponding file on the main branch.
+def pv_html_page_context(app, pagename: str, templatename: str, context, doctree) -> None:
+    """Add a function that Jinja can access for returning an "edit this page" link .
+
+    This function will create an "edit this page" link for any library, not just PyVista.
+    The link will point to the corresponding file on the main branch.
+
+    Parameters
+    ----------
+    app : Sphinx
+        The Sphinx application instance for rendering the documentation.
+
+    pagename : str
+        The name of the current page.
+
+    templatename : str
+        The name of the template being used.
+
+    context : dict
+        The context dictionary for the page.
+
+    doctree : document
+        The document tree for the page.
+    """
+
+    def fix_edit_link_button(link: str) -> str:
+        """Transform "edit on GitHub" links to the correct URL.
+
+        This function will create the correct URL for the "edit this page" link.
 
         Parameters
         ----------
-        app : Sphinx
-            The Sphinx application instance for rendering the documentation.
+        link : str
+            The link to the GitHub edit interface.
 
-        pagename : str
-            The name of the current page.
-
-        templatename : str
-            The name of the template being used.
-
-        context : dict
-            The context dictionary for the page.
-
-        doctree : document
-            The document tree for the page.
+        Returns
+        -------
+        str
+            The link to the corresponding file on the main branch.
         """
-
-        def fix_edit_link_button(link: str) -> str:
-            """Transform "edit on GitHub" links to the correct URL.
-
-            This function will create the correct URL for the "edit this page" link.
-
-            Parameters
-            ----------
-            link : str
-                The link to the GitHub edit interface.
-
-            Returns
-            -------
-            str
-                The link to the corresponding file on the main branch.
-            """
-            domain = "py"
-            module = pagename.replace("/", ".")
-            fullname = pagename.split("/")[-1].split(".")[0]
-
+        github_user = context.get("github_user", "")
+        github_repo = context.get("github_repo", "")
+        if pagename.startswith("examples") and "index" not in pagename:
+            return f"http://github.com/{github_user}/{github_repo}/edit/main/{pagename}.py"
+        elif "_autosummary" in pagename:
+            # This is an API example
+            fullname = pagename.split("_autosummary")[1][1:]
             return link_code_extension.linkcode_resolve(
-                domain,
-                {"module": module, "fullname": fullname},
-                library=app.config.library,
-                edit=True,
+                "py", {"module": f"{github_repo}", "fullname": fullname}, edit=True
             )
+        else:
+            return link
 
-        context["fix_edit_link_button"] = fix_edit_link_button
+    context["fix_edit_link_button"] = fix_edit_link_button
 
 
 def update_footer_theme(
@@ -203,8 +206,6 @@ def setup(app: Sphinx) -> Dict:
     theme_path = get_html_theme_path()
     app.add_html_theme("ansys_sphinx_theme", theme_path)
     app.config.templates_path.append(str(THEME_PATH / "components"))
-
-    app.connect("missing-reference", process_missing_linkcode)
 
     # Add default HTML configuration
     setup_default_html_theme_options(app)
