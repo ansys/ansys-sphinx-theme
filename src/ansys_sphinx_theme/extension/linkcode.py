@@ -40,6 +40,12 @@ def sphinx_linkcode_resolve(domain, info, library, version, edit=False):
     -----
     This function is used by the `sphinx.ext.linkcode` extension to create the "[Source]"
     button whose link is edited in this function.
+
+    References
+    ----------
+    GitHub pull request: https://github.com/pyvista/pyvista/pull/4113
+    (Author: Alex kaszynski <https://github.com/akaszynski>)
+
     """
     if domain != "py":
         return None
