@@ -11,9 +11,6 @@ from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
 __version__ = "0.11.dev0"
 
-library_name = None
-library_version = None
-
 
 # Declare the fundamental paths of the theme
 THIS_PATH = pathlib.Path(__file__).parent.resolve()
