@@ -38,7 +38,6 @@ html_context = {
     "github_repo": "ansys-sphinx-theme",
     "github_version": "main",
     "doc_path": "doc/source",
-    "version": f"{version}",
 }
 
 

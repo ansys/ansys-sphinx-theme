@@ -117,9 +117,8 @@ def linkcode(app: Sphinx, doctree: Node):
         "cpp": ["names"],
         "js": ["object", "fullname"],
     }
-    github_user = getattr(env.config, "github_user", "")
-    github_repo = getattr(env.config, "github_repo", "")
-    library = f"{github_user}/{github_repo}"
+
+    library = getattr(env.config, "link_code_library", "")
 
     for objnode in list(doctree.findall(addnodes.desc)):
         domain = objnode.get("domain")
@@ -158,6 +157,5 @@ def linkcode(app: Sphinx, doctree: Node):
 def setup(app: Sphinx):
     """Docstring missing."""
     app.connect("doctree-read", linkcode)
-    app.add_config_value("github_repo", None, "")
-    app.add_config_value("github_user", None, "")
+    app.add_config_value("link_code_library", None, "")
     return {"version": sphinx.__display_version__, "parallel_read_safe": True}
