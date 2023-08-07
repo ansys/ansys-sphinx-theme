@@ -158,8 +158,14 @@ def pv_html_page_context(app, pagename: str, templatename: str, context, doctree
         """
         github_user = context.get("github_user", "")
         github_repo = context.get("github_repo", "")
+        version = getattr(app.builder.env.config, "version", None)
+        if "dev" in version:
+            kind = "main"
+        else:  # pragma: no cover
+            kind = "release/%s" % (".".join(library_version.split(".")[:2]))
+
         if pagename.startswith("examples") and "index" not in pagename:
-            return f"http://github.com/{github_user}/{github_repo}/edit/main/{pagename}.py"
+            return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{pagename}.py"
         elif "_autosummary" in pagename:
             domain_keys = {
                 "py": ["module", "fullname"],
@@ -172,7 +178,6 @@ def pv_html_page_context(app, pagename: str, templatename: str, context, doctree
                 domain = objnode.get("domain")
                 uris: set[str] = set()
                 for signode in objnode:
-                    print(signode)
                     if not isinstance(signode, addnodes.desc_signature):
                         continue
 
@@ -190,9 +195,24 @@ def pv_html_page_context(app, pagename: str, templatename: str, context, doctree
                         domain=domain,
                         info=info,
                         library=f"{github_user}/{github_repo}",
-                        version=getattr(app.builder.env.config, "version", None),
+                        version=version,
                         edit=True,
                     )
+
+        elif "autoapi" in pagename:
+            domain = objnode.get("domain")
+            if domain != "py":  # Make sure it is a Python object.
+                return link
+
+            for signode in objnode:
+                if not isinstance(signode, addnodes.desc_signature):
+                    continue
+
+                fullname = signode["module"]
+                modname = fullname.replace(".", "/")
+
+                return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/src/{modname}.py"  # noqa: E501
+
         else:
             return link
 

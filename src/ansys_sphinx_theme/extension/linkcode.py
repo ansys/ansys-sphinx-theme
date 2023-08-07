@@ -107,7 +107,39 @@ def sphinx_linkcode_resolve(domain, info, library, version, edit=False):
 
 
 def linkcode(app: Sphinx, doctree: Node):
-    """Docstring missing."""
+    """Automatically add "View Source" links to the documentation.
+
+    This function is an event handler that automatically adds "View Source" links to the
+    documentation for Python, C, C++, and JavaScript objects. It is designed to work with
+    the Sphinx documentation tool.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        The Sphinx application instance.
+
+    doctree : docutils.nodes.Node
+        The document tree for the current page.
+
+    Notes
+    -----
+    The function uses the `sphinx_linkcode_resolve` function to res
+    olve the link for each
+    documented object. The link is added as a "View Source" link to the documentation
+    when rendered.
+
+    For Python, the function extracts information such as module name and fullname from
+    the signature node to create the link.
+
+    The `link_code_library` configuration option can be used to specify a custom library
+    for link resolution.
+
+    References
+    ----------
+    Sphinx GitHub repository for `linkcode` extension:
+    https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py
+
+    """
     env = app.builder.env
     version = getattr(env.config, "version", None)
 
@@ -155,7 +187,28 @@ def linkcode(app: Sphinx, doctree: Node):
 
 
 def setup(app: Sphinx):
-    """Docstring missing."""
+    """Initialize the linkcode extension for Sphinx.
+
+    This function initializes the linkcode extension for Sphinx. It connects the
+    `linkcode` function to the "doctree-read" event and adds the "link_code_library"
+    configuration option.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        The Sphinx application instance.
+
+    Returns
+    -------
+    dict
+        A dictionary containing configuration values for the extension.
+
+    References
+    ----------
+    Sphinx GitHub repository for `linkcode` extension:
+    https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py
+
+    """
     app.connect("doctree-read", linkcode)
     app.add_config_value("link_code_library", None, "")
     return {"version": sphinx.__display_version__, "parallel_read_safe": True}
