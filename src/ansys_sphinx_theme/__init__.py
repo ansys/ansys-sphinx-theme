@@ -6,9 +6,12 @@ from docutils.nodes import document
 from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
-from ansys_sphinx_theme.sphinx_link_code_extension.link_code_extension import linkcode_resolve
+from ansys_sphinx_theme.sphinx_link_code_extension.link_code_extension import linkcode
 
 __version__ = "0.11.dev0"
+
+library_name = None
+library_version = None
 
 
 # Declare the fundamental paths of the theme
@@ -149,17 +152,17 @@ def pv_html_page_context(app, pagename: str, templatename: str, context, doctree
         """
         github_user = context.get("github_user", "")
         github_repo = context.get("github_repo", "")
-        version = context.get("version", "")
         if pagename.startswith("examples") and "index" not in pagename:
             return f"http://github.com/{github_user}/{github_repo}/edit/main/{pagename}.py"
         elif "_autosummary" in pagename:
             # This is an API example
             fullname = pagename.split("_autosummary")[1][1:]
-            return linkcode_resolve(
-                "py",
-                {"module": f"{github_repo}", "fullname": fullname},
+            return linkcode(
+                domain="py",
+                info={"module": f"{github_repo}", "fullname": fullname},
+                context=context,
+                app=app,
                 edit=True,
-                version=version,
             )
         else:
             return link
@@ -222,9 +225,7 @@ def setup(app: Sphinx) -> Dict:
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     app.connect("html-page-context", update_footer_theme)
-    # Add templates for autosummary
     app.config.templates_path.append(str(TEMPLATES_PATH))
-
     return {
         "version": __version__,
         "parallel_read_safe": True,

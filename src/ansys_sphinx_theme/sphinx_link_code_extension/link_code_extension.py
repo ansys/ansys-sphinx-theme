@@ -1,13 +1,18 @@
-"""link code file."""
+"""Docstring missing."""
 import inspect
 import os
 import os.path as op
 import sys
 
+from docutils import nodes
+from docutils.nodes import Node
+import sphinx
+from sphinx import addnodes
 from sphinx.application import Sphinx
+from sphinx.locale import _
 
 
-def linkcode_resolve(domain, info, edit=False, version=None, app: Sphinx = None):
+def sphinx_linkcode_resolve(domain, info, library, version, edit=False):
     """Determine the URL corresponding to a Python object.
 
     Parameters
@@ -88,9 +93,69 @@ def linkcode_resolve(domain, info, edit=False, version=None, app: Sphinx = None)
     else:
         linespec = ""
 
-    repository = "ansys/pypim"  # Replace with your repository owner/repo
-    kind = "main"  # Or any versioning convention you want
-    print(fn)
+    repository = (
+        library  # Replace with your repository owner/repo  # Or any versioning convention you want
+    )
+    library_version = version
+    if "dev" in library_version:
+        kind = "main"
+    else:  # pragma: no cover
+        kind = "release/%s" % (".".join(library_version.split(".")[:2]))
 
     blob_or_edit = "edit" if edit else "blob"
     return f"http://github.com/{repository}/{blob_or_edit}/{kind}/{fn}{linespec}"
+
+
+def linkcode(app: Sphinx, doctree: Node, context):
+    """Docstring missing."""
+    env = app.builder.env
+    version = getattr(env.config, "version", None)
+
+    domain_keys = {
+        "py": ["module", "fullname"],
+        "c": ["names"],
+        "cpp": ["names"],
+        "js": ["object", "fullname"],
+    }
+    github_user = context.get("github_user", "")
+    github_repo = context.get("github_repo", "")
+    library = f"{github_user}/{github_repo}"
+
+    for objnode in list(doctree.findall(addnodes.desc)):
+        domain = objnode.get("domain")
+        uris: set[str] = set()
+        for signode in objnode:
+            if not isinstance(signode, addnodes.desc_signature):
+                continue
+
+            # Convert signode to a specified format
+            info = {}
+            for key in domain_keys.get(domain, []):
+                value = signode.get(key)
+                if not value:
+                    value = ""
+                info[key] = value
+            if not info:
+                continue
+
+            # Call user code to resolve the link
+            uri = sphinx_linkcode_resolve(domain, info, library, version)
+            if not uri:
+                # no source
+                continue
+
+            if uri in uris or not uri:
+                # only one link per name, please
+                continue
+            uris.add(uri)
+
+            inline = nodes.inline("", _("[source]"), classes=["viewcode-link"])
+            onlynode = addnodes.only(expr="html")
+            onlynode += nodes.reference("", "", inline, internal=False, refuri=uri)
+            signode += onlynode
+
+
+def setup(app: Sphinx):
+    """Docstring missing."""
+    app.connect("doctree-read", linkcode)
+    return {"version": sphinx.__display_version__, "parallel_read_safe": True}
