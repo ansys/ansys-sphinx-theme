@@ -106,7 +106,7 @@ def sphinx_linkcode_resolve(domain, info, library, version, edit=False):
     return f"http://github.com/{repository}/{blob_or_edit}/{kind}/{fn}{linespec}"
 
 
-def linkcode(app: Sphinx, doctree: Node, context):
+def linkcode(app: Sphinx, doctree: Node):
     """Docstring missing."""
     env = app.builder.env
     version = getattr(env.config, "version", None)
@@ -117,8 +117,8 @@ def linkcode(app: Sphinx, doctree: Node, context):
         "cpp": ["names"],
         "js": ["object", "fullname"],
     }
-    github_user = context.get("github_user", "")
-    github_repo = context.get("github_repo", "")
+    github_user = getattr(env.config, "github_user", "")
+    github_repo = getattr(env.config, "github_repo", "")
     library = f"{github_user}/{github_repo}"
 
     for objnode in list(doctree.findall(addnodes.desc)):
@@ -158,4 +158,6 @@ def linkcode(app: Sphinx, doctree: Node, context):
 def setup(app: Sphinx):
     """Docstring missing."""
     app.connect("doctree-read", linkcode)
+    app.add_config_value("github_repo", None, "")
+    app.add_config_value("github_user", None, "")
     return {"version": sphinx.__display_version__, "parallel_read_safe": True}

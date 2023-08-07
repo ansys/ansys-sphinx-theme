@@ -5,8 +5,8 @@ from typing import Any, Dict
 from docutils.nodes import document
 from sphinx.application import Sphinx
 
+from ansys_sphinx_theme.extension.linkcode import sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
-from ansys_sphinx_theme.sphinx_link_code_extension.link_code_extension import linkcode
 
 __version__ = "0.11.dev0"
 
@@ -157,11 +157,11 @@ def pv_html_page_context(app, pagename: str, templatename: str, context, doctree
         elif "_autosummary" in pagename:
             # This is an API example
             fullname = pagename.split("_autosummary")[1][1:]
-            return linkcode(
+            return sphinx_linkcode_resolve(
                 domain="py",
                 info={"module": f"{github_repo}", "fullname": fullname},
-                context=context,
-                app=app,
+                library=f"{github_user}/{github_repo}",
+                version=(getattr(app.builder.env.config, "version", None)),
                 edit=True,
             )
         else:
