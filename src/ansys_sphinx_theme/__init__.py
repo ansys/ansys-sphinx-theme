@@ -3,6 +3,7 @@ import pathlib
 from typing import Any, Dict
 
 from docutils.nodes import document
+from sphinx import addnodes
 from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.extension.linkcode import sphinx_linkcode_resolve
@@ -133,6 +134,11 @@ def pv_html_page_context(app, pagename: str, templatename: str, context, doctree
 
     doctree : document
         The document tree for the page.
+
+    References
+    ----------
+    .. [1] GitHub pull request: https://github.com/pyvista/pyvista/pull/4113
+       (Author: akaszynski <https://github.com/akaszynski>)
     """
 
     def fix_edit_link_button(link: str) -> str:
@@ -155,15 +161,38 @@ def pv_html_page_context(app, pagename: str, templatename: str, context, doctree
         if pagename.startswith("examples") and "index" not in pagename:
             return f"http://github.com/{github_user}/{github_repo}/edit/main/{pagename}.py"
         elif "_autosummary" in pagename:
-            # This is an API example
-            fullname = pagename.split("_autosummary")[1][1:]
-            return sphinx_linkcode_resolve(
-                domain="py",
-                info={"module": f"{github_repo}", "fullname": fullname},
-                library=f"{github_user}/{github_repo}",
-                version=(getattr(app.builder.env.config, "version", None)),
-                edit=True,
-            )
+            domain_keys = {
+                "py": ["module", "fullname"],
+                "c": ["names"],
+                "cpp": ["names"],
+                "js": ["object", "fullname"],
+            }
+
+            for objnode in list(doctree.findall(addnodes.desc)):
+                domain = objnode.get("domain")
+                uris: set[str] = set()
+                for signode in objnode:
+                    print(signode)
+                    if not isinstance(signode, addnodes.desc_signature):
+                        continue
+
+                    # Convert signode to a specified format
+                    info = {}
+                    for key in domain_keys.get(domain, []):
+                        value = signode.get(key)
+                        if not value:
+                            value = ""
+                        info[key] = value
+                    if not info:
+                        continue
+                    # This is an API example
+                    return sphinx_linkcode_resolve(
+                        domain=domain,
+                        info=info,
+                        library=f"{github_user}/{github_repo}",
+                        version=getattr(app.builder.env.config, "version", None),
+                        edit=True,
+                    )
         else:
             return link
 
@@ -225,6 +254,7 @@ def setup(app: Sphinx) -> Dict:
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     app.connect("html-page-context", update_footer_theme)
+    app.connect("html-page-context", pv_html_page_context)
     app.config.templates_path.append(str(TEMPLATES_PATH))
     return {
         "version": __version__,
