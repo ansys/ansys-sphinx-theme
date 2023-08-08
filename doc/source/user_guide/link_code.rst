@@ -1,4 +1,5 @@
 .. _ref_user_guide_link_code:
+
 Linkcode extension
 ==================
 
