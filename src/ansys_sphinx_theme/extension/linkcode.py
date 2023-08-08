@@ -68,6 +68,9 @@ def sphinx_linkcode_resolve(
     if fullname.startswith(modname):
         fullname = fullname[len(modname) + 1 :]
 
+    print("Module name:", modname)
+    print("Fullname:", fullname)
+
     submod = sys.modules.get(modname)
     if submod is None:
         return None
