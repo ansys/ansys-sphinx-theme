@@ -13,7 +13,7 @@ from sphinx.locale import _
 
 
 def sphinx_linkcode_resolve(
-    domain: str, info: dict, library: str, version: str, edit: bool = False
+    domain: str, info: dict, library: str, version: str, source_path, edit: bool = False
 ) -> str or None:
     """Resolve the URL corresponding to a Python object for linking to the source code.
 
@@ -93,12 +93,12 @@ def sphinx_linkcode_resolve(
 
     fn = op.relpath(fn, start=os.path.dirname(os.path.abspath(__file__)))
     fn_components = op.normpath(fn).split(os.sep)
-    if "src" in fn_components:
-        repo_index = fn_components.index("src")
+    if source_path in fn_components:
+        repo_index = fn_components.index(source_path)
     else:
         module = modname.split(".")[0]
         repo_index = fn_components.index(module)
-        fn_components.insert(repo_index, "src")
+        fn_components.insert(repo_index, source_path)
     fn = "/".join(fn_components[repo_index:])
 
     try:
@@ -159,6 +159,24 @@ def link_code(app: Sphinx, doctree: Node):
     """
     env = app.builder.env
     version = getattr(env.config, "version", None)
+    if getattr(env.config, "html_context"):
+        html_context = getattr(env.config, "html_context")
+        github_user = html_context.get("github_user", "")
+        github_repo = html_context.get("github_repo", "")
+        github_source = html_context.get("source_path", "")
+        if github_user and github_repo:
+            library = f"{github_user}/{github_repo}"
+        else:
+            raise AttributeError(
+                "The library should have both github_user and github_repo in html context."
+            )
+    elif hasattr(env.config, "link_code_library") and hasattr(env.config, "link_code_source"):
+        library = getattr(env.config, "link_code_library")
+        github_source = getattr(env.config, "link_code_source")
+    else:
+        raise AttributeError(
+            "The library should have either html context or linkcode should be present"
+        )
 
     domain_keys = {
         "py": ["module", "fullname"],
@@ -166,8 +184,6 @@ def link_code(app: Sphinx, doctree: Node):
         "cpp": ["names"],
         "js": ["object", "fullname"],
     }
-
-    library = getattr(env.config, "link_code_library", "")
 
     for objnode in list(doctree.findall(addnodes.desc)):
         domain = objnode.get("domain")
@@ -187,7 +203,7 @@ def link_code(app: Sphinx, doctree: Node):
                 continue
 
             # Call user code to resolve the link
-            uri = sphinx_linkcode_resolve(domain, info, library, version)
+            uri = sphinx_linkcode_resolve(domain, info, library, version, github_source)
             if not uri:
                 # no source
                 continue

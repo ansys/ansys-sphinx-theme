@@ -154,6 +154,8 @@ def fix_edit_html_page_context(
         """
         github_user = context.get("github_user", "")
         github_repo = context.get("github_repo", "")
+        github_source = context.get("source_path", "")
+        print(github_source)
         version = getattr(app.builder.env.config, "version", None)
         if "dev" in version:
             kind = "main"
@@ -190,6 +192,7 @@ def fix_edit_html_page_context(
                         domain=domain,
                         info=info,
                         library=f"{github_user}/{github_repo}",
+                        source_path=github_source,
                         version=version,
                         edit=True,
                     )
@@ -207,7 +210,7 @@ def fix_edit_html_page_context(
                     fullname = signode["module"]
                     modname = fullname.replace(".", "/")
 
-                    return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/src/{modname}.py"  # noqa: E501
+                    return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{github_source}/{modname}.py"  # noqa: E501
 
         else:
             return link
