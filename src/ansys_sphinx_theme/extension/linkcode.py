@@ -1,4 +1,4 @@
-"""Docstring missing."""
+"""Module containing ``link_code`` extension."""
 import inspect
 import os
 import os.path as op
@@ -13,9 +13,10 @@ from sphinx.locale import _
 
 
 def sphinx_linkcode_resolve(
-    domain: str, info: dict, library: str, source_path, github_version, edit: bool = False
+    domain: str, info: dict, library: str, source_path: str, github_version: str, edit: bool = False
 ) -> str or None:
-    """Resolve the URL corresponding to a Python object for linking to the source code.
+    """
+    Resolve the URL corresponding to a Python object for linking to the source code.
 
     Parameters
     ----------
@@ -23,19 +24,23 @@ def sphinx_linkcode_resolve(
         The domain of the object (e.g., 'py' for Python).
 
     info : dict
-        Dictionary containing the information about the object.
+        A dictionary containing the information about the object.
         It must have the keys 'module' and 'fullname'.
 
     library : str
         The repository/library name where the source code is hosted.
         For example, 'ansys/ansys-sphinx-theme'.
 
-    version : str
-        The version of the library. It can be a specific version like '1.2.0' or 'dev'.
-        For versioned links, the version will be used in the URL.
+    source_path : str
+        The relative path of the source code file within the repository.
+        For example, 'src'.
 
-    edit : bool, optional, default=False
-        If ``True`` , the link should point to the edit page for the source code.
+    github_version : str
+        The version of the library in github. It can be a specific version like
+        'main' or 'release/branch'.For versioned links, the version will be used in the URL.
+
+    edit : bool, default : False
+        If True, the link should point to the edit page for the source code.
         Otherwise, it will point to the view page.
 
     Returns
@@ -52,7 +57,6 @@ def sphinx_linkcode_resolve(
     ----------
     GitHub pull request: https://github.com/pyvista/pyvista/pull/4113
     (Author: Alex kaszynski <https://github.com/akaszynski>)
-
     """
     if domain != "py":
         return None
@@ -121,7 +125,8 @@ def sphinx_linkcode_resolve(
 
 
 def link_code(app: Sphinx, doctree: Node):
-    """Automatically add "View Source" links to the documentation.
+    """
+    Automatically add "View Source" links to the documentation.
 
     This function is an event handler that automatically adds "View Source" links to the
     documentation for Python, C, C++, and JavaScript objects. It is designed to work with
@@ -136,8 +141,7 @@ def link_code(app: Sphinx, doctree: Node):
 
     Notes
     -----
-    The function uses the `sphinx_linkcode_resolve` function to res
-    olve the link for each
+    The function uses the `sphinx_linkcode_resolve` function to resolve the link for each
     documented object. The link is added as a "View Source" link to the documentation
     when rendered.
 
@@ -151,7 +155,6 @@ def link_code(app: Sphinx, doctree: Node):
     -----
     Sphinx GitHub repository for `linkcode` extension:
     https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py
-
     """
     env = app.builder.env
     html_context = getattr(env.config, "html_context")
@@ -220,10 +223,11 @@ def link_code(app: Sphinx, doctree: Node):
 
 
 def setup(app: Sphinx):
-    """Initialize the linkcode extension for Sphinx.
+    """
+    Initialize the linkcode extension for Sphinx.
 
     This function initializes the linkcode extension for Sphinx. It connects the
-    `linkcode` function to the "doctree-read" event and adds the "link_code_library"
+    `link_code` function to the "doctree-read" event and adds the "link_code_library"
     configuration option.
 
     Parameters
@@ -240,7 +244,6 @@ def setup(app: Sphinx):
     -----
     Sphinx GitHub repository for `linkcode` extension:
     https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py
-
     """
     app.connect("doctree-read", link_code)
     app.add_config_value("link_code_library", None, "")
