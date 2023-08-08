@@ -22,6 +22,14 @@ CSS_PATH = STYLE_PATH / "ansys_sphinx_theme.css"
 TEMPLATES_PATH = THEME_PATH / "_templates"
 JS_FILE = JS_PATH / "table.js"
 
+
+DOMAIN_KEYS = {
+    "py": ["module", "fullname"],
+    "c": ["names"],
+    "cpp": ["names"],
+    "js": ["object", "fullname"],
+}
+
 # make logo paths available
 ansys_favicon = str((STATIC_PATH / "ansys-favicon.png").absolute())
 ansys_logo_black = str((STATIC_PATH / "ansys_logo_black_cropped.jpg").absolute())
@@ -156,19 +164,11 @@ def fix_edit_html_page_context(
         github_repo = context.get("github_repo", "")
         github_source = context.get("source_path", "")
         kind = context.get("github_version", "")
-        version = getattr(app.builder.env.config, "version", None)
 
         if pagename.startswith("examples") and "index" not in pagename:
             return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{pagename}.py"
 
         elif "_autosummary" in pagename:
-            domain_keys = {
-                "py": ["module", "fullname"],
-                "c": ["names"],
-                "cpp": ["names"],
-                "js": ["object", "fullname"],
-            }
-
             for obj_node in list(doctree.findall(addnodes.desc)):
                 domain = obj_node.get("domain")
                 for signode in obj_node:
@@ -176,7 +176,7 @@ def fix_edit_html_page_context(
                         continue
                     # Convert signode to a specified format
                     info = {}
-                    for key in domain_keys.get(domain, []):
+                    for key in DOMAIN_KEYS.get(domain, []):
                         value = signode.get(key)
                         if not value:
                             value = ""

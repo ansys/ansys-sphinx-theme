@@ -11,6 +11,13 @@ from sphinx import addnodes
 from sphinx.application import Sphinx
 from sphinx.locale import _
 
+DOMAIN_KEYS = {
+    "py": ["module", "fullname"],
+    "c": ["names"],
+    "cpp": ["names"],
+    "js": ["object", "fullname"],
+}
+
 
 def sphinx_linkcode_resolve(
     domain: str, info: dict, library: str, source_path: str, github_version: str, edit: bool = False
@@ -67,9 +74,6 @@ def sphinx_linkcode_resolve(
     # Little clean up to avoid library.library
     if fullname.startswith(modname):
         fullname = fullname[len(modname) + 1 :]
-
-    print("Module name:", modname)
-    print("Fullname:", fullname)
 
     submod = sys.modules.get(modname)
     if submod is None:
@@ -178,12 +182,6 @@ def link_code(app: Sphinx, doctree: Node):
         raise AttributeError(
             "The conf.py file either should have html_context or link_code_library with github_repo and github_user."  # noqa: E501
         )
-    domain_keys = {
-        "py": ["module", "fullname"],
-        "c": ["names"],
-        "cpp": ["names"],
-        "js": ["object", "fullname"],
-    }
 
     for objnode in list(doctree.findall(addnodes.desc)):
         domain = objnode.get("domain")
@@ -194,7 +192,7 @@ def link_code(app: Sphinx, doctree: Node):
 
             # Convert signode to a specified format
             info = {}
-            for key in domain_keys.get(domain, []):
+            for key in DOMAIN_KEYS.get(domain, []):
                 value = signode.get(key)
                 if not value:
                     value = ""
