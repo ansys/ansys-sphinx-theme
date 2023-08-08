@@ -93,12 +93,17 @@ def sphinx_linkcode_resolve(
 
     fn = op.relpath(fn, start=os.path.dirname(os.path.abspath(__file__)))
     fn_components = op.normpath(fn).split(os.sep)
-    if source_path in fn_components:
-        repo_index = fn_components.index(source_path)
-    else:
+
+    if not source_path:
         module = modname.split(".")[0]
         repo_index = fn_components.index(module)
-        fn_components.insert(repo_index, source_path)
+    else:
+        if source_path in fn_components:
+            repo_index = fn_components.index(source_path)
+        else:
+            module = modname.split(".")[0]
+            repo_index = fn_components.index(module)
+            fn_components.insert(repo_index, source_path)
     fn = "/".join(fn_components[repo_index:])
 
     try:
