@@ -164,25 +164,21 @@ def link_code(app: Sphinx, doctree: Node):
     """
     env = app.builder.env
     version = getattr(env.config, "version", None)
-    if getattr(env.config, "html_context"):
-        html_context = getattr(env.config, "html_context")
-        github_user = html_context.get("github_user", "")
-        github_repo = html_context.get("github_repo", "")
-        github_source = html_context.get("source_path", "")
-        if github_user and github_repo:
-            library = f"{github_user}/{github_repo}"
-        else:
-            raise AttributeError(
-                "The library should have both github_user and github_repo in html context."
-            )
+    html_context = getattr(env.config, "html_context")
+    github_user = html_context.get("github_user", "")
+    github_repo = html_context.get("github_repo", "")
+    github_source = html_context.get("source_path", "")
+    if github_user and github_repo:
+        library = f"{github_user}/{github_repo}"
     elif hasattr(env.config, "link_code_library") and hasattr(env.config, "link_code_source"):
         library = getattr(env.config, "link_code_library")
         github_source = getattr(env.config, "link_code_source")
     else:
+        raise AttributeError("The library should have either html_context or link_code_library.")
+    if not library:
         raise AttributeError(
-            "The library should have either html context or linkcode should be present"
+            "The conf.py file either should have html_context or link_code_library with github_repo and github_user."  # noqa: E501
         )
-
     domain_keys = {
         "py": ["module", "fullname"],
         "c": ["names"],
@@ -249,4 +245,5 @@ def setup(app: Sphinx):
     """
     app.connect("doctree-read", link_code)
     app.add_config_value("link_code_library", None, "")
+    app.add_config_value("link_code_source", None, "")
     return {"version": sphinx.__display_version__, "parallel_read_safe": True}

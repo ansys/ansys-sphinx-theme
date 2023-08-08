@@ -210,7 +210,10 @@ def fix_edit_html_page_context(
                     fullname = signode["module"]
                     modname = fullname.replace(".", "/")
 
-                    return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{github_source}/{modname}.py"  # noqa: E501
+                    if github_source:
+                        return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{github_source}/{modname}.py"  # noqa: E501
+                    else:
+                        return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{modname}.py"  # noqa: E501
 
         else:
             return link
