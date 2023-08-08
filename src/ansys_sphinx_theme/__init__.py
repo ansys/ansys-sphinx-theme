@@ -155,12 +155,8 @@ def fix_edit_html_page_context(
         github_user = context.get("github_user", "")
         github_repo = context.get("github_repo", "")
         github_source = context.get("source_path", "")
-        print(github_source)
+        kind = context.get("github_version", "")
         version = getattr(app.builder.env.config, "version", None)
-        if "dev" in version:
-            kind = "main"
-        else:  # pragma: no cover
-            kind = f"release/{'.'.join(version.split('.')[:2])}"
 
         if pagename.startswith("examples") and "index" not in pagename:
             return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{pagename}.py"
@@ -193,7 +189,7 @@ def fix_edit_html_page_context(
                         info=info,
                         library=f"{github_user}/{github_repo}",
                         source_path=github_source,
-                        version=version,
+                        github_version=kind,
                         edit=True,
                     )
 

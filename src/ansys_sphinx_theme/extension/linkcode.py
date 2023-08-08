@@ -13,7 +13,7 @@ from sphinx.locale import _
 
 
 def sphinx_linkcode_resolve(
-    domain: str, info: dict, library: str, version: str, source_path, edit: bool = False
+    domain: str, info: dict, library: str, source_path, github_version, edit: bool = False
 ) -> str or None:
     """Resolve the URL corresponding to a Python object for linking to the source code.
 
@@ -116,17 +116,8 @@ def sphinx_linkcode_resolve(
     else:
         linespec = ""
 
-    repository = (
-        library  # Replace with your repository owner/repo  # Or any versioning convention you want
-    )
-    library_version = version
-    if "dev" in library_version:
-        kind = "main"
-    else:  # pragma: no cover
-        kind = f"release/{'.'.join(version.split('.')[:2])}"
-
     blob_or_edit = "edit" if edit else "blob"
-    return f"http://github.com/{repository}/{blob_or_edit}/{kind}/{fn}{linespec}"
+    return f"http://github.com/{library}/{blob_or_edit}/{github_version}/{fn}{linespec}"
 
 
 def link_code(app: Sphinx, doctree: Node):
@@ -163,16 +154,18 @@ def link_code(app: Sphinx, doctree: Node):
 
     """
     env = app.builder.env
-    version = getattr(env.config, "version", None)
     html_context = getattr(env.config, "html_context")
     github_user = html_context.get("github_user", "")
     github_repo = html_context.get("github_repo", "")
     github_source = html_context.get("source_path", "")
+    github_version = html_context.get("github_version", "main")
     if github_user and github_repo:
         library = f"{github_user}/{github_repo}"
     elif hasattr(env.config, "link_code_library") and hasattr(env.config, "link_code_source"):
         library = getattr(env.config, "link_code_library")
         github_source = getattr(env.config, "link_code_source")
+        github_version = getattr(env.config, "link_code_branch")
+
     else:
         raise AttributeError("The library should have either html_context or link_code_library.")
     if not library:
@@ -204,7 +197,13 @@ def link_code(app: Sphinx, doctree: Node):
                 continue
 
             # Call user code to resolve the link
-            uri = sphinx_linkcode_resolve(domain, info, library, version, github_source)
+            uri = sphinx_linkcode_resolve(
+                domain=domain,
+                info=info,
+                library=library,
+                source_path=github_source,
+                github_version=github_version,
+            )
             if not uri:
                 # no source
                 continue
@@ -246,4 +245,5 @@ def setup(app: Sphinx):
     app.connect("doctree-read", link_code)
     app.add_config_value("link_code_library", None, "")
     app.add_config_value("link_code_source", None, "")
+    app.add_config_value("link_code_branch", None, "")
     return {"version": sphinx.__display_version__, "parallel_read_safe": True}
