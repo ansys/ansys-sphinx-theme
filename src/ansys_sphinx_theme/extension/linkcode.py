@@ -12,7 +12,7 @@ from sphinx.application import Sphinx
 from sphinx.locale import _
 
 
-def sphinx_linkcode_resolve(domain, info, library, version, edit=False):
+def sphinx_linkcode_resolve(domain: str, info: dict, library, version: str, edit: Optional=False):
     """Determine the URL corresponding to a Python object.
 
     Parameters
@@ -68,7 +68,7 @@ def sphinx_linkcode_resolve(domain, info, library, version, edit=False):
         except Exception:
             return None
 
-    # deal with our decorators properly
+    # Deal with our decorators properly
     while hasattr(obj, "fget"):
         obj = obj.fget
 
@@ -112,7 +112,7 @@ def sphinx_linkcode_resolve(domain, info, library, version, edit=False):
     return f"http://github.com/{repository}/{blob_or_edit}/{kind}/{fn}{linespec}"
 
 
-def linkcode(app: Sphinx, doctree: Node):
+def link_code(app: Sphinx, doctree: Node):
     """Automatically add "View Source" links to the documentation.
 
     This function is an event handler that automatically adds "View Source" links to the
@@ -123,7 +123,6 @@ def linkcode(app: Sphinx, doctree: Node):
     ----------
     app : sphinx.application.Sphinx
         The Sphinx application instance.
-
     doctree : docutils.nodes.Node
         The document tree for the current page.
 
@@ -140,8 +139,8 @@ def linkcode(app: Sphinx, doctree: Node):
     The `link_code_library` configuration option can be used to specify a custom library
     for link resolution.
 
-    References
-    ----------
+    Notes
+    -----
     Sphinx GitHub repository for `linkcode` extension:
     https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py
 
@@ -209,8 +208,8 @@ def setup(app: Sphinx):
     dict
         A dictionary containing configuration values for the extension.
 
-    References
-    ----------
+    Notes
+    -----
     Sphinx GitHub repository for `linkcode` extension:
     https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py
 

@@ -109,39 +109,34 @@ def setup_default_html_theme_options(app):
     app.config.html_theme_options.setdefault("collapse_navigation", True)
 
 
-def pv_html_page_context(app, pagename: str, templatename: str, context, doctree) -> None:
+def pv_html_page_context(app: Sphinx, pagename: str, templatename: str, context: dict, doctree: document) -> None:
     """Add a function that Jinja can access for returning an "edit this page" link .
 
-    This function will create an "edit this page" link for any library.
-    The link will point to the corresponding file on the main branch.
+    This function creates an "edit this page" link for any library.
+    The link points to the corresponding file on the main branch.
 
     Parameters
     ----------
     app : Sphinx
         The Sphinx application instance for rendering the documentation.
-
     pagename : str
         The name of the current page.
-
     templatename : str
         The name of the template being used.
-
     context : dict
         The context dictionary for the page.
-
     doctree : document
         The document tree for the page.
 
     References
     ----------
-    .. [1] GitHub pull request: https://github.com/pyvista/pyvista/pull/4113
-       (Author: akaszynski <https://github.com/akaszynski>)
+    .. [1] Originally implemented by `Alex Kaszynski <https://github.com/akaszynski>`_ in `PyVista <https://github.com/pyvista/pyvista>`_, see https://github.com/pyvista/pyvista/pull/4113
     """
 
     def fix_edit_link_button(link: str) -> str:
         """Transform "edit on GitHub" links to the correct URL.
 
-        This function will create the correct URL for the "edit this page" link.
+        This function fixes the URL for the "edit this page" link.
 
         Parameters
         ----------
@@ -171,10 +166,10 @@ def pv_html_page_context(app, pagename: str, templatename: str, context, doctree
                 "js": ["object", "fullname"],
             }
 
-            for objnode in list(doctree.findall(addnodes.desc)):
-                domain = objnode.get("domain")
+            for obj_node in list(doctree.findall(addnodes.desc)):
+                domain = obj_node.get("domain")
                 uris: set[str] = set()
-                for signode in objnode:
+                for signode in obj_node:
                     if not isinstance(signode, addnodes.desc_signature):
                         continue
 
