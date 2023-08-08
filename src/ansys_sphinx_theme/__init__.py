@@ -109,7 +109,9 @@ def setup_default_html_theme_options(app):
     app.config.html_theme_options.setdefault("collapse_navigation", True)
 
 
-def pv_html_page_context(app: Sphinx, pagename: str, templatename: str, context: dict, doctree: document) -> None:
+def fix_edit_html_page_context(
+    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: document
+) -> None:
     """Add a function that Jinja can access for returning an "edit this page" link .
 
     This function creates an "edit this page" link for any library.
@@ -130,7 +132,9 @@ def pv_html_page_context(app: Sphinx, pagename: str, templatename: str, context:
 
     References
     ----------
-    .. [1] Originally implemented by `Alex Kaszynski <https://github.com/akaszynski>`_ in `PyVista <https://github.com/pyvista/pyvista>`_, see https://github.com/pyvista/pyvista/pull/4113
+    .. [1] Originally implemented by `Alex Kaszynski <https://github.com/akaszynski>`_ in
+    `PyVista <https://github.com/pyvista/pyvista>`_,
+    see https://github.com/pyvista/pyvista/pull/4113
     """
 
     def fix_edit_link_button(link: str) -> str:
@@ -154,10 +158,11 @@ def pv_html_page_context(app: Sphinx, pagename: str, templatename: str, context:
         if "dev" in version:
             kind = "main"
         else:  # pragma: no cover
-            kind = "release/%s" % (".".join(library_version.split(".")[:2]))
+            kind = f"release/{'.'.join(version.split('.')[:2])}"
 
         if pagename.startswith("examples") and "index" not in pagename:
             return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{pagename}.py"
+
         elif "_autosummary" in pagename:
             domain_keys = {
                 "py": ["module", "fullname"],
@@ -168,11 +173,9 @@ def pv_html_page_context(app: Sphinx, pagename: str, templatename: str, context:
 
             for obj_node in list(doctree.findall(addnodes.desc)):
                 domain = obj_node.get("domain")
-                uris: set[str] = set()
                 for signode in obj_node:
                     if not isinstance(signode, addnodes.desc_signature):
                         continue
-
                     # Convert signode to a specified format
                     info = {}
                     for key in domain_keys.get(domain, []):
@@ -192,18 +195,19 @@ def pv_html_page_context(app: Sphinx, pagename: str, templatename: str, context:
                     )
 
         elif "autoapi" in pagename:
-            domain = objnode.get("domain")
-            if domain != "py":  # Make sure it is a Python object.
-                return link
+            for obj_node in list(doctree.findall(addnodes.desc)):
+                domain = obj_node.get("domain")
+                if domain != "py":
+                    return link
 
-            for signode in objnode:
-                if not isinstance(signode, addnodes.desc_signature):
-                    continue
+                for signode in obj_node:
+                    if not isinstance(signode, addnodes.desc_signature):
+                        continue
 
-                fullname = signode["module"]
-                modname = fullname.replace(".", "/")
+                    fullname = signode["module"]
+                    modname = fullname.replace(".", "/")
 
-                return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/src/{modname}.py"  # noqa: E501
+                    return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/src/{modname}.py"  # noqa: E501
 
         else:
             return link
@@ -266,7 +270,7 @@ def setup(app: Sphinx) -> Dict:
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     app.connect("html-page-context", update_footer_theme)
-    app.connect("html-page-context", pv_html_page_context)
+    app.connect("html-page-context", fix_edit_html_page_context)
     app.config.templates_path.append(str(TEMPLATES_PATH))
     return {
         "version": __version__,

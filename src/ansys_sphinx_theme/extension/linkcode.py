@@ -12,8 +12,10 @@ from sphinx.application import Sphinx
 from sphinx.locale import _
 
 
-def sphinx_linkcode_resolve(domain: str, info: dict, library, version: str, edit: Optional=False):
-    """Determine the URL corresponding to a Python object.
+def sphinx_linkcode_resolve(
+    domain: str, info: dict, library: str, version: str, edit: bool = False
+) -> str or None:
+    """Resolve the URL corresponding to a Python object for linking to the source code.
 
     Parameters
     ----------
@@ -24,12 +26,17 @@ def sphinx_linkcode_resolve(domain: str, info: dict, library, version: str, edit
         Dictionary containing the information about the object.
         It must have the keys 'module' and 'fullname'.
 
-    edit : bool, default=False
-        If True, the link should point to the edit page.
+    library : str
+        The repository/library name where the source code is hosted.
+        For example, 'ansys/ansys-sphinx-theme'.
 
-    app : Sphinx, optional
-        The Sphinx application instance for rendering the documentation.
-        This argument is optional, but if not provided, the library version check will be skipped.
+    version : str
+        The version of the library. It can be a specific version like '1.2.0' or 'dev'.
+        For versioned links, the version will be used in the URL.
+
+    edit : bool, optional, default=False
+        If ``True`` , the link should point to the edit page for the source code.
+        Otherwise, it will point to the view page.
 
     Returns
     -------
@@ -86,8 +93,13 @@ def sphinx_linkcode_resolve(domain: str, info: dict, library, version: str, edit
 
     fn = op.relpath(fn, start=os.path.dirname(os.path.abspath(__file__)))
     fn_components = op.normpath(fn).split(os.sep)
-    repo_index = fn_components.index("src")
-    fn = "/".join(fn_components[repo_index:])  # in case on Windows
+    if "src" in fn_components:
+        repo_index = fn_components.index("src")
+    else:
+        module = modname.split(".")[0]
+        repo_index = fn_components.index(module)
+        fn_components.insert(repo_index, "src")
+    fn = "/".join(fn_components[repo_index:])
 
     try:
         source, lineno = inspect.getsourcelines(obj)
@@ -106,7 +118,7 @@ def sphinx_linkcode_resolve(domain: str, info: dict, library, version: str, edit
     if "dev" in library_version:
         kind = "main"
     else:  # pragma: no cover
-        kind = "release/%s" % (".".join(library_version.split(".")[:2]))
+        kind = f"release/{'.'.join(version.split('.')[:2])}"
 
     blob_or_edit = "edit" if edit else "blob"
     return f"http://github.com/{repository}/{blob_or_edit}/{kind}/{fn}{linespec}"
@@ -214,6 +226,6 @@ def setup(app: Sphinx):
     https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py
 
     """
-    app.connect("doctree-read", linkcode)
+    app.connect("doctree-read", link_code)
     app.add_config_value("link_code_library", None, "")
     return {"version": sphinx.__display_version__, "parallel_read_safe": True}
