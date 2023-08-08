@@ -14,6 +14,7 @@ While the Ansys Sphinx theme is often used as is, you can customize the followin
 - :ref:`ref_user_guide_pdf_cover`
 - :ref:`ref_user_guide_404_page`
 - :ref:`ref_user_guide_link_code`
+  
 .. toctree::
    :hidden:
    :maxdepth: 2
