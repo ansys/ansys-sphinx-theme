@@ -15,10 +15,9 @@ and JavaScript objects. It allows you to link to the source code hosted on GitHu
 Installation
 ~~~~~~~~~~~~
 
-To use the ansys-sphinx-theme linkcode extension, you need to add it to the Sphinx configuration:
+To use the ``ansys-sphinx-theme`` linkcode extension, you need to add it to the Sphinx configuration:
 
-1. Add the following line in the ``conf.py`` file:
-
+#. Add the following line in the ``conf.py`` file:
    .. code-block:: python
 
       extensions = ["ansys_sphinx_theme.extension.linkcode"]
@@ -26,7 +25,12 @@ To use the ansys-sphinx-theme linkcode extension, you need to add it to the Sphi
 Configuration options
 ---------------------
 
-The Linkcode extension supports the following configuration options in your `conf.py` file:
+The Linkcode extension provides a way to configure its behavior by using certain options within your conf.py file. 
+Depending on your preferred approach, you can utilize the direct 
+configuration options or the html_context dictionary to streamline your settings.
+
+Direct configuration options:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - ``link_code_library`` (str, optional):
   The user/repository name where the source code is hosted. For example, ``ansys/ansys-sphinx-theme``.
@@ -37,9 +41,11 @@ The Linkcode extension supports the following configuration options in your `con
 - ``link_code_branch`` (str, optional, default: 'main'):
   The GitHub branch. It can be a specific version like ``main`` or ``dev``.
 
-You can also set the `link_code_library`, `link_code_source`, `link_code_branch`,
-and other GitHub-related configuration options directly in the `html_context` dictionary in your `conf.py` file.
-By doing so, you can avoid redundancy and centralize the GitHub-related information for the extension:
+Using ``html_context`` dictionary:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+You also have the option to centralize your GitHub-related configuration by incorporating it 
+directly into the ``html_context`` dictionary within your `conf.py` file. This approach allows you to 
+minimize redundancy and manage the GitHub-related information more effectively for the extension:
 
 .. code-block:: python
 
@@ -51,3 +57,6 @@ By doing so, you can avoid redundancy and centralize the GitHub-related informat
        "github_version": "<your-branch>",
        "source_path": "<path-from-root-to-your-source_file>",
    }
+
+With this setup, you can fine-tune your configuration according to your preferences and requirements, 
+enhancing the integration of the Linkcode extension into your documentation.

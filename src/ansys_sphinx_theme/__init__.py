@@ -157,10 +157,7 @@ def fix_edit_html_page_context(
         github_source = context.get("source_path", "")
         kind = context.get("github_version", "")
 
-        if pagename.startswith("examples") and "index" not in pagename:
-            return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{pagename}.py"
-
-        elif "_autosummary" in pagename:
+        if "_autosummary" in pagename:
             for obj_node in list(doctree.findall(addnodes.desc)):
                 domain = obj_node.get("domain")
                 for signode in obj_node:
@@ -199,9 +196,9 @@ def fix_edit_html_page_context(
                     modname = fullname.replace(".", "/")
 
                     if github_source:
-                        return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{github_source}/{modname}.py"  # noqa: E501
+                        return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{github_source}/{modname}.{domain}"  # noqa: E501
                     else:
-                        return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{modname}.py"  # noqa: E501
+                        return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{modname}.{domain}"  # noqa: E501
 
         else:
             return link
