@@ -3,7 +3,7 @@
 Extensions
 ==========
 
-This page contains the extensions shipped extensions that seamlessly integrate with our theme to enhance 
+This page contains the extensions shipped extensions that seamlessly integrate with this theme to enhance 
 documentation functionality 
 
 Linkcode extension
