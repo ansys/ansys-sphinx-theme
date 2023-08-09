@@ -120,15 +120,15 @@ def fix_edit_html_page_context(
     Parameters
     ----------
     app : Sphinx
-        The Sphinx application instance for rendering the documentation.
+        Sphinx application instance for rendering the documentation.
     pagename : str
-        The name of the current page.
+        Name of the current page.
     templatename : str
-        The name of the template being used.
+        Name of the template being used.
     context : dict
-        The context dictionary for the page.
+        Context dictionary for the page.
     doctree : document
-        The document tree for the page.
+        Document tree for the page.
 
     Notes
     -----
@@ -145,12 +145,12 @@ def fix_edit_html_page_context(
         Parameters
         ----------
         link : str
-            The link to the GitHub edit interface.
+            Link to the GitHub edit interface.
 
         Returns
         -------
         str
-            The link to the corresponding file on the main branch.
+            Link to the corresponding file on the main branch.
         """
         github_user = context.get("github_user", "")
         github_repo = context.get("github_repo", "")
