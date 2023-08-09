@@ -1,4 +1,4 @@
-"""Module containing ``link_code`` extension."""
+"""A module containing the an extension for creating links to original source code files."""
 import inspect
 import os
 import os.path as op
@@ -29,23 +29,18 @@ def sphinx_linkcode_resolve(
     ----------
     domain : str
         The domain of the object (e.g., 'py' for Python).
-
     info : dict
         A dictionary containing the information about the object.
         It must have the keys 'module' and 'fullname'.
-
     library : str
         The repository/library name where the source code is hosted.
         For example, 'ansys/ansys-sphinx-theme'.
-
     source_path : str
         The relative path of the source code file within the repository.
         For example, 'src'.
-
     github_version : str
         The version of the library in github. It can be a specific version like
         'main' or 'release/branch'.For versioned links, the version will be used in the URL.
-
     edit : bool, default : False
         If True, the link should point to the edit page for the source code.
         Otherwise, it will point to the view page.
@@ -159,7 +154,7 @@ def link_code(app: Sphinx, doctree: Node):
 
     Notes
     -----
-    Sphinx GitHub repository for `linkcode` extension:
+    Adapted from the original `linkcode` extension in Sphinx, see
     https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py
     """
     env = app.builder.env

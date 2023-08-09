@@ -11,9 +11,7 @@ Installation
 
 To use the ansys-sphinx-theme linkcode extension, you need to add it to the Sphinx configuration:
 
-1. Open your `conf.py` file.
-
-2. Add the following line to the file:
+1. Add the following line in the ``conf.py`` file:
 
    .. code-block:: python
 
