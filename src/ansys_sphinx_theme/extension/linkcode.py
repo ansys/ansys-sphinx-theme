@@ -50,27 +50,27 @@ def sphinx_linkcode_resolve(
     Parameters
     ----------
     domain : str
-        The domain of the object (e.g., 'py' for Python).
+        Domain of the object (e.g., 'py' for Python).
     info : dict
-        A dictionary containing the information about the object.
+        Dictionary containing the information about the object.
         It must have the keys 'module' and 'fullname'.
     library : str
-        The repository/library name where the source code is hosted.
+        Repository/library name where the source code is hosted.
         For example, 'ansys/ansys-sphinx-theme'.
     source_path : str
-        The relative path of the source code file within the repository.
+        Relative path of the source code file within the repository.
         For example, 'src'.
     github_version : str
-        The version of the library in github. It can be a specific version like
+        Version of the library in github. It can be a specific version like
         'main' or 'release/branch'.For versioned links, the version will be used in the URL.
     edit : bool, default : False
-        If True, the link should point to the edit page for the source code.
+        If ``True``, the link should point to the edit page for the source code.
         Otherwise, it will point to the view page.
 
     Returns
     -------
     str or None
-        The code URL or None if it cannot be determined.
+        Code URL or ``None`` if it cannot be determined.
 
     Notes
     -----
@@ -158,9 +158,9 @@ def link_code(app: Sphinx, doctree: Node):
     Parameters
     ----------
     app : sphinx.application.Sphinx
-        The Sphinx application instance.
+        Sphinx application instance.
     doctree : docutils.nodes.Node
-        The document tree for the current page.
+        Document tree for the current page.
 
     Notes
     -----
@@ -250,12 +250,12 @@ def setup(app: Sphinx):
     Parameters
     ----------
     app : sphinx.application.Sphinx
-        The Sphinx application instance.
+        Sphinx application instance.
 
     Returns
     -------
     dict
-        A dictionary containing configuration values for the extension.
+        Dictionary containing configuration values for the extension.
 
     Notes
     -----
