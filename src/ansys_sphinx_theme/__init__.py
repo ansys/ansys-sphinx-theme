@@ -6,7 +6,7 @@ from docutils.nodes import document
 from sphinx import addnodes
 from sphinx.application import Sphinx
 
-from ansys_sphinx_theme.extension.linkcode import sphinx_linkcode_resolve
+from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
 __version__ = "0.11.dev0"
@@ -21,14 +21,6 @@ JS_PATH = STATIC_PATH / "js"
 CSS_PATH = STYLE_PATH / "ansys_sphinx_theme.css"
 TEMPLATES_PATH = THEME_PATH / "_templates"
 JS_FILE = JS_PATH / "table.js"
-
-
-DOMAIN_KEYS = {
-    "py": ["module", "fullname"],
-    "c": ["names"],
-    "cpp": ["names"],
-    "js": ["object", "fullname"],
-}
 
 # make logo paths available
 ansys_favicon = str((STATIC_PATH / "ansys-favicon.png").absolute())

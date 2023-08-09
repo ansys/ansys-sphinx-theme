@@ -11,6 +11,28 @@ from sphinx import addnodes
 from sphinx.application import Sphinx
 from sphinx.locale import _
 
+"""
+DOMAIN_KEYS: Dictionary containing information about supported
+programming languages and their corresponding domain keys.
+
+This dictionary maps programming language codes to a list of domain keys that
+can be used to extract specific information related to the language.
+
+- 'py': Python language information keys:
+  - 'module': Key to access module information.
+  - 'fullname': Key to access full name information.
+
+- 'c': C language information keys:
+  - 'names': Key to access name information.
+
+- 'cpp': C++ language information keys:
+  - 'names': Key to access name information.
+
+- 'js': JavaScript language information keys:
+  - 'object': Key to access object information.
+  - 'fullname': Key to access full name information.
+
+"""
 DOMAIN_KEYS = {
     "py": ["module", "fullname"],
     "c": ["names"],
