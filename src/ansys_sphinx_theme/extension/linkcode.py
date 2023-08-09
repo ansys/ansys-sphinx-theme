@@ -60,8 +60,7 @@ def sphinx_linkcode_resolve(
     This function is used by the `sphinx.ext.linkcode` extension to create the "[Source]"
     button whose link is edited in this function.
 
-    References
-    ----------
+    Adapted from the link_code extension implemented in pyvista. See
     GitHub pull request: https://github.com/pyvista/pyvista/pull/4113
     (Author: Alex kaszynski <https://github.com/akaszynski>)
     """

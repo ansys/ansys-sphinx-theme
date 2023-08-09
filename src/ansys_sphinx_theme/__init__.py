@@ -138,8 +138,8 @@ def fix_edit_html_page_context(
     doctree : document
         The document tree for the page.
 
-    References
-    ----------
+    Notes
+    -----
     .. [1] Originally implemented by `Alex Kaszynski <https://github.com/akaszynski>`_ in
     `PyVista <https://github.com/pyvista/pyvista>`_,
     see https://github.com/pyvista/pyvista/pull/4113
