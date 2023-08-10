@@ -9,7 +9,7 @@ documentation functionality.
 Linkcode extension
 -------------------
 
-The Linkcode extension automatically adds "View Source" links to the documentation for Python, C, C++, 
+The Linkcode extension automatically adds "Source" links to the documentation for Python, C, C++, 
 and JavaScript objects. It allows you to link to the source code hosted on GitHub.
 
 Installation
@@ -18,9 +18,9 @@ Installation
 To use the ``ansys-sphinx-theme`` linkcode extension, you need to add it to the Sphinx configuration:
 
 #. Add the following line in the ``conf.py`` file:
-   .. code-block:: python
+  .. code-block:: python
 
-      extensions = ["ansys_sphinx_theme.extension.linkcode"]
+    extensions = ["ansys_sphinx_theme.extension.linkcode"]
 
 Configuration options
 ---------------------
@@ -29,8 +29,8 @@ The Linkcode extension provides a way to configure its behavior by using certain
 Depending on your preferred approach, you can utilize the direct 
 configuration options or the ``html_context`` dictionary to streamline your settings.
 
-If both sets of configuration options are given, the direct configuration options (e.g., ``link_code_library``,
- ``link_code_source``, ``link_code_branch``) will take 
+If both sets of configuration options are given, the direct configuration options (example, ``link_code_library``,
+``link_code_source``, ``link_code_branch``) has
 precedence over the corresponding settings in the ``html_context`` dictionary.
 
 Direct configuration options
@@ -61,14 +61,13 @@ the following default values will be used:
 Using ``html_context`` dictionary
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 You also have the option to centralize your GitHub-related configuration by incorporating it 
-directly into the ``html_context`` dictionary within your `conf.py` file. This approach allows you to 
+directly into the ``html_context`` dictionary within your ``conf.py`` file. This approach allows you to 
 minimize redundancy and manage the GitHub-related information more effectively for the extension:
 
 .. code-block:: python
 
    # Example of setting GitHub-related configuration in conf.py
    html_context = {
-       # "github_url": "https://github.com", # or your GitHub Enterprise site
        "github_user": "<your-github-org>",
        "github_repo": "<your-github-repo>",
        "github_version": "<your-branch>",
