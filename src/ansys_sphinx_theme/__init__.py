@@ -9,7 +9,7 @@ from sphinx.application import Sphinx
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
-__version__ = "0.10.2"
+__version__ = "0.10.3"
 
 
 # Declare the fundamental paths of the theme
