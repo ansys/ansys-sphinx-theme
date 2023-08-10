@@ -3,8 +3,8 @@
 Extensions
 ==========
 
-This page contains the extensions shipped extensions that seamlessly integrate with this theme to enhance 
-documentation functionality 
+This page contains the shipped extensions that seamlessly integrate with this theme to enhance 
+documentation functionality.
 
 Linkcode extension
 -------------------
@@ -25,16 +25,16 @@ To use the ``ansys-sphinx-theme`` linkcode extension, you need to add it to the 
 Configuration options
 ---------------------
 
-The Linkcode extension provides a way to configure its behavior by using certain options within your conf.py file. 
+The Linkcode extension provides a way to configure its behavior by using certain options within your ``conf.py`` file. 
 Depending on your preferred approach, you can utilize the direct 
-configuration options or the html_context dictionary to streamline your settings.
+configuration options or the ``html_context`` dictionary to streamline your settings.
 
 If both sets of configuration options are given, the direct configuration options (e.g., ``link_code_library``,
  ``link_code_source``, ``link_code_branch``) will take 
 precedence over the corresponding settings in the ``html_context`` dictionary.
 
-Direct configuration options:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Direct configuration options
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - ``link_code_library`` :
   The user/repository name where the source code is hosted. For example, ``ansys/ansys-sphinx-theme``.
@@ -58,8 +58,8 @@ the following default values will be used:
   link_code_source = "src"
   link_code_branch = "dev"
 
-Using ``html_context`` dictionary:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Using ``html_context`` dictionary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 You also have the option to centralize your GitHub-related configuration by incorporating it 
 directly into the ``html_context`` dictionary within your `conf.py` file. This approach allows you to 
 minimize redundancy and manage the GitHub-related information more effectively for the extension:
@@ -76,4 +76,4 @@ minimize redundancy and manage the GitHub-related information more effectively f
    }
 
 With this setup, you can fine-tune your configuration according to your preferences and requirements, 
-enhancing the integration of the Linkcode extension into your documentation.
+enhancing the integration of the ``linkcode`` extension into your documentation.
