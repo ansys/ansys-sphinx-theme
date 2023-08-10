@@ -180,17 +180,18 @@ def link_code(app: Sphinx, doctree: Node):
     https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py
     """
     env = app.builder.env
-    html_context = getattr(env.config, "html_context")
+    html_context = getattr(env.config, "html_context", {})
     github_user = html_context.get("github_user", "")
     github_repo = html_context.get("github_repo", "")
     github_source = html_context.get("source_path", "")
     github_version = html_context.get("github_version", "main")
-    if github_user and github_repo:
-        library = f"{github_user}/{github_repo}"
-    elif hasattr(env.config, "link_code_library") and hasattr(env.config, "link_code_source"):
+
+    if hasattr(env.config, "link_code_library"):
         library = getattr(env.config, "link_code_library")
-        github_source = getattr(env.config, "link_code_source")
-        github_version = getattr(env.config, "link_code_branch")
+        github_source = getattr(env.config, "link_code_source", github_source)
+        github_version = getattr(env.config, "link_code_branch", github_version)
+    elif github_user and github_repo:
+        library = f"{github_user}/{github_repo}"
 
     else:
         raise AttributeError("The library should have either html_context or link_code_library.")

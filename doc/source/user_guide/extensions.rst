@@ -29,17 +29,34 @@ The Linkcode extension provides a way to configure its behavior by using certain
 Depending on your preferred approach, you can utilize the direct 
 configuration options or the html_context dictionary to streamline your settings.
 
+If both sets of configuration options are given, the direct configuration options (e.g., ``link_code_library``,
+ ``link_code_source``, ``link_code_branch``) will take 
+precedence over the corresponding settings in the ``html_context`` dictionary.
+
 Direct configuration options:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``link_code_library`` (str, optional):
+- ``link_code_library`` :
   The user/repository name where the source code is hosted. For example, ``ansys/ansys-sphinx-theme``.
 
-- ``link_code_source`` (str, optional):
+- ``link_code_source`` (str, optional, default: ''):
   The relative path of the source code file within the repository. For example, ``src``.
 
 - ``link_code_branch`` (str, optional, default: 'main'):
   The GitHub branch. It can be a specific version like ``main`` or ``dev``.
+
+If the ``link_code_source`` and ``link_code_branch`` options are not provided in the configuration, 
+the following default values will be used:
+
+- ``link_code_source``: An empty string (``''``). This will link to the root of the repository.
+- ``link_code_branch``: ``main``. This is the default branch name used if no branch is specified.
+
+.. code-block:: python
+
+  # Example of setting direct configuration in example
+  link_code_library = "username/repo-name"
+  link_code_source = "src"
+  link_code_branch = "dev"
 
 Using ``html_context`` dictionary:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
