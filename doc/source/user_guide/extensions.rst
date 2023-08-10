@@ -30,7 +30,7 @@ The Linkcode extension provides a way to configure its behavior by using certain
 Depending on your preferred approach, you can utilize the direct 
 configuration options or the ``html_context`` dictionary to streamline your settings.
 
-If both sets of configuration options are given, the direct configuration options (example, ``link_code_library``,
+If both sets of configuration options are given, the direct configuration options (that is, ``link_code_library``,
 ``link_code_source``, ``link_code_branch``) has
 precedence over the corresponding settings in the ``html_context`` dictionary.
 
@@ -47,9 +47,9 @@ Direct configuration options
   The GitHub branch. It can be a specific version like ``main`` or ``dev``.
 
 If the ``link_code_source`` and ``link_code_branch`` options are not provided in the configuration, 
-the following default values will be used:
+the following default values are used:
 
-- ``link_code_source``: An empty string (``''``). This will link to the root of the repository.
+- ``link_code_source``: An empty string (``''``). This links to the root of the repository.
 - ``link_code_branch``: ``main``. This is the default branch name used if no branch is specified.
 
 .. code-block:: python
