@@ -186,15 +186,18 @@ def link_code(app: Sphinx, doctree: Node):
     github_source = html_context.get("source_path", "")
     github_version = html_context.get("github_version", "main")
 
-    if hasattr(env.config, "link_code_library"):
+    if getattr(env.config, "link_code_library"):
         library = getattr(env.config, "link_code_library")
-        github_source = getattr(env.config, "link_code_source", github_source)
-        github_version = getattr(env.config, "link_code_branch", github_version)
+
     elif github_user and github_repo:
         library = f"{github_user}/{github_repo}"
 
     else:
         raise AttributeError("The library should have either html_context or link_code_library.")
+
+    github_source = getattr(env.config, "link_code_source", github_source)
+    github_version = getattr(env.config, "link_code_branch", github_version)
+
     if not library:
         raise AttributeError(
             "The conf.py file either should have html_context or link_code_library with github_repo and github_user."  # noqa: E501
