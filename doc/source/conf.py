@@ -20,8 +20,6 @@ from ansys_sphinx_theme import (
     watermark,
 )
 
-ANNOUNCEMENT_URL = "https://raw.githubusercontent.com/ansys/ansys-sphinx-theme/main/doc/source/_templates/message.html"  # noqa: E501
-
 # Project information
 project = "ansys_sphinx_theme"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
@@ -67,7 +65,6 @@ html_theme_options = {
             f"ansys-sphinx-theme-v{convert_version_to_pymeilisearch(__version__)}": "ansys-sphinx-theme",  # noqa: E501
         },
     },
-    "announcement": ANNOUNCEMENT_URL,
 }
 
 html_short_title = html_title = "Ansys Sphinx Theme"
