@@ -3,8 +3,10 @@ import pathlib
 from typing import Any, Dict
 
 from docutils.nodes import document
+from sphinx import addnodes
 from sphinx.application import Sphinx
 
+from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
 __version__ = "0.10.2"
@@ -107,6 +109,103 @@ def setup_default_html_theme_options(app):
     app.config.html_theme_options.setdefault("collapse_navigation", True)
 
 
+def fix_edit_html_page_context(
+    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: document
+) -> None:
+    """Add a function that Jinja can access for returning an "edit this page" link .
+
+    This function creates an "edit this page" link for any library.
+    The link points to the corresponding file on the main branch.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application instance for rendering the documentation.
+    pagename : str
+        Name of the current page.
+    templatename : str
+        Name of the template being used.
+    context : dict
+        Context dictionary for the page.
+    doctree : document
+        Document tree for the page.
+
+    Notes
+    -----
+    .. [1] Originally implemented by `Alex Kaszynski <https://github.com/akaszynski>`_ in
+    `PyVista <https://github.com/pyvista/pyvista>`_,
+    see https://github.com/pyvista/pyvista/pull/4113
+    """
+
+    def fix_edit_link_button(link: str) -> str:
+        """Transform "edit on GitHub" links to the correct URL.
+
+        This function fixes the URL for the "edit this page" link.
+
+        Parameters
+        ----------
+        link : str
+            Link to the GitHub edit interface.
+
+        Returns
+        -------
+        str
+            Link to the corresponding file on the main branch.
+        """
+        github_user = context.get("github_user", "")
+        github_repo = context.get("github_repo", "")
+        github_source = context.get("source_path", "")
+        kind = context.get("github_version", "")
+
+        if "_autosummary" in pagename:
+            for obj_node in list(doctree.findall(addnodes.desc)):
+                domain = obj_node.get("domain")
+                for signode in obj_node:
+                    if not isinstance(signode, addnodes.desc_signature):
+                        continue
+                    # Convert signode to a specified format
+                    info = {}
+                    for key in DOMAIN_KEYS.get(domain, []):
+                        value = signode.get(key)
+                        if not value:
+                            value = ""
+                        info[key] = value
+                    if not info:
+                        continue
+                    # This is an API example
+                    return sphinx_linkcode_resolve(
+                        domain=domain,
+                        info=info,
+                        library=f"{github_user}/{github_repo}",
+                        source_path=github_source,
+                        github_version=kind,
+                        edit=True,
+                    )
+
+        elif "autoapi" in pagename:
+            for obj_node in list(doctree.findall(addnodes.desc)):
+                domain = obj_node.get("domain")
+                if domain != "py":
+                    return link
+
+                for signode in obj_node:
+                    if not isinstance(signode, addnodes.desc_signature):
+                        continue
+
+                    fullname = signode["module"]
+                    modname = fullname.replace(".", "/")
+
+                    if github_source:
+                        return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{github_source}/{modname}.{domain}"  # noqa: E501
+                    else:
+                        return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{modname}.{domain}"  # noqa: E501
+
+        else:
+            return link
+
+    context["fix_edit_link_button"] = fix_edit_link_button
+
+
 def update_footer_theme(
     app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: document
 ) -> None:
@@ -162,9 +261,8 @@ def setup(app: Sphinx) -> Dict:
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     app.connect("html-page-context", update_footer_theme)
-    # Add templates for autosummary
+    app.connect("html-page-context", fix_edit_html_page_context)
     app.config.templates_path.append(str(TEMPLATES_PATH))
-
     return {
         "version": __version__,
         "parallel_read_safe": True,
