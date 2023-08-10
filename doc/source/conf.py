@@ -20,9 +20,7 @@ from ansys_sphinx_theme import (
     watermark,
 )
 
-ANNOUNCEMENT_URL = (
-    "https://raw.githubusercontent.com/ansys/ansys-sphinx-theme/main/doc/_templates/message.html"
-)
+ANNOUNCEMENT_URL = "https://raw.githubusercontent.com/ansys/ansys-sphinx-theme/main/doc/source/_templates/message.html"  # noqa: E501
 
 # Project information
 project = "ansys_sphinx_theme"
