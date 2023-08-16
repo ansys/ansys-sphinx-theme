@@ -50,3 +50,4 @@ repos:
   hooks:
   - id: blacken-docs
     additional_dependencies: [black==23.7.0]
+    exclude: 'src/ansys_sphinx_theme/theme/ansys_sphinx_theme/_templates/'

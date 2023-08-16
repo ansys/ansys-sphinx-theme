@@ -1,32 +1,47 @@
-{{ objname | escape | underline}}
+{{ name | escape | underline}}
 
 .. currentmodule:: {{ module }}
 
+Import
+======
+
+{% set import_path = fullname.split(".")[:-1] %}
+
+.. code-block:: python
+
+    from {{ ".".join(import_path) }} import {{ name }}
+
 .. autoclass:: {{ objname }}
+   :members:
+   :show-inheritance:
+   :inherited-members:
+   :special-members: __call__, __add__, __mul__
 
    {% block methods %}
-
    {% if methods %}
-   .. rubric:: {{ _('Methods') }}
+
+   Methods
+   =======
 
    .. autosummary::
-      :toctree:
+      :nosignatures:
    {% for item in methods %}
-      {% if item != "__init__" %}
-      {{ name }}.{{ item }}
-      {% endif %}
+      {%- if not item.startswith('_') %}
+      ~{{ name }}.{{ item }}
+      {%- endif -%}
    {%- endfor %}
    {% endif %}
    {% endblock %}
 
    {% block attributes %}
    {% if attributes %}
-   .. rubric:: {{ _('Attributes') }}
+
+   Attributes
+   ==========
 
    .. autosummary::
-      :toctree:
    {% for item in attributes %}
-      {{ name }}.{{ item }}
+      ~{{ name }}.{{ item }}
    {%- endfor %}
    {% endif %}
    {% endblock %}
