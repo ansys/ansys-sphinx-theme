@@ -6,6 +6,33 @@ The table directive with ansys sphinx theme allows for rendering of tables.
 There are different types of tables, such as the data table, longtable-centered, 
 and table-centered, each serving different purposes.
 
+Normal table
+------------
+
+
+.. table:: Truth table for "not"
+   :widths: auto
+   :align: center
+
+   +--------------------+------------------------+----------------------------------+
+   |     **A**          |    **B**               |       **C**                      |
+   +====================+========================+==================================+
+   |                    ||    True               ||         False                   |
+   |        False       ||    False              ||         True                    |
+   +--------------------+------------------------+----------------------------------+
+   |                    ||    True               ||         False                   |
+   |       False        ||    False              ||         True                    |
+   +--------------------+------------------------+----------------------------------+
+   |                    ||                       ||                                 |
+   |                    ||     True              ||                                 |
+   |                    |                        ||                                 |
+   |        False       +------------------------+|          False                  +
+   |                    ||    True               ||                                 |
+   |                    ||    False              ||          True                   |
+   +--------------------+------------------------+----------------------------------+
+
+
+
 Data table
 ----------
 This is an example of a data table that can be rendered using the table directive.
