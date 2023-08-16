@@ -259,14 +259,14 @@ Table
 ########
 */
 
-table {
+.table {
   width: 100%;
   max-width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
   overflow: hidden;
   vertical-align: middle;
-
+  color: var(--pst-color-text-base);
   /* Disabling scroll bars */
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
