@@ -44,7 +44,14 @@ Contents
 {% set visible_functions = visible_children|selectattr("type", "equalto", "function")|list %}
 {% set visible_attributes = visible_children|selectattr("type", "equalto", "data")|list %}
 
-{% if visible_subpackages or visible_submodules or visible_classes or visible_functions or visible_attributes %}
+{% set visible_interfaces = [] %}
+{% for klass in visible_classes %}
+    {% if klass.name.startswith("I") and klass.name[1].isupper() %}
+        {% set _ = visible_interfaces.append(klass) %}
+    {% endif %}
+{% endfor %}
+
+{% if visible_subpackages or visible_submodules or visible_classes or visible_functions or visible_attributes or visible_interfaces %}
 .. tab-set::
 
 {% if visible_subpackages %}
@@ -80,9 +87,22 @@ Contents
            :header-rows: 0
            :widths: auto
 
-           {% for klass in visible_classes %}
+           {% for klass in visible_classes if not (klass in visible_interfaces) %}
            * - :py:class:`{{ klass.name }}`
              - {{ klass.summary }}
+           {% endfor %}
+{% endif %}
+
+{% if visible_interfaces %}
+    .. tab-item:: Interfaces
+
+        .. list-table::
+           :header-rows: 0
+           :widths: auto
+
+           {% for iface in visible_interfaces %}
+           * - :py:class:`{{ iface.name }}`
+             - {{ iface.summary }}
            {% endfor %}
 {% endif %}
 
