@@ -43,6 +43,7 @@ Contents
 {% set visible_classes = visible_children|selectattr("type", "equalto", "class")|list %}
 {% set visible_functions = visible_children|selectattr("type", "equalto", "function")|list %}
 {% set visible_attributes = visible_children|selectattr("type", "equalto", "data")|list %}
+{% set visible_exceptions = visible_children|selectattr("type", "equalto", "exception")|list %}
 
 {% set visible_interfaces = [] %}
 {% for klass in visible_classes %}
@@ -51,7 +52,7 @@ Contents
     {% endif %}
 {% endfor %}
 
-{% if visible_subpackages or visible_submodules or visible_classes or visible_functions or visible_attributes or visible_interfaces %}
+{% if visible_subpackages or visible_submodules or visible_classes or visible_functions or visible_attributes or visible_interfaces or visible_exceptions %}
 .. tab-set::
 
 {% if visible_subpackages %}
@@ -103,6 +104,19 @@ Contents
            {% for iface in visible_interfaces %}
            * - :py:class:`{{ iface.name }}`
              - {{ iface.summary }}
+           {% endfor %}
+{% endif %}
+
+{% if visible_exceptions %}
+    .. tab-item:: Exceptions
+
+        .. list-table::
+           :header-rows: 0
+           :widths: auto
+
+           {% for exc in visible_exceptions %}
+           * - :py:class:`{{ exc.name }}`
+             - {{ exc.summary }}
            {% endfor %}
 {% endif %}
 
