@@ -1,30 +1,21 @@
 {% if not obj.display %}
 :orphan:
-
 {% endif %}
 
 {% if obj.name.split(".") | length == 3 %}
 {{ obj.name }}
 {{ "=" * obj.name|length }}
-
 {% else %}
-
 {% if obj.type == "package" %}
-
 Package ``{{ obj.short_name }}``
 {{ "============" + "=" * obj.short_name|length }}
-
 {% else %}
-
 Module ``{{ obj.short_name }}``
 {{ "===========" + "=" * obj.short_name|length }}
-
 {% endif %}
-
 {% endif %}
 
 .. py:module:: {{ obj.name }}
-
 
 {# Include the description for the module #}
 
@@ -33,17 +24,30 @@ Description
 -----------
 
 {{ obj.docstring }}
-
 {% endif %}
 
+Contents
+--------
 
-Summary
--------
+{% if obj.all is not none %}
+{% set visible_children = obj.children|selectattr("short_name", "in", obj.all)|list %}
+{% elif obj.type is equalto("package") %}
+{% set visible_children = obj.children|selectattr("display")|list %}
+{% else %}
+{% set visible_children = obj.children|selectattr("display")|rejectattr("imported")|list %}
+{% endif %}
 
+{% set visible_subpackages = obj.subpackages|selectattr("display")|list %}
+{% set visible_submodules = obj.submodules|selectattr("display")|list %}
+
+{% set visible_classes = visible_children|selectattr("type", "equalto", "class")|list %}
+{% set visible_functions = visible_children|selectattr("type", "equalto", "function")|list %}
+{% set visible_attributes = visible_children|selectattr("type", "equalto", "data")|list %}
+
+{% if visible_subpackages or visible_submodules or visible_classes or visible_functions or visible_attributes %}
 .. tab-set::
 
-    {% set visible_subpackages = obj.subpackages|selectattr("display")|list %}
-    {% if visible_subpackages %}
+{% if visible_subpackages %}
     .. tab-item:: Subpackages
 
         .. list-table::
@@ -54,11 +58,10 @@ Summary
            * - :py:mod:`{{ subpackage.name }}`
              - {{ subpackage.summary }}
            {% endfor %}
-    {% endif %}
+{% endif %}
 
-    {% set visible_submodules = obj.submodules|selectattr("display")|list %}
-    {% if visible_submodules %}
-    .. tab-item:: Modules
+{% if visible_submodules %}
+    .. tab-item:: Submodules
 
         .. list-table::
            :header-rows: 0
@@ -68,30 +71,50 @@ Summary
            * - :py:mod:`{{ submodule.name }}`
              - {{ submodule.summary }}
            {% endfor %}
-    {% endif %}
+{% endif %}
 
+{% if visible_classes %}
+    .. tab-item:: Classes
+
+        .. list-table::
+           :header-rows: 0
+           :widths: auto
+
+           {% for klass in visible_classes %}
+           * - :py:class:`{{ klass.name }}`
+             - {{ klass.summary }}
+           {% endfor %}
+{% endif %}
+
+{% if visible_functions %}
     .. tab-item:: Functions
 
-        Content
+        .. list-table::
+           :header-rows: 0
+           :widths: auto
 
+           {% for function in visible_functions %}
+           * - :py:func:`{{ function.name }}`
+             - {{ function.summary }}
+           {% endfor %}
+{% endif %}
 
+{% if visible_attributes %}
+    .. tab-item:: Attributes
+
+        .. list-table::
+           :header-rows: 0
+           :widths: auto
+
+           {% for attribute in visible_attributes %}
+           * - :py:attr:`{{ attribute.name }}`
+             - {{ attribute.summary }}
+           {% endfor %}
+{% endif %}
+{% endif %}
 
 {% block subpackages %}
-{% set visible_subpackages = obj.subpackages|selectattr("display")|list %}
 {% if visible_subpackages %}
-Subpackages
------------
-
-.. list-table::
-   :header-rows: 1
-   :widths: auto
-
-   * - Name
-     - Description
-   {% for subpackage in visible_subpackages %}
-   * - :py:mod:`{{ subpackage.name }}`
-     - {{ subpackage.summary }}
-   {% endfor %}
 
 .. toctree::
    :titlesonly:
@@ -101,30 +124,11 @@ Subpackages
 {% for subpackage in visible_subpackages %}
    {{subpackage.short_name}}<{{ subpackage.short_name }}/index.rst>
 {% endfor %}
-
-
 {% endif %}
 {% endblock %}
 
-
-
-
 {% block submodules %}
-{% set visible_submodules = obj.submodules|selectattr("display")|list %}
 {% if visible_submodules %}
-Submodules
-----------
-
-.. list-table::
-   :header-rows: 1
-   :widths: auto
-
-   * - Name
-     - Description
-   {% for submodule in visible_submodules %}
-   * - :py:mod:`{{ submodule.name }}`
-     - {{ submodule.summary }}
-   {% endfor %}
 
 .. toctree::
    :titlesonly:
@@ -134,74 +138,9 @@ Submodules
 {% for submodule in visible_submodules %}
    {{submodule.short_name}}<{{ submodule.short_name }}/index.rst>
 {% endfor %}
-
-
 {% endif %}
 {% endblock %}
+
 {% block content %}
-{% if obj.all is not none %}
-{% set visible_children = obj.children|selectattr("short_name", "in", obj.all)|list %}
-{% elif obj.type is equalto("package") %}
-{% set visible_children = obj.children|selectattr("display")|list %}
-{% else %}
-{% set visible_children = obj.children|selectattr("display")|rejectattr("imported")|list %}
-{% endif %}
-{% if visible_children %}
-Contents
---------
-
-{% set visible_classes = visible_children|selectattr("type", "equalto", "class")|list %}
-{% set visible_functions = visible_children|selectattr("type", "equalto", "function")|list %}
-{% set visible_attributes = visible_children|selectattr("type", "equalto", "data")|list %}
-{% if "show-module-summary" in autoapi_options and (visible_classes or visible_functions) %}
-{% block classes scoped %}
-{% if visible_classes %}
-Classes
-~~~~~~~
-
-.. autoapisummary::
-
-{% for klass in visible_classes %}
-   {{ klass.id }}
-{% endfor %}
-
-
-{% endif %}
+{# ... Existing content block ... #}
 {% endblock %}
-
-{% block functions scoped %}
-{% if visible_functions %}
-Functions
-~~~~~~~~~
-
-.. autoapisummary::
-
-{% for function in visible_functions %}
-   {{ function.id }}
-{% endfor %}
-
-
-{% endif %}
-{% endblock %}
-
-{% block attributes scoped %}
-{% if visible_attributes %}
-Attributes
-~~~~~~~~~~
-
-.. autoapisummary::
-
-{% for attribute in visible_attributes %}
-   {{ attribute.id }}
-{% endfor %}
-
-
-{% endif %}
-{% endblock %}
-{% endif %}
-{% for obj_item in visible_children %}
-{{ obj_item.render()|indent(0) }}
-{% endfor %}
-{% endif %}
-{% endblock %}
-
