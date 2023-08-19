@@ -7,17 +7,25 @@
 {{ "=" * obj.name|length }}
 {% else %}
 {% if obj.type == "package" %}
-Package ``{{ obj.short_name }}``
-{{ "============" + "=" * obj.short_name|length }}
+The ``{{ obj.short_name }}`` package 
+{{ "====================" + "=" * obj.short_name|length }}
 {% else %}
-Module ``{{ obj.short_name }}``
-{{ "===========" + "=" * obj.short_name|length }}
+The ``{{ obj.short_name }}.py`` module
+{{ "==================" + "=" * obj.short_name|length }}
 {% endif %}
 {% endif %}
 
 .. py:module:: {{ obj.name }}
 
 {# Include the description for the module #}
+
+Type: {{ obj.type }}
+
+Name: {{ obj.name }}
+
+Short name: {{ obj.short_name }}
+
+Is top level: {{ obj.top_level_object }}
 
 {% if obj.docstring %}
 Description
@@ -156,7 +164,7 @@ Contents
    :hidden:
 
 {% for subpackage in visible_subpackages %}
-   {{subpackage.short_name}}<{{ subpackage.short_name }}/index.rst>
+    🖿 {{subpackage.short_name}}<{{ subpackage.short_name }}/index.rst>
 {% endfor %}
 {% endif %}
 {% endblock %}
@@ -170,7 +178,7 @@ Contents
    :hidden:
 
 {% for submodule in visible_submodules %}
-   {{submodule.short_name}}<{{ submodule.short_name }}/index.rst>
+    🗎 {{submodule.short_name}}.py <{{ submodule.short_name }}/index.rst>
 {% endfor %}
 {% endif %}
 {% endblock %}

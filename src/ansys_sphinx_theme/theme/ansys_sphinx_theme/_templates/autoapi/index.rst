@@ -1,7 +1,7 @@
 API reference
 =============
 
-This section describes ``LIBRARY`` endpoints, their capabilities, and how
+This section describes {{ project_name }} endpoints, their capabilities, and how
 to interact with them programmatically.
 
 .. toctree::
