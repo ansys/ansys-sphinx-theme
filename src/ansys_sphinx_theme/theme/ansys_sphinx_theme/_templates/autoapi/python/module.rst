@@ -3,8 +3,8 @@
 {% endif %}
 
 {% if obj.name.split(".") | length == 3 %}
-{{ obj.name }}
-{{ "=" * obj.name|length }}
+The ``{{ obj.name }}`` library
+{{ "================" + "=" * obj.name|length }}
 {% else %}
 {% if obj.type == "package" %}
 The ``{{ obj.short_name }}`` package 
@@ -18,14 +18,6 @@ The ``{{ obj.short_name }}.py`` module
 .. py:module:: {{ obj.name }}
 
 {# Include the description for the module #}
-
-Type: {{ obj.type }}
-
-Name: {{ obj.name }}
-
-Short name: {{ obj.short_name }}
-
-Is top level: {{ obj.top_level_object }}
 
 {% if obj.docstring %}
 Description
@@ -48,19 +40,32 @@ Contents
 {% set visible_subpackages = obj.subpackages|selectattr("display")|list %}
 {% set visible_submodules = obj.submodules|selectattr("display")|list %}
 
-{% set visible_classes = visible_children|selectattr("type", "equalto", "class")|list %}
+{% set visible_classes_and_interfaces = visible_children|selectattr("type", "equalto", "class")|list %}
 {% set visible_functions = visible_children|selectattr("type", "equalto", "function")|list %}
-{% set visible_attributes = visible_children|selectattr("type", "equalto", "data")|list %}
+{% set visible_attributes_and_constants = visible_children|selectattr("type", "equalto", "data")|list %}
 {% set visible_exceptions = visible_children|selectattr("type", "equalto", "exception")|list %}
 
+{% set visible_classes = [] %}
 {% set visible_interfaces = [] %}
-{% for klass in visible_classes %}
-    {% if klass.name.startswith("I") and klass.name[1].isupper() %}
-        {% set _ = visible_interfaces.append(klass) %}
+{% for element in visible_classes_and_interfaces %}
+    {% if element.name.startswith("I") and element.name[1].isupper() %}
+        {% set _ = visible_interfaces.append(element) %}
+    {% else %}
+        {% set _ = visible_classes.append(element) %}
     {% endif %}
 {% endfor %}
 
-{% if visible_subpackages or visible_submodules or visible_classes or visible_functions or visible_attributes or visible_interfaces or visible_exceptions %}
+{% set visible_attributes = [] %}
+{% set visible_constants = [] %}
+{% for element in visible_attributes_and_constants %}
+    {% if element.name.isupper() %}
+        {% set _ = visible_constants.append(element) %}
+    {% else %}
+        {% set _ = visible_attributes.append(element) %}
+    {% endif %}
+{% endfor %}
+
+{% if visible_subpackages or visible_submodules or visible_classes or visible_functions or visible_constants or visible_attributes or visible_interfaces or visible_exceptions %}
 .. tab-set::
 
 {% if visible_subpackages %}
@@ -138,6 +143,19 @@ Contents
            {% for function in visible_functions %}
            * - :py:func:`{{ function.name }}`
              - {{ function.summary }}
+           {% endfor %}
+{% endif %}
+
+{% if visible_constants %}
+    .. tab-item:: Constants
+
+        .. list-table::
+           :header-rows: 0
+           :widths: auto
+
+           {% for constant in visible_constants %}
+           * - :py:attr:`{{ constant.name }}`
+             - {{ constant.summary }}
            {% endfor %}
 {% endif %}
 
