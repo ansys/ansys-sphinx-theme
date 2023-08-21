@@ -47,9 +47,12 @@ Contents
 
 {% set visible_classes = [] %}
 {% set visible_interfaces = [] %}
+{% set visible_enums = [] %}
 {% for element in visible_classes_and_interfaces %}
-    {% if element.name.startswith("I") and element.name[1].isupper() %}
+    {% if element.name.startswith("I") and element.name[1].isupper() and ("enum.Enum" not in element.bases) %}
         {% set _ = visible_interfaces.append(element) %}
+    {% elif "enum.Enum" in element.bases %}
+        {% set _ = visible_enums.append(element) %}
     {% else %}
         {% set _ = visible_classes.append(element) %}
     {% endif %}
@@ -65,7 +68,9 @@ Contents
     {% endif %}
 {% endfor %}
 
-{% if visible_subpackages or visible_submodules or visible_classes or visible_functions or visible_constants or visible_attributes or visible_interfaces or visible_exceptions %}
+{% set module_objects = visible_subpackages + visible_submodules + visible_classes + visible_interfaces + visible_enums + visible_functions + visible_constants + visible_attributes %}
+
+{% if module_objects %}
 .. tab-set::
 
 {% if visible_subpackages %}
@@ -117,6 +122,19 @@ Contents
            {% for iface in visible_interfaces %}
            * - :py:class:`{{ iface.name }}`
              - {{ iface.summary }}
+           {% endfor %}
+{% endif %}
+
+{% if visible_enums %}
+    .. tab-item:: Enums
+
+        .. list-table::
+           :header-rows: 0
+           :widths: auto
+
+           {% for enum in visible_enums %}
+           * - :py:class:`{{ enum.name }}`
+             - {{ enum.summary }}
            {% endfor %}
 {% endif %}
 
@@ -173,6 +191,15 @@ Contents
 {% endif %}
 {% endif %}
 
+
+{% for klass in visible_classes %}
+
+{% endfor %}
+
+
+
+
+
 {% block subpackages %}
 {% if visible_subpackages %}
 
@@ -202,5 +229,11 @@ Contents
 {% endblock %}
 
 {% block content %}
-{# ... Existing content block ... #}
+{% if module_objects %}
+{% for obj_item in module_objects %}
+{% if obj_item not in (visible_subpackages + visible_submodules) %}
+{{ obj_item.render() }}
+{% endif %}
+{% endfor %}
+{% endif %}
 {% endblock %}
