@@ -228,6 +228,23 @@ Contents
 {% endif %}
 {% endblock %}
 
+{% block klasses %}
+{% if visible_classes %}
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+{% for klass in visible_classes %}
+    🝆 {{klass.name}} <{{ klass.name }}>
+{% endfor %}
+{% endif %}
+{% endblock %}
+
+
+
+
 {% block content %}
 {% if module_objects %}
 {% for obj_item in module_objects %}
