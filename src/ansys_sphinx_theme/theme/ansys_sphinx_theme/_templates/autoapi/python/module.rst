@@ -17,17 +17,8 @@ The ``{{ obj.short_name }}.py`` module
 
 .. py:module:: {{ obj.name }}
 
-{# Include the description for the module #}
-
-{% if obj.docstring %}
-Description
------------
-
-{{ obj.docstring }}
-{% endif %}
-
-Contents
---------
+Summary
+-------
 
 {% if obj.all is not none %}
 {% set visible_children = obj.children|selectattr("short_name", "in", obj.all)|list %}
@@ -191,13 +182,6 @@ Contents
 {% endif %}
 {% endif %}
 
-
-{% for klass in visible_classes %}
-
-{% endfor %}
-
-
-
 {% block subpackages %}
 {% if visible_subpackages %}
 
@@ -226,8 +210,7 @@ Contents
 {% endif %}
 {% endblock %}
 
-{% block klasses %}
-{% if visible_classes %}
+{% if visible_classes%}
 
 .. toctree::
    :titlesonly:
@@ -238,17 +221,13 @@ Contents
     🝆 {{klass.name}} <{{ klass.name }}>
 {% endfor %}
 {% endif %}
-{% endblock %}
 
 
+{# Include the description for the module #}
 
+{% if obj.docstring %}
+Description
+-----------
 
-{% block content %}
-{% if module_objects %}
-{% for obj_item in module_objects %}
-{% if obj_item not in (visible_subpackages + visible_submodules) %}
-{{ obj_item.render() }}
+{{ obj.docstring }}
 {% endif %}
-{% endfor %}
-{% endif %}
-{% endblock %}
