@@ -27,7 +27,8 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 
 {% endif %}
 {% endif %}
-{% if obj.docstring %}
+
+{% if obj.docstring -%}
 {{ obj.summary|indent(3) }}
 {% endif %}
 
@@ -62,7 +63,7 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 {% set class_objects = visible_properties + visible_attributes + visible_methods %}
 
 {% if class_objects %}
-.. currentmodule:: {{ obj.short_name }}
+.. py:currentmodule:: {{ obj.short_name }}
 .. tab-set::
 
 {% if visible_properties  %}
