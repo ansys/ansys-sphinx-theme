@@ -191,11 +191,10 @@ Contents
 {% endif %}
 {% endif %}
 
-{% if not "class" in autoapi_render_in_single_page and (visible_classes or visible_functions) %}
+
 {% for klass in visible_classes %}
 
 {% endfor %}
-{% endif %}
 
 
 
