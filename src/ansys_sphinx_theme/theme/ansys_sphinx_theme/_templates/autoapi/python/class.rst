@@ -3,7 +3,10 @@
 {{ obj.short_name }}
 {{"=" * obj.name|length }}
 
-.. py:{{ obj.type }}:: {{ obj.short_name }}{% if obj.args %}({{ obj.args }}){% endif %}
+.. py:{{ obj["type"] }}:: {{ obj["short_name"] }}{% if obj["args"] %}({{ obj["args"] }}){% endif %}
+
+   :canonical: {{ obj["obj"]["full_name"] }}.{{ obj["short_name"] }}
+
 
 {% for (args, return_annotation) in obj.overloads %}
     {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
@@ -25,7 +28,7 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 {% endif %}
 {% endif %}
 {% if obj.docstring %}
-{{ obj.docstring|indent(3) }}
+{{ obj.summary|indent(3) }}
 {% endif %}
 
 {% if "inherited-members" in autoapi_options %}
@@ -59,6 +62,7 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 {% set class_objects = visible_properties + visible_attributes + visible_methods %}
 
 {% if class_objects %}
+.. currentmodule:: {{ obj.short_name }}
 .. tab-set::
 
 {% if visible_properties  %}
