@@ -1,5 +1,8 @@
 {% if obj.display %}
 
+{{ obj.short_name }}
+{{"=" * obj.name|length }}
+
 .. py:{{ obj.type }}:: {{ obj.short_name }}{% if obj.args %}({{ obj.args }}){% endif %}
 
 {% for (args, return_annotation) in obj.overloads %}
@@ -21,9 +24,9 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 
 {% endif %}
 {% endif %}
-   {% if obj.docstring %}
-   {{ obj.docstring|indent(3) }}
-   {% endif %}
+{% if obj.docstring %}
+{{ obj.docstring|indent(3) }}
+{% endif %}
 
 {% if "inherited-members" in autoapi_options %}
 {% set visible_classes = obj.classes|selectattr("display")|list %}
@@ -66,7 +69,7 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
            :widths: auto
 
            {% for property in visible_properties %}
-           * - :py:data:`{{ property.name }}`
+           * - :py:attr:`~{{ property.name }}`
              - {{ property.summary }}
            {% endfor %}
 
@@ -80,7 +83,7 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
            :widths: auto
             
             {% for attribute in visible_attributes %}
-            * - :py:attr:`{{ attribute.name }}`
+            * - :py:attr:`~{{ attribute.name }}`
               - {{ attribute.summary }}
             {% endfor %}
             
@@ -94,7 +97,7 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
            :widths: auto
 
            {% for method in visible_methods %}
-           * - :py:attr:`{{ method.name }}`
+           * - :py:attr:`~{{ method.name }}`
              - {{ method.summary }}
            {% endfor %}  
 {% endif %}

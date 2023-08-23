@@ -192,12 +192,6 @@ Contents
 {% endif %}
 
 
-{% for klass in visible_classes %}
-
-{% endfor %}
-
-
-
 {% block subpackages %}
 {% if visible_subpackages %}
 
@@ -239,7 +233,6 @@ Contents
 {% endfor %}
 {% endif %}
 {% endblock %}
-
 
 
 
