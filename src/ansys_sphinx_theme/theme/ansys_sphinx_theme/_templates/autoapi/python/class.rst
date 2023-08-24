@@ -12,6 +12,7 @@
     {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
 {% endfor %}
 
+{% set testing = 'it worked' %}
 
 {% if obj.bases %}
 {% if "show-inheritance" in autoapi_options %}
@@ -60,6 +61,18 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 {% set visible_methods = obj.methods|rejectattr("inherited")|selectattr("display")|list %}
 {% endif %}
 
+{% set visible_abstract_methods = [] %}
+{% set visible_special_methods = [] %}
+
+{% for element in visible_methods %}
+    {% if "abstractmethod" in element.properties %}
+        {% set _ = visible_abstract_methods.append(element) %}
+    {% elif element.is_special %}
+        {% set _ = visible_special_methods.append(element) %}
+    {% endif %}
+{% endfor %}
+
+
 {% set class_objects = visible_properties + visible_attributes + visible_methods %}
 
 {% if class_objects %}
@@ -70,50 +83,76 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
     .. tab-item:: Properties
 
         .. list-table::
-           :header-rows: 0
+           :header-rows: 1
            :widths: auto
 
+           * - Property
+             - Summary
+
            {% for property in visible_properties %}
-           {% if property.summary %}
            * - :py:attr:`~{{ property.name }}`
              - {{ property.summary }}
-           {% else %}
-           * - :py:attr:`~{{ property.name }}`
-           {% endif %}{% endfor %}
+           {% endfor %}
 
 {% endif %}
 
-{% if visible_attributes  %}
+{% if visible_attributes %}
     .. tab-item:: Attributes
 
         .. list-table::
-           :header-rows: 0
+           :header-rows: 1
            :widths: auto
             
-            {% for attribute in visible_attributes %}
-            {% if attribute.summary %}
-            * - :py:attr:`~{{ attribute.name }}`
-              - {{ attribute.summary }}
-            {% else %}
-             * - :py:attr:`~{{ attribute.name  }}`
-            {% endif %}{% endfor %}
+           * - Attribute
+             - Summary
+
+           {% for attribute in visible_attributes %}
+           * - :py:attr:`~{{ attribute.name }}`
+             - {{ attribute.summary }}
+           {% endfor %}
             
 {% endif %}
 
-{% if visible_methods  %}
-    .. tab-item:: Methods
+{% if visible_methods %}
+    .. tab-item:: All Methods
 
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
+       .. list-table::
+          :header-rows: 1
+          :widths: auto
 
-           {% for method in visible_methods %}
-           {% if method.summary %}
-            * - :py:attr:`~{{ method.name }}`
-             - {{ method.summary }}
-            {% else %}
-            * - :py:attr:`~{{ method.name }}`
-           {% endif %}{% endfor %}  
+          * - Method
+            - Summary
+
+          {% for method in visible_methods %}
+          * - :py:attr:`~{{ method.name }}`
+            - {{ method.summary }}
+          {% endfor %}
+{% endif %}
+
+{% if visible_abstract_methods %}
+    .. tab-item:: Abstract Methods
+
+       .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          {% for method in visible_abstract_methods %}
+          * - :py:attr:`~{{ method.name }}`
+            - {{ method.summary }}
+          {% endfor %}
+{% endif %}
+
+{% if visible_special_methods %}
+    .. tab-item:: Special Methods
+
+       .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          {% for method in visible_special_methods %}
+          * - :py:attr:`~{{ method.name }}`
+            - {{ method.summary }}
+          {% endfor %}
 {% endif %}
 
 {% endif %}
