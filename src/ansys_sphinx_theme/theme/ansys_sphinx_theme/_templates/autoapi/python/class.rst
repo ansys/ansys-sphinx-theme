@@ -66,14 +66,14 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 .. py:currentmodule:: {{ obj.short_name }}
 .. tab-set::
 
-{% if visible_properties  %}
+{% if visible_properties %}
     .. tab-item:: Properties
 
         .. list-table::
            :header-rows: 0
            :widths: auto
 
-           {% for property in visible_properties %}
+           {% for property in visible_properties and property.summary %}
            * - :py:attr:`~{{ property.name }}`
              - {{ property.summary }}
            {% endfor %}
@@ -110,14 +110,29 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 {% endif %}
 {% endif %}
 
+
+{% if visible_properties  %}
+
+Property detail
+~~~~~~~~~~~~~~~
 {% for property in visible_properties %}
 {{ property.render()|indent(3) }}
 {% endfor %}
+{% endif %}
 
+
+{% if visible_attributes  %}
+Attribute detail
+~~~~~~~~~~~~~~~~
 {% for attribute in visible_attributes %}
 {{ attribute.render()|indent(3) }}
 {% endfor %}
+{% endif %}
 
+{% if visible_methods  %}
+Method detail
+~~~~~~~~~~~~~
 {% for method in visible_methods %}
 {{ method.render()|indent(3) }}
 {% endfor %}
+{% endif %}
