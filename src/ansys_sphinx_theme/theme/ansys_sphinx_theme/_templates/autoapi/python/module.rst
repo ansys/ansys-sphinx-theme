@@ -210,6 +210,18 @@ Summary
 {% endif %}
 {% endblock %}
 
+{% if visible_interfaces %}
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+{% for interface in visible_interfaces %}
+    🝆 {{interface.name}} <{{ interface.name }}>
+{% endfor %}
+{% endif %}
+
 {% if visible_classes%}
 
 .. toctree::
@@ -219,6 +231,30 @@ Summary
 
 {% for klass in visible_classes %}
     🝆 {{klass.name}} <{{ klass.name }}>
+{% endfor %}
+{% endif %}
+
+{% if visible_enums %}
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+{% for enum in visible_enums %}
+    ≔ {{enum.name}} <{{ enum.name }}>
+{% endfor %}
+{% endif %}
+
+{% if visible_constants %}
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+{% for constant in visible_constants %}
+    π {{constant.name}} <{{ constant.name }}>
 {% endfor %}
 {% endif %}
 
