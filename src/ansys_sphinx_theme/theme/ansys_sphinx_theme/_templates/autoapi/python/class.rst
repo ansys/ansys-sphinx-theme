@@ -5,7 +5,7 @@
 
 .. py:{{ obj["type"] }}:: {{ obj["short_name"] }}{% if obj["args"] %}({{ obj["args"] }}){% endif %}
 
-   :canonical: {{ obj["obj"]["full_name"] }}.{{ obj["short_name"] }}
+   :canonical: {{ obj["obj"]["full_name"] }}
 
 
 {% for (args, return_annotation) in obj.overloads %}
@@ -63,12 +63,24 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 
 {% set visible_abstract_methods = [] %}
 {% set visible_special_methods = [] %}
+{% set visible_static_methods = [] %}
+{% set visible_instance_methods = [] %}
+{% set visible_class_methods = [] %}
+{% set visible_constructors = [] %}
 
 {% for element in visible_methods %}
     {% if "abstractmethod" in element.properties %}
         {% set _ = visible_abstract_methods.append(element) %}
-    {% elif element.is_special %}
+    {% elif "staticmethod" in element.properties %}
+        {% set _ = visible_static_methods.append(element) %}
+    {% elif "classmethod" in element.properties %}
+        {% set _ = visible_class_methods.append(element) %}
+    {% elif element.name.startswith("__") and ("init" not in element.name) %}
         {% set _ = visible_special_methods.append(element) %}
+    {% elif ("init" not in element.name) %}
+        {% set _ = visible_instance_methods.append(element) %}
+    {% elif ("init" in element.name) %}
+        {% set _ = visible_constructors.append(element) %}
     {% endif %}
 {% endfor %}
 
@@ -76,18 +88,31 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 {% set class_objects = visible_properties + visible_attributes + visible_methods %}
 
 {% if class_objects %}
+
+overview
+~~~~~~~~
 .. py:currentmodule:: {{ obj.short_name }}
 .. tab-set::
+
+{% if visible_constructors %}
+    .. tab-item:: Constructors
+
+       .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          {% for constructor in visible_constructors %}
+          * - :py:attr:`~{{ constructor.name }}`
+            - {{ constructor.summary }}
+          {% endfor %}
+{% endif %}
 
 {% if visible_properties %}
     .. tab-item:: Properties
 
         .. list-table::
-           :header-rows: 1
+           :header-rows: 0
            :widths: auto
-
-           * - Property
-             - Summary
 
            {% for property in visible_properties %}
            * - :py:attr:`~{{ property.name }}`
@@ -100,11 +125,8 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
     .. tab-item:: Attributes
 
         .. list-table::
-           :header-rows: 1
+           :header-rows: 0
            :widths: auto
-            
-           * - Attribute
-             - Summary
 
            {% for attribute in visible_attributes %}
            * - :py:attr:`~{{ attribute.name }}`
@@ -114,29 +136,51 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 {% endif %}
 
 {% if visible_methods %}
-    .. tab-item:: All Methods
+    .. tab-item:: Methods
 
        .. list-table::
-          :header-rows: 1
+          :header-rows: 0
           :widths: auto
-
-          * - Method
-            - Summary
 
           {% for method in visible_methods %}
           * - :py:attr:`~{{ method.name }}`
             - {{ method.summary }}
           {% endfor %}
 {% endif %}
-
-{% if visible_abstract_methods %}
-    .. tab-item:: Abstract Methods
+{% if visible_instance_methods %}
+    .. tab-item:: Instance Methods
 
        .. list-table::
           :header-rows: 0
           :widths: auto
 
-          {% for method in visible_abstract_methods %}
+          {% for method in visible_instance_methods %}
+          * - :py:attr:`~{{ method.name }}`
+            - {{ method.summary }}
+          {% endfor %}
+{% endif %}
+
+{% if visible_class_methods %}
+    .. tab-item:: Class Methods
+
+       .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          {% for method in visible_class_methods %}
+          * - :py:attr:`~{{ method.name }}`
+            - {{ method.summary }}
+          {% endfor %}
+{% endif %}
+
+{% if visible_static_methods %}
+    .. tab-item:: Static Methods
+
+       .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          {% for method in visible_static_methods %}
           * - :py:attr:`~{{ method.name }}`
             - {{ method.summary }}
           {% endfor %}
@@ -154,10 +198,28 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
             - {{ method.summary }}
           {% endfor %}
 {% endif %}
+{% if visible_abstract_methods %}
+    .. tab-item:: Abstract Methods
+
+       .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          {% for method in visible_abstract_methods %}
+          * - :py:attr:`~{{ method.name }}`
+            - {{ method.summary }}
+          {% endfor %}
+{% endif %}
 
 {% endif %}
 {% endif %}
 
+import detail
+~~~~~~~~~~~~~~
+
+.. code-block:: python
+
+    from {{ obj.obj["full_name"] }} import {{ obj["short_name"] }}
 
 {% if visible_properties  %}
 
