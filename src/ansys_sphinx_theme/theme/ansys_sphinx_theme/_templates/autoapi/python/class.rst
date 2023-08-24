@@ -73,10 +73,13 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
            :header-rows: 0
            :widths: auto
 
-           {% for property in visible_properties and property.summary %}
+           {% for property in visible_properties %}
+           {% if property.summary %}
            * - :py:attr:`~{{ property.name }}`
              - {{ property.summary }}
-           {% endfor %}
+           {% else %}
+           * - :py:attr:`~{{ property.name }}`
+           {% endif %}{% endfor %}
 
 {% endif %}
 
@@ -88,9 +91,12 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
            :widths: auto
             
             {% for attribute in visible_attributes %}
+            {% if attribute.summary %}
             * - :py:attr:`~{{ attribute.name }}`
               - {{ attribute.summary }}
-            {% endfor %}
+            {% else %}
+             * - :py:attr:`~{{ attribute.name  }}`
+            {% endif %}{% endfor %}
             
 {% endif %}
 
@@ -102,9 +108,12 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
            :widths: auto
 
            {% for method in visible_methods %}
-           * - :py:attr:`~{{ method.name }}`
+           {% if method.summary %}
+            * - :py:attr:`~{{ method.name }}`
              - {{ method.summary }}
-           {% endfor %}  
+            {% else %}
+            * - :py:attr:`~{{ method.name }}`
+           {% endif %}{% endfor %}  
 {% endif %}
 
 {% endif %}
