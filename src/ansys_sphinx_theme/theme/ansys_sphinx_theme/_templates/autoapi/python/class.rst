@@ -214,12 +214,14 @@ overview
 {% endif %}
 {% endif %}
 
-import detail
+Import detail
 ~~~~~~~~~~~~~~
+{% set split_parts = obj.obj["full_name"].split('.') %}
+{% set joined_parts = '.'.join(split_parts[:-1]) %}
 
 .. code-block:: python
 
-    from {{ obj.obj["full_name"] }} import {{ obj["short_name"] }}
+    from {{ joined_parts }} import {{ obj["short_name"] }}
 
 {% if visible_properties  %}
 
