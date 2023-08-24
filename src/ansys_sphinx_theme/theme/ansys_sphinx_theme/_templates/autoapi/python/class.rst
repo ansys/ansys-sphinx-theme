@@ -12,7 +12,6 @@
     {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
 {% endfor %}
 
-{% set testing = 'it worked' %}
 
 {% if obj.bases %}
 {% if "show-inheritance" in autoapi_options %}
