@@ -16,17 +16,6 @@ endif %} {% block docs_navbar %}
   {%- include "sections/header.html" %}
 </nav>
 {% endblock docs_navbar %}
-<style>
-  .bd-main .bd-content .bd-article-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
-    max-width: 70em;
-    overflow-x: auto;
-    padding: 1rem;
-    width: 100%;
-  }
-</style>
 <div class="bd-container">
   <div class="bd-container__inner bd-page-width">
     {# Primary sidebar #}
@@ -47,13 +36,13 @@ endif %} {% block docs_navbar %}
           {# Article content #} {% block docs_body %}
           <div class="bd-search-container">
             <h1>{{ _("Search") }}</h1>
+            <style>
+              .bd-search .search-button__kbd-shortcut {
+                display: none;
+              }
+            </style>
             {% include "components/search-field.html" %}
           </div>
-          <style>
-            .bd-search .search-button__kbd-shortcut {
-              right: 33%;
-            }
-          </style>
           {% endblock docs_body %} {# Article Footer #} {% if
           theme_show_prev_next %}
           <footer class="bd-footer-article">
