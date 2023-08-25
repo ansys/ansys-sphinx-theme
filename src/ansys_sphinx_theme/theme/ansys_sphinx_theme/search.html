@@ -49,6 +49,11 @@ endif %} {% block docs_navbar %}
             <h1>{{ _("Search") }}</h1>
             {% include "components/search-field.html" %}
           </div>
+          <style>
+            .bd-search .search-button__kbd-shortcut {
+              right: 33%;
+            }
+          </style>
           {% endblock docs_body %} {# Article Footer #} {% if
           theme_show_prev_next %}
           <footer class="bd-footer-article">
