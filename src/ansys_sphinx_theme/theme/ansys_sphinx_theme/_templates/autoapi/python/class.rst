@@ -88,126 +88,53 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 
 {% if class_objects %}
 
+{% macro get_list_table(table_objs, title="") -%}
+    .. tab-item:: {{ title }}
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          {% for table_obj in table_objs %}
+          * - :py:attr:`~{{ table_obj.name }}`
+            - {{ table_obj.summary }}
+          {% endfor %}
+{%- endmacro %}
+
 overview
 ~~~~~~~~
 .. py:currentmodule:: {{ obj.short_name }}
 .. tab-set::
 
-{% if visible_constructors %}
-    .. tab-item:: Constructors
-
-       .. list-table::
-          :header-rows: 0
-          :widths: auto
-
-          {% for constructor in visible_constructors %}
-          * - :py:attr:`~{{ constructor.name }}`
-            - {{ constructor.summary }}
-          {% endfor %}
-{% endif %}
-
 {% if visible_properties %}
-    .. tab-item:: Properties
-
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
-
-           {% for property in visible_properties %}
-           * - :py:attr:`~{{ property.name }}`
-             - {{ property.summary }}
-           {% endfor %}
-
+    {{ get_list_table(visible_properties, "Properties") }}
 {% endif %}
 
 {% if visible_attributes %}
-    .. tab-item:: Attributes
-
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
-
-           {% for attribute in visible_attributes %}
-           * - :py:attr:`~{{ attribute.name }}`
-             - {{ attribute.summary }}
-           {% endfor %}
-            
+    {{ get_list_table(visible_attributes, "Attributes") }}      
 {% endif %}
 
 {% if visible_methods %}
-    .. tab-item:: Methods
-
-       .. list-table::
-          :header-rows: 0
-          :widths: auto
-
-          {% for method in visible_methods %}
-          * - :py:attr:`~{{ method.name }}`
-            - {{ method.summary }}
-          {% endfor %}
+    {{ get_list_table(visible_methods, "Methods") }}
 {% endif %}
+
 {% if visible_instance_methods %}
-    .. tab-item:: Instance Methods
-
-       .. list-table::
-          :header-rows: 0
-          :widths: auto
-
-          {% for method in visible_instance_methods %}
-          * - :py:attr:`~{{ method.name }}`
-            - {{ method.summary }}
-          {% endfor %}
+    {{ get_list_table(visible_instance_methods, "Instance methods") }}
 {% endif %}
 
 {% if visible_class_methods %}
-    .. tab-item:: Class Methods
-
-       .. list-table::
-          :header-rows: 0
-          :widths: auto
-
-          {% for method in visible_class_methods %}
-          * - :py:attr:`~{{ method.name }}`
-            - {{ method.summary }}
-          {% endfor %}
+    {{ get_list_table(visible_class_methods, "Class methods") }}
 {% endif %}
 
 {% if visible_static_methods %}
-    .. tab-item:: Static Methods
-
-       .. list-table::
-          :header-rows: 0
-          :widths: auto
-
-          {% for method in visible_static_methods %}
-          * - :py:attr:`~{{ method.name }}`
-            - {{ method.summary }}
-          {% endfor %}
+    {{ get_list_table(visible_static_methods, "Static methods") }}
 {% endif %}
 
 {% if visible_special_methods %}
-    .. tab-item:: Special Methods
-
-       .. list-table::
-          :header-rows: 0
-          :widths: auto
-
-          {% for method in visible_special_methods %}
-          * - :py:attr:`~{{ method.name }}`
-            - {{ method.summary }}
-          {% endfor %}
+    {{ get_list_table(visible_special_methods, "Special methods") }}
 {% endif %}
 {% if visible_abstract_methods %}
-    .. tab-item:: Abstract Methods
-
-       .. list-table::
-          :header-rows: 0
-          :widths: auto
-
-          {% for method in visible_abstract_methods %}
-          * - :py:attr:`~{{ method.name }}`
-            - {{ method.summary }}
-          {% endfor %}
+    {{ get_list_table(visible_abstract_methods, "Abstract methods") }}
 {% endif %}
 
 {% endif %}
