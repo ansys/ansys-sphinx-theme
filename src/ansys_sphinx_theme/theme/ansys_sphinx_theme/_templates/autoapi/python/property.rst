@@ -3,7 +3,7 @@
    :canonical: {{ obj["obj"]["full_name"] }}
    {% set module_path = obj.obj["full_name"].split('.') %}
    {% set module_name = '.'.join(module_path[:2]) %}
-   {% if obj.annotation and module_name in obj.annotation and "Union" not in obj.annotation %}
+   {% if obj.annotation and module_name in obj.annotation and "[" not in obj.annotation %}
    {% set split_parts = obj.annotation.split('.') %}
    {% set last_part = split_parts[-1] %}
    :type: {{ last_part }}
