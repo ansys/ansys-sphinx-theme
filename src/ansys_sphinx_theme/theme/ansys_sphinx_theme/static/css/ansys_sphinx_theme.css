@@ -290,6 +290,10 @@ tr:nth-child(even) {
   background-color: var(--pst-color-table-hover);
 }
 
+td {
+  color: var(--pst-color-text-base)
+}
+
 /*
 ###############
 Table-centered 
@@ -1016,6 +1020,10 @@ div.versionchanged {
 .admonition,
 div.admonition {
   background-color: var(--pst-color-on-surface);
+}
+
+.output_area.rendered_html {
+  background-color: transparent;
 }
 
 /*
