@@ -16,7 +16,14 @@
     id="search-bar-input"
     autofocus
   />
-
+  <span class="search-button__kbd-shortcut"
+    ><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span
+  >
+  <style>
+    .bd-search .search-button__kbd-shortcut {
+      right: 33%;
+    }
+  </style>
   {% if theme_use_meilisearch.index_uids %}
   <select id="indexUidSelector" class="index-select">
     {% for index_uid, index_name in theme_use_meilisearch.index_uids.items() %}
