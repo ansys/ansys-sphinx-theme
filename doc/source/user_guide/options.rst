@@ -130,8 +130,7 @@ This dictionary should contain the following keys:
    corresponding user-friendly name. Each key-value pair in the dictionary 
    represents an index, with the key being the index UID and the value
    being the index name. The index UID points to an index on the server.
-   The list of all available indices can be found 
-   at `Active Public Indices <https://stunning-adventure-k6g9rqj.pages.github.io/active_indices.html>`_ .
+
 
 Here is an example configuration for using MeiliSearch in the ``conf.py`` file:
 
@@ -147,6 +146,23 @@ Here is an example configuration for using MeiliSearch in the ``conf.py`` file:
             "another-index-uid": "index name to be displayed",
         },
     }
+
+If your project features multiple documentation versions, it's crucial to adapt the index_uids 
+mapping to accommodate different versions. 
+To ensure seamless search integration across versions,
+use the following format to dynamically generate version-specific index UIDs:
+
+.. code-block:: python
+
+    from ansys_sphinx_theme import convert_version_to_pymeilisearch
+
+    use_meilisearch = {
+        "api_key": os.getenv("MEILISEARCH_PUBLIC_API_KEY", ""),
+        "index_uids": {
+            f"ansys-sphinx-theme-v{convert_version_to_pymeilisearch(__version__)}": "ansys-sphinx-theme",
+        },
+    }
+
 
 Here is the example configuration of using MeiliSearch in 
 ``conf.py`` file of ``ansys-sphinx-theme``:
