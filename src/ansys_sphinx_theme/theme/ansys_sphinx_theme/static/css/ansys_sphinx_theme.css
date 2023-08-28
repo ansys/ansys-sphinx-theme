@@ -291,7 +291,7 @@ tr:nth-child(even) {
 }
 
 td {
-  color: var(--pst-color-text-base)
+  color: var(--pst-color-text-base);
 }
 
 /*
@@ -1023,7 +1023,8 @@ div.admonition {
 }
 
 /* Select only divisions that contain a dataframe, with enough specificity to override pydata css */
-div.nboutput div.output_area.rendered_html.docutils.container:has(table.dataframe) {
+div.nboutput
+  div.output_area.rendered_html.docutils.container:has(table.dataframe) {
   background-color: transparent;
 }
 
