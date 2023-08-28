@@ -290,7 +290,7 @@ tr:nth-child(even) {
   background-color: var(--pst-color-table-hover);
 }
 
-td {
+div.rendered_html table.dataframe td {
   color: var(--pst-color-text-base);
 }
 
