@@ -158,7 +158,7 @@ def fix_edit_html_page_context(
     see https://github.com/pyvista/pyvista/pull/4113
     """
 
-    def fix_edit_link_button(link: str) -> str:
+    def fix_edit_link_page(link: str) -> str:
         """Transform "edit on GitHub" links to the correct URL.
 
         This function fixes the URL for the "edit this page" link.
@@ -224,7 +224,7 @@ def fix_edit_html_page_context(
         else:
             return link
 
-    context["fix_edit_link_button"] = fix_edit_link_button
+    context["fix_edit_link_page"] = fix_edit_link_page
 
 
 def update_footer_theme(
