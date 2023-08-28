@@ -147,10 +147,10 @@ Here is an example configuration for using MeiliSearch in the ``conf.py`` file:
         },
     }
 
-If your project features multiple documentation versions, it's crucial to adapt the index_uids 
+If your project features multiple documentation versions, it's crucial to adapt the ``index_uids``
 mapping to accommodate different versions. 
 To ensure seamless search integration across versions,
-use the following format to dynamically generate version-specific index UIDs:
+use the following format to dynamically generate version-specific index ``UIDs``:
 
 .. code-block:: python
 
