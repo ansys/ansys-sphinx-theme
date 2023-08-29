@@ -62,123 +62,56 @@ Summary
 {% set module_objects = visible_subpackages + visible_submodules + visible_classes + visible_interfaces + visible_enums + visible_functions + visible_constants + visible_attributes %}
 
 {% if module_objects %}
+
+{% macro module_get_list_table(table_objs, title="") -%}
+    .. tab-item:: {{ title }}
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          {% for table_obj in table_objs %}
+          * - :py:mod:`{{ table_obj.name }}`
+            - {{ table_obj.summary }}
+          {% endfor %}
+{%- endmacro %}
+
 .. tab-set::
 
 {% if visible_subpackages %}
-    .. tab-item:: Subpackages
-
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
-
-           {% for subpackage in visible_subpackages %}
-           * - :py:mod:`{{ subpackage.name }}`
-             - {{ subpackage.summary }}
-           {% endfor %}
+    {{ module_get_list_table(visible_subpackages, "Subpackages") }}
 {% endif %}
 
 {% if visible_submodules %}
-    .. tab-item:: Submodules
-
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
-
-           {% for submodule in visible_submodules %}
-           * - :py:mod:`{{ submodule.name }}`
-             - {{ submodule.summary }}
-           {% endfor %}
+    {{ module_get_list_table(visible_submodules, "Submodules") }}
 {% endif %}
 
 {% if visible_classes %}
-    .. tab-item:: Classes
-
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
-
-           {% for klass in visible_classes if not (klass in visible_interfaces) %}
-           * - :py:class:`{{ klass.name }}`
-             - {{ klass.summary }}
-           {% endfor %}
+    {{ module_get_list_table(visible_classes, "Classes") }}
 {% endif %}
 
 {% if visible_interfaces %}
-    .. tab-item:: Interfaces
-
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
-
-           {% for iface in visible_interfaces %}
-           * - :py:class:`{{ iface.name }}`
-             - {{ iface.summary }}
-           {% endfor %}
+    {{ module_get_list_table(visible_interfaces, "Interfaces") }}
 {% endif %}
 
 {% if visible_enums %}
-    .. tab-item:: Enums
-
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
-
-           {% for enum in visible_enums %}
-           * - :py:class:`{{ enum.name }}`
-             - {{ enum.summary }}
-           {% endfor %}
+    {{ module_get_list_table(visible_enums, "Enums") }}
 {% endif %}
 
 {% if visible_exceptions %}
-    .. tab-item:: Exceptions
-
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
-
-           {% for exc in visible_exceptions %}
-           * - :py:class:`{{ exc.name }}`
-             - {{ exc.summary }}
-           {% endfor %}
+    {{ module_get_list_table(visible_exceptions, "Exceptions") }}
 {% endif %}
 
 {% if visible_functions %}
-    .. tab-item:: Functions
-
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
-
-           {% for function in visible_functions %}
-           * - :py:func:`{{ function.name }}`
-             - {{ function.summary }}
-           {% endfor %}
+    {{ module_get_list_table(visible_functions, "Functions") }}
 {% endif %}
 
 {% if visible_constants %}
-    .. tab-item:: Constants
-
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
-
-           {% for constant in visible_constants %}
-           * - :py:attr:`{{ constant.name }}`
-             - {{ constant.summary }}
-           {% endfor %}
+    {{ module_get_list_table(visible_constants, "Constants") }}
 {% endif %}
 
 {% if visible_attributes %}
-    .. tab-item:: Attributes
-
-        .. list-table::
-           :header-rows: 0
-           :widths: auto
-
-           {% for attribute in visible_attributes %}
-           * - :py:attr:`{{ attribute.name }}`
-             - {{ attribute.summary }}
-           {% endfor %}
+    {{ module_get_list_table(visible_attributes, "Attributes") }}
 {% endif %}
 {% endif %}
 
