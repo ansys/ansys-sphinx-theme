@@ -1,7 +1,7 @@
 """This is the ansys-sphinx-theme module."""
+import logging
 import pathlib
 from typing import Any, Dict
-import logging
 
 from docutils.nodes import document
 from sphinx import addnodes
