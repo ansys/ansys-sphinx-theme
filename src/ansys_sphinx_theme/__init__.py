@@ -1,6 +1,7 @@
 """This is the ansys-sphinx-theme module."""
 import pathlib
 from typing import Any, Dict
+import logging
 
 from docutils.nodes import document
 from sphinx import addnodes
@@ -159,28 +160,32 @@ def fix_edit_html_page_context(
 
         if "_autosummary" in pagename:
             for obj_node in list(doctree.findall(addnodes.desc)):
-                domain = obj_node.get("domain")
-                for signode in obj_node:
-                    if not isinstance(signode, addnodes.desc_signature):
-                        continue
-                    # Convert signode to a specified format
-                    info = {}
-                    for key in DOMAIN_KEYS.get(domain, []):
-                        value = signode.get(key)
-                        if not value:
-                            value = ""
-                        info[key] = value
-                    if not info:
-                        continue
-                    # This is an API example
-                    return sphinx_linkcode_resolve(
-                        domain=domain,
-                        info=info,
-                        library=f"{github_user}/{github_repo}",
-                        source_path=github_source,
-                        github_version=kind,
-                        edit=True,
-                    )
+                try:
+                    domain = obj_node.get("domain")
+                    for signode in obj_node:
+                        if not isinstance(signode, addnodes.desc_signature):
+                            continue
+                        # Convert signode to a specified format
+                        info = {}
+                        for key in DOMAIN_KEYS.get(domain, []):
+                            value = signode.get(key)
+                            if not value:
+                                value = ""
+                            info[key] = value
+                        if not info:
+                            continue
+                        # This is an API example
+                        return sphinx_linkcode_resolve(
+                            domain=domain,
+                            info=info,
+                            library=f"{github_user}/{github_repo}",
+                            source_path=github_source,
+                            github_version=kind,
+                            edit=True,
+                        )
+                except Exception as e:
+                    logging.debug(f"An error occurred: {e}")  # Log the exception as debug info
+                    return link
 
         elif "autoapi" in pagename:
             for obj_node in list(doctree.findall(addnodes.desc)):
