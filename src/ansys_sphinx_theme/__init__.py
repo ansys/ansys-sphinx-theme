@@ -1,6 +1,6 @@
 """This is the ansys-sphinx-theme module."""
-import os
 import logging
+import os
 import pathlib
 from typing import Any, Dict
 
