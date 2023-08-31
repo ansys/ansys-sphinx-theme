@@ -183,7 +183,7 @@ def fix_edit_html_page_context(
                             github_version=kind,
                             edit=True,
                         )
-                except Exception as e:
+                except ValueError as e:
                     logging.debug(f"An error occurred: {e}")  # Log the exception as debug info
                     return link
 
