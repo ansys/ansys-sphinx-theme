@@ -290,6 +290,10 @@ tr:nth-child(even) {
   background-color: var(--pst-color-table-hover);
 }
 
+div.rendered_html table.dataframe td {
+  color: var(--pst-color-text-base);
+}
+
 /*
 ###############
 Table-centered 
@@ -1016,6 +1020,12 @@ div.versionchanged {
 .admonition,
 div.admonition {
   background-color: var(--pst-color-on-surface);
+}
+
+/* Select only divisions that contain a dataframe, with enough specificity to override pydata css */
+div.nboutput
+  div.output_area.rendered_html.docutils.container:has(table.dataframe) {
+  background-color: transparent;
 }
 
 /*

@@ -26,6 +26,10 @@ Ansys Sphinx theme
    :target: https://github.com/psf/black
    :alt: Black
 
+.. |Downloads| image:: https://img.shields.io/pypi/dm/ansys-sphinx-theme.svg?label=PyPI%20downloads
+   :target: https://pypi.org/project/ansys-sphinx-theme
+   :alt: Downloads
+
 
 Introduction
 ------------
