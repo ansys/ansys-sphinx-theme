@@ -155,7 +155,7 @@ jobs:
     needs: doc-deploy-stable
     steps:
       - name: "Install Git and clone project"
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: "get version of library"
         shell: bash
