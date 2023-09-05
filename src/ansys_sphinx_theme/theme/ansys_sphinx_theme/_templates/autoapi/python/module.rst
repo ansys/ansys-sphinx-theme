@@ -143,7 +143,7 @@ Summary
 {% endif %}
 {% endblock %}
 
-{% if visible_interfaces %}
+{% if visible_interfaces and "class" in render_in_single_page %}
 
 .. toctree::
    :titlesonly:
@@ -151,11 +151,11 @@ Summary
    :hidden:
 
 {% for interface in visible_interfaces %}
-    🝆 {{interface.name}} <{{ interface.name }}>
+    🝆 {{ interface.name }} <{{ interface.name }}>
 {% endfor %}
 {% endif %}
 
-{% if visible_classes%}
+{% if visible_classes and "class" in render_in_single_page %}
 
 .. toctree::
    :titlesonly:
@@ -163,11 +163,11 @@ Summary
    :hidden:
 
 {% for klass in visible_classes %}
-    🝆 {{klass.name}} <{{ klass.name }}>
+    🝆 {{ klass.name }} <{{ klass.name }}>
 {% endfor %}
 {% endif %}
 
-{% if visible_enums %}
+{% if visible_enums and "enum" in render_in_single_page %}
 
 .. toctree::
    :titlesonly:
@@ -175,11 +175,11 @@ Summary
    :hidden:
 
 {% for enum in visible_enums %}
-    ≔ {{enum.name}} <{{ enum.name }}>
+    ≔ {{ enum.name }} <{{ enum.name }}>
 {% endfor %}
 {% endif %}
 
-{% if visible_constants %}
+{% if visible_constants and "constant" in render_in_single_page %}
 
 .. toctree::
    :titlesonly:
@@ -187,7 +187,7 @@ Summary
    :hidden:
 
 {% for constant in visible_constants %}
-    π {{constant.name}} <{{ constant.name }}>
+    π {{ constant.name }} <{{ constant.name }}>
 {% endfor %}
 {% endif %}
 
