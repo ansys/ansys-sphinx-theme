@@ -61,7 +61,7 @@ Summary
 
 {% set module_objects = visible_subpackages + visible_submodules + visible_classes + visible_interfaces + visible_enums + visible_functions + visible_constants + visible_attributes %}
 
-{% if module_objects %}
+{# Add the macros #}
 
 {% macro module_get_list_table(table_objs, title="") -%}
     .. tab-item:: {{ title }}
@@ -75,6 +75,24 @@ Summary
             - {{ table_obj.summary }}
           {% endfor %}
 {%- endmacro %}
+
+{% macro add_module_toctree(toctree_objs, icon="", need_index="false") -%}
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+{% for toctree_obj in toctree_objs %}
+    {% if need_index == "true" %}
+    {{ icon }} {{ toctree_obj.short_name }}<{{ toctree_obj.short_name }}/index.rst>
+    {% else %}
+    {{ icon }} {{ toctree_obj.short_name }}<{{ toctree_obj.short_name }}>
+    {% endif %}
+{% endfor %}
+{%- endmacro %}
+
+{% if module_objects %}
 
 .. tab-set::
 
@@ -117,46 +135,17 @@ Summary
 
 {% block subpackages %}
 {% if visible_subpackages %}
-
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-   :hidden:
-
-{% for subpackage in visible_subpackages %}
-    🖿 {{subpackage.short_name}}<{{ subpackage.short_name }}/index.rst>
-{% endfor %}
+{{ add_module_toctree(visible_subpackages, "🖿", need_index="true") }}
 {% endif %}
 {% endblock %}
 
 {% block submodules %}
 {% if visible_submodules %}
-
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-   :hidden:
-
-{% for submodule in visible_submodules %}
-    🗎 {{submodule.short_name}}.py <{{ submodule.short_name }}/index.rst>
-{% endfor %}
+{{ add_module_toctree(visible_submodules, "🗎", need_index="true") }}
 {% endif %}
 {% endblock %}
 
-{% macro add_module_toctree(toctree_objs, icon="") -%}
-
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-   :hidden:
-
-{% for toctree_obj in toctree_objs %}
-    {{ icon }} {{ toctree_obj.short_name }}<{{ toctree_obj.short_name }}>
-{% endfor %}
-{%- endmacro %}
-
 {% if "class" in render_in_single_page %}
-
 {% if visible_interfaces %}
 {{ add_module_toctree(visible_interfaces, "🝆") }}
 {% endif %}
@@ -168,7 +157,6 @@ Summary
 {% if visible_enums %}
 {{ add_module_toctree(visible_enums, "≔") }}
 {% endif %}
-
 {% endif %}
 
 {% if visible_constants and "constant" in render_in_single_page %}
