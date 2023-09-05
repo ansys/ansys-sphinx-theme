@@ -143,7 +143,8 @@ Summary
 {% endif %}
 {% endblock %}
 
-{% if visible_interfaces and "class" in render_in_single_page %}
+{% if "class" in render_in_single_page %}
+{% if visible_interfaces %}
 
 .. toctree::
    :titlesonly:
@@ -155,7 +156,7 @@ Summary
 {% endfor %}
 {% endif %}
 
-{% if visible_classes and "class" in render_in_single_page %}
+{% if visible_classes %}
 
 .. toctree::
    :titlesonly:
@@ -167,7 +168,7 @@ Summary
 {% endfor %}
 {% endif %}
 
-{% if visible_enums and "enum" in render_in_single_page %}
+{% if visible_enums %}
 
 .. toctree::
    :titlesonly:
@@ -177,6 +178,7 @@ Summary
 {% for enum in visible_enums %}
     ≔ {{ enum.name }} <{{ enum.name }}>
 {% endfor %}
+{% endif %}
 {% endif %}
 
 {% if visible_constants and "constant" in render_in_single_page %}
