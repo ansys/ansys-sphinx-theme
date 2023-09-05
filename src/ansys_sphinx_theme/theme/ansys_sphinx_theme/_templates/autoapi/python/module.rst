@@ -143,56 +143,37 @@ Summary
 {% endif %}
 {% endblock %}
 
-{% if "class" in render_in_single_page %}
-{% if visible_interfaces %}
+{% macro add_module_toctree(toctree_objs, icon="") -%}
 
 .. toctree::
    :titlesonly:
    :maxdepth: 1
    :hidden:
 
-{% for interface in visible_interfaces %}
-    🝆 {{ interface.name }} <{{ interface.name }}>
+{% for toctree_obj in toctree_objs %}
+    {{ icon }} {{ toctree_obj.short_name }}<{{ toctree_obj.short_name }}>
 {% endfor %}
+{%- endmacro %}
+
+{% if "class" in render_in_single_page %}
+
+{% if visible_interfaces %}
+{{ add_module_toctree(visible_interfaces, "🝆") }}
 {% endif %}
 
 {% if visible_classes %}
-
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-   :hidden:
-
-{% for klass in visible_classes %}
-    🝆 {{ klass.name }} <{{ klass.name }}>
-{% endfor %}
+{{ add_module_toctree(visible_classes, "🝆") }}
 {% endif %}
 
 {% if visible_enums %}
-
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-   :hidden:
-
-{% for enum in visible_enums %}
-    ≔ {{ enum.name }} <{{ enum.name }}>
-{% endfor %}
+{{ add_module_toctree(visible_enums, "≔") }}
 {% endif %}
+
 {% endif %}
 
 {% if visible_constants and "constant" in render_in_single_page %}
-
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-   :hidden:
-
-{% for constant in visible_constants %}
-    π {{ constant.name }} <{{ constant.name }}>
-{% endfor %}
+{{ add_module_toctree(visible_constants, "π") }}
 {% endif %}
-
 
 {# Include the description for the module #}
 
