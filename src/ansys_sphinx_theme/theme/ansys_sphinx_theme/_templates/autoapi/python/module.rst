@@ -1,3 +1,36 @@
+{# ------------------------- Begin macros definition ----------------------- #}
+
+{% macro tab_item_from_objects_list(objects_list, title="") -%}
+    .. tab-item:: {{ title }}
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          {% for obj in objects_list %}
+          * - :py:mod:`{{ obj.name }}`
+            - {{ obj.summary }}
+          {% endfor %}
+{%- endmacro %}
+
+{% macro toctree_from_objects_list(objects_list, icon="", needs_index="false") -%}
+
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+   :hidden:
+
+{% for obj in objects_list %}
+    {% if needs_index == "true" %}
+    {{ icon }} {{ obj.short_name }}<{{ obj.short_name }}/index.rst>
+    {% else %}
+    {{ icon }} {{ obj.short_name }}<{{ obj.short_name }}>
+    {% endif %}
+{% endfor %}
+{%- endmacro %}
+
+{# --------------------------- End macros definition ----------------------- #}
+
 {% if not obj.display %}
 :orphan:
 {% endif %}
@@ -61,106 +94,75 @@ Summary
 
 {% set module_objects = visible_subpackages + visible_submodules + visible_classes + visible_interfaces + visible_enums + visible_functions + visible_constants + visible_attributes %}
 
-{# Add the macros #}
-
-{% macro module_get_list_table(table_objs, title="") -%}
-    .. tab-item:: {{ title }}
-
-        .. list-table::
-          :header-rows: 0
-          :widths: auto
-
-          {% for table_obj in table_objs %}
-          * - :py:mod:`{{ table_obj.name }}`
-            - {{ table_obj.summary }}
-          {% endfor %}
-{%- endmacro %}
-
-{% macro add_module_toctree(toctree_objs, icon="", need_index="false") -%}
-
-.. toctree::
-   :titlesonly:
-   :maxdepth: 1
-   :hidden:
-
-{% for toctree_obj in toctree_objs %}
-    {% if need_index == "true" %}
-    {{ icon }} {{ toctree_obj.short_name }}<{{ toctree_obj.short_name }}/index.rst>
-    {% else %}
-    {{ icon }} {{ toctree_obj.short_name }}<{{ toctree_obj.short_name }}>
-    {% endif %}
-{% endfor %}
-{%- endmacro %}
-
 {% if module_objects %}
 
 .. tab-set::
 
 {% if visible_subpackages %}
-    {{ module_get_list_table(visible_subpackages, "Subpackages") }}
+    {{ tab_item_from_objects_list(visible_subpackages, "Subpackages") }}
 {% endif %}
 
 {% if visible_submodules %}
-    {{ module_get_list_table(visible_submodules, "Submodules") }}
+    {{ tab_item_from_objects_list(visible_submodules, "Submodules") }}
 {% endif %}
 
 {% if visible_classes %}
-    {{ module_get_list_table(visible_classes, "Classes") }}
+    {{ tab_item_from_objects_list(visible_classes, "Classes") }}
 {% endif %}
 
 {% if visible_interfaces %}
-    {{ module_get_list_table(visible_interfaces, "Interfaces") }}
+    {{ tab_item_from_objects_list(visible_interfaces, "Interfaces") }}
 {% endif %}
 
 {% if visible_enums %}
-    {{ module_get_list_table(visible_enums, "Enums") }}
+    {{ tab_item_from_objects_list(visible_enums, "Enums") }}
 {% endif %}
 
 {% if visible_exceptions %}
-    {{ module_get_list_table(visible_exceptions, "Exceptions") }}
+    {{ tab_item_from_objects_list(visible_exceptions, "Exceptions") }}
 {% endif %}
 
 {% if visible_functions %}
-    {{ module_get_list_table(visible_functions, "Functions") }}
+    {{ tab_item_from_objects_list(visible_functions, "Functions") }}
 {% endif %}
 
 {% if visible_constants %}
-    {{ module_get_list_table(visible_constants, "Constants") }}
+    {{ tab_item_from_objects_list(visible_constants, "Constants") }}
 {% endif %}
 
 {% if visible_attributes %}
-    {{ module_get_list_table(visible_attributes, "Attributes") }}
+    {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}
 {% endif %}
 {% endif %}
 
 {% block subpackages %}
 {% if visible_subpackages %}
-{{ add_module_toctree(visible_subpackages, "🖿", need_index="true") }}
+{{ toctree_from_objects_list(visible_subpackages, "🖿", needs_index="true") }}
 {% endif %}
 {% endblock %}
 
 {% block submodules %}
 {% if visible_submodules %}
-{{ add_module_toctree(visible_submodules, "🗎", need_index="true") }}
+{{ toctree_from_objects_list(visible_submodules, "🗎", needs_index="true") }}
 {% endif %}
 {% endblock %}
 
 {% if "class" in render_in_single_page %}
 {% if visible_interfaces %}
-{{ add_module_toctree(visible_interfaces, "🝆") }}
+{{ toctree_from_objects_list(visible_interfaces, "🝆") }}
 {% endif %}
 
 {% if visible_classes %}
-{{ add_module_toctree(visible_classes, "🝆") }}
+{{ toctree_from_objects_list(visible_classes, "🝆") }}
 {% endif %}
 
 {% if visible_enums %}
-{{ add_module_toctree(visible_enums, "≔") }}
+{{ toctree_from_objects_list(visible_enums, "≔") }}
 {% endif %}
 {% endif %}
 
 {% if visible_constants and "constant" in render_in_single_page %}
-{{ add_module_toctree(visible_constants, "π") }}
+{{ toctree_from_objects_list(visible_constants, "π") }}
 {% endif %}
 
 {# Include the description for the module #}
