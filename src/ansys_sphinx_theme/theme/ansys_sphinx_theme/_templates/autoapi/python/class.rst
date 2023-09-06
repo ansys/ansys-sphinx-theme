@@ -101,8 +101,8 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
           {% endfor %}
 {%- endmacro %}
 
-overview
-~~~~~~~~
+Overview
+--------
 .. py:currentmodule:: {{ obj.short_name }}
 .. tab-set::
 
@@ -141,7 +141,7 @@ overview
 {% endif %}
 
 Import detail
-~~~~~~~~~~~~~~
+-------------
 {% set split_parts = obj.obj["full_name"].split('.') %}
 {% set joined_parts = '.'.join(split_parts[:-1]) %}
 
@@ -152,25 +152,25 @@ Import detail
 {% if visible_properties  %}
 
 Property detail
-~~~~~~~~~~~~~~~
+---------------
 {% for property in visible_properties %}
-{{ property.render()|indent(3) }}
+{{ property.render() }}
 {% endfor %}
 {% endif %}
 
 
 {% if visible_attributes  %}
 Attribute detail
-~~~~~~~~~~~~~~~~
+----------------
 {% for attribute in visible_attributes %}
-{{ attribute.render()|indent(3) }}
+{{ attribute.render() }}
 {% endfor %}
 {% endif %}
 
 {% if visible_methods  %}
 Method detail
-~~~~~~~~~~~~~
+-------------
 {% for method in visible_methods %}
-{{ method.render()|indent(3) }}
+{{ method.render() }}
 {% endfor %}
 {% endif %}
