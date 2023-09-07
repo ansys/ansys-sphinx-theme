@@ -5,11 +5,17 @@
     {% set obj_type = objects_list[0].type %}
 
     {% if obj_type == "package" or "module" %}
-    {% set role_type = "mod" %}
+        {% set role_type = "mod" %}
+
+    {% elif obj_type == "class" %}
+        {% set role_type = "class" %}
+
     {% elif obj_type == "function" %}
-    {% set role_type = "func" %}
+        {% set role_type = "func" %}
+
     {% elif obj_type == "exception" %}
-    {% set role_type = "exc" %}
+        {% set role_type = "exc" %}
+
     {% endif %}
 
     .. tab-item:: {{ title }}
@@ -216,4 +222,5 @@ Module detail
 {{ obj.render() }}
 {% endfor %}
 
+{% endif %}
 {# ---------------------- End module detail description -------------------- #}

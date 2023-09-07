@@ -1,3 +1,31 @@
+{# ------------------------- Begin macros definition ----------------------- #}
+
+{% macro tab_item_from_objects_list(objects_list, title="") -%}
+
+    {% set obj_type = objects_list[0].type %}
+
+    {% if obj_type == "method" %}
+        {% set role_type = "meth" %}
+
+    {% elif obj_type == "property" %}
+        {% set role_type = "attr" %}
+
+    {% endif %}
+
+    .. tab-item:: {{ title }}
+
+        .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          {% for obj in objects_list %}
+          * - :py:{{ role_type }}:`~{{ obj.name }}`
+            - {{ obj.summary }}
+          {% endfor %}
+{%- endmacro %}
+
+{# --------------------------- End macros definition ----------------------- #}
+
 {% if obj.display %}
 
 {{ obj.short_name }}
@@ -55,86 +83,75 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 {% endif %}
 
 {% if "inherited-members" in autoapi_options %}
-{% set visible_methods = obj.methods|selectattr("display")|list %}
+{% set all_visible_methods = obj.methods|selectattr("display")|list %}
 {% else %}
-{% set visible_methods = obj.methods|rejectattr("inherited")|selectattr("display")|list %}
+{% set all_visible_methods = obj.methods|rejectattr("inherited")|selectattr("display")|list %}
 {% endif %}
 
 {% set visible_abstract_methods = [] %}
+{% set visible_constructor_methods = [] %}
+{% set visible_instance_methods = [] %}
 {% set visible_special_methods = [] %}
 {% set visible_static_methods = [] %}
-{% set visible_instance_methods = [] %}
-{% set visible_class_methods = [] %}
-{% set visible_constructors = [] %}
 
-{% for element in visible_methods %}
+{% for element in all_visible_methods %}
     {% if "abstractmethod" in element.properties %}
         {% set _ = visible_abstract_methods.append(element) %}
+
     {% elif "staticmethod" in element.properties %}
         {% set _ = visible_static_methods.append(element) %}
-    {% elif "classmethod" in element.properties %}
-        {% set _ = visible_class_methods.append(element) %}
-    {% elif element.name.startswith("__") and ("init" not in element.name) %}
+
+    {% elif "classmethod" in element.properties or element.name in ["__new__", "__init__"] %}
+        {% set _ = visible_constructor_methods.append(element) %}
+
+    {% elif element.name.startswith("__") and element.name.endswith("__") and element.name not in ["__new__", "__init__"] %}
         {% set _ = visible_special_methods.append(element) %}
-    {% elif ("init" not in element.name) %}
+
+    {% else %}
         {% set _ = visible_instance_methods.append(element) %}
-    {% elif ("init" in element.name) %}
-        {% set _ = visible_constructors.append(element) %}
+
     {% endif %}
 {% endfor %}
 
 
-{% set class_objects = visible_properties + visible_attributes + visible_methods %}
+{% set class_objects = visible_properties + visible_attributes + all_visible_methods %}
 
 {% if class_objects %}
-
-{% macro get_list_table(table_objs, title="") -%}
-    .. tab-item:: {{ title }}
-
-        .. list-table::
-          :header-rows: 0
-          :widths: auto
-
-          {% for table_obj in table_objs %}
-          * - :py:attr:`~{{ table_obj.name }}`
-            - {{ table_obj.summary }}
-          {% endfor %}
-{%- endmacro %}
 
 Overview
 --------
 .. py:currentmodule:: {{ obj.short_name }}
 .. tab-set::
 
+{% if visible_constructor_methods %}
+    {{ tab_item_from_objects_list(visible_constructor_methods, "Constructors") }}
+{% endif %}
+
 {% if visible_properties %}
-    {{ get_list_table(visible_properties, "Properties") }}
+    {{ tab_item_from_objects_list(visible_properties, "Properties") }}
 {% endif %}
 
 {% if visible_attributes %}
-    {{ get_list_table(visible_attributes, "Attributes") }}      
+    {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}      
 {% endif %}
 
 {% if visible_methods %}
-    {{ get_list_table(visible_methods, "Methods") }}
+    {{ tab_item_from_objects_list(visible_methods, "Methods") }}
 {% endif %}
 
 {% if visible_instance_methods %}
-    {{ get_list_table(visible_instance_methods, "Instance methods") }}
-{% endif %}
-
-{% if visible_class_methods %}
-    {{ get_list_table(visible_class_methods, "Class methods") }}
+    {{ tab_item_from_objects_list(visible_instance_methods, "Instance methods") }}
 {% endif %}
 
 {% if visible_static_methods %}
-    {{ get_list_table(visible_static_methods, "Static methods") }}
+    {{ tab_item_from_objects_list(visible_static_methods, "Static methods") }}
 {% endif %}
 
 {% if visible_special_methods %}
-    {{ get_list_table(visible_special_methods, "Special methods") }}
+    {{ tab_item_from_objects_list(visible_special_methods, "Special methods") }}
 {% endif %}
 {% if visible_abstract_methods %}
-    {{ get_list_table(visible_abstract_methods, "Abstract methods") }}
+    {{ tab_item_from_objects_list(visible_abstract_methods, "Abstract methods") }}
 {% endif %}
 
 {% endif %}
@@ -167,10 +184,10 @@ Attribute detail
 {% endfor %}
 {% endif %}
 
-{% if visible_methods  %}
+{% if all_visible_methods  %}
 Method detail
 -------------
-{% for method in visible_methods %}
+{% for method in all_visible_methods %}
 {{ method.render() }}
 {% endfor %}
 {% endif %}
