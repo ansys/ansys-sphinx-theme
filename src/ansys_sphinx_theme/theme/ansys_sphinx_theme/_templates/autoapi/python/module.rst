@@ -1,6 +1,17 @@
 {# ------------------------- Begin macros definition ----------------------- #}
 
 {% macro tab_item_from_objects_list(objects_list, title="") -%}
+
+    {% set obj_type = objects_list[0].type %}
+
+    {% if obj_type == "package" or "module" %}
+    {% set role_type = "mod" %}
+    {% elif obj_type == "function" %}
+    {% set role_type = "func" %}
+    {% elif obj_type == "exception" %}
+    {% set role_type = "exc" %}
+    {% endif %}
+
     .. tab-item:: {{ title }}
 
         .. list-table::
@@ -8,7 +19,7 @@
           :widths: auto
 
           {% for obj in objects_list %}
-          * - :py:mod:`{{ obj.name }}`
+          * - :py:{{ role_type }}:`{{ obj.name }}`
             - {{ obj.summary }}
           {% endfor %}
 {%- endmacro %}
@@ -161,6 +172,10 @@ Summary
 
 {% if visible_enums %}
 {{ toctree_from_objects_list(visible_enums, "≔") }}
+{% endif %}
+
+{% if visible_exceptions %}
+{{ toctree_from_objects_list(visible_exceptions, "") }}
 {% endif %}
 {% endif %}
 
