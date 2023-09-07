@@ -200,8 +200,14 @@ Description
 Module detail
 -------------
 
+{% set visible_objects_in_this_page = [] %}
+
 {% for obj in module_objects %}
 {% if obj.type not in render_in_single_page %}
-{{ obj.render() }}
+{% set _ = visible_objects_in_this_page.append(obj) %}
 {% endif %}
+{% endfor %}
+
+{% for obj in visible_objects_in_this_page %}
+{{ obj.render() }}
 {% endfor %}
