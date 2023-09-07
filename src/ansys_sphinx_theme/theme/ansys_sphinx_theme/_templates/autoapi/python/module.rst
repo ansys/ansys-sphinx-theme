@@ -100,6 +100,7 @@ Summary
 
 {% if module_objects %}
 
+.. py:currentmodule:: {{ obj.short_name }}
 .. tab-set::
 
 {% if visible_subpackages %}
