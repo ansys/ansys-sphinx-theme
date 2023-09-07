@@ -209,22 +209,22 @@ def fix_edit_html_page_context(
                     return link
 
         elif pagename in ["autoapi", "api"]:
-           for obj_node in list(doctree.findall(addnodes.desc)):
-               domain = obj_node.get("domain")
-               if domain != "py":
-                   return link
-        
-               for signode in obj_node:
-                   if not isinstance(signode, addnodes.desc_signature):
-                       continue
-        
-                   fullname = signode["module"]
-                   modname = fullname.replace(".", "/")
-        
-                   if github_source:
-                       return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{github_source}/{modname}.{domain}"  # noqa: E501
-                   else:
-                       return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{modname}.{domain}"  # noqa: E501
+            for obj_node in list(doctree.findall(addnodes.desc)):
+                domain = obj_node.get("domain")
+                if domain != "py":
+                    return link
+
+                for signode in obj_node:
+                    if not isinstance(signode, addnodes.desc_signature):
+                        continue
+
+                    fullname = signode["module"]
+                    modname = fullname.replace(".", "/")
+
+                    if github_source:
+                        return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{github_source}/{modname}.{domain}"  # noqa: E501
+                    else:
+                        return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{modname}.{domain}"  # noqa: E501
 
         else:
             return link

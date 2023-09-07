@@ -98,6 +98,7 @@ Summary
 
 {% set module_objects = visible_subpackages + visible_submodules + visible_classes + visible_interfaces + visible_enums + visible_exceptions + visible_functions + visible_constants + visible_attributes %}
 
+{# ---------------------- Begin module tabset -------------------- #}
 {% if module_objects %}
 
 .. py:currentmodule:: {{ obj.short_name }}
@@ -140,7 +141,7 @@ Summary
 {% endif %}
 {% endif %}
 
-
+{# ---------------------- End module tabset -------------------- #}
 {# ------------------------ Begin toctree definition ----------------------- #}
 
 {% block subpackages %}
