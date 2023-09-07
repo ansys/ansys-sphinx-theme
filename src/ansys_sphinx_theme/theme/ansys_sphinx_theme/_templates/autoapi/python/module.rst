@@ -10,20 +10,7 @@
 
           {% for obj in objects_list %}
 
-              {% if obj.type == "package" or "module" %}
-                  {% set role = "mod" %}
-
-              {% elif obj.type == "class" %}
-                  {% set role = "class" %}
-
-              {% elif obj.type == "function" %}
-                  {% set role = "func" %}
-
-              {% elif obj.type == "exception" %}
-                  {% set role = "exc" %}
-              {% endif %}
-
-          * - :py:{{ role }}:`{{ obj.name }}`
+          * - :py:attr:`~{{ obj.name }}`
             - {{ obj.summary }}
 
           {% endfor %}
