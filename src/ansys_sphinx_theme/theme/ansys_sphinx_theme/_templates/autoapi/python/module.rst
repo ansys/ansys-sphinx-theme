@@ -106,12 +106,12 @@ Summary
     {{ tab_item_from_objects_list(visible_submodules, "Submodules") }}
 {% endif %}
 
-{% if visible_classes %}
-    {{ tab_item_from_objects_list(visible_classes, "Classes") }}
-{% endif %}
-
 {% if visible_interfaces %}
     {{ tab_item_from_objects_list(visible_interfaces, "Interfaces") }}
+{% endif %}
+
+{% if visible_classes %}
+    {{ tab_item_from_objects_list(visible_classes, "Classes") }}
 {% endif %}
 
 {% if visible_enums %}
@@ -134,6 +134,9 @@ Summary
     {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}
 {% endif %}
 {% endif %}
+
+
+{# ------------------------ Begin toctree definition ----------------------- #}
 
 {% block subpackages %}
 {% if visible_subpackages %}
@@ -165,7 +168,10 @@ Summary
 {{ toctree_from_objects_list(visible_constants, "π") }}
 {% endif %}
 
-{# Include the description for the module #}
+{# ------------------------- End toctree definition ------------------------ #}
+
+
+{# ------------------------ Begin module description ----------------------- #}
 
 {% if obj.docstring %}
 Description
@@ -173,3 +179,14 @@ Description
 
 {{ obj.docstring }}
 {% endif %}
+
+{# ------------------------- End module description ------------------------ #}
+
+Module detail
+-------------
+
+{% for obj in module_objects %}
+{% if obj.type not in render_in_single_page %}
+{{ obj. }}
+{% endif %}
+{% endfor %}
