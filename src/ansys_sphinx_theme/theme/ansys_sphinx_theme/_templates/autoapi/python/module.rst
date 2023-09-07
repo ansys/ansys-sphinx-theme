@@ -92,7 +92,7 @@ Summary
     {% endif %}
 {% endfor %}
 
-{% set module_objects = visible_subpackages + visible_submodules + visible_classes + visible_interfaces + visible_enums + visible_functions + visible_constants + visible_attributes %}
+{% set module_objects = visible_subpackages + visible_submodules + visible_classes + visible_interfaces + visible_enums + visible_exceptions + visible_functions + visible_constants + visible_attributes %}
 
 {% if module_objects %}
 
@@ -187,6 +187,6 @@ Module detail
 
 {% for obj in module_objects %}
 {% if obj.type not in render_in_single_page %}
-{{ obj. }}
+{{ obj.render() }}
 {% endif %}
 {% endfor %}
