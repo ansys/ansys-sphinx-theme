@@ -2,22 +2,6 @@
 
 {% macro tab_item_from_objects_list(objects_list, title="") -%}
 
-    {% set obj_type = objects_list[0].type %}
-
-    {% if obj_type == "package" or "module" %}
-        {% set role_type = "mod" %}
-
-    {% elif obj_type == "class" %}
-        {% set role_type = "class" %}
-
-    {% elif obj_type == "function" %}
-        {% set role_type = "func" %}
-
-    {% elif obj_type == "exception" %}
-        {% set role_type = "exc" %}
-
-    {% endif %}
-
     .. tab-item:: {{ title }}
 
         .. list-table::
@@ -25,9 +9,25 @@
           :widths: auto
 
           {% for obj in objects_list %}
-          * - :py:{{ role_type }}:`{{ obj.name }}`
+
+              {% if obj.type == "package" or "module" %}
+                  {% set role = "mod" %}
+
+              {% elif obj.type == "class" %}
+                  {% set role = "class" %}
+
+              {% elif obj.type == "function" %}
+                  {% set role = "func" %}
+
+              {% elif obj.type == "exception" %}
+                  {% set role = "exc" %}
+              {% endif %}
+
+          * - :py:{{ role }}:`{{ obj.name }}`
             - {{ obj.summary }}
+
           {% endfor %}
+
 {%- endmacro %}
 
 {% macro toctree_from_objects_list(objects_list, icon="", needs_index="false") -%}
@@ -143,12 +143,12 @@ Summary
     {{ tab_item_from_objects_list(visible_functions, "Functions") }}
 {% endif %}
 
-{% if visible_constants %}
-    {{ tab_item_from_objects_list(visible_constants, "Constants") }}
-{% endif %}
-
 {% if visible_attributes %}
     {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}
+{% endif %}
+
+{% if visible_constants %}
+    {{ tab_item_from_objects_list(visible_constants, "Constants") }}
 {% endif %}
 {% endif %}
 
@@ -183,6 +183,10 @@ Summary
 {% if visible_exceptions %}
 {{ toctree_from_objects_list(visible_exceptions, "") }}
 {% endif %}
+{% endif %}
+
+{% if visible_functions and "function" in render_in_single_page %}
+{{ toctree_from_objects_list(visible_functions, "𝑓(x)") }}
 {% endif %}
 
 {% if visible_constants and "constant" in render_in_single_page %}

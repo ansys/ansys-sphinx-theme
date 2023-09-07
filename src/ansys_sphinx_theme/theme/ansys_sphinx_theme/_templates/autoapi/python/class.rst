@@ -2,16 +2,6 @@
 
 {% macro tab_item_from_objects_list(objects_list, title="") -%}
 
-    {% set obj_type = objects_list[0].type %}
-
-    {% if obj_type == "method" %}
-        {% set role_type = "meth" %}
-
-    {% elif obj_type == "property" %}
-        {% set role_type = "attr" %}
-
-    {% endif %}
-
     .. tab-item:: {{ title }}
 
         .. list-table::
@@ -19,7 +9,7 @@
           :widths: auto
 
           {% for obj in objects_list %}
-          * - :py:{{ role_type }}:`~{{ obj.name }}`
+          * - :py:attr:`~{{ obj.name }}`
             - {{ obj.summary }}
           {% endfor %}
 {%- endmacro %}
@@ -28,8 +18,10 @@
 
 {% if obj.display %}
 
+{% if "class" in render_in_single_page %}
 {{ obj.short_name }}
 {{"=" * obj.name|length }}
+{% endif %}
 
 .. py:{{ obj["type"] }}:: {{ obj["short_name"] }}{% if obj["args"] %}({{ obj["args"] }}){% endif %}
 
@@ -123,8 +115,16 @@ Overview
 .. py:currentmodule:: {{ obj.short_name }}
 .. tab-set::
 
+{% if visible_abstract_methods %}
+    {{ tab_item_from_objects_list(visible_abstract_methods, "Abstract methods") }}
+{% endif %}
+
 {% if visible_constructor_methods %}
     {{ tab_item_from_objects_list(visible_constructor_methods, "Constructors") }}
+{% endif %}
+
+{% if visible_instance_methods %}
+    {{ tab_item_from_objects_list(visible_instance_methods, "Methods") }}
 {% endif %}
 
 {% if visible_properties %}
@@ -135,23 +135,12 @@ Overview
     {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}      
 {% endif %}
 
-{% if visible_methods %}
-    {{ tab_item_from_objects_list(visible_methods, "Methods") }}
-{% endif %}
-
-{% if visible_instance_methods %}
-    {{ tab_item_from_objects_list(visible_instance_methods, "Instance methods") }}
-{% endif %}
-
 {% if visible_static_methods %}
     {{ tab_item_from_objects_list(visible_static_methods, "Static methods") }}
 {% endif %}
 
 {% if visible_special_methods %}
     {{ tab_item_from_objects_list(visible_special_methods, "Special methods") }}
-{% endif %}
-{% if visible_abstract_methods %}
-    {{ tab_item_from_objects_list(visible_abstract_methods, "Abstract methods") }}
 {% endif %}
 
 {% endif %}
