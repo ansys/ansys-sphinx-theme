@@ -18,7 +18,7 @@
 
 {% if obj.display %}
 
-{% if "class" in render_in_single_page %}
+{% if obj["type"] in render_in_single_page %}
 {{ obj.short_name }}
 {{"=" * obj.name|length }}
 {% endif %}
