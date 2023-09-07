@@ -197,8 +197,8 @@ Description
 
 {# ------------------------- End module description ------------------------ #}
 
-Module detail
--------------
+
+{# -------------------------- Begin module detail -------------------------- #}
 
 {% set visible_objects_in_this_page = [] %}
 
@@ -208,6 +208,12 @@ Module detail
 {% endif %}
 {% endfor %}
 
+{% if visible_objects_in_this_page %}
+Module detail
+-------------
+
 {% for obj in visible_objects_in_this_page %}
 {{ obj.render() }}
 {% endfor %}
+
+{# ---------------------- End module detail description -------------------- #}
