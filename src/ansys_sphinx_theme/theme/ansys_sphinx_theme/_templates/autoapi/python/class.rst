@@ -18,15 +18,16 @@
 
 {% if obj.display %}
 
-{% if obj["type"] in render_in_single_page %}
+{% if render_in_single_page and obj["type"] in render_in_single_page %}
 {{ obj.short_name }}
 {{"=" * obj.name|length }}
 {% endif %}
 
 .. py:{{ obj["type"] }}:: {{ obj["short_name"] }}{% if obj["args"] %}({{ obj["args"] }}){% endif %}
 
+{% if render_in_single_page and obj["type"] in render_in_single_page %}
    :canonical: {{ obj["obj"]["full_name"] }}
-
+{% endif %}
 
 {% for (args, return_annotation) in obj.overloads %}
     {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
@@ -112,9 +113,11 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 
 {% if class_objects %}
 
+{% if render_in_single_page and obj["type"] in render_in_single_page %}
 Overview
 --------
-.. py:currentclass:: {{ obj.short_name }}
+.. py:currentmodule:: {{ obj.short_name }}
+{% endif %}
 .. tab-set::
 
 {% if visible_abstract_methods %}

@@ -159,6 +159,7 @@ Summary
 {% endif %}
 {% endblock %}
 
+{% block class %}
 {% if render_in_single_page and "class" in render_in_single_page %}
 {% if visible_interfaces %}
 {{ toctree_from_objects_list(visible_interfaces, "🝆") }}
@@ -176,10 +177,13 @@ Summary
 {{ toctree_from_objects_list(visible_exceptions, "") }}
 {% endif %}
 {% endif %}
+{% endblock %}
 
+{% block functions %}
 {% if render_in_single_page and visible_functions and "function" in render_in_single_page %}
 {{ toctree_from_objects_list(visible_functions, "𝑓(x)") }}
 {% endif %}
+{% endblock %}
 
 {% block constants %}
 {% if render_in_single_page and visible_constants and "constant" in render_in_single_page %}
@@ -204,15 +208,19 @@ Description
 
 {# -------------------------- Begin module detail -------------------------- #}
 
+{% set module_objects_in_this_page = visible_classes + visible_interfaces + visible_enums + visible_exceptions + visible_functions + visible_constants + visible_attributes %}
+{% if module_objects_in_this_page %}
 {% set visible_objects_in_this_page = [] %}
 
-{% for obj in module_objects %}
-{% if render_in_single_page and obj.type not in render_in_single_page %}
-{% set _ = visible_objects_in_this_page.append(obj) %}
-{% else %}
+{% if render_in_single_page %}
+{% for obj in module_objects_in_this_page %}
+{% if obj.type not in render_in_single_page %}
 {% set _ = visible_objects_in_this_page.append(obj) %}
 {% endif %}
 {% endfor %}
+{% else %}
+{% set visible_objects_in_this_page = module_objects_in_this_page %}
+{% endif %}
 
 {% if visible_objects_in_this_page %}
 Module detail
@@ -222,6 +230,7 @@ Module detail
 {{ obj.render() }}
 {% endfor %}
 
+{% endif %}
 {% endif %}
 
 {# ---------------------- End module detail description -------------------- #}
