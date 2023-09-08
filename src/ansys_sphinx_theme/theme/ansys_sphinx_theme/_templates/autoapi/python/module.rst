@@ -156,7 +156,7 @@ Summary
 {% endif %}
 {% endblock %}
 
-{% if "class" in render_in_single_page %}
+{% if render_in_single_page and "class" in render_in_single_page %}
 {% if visible_interfaces %}
 {{ toctree_from_objects_list(visible_interfaces, "🝆") }}
 {% endif %}
@@ -174,11 +174,11 @@ Summary
 {% endif %}
 {% endif %}
 
-{% if visible_functions and "function" in render_in_single_page %}
+{% if render_in_single_page and visible_functions and "function" in render_in_single_page %}
 {{ toctree_from_objects_list(visible_functions, "𝑓(x)") }}
 {% endif %}
 
-{% if visible_constants and "constant" in render_in_single_page %}
+{% if render_in_single_page and if visible_constants and "constant" in render_in_single_page %}
 {{ toctree_from_objects_list(visible_constants, "π") }}
 {% endif %}
 
