@@ -54,6 +54,8 @@ The ``{{ obj.short_name }}.py`` module
 
 .. py:module:: {{ obj.name }}
 
+{# ---------------------- Begin module summary -------------------- #}
+
 Summary
 -------
 
@@ -98,6 +100,7 @@ Summary
 
 {% set module_objects = visible_subpackages + visible_submodules + visible_classes + visible_interfaces + visible_enums + visible_exceptions + visible_functions + visible_constants + visible_attributes %}
 
+{# ---------------------- End module summary -------------------- #}
 {# ---------------------- Begin module tabset -------------------- #}
 {% if module_objects %}
 
@@ -178,9 +181,11 @@ Summary
 {{ toctree_from_objects_list(visible_functions, "𝑓(x)") }}
 {% endif %}
 
-{% if render_in_single_page and if visible_constants and "constant" in render_in_single_page %}
+{% block constants %}
+{% if render_in_single_page and visible_constants and "constant" in render_in_single_page %}
 {{ toctree_from_objects_list(visible_constants, "π") }}
 {% endif %}
+{% endblock %}
 
 {# ------------------------- End toctree definition ------------------------ #}
 
@@ -202,7 +207,9 @@ Description
 {% set visible_objects_in_this_page = [] %}
 
 {% for obj in module_objects %}
-{% if obj.type not in render_in_single_page %}
+{% if render_in_single_page and obj.type not in render_in_single_page %}
+{% set _ = visible_objects_in_this_page.append(obj) %}
+{% else %}
 {% set _ = visible_objects_in_this_page.append(obj) %}
 {% endif %}
 {% endfor %}
@@ -216,4 +223,5 @@ Module detail
 {% endfor %}
 
 {% endif %}
+
 {# ---------------------- End module detail description -------------------- #}

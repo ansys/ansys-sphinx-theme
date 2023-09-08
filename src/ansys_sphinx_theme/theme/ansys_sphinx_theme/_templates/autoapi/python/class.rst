@@ -108,11 +108,13 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 
 {% set class_objects = visible_properties + visible_attributes + all_visible_methods %}
 
+{# ------------------------ Begin tabset definition ----------------------- #}
+
 {% if class_objects %}
 
 Overview
 --------
-.. py:currentmodule:: {{ obj.short_name }}
+.. py:currentclass:: {{ obj.short_name }}
 .. tab-set::
 
 {% if visible_abstract_methods %}
@@ -145,6 +147,8 @@ Overview
 
 {% endif %}
 {% endif %}
+{# ---------------------- End class tabset -------------------- #}
+{# ---------------------- Begin class datails -------------------- #}
 
 Import detail
 -------------
@@ -180,3 +184,5 @@ Method detail
 {{ method.render() }}
 {% endfor %}
 {% endif %}
+
+{# ---------------------- End class details -------------------- #}
