@@ -1,5 +1,6 @@
 """This is the ansys-sphinx-theme module."""
 import logging
+import os
 import pathlib
 from typing import Any, Dict
 
@@ -21,6 +22,7 @@ STYLE_PATH = STATIC_PATH / "css"
 JS_PATH = STATIC_PATH / "js"
 CSS_PATH = STYLE_PATH / "ansys_sphinx_theme.css"
 TEMPLATES_PATH = THEME_PATH / "_templates"
+AUTOAPI_TEMPLATES_PATH = TEMPLATES_PATH / "autoapi"
 JS_FILE = JS_PATH / "table.js"
 
 # make logo paths available
@@ -64,6 +66,25 @@ def get_version_match(semver: str) -> str:
         return "dev"
     major, minor, *_ = semver.split(".")
     return ".".join([major, minor])
+
+
+def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
+    """Return a string representing the relative path for autoapi templates.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        Path to the desired file.
+
+    Returns
+    -------
+    str
+        A string rerpesenting the relative path to the autoapi templates.
+
+    """
+    return os.path.relpath(
+        str(AUTOAPI_TEMPLATES_PATH.absolute()), start=str(path.parent.absolute())
+    )
 
 
 def convert_version_to_pymeilisearch(semver: str) -> str:
@@ -187,7 +208,7 @@ def fix_edit_html_page_context(
                     logging.debug(f"An error occurred: {e}")  # Log the exception as debug info
                     return link
 
-        elif "autoapi" in pagename:
+        elif pagename in ["autoapi", "api"]:
             for obj_node in list(doctree.findall(addnodes.desc)):
                 domain = obj_node.get("domain")
                 if domain != "py":
