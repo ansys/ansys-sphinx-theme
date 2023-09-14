@@ -79,10 +79,23 @@ Summary
 {% set visible_interfaces = [] %}
 {% set visible_enums = [] %}
 {% for element in visible_classes_and_interfaces %}
-    {% if element.name.startswith("I") and element.name[1].isupper() and ("enum.Enum" not in element.bases) %}
-        {% set _ = visible_interfaces.append(element) %}
-    {% elif "enum.Enum" in element.bases %}
+
+    {#
+        HACK: there is not built-in "startswith" test, no "break" statement, and
+        no limited scope for variables inside blocks, see:
+        https://stackoverflow.com/questions/4870346/can-a-jinja-variables-scope-extend-beyond-in-an-inner-block
+    #}
+    {% set has_enum_base = [] %}
+    {% for base in element.bases %}
+        {% if base.startswith("enum.") %}
+            {% set _ = has_enum_base.append(true) %}
+        {% endif %}
+    {% endfor %}
+
+    {% if has_enum_base %}
         {% set _ = visible_enums.append(element) %}
+    {% elif element.name.startswith("I") and element.name[1].isupper() and not has_enum_base %}
+        {% set _ = visible_interfaces.append(element) %}
     {% else %}
         {% set _ = visible_classes.append(element) %}
     {% endif %}
