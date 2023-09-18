@@ -1,5 +1,6 @@
 """A module containing the an extension for creating links to original source code files."""
 import inspect
+import logging
 import os
 import os.path as op
 import sys
@@ -225,26 +226,30 @@ def link_code(app: Sphinx, doctree: Node):
                 continue
 
             # Call user code to resolve the link
-            uri = sphinx_linkcode_resolve(
-                domain=domain,
-                info=info,
-                library=library,
-                source_path=github_source,
-                github_version=github_version,
-            )
-            if not uri:
-                # no source
-                continue
+            try:
+                uri = sphinx_linkcode_resolve(
+                    domain=domain,
+                    info=info,
+                    library=library,
+                    source_path=github_source,
+                    github_version=github_version,
+                )
+                if not uri:
+                    # no source
+                    continue
 
-            if uri in uris or not uri:
-                # only one link per name, please
-                continue
-            uris.add(uri)
+                if uri in uris or not uri:
+                    # only one link per name, please
+                    continue
+                uris.add(uri)
 
-            inline = nodes.inline("", _("[source]"), classes=["viewcode-link"])
-            onlynode = addnodes.only(expr="html")
-            onlynode += nodes.reference("", "", inline, internal=False, refuri=uri)
-            signode += onlynode
+                inline = nodes.inline("", _("[source]"), classes=["viewcode-link"])
+                onlynode = addnodes.only(expr="html")
+                onlynode += nodes.reference("", "", inline, internal=False, refuri=uri)
+                signode += onlynode
+
+            except ValueError as e:
+                logging.debug(f"An error occurred: {e}")
 
 
 def setup(app: Sphinx):
