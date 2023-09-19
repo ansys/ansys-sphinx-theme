@@ -665,6 +665,10 @@ strong {
   border-bottom: 2px solid #fff;
 }
 
+.bd-header .navbar-header-items__start {
+  width: fit-content;
+}
+
 .navbar-nav li a:focus,
 .navbar-nav li a:hover,
 .navbar-nav li.current > a {
