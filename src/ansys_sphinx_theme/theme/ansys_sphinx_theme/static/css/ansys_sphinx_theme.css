@@ -616,8 +616,6 @@ Navigation column (according to side column)
 ############################################
 */
 .col-lg-9 {
-  flex: 0 0 80%;
-  max-width: 80%;
   padding-right: 5px;
   padding-left: 20px;
 }
@@ -667,6 +665,7 @@ strong {
 
 .bd-header .navbar-header-items__start {
   width: fit-content;
+  padding-right: 3rem;
 }
 
 .navbar-nav li a:focus,
