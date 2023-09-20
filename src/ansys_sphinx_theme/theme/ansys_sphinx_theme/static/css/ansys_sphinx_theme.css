@@ -699,6 +699,15 @@ nav.bd-links li > a:hover {
   color: var(--pst-color-link) !important;
 }
 
+.bd-header .navbar-nav .dropdown button:hover {
+  color: white;
+}
+
+.dropdown-item:hover {
+  font-weight: bold;
+  background-color: transparent;
+}
+
 /*
 ##################
 icon, button, logo  
