@@ -659,10 +659,6 @@ strong {
   font-weight: 900;
 }
 
-.bd-header .navbar-nav > .active > .nav-link {
-  border-bottom: 2px solid #fff;
-}
-
 .bd-header .navbar-header-items__start {
   width: fit-content;
   padding-right: 3rem;
@@ -790,7 +786,7 @@ i.fa-square-github:before {
 }
 
 html[data-theme="light"] #pst-back-to-top {
-  background-color: var(--pst-color-secondary);
+  background-color: var(--pst-color-link);
 }
 /*
 ##############################
