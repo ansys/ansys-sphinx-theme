@@ -237,7 +237,7 @@ def link_code(app: Sphinx, doctree: Node):
                 )
 
                 # Check if the URI is already processed
-                if uri in uris:
+                if not uri or uri in uris:
                     # Skip processing if the URI is already in the set
                     continue
                 uris.add(uri)
