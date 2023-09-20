@@ -66,7 +66,7 @@ html[data-theme="light"] {
   --pst-color-success: rgb(40, 167, 69);
   --pst-color-text-base: rgb(0, 0, 0);
   --pst-color-text-muted: rgb(26, 24, 24);
-  --pst-color-border: #c9c9c9;
+  --pst-color-border: #a19d9d;
   --pst-color-shadow: rgb(216, 216, 216);
   --pst-color-info: var(--pst-color-link);
 
@@ -752,7 +752,11 @@ kbd {
 }
 
 .search-button-field {
-  color: white !important;
+  color: white;
+}
+
+.search-button-field:hover {
+  color: var(--pst-color-border);
 }
 
 /* make the github logo white */
@@ -760,7 +764,7 @@ kbd {
 i.fa-github-square:before,
 i.fa-square-github:before {
   color: white;
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .version-switcher__menu a.list-group-item:hover {
@@ -785,6 +789,9 @@ i.fa-square-github:before {
   color: white;
 }
 
+html[data-theme="light"] #pst-back-to-top {
+  background-color: var(--pst-color-secondary);
+}
 /*
 ##############################
 image padding before and after 
