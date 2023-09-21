@@ -754,6 +754,7 @@ kbd {
 
 .theme-switch-button span:hover {
   color: var(--ansysGold);
+  border-color: white;
 }
 
 .search-button-field {
