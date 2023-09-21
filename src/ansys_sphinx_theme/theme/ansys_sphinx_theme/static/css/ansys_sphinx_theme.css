@@ -758,6 +758,7 @@ kbd {
 
 .search-button-field {
   color: white;
+  background-color: transparent;
 }
 
 .search-button-field:hover {
