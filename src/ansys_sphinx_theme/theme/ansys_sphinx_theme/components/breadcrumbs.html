@@ -1,6 +1,32 @@
-<div class="container-xl">
-  <div class="row">
-    <div class="col-12 col-md-3" id="breadcrumbs-spacer"></div>
-    <div class="col-12 col-md-11 col-xl-9" id="breadcrumbs">{{ relbar() }}</div>
-  </div>
-</div>
+{% block breadcrumbs %}
+<nav aria-label="{{ _('Breadcrumb') }}">
+  <ul class="bd-breadcrumbs">
+    {# Additional breadcrumbs before "Home" #} {% block rootrellink %} {% for
+    (name, href) in theme_additional_breadcrumbs %}
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="{{ href }}" class="nav-link">{{ name }}</a>
+    </li>
+    {% endfor %} {% endblock %} {# Home icon #}
+    <li class="breadcrumb-item">
+      <a
+        href="{{ pathto(root_doc) }}"
+        class="nav-link"
+        aria-label="{{ _('Home') }}"
+      >
+        <i class="fa-solid fa-home"></i
+      ></a>
+    </li>
+
+    {%- for doc in parents %} {% if doc.link %}
+    <li class="breadcrumb-item">
+      <a href="{{ doc.link|e }}" class="nav-link">{{ doc.title }}</a>
+    </li>
+    {% else %}
+    <li class="breadcrumb-item">{{ doc.title }}</li>
+    {% endif %} {%- endfor %} {% if title and pagename != root_doc %} {# Current
+    page title #}
+    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+    {% endif %}
+  </ul>
+</nav>
+{% endblock %}
