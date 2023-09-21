@@ -1068,3 +1068,7 @@ search hide match
 div#searchbox p.highlight-link a {
   background-color: var(--pst-color-search-match);
 }
+
+.header-article__inner {
+  padding: 0 1rem;
+}
