@@ -66,7 +66,7 @@ html[data-theme="light"] {
   --pst-color-success: rgb(40, 167, 69);
   --pst-color-text-base: rgb(0, 0, 0);
   --pst-color-text-muted: rgb(26, 24, 24);
-  --pst-color-border: #c9c9c9;
+  --pst-color-border: #a19d9d;
   --pst-color-shadow: rgb(216, 216, 216);
   --pst-color-info: var(--pst-color-link);
 
@@ -616,8 +616,6 @@ Navigation column (according to side column)
 ############################################
 */
 .col-lg-9 {
-  flex: 0 0 80%;
-  max-width: 80%;
   padding-right: 5px;
   padding-left: 20px;
 }
@@ -661,8 +659,9 @@ strong {
   font-weight: 900;
 }
 
-.bd-header .navbar-nav > .active > .nav-link {
-  border-bottom: 2px solid #fff;
+.bd-header .navbar-header-items__start {
+  width: fit-content;
+  padding-right: 3rem;
 }
 
 .navbar-nav li a:focus,
@@ -698,6 +697,15 @@ nav.bd-links .active > a {
 nav.bd-links li > a:hover {
   font-weight: 900;
   color: var(--pst-color-link) !important;
+}
+
+.bd-header .navbar-nav .dropdown button:hover {
+  color: white;
+}
+
+.dropdown-item:hover {
+  font-weight: bold;
+  background-color: transparent;
 }
 
 /*
@@ -744,8 +752,18 @@ kbd {
   color: #f8f9fa;
 }
 
-html[data-theme="light"] .theme-switch-button span:hover {
-  color: #0d0d0d;
+.theme-switch-button span:hover {
+  color: var(--ansysGold);
+  border-color: white;
+}
+
+.search-button-field {
+  color: white;
+  background-color: transparent;
+}
+
+.search-button-field:hover {
+  color: var(--pst-color-border);
 }
 
 /* make the github logo white */
@@ -753,7 +771,7 @@ html[data-theme="light"] .theme-switch-button span:hover {
 i.fa-github-square:before,
 i.fa-square-github:before {
   color: white;
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 .version-switcher__menu a.list-group-item:hover {
@@ -778,6 +796,9 @@ i.fa-square-github:before {
   color: white;
 }
 
+html[data-theme="light"] #pst-back-to-top {
+  background-color: var(--pst-color-link);
+}
 /*
 ##############################
 image padding before and after 
@@ -1046,4 +1067,8 @@ search hide match
 
 div#searchbox p.highlight-link a {
   background-color: var(--pst-color-search-match);
+}
+
+.header-article__inner {
+  padding: 0 1rem;
 }
