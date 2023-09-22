@@ -227,6 +227,7 @@ def link_code(app: Sphinx, doctree: Node):
 
             # Call user code to resolve the link
             try:
+                # Resolve the URI for source code link
                 uri = sphinx_linkcode_resolve(
                     domain=domain,
                     info=info,
@@ -234,12 +235,10 @@ def link_code(app: Sphinx, doctree: Node):
                     source_path=github_source,
                     github_version=github_version,
                 )
-                if not uri:
-                    # no source
-                    continue
 
-                if uri in uris or not uri:
-                    # only one link per name, please
+                # Check if the URI is already processed
+                if not uri or uri in uris:
+                    # Skip processing if the URI is already in the set
                     continue
                 uris.add(uri)
 
