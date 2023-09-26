@@ -924,10 +924,10 @@ blockquote {
   background-color: var(--pst-color-background) !important;
 }
 
-.sd-card .sd-card-header {
+.bd-content .sd-card .sd-card-header {
   border: none;
-  background-color: white;
-  color: #150458 !important;
+  background-color: transparent;
+  color: var(--pst-color-text-base) !important;
   font-size: var(--pst-font-size-h5);
   font-weight: bold;
   font-family: var(--pst-font-family-base);
@@ -939,6 +939,12 @@ blockquote {
   margin-left: auto;
   margin-right: auto;
   font-family: var(--pst-font-family-base);
+}
+
+.bd-content .sd-card .sd-card-body,
+.bd-content .sd-card .sd-card-footer,
+.bd-content .sd-card .sd-card-text {
+  background-color: transparent;
 }
 
 html[data-theme="dark"] .sd-shadow-sm {
@@ -981,13 +987,17 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
 Sphinx-design dropdown
 */
 
-details.sd-dropdown .sd-summary-title {
+.bd-content details.sd-dropdown .sd-summary-title {
   border: 1px solid var(--pst-color-text-base) !important;
   color: var(--pst-color-text-base) !important;
   font-family: var(monospace) !important;
   font-size: medium;
   text-align: left;
   padding-left: 1rem;
+}
+
+details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
+  background-color: transparent;
 }
 
 /*
