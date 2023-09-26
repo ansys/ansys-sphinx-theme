@@ -862,19 +862,23 @@ html[data-theme="dark"] .highlight pre {
 Sphinx design
 ##############
 */
+
+blockquote {
+  background-color: var(--pst-color-background);
+}
 .sd-sphinx-override,
 .sd-sphinx-override * {
-  background-color: transparent !important;
   font-size: medium;
   flex: auto;
 }
+
 /* Sphinx-design tab */
 
 /* Common styles for all screen sizes */
 .sd-tab-set > input:not(.focus-visible) + label {
   outline: none;
   font-size: large;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: var(--pst-color-background) !important;
   color: var(--pst-color-text-base);
 }
 
@@ -917,6 +921,7 @@ Sphinx design
 /* Common styles for all screen sizes */
 .sd-card .sd-card-text {
   font-family: var(--pst-font-family-base) !important;
+  background-color: var(--pst-color-background) !important;
 }
 
 .sd-card .sd-card-header {
@@ -978,7 +983,7 @@ Sphinx-design dropdown
 
 details.sd-dropdown .sd-summary-title {
   border: 1px solid var(--pst-color-text-base) !important;
-  color: var(--sd-color-card-text) !important;
+  color: var(--pst-color-text-base) !important;
   font-family: var(monospace) !important;
   font-size: medium;
   text-align: left;
