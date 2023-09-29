@@ -33,54 +33,18 @@
   {% endif %}
   <i class="fa-solid fa-magnifying-glass"></i>
   <!-- Include the MeiliSearch JavaScript library for the search bar -->
-  <script src="https://cdn.jsdelivr.net/npm/docs-searchbar.js@latest/dist/cdn/docs-searchbar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 
   {% if not theme_use_meilisearch.host %} {% set HOST_URL =
   "https://backend.search.pyansys.com/" %} {% else %} {% set HOST_URL =
   theme_use_meilisearch.host %} {% endif %}
-
   <script>
-    document.body.style.overflow = "hidden !important";
-    // Initialize the MeiliSearch bar with the given API key and host
-    // inspect the first value of index UID as default
-    var theSearchBar = docsSearchBar({
-      hostUrl: "{{ HOST_URL }}",
-      apiKey: "{{ API_KEY }}",
-      indexUid: "{{ theme_use_meilisearch.index_uids.items()|first|first }}",
-      inputSelector: "#search-bar-input",
-      debug: true, // Set debug to true if you want to inspect the dropdown
-      meilisearchOptions: {
-        limit: 1000,
-      },
-    });
-
-    // Listen for changes in the dropdown selector and update the index uid and suggestion accordingly
-    document
-      .getElementById("indexUidSelector")
-      .addEventListener("change", function () {
-        theSearchBar.indexUid = this.value;
-        theSearchBar.suggestionIndexUid = this.value;
-        theSearchBar.autocomplete.autocomplete.setVal("");
-      });
-
-    // Listen for changes in the search bar input and update the suggestion accordingly
-    document
-      .getElementById("search-bar-input")
-      .addEventListener("change", function () {
-        theSearchBar.suggestionIndexUid =
-          document.getElementById("indexUidSelector").value;
-      });
-
-    // Set the focus on the search bar input
-    document.getElementById("searchbar").focus();
-
-    // Set the focus on the dropdown selector
-    document
-      .getElementById("searchbar")
-      .addEventListener("indexUidSelector", function () {
-        theSearchBar.autocomplete.autocomplete.close();
-      });
+    var HOST_URL = "{{ HOST_URL }}";
+    var API_KEY = "{{ API_KEY }}";
+    var indexUid = "{{ theme_use_meilisearch.index_uids.items()|first|first }}";
   </script>
+
+  <script src="{{ pathto('_static/js/meilisearch.js', 1) }}"></script>
 </form>
 {% else %}
 <!-- If there is no MiliSearch enabled, use the PyData search -->
