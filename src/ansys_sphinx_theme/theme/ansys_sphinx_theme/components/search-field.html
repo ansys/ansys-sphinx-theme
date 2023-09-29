@@ -44,7 +44,7 @@
     var indexUid = "{{ theme_use_meilisearch.index_uids.items()|first|first }}";
   </script>
 
-  <script src="{{ pathto('_static/js/meilisearch.js', 1) }}"></script>
+  <script src="{{ pathto('_static/js/meilisearch_theme_wrap.js', 1) }}"></script>
 </form>
 {% else %}
 <!-- If there is no MiliSearch enabled, use the PyData search -->
