@@ -755,8 +755,20 @@ icon, button, logo  for small screen
 #####################################
 */
 @media screen and (max-width: 576px) {
-  .theme-switch-button span {
-    color: rgb(109, 104, 104) !important;
+  html[data-theme="light"] .theme-switch-button span {
+    color: rgb(19, 18, 18) !important;
+  }
+  button.btn.version-switcher__button {
+    border-color: var(--pst-color-border);
+    color: var(--pst-color-text-base);
+    font-weight: 700;
+  }
+  button.btn.version-switcher__button {
+    border-color: var(--pst-color-border);
+    color: var(--pst-color-text-base);
+  }
+  button.version-switcher__button {
+    color: var(--pst-color-text-base);
   }
   .navbar-nav li a:focus,
   .navbar-nav li a:hover,
@@ -781,6 +793,10 @@ icon, button, logo  for small screen
 .theme-switch-button span:hover {
   color: var(--ansysGold);
   border-color: white;
+}
+
+.navbar-icon-links {
+  column-gap: 0.2rem;
 }
 
 .search-button-field {
