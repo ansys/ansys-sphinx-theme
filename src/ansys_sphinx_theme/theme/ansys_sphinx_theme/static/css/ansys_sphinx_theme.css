@@ -628,6 +628,7 @@ Navigation column (according to side column)
 .bd-main .bd-content .bd-article-container .bd-article {
   padding-left: 1rem;
   padding-top: 1rem;
+  padding-right: 1rem;
 }
 .bd-header .navbar-nav li a.nav-link {
   color: #ddd;
@@ -748,6 +749,43 @@ kbd {
   background-color: #f8f9fa;
 }
 
+/*
+#####################################
+icon, button, logo  for small screen
+#####################################
+*/
+@media screen and (max-width: 576px) {
+  html[data-theme="light"] .theme-switch-button span {
+    color: rgb(19, 18, 18) !important;
+  }
+  button.btn.version-switcher__button {
+    border-color: var(--pst-color-border);
+    color: var(--pst-color-text-base);
+    font-weight: 700;
+  }
+  button.btn.version-switcher__button {
+    border-color: var(--pst-color-border);
+    color: var(--pst-color-text-base);
+  }
+  button.version-switcher__button {
+    color: var(--pst-color-text-base);
+  }
+  .navbar-nav li a:focus,
+  .navbar-nav li a:hover,
+  .navbar-nav li.current > a {
+    color: var(--pst-color-text-base) !important;
+    font-weight: 700;
+  }
+  button,
+  input,
+  optgroup,
+  select,
+  textarea,
+  button:hover {
+    color: var(--pst-color-text-base);
+  }
+}
+
 .theme-switch-button span {
   color: #f8f9fa;
 }
@@ -755,6 +793,10 @@ kbd {
 .theme-switch-button span:hover {
   color: var(--ansysGold);
   border-color: white;
+}
+
+.navbar-icon-links {
+  column-gap: 0.2rem;
 }
 
 .search-button-field {
@@ -939,6 +981,10 @@ blockquote {
   margin-left: auto;
   margin-right: auto;
   font-family: var(--pst-font-family-base);
+}
+
+.sd-card-title {
+  font-family: var(--pst-font-family-base-system);
 }
 
 .bd-content .sd-card .sd-card-body,
