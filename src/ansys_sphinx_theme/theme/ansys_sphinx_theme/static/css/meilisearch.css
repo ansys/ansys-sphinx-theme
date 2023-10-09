@@ -82,7 +82,7 @@ div[data-ds-theme] .searchbox input {
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: right;
 }
 
 div[data-ds-theme] .meilisearch-autocomplete {
@@ -92,23 +92,11 @@ div[data-ds-theme] .meilisearch-autocomplete {
 
 #search-bar-input {
   background-color: var(--pst-color-background);
-  border: 1px solid var(--pst-color-border);
-  border-radius: 0.25rem;
   color: var(--pst-color-text-base);
   font-size: var(--pst-font-size-icon);
   position: relative;
-  padding-left: 3rem;
-}
-
-.meilisearch-autocomplete::before {
-  content: "\f002";
-  font-family: "Font Awesome 6 Free";
-  position: absolute;
-  left: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1rem;
-  color: var(--pst-color-border);
+  padding-left: 1rem;
+  outline-color: var(--pst-color-border);
 }
 
 .index-select {
@@ -197,4 +185,9 @@ div[data-ds-theme]
 
 .bd-search {
   margin-bottom: 200px;
+  gap: 0em;
+  border: 0px solid var(--pst-color-border);
+}
+#search-icon {
+  font-size: large;
 }
