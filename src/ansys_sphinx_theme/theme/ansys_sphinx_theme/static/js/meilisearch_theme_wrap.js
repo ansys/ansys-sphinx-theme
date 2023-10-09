@@ -8,7 +8,6 @@ require.config({
 require(["docsSearchBar"], function (docsSearchBar) {
   document.body.style.overflow = "hidden !important";
   // Initialize the MeiliSearch bar with the given API key and host
-  // inspect the first value of index UID as default
   var theSearchBar = docsSearchBar({
     hostUrl: HOST_URL,
     apiKey: API_KEY,
@@ -24,7 +23,6 @@ require(["docsSearchBar"], function (docsSearchBar) {
   function showMagnifierIcon() {
     var searchIcon = document.getElementById("search-icon");
     searchIcon.classList.remove("fa-solid", "fa-spinner", "fa-spin");
-    // Assuming you are using Font Awesome for icons
   }
 
   // Function to show the spinner icon
