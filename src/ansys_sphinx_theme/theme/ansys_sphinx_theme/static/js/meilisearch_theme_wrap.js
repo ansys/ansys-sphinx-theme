@@ -20,8 +20,6 @@ require(["docsSearchBar"], function (docsSearchBar) {
     },
   });
 
-  // Assuming you have an element with id "search-icon" for the search icon
-
   // Function to show the magnifier icon
   function showMagnifierIcon() {
     var searchIcon = document.getElementById("search-icon");
@@ -29,11 +27,10 @@ require(["docsSearchBar"], function (docsSearchBar) {
     // Assuming you are using Font Awesome for icons
   }
 
-  // Function to show the spinner/loading icon
+  // Function to show the spinner icon
   function showSpinnerIcon() {
     var searchIcon = document.getElementById("search-icon");
     if (searchIcon) {
-      console.log("reached");
       searchIcon.classList = "fa-solid fa-spinner fa-spin";
     }
   }
