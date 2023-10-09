@@ -97,6 +97,7 @@ div[data-ds-theme] .meilisearch-autocomplete {
   position: relative;
   padding-left: 1rem;
   outline-color: var(--pst-color-border);
+  margin-left: 1rem;
 }
 
 .index-select {
@@ -189,5 +190,5 @@ div[data-ds-theme]
   border: 0px solid var(--pst-color-border);
 }
 #search-icon {
-  font-size: large;
+  font-size: 1.5rem;
 }
