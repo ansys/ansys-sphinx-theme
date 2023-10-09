@@ -9,6 +9,7 @@
   action="{{ pathto('search') }}"
   method="get"
 >
+  <i class="fa-solid fa-magnifying-glass" id="search-icon"></i>
   <input
     type="search"
     placeholder="Search"
@@ -31,7 +32,6 @@
     {% endfor %}
   </select>
   {% endif %}
-  <i class="fa-solid fa-magnifying-glass"></i>
   <!-- Include the MeiliSearch JavaScript library for the search bar -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 

@@ -63,6 +63,8 @@ html_theme_options = {
         "api_key": os.getenv("MEILISEARCH_PUBLIC_API_KEY", ""),
         "index_uids": {
             f"ansys-sphinx-theme-v{convert_version_to_pymeilisearch(__version__)}": "ansys-sphinx-theme",  # noqa: E501
+            "pymeilisearch-vdev": "ansys-sphinx-theme-trial",
+            "pyaedt-vdev": "pyaedt",  # noqa: E501
         },
     },
 }

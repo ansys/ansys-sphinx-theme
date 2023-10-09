@@ -9,7 +9,6 @@ require(["docsSearchBar"], function (docsSearchBar) {
   document.body.style.overflow = "hidden !important";
   // Initialize the MeiliSearch bar with the given API key and host
   // inspect the first value of index UID as default
-
   var theSearchBar = docsSearchBar({
     hostUrl: HOST_URL,
     apiKey: API_KEY,
@@ -17,10 +16,43 @@ require(["docsSearchBar"], function (docsSearchBar) {
     inputSelector: "#search-bar-input",
     debug: true, // Set debug to true if you want to inspect the dropdown
     meilisearchOptions: {
-      limit: 1000,
+      limit: 10,
     },
   });
 
+  // Assuming you have an element with id "search-icon" for the search icon
+
+  // Function to show the magnifier icon
+  function showMagnifierIcon() {
+    var searchIcon = document.getElementById("search-icon");
+    searchIcon.classList.remove("fa-solid", "fa-spinner", "fa-spin");
+    // Assuming you are using Font Awesome for icons
+  }
+
+  // Function to show the spinner/loading icon
+  function showSpinnerIcon() {
+    var searchIcon = document.getElementById("search-icon");
+    if (searchIcon) {
+      console.log("reached");
+      searchIcon.classList = "fa-solid fa-spinner fa-spin";
+    }
+  }
+
+  document
+    .getElementById("search-bar-input")
+    .addEventListener("input", function () {
+      // Show the spinner icon when the user starts typing
+      const suggestions = document.querySelectorAll(".dsb-suggestion");
+      const noSuggestions = suggestions.length === 0;
+
+      if (noSuggestions) {
+        // Show the spinner icon only when there are no suggestions
+        showSpinnerIcon();
+      } else {
+        // Hide the spinner icon when there are suggestions
+        showMagnifierIcon();
+      }
+    });
   // Listen for changes in the dropdown selector and update the index uid and suggestion accordingly
   document
     .getElementById("indexUidSelector")
@@ -28,23 +60,5 @@ require(["docsSearchBar"], function (docsSearchBar) {
       theSearchBar.indexUid = this.value;
       theSearchBar.suggestionIndexUid = this.value;
       theSearchBar.autocomplete.autocomplete.setVal("");
-    });
-
-  // Listen for changes in the search bar input and update the suggestion accordingly
-  document
-    .getElementById("search-bar-input")
-    .addEventListener("change", function () {
-      theSearchBar.suggestionIndexUid =
-        document.getElementById("indexUidSelector").value;
-    });
-
-  // Set the focus on the search bar input
-  document.getElementById("searchbar").focus();
-
-  // Set the focus on the dropdown selector
-  document
-    .getElementById("searchbar")
-    .addEventListener("indexUidSelector", function () {
-      theSearchBar.autocomplete.autocomplete.close();
     });
 });
