@@ -78,3 +78,9 @@ source = ["src"]
 
 [tool.coverage.report]
 show_missing = true
+
+[tool.codespell]
+skip = '*.pyc,*.txt,*.gif,*.png,*.jpg,*.js,*.html,*.doctree,*.ttf,*.woff,*.woff2,*.eot,*.mp4,*.inv'
+ignore-words = "doc/styles/Vocab/ANSYS/accept.txt"
+quiet-level = 3
+ignore-regex=".*codespell-ignore$|NORML|POIN"
