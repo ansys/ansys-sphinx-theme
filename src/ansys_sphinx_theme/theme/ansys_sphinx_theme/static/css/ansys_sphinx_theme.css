@@ -1133,3 +1133,8 @@ div#searchbox p.highlight-link a {
 .header-article__inner {
   padding: 0 1rem;
 }
+
+.table > :not(caption) > * > * {
+  background-color: transparent;
+  color: var(--pst-color-text-base);
+}
