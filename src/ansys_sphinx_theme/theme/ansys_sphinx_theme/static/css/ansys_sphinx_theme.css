@@ -1137,8 +1137,8 @@ div#searchbox p.highlight-link a {
 }
 
 .table > :not(caption) > * > * {
-  background-color: transparent;
-  color: var(--pst-color-text-base);
+  background-color: transparent !important;
+  color: var(--pst-color-text-base) !important;
 }
 
 nav.bd-links li > a {
