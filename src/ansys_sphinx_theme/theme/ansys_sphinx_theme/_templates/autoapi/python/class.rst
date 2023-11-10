@@ -50,7 +50,7 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 {% endif %}
 
 {% if obj.docstring -%}
-{{ obj.summary|indent(3) }}
+{{ obj.docstring|indent(3) }}
 {% endif %}
 
 {% if "inherited-members" in autoapi_options %}
