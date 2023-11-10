@@ -88,6 +88,7 @@ html[data-theme="light"] {
 
   --pst-color-link: #1e6ddc;
   --pst-color-link-hover: #32cfea;
+  --pst-color-link-visted: #9428f2;
   --pst-color-inline-code: #000;
   --pst-color-target: rgb(255, 255, 255);
 
@@ -144,6 +145,7 @@ html[data-theme="dark"] {
 
   --pst-color-link: #579ce5;
   --pst-color-link-hover: #12b2e2;
+  --pst-color-link-visted: #c58af9;
   --pst-color-inline-code: #fff;
   --pst-color-target: rgb(71, 39, 0);
 
@@ -1132,4 +1134,37 @@ div#searchbox p.highlight-link a {
 
 .header-article__inner {
   padding: 0 1rem;
+}
+
+.table > :not(caption) > * > * {
+  background-color: transparent !important;
+  color: var(--pst-color-text-base) !important;
+}
+
+nav.bd-links li > a {
+  text-decoration: none;
+}
+
+.bd-header .navbar-nav li a.nav-link:hover {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:active,
+a:visited,
+a:visited:hover,
+a:active:hover,
+a:hover {
+  text-decoration: underline;
+  color: var(--pst-color-link);
+  font-weight: 500;
+}
+
+a:visited,
+a:visited:hover {
+  color: var(--pst-color-link-visted);
 }
