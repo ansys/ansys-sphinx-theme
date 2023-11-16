@@ -10,7 +10,7 @@
 
           {% for obj in objects_list %}
           * - :py:attr:`~{{ obj.name }}`
-            - {{ obj.summary }}
+            - {{ obj.docstring }}
           {% endfor %}
 {%- endmacro %}
 
@@ -137,7 +137,7 @@ Overview
 {% endif %}
 
 {% if visible_attributes %}
-    {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}      
+    {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}
 {% endif %}
 
 {% if visible_static_methods %}
