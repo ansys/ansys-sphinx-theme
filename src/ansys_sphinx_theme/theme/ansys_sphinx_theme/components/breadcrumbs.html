@@ -1,30 +1,45 @@
 {% block breadcrumbs %}
 <nav aria-label="{{ _('Breadcrumb') }}">
   <ul class="bd-breadcrumbs">
-    {# Additional breadcrumbs before "Home" #} {% block rootrellink %} {% for
-    (name, href) in theme_additional_breadcrumbs %}
+    {# Additional breadcrumbs before "Home" #} {%- if
+    theme_additional_breadcrumbs %} {% block rootrellink %} {# Home icon for
+    only one theme_additional_breadcrumbs #} {% for name, href in
+    theme_additional_breadcrumbs %} {% if loop.first %} {# Home icon #}
     <li class="breadcrumb-item breadcrumb-home">
       <a href="{{ href }}" class="nav-link">{{ name }}</a>
     </li>
-    {% endfor %} {% endblock %} {# Home icon #}
+    {% else %} {# Breadcrumb item #}
+    <li class="breadcrumb-item">
+      <a href="{{ href }}" class="nav-link">{{ name }}</a>
+    </li>
+    {% endif %} {% endfor %}
     <li class="breadcrumb-item">
       <a
         href="{{ pathto(root_doc) }}"
         class="nav-link"
         aria-label="{{ _('Home') }}"
       >
-        <i class="fa-solid fa-home"></i
-      ></a>
+        <i class="fa-solid fa-home"></i>
+      </a>
     </li>
-
-    {%- for doc in parents %} {% if doc.link %}
+    {% endblock %} {%- else %} {# Home icon #}
+    <li class="breadcrumb-item breadcrumb-home">
+      <a
+        href="{{ pathto(root_doc) }}"
+        class="nav-link"
+        aria-label="{{ _('Home') }}"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    {% endif %} {%- for doc in parents %} {% if doc.link %}
     <li class="breadcrumb-item">
       <a href="{{ doc.link|e }}" class="nav-link">{{ doc.title }}</a>
     </li>
     {% else %}
     <li class="breadcrumb-item">{{ doc.title }}</li>
-    {% endif %} {%- endfor %} {% if title and pagename != root_doc %} {# Current
-    page title #}
+    {% endif %} {%- endfor %} {# Current page title #} {% if title and pagename
+    != root_doc %}
     <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
     {% endif %}
   </ul>
