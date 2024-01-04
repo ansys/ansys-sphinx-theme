@@ -1,4 +1,13 @@
 {% if theme_use_meilisearch %} {%- extends "page.html" %} {%- block content %}
+{# A tiny helper pixel to detect if we've scrolled #}
+<div id="pst-scroll-pixel-helper"></div>
+
+{# the scroll to top button #}
+<button type="button" class="btn rounded-pill" id="pst-back-to-top">
+  <i class="fa-solid fa-arrow-up"></i>
+  {{ _("Back to top") }}
+</button>
+
 {# checkbox to toggle primary sidebar #}
 <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary" />
 <label class="overlay overlay-primary" for="__primary"></label>
@@ -10,15 +19,21 @@
   id="__secondary"
 />
 <label class="overlay overlay-secondary" for="__secondary"></label>
-{%- if theme_announcement -%} {% include "sections/announcement.html" %} {%-
-endif %} {% block docs_navbar %}
-<nav class="bd-header navbar navbar-expand-lg bd-navbar">
-  {%- include "sections/header.html" %}
-</nav>
-{% endblock docs_navbar %}
+<header>
+  {%- if theme_announcement -%} {% include "sections/announcement.html" %} {%-
+  endif %} {% block docs_navbar %}
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    {%- include "sections/header.html" %}
+  </nav>
+  {% endblock docs_navbar %}
+</header>
 <div class="bd-container">
   <div class="bd-container__inner bd-page-width">
-    {# Primary sidebar #}
+    {# Primary sidebar #} {# If we have no sidebar TOC, pop the TOC component
+    from the sidebar list #} {% if
+    get_sidebar_toctree_length(show_nav_level=theme_show_nav_level|int) == 0 %}
+    {% set sidebars = sidebars | reject("in", "sidebar-nav-bs.html") | list %}
+    {% endif %}
     <div
       class="bd-sidebar-primary bd-sidebar{% if not sidebars %} hide-on-wide{% endif %}"
     >
@@ -34,6 +49,7 @@ endif %} {% block docs_navbar %}
             {% include "sections/header-article.html" %}
           </div>
           {# Article content #} {% block docs_body %}
+
           <div class="bd-search-container">
             <h1>{{ _("Search") }}</h1>
             <style>
