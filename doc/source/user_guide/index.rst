@@ -9,15 +9,9 @@ For more information on its configuration, see
 
 While the Ansys Sphinx theme is often used as is, you can customize the following:
 
-- :ref:`ref_user_guide_css`
-- :ref:`ref_user_guide_html_theme`
-- :ref:`ref_user_guide_pdf_cover`
-- :ref:`ref_user_guide_404_page`
-- :ref:`ref_user_guide_extension`
-  
 .. toctree::
-   :hidden:
    :maxdepth: 2
+   :includehidden:
 
    css
    options
