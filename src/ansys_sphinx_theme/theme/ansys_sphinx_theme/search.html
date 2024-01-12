@@ -19,21 +19,22 @@
   id="__secondary"
 />
 <label class="overlay overlay-secondary" for="__secondary"></label>
-<header>
-  {%- if theme_announcement -%} {% include "sections/announcement.html" %} {%-
-  endif %} {% block docs_navbar %}
-  <nav class="bd-header navbar navbar-expand-lg bd-navbar">
-    {%- include "sections/header.html" %}
-  </nav>
-  {% endblock docs_navbar %}
-</header>
+<!-- header-->
+{%- if theme_announcement -%} {% include "sections/announcement.html" %} {%-
+endif %} {% block docs_navbar %}
+<nav class="bd-header navbar navbar-expand-lg bd-navbar">
+  {%- include "sections/header.html" %}
+</nav>
+{% endblock docs_navbar %}
+<!-- /header -->
 <div class="bd-container">
   <div class="bd-container__inner bd-page-width">
     {# Primary sidebar #} {# If we have no sidebar TOC, pop the TOC component
-    from the sidebar list #} {% if
-    get_sidebar_toctree_length(show_nav_level=theme_show_nav_level|int) == 0 %}
-    {% set sidebars = sidebars | reject("in", "sidebar-nav-bs.html") | list %}
-    {% endif %}
+    from the sidebar list #} {# % if
+    get_sidebar_toctree_length(show_nav_level=theme_show_nav_level|int) == 0 %
+    #} {# % set sidebars = sidebars | reject("in", "sidebar-nav-bs.html") | list
+    % #} {# % endif % #}
+
     <div
       class="bd-sidebar-primary bd-sidebar{% if not sidebars %} hide-on-wide{% endif %}"
     >
