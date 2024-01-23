@@ -51,3 +51,10 @@ repos:
   - id: blacken-docs
     additional_dependencies: [black==23.7.0]
     exclude: 'src/ansys_sphinx_theme/theme/ansys_sphinx_theme/_templates/'
+
+- repo: https://github.com/ansys/pre-commit-hooks
+  rev: v0.2.6
+  hooks:
+  - id: add-license-headers
+    args:
+    - --start_year=2021
