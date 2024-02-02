@@ -527,45 +527,6 @@ a > code.download {
 }
 
 /*
-#####################
-Sphinx gallery output
-#####################
-*/
-.sphx-glr-script-out .highlight pre {
-  background-color: var(--pst-color-codecell) !important;
-  color: var(--pst-color-codeout);
-}
-
-.prev-next-area a p.prev-next-title {
-  color: var(--pst-color-link);
-  font-weight: 600;
-  font-size: 1.1em;
-}
-
-.highlight .s1,
-.s2,
-.kc {
-  color: var(--pst-color-code-s1) !important;
-}
-
-html[data-theme="dark"] .highlight .kn {
-  color: #e18fff;
-  font-weight: normal;
-}
-
-.highlight .c1 {
-  color: var(--pst-color-code-c1);
-}
-
-html[data-theme="dark"] .highlight .n {
-  color: #b3d7ff;
-}
-
-html[data-theme="dark"] .highlight .nn {
-  color: #43d69d;
-  text-decoration: none;
-}
-/*
 ###############
 Dropdown button
 ###############
