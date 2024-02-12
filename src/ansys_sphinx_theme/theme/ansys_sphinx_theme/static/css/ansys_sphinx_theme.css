@@ -1073,6 +1073,10 @@ div.nboutput
   background-color: transparent;
 }
 
+aside.topic > p {
+  color: var(--pst-color-text-base) !important;
+}
+
 /*
 ############
 Border lines
