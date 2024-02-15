@@ -14,11 +14,11 @@ please refer `sphinx design <https://sphinx-design.readthedocs.io/en/latest/inde
     {{ title[0].upper() }}{{ title[1:] }}
     {{ '~' * (title | length) }}
 
-        .. literalinclude:: sphinx_examples/{{ filename }}
-           :language: rst
+    .. literalinclude:: sphinx_examples/{{ filename }}
+       :language: rst
         
     This directive renders as follows:
 
-        .. include:: sphinx_examples/{{ filename }}
+    .. include:: sphinx_examples/{{ filename }}
 
     {% endfor %}
