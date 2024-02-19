@@ -173,7 +173,7 @@ Summary
 {% endblock %}
 
 {% block class %}
-{% if render_in_single_page and "class" in render_in_single_page %}
+{% if own_page_types and "class" in own_page_types %}
 {% if visible_interfaces %}
 {{ toctree_from_objects_list(visible_interfaces, "🝆") }}
 {% endif %}
@@ -193,13 +193,13 @@ Summary
 {% endblock %}
 
 {% block functions %}
-{% if render_in_single_page and visible_functions and "function" in render_in_single_page %}
+{% if own_page_types and visible_functions and "function" in own_page_types %}
 {{ toctree_from_objects_list(visible_functions, "𝑓(x)") }}
 {% endif %}
 {% endblock %}
 
 {% block constants %}
-{% if render_in_single_page and visible_constants and "constant" in render_in_single_page %}
+{% if own_page_types and visible_constants and "constant" in own_page_types %}
 {{ toctree_from_objects_list(visible_constants, "π") }}
 {% endif %}
 {% endblock %}
@@ -225,9 +225,9 @@ Description
 {% if module_objects_in_this_page %}
 {% set visible_objects_in_this_page = [] %}
 
-{% if render_in_single_page %}
+{% if own_page_types %}
 {% for obj in module_objects_in_this_page %}
-{% if obj.type not in render_in_single_page %}
+{% if obj.type not in own_page_types %}
 {% set _ = visible_objects_in_this_page.append(obj) %}
 {% endif %}
 {% endfor %}

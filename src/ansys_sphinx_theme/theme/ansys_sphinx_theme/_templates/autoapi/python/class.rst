@@ -18,14 +18,14 @@
 
 {% if obj.display %}
 
-{% if render_in_single_page and obj["type"] in render_in_single_page %}
+{% if own_page_types and obj["type"] in own_page_types %}
 {{ obj.short_name }}
 {{"=" * obj.name|length }}
 {% endif %}
 
 .. py:{{ obj["type"] }}:: {{ obj["short_name"] }}{% if obj["args"] %}({{ obj["args"] }}){% endif %}
 
-{% if render_in_single_page and obj["type"] in render_in_single_page %}
+{% if own_page_types and obj["type"] in own_page_types %}
    :canonical: {{ obj["obj"]["full_name"] }}
 {% endif %}
 
@@ -113,7 +113,7 @@ Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {%
 
 {% if class_objects %}
 
-{% if render_in_single_page and obj["type"] in render_in_single_page %}
+{% if own_page_types and obj["type"] in own_page_types %}
 Overview
 --------
 .. py:currentmodule:: {{ obj.short_name }}
