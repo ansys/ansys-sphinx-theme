@@ -201,13 +201,14 @@ dictionary in the ``conf.py`` file.
 
 The dict should contain the following keys:
 
-#. ``url``: The URL of the cheatsheet from which it can be downloaded.
+#. ``url``: The URL of the cheatsheet for downloading.
 #. ``title``: Title of the cheatsheet.
 #. ``image``: The thumbnail image for the cheatsheet.
-#. ``local_download``: Whether to download the cheatsheet locally during the build. 
-   If set to `True`, the cheatsheet will be downloaded to `_build/html/_static/`, otherwise, 
-   it will be accessed directly from the provided URL.It is set to `False` by default.
-#. ``pages``: A list of pages to include in the cheatsheet (optional). If not provided, it will include the index page of the documentation.
+#. ``local_download``: Specifies whether to download the cheatsheet locally during the build. 
+   If set to `True`, the cheatsheet is downloaded to `_build/html/_static/`, otherwise, 
+   it is accessed directly from the provided URL. It defaults to `False`.
+#. ``pages``: A list of pages to include in the cheatsheet (optional). If not provided, 
+   the cheatsheet includes the index page of the documentation.
 
 .. code-block:: python
 
@@ -235,7 +236,7 @@ Here is an example configuration of using cheatsheet in
                 "title": "PyMAPDL cheatsheet",
                 "image": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.png",
                 "local_download": True,
-                "pages": ["index", "getting_started/learning.html"],
+                "pages": ["index", "getting_started/learning"],
             },
         },
     )
