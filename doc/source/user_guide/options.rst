@@ -217,7 +217,7 @@ The dict should contain the following keys:
             "cheatsheet": {
                 "url": "<your cheatsheet URL>",
                 "title": "<title of your cheatsheet>",
-                "image": "<image URL>",
+                "thumbnail": "<image URL>",
                 "needs_download": True,  # True if you want to download the cheatsheet locally in ``_build/html/_static/``
                 "pages": "<list of pages to include in the cheatsheet>",  # Optional
             },
@@ -234,7 +234,7 @@ Here is an example configuration of using cheatsheet in
             "cheatsheet": {
                 "url": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.pdf",
                 "title": "PyMAPDL cheatsheet",
-                "image": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.png",
+                "thumbnail": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.png",
                 "needs_download": True,
                 "pages": ["index", "getting_started/learning"],
             },

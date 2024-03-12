@@ -308,17 +308,20 @@ def add_cheat_sheet(
     pages = cheatsheet_options.get("pages", ["index"])
     pages = [pages] if isinstance(pages, str) else pages
     if cheatsheet_options and any(pagename == page for page in pages):
-        if cheatsheet_options.get("needs_download") == True:
-            static_folder = (
-                ["static"] if app.config.html_static_path is None else app.config.html_static_path
-            )
+        if cheatsheet_options.get("needs_download"):
+            static_folder = app.config.html_static_path or ["static"]
             download_cheatsheet_to_static(app, cheatsheet_options, static_folder, context)
-        sidebar = context.get("sidebars", "")
+        sidebar = context.get("sidebars", [])
         sidebar.append("cheatsheet_sidebar.html")
         context["sidebars"] = sidebar
 
 
-def download_cheatsheet_to_static(app: Sphinx, cheatsheet_options, static_folder, context) -> None:
+def download_cheatsheet_to_static(
+    app: Sphinx,
+    cheatsheet_options: Dict[str, Any],
+    static_folder: pathlib.Path,
+    context: Dict[str, Any],
+) -> None:
     """Download the cheatsheet to the static directory.
 
     Parameters
@@ -327,20 +330,21 @@ def download_cheatsheet_to_static(app: Sphinx, cheatsheet_options, static_folder
         Application instance for rendering the documentation.
     cheatsheet_options : dict
         Dictionary containing the cheatsheet options.
-    static_folder : list
-        List containing the static folder path.
+    static_folder : pathlib.Path
+        Path containing the static folder.
     context : dict
         Dictionary containing the context for the page.
     """
     cheatsheet_url = cheatsheet_options.get("url", "")
     cheatsheet_thumbnail = cheatsheet_options.get("thumbnail", "")
     static_path = pathlib.Path(app.outdir) / static_folder[0]
-    context["cheatsheet_static_path"] = static_folder[0]
+    context["cheatsheet_static_path"] = str(static_folder[0])
+
     # Download cheatsheet file if URL is provided
     if cheatsheet_url:
         download_file(cheatsheet_url, static_path)
 
-        # Download cheatsheet image if thumbnail URL is provided
+    # Download cheatsheet image if thumbnail URL is provided
     if cheatsheet_thumbnail:
         download_file(cheatsheet_thumbnail, static_path)
 
@@ -353,16 +357,14 @@ def download_file(url: str, directory: pathlib.Path) -> None:
     ----------
     url : str
         The URL of the file to download.
-    directory : str
+    directory : pathlib.Path
         The directory where the file will be saved.
     """
     filename = url.split("/")[-1]
-    directory = pathlib.Path(directory) if isinstance(directory, str) else directory
     if not directory.exists():
         directory.mkdir(parents=True, exist_ok=True)
     if not (directory / filename).exists():
         file_path = directory / filename
-
         with open(file_path, "wb") as file:
             response = requests.get(url)
             if response.status_code != 200:
