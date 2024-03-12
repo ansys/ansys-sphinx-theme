@@ -59,7 +59,7 @@ GitHub repository.
   in the *PyData Theme* documentation.
 - For comprehensive information on `Font Awesome <https://fontawesome.com/>`_, an icon
   library and toolkit, see its `documentation <https://fontawesome.com/v6/docs>`_,
-  particularly `How To Add Icons <https://fontawesome.com/v6/docs/web/add-icons/how-to#contentHeader>`_.
+  particularly `How To Add Icons <https://fontawesome.com/v6/docs/web/add-icons/how-to>`_.
 
 The following sections explain how you can add icons and hide icons.
 
