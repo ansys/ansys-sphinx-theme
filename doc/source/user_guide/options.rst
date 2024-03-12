@@ -203,10 +203,10 @@ The dict should contain the following keys:
 
 #. ``url``: The URL of the cheatsheet for downloading.
 #. ``title``: Title of the cheatsheet.
-#. ``image``: The thumbnail image for the cheatsheet.
-#. ``local_download``: Specifies whether to download the cheatsheet locally during the build. 
+#. ``thumbnail``: The thumbnail image for the cheatsheet.
+#. ``needs_download``: Specifies whether to download the cheatsheet locally during the build. 
    If set to `True`, the cheatsheet is downloaded to `_build/html/_static/`, otherwise, 
-   it is accessed directly from the provided URL. It defaults to `False`.
+   it is accessed directly from the provided URL. ``needs_download`` defaults to `False`.
 #. ``pages``: A list of pages to include in the cheatsheet (optional). If not provided, 
    the cheatsheet includes the index page of the documentation.
 
