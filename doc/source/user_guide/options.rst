@@ -204,7 +204,7 @@ The dict should contain the following keys:
 #. ``url``: The URL of the cheatsheet for downloading.
 #. ``title``: Title of the cheatsheet.
 #. ``image``: The thumbnail image for the cheatsheet.
-#. ``local_download``: Specifies whether to download the cheatsheet locally during the build. 
+#. ``needs_download``: Specifies whether to download the cheatsheet locally during the build. 
    If set to `True`, the cheatsheet is downloaded to `_build/html/_static/`, otherwise, 
    it is accessed directly from the provided URL. It defaults to `False`.
 #. ``pages``: A list of pages to include in the cheatsheet (optional). If not provided, 
@@ -218,7 +218,7 @@ The dict should contain the following keys:
                 "url": "<your cheatsheet URL>",
                 "title": "<title of your cheatsheet>",
                 "image": "<image URL>",
-                "local_download": True,  # True if you want to download the cheatsheet locally in ``_build/html/_static/``
+                "needs_download": True,  # True if you want to download the cheatsheet locally in ``_build/html/_static/``
                 "pages": "<list of pages to include in the cheatsheet>",  # Optional
             },
         },
@@ -235,7 +235,7 @@ Here is an example configuration of using cheatsheet in
                 "url": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.pdf",
                 "title": "PyMAPDL cheatsheet",
                 "image": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.png",
-                "local_download": True,
+                "needs_download": True,
                 "pages": ["index", "getting_started/learning"],
             },
         },

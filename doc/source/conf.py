@@ -65,6 +65,12 @@ html_theme_options = {
             f"ansys-sphinx-theme-v{convert_version_to_pymeilisearch(__version__)}": "ansys-sphinx-theme",  # noqa: E501
         },
     },
+    "cheatsheet": {
+        "url": "https://cheatsheets.docs.pyansys.com/pyaedt_API_cheat_sheet.pdf",
+        "title": "PyAEDT Cheatsheet",
+        "thumbnail": "https://cheatsheets.docs.pyansys.com/pyaedt_API_cheat_sheet.png",
+        "needs_download": True,
+    },
 }
 
 html_short_title = html_title = "Ansys Sphinx Theme"
@@ -118,7 +124,7 @@ numpydoc_validation_checks = {
 html_favicon = ansys_favicon
 
 # static path
-html_static_path = ["_static"]
+html_static_path = [""]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
