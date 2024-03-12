@@ -65,12 +65,6 @@ html_theme_options = {
             f"ansys-sphinx-theme-v{convert_version_to_pymeilisearch(__version__)}": "ansys-sphinx-theme",  # noqa: E501
         },
     },
-    "cheatsheet": {
-        "url": "https://cheatsheets.docs.pyansys.com/pyaedt_API_cheat_sheet.pdf",
-        "title": "PyAEDT Cheatsheet",
-        "thumbnail": "https://cheatsheets.docs.pyansys.com/pyaedt_API_cheat_sheet.png",
-        "needs_download": True,
-    },
 }
 
 html_short_title = html_title = "Ansys Sphinx Theme"
