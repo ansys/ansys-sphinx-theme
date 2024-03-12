@@ -285,6 +285,37 @@ def update_footer_theme(
     context["ansys_sphinx_theme_version"] = __version__
 
 
+def add_cheat_sheet(
+    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: document
+) -> None:
+    """Add a cheatsheet to the sidebar.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    pagename : str
+        The name of the current page.
+    templatename : str
+        The name of the template being used.
+    context : dict
+        The context dictionary for the page.
+    doctree : ~docutils.nodes.document
+        The doctree
+    """
+    cheatsheet_options = app.config.html_theme_options.get("cheatsheet", {})
+    pages = (
+        [cheatsheet_options.get("pages", "index.html")]
+        if not isinstance(cheatsheet_options.get("pages"), list)
+        else cheatsheet_options.get("pages", ["index.html"])
+    )
+
+    if cheatsheet_options and any(pagename == page for page in pages):
+        sidebar = context.get("sidebars", "")
+        sidebar.append("cheatsheet_sidebar.html")
+        context["sidebars"] = sidebar
+
+
 def setup(app: Sphinx) -> Dict:
     """Connect to the sphinx theme app.
 
@@ -316,6 +347,7 @@ def setup(app: Sphinx) -> Dict:
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
+    app.connect("html-page-context", add_cheat_sheet)
     app.config.templates_path.append(str(TEMPLATES_PATH))
     return {
         "version": __version__,

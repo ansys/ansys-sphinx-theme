@@ -1133,3 +1133,24 @@ a:visited,
 a:visited:hover {
   color: var(--pst-color-link-visted);
 }
+
+.sidebar-cheatsheets {
+  font-size: var(--pst-sidebar-header-font-size);
+  font-weight: bold;
+}
+.sidebar-cheatsheets a {
+  display: inline-flex;
+  border: 0.5px solid var(--pst-color-border);
+  padding: 0.25rem;
+  max-width: 80%;
+}
+.sidebar-cheatsheets a:hover {
+  background-color: var(--pst-color-border);
+  color: var(--pst-color-text-base);
+}
+.sidebar-cheatsheets img {
+  padding: 0rem;
+}
+.bd-sidebar-primary {
+  padding: 0.5rem;
+}

@@ -1,0 +1,9 @@
+{% if theme_cheatsheet %} {% set theme_cheatsheet_title =
+theme_cheatsheet.get('title', 'fd') %}
+<div class="sidebar-cheatsheets">
+  <h4>{{ theme_cheatsheet_title }}</h4>
+  <a href="{{ theme_cheatsheet.url }}">
+    <img src="{{ theme_cheatsheet.image }}" alt="{{ theme_cheatsheet.title}}" />
+  </a>
+</div>
+{% endif %}
