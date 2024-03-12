@@ -27,6 +27,7 @@ import pathlib
 from typing import Any, Dict
 
 from docutils.nodes import document
+import requests
 from sphinx import addnodes
 from sphinx.application import Sphinx
 
@@ -304,16 +305,59 @@ def add_cheat_sheet(
         The doctree
     """
     cheatsheet_options = app.config.html_theme_options.get("cheatsheet", {})
-    pages = (
-        [cheatsheet_options.get("pages", "index.html")]
-        if not isinstance(cheatsheet_options.get("pages"), list)
-        else cheatsheet_options.get("pages", ["index.html"])
-    )
-
+    pages = cheatsheet_options.get("pages", ["index"])
+    pages = [pages] if isinstance(pages, str) else pages
     if cheatsheet_options and any(pagename == page for page in pages):
+        if cheatsheet_options.get("local_download") == True:
+            download_cheatsheet_to_static(app, cheatsheet_options)
         sidebar = context.get("sidebars", "")
         sidebar.append("cheatsheet_sidebar.html")
         context["sidebars"] = sidebar
+
+
+def download_cheatsheet_to_static(app: Sphinx, cheatsheet_options) -> None:
+    """Download the cheatsheet to the static directory.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    exception : Exception
+        Exception that was raised.
+    """
+    cheatsheet_url = cheatsheet_options.get("url", "")
+    cheatsheet_image = cheatsheet_options.get("image", "")
+    static_path = app.outdir / "_static"
+
+    # Download cheatsheet file if URL is provided
+    if cheatsheet_url:
+        download_file(cheatsheet_url, static_path)
+
+        # Download cheatsheet image if image URL is provided
+    if cheatsheet_image:
+        download_file(cheatsheet_image, static_path)
+
+
+def download_file(url: str, directory: str) -> None:
+    """
+    Download a file from the given URL and save it to the specified directory.
+
+    Parameters
+    ----------
+    url : str
+        The URL of the file to download.
+    directory : str
+        The directory where the file will be saved.
+    """
+    filename = url.split("/")[-1]
+    if not filename in os.listdir(directory):
+        file_path = directory / filename
+
+        with open(file_path, "wb") as file:
+            response = requests.get(url)
+            if response.status_code != 200:
+                raise FileNotFoundError(f"Failed to download file from {url}.")
+            file.write(response.content)
 
 
 def setup(app: Sphinx) -> Dict:

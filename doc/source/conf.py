@@ -66,10 +66,12 @@ html_theme_options = {
         },
     },
     "cheatsheet": {
-        "url": "https://cheatsheets.docs.pyansys.com/pyaedt_API_cheat_sheet.pdf",
-        "title": "Cheatsheet",
-        "image": "https://cheatsheets.docs.pyansys.com/pyaedt_API_cheat_sheet.png",
-        "pages": ["user_guide/index", "getting_started/index", "index"],
+        # "url": "https://cheatsheets.docs.pyansys.com/pyaedt_API_cheat_sheet.pdf",
+        "url": "https://cheatsheets.docs.pyansys.com/pymechanical_cheat_sheet.pdf",
+        "title": "PyMechanical Cheatsheet",
+        "image": "https://cheatsheets.docs.pyansys.com/pymechanical_cheat_sheet.png",
+        "local_download": True,
+        # "pages": ["user_guide/index", "getting_started/index", "index"],
     },
 }
 
