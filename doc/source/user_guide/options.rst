@@ -188,3 +188,54 @@ to provide search functionality for your documentation.
     If you do not set the "use_meilisearch" option,
     ``ansys-sphinx-theme`` uses the default search functionality 
     inherited from the PyData Sphinx Theme.
+
+Cheatsheet
+----------
+
+The theme option cheatsheet provides a quick reference guide for users to easily access 
+and understand the available options in the Sphinx theme.
+
+To enable the cheatsheet, you can add a child 
+dictionary called ``cheatsheet`` to the ``html_theme_options``
+dictionary in the ``conf.py`` file. 
+
+The dict should contain the following keys:
+
+#. ``url``: The URL of the cheatsheet from which it can be downloaded.
+#. ``title``: Title of the cheatsheet.
+#. ``image``: The thumbnail image for the cheatsheet.
+#. ``local_download``: Whether to download the cheatsheet locally during the build. 
+   If set to `True`, the cheatsheet will be downloaded to `_build/html/_static/`, otherwise, 
+   it will be accessed directly from the provided URL.It is set to `False` by default.
+#. ``pages``: A list of pages to include in the cheatsheet (optional). If not provided, it will include the index page of the documentation.
+
+.. code-block:: python
+
+    html_theme_options = (
+        {
+            "cheatsheet": {
+                "url": "<your cheatsheet URL>",
+                "title": "<title of your cheatsheet>",
+                "image": "<image URL>",
+                "local_download": True,  # True if you want to download the cheatsheet locally in ``_build/html/_static/``
+                "pages": "<list of pages to include in the cheatsheet>",  # Optional
+            },
+        },
+    )
+
+Here is an example configuration of using cheatsheet in 
+``conf.py`` file of ``PyMAPDL``:
+
+ .. code-block:: python
+
+    html_theme_options = (
+        {
+            "cheatsheet": {
+                "url": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.pdf",
+                "title": "PyMAPDL cheatsheet",
+                "image": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.png",
+                "local_download": True,
+                "pages": ["index", "getting_started/learning.html"],
+            },
+        },
+    )

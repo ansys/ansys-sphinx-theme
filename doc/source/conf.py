@@ -65,14 +65,6 @@ html_theme_options = {
             f"ansys-sphinx-theme-v{convert_version_to_pymeilisearch(__version__)}": "ansys-sphinx-theme",  # noqa: E501
         },
     },
-    "cheatsheet": {
-        # "url": "https://cheatsheets.docs.pyansys.com/pyaedt_API_cheat_sheet.pdf",
-        "url": "https://cheatsheets.docs.pyansys.com/pymechanical_cheat_sheet.pdf",
-        "title": "PyMechanical Cheatsheet",
-        "image": "https://cheatsheets.docs.pyansys.com/pymechanical_cheat_sheet.png",
-        "local_download": True,
-        # "pages": ["user_guide/index", "getting_started/index", "index"],
-    },
 }
 
 html_short_title = html_title = "Ansys Sphinx Theme"
