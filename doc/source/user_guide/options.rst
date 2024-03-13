@@ -236,3 +236,15 @@ Here is an example configuration of using cheatsheet in
             },
         },
     )
+
+.. note:: 
+
+    if you set the "needs_download" option, you should provide the "html_static_path" option 
+    in the ``conf.py`` file to specify the location of the cheat sheet.
+
+    for example, if you need to download cheat sheet in the ``_build/html/_static/`` directory,
+    you should add the following line in the ``conf.py`` file:
+
+    .. code-block:: pycon
+
+        html_static_path = ["_static"]
