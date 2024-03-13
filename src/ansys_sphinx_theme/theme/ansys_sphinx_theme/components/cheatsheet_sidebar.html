@@ -1,0 +1,19 @@
+{% if theme_cheatsheet %}
+  {% set theme_cheatsheet_title = theme_cheatsheet.get('title', 'Cheatsheet') %}
+  <div class="sidebar-cheatsheets">
+    <h4>{{ theme_cheatsheet_title }}</h4>
+    {% if theme_cheatsheet.get('needs_download') == true %}
+      {% set static_path = cheatsheet_static_path + '/' | default('') %}
+      {% set theme_cheatsheet_url = theme_cheatsheet.get('url').split('/')[-1] %}
+      {% set theme_cheatsheet_thumbnail = theme_cheatsheet.get('thumbnail').split('/')[-1] %}
+      {% set theme_cheatsheet_thumbnail = pathto(static_path ~ theme_cheatsheet_thumbnail, 1) %}
+      {% set theme_cheatsheet_url = pathto(static_path ~ theme_cheatsheet_url, 1) %}
+    {% else %}
+      {% set theme_cheatsheet_url = theme_cheatsheet.get('url') %}
+      {% set theme_cheatsheet_thumbnail = theme_cheatsheet.get('thumbnail') %}
+    {% endif %}
+    <a href="{{ theme_cheatsheet_url }}">
+      <img src="{{ theme_cheatsheet_thumbnail }}" alt="{{ theme_cheatsheet_title }}" />
+    </a>
+  </div>
+{% endif %}

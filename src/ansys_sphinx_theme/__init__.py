@@ -27,6 +27,7 @@ import pathlib
 from typing import Any, Dict
 
 from docutils.nodes import document
+import requests
 from sphinx import addnodes
 from sphinx.application import Sphinx
 
@@ -285,8 +286,94 @@ def update_footer_theme(
     context["ansys_sphinx_theme_version"] = __version__
 
 
+def add_cheat_sheet(
+    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: document
+) -> None:
+    """Add a cheat sheet to the left navigation sidebar.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    pagename : str
+        Name of the current page.
+    templatename : str
+        Name of the template being used.
+    context : dict
+        Context dictionary for the page.
+    doctree : ~docutils.nodes.document
+        The doctree.
+    """
+    cheatsheet_options = app.config.html_theme_options.get("cheatsheet", {})
+    pages = cheatsheet_options.get("pages", ["index"])
+    pages = [pages] if isinstance(pages, str) else pages
+    if cheatsheet_options and any(pagename == page for page in pages):
+        if cheatsheet_options.get("needs_download"):
+            static_folder = app.config.html_static_path or ["static"]
+            download_cheatsheet_to_static(app, cheatsheet_options, static_folder, context)
+        sidebar = context.get("sidebars", [])
+        sidebar.append("cheatsheet_sidebar.html")
+        context["sidebars"] = sidebar
+
+
+def download_cheatsheet_to_static(
+    app: Sphinx,
+    cheatsheet_options: Dict[str, Any],
+    static_folder: pathlib.Path,
+    context: Dict[str, Any],
+) -> None:
+    """Download the cheatsheet to the static directory.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    cheatsheet_options : dict
+        Dictionary containing the cheat sheet options.
+    static_folder : pathlib.Path
+        Path containing the static folder.
+    context : dict
+        Dictionary containing the context for the page.
+    """
+    cheatsheet_url = cheatsheet_options.get("url", "")
+    cheatsheet_thumbnail = cheatsheet_options.get("thumbnail", "")
+    static_path = pathlib.Path(app.outdir) / static_folder[0]
+    context["cheatsheet_static_path"] = str(static_folder[0])
+
+    # Download cheat sheet file if URL is provided
+    if cheatsheet_url:
+        download_file(cheatsheet_url, static_path)
+
+    # Download cheat sheet image if thumbnail URL is provided
+    if cheatsheet_thumbnail:
+        download_file(cheatsheet_thumbnail, static_path)
+
+
+def download_file(url: str, directory: pathlib.Path) -> None:
+    """
+    Download a file from the given URL and save it to a given directory.
+
+    Parameters
+    ----------
+    url : str
+        URL of the file to download.
+    directory : pathlib.Path
+        Directory to save the file to.
+    """
+    filename = url.split("/")[-1]
+    if not directory.exists():
+        directory.mkdir(parents=True, exist_ok=True)
+    if not (directory / filename).exists():
+        file_path = directory / filename
+        with open(file_path, "wb") as file:
+            response = requests.get(url)
+            if response.status_code != 200:
+                raise FileNotFoundError(f"Failed to download file from {url}.")
+            file.write(response.content)
+
+
 def setup(app: Sphinx) -> Dict:
-    """Connect to the sphinx theme app.
+    """Connect to the Sphinx theme app.
 
     Parameters
     ----------
@@ -316,6 +403,7 @@ def setup(app: Sphinx) -> Dict:
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
+    app.connect("html-page-context", add_cheat_sheet)
     app.config.templates_path.append(str(TEMPLATES_PATH))
     return {
         "version": __version__,
