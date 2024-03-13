@@ -1134,7 +1134,7 @@ a:visited:hover {
   color: var(--pst-color-link-visted);
 }
 
-/* Cheatsheets sidebar */
+/* Cheat sheet sidebar */
 
 .sidebar-cheatsheets h4 {
   font-weight: var(--pst-sidebar-header-font-weight) !important;

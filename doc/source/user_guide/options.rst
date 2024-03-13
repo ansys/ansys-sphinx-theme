@@ -189,37 +189,33 @@ to provide search functionality for your documentation.
     ``ansys-sphinx-theme`` uses the default search functionality 
     inherited from the PyData Sphinx Theme.
 
-Cheatsheet
-----------
+Cheat sheets
+------------
 
-The theme option cheatsheet provides a quick reference guide for users to easily access 
-and understand the available options in the Sphinx theme.
+The ``cheatsheet`` HTML theme option can be used to enable a cheat sheet in the Ansys Sphinx theme.
 
-To enable the cheatsheet, you can add a child 
-dictionary called ``cheatsheet`` to the ``html_theme_options``
-dictionary in the ``conf.py`` file. 
+To enable a cheatsheet, in the ``conf.py`` file for your PyAnsys
+library, you can add a child dictionary named ``cheatsheet`` to
+the ``html_theme_options`` dictionary. 
 
-The dict should contain the following keys:
+This dictionary should contain these keys, in the order given:
 
-#. ``url``: The URL of the cheatsheet for downloading.
-#. ``title``: Title of the cheatsheet.
-#. ``thumbnail``: The thumbnail image for the cheatsheet.
-#. ``needs_download``: Specifies whether to download the cheatsheet locally during the build. 
-   If set to `True`, the cheatsheet is downloaded to `_build/html/_static/`, otherwise, 
-   it is accessed directly from the provided URL. ``needs_download`` defaults to `False`.
-#. ``pages``: A list of pages to include in the cheatsheet (optional). If not provided, 
-   the cheatsheet includes the index page of the documentation.
+#. ``url``: URL of the cheat sheet for downloading.
+#. ``title``: Title of the cheat sheet.
+#. ``thumbnail``: Thumbnail image for the cheat sheet.
+#. ``needs_download``: Whether to download the cheat sheet locally during the build. The default is ``False``, in which case the cheat sheet is accessed directly from the provided URL. If ``True``, the cheat sheet is downloaded to the ``_build/html/_static/`` directory. 
+#. ``pages``: List of pages to include in the cheat sheet (optional). If no list is provided, the cheat sheet includes the index page of the documentation.
 
 .. code-block:: python
 
     html_theme_options = (
         {
             "cheatsheet": {
-                "url": "<your cheatsheet URL>",
-                "title": "<title of your cheatsheet>",
+                "url": "<your cheat sheet URL>",
+                "title": "<title of your cheat sheet>",
                 "thumbnail": "<image URL>",
-                "needs_download": True,  # True if you want to download the cheatsheet locally in ``_build/html/_static/``
-                "pages": "<list of pages to include in the cheatsheet>",  # Optional
+                "needs_download": True,  # True if you want to download the cheatsheet locally in the ``_build/html/_static/`` directory.
+                "pages": "<list of pages to include the cheat sheet on>",  # Optional
             },
         },
     )

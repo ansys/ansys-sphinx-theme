@@ -289,20 +289,20 @@ def update_footer_theme(
 def add_cheat_sheet(
     app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: document
 ) -> None:
-    """Add a cheatsheet to the sidebar.
+    """Add a cheat sheet to the left navigation sidebar.
 
     Parameters
     ----------
     app : ~sphinx.application.Sphinx
         Application instance for rendering the documentation.
     pagename : str
-        The name of the current page.
+        Name of the current page.
     templatename : str
-        The name of the template being used.
+        Name of the template being used.
     context : dict
-        The context dictionary for the page.
+        Context dictionary for the page.
     doctree : ~docutils.nodes.document
-        The doctree
+        The doctree.
     """
     cheatsheet_options = app.config.html_theme_options.get("cheatsheet", {})
     pages = cheatsheet_options.get("pages", ["index"])
@@ -329,7 +329,7 @@ def download_cheatsheet_to_static(
     app : ~sphinx.application.Sphinx
         Application instance for rendering the documentation.
     cheatsheet_options : dict
-        Dictionary containing the cheatsheet options.
+        Dictionary containing the cheat sheet options.
     static_folder : pathlib.Path
         Path containing the static folder.
     context : dict
@@ -340,25 +340,25 @@ def download_cheatsheet_to_static(
     static_path = pathlib.Path(app.outdir) / static_folder[0]
     context["cheatsheet_static_path"] = str(static_folder[0])
 
-    # Download cheatsheet file if URL is provided
+    # Download cheat sheet file if URL is provided
     if cheatsheet_url:
         download_file(cheatsheet_url, static_path)
 
-    # Download cheatsheet image if thumbnail URL is provided
+    # Download cheat sheet image if thumbnail URL is provided
     if cheatsheet_thumbnail:
         download_file(cheatsheet_thumbnail, static_path)
 
 
 def download_file(url: str, directory: pathlib.Path) -> None:
     """
-    Download a file from the given URL and save it to the specified directory.
+    Download a file from the given URL and save it to a given directory.
 
     Parameters
     ----------
     url : str
-        The URL of the file to download.
+        URL of the file to download.
     directory : pathlib.Path
-        The directory where the file will be saved.
+        Directory to save the file to.
     """
     filename = url.split("/")[-1]
     if not directory.exists():
@@ -373,7 +373,7 @@ def download_file(url: str, directory: pathlib.Path) -> None:
 
 
 def setup(app: Sphinx) -> Dict:
-    """Connect to the sphinx theme app.
+    """Connect to the Sphinx theme app.
 
     Parameters
     ----------
