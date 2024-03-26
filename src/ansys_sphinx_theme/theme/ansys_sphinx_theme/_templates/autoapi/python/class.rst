@@ -13,13 +13,12 @@
             - {{ obj.summary }}
           {% endfor %}
 {%- endmacro %}
-
 {# --------------------------- End macros definition ----------------------- #}
 
 {% if obj.display %}
    {% if is_own_page %}
-:class:`{{ obj.short_name }}`
-========={{ "=" * obj.short_name | length }}
+:class:`{{ obj.id }}`
+========={{ "=" * obj.id | length }}
 
    {% endif %}
    {% set visible_children = obj.children|selectattr("display")|list %}
@@ -66,76 +65,75 @@
       {% endif %}
    {% endfor %}
    {% if is_own_page and own_page_children %}
-        {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
-        {% set visible_properties = own_page_children|selectattr("type", "equalto", "property")|list %}
-        {% set all_visible_methods = own_page_children|selectattr("type", "equalto", "method") |list %}
+      {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
+      {% set visible_properties = own_page_children|selectattr("type", "equalto", "property")|list %}
+      {% set all_visible_methods = own_page_children|selectattr("type", "equalto", "method") |list %}
 
-        {% set visible_abstract_methods = [] %}
-        {% set visible_constructor_methods = [] %}
-        {% set visible_instance_methods = [] %}
-        {% set visible_special_methods = [] %}
-        {% set visible_static_methods = [] %}
+      {% set visible_abstract_methods = [] %}
+      {% set visible_constructor_methods = [] %}
+      {% set visible_instance_methods = [] %}
+      {% set visible_special_methods = [] %}
+      {% set visible_static_methods = [] %}
 
-        {% for element in all_visible_methods %}
-            {% if "abstractmethod" in element.properties %}
-                {% set _ = visible_abstract_methods.append(element) %}
+      {% for element in all_visible_methods %}
+          {% if "abstractmethod" in element.properties %}
+              {% set _ = visible_abstract_methods.append(element) %}
 
-            {% elif "staticmethod" in element.properties %}
-                {% set _ = visible_static_methods.append(element) %}
+          {% elif "staticmethod" in element.properties %}
+              {% set _ = visible_static_methods.append(element) %}
 
-            {% elif "classmethod" in element.properties or element.name in ["__new__", "__init__"] %}
-                {% set _ = visible_constructor_methods.append(element) %}
+          {% elif "classmethod" in element.properties or element.name in ["__new__", "__init__"] %}
+              {% set _ = visible_constructor_methods.append(element) %}
 
-            {% elif element.name.startswith("__") and element.name.endswith("__") and element.name not in ["__new__", "__init__"] %}
-                {% set _ = visible_special_methods.append(element) %}
+          {% elif element.name.startswith("__") and element.name.endswith("__") and element.name not in ["__new__", "__init__"] %}
+              {% set _ = visible_special_methods.append(element) %}
 
-            {% else %}
-                {% set _ = visible_instance_methods.append(element) %}
+          {% else %}
+              {% set _ = visible_instance_methods.append(element) %}
+          {% endif %}
+      {% endfor %}
 
-            {% endif %}
-        {% endfor %}
 
+      {% set class_objects = visible_properties + visible_attributes + all_visible_methods %}
 
-        {% set class_objects = visible_properties + visible_attributes + all_visible_methods %}
+      {# ------------------------ Begin tabset definition ----------------------- #}
 
-        {# ------------------------ Begin tabset definition ----------------------- #}
-
-        {% if class_objects %}
+      {% if class_objects %}
 
 Overview
 --------
 
 .. tab-set::
 
-            {% if visible_abstract_methods %}
+        {% if visible_abstract_methods %}
     {{ tab_item_from_objects_list(visible_abstract_methods, "Abstract methods") }}
-            {% endif %}
-
-            {% if visible_constructor_methods %}
-    {{ tab_item_from_objects_list(visible_constructor_methods, "Constructors") }}
-            {% endif %}
-
-            {% if visible_instance_methods %}
-    {{ tab_item_from_objects_list(visible_instance_methods, "Methods") }}
-            {% endif %}
-
-            {% if visible_properties %}
-    {{ tab_item_from_objects_list(visible_properties, "Properties") }}
-            {% endif %}
-
-            {% if visible_attributes %}
-    {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}      
-            {% endif %}
-
-            {% if visible_static_methods %}
-    {{ tab_item_from_objects_list(visible_static_methods, "Static methods") }}
-            {% endif %}
-
-            {% if visible_special_methods %}
-    {{ tab_item_from_objects_list(visible_special_methods, "Special methods") }}
-            {% endif %}
-
         {% endif %}
+
+        {% if visible_constructor_methods %}
+    {{ tab_item_from_objects_list(visible_constructor_methods, "Constructors") }}
+        {% endif %}
+
+        {% if visible_instance_methods %}
+    {{ tab_item_from_objects_list(visible_instance_methods, "Methods") }}
+        {% endif %}
+
+        {% if visible_properties %}
+    {{ tab_item_from_objects_list(visible_properties, "Properties") }}
+        {% endif %}
+
+        {% if visible_attributes %}
+    {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}      
+        {% endif %}
+
+        {% if visible_static_methods %}
+    {{ tab_item_from_objects_list(visible_static_methods, "Static methods") }}
+        {% endif %}
+
+        {% if visible_special_methods %}
+    {{ tab_item_from_objects_list(visible_special_methods, "Special methods") }}
+        {% endif %}
+
+      {% endif %}
 {# ---------------------- End class tabset -------------------- #}
 {# ---------------------- Begin class datails -------------------- #}
 
@@ -155,6 +153,7 @@ Property detail
             {% for property in visible_properties %}
 {{ property.render() }}
             {% endfor %}
+
         {% endif %}
 
 
@@ -173,7 +172,8 @@ Method detail
 {{ method.render() }}
             {% endfor %}
         {% endif %}
+
     {% endif %}
+{# ---------------------- End class details -------------------- #}
 {% endif %}
 
-{# ---------------------- End class details -------------------- #}
