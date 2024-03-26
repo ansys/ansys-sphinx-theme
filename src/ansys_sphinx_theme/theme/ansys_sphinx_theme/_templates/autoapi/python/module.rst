@@ -24,13 +24,13 @@
    :maxdepth: 1
    :hidden:
 
-{% for obj in objects_list %}
-    {% if needs_index == "true" %}
+    {% for obj in objects_list %}
+        {% if needs_index == "true" %}
     {{ icon }} {{ obj.short_name }}<{{ obj.short_name }}/index.rst>
-    {% else %}
+        {% else %}
     {{ icon }} {{ obj.short_name }}<{{ obj.short_name }}>
-    {% endif %}
-{% endfor %}
+        {% endif %}
+    {% endfor %}
 {%- endmacro %}
 
 {# --------------------------- End macros definition ----------------------- #}
@@ -39,17 +39,20 @@
 :orphan:
 {% endif %}
 
-{% if obj.name.split(".") | length == 3 %}
-The ``{{ obj.name }}`` library
-{{ "================" + "=" * obj.name|length }}
-{% else %}
-{% if obj.type == "package" %}
-The ``{{ obj.short_name }}`` package 
-{{ "====================" + "=" * obj.short_name|length }}
-{% else %}
-The ``{{ obj.short_name }}.py`` module
-{{ "==================" + "=" * obj.short_name|length }}
-{% endif %}
+{% if is_own_page %}
+
+    {% if obj.name.split(".") | length == 3 %}
+    The ``{{ obj.name }}`` library
+    {{ "================" + "=" * obj.name|length }}
+    {% else %}
+    {% if obj.type == "package" %}
+    The ``{{ obj.short_name }}`` package 
+    {{ "====================" + "=" * obj.short_name|length }}
+    {% else %}
+    The ``{{ obj.short_name }}.py`` module
+    {{ "==================" + "=" * obj.short_name|length }}
+    {% endif %}
+    {% endif %}
 {% endif %}
 
 .. py:module:: {{ obj.name }}

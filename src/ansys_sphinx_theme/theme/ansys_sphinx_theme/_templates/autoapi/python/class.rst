@@ -17,139 +17,125 @@
 {# --------------------------- End macros definition ----------------------- #}
 
 {% if obj.display %}
+   {% if is_own_page %}
+:class:`{{ obj.id }}`
+========={{ "=" * obj.id | length }}
 
-{% if own_page_types and obj["type"] in own_page_types %}
-{{ obj.short_name }}
-{{"=" * obj.name|length }}
-{% endif %}
-
-.. py:{{ obj["type"] }}:: {{ obj["short_name"] }}{% if obj["args"] %}({{ obj["args"] }}){% endif %}
-
-{% if own_page_types and obj["type"] in own_page_types %}
-   :canonical: {{ obj["obj"]["full_name"] }}
-{% endif %}
-
-{% for (args, return_annotation) in obj.overloads %}
-    {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
-{% endfor %}
-
-
-{% if obj.bases %}
-{% if "show-inheritance" in autoapi_options %}
-Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {% endif %}{% endfor %}
-{% endif %}
-
-{% if "show-inheritance-diagram" in autoapi_options and obj.bases != ["object"] %}
-.. autoapi-inheritance-diagram:: {{ obj.obj["full_name"] }}
-   :parts: 1
-   {% if "private-members" in autoapi_options %}
-   :private-bases:
    {% endif %}
+   {% set visible_children = obj.children|selectattr("display")|list %}
+   {% set own_page_children = visible_children|selectattr("type", "in", own_page_types)|list %}
+   {% if is_own_page and own_page_children %}
+.. toctree::
+   :hidden:
 
-{% endif %}
-{% endif %}
+      {% for child in own_page_children %}
+   {{ child.include_path }}
+      {% endfor %}
 
-{% if obj.docstring -%}
-{{ obj.docstring|indent(3) }}
-{% endif %}
+   {% endif %}
+.. py:{{ obj.type }}:: {% if is_own_page %}{{ obj.id }}{% else %}{{ obj.short_name }}{% endif %}{% if obj.args %}({{ obj.args }}){% endif %}
 
-{% if "inherited-members" in autoapi_options %}
-{% set visible_classes = obj.classes|selectattr("display")|list %}
-{% else %}
-{% set visible_classes = obj.classes|rejectattr("inherited")|selectattr("display")|list %}
-{% endif %}
+   {% for (args, return_annotation) in obj.overloads %}
+      {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
 
-{% for klass in visible_classes %}
-{{ klass.render()|indent(3) }}
-{% endfor %}
+   {% endfor %}
+   {% if obj.bases %}
+      {% if "show-inheritance" in autoapi_options %}
 
-{% if "inherited-members" in autoapi_options %}
-{% set visible_properties = obj.properties|selectattr("display")|list %}
-{% else %}
-{% set visible_properties = obj.properties|rejectattr("inherited")|selectattr("display")|list %}
-{% endif %}
-
-{% if "inherited-members" in autoapi_options %}
-{% set visible_attributes = obj.attributes|selectattr("display")|list %}
-{% else %}
-{% set visible_attributes = obj.attributes|rejectattr("inherited")|selectattr("display")|list %}
-{% endif %}
-
-{% if "inherited-members" in autoapi_options %}
-{% set all_visible_methods = obj.methods|selectattr("display")|list %}
-{% else %}
-{% set all_visible_methods = obj.methods|rejectattr("inherited")|selectattr("display")|list %}
-{% endif %}
-
-{% set visible_abstract_methods = [] %}
-{% set visible_constructor_methods = [] %}
-{% set visible_instance_methods = [] %}
-{% set visible_special_methods = [] %}
-{% set visible_static_methods = [] %}
-
-{% for element in all_visible_methods %}
-    {% if "abstractmethod" in element.properties %}
-        {% set _ = visible_abstract_methods.append(element) %}
-
-    {% elif "staticmethod" in element.properties %}
-        {% set _ = visible_static_methods.append(element) %}
-
-    {% elif "classmethod" in element.properties or element.name in ["__new__", "__init__"] %}
-        {% set _ = visible_constructor_methods.append(element) %}
-
-    {% elif element.name.startswith("__") and element.name.endswith("__") and element.name not in ["__new__", "__init__"] %}
-        {% set _ = visible_special_methods.append(element) %}
-
-    {% else %}
-        {% set _ = visible_instance_methods.append(element) %}
-
-    {% endif %}
-{% endfor %}
+   Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {% endif %}{% endfor %}
+      {% endif %}
 
 
-{% set class_objects = visible_properties + visible_attributes + all_visible_methods %}
+      {% if "show-inheritance-diagram" in autoapi_options and obj.bases != ["object"] %}
+   .. autoapi-inheritance-diagram:: {{ obj.obj["full_name"] }}
+      :parts: 1
+         {% if "private-members" in autoapi_options %}
+      :private-bases:
+         {% endif %}
 
-{# ------------------------ Begin tabset definition ----------------------- #}
+      {% endif %}
+   {% endif %}
+   {% if obj.docstring %}
 
-{% if class_objects %}
+   {{ obj.docstring|indent(3) }}
+   {% endif %}
+   {% for obj_item in visible_children %}
+      {% if obj_item.type not in own_page_types %}
 
-{% if own_page_types and obj["type"] in own_page_types %}
+   {{ obj_item.render()|indent(3) }}
+      {% endif %}
+   {% endfor %}
+   {% if is_own_page and own_page_children %}
+        {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
+        {% set visible_properties = own_page_children|selectattr("type", "equalto", "property")|list %}
+        {% set all_visible_methods = own_page_children|selectattr("type", "equalto", "method") |list %}
+
+        {% set visible_abstract_methods = [] %}
+        {% set visible_constructor_methods = [] %}
+        {% set visible_instance_methods = [] %}
+        {% set visible_special_methods = [] %}
+        {% set visible_static_methods = [] %}
+
+        {% for element in all_visible_methods %}
+            {% if "abstractmethod" in element.properties %}
+                {% set _ = visible_abstract_methods.append(element) %}
+
+            {% elif "staticmethod" in element.properties %}
+                {% set _ = visible_static_methods.append(element) %}
+
+            {% elif "classmethod" in element.properties or element.name in ["__new__", "__init__"] %}
+                {% set _ = visible_constructor_methods.append(element) %}
+
+            {% elif element.name.startswith("__") and element.name.endswith("__") and element.name not in ["__new__", "__init__"] %}
+                {% set _ = visible_special_methods.append(element) %}
+
+            {% else %}
+                {% set _ = visible_instance_methods.append(element) %}
+
+            {% endif %}
+        {% endfor %}
+
+
+        {% set class_objects = visible_properties + visible_attributes + all_visible_methods %}
+
+        {# ------------------------ Begin tabset definition ----------------------- #}
+
+        {% if class_objects %}
+
 Overview
 --------
-.. py:currentmodule:: {{ obj.short_name }}
-{% endif %}
+
 .. tab-set::
 
-{% if visible_abstract_methods %}
+            {% if visible_abstract_methods %}
     {{ tab_item_from_objects_list(visible_abstract_methods, "Abstract methods") }}
-{% endif %}
+            {% endif %}
 
-{% if visible_constructor_methods %}
+            {% if visible_constructor_methods %}
     {{ tab_item_from_objects_list(visible_constructor_methods, "Constructors") }}
-{% endif %}
+            {% endif %}
 
-{% if visible_instance_methods %}
+            {% if visible_instance_methods %}
     {{ tab_item_from_objects_list(visible_instance_methods, "Methods") }}
-{% endif %}
+            {% endif %}
 
-{% if visible_properties %}
+            {% if visible_properties %}
     {{ tab_item_from_objects_list(visible_properties, "Properties") }}
-{% endif %}
+            {% endif %}
 
-{% if visible_attributes %}
+            {% if visible_attributes %}
     {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}      
-{% endif %}
+            {% endif %}
 
-{% if visible_static_methods %}
+            {% if visible_static_methods %}
     {{ tab_item_from_objects_list(visible_static_methods, "Static methods") }}
-{% endif %}
+            {% endif %}
 
-{% if visible_special_methods %}
+            {% if visible_special_methods %}
     {{ tab_item_from_objects_list(visible_special_methods, "Special methods") }}
-{% endif %}
+            {% endif %}
 
-{% endif %}
-{% endif %}
+        {% endif %}
 {# ---------------------- End class tabset -------------------- #}
 {# ---------------------- Begin class datails -------------------- #}
 
@@ -162,30 +148,32 @@ Import detail
 
     from {{ joined_parts }} import {{ obj["short_name"] }}
 
-{% if visible_properties  %}
+        {% if visible_properties  %}
 
 Property detail
 ---------------
-{% for property in visible_properties %}
+            {% for property in visible_properties %}
 {{ property.render() }}
-{% endfor %}
-{% endif %}
+            {% endfor %}
+        {% endif %}
 
 
-{% if visible_attributes  %}
+        {% if visible_attributes  %}
 Attribute detail
 ----------------
-{% for attribute in visible_attributes %}
+            {% for attribute in visible_attributes %}
 {{ attribute.render() }}
-{% endfor %}
-{% endif %}
+            {% endfor %}
+        {% endif %}
 
-{% if all_visible_methods  %}
+        {% if all_visible_methods  %}
 Method detail
 -------------
-{% for method in all_visible_methods %}
+            {% for method in all_visible_methods %}
 {{ method.render() }}
-{% endfor %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
 {% endif %}
 
 {# ---------------------- End class details -------------------- #}
