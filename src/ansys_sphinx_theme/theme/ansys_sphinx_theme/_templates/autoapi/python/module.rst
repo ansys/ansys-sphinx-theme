@@ -42,15 +42,15 @@
 {% if is_own_page %}
 
     {% if obj.name.split(".") | length == 3 %}
-    The ``{{ obj.name }}`` library
-    {{ "================" + "=" * obj.name|length }}
+The ``{{ obj.name }}`` library
+{{ "================" + "=" * obj.name|length }}
     {% else %}
     {% if obj.type == "package" %}
-    The ``{{ obj.short_name }}`` package 
-    {{ "====================" + "=" * obj.short_name|length }}
+The ``{{ obj.short_name }}`` package 
+{{ "====================" + "=" * obj.short_name|length }}
     {% else %}
-    The ``{{ obj.short_name }}.py`` module
-    {{ "==================" + "=" * obj.short_name|length }}
+The ``{{ obj.short_name }}.py`` module
+{{ "==================" + "=" * obj.short_name|length }}
     {% endif %}
     {% endif %}
 {% endif %}

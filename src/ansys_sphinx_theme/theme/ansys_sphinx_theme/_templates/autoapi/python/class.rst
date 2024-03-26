@@ -18,8 +18,8 @@
 
 {% if obj.display %}
    {% if is_own_page %}
-:class:`{{ obj.id }}`
-========={{ "=" * obj.id | length }}
+:class:`{{ obj.short_name }}`
+========={{ "=" * obj.short_name | length }}
 
    {% endif %}
    {% set visible_children = obj.children|selectattr("display")|list %}
