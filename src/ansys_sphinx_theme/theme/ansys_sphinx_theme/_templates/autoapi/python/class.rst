@@ -16,8 +16,8 @@
 {# --------------------------- End macros definition ----------------------- #}
 
     {% if is_own_page %}
-:class:`{{ obj.id }}`
-========={{ "=" * obj.id | length }}
+:class:`{{ obj.short_name }}`
+========={{ "=" * obj.short_name | length }}
 
     {% endif %}
     {% set visible_children = obj.children|selectattr("display")|list %}
@@ -54,73 +54,17 @@
         {% endif %}
     {% endif %}
     {% if obj.docstring %}
-
-   {{ obj.docstring|indent(3) }}
+    {{ obj.docstring|indent(3) }}
     {% endif %}
-
-    {% if is_own_page and own_page_children %}
-        {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
-        {% if visible_attributes %}
-Attributes
-----------
-
-.. autoapisummary::
-
-         {% for attribute in visible_attributes %}
-   {{ attribute.id }}
-         {% endfor %}
-
-
-      {% endif %}
-      {% set visible_exceptions = own_page_children|selectattr("type", "equalto", "exception")|list %}
-      {% if visible_exceptions %}
-Exceptions
-----------
-
-.. autoapisummary::
-
-         {% for exception in visible_exceptions %}
-   {{ exception.id }}
-         {% endfor %}
-
-
-      {% endif %}
-      {% set visible_classes = own_page_children|selectattr("type", "equalto", "class")|list %}
-      {% if visible_classes %}
-Classes
--------
-
-.. autoapisummary::
-
-         {% for klass in visible_classes %}
-   {{ klass.id }}
-         {% endfor %}
-
-
-      {% endif %}
-      {% set visible_methods = own_page_children|selectattr("type", "equalto", "method")|list %}
-      {% if visible_methods %}
-Methods
--------
-
-.. autoapisummary::
-
-            {% for method in visible_methods %}
-   {{ method.id }}
-            {% endfor %}
-
-
-      {% endif %}
-    {% endif %}
-
+    {% set this_page_children = visible_children|rejectattr("type", "in", own_page_types)|list %}
     {% set visible_abstract_methods = [] %}
     {% set visible_constructor_methods = [] %}
     {% set visible_instance_methods = [] %}
     {% set visible_special_methods = [] %}
     {% set visible_static_methods = [] %}
-    {% set visible_properties = visible_children|selectattr("type", "equalto", "property")|list %}
-    {% set visible_attributes = visible_children|selectattr("type", "equalto", "attribute")|list %}
-    {% set all_visible_methods = visible_children|selectattr("type", "equalto", "method")|list %}
+    {% set visible_properties = this_page_children|selectattr("type", "equalto", "property")|list %}
+    {% set visible_attributes = this_page_children|selectattr("type", "equalto", "attribute")|list %}
+    {% set all_visible_methods = this_page_children|selectattr("type", "equalto", "method")|list %}
     {% if all_visible_methods %}
         {% for element in all_visible_methods %}
         {% if "abstractmethod" in element.properties %}
@@ -194,14 +138,13 @@ Import detail
 
     from {{ joined_parts }} import {{ obj["short_name"] }}
 
-
     {% if visible_properties %}
 Property detail
 ---------------
     {% for property in visible_properties %}
 {{ property.render()|indent(3) }}
     {% endfor %}
-
+    
 {% endif %}
 
 
@@ -209,9 +152,11 @@ Property detail
 Attribute detail
 ----------------
     {% for attribute in visible_attributes %}
+
 {{ attribute.render()|indent(3) }}
     {% endfor %}
     {% endif %}
+    
 
     {% if all_visible_methods  %}
 Method detail
@@ -219,6 +164,60 @@ Method detail
     {% for method in all_visible_methods %}
 {{ method.render()|indent(3) }}
     {% endfor %}
+    {% endif %}
+    {% if is_own_page and own_page_children %}
+        {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
+        {% if visible_attributes %}
+Attributes
+----------
+
+.. autoapisummary::
+
+         {% for attribute in visible_attributes %}
+   {{ attribute.id }}
+         {% endfor %}
+
+
+      {% endif %}
+      {% set visible_exceptions = own_page_children|selectattr("type", "equalto", "exception")|list %}
+      {% if visible_exceptions %}
+Exceptions
+----------
+
+.. autoapisummary::
+
+         {% for exception in visible_exceptions %}
+   {{ exception.id }}
+         {% endfor %}
+
+
+      {% endif %}
+      {% set visible_classes = own_page_children|selectattr("type", "equalto", "class")|list %}
+      {% if visible_classes %}
+Classes
+-------
+
+.. autoapisummary::
+
+         {% for klass in visible_classes %}
+   {{ klass.id }}
+         {% endfor %}
+
+
+      {% endif %}
+      {% set visible_methods = own_page_children|selectattr("type", "equalto", "method")|list %}
+      {% if visible_methods %}
+Methods
+-------
+
+.. autoapisummary::
+
+            {% for method in visible_methods %}
+   {{ method.id }}
+            {% endfor %}
+
+
+      {% endif %}
     {% endif %}
 
 {# ---------------------- End class details -------------------- #}
