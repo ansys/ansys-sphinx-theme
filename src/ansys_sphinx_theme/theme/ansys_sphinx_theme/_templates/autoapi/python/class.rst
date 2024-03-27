@@ -88,7 +88,7 @@
         {% endfor %}
     {% endif %}
 
-    {% set class_objects =  visible_attributes + all_visible_methods %}
+    {% set class_objects =  visible_properties + visible_attributes + all_visible_methods %}
 
     {% if class_objects %}
 
@@ -169,5 +169,60 @@ Method detail
 
 {# ---------------------- End class details -------------------- #}
 {% endif %}
+
+{% if is_own_page and own_page_children %}
+      {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
+      {% if visible_attributes %}
+Attributes
+----------
+
+.. autoapisummary::
+
+         {% for attribute in visible_attributes %}
+   {{ attribute.id }}
+         {% endfor %}
+
+
+      {% endif %}
+      {% set visible_exceptions = own_page_children|selectattr("type", "equalto", "exception")|list %}
+      {% if visible_exceptions %}
+Exceptions
+----------
+
+.. autoapisummary::
+
+         {% for exception in visible_exceptions %}
+   {{ exception.id }}
+         {% endfor %}
+
+
+      {% endif %}
+      {% set visible_classes = own_page_children|selectattr("type", "equalto", "class")|list %}
+      {% if visible_classes %}
+Classes
+-------
+
+.. autoapisummary::
+
+         {% for klass in visible_classes %}
+   {{ klass.id }}
+         {% endfor %}
+
+
+      {% endif %}
+      {% set visible_methods = own_page_children|selectattr("type", "equalto", "method")|list %}
+      {% if visible_methods %}
+Methods
+-------
+
+.. autoapisummary::
+
+            {% for method in visible_methods %}
+   {{ method.id }}
+            {% endfor %}
+
+
+      {% endif %}
+   {% endif %}
 
 {% endif %}
