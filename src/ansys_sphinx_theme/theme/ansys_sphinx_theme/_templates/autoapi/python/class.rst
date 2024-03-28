@@ -17,7 +17,7 @@
 {# --------------------------- End macros definition ----------------------- #}
 
     {% if is_own_page %}
-:class:{{ obj.name }}
+:class:`{{ obj.name }}`
 ========={{ "=" * obj.name | length }}
 
     {% endif %}
@@ -33,34 +33,30 @@
 
     {% endif %}
 .. py:{{ obj.type }}:: {% if is_own_page %}{{ obj.id }}{% else %}{{ obj.short_name }}{% endif %}{% if obj.args %}({{ obj.args }}){% endif %}
-    
-    {% if is_own_page %}
-    :canonical: {{ obj["obj"]["full_name"] }}
-    {% endif %}
 
     {% for (args, return_annotation) in obj.overloads %}
-        {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
+      {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
 
     {% endfor %}
     {% if obj.bases %}
-        {% if "show-inheritance" in autoapi_options %}
+      {% if "show-inheritance" in autoapi_options %}
 
-    Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {% endif %}{% endfor %}
-        {% endif %}
+   Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {% endif %}{% endfor %}
+      {% endif %}
 
 
-        {% if "show-inheritance-diagram" in autoapi_options and obj.bases != ["object"] %}
-    .. autoapi-inheritance-diagram:: {{ obj.obj["full_name"] }}
-        :parts: 1
-            {% if "private-members" in autoapi_options %}
-        :private-bases:
-            {% endif %}
+      {% if "show-inheritance-diagram" in autoapi_options and obj.bases != ["object"] %}
+   .. autoapi-inheritance-diagram:: {{ obj.obj["full_name"] }}
+      :parts: 1
+         {% if "private-members" in autoapi_options %}
+      :private-bases:
+         {% endif %}
 
-        {% endif %}
+      {% endif %}
     {% endif %}
-
     {% if obj.docstring %}
-    {{ obj.docstring|indent(3) }}
+
+   {{ obj.docstring|indent(3) }}
     {% endif %}
     {% set this_page_children = visible_children|rejectattr("type", "in", own_page_types)|list %}
     {% set visible_abstract_methods = [] %}
