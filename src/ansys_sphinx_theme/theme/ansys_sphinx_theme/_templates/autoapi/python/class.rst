@@ -1,5 +1,6 @@
 {% if obj.display %}
 
+{# ----------------- Start macros definition for tab item ------------------#}
 {% macro tab_item_from_objects_list(objects_list, title="") -%}
 
   .. tab-item:: {{ title }}
@@ -16,8 +17,8 @@
 {# --------------------------- End macros definition ----------------------- #}
 
     {% if is_own_page %}
-:class:`{{ obj.id }}`
-========={{ "=" * obj.id | length }}
+:class:{{ obj.name }}
+========={{ "=" * obj.name | length }}
 
     {% endif %}
     {% set visible_children = obj.children|selectattr("display")|list %}
@@ -33,30 +34,31 @@
     {% endif %}
 .. py:{{ obj.type }}:: {% if is_own_page %}{{ obj.id }}{% else %}{{ obj.short_name }}{% endif %}{% if obj.args %}({{ obj.args }}){% endif %}
     
-{% if is_own_page %}
+    {% if is_own_page %}
     :canonical: {{ obj["obj"]["full_name"] }}
-{% endif %}
+    {% endif %}
 
-{% for (args, return_annotation) in obj.overloads %}
+    {% for (args, return_annotation) in obj.overloads %}
         {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
 
     {% endfor %}
     {% if obj.bases %}
         {% if "show-inheritance" in autoapi_options %}
 
-   Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {% endif %}{% endfor %}
+    Bases: {% for base in obj.bases %}{{ base|link_objs }}{% if not loop.last %}, {% endif %}{% endfor %}
         {% endif %}
 
 
         {% if "show-inheritance-diagram" in autoapi_options and obj.bases != ["object"] %}
-   .. autoapi-inheritance-diagram:: {{ obj.obj["full_name"] }}
-      :parts: 1
+    .. autoapi-inheritance-diagram:: {{ obj.obj["full_name"] }}
+        :parts: 1
             {% if "private-members" in autoapi_options %}
-      :private-bases:
+        :private-bases:
             {% endif %}
 
         {% endif %}
     {% endif %}
+
     {% if obj.docstring %}
     {{ obj.docstring|indent(3) }}
     {% endif %}
@@ -89,11 +91,10 @@
         {% endfor %}
     {% endif %}
 
-    {% set class_objects =  visible_properties + visible_attributes + all_visible_methods %}
+    {% if this_page_children %}
 
-    {% if class_objects %}
-
-{# ------------------------- Begin macros definition ----------------------- #}
+.. py:currentmodule:: {{ obj.short_name }}
+{# ------------------------- Begin tab-set definition ----------------------- #}
 
 Overview
 --------
@@ -146,17 +147,15 @@ Import detail
 Property detail
 ---------------
     {% for property in visible_properties %}
-   {{ property.render()|indent(3) }}
+{{ property.render() }}
     {% endfor %}
-    
-{% endif %}
+    {% endif %}
 
 
     {% if visible_attributes  %}
 Attribute detail
 ----------------
     {% for attribute in visible_attributes %}
-
 {{ attribute.render() }}
     {% endfor %}
     {% endif %}
