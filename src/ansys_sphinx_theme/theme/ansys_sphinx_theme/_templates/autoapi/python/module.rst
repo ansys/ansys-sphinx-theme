@@ -24,13 +24,13 @@
    :maxdepth: 1
    :hidden:
 
-{% for obj in objects_list %}
-    {% if needs_index == "true" %}
+    {% for obj in objects_list %}
+        {% if needs_index == "true" %}
     {{ icon }} {{ obj.short_name }}<{{ obj.short_name }}/index.rst>
-    {% else %}
+        {% else %}
     {{ icon }} {{ obj.short_name }}<{{ obj.short_name }}>
-    {% endif %}
-{% endfor %}
+        {% endif %}
+    {% endfor %}
 {%- endmacro %}
 
 {# --------------------------- End macros definition ----------------------- #}
@@ -39,17 +39,20 @@
 :orphan:
 {% endif %}
 
-{% if obj.name.split(".") | length == 3 %}
+{% if is_own_page %}
+
+    {% if obj.name.split(".") | length == 3 %}
 The ``{{ obj.name }}`` library
 {{ "================" + "=" * obj.name|length }}
-{% else %}
-{% if obj.type == "package" %}
+    {% else %}
+    {% if obj.type == "package" %}
 The ``{{ obj.short_name }}`` package 
 {{ "====================" + "=" * obj.short_name|length }}
-{% else %}
+    {% else %}
 The ``{{ obj.short_name }}.py`` module
 {{ "==================" + "=" * obj.short_name|length }}
-{% endif %}
+    {% endif %}
+    {% endif %}
 {% endif %}
 
 .. py:module:: {{ obj.name }}
@@ -226,22 +229,22 @@ Description
 {% set visible_objects_in_this_page = [] %}
 
 {% if own_page_types %}
-{% for obj in module_objects_in_this_page %}
-{% if obj.type not in own_page_types %}
-{% set _ = visible_objects_in_this_page.append(obj) %}
-{% endif %}
-{% endfor %}
+    {% for obj in module_objects_in_this_page %}
+        {% if obj.type not in own_page_types %}
+        {% set _ = visible_objects_in_this_page.append(obj) %}
+        {% endif %}
+    {% endfor %}
 {% else %}
-{% set visible_objects_in_this_page = module_objects_in_this_page %}
+    {% set visible_objects_in_this_page = module_objects_in_this_page %}
 {% endif %}
 
 {% if visible_objects_in_this_page %}
 Module detail
 -------------
 
-{% for obj in visible_objects_in_this_page %}
+    {% for obj in visible_objects_in_this_page %}
 {{ obj.render() }}
-{% endfor %}
+    {% endfor %}
 
 {% endif %}
 {% endif %}
