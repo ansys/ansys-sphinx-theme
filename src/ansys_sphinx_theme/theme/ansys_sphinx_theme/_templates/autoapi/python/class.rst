@@ -16,8 +16,8 @@
 {# --------------------------- End macros definition ----------------------- #}
 
     {% if is_own_page %}
-:class:`{{ obj.short_name }}`
-========={{ "=" * obj.short_name | length }}
+:class:`{{ obj.id }}`
+========={{ "=" * obj.id | length }}
 
     {% endif %}
     {% set visible_children = obj.children|selectattr("display")|list %}
@@ -32,8 +32,12 @@
 
     {% endif %}
 .. py:{{ obj.type }}:: {% if is_own_page %}{{ obj.id }}{% else %}{{ obj.short_name }}{% endif %}{% if obj.args %}({{ obj.args }}){% endif %}
+    
+{% if is_own_page %}
+    :canonical: {{ obj["obj"]["full_name"] }}
+{% endif %}
 
-    {% for (args, return_annotation) in obj.overloads %}
+{% for (args, return_annotation) in obj.overloads %}
         {{ " " * (obj.type | length) }}   {{ obj.short_name }}{% if args %}({{ args }}){% endif %}
 
     {% endfor %}
@@ -142,7 +146,7 @@ Import detail
 Property detail
 ---------------
     {% for property in visible_properties %}
-{{ property.render()|indent(3) }}
+   {{ property.render()|indent(3) }}
     {% endfor %}
     
 {% endif %}
@@ -153,7 +157,7 @@ Attribute detail
 ----------------
     {% for attribute in visible_attributes %}
 
-{{ attribute.render()|indent(3) }}
+{{ attribute.render() }}
     {% endfor %}
     {% endif %}
     
@@ -162,7 +166,7 @@ Attribute detail
 Method detail
 -------------
     {% for method in all_visible_methods %}
-{{ method.render()|indent(3) }}
+{{ method.render() }}
     {% endfor %}
     {% endif %}
     {% if is_own_page and own_page_children %}
