@@ -10,7 +10,7 @@
 
           {% for obj in objects_list %}
 
-          * - :py:attr:`~{{ obj.name }}`
+          * - :py:attr:`~{{ obj.id }}`
             - {{ obj.summary }}
 
           {% endfor %}
