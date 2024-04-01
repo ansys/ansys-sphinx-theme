@@ -10,7 +10,11 @@
 
           {% for obj in objects_list %}
 
-          * - :py:attr:`~{{ obj.id }}`
+              {% if obj.type in own_page_types %}
+          * - :py:obj:`~{{ obj.id }}`
+              {% else %}
+          * - :py:obj:`~{{ obj.short_name }}`
+              {% endif %}
             - {{ obj.summary }}
 
           {% endfor %}
