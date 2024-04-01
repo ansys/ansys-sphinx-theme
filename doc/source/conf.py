@@ -3,6 +3,7 @@
 from datetime import datetime
 import os
 
+from github import Github
 from sphinx.builders.latex import LaTeXBuilder
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
@@ -156,15 +157,17 @@ EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 
 
 def extract_example_links(
-    archive_url: str, archive_base_url: str, exclude_files: List[str]
+    repo_fullname: str, path_relative_to_root: str, exclude_files: List[str]
 ) -> List[str]:
     """
-    Extract example links from a specific URL.
+    Extract example links from a specific GitHub repository.
 
     Parameters
     ----------
-    archive_url : str
-        The URL of the archive to retrieve the example links from.
+    repo_fullname : str
+        Fullname of the repository to extract example links from.
+    path_relative_to_root : str
+        Path relative to the root of the repository to extract example links from.
     exclude_files : list of str
         A list of files to exclude from the returned example links.
 
@@ -173,16 +176,17 @@ def extract_example_links(
     list
         List of example links.
     """
-    response = requests.get(archive_url)
-    json_data = response.json()
-    items = json_data.get("payload", {}).get("tree", {}).get("items", [])
+    g = Github()
+    repo = g.get_repo(repo_fullname)
+    contents = repo.get_contents(path_relative_to_root)
 
-    txt_file_paths = [
-        item["path"]
-        for item in items
-        if item["name"].endswith(".txt") and all(file not in item["path"] for file in exclude_files)
-    ]
-    example_links = [f"{archive_base_url}{path.replace('/blob/', '/')}" for path in txt_file_paths]
+    example_links = []
+    for content in contents:
+        if content.type == "dir":
+            example_links.extend(extract_example_links(repo_fullname, content.path, exclude_files))
+        elif content.type == "file":
+            if content.name not in exclude_files:
+                example_links.append(content.download_url)
 
     return example_links
 
@@ -225,10 +229,10 @@ def download_and_process_files(example_links: List[str]) -> List[str]:
     return file_names
 
 
-URL_ARCHIVE = "https://github.com/executablebooks/sphinx-design/tree/main/docs/snippets/rst"
-ARCHIVE_BASE_URL = f"https://raw.githubusercontent.com/executablebooks/sphinx-design/main/"
 example_links = extract_example_links(
-    URL_ARCHIVE, ARCHIVE_BASE_URL, exclude_files=["article-info.txt"]
+    "executablebooks/sphinx-design",
+    "docs/snippets/rst",
+    exclude_files=["article-info.txt"],
 )
 file_names = download_and_process_files(example_links)
 

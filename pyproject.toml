@@ -40,6 +40,7 @@ doc = [
     "sphinx-design==0.5.0",
     "requests==2.31.0",
     "sphinx-jinja==2.0.2",
+    "PyGitHub==2.3.0",
 ]
 
 [project.entry-points."sphinx.html_themes"]
