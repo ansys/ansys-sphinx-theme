@@ -17,7 +17,7 @@
 
 {%- endmacro %}
 
-{% macro toctree_from_objects_list(objects_list, icon="", needs_index="false") -%}
+{% macro toctree_from_objects_list(objects_list, icon="") -%}
 
 .. toctree::
    :titlesonly:
@@ -25,11 +25,7 @@
    :hidden:
 
     {% for obj in objects_list %}
-        {% if needs_index == "true" %}
-    {{ icon }} {{ obj.short_name }}<{{ obj.short_name }}/index.rst>
-        {% else %}
-    {{ icon }} {{ obj.short_name }}<{{ obj.short_name }}>
-        {% endif %}
+    {{ icon }} {{ obj.short_name }}<{{ obj.include_path }}>
     {% endfor %}
 {%- endmacro %}
 
@@ -165,13 +161,13 @@ Summary
 
 {% block subpackages %}
 {% if visible_subpackages %}
-{{ toctree_from_objects_list(visible_subpackages, "🖿", needs_index="true") }}
+{{ toctree_from_objects_list(visible_subpackages, "🖿") }}
 {% endif %}
 {% endblock %}
 
 {% block submodules %}
 {% if visible_submodules %}
-{{ toctree_from_objects_list(visible_submodules, "🗎", needs_index="true") }}
+{{ toctree_from_objects_list(visible_submodules, "🗎") }}
 {% endif %}
 {% endblock %}
 
