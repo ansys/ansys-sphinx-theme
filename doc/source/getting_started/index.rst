@@ -3,9 +3,9 @@
 ===============
 Getting started
 ===============
-`Sphinx <https://www.sphinx-doc.org/en/master/>`_ is a Python documentation
+`Sphinx <Sphinx_>`_ is a Python documentation
 generator for creating documentation. If you are new to using Sphinx, see
-`Sphinx Getting Started <https://www.sphinx-doc.org/en/master/usage/quickstart.html>`_.
+`Sphinx Getting Started <Sphinx_Getting_Started_>`_.
 
 This section explains how to install the Ansys Sphinx theme and then set up your
 Sphinx ``conf.py`` file to use this theme to generate your documentation.
@@ -16,9 +16,9 @@ Dependencies
 Ansys sphinx theme build on top of ``pydata sphinx theme``. 
 The theme requires the following dependencies:
 
-- `sphinx <https://www.sphinx-doc.org/en/master/>`_
-- `pydata-sphinx-theme <https://pydata-sphinx-theme.readthedocs.io/en/latest/>`_
-- `Jinja2 <https://jinja.palletsprojects.com/en/2.11.x/>`_
+- `Sphinx <Sphinx_PyPI_>`_
+- `pydata-sphinx-theme <PyData_PyPI_>`_
+- `Jinja2 <Jinja2_PyPI_>`_
 
 Optional dependencies
 ---------------------
@@ -27,12 +27,12 @@ Ansys Sphinx theme includes optional dependencies for autoapi documentation.
 To utilize `sphinx-autoapi` with custom templates provided by the theme, 
 you need to install the following dependencies:
 
-- `sphinx-autoapi <https://sphinx-autoapi.readthedocs.io/en/latest/>`_
-- `sphinx-design <https://sphinx-design.readthedocs.io/en/latest/>`_
+- `sphinx-autoapi <Sphinx_AutoAPI_PyPI_>`_
+- `sphinx-design <Sphinx_Design_PyPI_>`_
 
 An example page demonstrating autoapi rendering with the Ansys sphinx theme template can
 be found found on the ``API Reference`` page of the 
-`PyAnsys Geometry documentation <https://geometry.docs.pyansys.com/>`_.
+`PyAnsys Geometry documentation <PyAnsys_Geometry_Docs_>`_.
 
 Install the theme
 -----------------
@@ -63,3 +63,14 @@ Consider using the ``conf.py`` for this repository:
 .. toctree::
    :hidden:
    :maxdepth: 2
+
+.. LINKS and References 
+
+.. _Sphinx: https://www.sphinx-doc.org/en/master/
+.. _Sphinx_Getting_Started: https://www.sphinx-doc.org/en/master/usage/quickstart.html
+.. _Sphinx_PyPI: https://pypi.org/project/Sphinx/
+.. _PyData_PyPI: https://pypi.org/project/pydata-sphinx-theme/
+.. _Jinja2_PyPI: https://pypi.org/project/Jinja2/
+.. _Sphinx_AutoAPI_PyPI: https://pypi.org/project/sphinx-autoapi/
+.. _Sphinx_Design_PyPI: https://pypi.org/project/sphinx-design/
+.. _PyAnsys_Geometry_Docs: https://geometry.docs.pyansys.com/
