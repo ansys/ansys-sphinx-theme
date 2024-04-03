@@ -32,6 +32,12 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+
+api = [
+    "sphinx-autoapi==3.0.0a4",
+    "sphinx-design==0.5.0",
+]
+
 doc = [
     "numpydoc==1.7.0",
     "Sphinx==7.2.6",
