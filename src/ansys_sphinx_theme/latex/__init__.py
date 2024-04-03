@@ -55,11 +55,11 @@ def generate_preamble(title, watermark="watermark", date=None):
     variables = dict(_title=title, _watermark=watermark, _date=date)
 
     latex_jinja_env = jinja2.Environment(
-        block_start_string="\BLOCK{",
+        block_start_string="\\BLOCK{",
         block_end_string="}",
-        variable_start_string="\pyvar{",
+        variable_start_string="\\pyvar{",
         variable_end_string="}",
-        comment_start_string="\#{",
+        comment_start_string="\\#{",
         comment_end_string="}",
         line_statement_prefix="%%",
         line_comment_prefix="%#",

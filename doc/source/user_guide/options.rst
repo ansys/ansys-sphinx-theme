@@ -59,7 +59,7 @@ GitHub repository.
   in the *PyData Theme* documentation.
 - For comprehensive information on `Font Awesome <https://fontawesome.com/>`_, an icon
   library and toolkit, see its `documentation <https://fontawesome.com/v6/docs>`_,
-  particularly `How To Add Icons <https://fontawesome.com/v6/docs/web/add-icons/how-to#contentHeader>`_.
+  particularly `How To Add Icons <https://fontawesome.com/v6/docs/web/add-icons/how-to>`_.
 
 The following sections explain how you can add icons and hide icons.
 
@@ -188,3 +188,63 @@ to provide search functionality for your documentation.
     If you do not set the "use_meilisearch" option,
     ``ansys-sphinx-theme`` uses the default search functionality 
     inherited from the PyData Sphinx Theme.
+
+Cheat sheets
+------------
+
+The ``cheatsheet`` HTML theme option can be used to enable a cheat sheet in the Ansys Sphinx theme.
+
+To enable a cheatsheet, in the ``conf.py`` file for your PyAnsys
+library, you can add a child dictionary named ``cheatsheet`` to
+the ``html_theme_options`` dictionary. 
+
+This dictionary should contain these keys, in the order given:
+
+#. ``url``: URL of the cheat sheet for downloading.
+#. ``title``: Title of the cheat sheet.
+#. ``thumbnail``: Thumbnail image for the cheat sheet.
+#. ``needs_download``: Whether to download the cheat sheet locally during the build. The default is ``False``, in which case the cheat sheet is accessed directly from the provided URL. If ``True``, the cheat sheet is downloaded to the ``_build/html/_static/`` directory. 
+#. ``pages``: List of pages to include in the cheat sheet (optional). If no list is provided, the cheat sheet includes the index page of the documentation.
+
+.. code-block:: python
+
+    html_theme_options = (
+        {
+            "cheatsheet": {
+                "url": "<your cheat sheet URL>",
+                "title": "<title of your cheat sheet>",
+                "thumbnail": "<image URL>",
+                "needs_download": True,  # True if you want to download the cheatsheet locally in the ``_build/html/_static/`` directory.
+                "pages": "<list of pages to include the cheat sheet on>",  # Optional
+            },
+        },
+    )
+
+Here is an example configuration of using cheatsheet in 
+``conf.py`` file of ``PyMAPDL``:
+
+ .. code-block:: python
+
+    html_theme_options = (
+        {
+            "cheatsheet": {
+                "url": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.pdf",
+                "title": "PyMAPDL cheatsheet",
+                "thumbnail": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.png",
+                "needs_download": True,
+                "pages": ["index", "getting_started/learning"],
+            },
+        },
+    )
+
+.. note:: 
+
+    if you set the "needs_download" option, you should provide the "html_static_path" option 
+    in the ``conf.py`` file to specify the location of the cheat sheet.
+
+    for example, if you need to download cheat sheet in the ``_build/html/_static/`` directory,
+    you should add the following line in the ``conf.py`` file:
+
+    .. code-block:: pycon
+
+        html_static_path = ["_static"]
