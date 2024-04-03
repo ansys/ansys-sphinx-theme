@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [project]
 # Check https://flit.readthedocs.io/en/latest/pyproject_toml.html for all available sections
 name = "ansys-sphinx-theme"
-dynamic = ["version"]
+version = "0.16.dev0"
 description = "A theme devised by ANSYS, Inc. for Sphinx documentation."
 readme = "README.rst"
 requires-python = ">=3.9,<4"
@@ -28,6 +28,7 @@ dependencies = [
     "Sphinx>=4.2.0",
     "pydata-sphinx-theme>=0.14,<0.15",
     "Jinja2>=3.1.2",
+    "importlib-metadata>=4.0",
 ]
 
 [project.optional-dependencies]
