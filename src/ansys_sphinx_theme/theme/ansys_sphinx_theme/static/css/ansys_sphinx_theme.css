@@ -1161,3 +1161,9 @@ a:visited:hover {
 .bd-sidebar-primary {
   padding: 0.5rem;
 }
+
+/* Auto-api prename */
+
+.sig-prename.descclassname {
+  display: none;
+}
