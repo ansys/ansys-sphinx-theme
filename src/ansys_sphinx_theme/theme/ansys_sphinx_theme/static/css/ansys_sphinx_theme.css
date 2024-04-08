@@ -1162,7 +1162,11 @@ a:visited:hover {
   padding: 0.5rem;
 }
 
-/* Auto-api prename */
+/* Do not display object domain namespace when documenting objects.
+
+   Example: class ansys.module.foo.Foo.method -> method
+
+  */
 
 .sig-prename.descclassname {
   display: none;
