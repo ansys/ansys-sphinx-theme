@@ -1161,3 +1161,13 @@ a:visited:hover {
 .bd-sidebar-primary {
   padding: 0.5rem;
 }
+
+/* Do not display object domain namespace when documenting objects.
+
+   Example: class ansys.module.foo.Foo.method -> method
+
+  */
+
+.sig-prename.descclassname {
+  display: none;
+}
