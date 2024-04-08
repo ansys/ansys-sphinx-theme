@@ -372,6 +372,26 @@ def download_file(url: str, directory: pathlib.Path) -> None:
             file.write(response.content)
 
 
+def replace_html_tag(app, exception):
+    """Replace HTML tags in the generated HTML files.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    exception : Exception
+        Exception that occurred during the build process.
+    """
+    if exception is None:
+        build_dir = pathlib.Path(app.builder.outdir).resolve()
+        file_names = [str(file) for file in build_dir.rglob("*.html")]
+        for file_name in file_names:
+            with open(build_dir / file_name, "r", encoding="utf-8") as f:
+                content = f.read()
+            with open(build_dir / file_name, "w", encoding="utf-8") as f:
+                f.write(content.replace("&lt;", "<").replace("&gt;", ">"))
+
+
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -404,6 +424,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
+    app.connect("build-finished", replace_html_tag)
     app.config.templates_path.append(str(TEMPLATES_PATH))
     return {
         "version": __version__,

@@ -29,7 +29,7 @@
    :hidden:
 
     {% for obj in objects_list %}
-    <i class="{{ icon }}"></i> <i class="{{ icon }}"></i>{{ obj.short_name }}<{{ obj.include_path }}>
+    <i class="{{ icon }}"></i> {{ obj.short_name }}<{{ obj.include_path }}>
     {% endfor %}
 {%- endmacro %}
 
@@ -165,28 +165,28 @@ Summary
 
 {% block subpackages %}
 {% if visible_subpackages %}
-{{ toctree_from_objects_list(visible_subpackages, "nf-md-package") }}
+{{ toctree_from_objects_list(visible_subpackages, "nf nf-md-package") }}
 {% endif %}
 {% endblock %}
 
 {% block submodules %}
 {% if visible_submodules %}
-{{ toctree_from_objects_list(visible_submodules, "nf-fa-file") }}
+{{ toctree_from_objects_list(visible_submodules, "nf nf-fa-file") }}
 {% endif %}
 {% endblock %}
 
 {% block class %}
 {% if own_page_types and "class" in own_page_types %}
 {% if visible_interfaces %}
-{{ toctree_from_objects_list(visible_interfaces, "nf-cod-symbol_interface") }}
+{{ toctree_from_objects_list(visible_interfaces, "nf nf-cod-symbol_interface") }}
 {% endif %}
 
 {% if visible_classes %}
-{{ toctree_from_objects_list(visible_classes, "nf-cod-symbol_class") }}
+{{ toctree_from_objects_list(visible_classes, "nf nf-cod-symbol_class") }}
 {% endif %}
 
 {% if visible_enums %}
-{{ toctree_from_objects_list(visible_enums, "nf-cod-symbol_enum") }}
+{{ toctree_from_objects_list(visible_enums, "nf nf-cod-symbol_enum") }}
 {% endif %}
 
 {% if visible_exceptions %}
@@ -197,13 +197,13 @@ Summary
 
 {% block functions %}
 {% if own_page_types and visible_functions and "function" in own_page_types %}
-{{ toctree_from_objects_list(visible_functions, "nf-md-function_variant") }}
+{{ toctree_from_objects_list(visible_functions, "nf nf-md-function_variant") }}
 {% endif %}
 {% endblock %}
 
 {% block constants %}
 {% if own_page_types and visible_constants and "constant" in own_page_types %}
-{{ toctree_from_objects_list(visible_constants, "nf-cod-symbol_constant") }}
+{{ toctree_from_objects_list(visible_constants, "nf nf-cod-symbol_constant") }}
 {% endif %}
 {% endblock %}
 
