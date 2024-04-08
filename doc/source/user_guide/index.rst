@@ -18,4 +18,5 @@ While the Ansys Sphinx theme is often used as is, you can customize the followin
    pdf
    404_page
    extensions
+   autoapi
 
