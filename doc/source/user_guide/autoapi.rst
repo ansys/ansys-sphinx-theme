@@ -27,9 +27,7 @@ If you are using a ``pyproject.toml`` file, you would define your dependency as 
     # For a typical PyAnsys pyproject.toml file
     [project.optional-dependencies]
     doc = [
-        ...
         "ansys-sphinx-theme[autoapi]==XX.YY.ZZ",
-        ...
     ]
 
 Configuring our Sphinx project
