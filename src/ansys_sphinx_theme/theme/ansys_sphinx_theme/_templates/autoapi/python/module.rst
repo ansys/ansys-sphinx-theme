@@ -29,7 +29,7 @@
    :hidden:
 
     {% for obj in objects_list %}
-    <i class={{ icon }}></i> <i class={{ icon }}></i>{{ obj.short_name }}<{{ obj.include_path }}>
+    <i class="{{ icon }}"></i> <i class="{{ icon }}"></i>{{ obj.short_name }}<{{ obj.include_path }}>
     {% endfor %}
 {%- endmacro %}
 
