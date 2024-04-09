@@ -21,8 +21,6 @@ from ansys_sphinx_theme import (
     watermark,
 )
 
-access_token = os.getenv("GITHUB_ACCESS_TOKEN", "")
-
 # Project information
 project = "ansys_sphinx_theme"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
@@ -174,7 +172,7 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github(access_token) if access_token else Github()
+    g = Github()
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
 
