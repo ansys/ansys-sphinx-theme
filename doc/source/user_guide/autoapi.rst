@@ -3,10 +3,10 @@
 Using ``sphinx-autoapi`` to generate API documentation
 ------------------------------------------------------
 
-``sphinx-autoapi`` is a tool that automatically generates API documentation from your source code.
+`sphinx-autoapi <https://github.com/readthedocs/sphinx-autoapi/>`_ is a tool that automatically generates API documentation from your source code.
 It is a great way to keep your documentation up-to-date with your codebase.
 
-The ``ansys-sphinx-theme`` includes a custom template for ``sphinx-autoapi`` that is designed
+The ``ansys-sphinx-theme`` includes a set of custom templates for ``sphinx-autoapi`` that is designed
 to match the look and feel of the rest of the PyAnsys documentation.
 
 Dependencies required
@@ -16,9 +16,11 @@ To use ``sphinx-autoapi`` with the ``ansys-sphinx-theme``, you need to install t
 of the theme. This can be done by defining your ``ansys-sphinx-theme`` dependency as
 ``ansys-sphinx-theme[autoapi]`` in your project's requirements location.
 
-For example, if you are using a ``requirements.txt`` file, you would define your dependency as follows::
+For example, if you are using a ``requirements.txt`` file, you would define your dependency as follows:
 
-    ansys-sphinx-theme[autoapi]
+.. code-block: text
+
+    ansys-sphinx-theme[autoapi]==X.Y.Z
 
 If you are using a ``pyproject.toml`` file, you would define your dependency as follows:
 
@@ -27,7 +29,7 @@ If you are using a ``pyproject.toml`` file, you would define your dependency as 
     # For a typical PyAnsys pyproject.toml file
     [project.optional-dependencies]
     doc = [
-        "ansys-sphinx-theme[autoapi]==XX.YY.ZZ",
+        "ansys-sphinx-theme[autoapi]==X.Y.Z",
     ]
 
 Configuring our Sphinx project
@@ -61,11 +63,10 @@ templates, you need to add the following configuration to your Sphinx project's 
     autoapi_own_page_level = "class"
 
 
-The above configuration will generate API documentation for your package in the ``src`` directory
-and place the generated files in the ``api`` directory. The generated files will be based on the
+The above configuration generates the API documentation for your package in the ``src`` directory
+and places the generated files in the ``api`` directory. These files are based on the
 ``ansys-sphinx-theme`` templates. If you want to customize some of the previous options, you can
-do so by modifying the configuration above. The main line of code to use the shipped
-templates is the following.
+do so by modifying the configuration above. The line of code declaring the desired set of templates is the following one:
 
 .. code:: python
 
