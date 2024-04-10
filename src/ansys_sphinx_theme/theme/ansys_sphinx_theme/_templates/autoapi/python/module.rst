@@ -190,7 +190,7 @@ Summary
 {% endif %}
 
 {% if visible_exceptions %}
-{{ toctree_from_objects_list(visible_exceptions, "🗲") }}
+{{ toctree_from_objects_list(visible_exceptions, "nf-md-lightning_bolt") }}
 {% endif %}
 {% endif %}
 {% endblock %}
