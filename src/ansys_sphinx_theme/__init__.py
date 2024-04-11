@@ -115,7 +115,9 @@ def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
     )
 
 
-def add_autopai_template_theme_option(app: Sphinx) -> None:
+def add_autoapi_theme_option(
+    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: document
+) -> None:
     """Add the autoapi template path to the theme options.
 
     Parameters
@@ -131,13 +133,30 @@ def add_autopai_template_theme_option(app: Sphinx) -> None:
     doctree : ~docutils.nodes.document
         The doctree.
     """
-    use_autoapi_template = app.config.html_theme_options.get("use_ansys_autoapi_templates", False)
-    if use_autoapi_template:
-        # get the path of doc source
-        path_file = app.config.html_theme_options.get("autoapi_path", "")
-        relative_path = pathlib.Path(get_autoapi_templates_dir_relative_path(path_file))
-        app.config.html_theme_options.setdefault("autoapi_template_dir", relative_path)
-        print(app.config.html_theme_options.get("autoapi_template_dir"))
+    config = app.config
+    # get the autoapi dict path
+    autoapi_options = config.html_theme_options.get("autoapi_template", {})
+    if autoapi_options:
+        autoapi_template_dir = autoapi_options.get("autoapi_template_dir", "")
+        autoapi_project_name = autoapi_options.get("autoapi_project_name", "")
+        app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
+
+        def prepare_jinja_env(jinja_env) -> None:
+            """Prepare the Jinja environment for the theme."""
+            jinja_env.globals["autoapi_template_dir"] = autoapi_template_dir
+            jinja_env.globals["project_name"] = autoapi_project_name
+
+        autoapi_prepare_jinja_env = prepare_jinja_env
+
+        print("autoapi_template_dir: ", autoapi_template_dir)
+
+    # use_autoapi_template = app.config.html_theme_options.get("use_ansys_autoapi_templates", False)
+    # if use_autoapi_template:
+    #     # get the path of doc source
+    #     path_file = Path(app.config.html_theme_options.get("autoapi_path", ""))
+    #     autoapi_template_dir = get_autoapi_templates_dir_relative_path(path_file)
+    #     env = app.builder.env
+    #     config = env.config
 
 
 def convert_version_to_pymeilisearch(semver: str) -> str:
@@ -447,12 +466,11 @@ def setup(app: Sphinx) -> Dict:
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     app.config.templates_path.append(str(TEMPLATES_PATH))
-    app.connect("builder-inited", add_autopai_template_theme_option)
+    app.config.config_values["autoapi_template_dir"] = AUTOAPI_TEMPLATES_PATH
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
-    # app.connect("html-page-context", add_autopai_template_theme_option)
-    # app.connect("build-finished", replace_html_tag)
+    app.connect("html-page-context", add_autoapi_theme_option)
     return {
         "version": __version__,
         "parallel_read_safe": True,
