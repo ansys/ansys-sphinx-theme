@@ -115,6 +115,31 @@ def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
     )
 
 
+def add_autopai_template_theme_option(app: Sphinx) -> None:
+    """Add the autoapi template path to the theme options.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    pagename : str
+        Name of the current page.
+    templatename : str
+        Name of the template being used.
+    context : dict
+        Context dictionary for the page.
+    doctree : ~docutils.nodes.document
+        The doctree.
+    """
+    use_autoapi_template = app.config.html_theme_options.get("use_ansys_autoapi_templates", False)
+    if use_autoapi_template:
+        # get the path of doc source
+        path_file = app.config.html_theme_options.get("autoapi_path", "")
+        relative_path = pathlib.Path(get_autoapi_templates_dir_relative_path(path_file))
+        app.config.html_theme_options.setdefault("autoapi_template_dir", relative_path)
+        print(app.config.html_theme_options.get("autoapi_template_dir"))
+
+
 def convert_version_to_pymeilisearch(semver: str) -> str:
     """Convert a semantic version number to pymeilisearch-compatible format.
 
@@ -421,11 +446,13 @@ def setup(app: Sphinx) -> Dict:
     app.add_js_file(str(JS_FILE.relative_to(STATIC_PATH)))
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
+    app.config.templates_path.append(str(TEMPLATES_PATH))
+    app.connect("builder-inited", add_autopai_template_theme_option)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
-    app.connect("build-finished", replace_html_tag)
-    app.config.templates_path.append(str(TEMPLATES_PATH))
+    # app.connect("html-page-context", add_autopai_template_theme_option)
+    # app.connect("build-finished", replace_html_tag)
     return {
         "version": __version__,
         "parallel_read_safe": True,
