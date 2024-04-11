@@ -148,16 +148,6 @@ def add_autoapi_theme_option(
 
         autoapi_prepare_jinja_env = prepare_jinja_env
 
-        print("autoapi_template_dir: ", autoapi_template_dir)
-
-    # use_autoapi_template = app.config.html_theme_options.get("use_ansys_autoapi_templates", False)
-    # if use_autoapi_template:
-    #     # get the path of doc source
-    #     path_file = Path(app.config.html_theme_options.get("autoapi_path", ""))
-    #     autoapi_template_dir = get_autoapi_templates_dir_relative_path(path_file)
-    #     env = app.builder.env
-    #     config = env.config
-
 
 def convert_version_to_pymeilisearch(semver: str) -> str:
     """Convert a semantic version number to pymeilisearch-compatible format.
