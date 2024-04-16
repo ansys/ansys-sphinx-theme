@@ -115,38 +115,30 @@ def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
     )
 
 
-def add_autoapi_theme_option(
-    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: document
-) -> None:
+def add_autoapi_theme_option(app: Sphinx) -> None:
     """Add the autoapi template path to the theme options.
 
     Parameters
     ----------
     app : ~sphinx.application.Sphinx
         Application instance for rendering the documentation.
-    pagename : str
-        Name of the current page.
-    templatename : str
-        Name of the template being used.
-    context : dict
-        Context dictionary for the page.
-    doctree : ~docutils.nodes.document
-        The doctree.
     """
-    config = app.config
-    # get the autoapi dict path
-    autoapi_options = config.html_theme_options.get("autoapi_template", {})
-    if autoapi_options:
-        autoapi_template_dir = autoapi_options.get("autoapi_template_dir", "")
-        autoapi_project_name = autoapi_options.get("autoapi_project_name", "")
-        app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
+    app.config.templates_path.append(str(TEMPLATES_PATH))
+    autoapi_options = app.config.html_theme_options.get("autoapi_template", {})
+    autoapi_template_dir = autoapi_options.get("autoapi_template_dir", "")
+    autoapi_project_name = autoapi_options.get("project_name", "")
+    if not autoapi_template_dir:
+        autoapi_template_dir = get_autoapi_templates_dir_relative_path(TEMPLATES_PATH)
+    app.config["autoapi_template_dir"] = get_autoapi_templates_dir_relative_path(
+        pathlib.Path(autoapi_template_dir)
+    )
+    app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
 
-        def prepare_jinja_env(jinja_env) -> None:
-            """Prepare the Jinja environment for the theme."""
-            jinja_env.globals["autoapi_template_dir"] = autoapi_template_dir
-            jinja_env.globals["project_name"] = autoapi_project_name
+    def prepare_jinja_env(jinja_env) -> None:
+        """Prepare the Jinja environment for the theme."""
+        jinja_env.globals["project_name"] = autoapi_project_name
 
-        autoapi_prepare_jinja_env = prepare_jinja_env
+    app.config["autoapi_prepare_jinja_env"] = prepare_jinja_env
 
 
 def convert_version_to_pymeilisearch(semver: str) -> str:
@@ -455,12 +447,11 @@ def setup(app: Sphinx) -> Dict:
     app.add_js_file(str(JS_FILE.relative_to(STATIC_PATH)))
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
-    app.config.templates_path.append(str(TEMPLATES_PATH))
-    app.config.config_values["autoapi_template_dir"] = AUTOAPI_TEMPLATES_PATH
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
-    app.connect("html-page-context", add_autoapi_theme_option)
+    app.connect("builder-inited", add_autoapi_theme_option, priority=1)
+    app.connect("build-finished", replace_html_tag)
     return {
         "version": __version__,
         "parallel_read_safe": True,
