@@ -124,7 +124,7 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
         Application instance for rendering the documentation.
     """
     app.config.templates_path.append(str(TEMPLATES_PATH))
-    autoapi_options = app.config.html_theme_options.get("autoapi_template", {})
+    autoapi_options = app.config.html_theme_options.get("autoapi", {})
     autoapi_template_dir = autoapi_options.get("autoapi_template_dir", "")
     autoapi_project_name = autoapi_options.get("project_name", "")
     if not autoapi_template_dir:
