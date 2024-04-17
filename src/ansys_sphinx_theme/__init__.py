@@ -123,26 +123,47 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     app : ~sphinx.application.Sphinx
         Application instance for rendering the documentation.
     """
-    autoapi_options = app.config.html_theme_options.get("autoapi", {})
-    if not autoapi_options:
+    autoapi = app.config.html_theme_options.get("autoapi", {})
+    if not autoapi:
         return
+    AUTOAPI_OPTIONS = [
+        "members",
+        "undoc-members",
+        "show-inheritance",
+        "show-module-summary",
+        "special-members",
+    ]
     app.config.templates_path.append(str(TEMPLATES_PATH))
     app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
-    autoapi_template_dir = autoapi_options.get("autoapi_template_dir", "")
-    autoapi_project_name = autoapi_options.get("project_name", "")
+    autoapi_template_dir = autoapi.get("autoapi_template_dir", "")
+    autoapi_project_name = autoapi.get("project_name", "")
 
     if not autoapi_template_dir:
         autoapi_template_dir = get_autoapi_templates_dir_relative_path(TEMPLATES_PATH)
 
-    app.config["autoapi_template_dir"] = get_autoapi_templates_dir_relative_path(
-        pathlib.Path(autoapi_template_dir)
-    )
+    app.config["autoapi_template_dir"] = autoapi_template_dir
 
     def prepare_jinja_env(jinja_env) -> None:
         """Prepare the Jinja environment for the theme."""
         jinja_env.globals["project_name"] = autoapi_project_name
 
     app.config["autoapi_prepare_jinja_env"] = prepare_jinja_env
+    if "sphinx_jinja" not in app.config["extensions"]:
+        app.config["extensions"].append("sphinx_jinja")
+    if "autoapi.extension" not in app.config["extensions"]:
+        app.config["extensions"].append("autoapi.extension")
+    if "sphinx_design" not in app.config["extensions"]:
+        app.config["extensions"].append("sphinx_design")
+    app.config["autoapi_type"] = autoapi.get("type", "python")
+    app.config["autoapi_dirs"] = autoapi.get("directory", [])
+    app.config["autoapi_root"] = autoapi.get("output", "api")
+    app.config["autoapi_own_page_level"] = autoapi.get("own_page_level", "module")
+    app.config["autoapi_python_use_implicit_namespaces"] = autoapi.get(
+        "use_implicit_namespaces", True
+    )
+    app.config["autoapi_keep_files"] = autoapi.get("keep_files", True)
+    app.config["autoapi_python_class_content"] = autoapi.get("class_content", "class")
+    app.config["autoapi_options"] = autoapi.get("options", AUTOAPI_OPTIONS)
 
 
 def convert_version_to_pymeilisearch(semver: str) -> str:
