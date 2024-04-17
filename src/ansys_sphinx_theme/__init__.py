@@ -110,9 +110,7 @@ def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
         A string rerpesenting the relative path to the autoapi templates.
 
     """
-    return os.path.relpath(
-        str(AUTOAPI_TEMPLATES_PATH.absolute()), start=str(path.parent.absolute())
-    )
+    return os.path.relpath(str(AUTOAPI_TEMPLATES_PATH.absolute()), start=str(path.absolute()))
 
 
 def add_autoapi_theme_option(app: Sphinx) -> None:
@@ -126,6 +124,12 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     autoapi = app.config.html_theme_options.get("autoapi", {})
     if not autoapi:
         return
+    if "sphinx_jinja" not in app.config["extensions"]:
+        app.config["extensions"].append("sphinx_jinja")
+    if "autoapi.extension" not in app.config["extensions"]:
+        app.config["extensions"].append("autoapi.extension")
+    if "sphinx_design" not in app.config["extensions"]:
+        app.config["extensions"].append("sphinx_design")
     AUTOAPI_OPTIONS = [
         "members",
         "undoc-members",
@@ -133,13 +137,12 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
         "show-module-summary",
         "special-members",
     ]
-    app.config.templates_path.append(str(TEMPLATES_PATH))
     app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
-    autoapi_template_dir = autoapi.get("autoapi_template_dir", "")
-    autoapi_project_name = autoapi.get("project_name", "")
+    autoapi_template_dir = autoapi.get("templates", "")
+    autoapi_project_name = autoapi.get("project", "")
 
     if not autoapi_template_dir:
-        autoapi_template_dir = get_autoapi_templates_dir_relative_path(TEMPLATES_PATH)
+        autoapi_template_dir = get_autoapi_templates_dir_relative_path(app.confdir)
 
     app.config["autoapi_template_dir"] = autoapi_template_dir
 
@@ -148,12 +151,6 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
         jinja_env.globals["project_name"] = autoapi_project_name
 
     app.config["autoapi_prepare_jinja_env"] = prepare_jinja_env
-    if "sphinx_jinja" not in app.config["extensions"]:
-        app.config["extensions"].append("sphinx_jinja")
-    if "autoapi.extension" not in app.config["extensions"]:
-        app.config["extensions"].append("autoapi.extension")
-    if "sphinx_design" not in app.config["extensions"]:
-        app.config["extensions"].append("sphinx_design")
     app.config["autoapi_type"] = autoapi.get("type", "python")
     app.config["autoapi_dirs"] = autoapi.get("directory", [])
     app.config["autoapi_root"] = autoapi.get("output", "api")
@@ -470,6 +467,7 @@ def setup(app: Sphinx) -> Dict:
         raise FileNotFoundError(f"Unable to locate ansys-sphinx theme at {CSS_PATH.absolute()}")
     app.add_css_file(str(CSS_PATH.relative_to(STATIC_PATH)))
     app.add_js_file(str(JS_FILE.relative_to(STATIC_PATH)))
+    app.config.templates_path.append(str(TEMPLATES_PATH))
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     app.connect("html-page-context", update_footer_theme)
