@@ -123,16 +123,20 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     app : ~sphinx.application.Sphinx
         Application instance for rendering the documentation.
     """
-    app.config.templates_path.append(str(TEMPLATES_PATH))
     autoapi_options = app.config.html_theme_options.get("autoapi", {})
+    if not autoapi_options:
+        return
+    app.config.templates_path.append(str(TEMPLATES_PATH))
+    app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     autoapi_template_dir = autoapi_options.get("autoapi_template_dir", "")
     autoapi_project_name = autoapi_options.get("project_name", "")
+
     if not autoapi_template_dir:
         autoapi_template_dir = get_autoapi_templates_dir_relative_path(TEMPLATES_PATH)
+
     app.config["autoapi_template_dir"] = get_autoapi_templates_dir_relative_path(
         pathlib.Path(autoapi_template_dir)
     )
-    app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
 
     def prepare_jinja_env(jinja_env) -> None:
         """Prepare the Jinja environment for the theme."""
