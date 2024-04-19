@@ -162,6 +162,8 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     app.config["autoapi_keep_files"] = autoapi.get("keep_files", True)
     app.config["autoapi_python_class_content"] = autoapi.get("class_content", "class")
     app.config["autoapi_options"] = autoapi.get("options", AUTOAPI_OPTIONS)
+    print("=====================================")
+    print(app.config.autoapi_dirs)
 
 
 def convert_version_to_pymeilisearch(semver: str) -> str:
@@ -476,9 +478,6 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", add_cheat_sheet)
     app.connect("builder-inited", add_autoapi_theme_option, priority=200)
     app.connect("build-finished", replace_html_tag)
-    app.connect("doctree-read", update_env)
-    app.connect("env-check-consistency", check_consistency)
-    app.connect("build-finished", check_config_after_build)
     return {
         "version": __version__,
         "parallel_read_safe": True,
