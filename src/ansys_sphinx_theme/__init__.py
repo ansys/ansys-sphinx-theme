@@ -124,12 +124,12 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     autoapi = app.config.html_theme_options.get("autoapi", {})
     if not autoapi:
         return
-    if "sphinx_jinja" not in app.config["extensions"]:
-        app.config["extensions"].append("sphinx_jinja")
-    if "autoapi.extension" not in app.config["extensions"]:
-        app.config["extensions"].append("autoapi.extension")
-    if "sphinx_design" not in app.config["extensions"]:
-        app.config["extensions"].append("sphinx_design")
+    required_extensions = ["sphinx_jinja", "sphinx_design"]
+
+    for extension in required_extensions:
+        if extension not in app.config["extensions"]:
+            app.config["extensions"].append(extension)
+    print(app.config["extensions"])
     AUTOAPI_OPTIONS = [
         "members",
         "undoc-members",
@@ -150,6 +150,7 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
         """Prepare the Jinja environment for the theme."""
         jinja_env.globals["project_name"] = autoapi_project_name
 
+    # Set the autoapi options
     app.config["autoapi_prepare_jinja_env"] = prepare_jinja_env
     app.config["autoapi_type"] = autoapi.get("type", "python")
     app.config["autoapi_dirs"] = autoapi.get("directory", [])
@@ -473,8 +474,11 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
-    app.connect("builder-inited", add_autoapi_theme_option, priority=1)
+    app.connect("builder-inited", add_autoapi_theme_option, priority=200)
     app.connect("build-finished", replace_html_tag)
+    app.connect("doctree-read", update_env)
+    app.connect("env-check-consistency", check_consistency)
+    app.connect("build-finished", check_config_after_build)
     return {
         "version": __version__,
         "parallel_read_safe": True,
