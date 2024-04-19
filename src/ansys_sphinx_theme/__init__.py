@@ -153,7 +153,6 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     # Set the autoapi options
     app.config["autoapi_prepare_jinja_env"] = prepare_jinja_env
     app.config["autoapi_type"] = autoapi.get("type", "python")
-    app.config["autoapi_dirs"] = autoapi.get("directory", [])
     app.config["autoapi_root"] = autoapi.get("output", "api")
     app.config["autoapi_own_page_level"] = autoapi.get("own_page_level", "module")
     app.config["autoapi_python_use_implicit_namespaces"] = autoapi.get(
@@ -162,8 +161,11 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     app.config["autoapi_keep_files"] = autoapi.get("keep_files", True)
     app.config["autoapi_python_class_content"] = autoapi.get("class_content", "class")
     app.config["autoapi_options"] = autoapi.get("options", AUTOAPI_OPTIONS)
-    print("=====================================")
-    print(app.config.autoapi_dirs)
+
+    relative_autoapi_dir = os.path.relpath(
+        autoapi.get("directory", ""), start=str(app.confdir / "conf.py")
+    )
+    app.config["autoapi_dirs"] = [relative_autoapi_dir]
 
 
 def convert_version_to_pymeilisearch(semver: str) -> str:
