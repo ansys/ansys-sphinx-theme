@@ -129,7 +129,6 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     for extension in required_extensions:
         if extension not in app.config["extensions"]:
             app.config["extensions"].append(extension)
-    print(app.config["extensions"])
     AUTOAPI_OPTIONS = [
         "members",
         "undoc-members",
@@ -468,6 +467,7 @@ def setup(app: Sphinx) -> Dict:
     setup_default_html_theme_options(app)
 
     # Verify that the main CSS file exists
+    app.connect("builder-inited", add_autoapi_theme_option, priority=400)
     if not CSS_PATH.exists():
         raise FileNotFoundError(f"Unable to locate ansys-sphinx theme at {CSS_PATH.absolute()}")
     app.add_css_file(str(CSS_PATH.relative_to(STATIC_PATH)))
@@ -478,7 +478,6 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
-    app.connect("builder-inited", add_autoapi_theme_option, priority=200)
     app.connect("build-finished", replace_html_tag)
     return {
         "version": __version__,
