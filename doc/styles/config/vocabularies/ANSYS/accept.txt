@@ -1,0 +1,15 @@
+ANSYS
+[Aa]nsys
+[Ss]phinx 
+[Tt]heme
+boolean
+datatable
+MeiliSearch
+[Ll]inkcode
+link_code_library
+link_code_source
+link_code_branch
+html_context
+(?!)HTML
+CSS
+PDF
