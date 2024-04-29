@@ -1,0 +1,15 @@
+(?i)ansys
+(?i)sphinx
+(?i)theme
+(?i)Boolean
+datatable
+MeiliSearch
+(?i)linkcode
+link_code_library
+link_code_source
+link_code_branch
+html_context
+autoapi
+(?i)HTML
+CSS
+PDF

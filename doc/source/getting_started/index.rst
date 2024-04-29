@@ -31,7 +31,7 @@ you need to install the following dependencies:
 - `sphinx-design <Sphinx_Design_PyPI_>`_
 
 An example page demonstrating autoapi rendering with the Ansys sphinx theme template can
-be found found on the ``API Reference`` page of the 
+be found on the ``API Reference`` page of the 
 `PyAnsys Geometry documentation <PyAnsys_Geometry_Docs_>`_.
 
 Install the theme
