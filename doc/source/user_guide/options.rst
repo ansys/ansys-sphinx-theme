@@ -28,9 +28,9 @@ for the documentation landing page for the Ansys repository:
        ],
    }
 
-When you are on the landing page for your documentation, the breadcrumb shows the title for this
+When you are on the landing page for your documentation, the breadcrumb shows the title for this 
 page. However, Sphinx cannot access this title from other documentation pages. Thus, after
-``html_theme_options`` dictionary, you must set ``html_short_title``to the display text to
+``html_theme_options`` dictionary, you must set ``html_short_title`` to the display text to
 use for this breadcrumb.
 
 To ensure a consistent user experience, always set the ``html_short_title``
