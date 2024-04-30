@@ -51,12 +51,6 @@ html_theme_options = {
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
     ],
-    "external_links": [
-        {
-            "url": "https://github.com/ansys/ansys-sphinx-theme/releases",
-            "name": "Changelog",
-        },
-    ],
     "switcher": {
         "json_url": f"https://{cname}/versions.json",
         "version_match": get_version_match(__version__),
