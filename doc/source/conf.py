@@ -27,6 +27,7 @@ copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "ANSYS, Inc."
 release = version = __version__
 cname = os.getenv("DOCUMENTATION_CNAME", "sphinxdocs.ansys.com")
+switcher_version = get_version_match(__version__)
 
 # use the default ansys logo
 html_logo = ansys_logo_black
@@ -149,6 +150,12 @@ import requests
 THIS_PATH = Path(__file__).parent.resolve()
 
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
+
+linkcheck_ignore = []
+if switcher_version != "dev":
+    linkcheck_ignore.append(
+        f"https://github.com/ansys/ansys-sphinx-theme/releases/tag/v{__version__}"
+    )
 
 
 def extract_example_links(
