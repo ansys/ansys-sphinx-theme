@@ -11,7 +11,6 @@ on:
 env:
   MAIN_PYTHON_VERSION : '3.10'
   PACKAGE_NAME: 'ansys-sphinx-theme'
-  PACKAGE_NAMESPACE: 'ansys_sphinx_theme'
   DOCUMENTATION_CNAME: 'sphinxdocs.ansys.com'
   MEILISEARCH_API_KEY: ${{ secrets.MEILISEARCH_API_KEY }}
   MEILISEARCH_PUBLIC_API_KEY: ${{ secrets.MEILISEARCH_PUBLIC_API_KEY }}
