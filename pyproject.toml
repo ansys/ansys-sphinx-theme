@@ -32,9 +32,13 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+autoapi = [
+    "sphinx-autoapi==3.0.0a4",
+    "sphinx-design==0.5.0",
+]
 doc = [
     "numpydoc==1.7.0",
-    "Sphinx==7.2.6",
+    "Sphinx==7.3.7",
     "sphinx-copybutton==0.5.2",
     "sphinx-notfound-page==1.0.0",
     "sphinx-design==0.5.0",
@@ -79,3 +83,39 @@ source = ["src"]
 
 [tool.coverage.report]
 show_missing = true
+
+
+[tool.towncrier]
+directory = "doc/changelog.d"
+filename = "doc/source/changelog.rst"
+template = "doc/changelog.d/changelog_template.jinja"
+start_string = ".. towncrier release notes start\n"
+title_format = "`{version} <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v{version}>`_ - {project_date}"
+issue_format = "`#{issue} <https://github.com/ansys/ansys-sphinx-theme/pull/{issue}>`_"
+
+[[tool.towncrier.type]]
+directory = "added"
+name = "Added"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "changed"
+name = "Changed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "fixed"
+name = "Fixed"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "dependencies"
+name = "Dependencies"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "miscellaneous"
+name = "Miscellaneous"
+showcontent = true
+
+
