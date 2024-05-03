@@ -27,6 +27,7 @@ copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
 author = "ANSYS, Inc."
 release = version = __version__
 cname = os.getenv("DOCUMENTATION_CNAME", "sphinxdocs.ansys.com")
+switcher_version = get_version_match(__version__)
 
 # use the default ansys logo
 html_logo = ansys_logo_black
@@ -49,12 +50,6 @@ html_theme_options = {
     "use_edit_page_button": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
-    ],
-    "external_links": [
-        {
-            "url": "https://github.com/ansys/ansys-sphinx-theme/releases",
-            "name": "Changelog",
-        },
     ],
     "switcher": {
         "json_url": f"https://{cname}/versions.json",
@@ -85,12 +80,7 @@ extensions = [
 # Intersphinx mapping
 intersphinx_mapping = {
     "python": ("https://docs.python.org/3", None),
-    # kept here as an example
-    # "scipy": ("https://docs.scipy.org/doc/scipy/reference", None),
-    # "numpy": ("https://numpy.org/devdocs", None),
-    # "matplotlib": ("https://matplotlib.org/stable", None),
-    # "pandas": ("https://pandas.pydata.org/pandas-docs/stable", None),
-    # "pyvista": ("https://docs.pyvista.org/", None),
+    "sphinx": ("https://www.sphinx-doc.org/en/master", None),
 }
 
 # numpydoc configuration
@@ -154,6 +144,12 @@ import requests
 THIS_PATH = Path(__file__).parent.resolve()
 
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
+
+linkcheck_ignore = []
+if switcher_version != "dev":
+    linkcheck_ignore.append(
+        f"https://github.com/ansys/ansys-sphinx-theme/releases/tag/v{__version__}"
+    )
 
 
 def extract_example_links(
