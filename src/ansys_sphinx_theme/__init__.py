@@ -153,7 +153,7 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     app.config["autoapi_prepare_jinja_env"] = prepare_jinja_env
     app.config["autoapi_type"] = autoapi.get("type", "python")
     app.config["autoapi_root"] = autoapi.get("output", "api")
-    app.config["autoapi_own_page_level"] = autoapi.get("own_page_level", "module")
+    app.config["autoapi_own_page_level"] = autoapi.get("own_page_level", "class")
     app.config["autoapi_python_use_implicit_namespaces"] = autoapi.get(
         "use_implicit_namespaces", True
     )
