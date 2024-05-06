@@ -429,13 +429,18 @@ def replace_html_tag(app, exception):
     exception : Exception
         Exception that occurred during the build process.
     """
-    if exception is None:
-        build_dir = pathlib.Path(app.builder.outdir).resolve()
-        file_names = [str(file) for file in build_dir.rglob("*.html")]
+    if exception is not None:
+        return
+
+    build_dir = pathlib.Path(app.builder.outdir).resolve()
+    api_dir = app.config["autoapi_root"] or "api"
+    api_dir = build_dir / api_dir
+    if api_dir.exists():
+        file_names = [str(file) for file in api_dir.rglob("*.html")]
         for file_name in file_names:
-            with open(build_dir / file_name, "r", encoding="utf-8") as f:
+            with open(api_dir / file_name, "r", encoding="utf-8") as f:
                 content = f.read()
-            with open(build_dir / file_name, "w", encoding="utf-8") as f:
+            with open(api_dir / file_name, "w", encoding="utf-8") as f:
                 f.write(content.replace("&lt;", "<").replace("&gt;", ">"))
 
 
