@@ -433,15 +433,19 @@ def replace_html_tag(app, exception):
         return
 
     build_dir = pathlib.Path(app.builder.outdir).resolve()
-    api_dir = app.config["autoapi_root"] or "api"
-    api_dir = build_dir / api_dir
-    if api_dir.exists():
-        file_names = [str(file) for file in api_dir.rglob("*.html")]
-        for file_name in file_names:
-            with open(api_dir / file_name, "r", encoding="utf-8") as f:
-                content = f.read()
-            with open(api_dir / file_name, "w", encoding="utf-8") as f:
-                f.write(content.replace("&lt;", "<").replace("&gt;", ">"))
+    if app.config["extensions"] and "autoapi.extension" not in app.config["extensions"]:
+        return
+    api_dir = app.config["autoapi_root"]
+    api_path = build_dir / api_dir
+    if not api_path.exists():
+        return
+    file_names = list(api_path.rglob("*.html"))
+    for file_name in file_names:
+        with open(api_dir / file_name, "r", encoding="utf-8") as file:
+            content = file.read()
+        with open(api_dir / file_name, "w", encoding="utf-8") as file:
+            modified_content = content.replace("&lt;", "<").replace("&gt;", ">")
+            file.write(modified_content)
 
 
 def setup(app: Sphinx) -> Dict:
