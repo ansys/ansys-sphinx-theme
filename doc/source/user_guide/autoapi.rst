@@ -82,18 +82,19 @@ The following options are available for the ``autoapi`` extensions in the ``ansy
 add the following theme options to your ``conf.py`` file:
 
 - ``project``: The name of the project.
-- ``output``: The path to the directory where the generated files are placed. By default, this is set to the ``api`` directory.
+- ``output``: The path to the directory where the generated files are placed.
+  By default, this is set to the ``api`` directory.
 - ``templates``: The path to the directory containing the custom templates for ``sphinx-autoapi``.
-by default, this is set to the ``autoapi_templates`` directory in the theme package.
+  By default, this is set to the ``autoapi_templates`` directory in the theme package.
 - ``use_implicit_namespaces``: If set to ``True``, the autoapi extension use `implicit namespaces`.
-by default, this is set to ``True``.
+  By default, this is set to ``True``.
 - ``keep_files``: If set to ``True``, the autoapi extension keeps the generated files.
-by default, this is set to ``True``.
+  By default, this is set to ``True``.
 - ``own_page_level``: The level of the page where the autoapi extension places the content of the class.
-by default, this is set to ``class``.
-``type``: The type of the autoapi extension. By default, this is set to ``python``. 
-``options``: The options to pass to the autoapi extension. By default, 
-this is set to ``["members", "undoc-members", "show-inheritance", "show-module-summary", "special-members"]``.
+  By default, this is set to ``class``.
+- ``type``: The type of the autoapi extension. By default, this is set to ``python``. 
+- ``options``: The options to pass to the autoapi extension. By default, 
+  this is set to ``["members", "undoc-members", "show-inheritance", "show-module-summary", "special-members"]``.
 - ``class_content``: The content of the class. By default this is set to ``class``.
 
 All these options can be set in the ``conf.py`` file of your Sphinx project.
