@@ -22,6 +22,7 @@
 
 """This is the ansys-sphinx-theme module."""
 import logging
+import os
 import pathlib
 from typing import Any, Dict
 
@@ -389,6 +390,7 @@ def replace_html_tag(app, exception):
     api_path = build_dir / api_dir
     if not api_path.exists():
         return
+
     file_names = list(api_path.rglob("*.html"))
     for file_name in file_names:
         with open(api_dir / file_name, "r", encoding="utf-8") as file:
@@ -431,6 +433,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
+    app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     app.connect("build-finished", replace_html_tag)
     return {
         "version": __version__,
