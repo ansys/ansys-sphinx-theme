@@ -22,7 +22,6 @@
 
 """This is the ansys-sphinx-theme module."""
 import logging
-import os
 import pathlib
 from typing import Any, Dict
 
@@ -94,72 +93,6 @@ def get_version_match(semver: str) -> str:
         return "dev"
     major, minor, *_ = semver.split(".")
     return ".".join([major, minor])
-
-
-def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
-    """Return a string representing the relative path for autoapi templates.
-
-    Parameters
-    ----------
-    path : pathlib.Path
-        Path to the desired file.
-
-    Returns
-    -------
-    str
-        A string rerpesenting the relative path to the autoapi templates.
-
-    """
-    return os.path.relpath(str(AUTOAPI_TEMPLATES_PATH.absolute()), start=str(path.absolute()))
-
-
-def add_autoapi_theme_option(app: Sphinx) -> None:
-    """Add the autoapi template path to the theme options.
-
-    Parameters
-    ----------
-    app : ~sphinx.application.Sphinx
-        Application instance for rendering the documentation.
-    """
-    autoapi = app.config.html_theme_options.get("autoapi", {})
-    if not autoapi:
-        return
-    required_extensions = ["sphinx_jinja", "sphinx_design"]
-
-    for extension in required_extensions:
-        if extension not in app.config["extensions"]:
-            app.config["extensions"].append(extension)
-    AUTOAPI_OPTIONS = [
-        "members",
-        "undoc-members",
-        "show-inheritance",
-        "show-module-summary",
-        "special-members",
-    ]
-    app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
-    autoapi_template_dir = autoapi.get("templates", "")
-    autoapi_project_name = autoapi.get("project", "")
-
-    if not autoapi_template_dir:
-        autoapi_template_dir = get_autoapi_templates_dir_relative_path(app.confdir)
-
-    app.config["autoapi_template_dir"] = autoapi_template_dir
-
-    def prepare_jinja_env(jinja_env) -> None:
-        """Prepare the Jinja environment for the theme."""
-        jinja_env.globals["project_name"] = autoapi_project_name
-
-    # Set the autoapi options
-    app.config["autoapi_prepare_jinja_env"] = prepare_jinja_env
-    app.config["autoapi_type"] = autoapi.get("type", "python")
-    app.config["autoapi_root"] = autoapi.get("output", "autoapi")
-    app.config["autoapi_own_page_level"] = autoapi.get("own_page_level", "class")
-    app.config["autoapi_python_use_implicit_namespaces"] = autoapi.get(
-        "use_implicit_namespaces", True
-    )
-    app.config["autoapi_keep_files"] = autoapi.get("keep_files", True)
-    app.config["autoapi_python_class_content"] = autoapi.get("class_content", "class")
-    app.config["autoapi_options"] = autoapi.get("options", AUTOAPI_OPTIONS)
 
 
 def convert_version_to_pymeilisearch(semver: str) -> str:
@@ -471,7 +404,6 @@ def setup(app: Sphinx) -> Dict:
     setup_default_html_theme_options(app)
 
     # Verify that the main CSS file exists
-    app.connect("builder-inited", add_autoapi_theme_option, priority=400)
     if not CSS_PATH.exists():
         raise FileNotFoundError(f"Unable to locate ansys-sphinx theme at {CSS_PATH.absolute()}")
     app.add_css_file(str(CSS_PATH.relative_to(STATIC_PATH)))
