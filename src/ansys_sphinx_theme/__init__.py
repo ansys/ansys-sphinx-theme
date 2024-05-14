@@ -383,7 +383,11 @@ def replace_html_tag(app, exception):
         return
 
     build_dir = pathlib.Path(app.builder.outdir).resolve()
-    if app.config["extensions"] and "autoapi.extension" not in app.config["extensions"]:
+    extensions = app.config["extensions"]
+    if not any(
+        extension in extensions
+        for extension in ["autoapi.extension", "ansys_sphinx_theme.extension.autoapi"]
+    ):
         return
     api_dir = app.config["autoapi_root"]
     api_path = build_dir / api_dir
@@ -429,10 +433,10 @@ def setup(app: Sphinx) -> Dict:
     app.config.templates_path.append(str(TEMPLATES_PATH))
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
+    app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
-    app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     app.connect("build-finished", replace_html_tag)
     return {
         "version": __version__,

@@ -52,37 +52,7 @@ def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
         A string rerpesenting the relative path to the autoapi templates.
 
     """
-    print(AUTOAPI_TEMPLATES_PATH.absolute())
     return os.path.relpath(str(AUTOAPI_TEMPLATES_PATH.absolute()), start=str(path.absolute()))
-
-
-def replace_html_tag(app, exception):
-    """Replace HTML tags in the generated HTML files.
-
-    Parameters
-    ----------
-    app : ~sphinx.application.Sphinx
-        Application instance for rendering the documentation.
-    exception : Exception
-        Exception that occurred during the build process.
-    """
-    if exception is not None:
-        return
-
-    build_dir = pathlib.Path(app.builder.outdir).resolve()
-    if app.config["extensions"] and "autoapi.extension" not in app.config["extensions"]:
-        return
-    api_dir = app.config["autoapi_root"]
-    api_path = build_dir / api_dir
-    if not api_path.exists():
-        return
-    file_names = list(api_path.rglob("*.html"))
-    for file_name in file_names:
-        with open(api_dir / file_name, "r", encoding="utf-8") as file:
-            content = file.read()
-        with open(api_dir / file_name, "w", encoding="utf-8") as file:
-            modified_content = content.replace("&lt;", "<").replace("&gt;", ">")
-            file.write(modified_content)
 
 
 def add_autoapi_theme_option(app: Sphinx) -> None:
@@ -108,7 +78,6 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
         "show-module-summary",
         "special-members",
     ]
-    app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     autoapi_template_dir = autoapi.get("templates", "")
     autoapi_project_name = autoapi.get("project", "")
 
@@ -143,7 +112,6 @@ def setup(app: Sphinx) -> Dict[str, Any]:
     """Add the autoapi extension to the Sphinx application."""
     app.setup_extension("autoapi.extension")
     app.connect("builder-inited", add_autoapi_theme_option, priority=400)
-    app.connect("build-finished", replace_html_tag)
     return {
         "version": __version__,
         "parallel_read_safe": True,
