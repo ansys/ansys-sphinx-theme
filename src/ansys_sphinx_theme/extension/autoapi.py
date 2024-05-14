@@ -66,6 +66,8 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     autoapi = app.config.html_theme_options.get("autoapi", {})
     if not autoapi:
         return
+
+    # HACK: The ``sphinx_jinja`` and ``sphinx_design`` should be added to the extensions.
     required_extensions = ["sphinx_jinja", "sphinx_design"]
 
     for extension in required_extensions:
@@ -102,6 +104,8 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     app.config["autoapi_keep_files"] = autoapi.get("keep_files", True)
     app.config["autoapi_python_class_content"] = autoapi.get("class_content", "class")
     app.config["autoapi_options"] = autoapi.get("options", AUTOAPI_OPTIONS)
+
+    # HACK: The ``autoapi_dirs`` should be given as a relative path to the conf.py.
     relative_autoapi_dir = os.path.relpath(
         autoapi.get("directory", "src/ansys"), start=str(app.confdir / "conf.py")
     )
@@ -109,7 +113,19 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:
-    """Add the autoapi extension to the Sphinx application."""
+    """Add the autoapi extension to the Sphinx application.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+
+    Returns
+    -------
+    Dict[str, Any]
+        A dictionary containing the version and parallel read/write safety flags.
+    """
+    # HACK: The ``autoapi.extension`` should add here to initialize the extension.
     app.setup_extension("autoapi.extension")
     app.connect("builder-inited", add_autoapi_theme_option, priority=400)
     return {

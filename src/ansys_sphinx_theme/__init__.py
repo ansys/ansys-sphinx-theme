@@ -30,6 +30,9 @@ import requests
 from sphinx import addnodes
 from sphinx.application import Sphinx
 
+from ansys_sphinx_theme.extension.autoapi import (  # noqa: F401
+    get_autoapi_templates_dir_relative_path,
+)
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
