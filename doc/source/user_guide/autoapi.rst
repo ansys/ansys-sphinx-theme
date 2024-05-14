@@ -73,19 +73,20 @@ do so by modifying the configuration above. The line of code declaring the desir
     autoapi_template_dir = get_autoapi_templates_dir_relative_path(Path(__file__))
 
 
-``autoapi`` theme options
-~~~~~~~~~~~~~~~~~~~~~~~~~
+``autoapi`` theme options and extension
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following options are available for the ``autoapi`` extensions in the ``ansys-sphinx-theme``:
-
-
-add the following theme options to your ``conf.py`` file:
+To use the ``autoapi`` along with the ``ansys-sphinx-theme``, you need to
+add ``ansys_sphinx_theme.extension.autoapi`` to the ``extensions`` list in your ``conf.py`` file
+and set the ``autoapi`` theme options in the ``html_theme_options`` dictionary.
 
 - ``project``: The name of the project.
 - ``output``: The path to the directory where the generated files are placed.
   By default, this is set to the ``api`` directory.
 - ``templates``: The path to the directory containing the custom templates for ``sphinx-autoapi``.
   By default, this is set to the ``autoapi_templates`` directory in the theme package.
+- ``directory``: The path to the directory containing the source code respect to the ``conf.py`` file.
+  By default, this is set to the ``src/ansys`` directory.
 - ``use_implicit_namespaces``: If set to ``True``, the autoapi extension use `implicit namespaces`.
   By default, this is set to ``True``.
 - ``keep_files``: If set to ``True``, the autoapi extension keeps the generated files.
@@ -105,6 +106,7 @@ All these options can be set in the ``conf.py`` file of your Sphinx project.
         "autoapi": {
             "project": "My Project",
             "output": "api",
+            "directory": "src/ansys",
             "use_implicit_namespaces": True,
             "keep_files": True,
             "own_page_level": "class",
@@ -120,19 +122,13 @@ All these options can be set in the ``conf.py`` file of your Sphinx project.
         }
     }
 
-You need to add ``autoapi.extension`` to the list of extensions in your ``conf.py`` file:
+You need to add ``ansys_sphinx_theme.extension.autoapi`` to the ``extensions`` list in your ``conf.py`` file:
 
 .. code:: python
 
     extensions = [
-        "autoapi.extension",
+        "ansys_sphinx_theme.extension.autoapi",
     ]
-
-Also you need to add the directory containing the source code as ``autoapi_dirs`` in your ``conf.py`` file:
-
-.. code:: python
-
-    autoapi_dirs = ["../../src/ansys"]
 
 The complete configuration for ``sphinx-autoapi`` in your ``conf.py`` file should look like this:
 
@@ -144,6 +140,7 @@ The complete configuration for ``sphinx-autoapi`` in your ``conf.py`` file shoul
             "project": "My Project",
             "output": "api",
             "use_implicit_namespaces": True,
+            "directory": "src/ansys",
             "keep_files": True,
             "own_page_level": "class",
             "type": "python",
@@ -159,9 +156,7 @@ The complete configuration for ``sphinx-autoapi`` in your ``conf.py`` file shoul
     }
 
     extensions = [
-        "autoapi.extension",
+        "ansys_sphinx_theme.extension.autoapi",
     ]
-
-    autoapi_dirs = ["../../src/ansys"]
 
 
