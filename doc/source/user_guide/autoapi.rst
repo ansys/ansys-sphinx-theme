@@ -32,7 +32,7 @@ If you are using a ``pyproject.toml`` file, you would define your dependency as 
         "ansys-sphinx-theme[autoapi]==X.Y.Z",
     ]
 
-Configuring our Sphinx project
+Configuring the Sphinx project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To use ``sphinx-autoapi`` with the ``ansys-sphinx-theme``, and benefit from the shipped
@@ -71,3 +71,5 @@ do so by modifying the configuration above. The line of code declaring the desir
 .. code:: python
 
     autoapi_template_dir = get_autoapi_templates_dir_relative_path(Path(__file__))
+
+

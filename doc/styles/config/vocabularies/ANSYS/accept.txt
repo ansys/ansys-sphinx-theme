@@ -13,3 +13,4 @@ autoapi
 (?i)HTML
 CSS
 PDF
+namespaces
