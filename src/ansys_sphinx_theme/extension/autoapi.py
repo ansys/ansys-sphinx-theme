@@ -1,4 +1,4 @@
-"""AutoAPI extension for the ANSYS Sphinx theme."""
+"""Module for adding the autoapi extension with the theme."""
 
 # Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
@@ -23,36 +23,11 @@
 # SOFTWARE.
 
 import os
-import pathlib
 from typing import Any, Dict
 
 from sphinx.application import Sphinx
 
-from ansys_sphinx_theme import __version__
-
-THIS_PARENT_PATH = pathlib.Path(__file__).parent.absolute()
-
-
-AUTOAPI_TEMPLATES_PATH = (
-    THIS_PARENT_PATH.parent.resolve() / "theme" / "ansys_sphinx_theme" / "_templates" / "autoapi"
-)
-
-
-def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
-    """Return a string representing the relative path for autoapi templates.
-
-    Parameters
-    ----------
-    path : pathlib.Path
-        Path to the desired file.
-
-    Returns
-    -------
-    str
-        A string rerpesenting the relative path to the autoapi templates.
-
-    """
-    return os.path.relpath(str(AUTOAPI_TEMPLATES_PATH.absolute()), start=str(path.absolute()))
+from ansys_sphinx_theme import __version__, get_autoapi_templates_dir_relative_path
 
 
 def add_autoapi_theme_option(app: Sphinx) -> None:

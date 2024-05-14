@@ -13,7 +13,7 @@ While the Ansys Sphinx theme is often used as is, you can customize the followin
    :maxdepth: 2
    :includehidden:
 
-   \<span class="nf nf-md-package"\>\</span\> css <css.rst>
+   css
    options
    pdf
    404_page

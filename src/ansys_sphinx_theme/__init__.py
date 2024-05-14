@@ -22,6 +22,7 @@
 
 """This is the ansys-sphinx-theme module."""
 import logging
+import os
 import pathlib
 from typing import Any, Dict
 
@@ -30,9 +31,6 @@ import requests
 from sphinx import addnodes
 from sphinx.application import Sphinx
 
-from ansys_sphinx_theme.extension.autoapi import (  # noqa: F401
-    get_autoapi_templates_dir_relative_path,
-)
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
 
@@ -76,6 +74,23 @@ def get_html_theme_path() -> pathlib.Path:
 
     """
     return THEME_PATH.resolve()
+
+
+def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
+    """Return a string representing the relative path for autoapi templates.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        Path to the desired file.
+
+    Returns
+    -------
+    str
+        A string rerpesenting the relative path to the autoapi templates.
+
+    """
+    return os.path.relpath(str(AUTOAPI_TEMPLATES_PATH.absolute()), start=str(path.absolute()))
 
 
 def get_version_match(semver: str) -> str:
