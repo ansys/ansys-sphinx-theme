@@ -103,7 +103,7 @@ All these options can be set in the ``conf.py`` file of your Sphinx project.
 .. code:: python
 
     html_theme_options = {
-        "autoapi": {
+        "ansys-sphinx-theme-autoapi": {
             "project": "My Project",
             "output": "api",
             "directory": "src/ansys",

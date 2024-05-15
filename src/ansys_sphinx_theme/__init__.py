@@ -401,9 +401,9 @@ def replace_html_tag(app, exception):
         return
 
     build_dir = pathlib.Path(app.builder.outdir).resolve()
-    extensions = app.config["extensions"]
+    defined_extensions = app.config["extensions"]
     if not any(
-        extension in extensions
+        extension in defined_extensions 
         for extension in ["autoapi.extension", "ansys_sphinx_theme.extension.autoapi"]
     ):
         return
