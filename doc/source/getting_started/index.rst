@@ -29,6 +29,7 @@ you need to install the following dependencies:
 
 - `sphinx-autoapi <Sphinx_AutoAPI_PyPI_>`_
 - `sphinx-design <Sphinx_Design_PyPI_>`_
+- `sphinx-jinja <Sphinx_Jinja_PyPI_>`_
 
 An example page demonstrating autoapi rendering with the Ansys sphinx theme template can
 be found on the ``API Reference`` page of the 
@@ -73,4 +74,5 @@ Consider using the ``conf.py`` for this repository:
 .. _Jinja2_PyPI: https://pypi.org/project/Jinja2/
 .. _Sphinx_AutoAPI_PyPI: https://pypi.org/project/sphinx-autoapi/
 .. _Sphinx_Design_PyPI: https://pypi.org/project/sphinx-design/
+.. _Sphinx_Jinja_PyPI: https://pypi.org/project/sphinx-jinja/
 .. _PyAnsys_Geometry_Docs: https://geometry.docs.pyansys.com/
