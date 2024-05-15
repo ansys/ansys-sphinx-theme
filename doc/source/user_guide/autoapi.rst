@@ -85,7 +85,7 @@ and set the ``ansys_sphinx_theme_autoapi`` theme options in the ``html_theme_opt
   By default, this is set to the ``api`` directory.
 - ``templates``: The path to the directory containing the custom templates for ``sphinx-autoapi``.
   By default, this is set to the ``autoapi_templates`` directory in the theme package.
-- ``directory``: The path to the directory containing the source code respect to the ``conf.py`` file.
+- ``directory``: The path to the directory containing the source code with respect to the ``conf.py`` file.
   By default, this is set to the ``src/ansys`` directory.
 - ``use_implicit_namespaces``: If set to ``True``, the autoapi extension use `implicit namespaces`.
   By default, this is set to ``True``.
