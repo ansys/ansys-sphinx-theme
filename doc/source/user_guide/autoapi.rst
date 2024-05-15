@@ -73,12 +73,12 @@ do so by modifying the configuration above. The line of code declaring the desir
     autoapi_template_dir = get_autoapi_templates_dir_relative_path(Path(__file__))
 
 
-``autoapi`` theme options and extension
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+``ansys_sphinx_theme_autoapi`` theme options and extension
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To use the ``autoapi`` along with the ``ansys-sphinx-theme``, you need to
 add ``ansys_sphinx_theme.extension.autoapi`` to the ``extensions`` list in your ``conf.py`` file
-and set the ``autoapi`` theme options in the ``html_theme_options`` dictionary.
+and set the ``ansys_sphinx_theme_autoapi`` theme options in the ``html_theme_options`` dictionary.
 
 - ``project``: The name of the project.
 - ``output``: The path to the directory where the generated files are placed.
@@ -136,7 +136,7 @@ The complete configuration for ``sphinx-autoapi`` in your ``conf.py`` file shoul
 
 
     html_theme_options = {
-        "autoapi": {
+        "ansys_sphinx_theme_autoapi": {
             "project": "My Project",
             "output": "api",
             "use_implicit_namespaces": True,
