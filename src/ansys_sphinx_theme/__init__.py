@@ -76,6 +76,23 @@ def get_html_theme_path() -> pathlib.Path:
     return THEME_PATH.resolve()
 
 
+def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
+    """Return a string representing the relative path for autoapi templates.
+
+    Parameters
+    ----------
+    path : pathlib.Path
+        Path to the desired file.
+
+    Returns
+    -------
+    str
+        A string rerpesenting the relative path to the autoapi templates.
+
+    """
+    return os.path.relpath(str(AUTOAPI_TEMPLATES_PATH.absolute()), start=str(path.absolute()))
+
+
 def get_version_match(semver: str) -> str:
     """Evaluate the version match for the multi-documentation.
 
@@ -103,12 +120,10 @@ def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
     ----------
     path : pathlib.Path
         Path to the desired file.
-
     Returns
     -------
     str
         A string rerpesenting the relative path to the autoapi templates.
-
     """
     return os.path.relpath(
         str(AUTOAPI_TEMPLATES_PATH.absolute()), start=str(path.parent.absolute())
@@ -372,6 +387,40 @@ def download_file(url: str, directory: pathlib.Path) -> None:
             file.write(response.content)
 
 
+def replace_html_tag(app, exception):
+    """Replace HTML tags in the generated HTML files.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    exception : Exception
+        Exception that occurred during the build process.
+    """
+    if exception is not None:
+        return
+
+    build_dir = pathlib.Path(app.builder.outdir).resolve()
+    defined_extensions = app.config["extensions"]
+    if not any(
+        extension in defined_extensions
+        for extension in ["autoapi.extension", "ansys_sphinx_theme.extension.autoapi"]
+    ):
+        return
+    api_dir = app.config["autoapi_root"]
+    api_path = build_dir / api_dir
+    if not api_path.exists():
+        return
+
+    file_names = list(api_path.rglob("*.html"))
+    for file_name in file_names:
+        with open(api_dir / file_name, "r", encoding="utf-8") as file:
+            content = file.read()
+        with open(api_dir / file_name, "w", encoding="utf-8") as file:
+            modified_content = content.replace("&lt;", "<").replace("&gt;", ">")
+            file.write(modified_content)
+
+
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -399,12 +448,14 @@ def setup(app: Sphinx) -> Dict:
         raise FileNotFoundError(f"Unable to locate ansys-sphinx theme at {CSS_PATH.absolute()}")
     app.add_css_file(str(CSS_PATH.relative_to(STATIC_PATH)))
     app.add_js_file(str(JS_FILE.relative_to(STATIC_PATH)))
+    app.config.templates_path.append(str(TEMPLATES_PATH))
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
+    app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
-    app.config.templates_path.append(str(TEMPLATES_PATH))
+    app.connect("build-finished", replace_html_tag)
     return {
         "version": __version__,
         "parallel_read_safe": True,

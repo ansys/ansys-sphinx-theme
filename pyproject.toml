@@ -35,6 +35,7 @@ dependencies = [
 autoapi = [
     "sphinx-autoapi==3.0.0a4",
     "sphinx-design==0.5.0",
+    "sphinx-jinja==2.0.2",
 ]
 doc = [
     "numpydoc==1.7.0",
@@ -42,7 +43,7 @@ doc = [
     "sphinx-copybutton==0.5.2",
     "sphinx-notfound-page==1.0.0",
     "sphinx-design==0.5.0",
-    "requests==2.31.0",
+    "requests==2.32.1",
     "sphinx-jinja==2.0.2",
     "PyGitHub==2.3.0",
 ]

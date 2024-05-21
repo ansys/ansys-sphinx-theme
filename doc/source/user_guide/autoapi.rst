@@ -32,7 +32,7 @@ If you are using a ``pyproject.toml`` file, you would define your dependency as 
         "ansys-sphinx-theme[autoapi]==X.Y.Z",
     ]
 
-Configuring our Sphinx project
+Configuring the Sphinx project
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To use ``sphinx-autoapi`` with the ``ansys-sphinx-theme``, and benefit from the shipped
@@ -71,3 +71,92 @@ do so by modifying the configuration above. The line of code declaring the desir
 .. code:: python
 
     autoapi_template_dir = get_autoapi_templates_dir_relative_path(Path(__file__))
+
+
+``ansys_sphinx_theme_autoapi`` theme options and extension
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To use the ``autoapi`` along with the ``ansys-sphinx-theme``, you need to
+add ``ansys_sphinx_theme.extension.autoapi`` to the ``extensions`` list in your ``conf.py`` file
+and set the ``ansys_sphinx_theme_autoapi`` theme options in the ``html_theme_options`` dictionary.
+
+- ``project``: The name of the project.
+- ``output``: The path to the directory where the generated files are placed.
+  By default, this is set to the ``api`` directory.
+- ``templates``: The path to the directory containing the custom templates for ``sphinx-autoapi``.
+  By default, this is set to the ``autoapi_templates`` directory in the theme package.
+- ``directory``: The path to the directory containing the source code with respect to the ``conf.py`` file.
+  By default, this is set to the ``src/ansys`` directory.
+- ``use_implicit_namespaces``: If set to ``True``, the autoapi extension use `implicit namespaces`.
+  By default, this is set to ``True``.
+- ``keep_files``: If set to ``True``, the autoapi extension keeps the generated files.
+  By default, this is set to ``True``.
+- ``own_page_level``: The level of the page where the autoapi extension places the content of the class.
+  By default, this is set to ``class``.
+- ``type``: The type of the autoapi extension. By default, this is set to ``python``. 
+- ``options``: The options to pass to the autoapi extension. By default, 
+  this is set to ``["members", "undoc-members", "show-inheritance", "show-module-summary", "special-members"]``.
+- ``class_content``: The content of the class. By default this is set to ``class``.
+
+All these options can be set in the ``conf.py`` file of your Sphinx project.
+
+.. code:: python
+
+    html_theme_options = {
+        "ansys-sphinx-theme-autoapi": {
+            "project": "My Project",
+            "output": "api",
+            "directory": "src/ansys",
+            "use_implicit_namespaces": True,
+            "keep_files": True,
+            "own_page_level": "class",
+            "type": "python",
+            "options": [
+                "members",
+                "undoc-members",
+                "show-inheritance",
+                "show-module-summary",
+                "special-members",
+            ],
+            "class_content": "class",
+        }
+    }
+
+You need to add ``ansys_sphinx_theme.extension.autoapi`` to the ``extensions`` list in your ``conf.py`` file:
+
+.. code:: python
+
+    extensions = [
+        "ansys_sphinx_theme.extension.autoapi",
+    ]
+
+The complete configuration for ``sphinx-autoapi`` in your ``conf.py`` file should look like this:
+
+.. code:: python
+
+
+    html_theme_options = {
+        "ansys_sphinx_theme_autoapi": {
+            "project": "My Project",
+            "output": "api",
+            "use_implicit_namespaces": True,
+            "directory": "src/ansys",
+            "keep_files": True,
+            "own_page_level": "class",
+            "type": "python",
+            "options": [
+                "members",
+                "undoc-members",
+                "show-inheritance",
+                "show-module-summary",
+                "special-members",
+            ],
+            "class_content": "class",
+        }
+    }
+
+    extensions = [
+        "ansys_sphinx_theme.extension.autoapi",
+    ]
+
+
