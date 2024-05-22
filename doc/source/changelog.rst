@@ -12,19 +12,22 @@ This document contains the release notes for the project.
 `0.16.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.1>`_ - 2024-05-22
 =========================================================================================
 
-### Added
+Added
+^^^^^
 
 - feat: add nerd fonts for ``autoapi`` templates icon `#362 <https://github.com/ansys/ansys-sphinx-theme/pull/362>`_
 - feat: add the changelog action `#370 <https://github.com/ansys/ansys-sphinx-theme/pull/370>`_
 - feat: add autoapi extension `#372 <https://github.com/ansys/ansys-sphinx-theme/pull/372>`_
 
 
-### Fixed
+Fixed
+^^^^^
 
 - fix: add changelog action in ci-cd `#378 <https://github.com/ansys/ansys-sphinx-theme/pull/378>`_
 
 
-### Dependencies
+Dependencies
+^^^^^^^^^^^^
 
 - chore(deps): bump requests from 2.31.0 to 2.32.1 `#374 <https://github.com/ansys/ansys-sphinx-theme/pull/374>`_
 - maint: update the sphinx-autoapi version `#375 <https://github.com/ansys/ansys-sphinx-theme/pull/375>`_
