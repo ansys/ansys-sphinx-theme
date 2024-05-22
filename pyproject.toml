@@ -41,7 +41,7 @@ doc = [
     "numpydoc==1.7.0",
     "Sphinx==7.3.7",
     "sphinx-copybutton==0.5.2",
-    "sphinx-notfound-page==1.0.0",
+    "sphinx-notfound-page==1.0.1",
     "sphinx-design==0.5.0",
     "requests==2.32.1",
     "sphinx-jinja==2.0.2",
