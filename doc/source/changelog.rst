@@ -9,6 +9,20 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`0.16.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.2>`_ - 2024-05-22
+=========================================================================================
+
+Changed
+^^^^^^^
+
+- chore: update CHANGELOG for v0.16.1 `#379 <https://github.com/ansys/ansys-sphinx-theme/pull/379>`_
+
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- docs: update changelog_template.jinja `#380 <https://github.com/ansys/ansys-sphinx-theme/pull/380>`_
+
 `0.16.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.1>`_ - 2024-05-22
 =========================================================================================
 
