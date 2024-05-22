@@ -39,6 +39,18 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
+  update-changelog:
+    name: "Update CHANGELOG (on release)"
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: ansys/actions/doc-deploy-changelog@v6
+        with:
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+
   doc-build:
     name: Doc building
     runs-on: ubuntu-latest
@@ -109,7 +121,7 @@ jobs:
   release:
     name: "Release project to private PyPI, public PyPI and GitHub"
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-    needs: build-library
+    needs: [build-library, update-changelog]
     runs-on: ubuntu-latest
     steps:
 
