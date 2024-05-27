@@ -18,5 +18,3 @@
 * [Maxime Rey](https://github.com/MaxJPRey)
 * [Paul Profizi](https://github.com/PProfizi)
 * [Roberto Pastor](https://github.com/RobPasMue)
-
-
