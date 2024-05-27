@@ -46,7 +46,7 @@ The ``{{ obj.name }}`` library
 {{ "================" + "=" * obj.name|length }}
     {% else %}
     {% if obj.type == "package" %}
-The ``{{ obj.short_name }}`` package 
+The ``{{ obj.short_name }}`` package
 {{ "====================" + "=" * obj.short_name|length }}
     {% else %}
 The ``{{ obj.short_name }}.py`` module

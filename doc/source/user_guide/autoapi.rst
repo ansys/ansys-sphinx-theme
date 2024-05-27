@@ -25,7 +25,7 @@ For example, if you are using a ``requirements.txt`` file, you would define your
 If you are using a ``pyproject.toml`` file, you would define your dependency as follows:
 
 .. code:: toml
-    
+
     # For a typical PyAnsys pyproject.toml file
     [project.optional-dependencies]
     doc = [
@@ -93,8 +93,8 @@ and set the ``ansys_sphinx_theme_autoapi`` theme options in the ``html_theme_opt
   By default, this is set to ``True``.
 - ``own_page_level``: The level of the page where the autoapi extension places the content of the class.
   By default, this is set to ``class``.
-- ``type``: The type of the autoapi extension. By default, this is set to ``python``. 
-- ``options``: The options to pass to the autoapi extension. By default, 
+- ``type``: The type of the autoapi extension. By default, this is set to ``python``.
+- ``options``: The options to pass to the autoapi extension. By default,
   this is set to ``["members", "undoc-members", "show-inheritance", "show-module-summary", "special-members"]``.
 - ``class_content``: The content of the class. By default this is set to ``class``.
 
