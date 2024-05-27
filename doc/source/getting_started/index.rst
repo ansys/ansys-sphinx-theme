@@ -13,7 +13,7 @@ Sphinx ``conf.py`` file to use this theme to generate your documentation.
 Dependencies
 ------------
 
-Ansys sphinx theme build on top of ``pydata sphinx theme``. 
+Ansys sphinx theme build on top of ``pydata sphinx theme``.
 The theme requires the following dependencies:
 
 - `Sphinx <Sphinx_PyPI_>`_
@@ -23,8 +23,8 @@ The theme requires the following dependencies:
 Optional dependencies
 ---------------------
 
-Ansys Sphinx theme includes optional dependencies for autoapi documentation. 
-To utilize `sphinx-autoapi` with custom templates provided by the theme, 
+Ansys Sphinx theme includes optional dependencies for autoapi documentation.
+To utilize `sphinx-autoapi` with custom templates provided by the theme,
 you need to install the following dependencies:
 
 - `sphinx-autoapi <Sphinx_AutoAPI_PyPI_>`_
@@ -32,7 +32,7 @@ you need to install the following dependencies:
 - `sphinx-jinja <Sphinx_Jinja_PyPI_>`_
 
 An example page demonstrating autoapi rendering with the Ansys sphinx theme template can
-be found on the ``API Reference`` page of the 
+be found on the ``API Reference`` page of the
 `PyAnsys Geometry documentation <PyAnsys_Geometry_Docs_>`_.
 
 Install the theme
@@ -65,7 +65,7 @@ Consider using the ``conf.py`` for this repository:
    :hidden:
    :maxdepth: 2
 
-.. LINKS and References 
+.. LINKS and References
 
 .. _Sphinx: https://www.sphinx-doc.org/en/master/
 .. _Sphinx_Getting_Started: https://www.sphinx-doc.org/en/master/usage/quickstart.html

@@ -38,7 +38,7 @@
 
   /*****************************************************************************
   * Ansys compatible colors
-  * 
+  *
   * Colors are defined in rgb string way, "red, green, blue"
   **/
   --ansysGold: rgb(255, 183, 27); /* #FFB71B */
@@ -257,7 +257,7 @@ p.rubric {
 
 /*
 ########
-Table 
+Table
 ########
 */
 
@@ -298,7 +298,7 @@ div.rendered_html table.dataframe td {
 
 /*
 ###############
-Table-centered 
+Table-centered
 ################
 Same as table but with horizontally centered text.
 
@@ -505,7 +505,7 @@ body::-webkit-scrollbar-track {
 
 /*
 ############
-Autosummary 
+Autosummary
 ############
 */
 
@@ -640,7 +640,7 @@ strong {
 
 /*
 ###########################
-Left side toc-tree hovering 
+Left side toc-tree hovering
 ###########################
 */
 
@@ -674,7 +674,7 @@ nav.bd-links li > a:hover {
 
 /*
 ##################
-icon, button, logo  
+icon, button, logo
 ##################
 */
 
@@ -806,7 +806,7 @@ html[data-theme="light"] #pst-back-to-top {
 }
 /*
 ##############################
-image padding before and after 
+image padding before and after
 ##############################
 */
 
@@ -826,7 +826,7 @@ img.logo__image {
 
 /*
 ##########################
-Nav-bar entity right side. 
+Nav-bar entity right side.
 ##########################
 */
 

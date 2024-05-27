@@ -37,6 +37,6 @@ goto end
 	cd "%BUILDDIR%\latex"
 	for %%f in (*.tex) do (
 	pdflatex "%%f" --interaction=nonstopmode)
-	
+
 :end
 popd
