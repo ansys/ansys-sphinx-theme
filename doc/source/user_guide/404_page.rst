@@ -8,7 +8,7 @@ Because Sphinx does not create a 404 page by default, you can use the
 <https://sphinx-notfound-page.readthedocs.io/en/latest/index.html>`_ extension
 for 404 pages. While originally developed to be used with `Read the Docs <https://readthedocs.org/>`_,
 this extension can be used in other hosting services. For more
-information, see the extension's `documentation <https://sphinx-notfound-page.readthedocs.io/en/latest/how-it-works.html>`_. 
+information, see the extension's `documentation <https://sphinx-notfound-page.readthedocs.io/en/latest/how-it-works.html>`_.
 
 Install the extension
 ---------------------
@@ -66,18 +66,18 @@ To create and use a custom 404 page, do the following:
 #. Create a ``404.rst`` file next to the ``conf.py`` file.
 #. To suppress the spurious ``document isn't included in any toctree`` Sphinx
    warning, include the ``:orphan:`` attribute at the top of this ``404.rst`` file:
-   
+
    .. code-block:: rst
 
         :orphan:
-        
+
         Error 404 Not Found
         ===================
         The page you are requesting does not exist.
 
 #. Update the ``notfound_template`` variable in the ``conf.py`` to the location of
    your ``404.rst`` file:
-   
+
    .. code-block:: rst
 
         # Configure sphinx-notfound-page
