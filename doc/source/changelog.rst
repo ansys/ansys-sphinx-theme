@@ -9,6 +9,22 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`0.16.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.4>`_ - 2024-05-29
+=========================================================================================
+
+Added
+^^^^^
+
+- feat: adapt package to general PyAnsys repository layout `#387 <https://github.com/ansys/ansys-sphinx-theme/pull/387>`_
+
+
+Dependencies
+^^^^^^^^^^^^
+
+- chore(deps): bump sphinx-design from 0.5.0 to 0.6.0 `#383 <https://github.com/ansys/ansys-sphinx-theme/pull/383>`_
+- chore(deps): bump sphinx-notfound-page from 1.0.1 to 1.0.2 `#384 <https://github.com/ansys/ansys-sphinx-theme/pull/384>`_
+- chore(deps): bump sphinx-autoapi from 3.1.0 to 3.1.1 `#385 <https://github.com/ansys/ansys-sphinx-theme/pull/385>`_
+
 `0.16.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.3>`_ - 2024-05-29
 =========================================================================================
 
