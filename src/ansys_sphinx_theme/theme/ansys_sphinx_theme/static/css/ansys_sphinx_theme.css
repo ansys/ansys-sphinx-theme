@@ -929,6 +929,7 @@ blockquote {
   background-color: var(--pst-color-background) !important;
 }
 
+/* hide the file name from card with clickable link footer in sphinx design */
 .sd-hide-link-text {
   display: none;
 }
