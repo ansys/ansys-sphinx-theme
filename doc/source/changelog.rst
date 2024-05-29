@@ -9,6 +9,14 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`0.16.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.3>`_ - 2024-05-29
+=========================================================================================
+
+Fixed
+^^^^^
+
+- fix: update the sphinx design style to disable display of name `#388 <https://github.com/ansys/ansys-sphinx-theme/pull/388>`_
+
 `0.16.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.2>`_ - 2024-05-22
 =========================================================================================
 
