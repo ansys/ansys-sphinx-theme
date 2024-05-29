@@ -1,5 +1,8 @@
 .. _ref_user_guide_autoapi:
 
+``ansys-sphinx-theme`` autoapi extension
+========================================
+
 Using ``sphinx-autoapi`` to generate API documentation
 ------------------------------------------------------
 

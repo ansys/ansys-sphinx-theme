@@ -929,6 +929,10 @@ blockquote {
   background-color: var(--pst-color-background) !important;
 }
 
+.sd-hide-link-text {
+  display: none;
+}
+
 .bd-content .sd-card .sd-card-header {
   border: none;
   background-color: transparent;
