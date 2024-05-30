@@ -39,7 +39,7 @@ doc = [
     "sphinx-copybutton==0.5.2",
     "sphinx-notfound-page==1.0.2",
     "sphinx-design==0.6.0",
-    "requests==2.32.2",
+    "requests==2.32.3",
     "sphinx-jinja==2.0.2",
     "PyGitHub==2.3.0",
 ]
