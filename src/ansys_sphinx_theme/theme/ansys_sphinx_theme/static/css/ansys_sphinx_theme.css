@@ -199,7 +199,6 @@ span.highlighted {
   color: var(--pst-color-inline-code);
   font-family: var(--pst-font-family-monospace);
   font-weight: 500;
-  font-size: medium;
 }
 
 code.literal {
