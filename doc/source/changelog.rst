@@ -9,6 +9,14 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`0.16.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.5>`_ - 2024-05-31
+=========================================================================================
+
+Fixed
+^^^^^
+
+- fix:  sphinx design card font size `#393 <https://github.com/ansys/ansys-sphinx-theme/pull/393>`_
+
 `0.16.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.4>`_ - 2024-05-29
 =========================================================================================
 
