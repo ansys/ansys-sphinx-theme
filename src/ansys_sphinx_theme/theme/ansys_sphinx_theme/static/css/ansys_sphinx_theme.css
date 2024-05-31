@@ -199,7 +199,7 @@ span.highlighted {
   color: var(--pst-color-inline-code);
   font-family: var(--pst-font-family-monospace);
   font-weight: 500;
-  font-size: 87.5%;
+  font-size: medium;
 }
 
 code.literal {
@@ -873,7 +873,6 @@ blockquote {
 }
 .sd-sphinx-override,
 .sd-sphinx-override * {
-  font-size: medium;
   flex: auto;
 }
 
@@ -927,11 +926,6 @@ blockquote {
 .sd-card .sd-card-text {
   font-family: var(--pst-font-family-base) !important;
   background-color: var(--pst-color-background) !important;
-}
-
-/* hide the file name from card with clickable link footer in sphinx design */
-.sd-hide-link-text {
-  display: none;
 }
 
 .bd-content .sd-card .sd-card-header {
