@@ -174,8 +174,8 @@ jobs:
 
       - name: Scrape the stable documentation to PyMeilisearch
         run: |
-          VERSION=$(python -c "from ${{ env.PACKAGE_NAMESPACE }} import __version__; print('.'.join(__version__.split('.')[:2]))")
-          VERSION_MEILI=$(python -c "from ${{ env.PACKAGE_NAMESPACE }} import __version__; print('-'.join(__version__.split('.')[:2]))")
+          VERSION=$(python -c "from ${{ env.PACKAGE_NAME }} import __version__; print('.'.join(__version__.split('.')[:2]))")
+          VERSION_MEILI=$(python -c "from ${{ env.PACKAGE_NAME }} import __version__; print('-'.join(__version__.split('.')[:2]))")
           echo "Calculated VERSION: $VERSION"
           echo "Calculated VERSION_MEILI: $VERSION_MEILI"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
