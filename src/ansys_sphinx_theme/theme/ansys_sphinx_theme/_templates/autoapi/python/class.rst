@@ -114,7 +114,7 @@ Overview
         {% endif %}
 
         {% if visible_attributes %}
-   {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}      
+   {{ tab_item_from_objects_list(visible_attributes, "Attributes") }}
         {% endif %}
 
         {% if visible_static_methods %}
@@ -155,7 +155,7 @@ Attribute detail
 {{ attribute.render() }}
     {% endfor %}
     {% endif %}
-    
+
 
     {% if all_visible_methods  %}
 Method detail

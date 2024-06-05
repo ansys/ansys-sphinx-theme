@@ -24,7 +24,7 @@ Here is an example that edits the ``body`` element:
      overflow: auto;
      height: calc(100vh - 3.8rem);
      overflow-y: scroll;
-   }  
+   }
    .prev-next-bottom{margin-bottom: 6rem}
 
 

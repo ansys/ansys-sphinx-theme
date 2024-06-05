@@ -3,7 +3,7 @@
 Table
 =====
 The table directive with ansys sphinx theme allows for rendering of tables.
-There are different types of tables, such as the data table, longtable-centered, 
+There are different types of tables, such as the data table, longtable-centered,
 and table-centered, each serving different purposes.
 
 Normal table
@@ -75,7 +75,7 @@ Here is an example of a longtable-centered:
 
 .. code:: rst
 
-    .. table:: 
+    .. table::
         :class: longtable-centered
 
         +---------------------------+-------------------+
@@ -88,7 +88,7 @@ Here is an example of a longtable-centered:
         | **GUI commands**          | * ``*ASK``        |
         +---------------------------+-------------------+
 
-.. table:: 
+.. table::
    :class: longtable-centered
 
    +---------------------------+-------------------+
@@ -109,7 +109,7 @@ Here is an example of a table-centered:
 
 .. code:: rst
 
-    .. table:: 
+    .. table::
         :class: table-centered
 
         +---------------------------+-------------------+
