@@ -1,18 +1,15 @@
 .. _ref_getting_started:
 
-===============
 Getting started
-===============
-`Sphinx <Sphinx_>`_ is a Python documentation
-generator for creating documentation. If you are new to using Sphinx, see
-`Sphinx Getting Started <Sphinx_Getting_Started_>`_.
+###############
 
 This section explains how to install the Ansys Sphinx theme and then set up your
 Sphinx ``conf.py`` file to use this theme to generate your documentation.
+If you are interested in contributing to the theme, see the `Contributing <Pyansys_contributing>` for
+information on installing the theme in development mode.
 
-Dependencies
-------------
-
+Package dependencies
+====================
 Ansys sphinx theme build on top of ``pydata sphinx theme``.
 The theme requires the following dependencies:
 
@@ -22,22 +19,28 @@ The theme requires the following dependencies:
 
 Optional dependencies
 ---------------------
-
 Ansys Sphinx theme includes optional dependencies for autoapi documentation.
-To utilize `sphinx-autoapi` with custom templates provided by the theme,
+To utilize `sphinx-autoapi` with `autoapi` extension provided by the theme,
 you need to install the following dependencies:
 
 - `sphinx-autoapi <Sphinx_AutoAPI_PyPI_>`_
 - `sphinx-design <Sphinx_Design_PyPI_>`_
 - `sphinx-jinja <Sphinx_Jinja_PyPI_>`_
 
-An example page demonstrating autoapi rendering with the Ansys sphinx theme template can
-be found on the ``API Reference`` page of the
-`PyAnsys Geometry documentation <PyAnsys_Geometry_Docs_>`_.
+.. note::
+   To see how to use the autoapi extension with the Ansys sphinx theme, refer to the
+   `user guide <autoapi>`_.
 
 Install the theme
------------------
-Install the Ansys Sphinx theme with:
+=================
+
+#. Before installing `ansys-sphinx-theme` make sure that you have the latest version of pip with this command:
+
+.. code::
+
+   python -m pip install --upgrade pip
+
+#. Install the theme using pip:
 
 .. code::
 
@@ -49,30 +52,22 @@ For installing the optional dependencies, use:
 
    pip install ansys-sphinx-theme[autoapi]
 
-Modify the ``conf.py`` file
----------------------------
-To use this theme, modify your Sphinx ``conf.py`` file::
+
+Add the theme to your Sphinx project
+=====================================
+
+To use the Ansys Sphinx theme, you need to modify your Sphinx ``conf.py`` file.
+
+.. code:: python
 
    html_theme = "ansys_sphinx_theme"
 
-Consider using the ``conf.py`` for this repository:
-
-.. literalinclude:: ../conf.py
-   :language: python
-   :end-before: # ONLY FOR ANSYS-SPHINX-THEME
-
-.. toctree::
-   :hidden:
-   :maxdepth: 2
-
-.. LINKS and References
-
 .. _Sphinx: https://www.sphinx-doc.org/en/master/
-.. _Sphinx_Getting_Started: https://www.sphinx-doc.org/en/master/usage/quickstart.html
 .. _Sphinx_PyPI: https://pypi.org/project/Sphinx/
 .. _PyData_PyPI: https://pypi.org/project/pydata-sphinx-theme/
 .. _Jinja2_PyPI: https://pypi.org/project/Jinja2/
 .. _Sphinx_AutoAPI_PyPI: https://pypi.org/project/sphinx-autoapi/
 .. _Sphinx_Design_PyPI: https://pypi.org/project/sphinx-design/
 .. _Sphinx_Jinja_PyPI: https://pypi.org/project/sphinx-jinja/
-.. _PyAnsys_Geometry_Docs: https://geometry.docs.pyansys.com/
+.. _pip: https://pypi.org/project/pip/
+.. _Pyansys_contributing: https://dev.docs.pyansys.com/how-to/contributing.html
