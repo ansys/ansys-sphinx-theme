@@ -11,6 +11,7 @@ link_code_branch
 html_context
 autoapi
 (?i)HTML
+multi-version
 CSS
 PDF
 namespaces

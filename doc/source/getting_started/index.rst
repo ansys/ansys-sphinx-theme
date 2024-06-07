@@ -5,7 +5,7 @@ Getting started
 
 This section explains how to install the Ansys Sphinx theme and then set up your
 Sphinx ``conf.py`` file to use this theme to generate your documentation.
-If you are interested in contributing to the theme, see the `Contributing <Pyansys_contributing>` for
+If you are interested in contributing to the theme, see the `PyAnsys Contributing <Pyansys_contributing>`_ for
 information on installing the theme in development mode.
 
 Package dependencies
