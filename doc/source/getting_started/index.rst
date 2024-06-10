@@ -5,7 +5,7 @@ Getting started
 
 This section explains how to install the Ansys Sphinx theme and then set up your
 Sphinx ``conf.py`` file to use this theme to generate your documentation.
-If you are interested in contributing to the theme, see the `PyAnsys Contributing <Pyansys_contributing>`_ for
+If you are interested in contributing to the theme, see the `PyAnsys Contributing <dev_guide_contributing_>`_ for
 information on installing the theme in development mode.
 
 Package dependencies
@@ -29,7 +29,7 @@ you need to install the following dependencies:
 
 .. note::
    To see how to use the autoapi extension with the Ansys sphinx theme, refer to the
-   `user guide <autoapi>`_.
+   :ref:`ref_user_guide_autoapi`.
 
 Install the theme
 =================
@@ -61,13 +61,3 @@ To use the Ansys Sphinx theme, you need to modify your Sphinx ``conf.py`` file.
 .. code:: python
 
    html_theme = "ansys_sphinx_theme"
-
-.. _Sphinx: https://www.sphinx-doc.org/en/master/
-.. _Sphinx_PyPI: https://pypi.org/project/Sphinx/
-.. _PyData_PyPI: https://pypi.org/project/pydata-sphinx-theme/
-.. _Jinja2_PyPI: https://pypi.org/project/Jinja2/
-.. _Sphinx_AutoAPI_PyPI: https://pypi.org/project/sphinx-autoapi/
-.. _Sphinx_Design_PyPI: https://pypi.org/project/sphinx-design/
-.. _Sphinx_Jinja_PyPI: https://pypi.org/project/sphinx-jinja/
-.. _pip: https://pypi.org/project/pip/
-.. _Pyansys_contributing: https://dev.docs.pyansys.com/how-to/contributing.html

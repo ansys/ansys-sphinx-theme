@@ -135,6 +135,10 @@ notfound_context = {
 notfound_no_urls_prefix = True
 
 # ONLY FOR ANSYS-SPHINX-THEME
+exclude_patterns = ["links.rst"]
+rst_epilog = ""
+with open("links.rst") as f:
+    rst_epilog += f.read()
 
 from pathlib import Path
 from typing import List

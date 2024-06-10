@@ -19,7 +19,7 @@ From ansys sphinx theme you can use the following features:
 
    The Ansys Sphinx theme includes the PyAnsys and Ansys logos. All The logos
    are available in the
-   `ansys_sphinx_theme/static/ <https://github.com/ansys/ansys-sphinx-theme/blob/main/src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/logos>`_
+   `ansys_sphinx_theme/static/ <static_file_>`_
    directory. You can use the following code to add the logos to your documentation:
 
    .. code-block:: python
@@ -50,7 +50,7 @@ From ansys sphinx theme you can use the following features:
     },
 
    The switcher requires a `versions.json` file that contains the versions of the documentation and their URLs in the given ``json_url``.
-   see `PyAnsys multi-version documentation <https://dev.docs.pyansys.com/how-to/documenting.html#enable-multi-version-documentation>`_
+   see `PyAnsys multi-version documentation <dev_guide_multi_version_>`_
    for more information.
 
 #. PDF cover page
@@ -98,7 +98,7 @@ From ansys sphinx theme you can use the following features:
       :link: autoapi
       :link-type: doc
 
-      autoapi
+      AutoAPI extension customization
 
 .. toctree::
    :maxdepth: 2
