@@ -19,7 +19,7 @@ From ansys sphinx theme you can use the following features:
 
    The Ansys Sphinx theme includes the PyAnsys and Ansys logos. All The logos
    are available in the
-   `ansys_sphinx_theme/static/ <static_file_>`_
+   `ansys_sphinx_theme/static/ <static_files_>`_
    directory. You can use the following code to add the logos to your documentation:
 
    .. code-block:: python
@@ -36,18 +36,19 @@ From ansys sphinx theme you can use the following features:
    The Ansys Sphinx theme includes a version switcher that allows users to switch between different versions of the documentation.
    To use the version switcher, add the following code to your `conf.py` file:
 
-   .. code::
+   .. code-block:: python
 
       from ansys_sphinx_theme import get_version_match
 
-      version = "<your_version>"
+      version = "0.1.0"
       switcher_versions = get_version_match(version)
-      cname = "<your_cname>"
+      cname = "your_name"
       html_theme_options = {
-      "switcher": {
-        "json_url": f"https://{cname}/versions.json",
-        "version_match": switcher_version,
-    },
+          "switcher": {
+              "json_url": f"https://{cname}/versions.json",
+              "version_match": switcher_version,
+          },
+      }
 
    The switcher requires a `versions.json` file that contains the versions of the documentation and their URLs in the given ``json_url``.
    see `PyAnsys multi-version documentation <dev_guide_multi_version_>`_

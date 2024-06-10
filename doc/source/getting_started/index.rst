@@ -36,19 +36,19 @@ Install the theme
 
 #. Before installing `ansys-sphinx-theme` make sure that you have the latest version of pip with this command:
 
-.. code::
+.. code-block:: bash
 
    python -m pip install --upgrade pip
 
 #. Install the theme using pip:
 
-.. code::
+.. code-block:: bash
 
    pip install ansys-sphinx-theme
 
 For installing the optional dependencies, use:
 
-.. code::
+.. code-block:: bash
 
    pip install ansys-sphinx-theme[autoapi]
 
@@ -58,6 +58,6 @@ Add the theme to your Sphinx project
 
 To use the Ansys Sphinx theme, you need to modify your Sphinx ``conf.py`` file.
 
-.. code:: python
+Add the following lines to your ``conf.py`` file::
 
-   html_theme = "ansys_sphinx_theme"
+   html_theme = 'ansys_sphinx_theme'
