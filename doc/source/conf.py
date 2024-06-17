@@ -229,4 +229,9 @@ example_links = extract_example_links(
 )
 file_names = download_and_process_files(example_links)
 
-jinja_contexts = {"examples": {"inputs_examples": file_names}}
+jinja_contexts = {
+    "examples": {"inputs_examples": file_names},
+    "install_guide": {
+        "version": f"v{version}" if not version.endswith("dev0") else "main",
+    },
+}
