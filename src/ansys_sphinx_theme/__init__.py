@@ -176,8 +176,7 @@ def setup_default_html_theme_options(app):
     theme_options.setdefault("collapse_navigation", True)
     theme_options.setdefault("navigation_with_keys", True)
 
-    # update github icon links
-    # if icon links are not given override them with default links
+    # Update the icon links. If not given, add a default GitHub icon.
     if not theme_options.get("icon_links") and theme_options.get("github_url"):
         theme_options["icon_links"] = [
             {
