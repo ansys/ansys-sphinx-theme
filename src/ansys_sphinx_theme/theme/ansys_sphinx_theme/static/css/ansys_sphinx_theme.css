@@ -55,7 +55,6 @@
   --pst-font-size-h4: 20px;
   --pst-font-size-h5: 14px;
   --pst-font-size-h6: 11px;
-  --bs-nav-link-font-size: 1rem;
 }
 
 html[data-theme="light"] {
@@ -601,8 +600,15 @@ Navigation column (according to side column)
   display: unset;
 }
 
-.nav-link {
+.navbar-icon-links {
   color: #ddd;
+  border-color: #ddd;
+}
+
+.theme-switch-button span,
+.theme-switch-button span:hover,
+.theme-switch-button span:focus {
+  color: #fff;
 }
 
 /*
@@ -682,21 +688,12 @@ icon, button, logo
 ##################
 */
 
-button,
-input,
-optgroup,
-select,
-textarea,
-button:hover {
-  color: #ddd;
-}
-
 button.btn.version-switcher__button {
   border-color: var(--pst-color-border);
   color: #ddd;
 }
 
-button.version-switcher__button:hover {
+button.btn.version-switcher__button:hover {
   color: #f8f8f2;
 }
 
@@ -710,6 +707,10 @@ button.version-switcher__button {
 
 kbd {
   background-color: #f8f9fa;
+}
+
+.theme-switch-button:hover {
+  color: #f8f9fa;
 }
 
 /*
