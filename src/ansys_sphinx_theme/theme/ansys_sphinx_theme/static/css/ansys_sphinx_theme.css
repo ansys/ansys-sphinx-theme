@@ -693,10 +693,6 @@ button.btn.version-switcher__button {
   color: #ddd;
 }
 
-button.btn.version-switcher__button:hover {
-  color: #f8f8f2;
-}
-
 button.version-switcher__button {
   color: #f8f9fa;
 }
