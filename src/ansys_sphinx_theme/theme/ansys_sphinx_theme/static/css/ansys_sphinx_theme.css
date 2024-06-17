@@ -55,6 +55,7 @@
   --pst-font-size-h4: 20px;
   --pst-font-size-h5: 14px;
   --pst-font-size-h6: 11px;
+  --bs-nav-link-font-size: 1.1rem;
 }
 
 html[data-theme="light"] {
@@ -600,6 +601,10 @@ Navigation column (according to side column)
   display: unset;
 }
 
+.nav-link {
+  color: #ddd;
+}
+
 /*
 #################################
 Syntax highlighting in code block
@@ -686,10 +691,6 @@ button:hover {
   color: #ddd;
 }
 
-.theme-switch-button {
-  border-color: #f8f9fa;
-}
-
 button.btn.version-switcher__button {
   border-color: var(--pst-color-border);
   color: #ddd;
@@ -748,15 +749,6 @@ icon, button, logo  for small screen
   }
 }
 
-.theme-switch-button span {
-  color: #f8f9fa;
-}
-
-.theme-switch-button span:hover {
-  color: var(--ansysGold);
-  border-color: white;
-}
-
 .navbar-icon-links {
   column-gap: 0.2rem;
 }
@@ -772,12 +764,6 @@ icon, button, logo  for small screen
 
 /* make the github logo white */
 
-i.fa-github-square:before,
-i.fa-square-github:before {
-  color: white;
-  font-size: 1rem;
-}
-
 .version-switcher__menu a.list-group-item:hover {
   background-color: #d09735 !important;
   border-color: var(--pst-color-text-base) !important;
@@ -792,11 +778,6 @@ i.fa-square-github:before {
 
 .fa-wrench:before {
   content: "\f0ad";
-  color: white;
-}
-
-.navbar-icon-links {
-  font-size: 1.5rem;
   color: white;
 }
 
