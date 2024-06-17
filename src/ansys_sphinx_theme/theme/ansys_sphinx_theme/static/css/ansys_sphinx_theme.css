@@ -600,14 +600,7 @@ Navigation column (according to side column)
   display: unset;
 }
 
-.navbar-icon-links {
-  color: #ddd;
-  border-color: #ddd;
-}
-
-.theme-switch-button span,
-.theme-switch-button span:hover,
-.theme-switch-button span:focus {
+.theme-switch-button span {
   color: #fff;
 }
 
@@ -703,10 +696,6 @@ button.version-switcher__button {
 
 kbd {
   background-color: #f8f9fa;
-}
-
-.theme-switch-button:hover {
-  color: #f8f9fa;
 }
 
 /*
