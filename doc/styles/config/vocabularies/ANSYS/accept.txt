@@ -9,9 +9,9 @@ link_code_library
 link_code_source
 link_code_branch
 html_context
-autoapi
+(?i)autoapi
 (?i)HTML
 multi-version
-CSS
+(?i)css
 PDF
 namespaces

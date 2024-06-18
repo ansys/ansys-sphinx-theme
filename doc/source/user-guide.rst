@@ -32,7 +32,7 @@ This section provides information on how to customize the Ansys Sphinx theme.
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Basic configuration
+   :caption: Ansys sphinx theme configuration
 
    user-guide/configuration
    user-guide/pdf

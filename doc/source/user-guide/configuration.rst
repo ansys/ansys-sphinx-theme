@@ -1,7 +1,7 @@
 .. _ref_user_guide_configuration:
 
-``ansys_sphinx_theme`` configuration
-====================================
+Basic configuration
+===================
 
 Add the following to your `conf.py` file to use the Ansys Sphinx theme:
 
