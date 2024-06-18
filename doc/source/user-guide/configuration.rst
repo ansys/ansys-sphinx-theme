@@ -54,3 +54,26 @@ From ansys sphinx theme you can use the following features:
 
    The Ansys Sphinx theme includes a PDF cover page that you can customize.
    To customize the PDF cover page, see :ref:`ref_user_guide_pdf_cover`.
+
+#. **Custom CSS**
+
+    You can add custom CSS to the Ansys Sphinx theme by creating a directory called `_static/css` in
+    your documentation and adding the following code to your `conf.py` file:
+
+    .. code-block:: python
+
+        html_static_path = ["_static"]
+        html_css_files = [
+            "css/custom.css",
+        ]
+
+    Here is an example of a custom CSS file:
+
+    .. code-block:: css
+
+        .body {
+            background-color: black;
+            color: white;
+        }
+
+    which changes the background color of the body to black and the text color to white.

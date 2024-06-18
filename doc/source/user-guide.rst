@@ -16,12 +16,6 @@ This section provides information on how to customize the Ansys Sphinx theme.
 
         Basic configuration
 
-   .. grid-item-card:: :octicon:`file-code` :ref:`ref_user_guide_css`
-      :link: user-guide/css
-      :link-type: doc
-
-      css customization
-
    .. grid-item-card:: :octicon:`gear` :ref:`ref_user_guide_html_theme`
       :link: user-guide/options
       :link-type: doc
@@ -46,17 +40,9 @@ This section provides information on how to customize the Ansys Sphinx theme.
 .. toctree::
     :maxdepth: 2
     :hidden:
-    :caption: css customization
-
-    user-guide/css
-
-.. toctree::
-    :maxdepth: 2
-    :hidden:
-    :caption: theme options
+    :caption: Theme options
 
     user-guide/options
-    user-guide/404_page
 
 .. toctree::
     :maxdepth: 2
