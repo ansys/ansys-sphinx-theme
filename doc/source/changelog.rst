@@ -9,6 +9,14 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`0.16.6 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.6>`_ - 2024-06-18
+=========================================================================================
+
+Fixed
+^^^^^
+
+- fix: wrong env var name for PACKAGE_NAME `#395 <https://github.com/ansys/ansys-sphinx-theme/pull/395>`_
+
 `0.16.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.5>`_ - 2024-05-31
 =========================================================================================
 
