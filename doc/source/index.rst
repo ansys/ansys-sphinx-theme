@@ -20,7 +20,7 @@ appealing and user-friendly.
         Step-by-step guidelines on how to install the Ansys Sphinx theme.
 
     .. grid-item-card:: User guide :fa:`book-open-reader`
-        :link: user_guide/index
+        :link: user-guide
         :link-type: doc
 
         Learn about the capabilitie, features, and key topics of this theme.
@@ -44,6 +44,6 @@ appealing and user-friendly.
    :maxdepth: 3
 
    getting-started.rst
-   user_guide/index.rst
+   user-guide.rst
    examples/index.rst
    changelog

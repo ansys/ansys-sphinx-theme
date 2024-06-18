@@ -1,12 +1,8 @@
-.. _ref_user_guide:
+.. _ref_user_guide_configuration:
 
-User guide
-##########
+``ansys_sphinx_theme`` configuration
+====================================
 
-This section provides information on how to customize the Ansys Sphinx theme.
-
-Basic usage
-===========
 Add the following to your `conf.py` file to use the Ansys Sphinx theme:
 
 .. code-block:: python
@@ -54,61 +50,7 @@ From ansys sphinx theme you can use the following features:
    see `PyAnsys multi-version documentation <dev_guide_multi_version_>`_
    for more information.
 
-#. PDF cover page
+#. **PDF cover page**
 
    The Ansys Sphinx theme includes a PDF cover page that you can customize.
    To customize the PDF cover page, see :ref:`ref_user_guide_pdf_cover`.
-
-
-.. grid:: 1 1 2 2
-   :gutter: 2
-   :padding: 2
-   :margin: 2
-
-   .. grid-item-card:: :octicon:`file-code` :ref:`ref_user_guide_css`
-      :link: css
-      :link-type: doc
-
-      css customization
-
-   .. grid-item-card:: :octicon:`gear` :ref:`ref_user_guide_html_theme`
-      :link: options
-      :link-type: doc
-
-      theme options
-
-   .. grid-item-card:: :octicon:`file` :ref:`ref_user_guide_pdf_cover`
-      :link: pdf
-      :link-type: doc
-
-      PDF customization
-
-   .. grid-item-card:: :octicon:`alert` :ref:`ref_user_guide_404_page`
-      :link: 404_page
-      :link-type: doc
-
-      404 page customization
-
-   .. grid-item-card:: :octicon:`package` :ref:`ref_user_guide_extension`
-      :link: extensions
-      :link-type: doc
-
-      extensions
-
-   .. grid-item-card:: :octicon:`code` :ref:`ref_user_guide_autoapi`
-      :link: autoapi
-      :link-type: doc
-
-      AutoAPI extension customization
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-
-   css
-   options
-   pdf
-   404_page
-   extensions
-   autoapi
-
