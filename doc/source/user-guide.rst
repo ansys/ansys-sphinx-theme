@@ -14,13 +14,13 @@ This section provides information on how to customize the Ansys Sphinx theme.
       :link: user-guide/configuration
       :link-type: doc
 
-      Basic configuration
+      Ansys sphinx theme configuration
 
    .. grid-item-card:: :octicon:`gear` :ref:`ref_user_guide_html_theme`
       :link: user-guide/options
       :link-type: doc
 
-      theme options
+      Theme options
 
    .. grid-item-card:: :octicon:`package` :ref:`ref_user_guide_extension`
       :link: user-guide/linkcode
