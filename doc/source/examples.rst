@@ -1,7 +1,9 @@
-========
 Examples
-========
-This show how the different extensions get rendered in ansys-sphinx-theme. This is for testing purpose.
+########
+
+This show how the different extensions get rendered in ansys-sphinx-theme.
+It is intended to be used as a reference for the users to see how the different
+extensions are rendered in the theme.
 
 .. grid:: 2
 
@@ -25,5 +27,5 @@ This show how the different extensions get rendered in ansys-sphinx-theme. This 
    :hidden:
    :maxdepth: 2
 
-   sphinx-design
-   table
+   examples/sphinx-design
+   examples/table

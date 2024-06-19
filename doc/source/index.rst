@@ -34,7 +34,7 @@ appealing and user-friendly.
         A detailed guide describing the extensions provided by this theme.
 
     .. grid-item-card:: Examples :fa:`laptop-code`
-        :link: examples/index
+        :link: examples
         :link-type: doc
 
         Gallery of examples showing how third-party extensions integrate with this theme.
@@ -45,5 +45,5 @@ appealing and user-friendly.
 
    getting-started.rst
    user-guide.rst
-   examples/index.rst
+   examples.rst
    changelog
