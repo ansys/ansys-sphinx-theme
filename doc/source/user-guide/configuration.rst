@@ -57,23 +57,21 @@ From ansys sphinx theme you can use the following features:
 
 #. **Custom CSS**
 
-    You can add custom CSS to the Ansys Sphinx theme by creating a directory called `_static/css` in
-    your documentation and adding the following code to your `conf.py` file:
+   You can add custom CSS to the Ansys Sphinx theme by creating a directory called `_static/css` in
+   your documentation and adding the following code to your `conf.py` file:
 
-    .. code-block:: python
+   .. code-block:: python
 
-        html_static_path = ["_static"]
-        html_css_files = [
-            "css/custom.css",
-        ]
+    html_static_path = ["_static"]
+    html_css_files = ["css/custom.css"]
 
-    Here is an example of a custom CSS file:
+   Here is an example of a custom CSS file:
 
-    .. code-block:: css
+   .. code-block:: css
 
-        .body {
-            background-color: black;
-            color: white;
-        }
+    .body {
+        background-color: black;
+        color: white;
+    }
 
-    which changes the background color of the body to black and the text color to white.
+   which changes the background color of the body to black and the text color to white.
