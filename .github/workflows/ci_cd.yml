@@ -60,6 +60,7 @@ jobs:
         uses: ansys/actions/doc-build@v6
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          add-pdf-html-docs-as-assets: true
 
   doc-deploy-development:
     name: Doc dev version deploy
