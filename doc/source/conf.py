@@ -234,4 +234,5 @@ jinja_contexts = {
     "install_guide": {
         "version": f"v{version}" if not version.endswith("dev0") else "main",
     },
+    "pdf_guide": {"version": get_version_match(__version__)},  # noqa: E501
 }
