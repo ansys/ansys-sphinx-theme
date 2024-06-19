@@ -11,21 +11,22 @@ Add the following to your `conf.py` file to use the Ansys Sphinx theme:
 
 From ansys sphinx theme you can use the following features:
 
-#. **PyAnsys and Ansys logos**
+1. PyAnsys and Ansys logos
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   The Ansys Sphinx theme includes the PyAnsys and Ansys logos. All The logos
-   are available in the
-   `ansys_sphinx_theme/static/ <static_files_>`_
-   directory. You can use the following code to add the logos to your documentation:
+The Ansys Sphinx theme includes the PyAnsys and Ansys logos. All The logos
+are available in the
+`ansys_sphinx_theme/static/ <static_files_>`_
+directory. You can use the following code to add the logos to your documentation:
 
-   .. code-block:: python
+.. code-block:: python
 
-      from ansys_sphinx_theme import pyansys_logo_black, ansys_logo_black, ansys_favicon
+    from ansys_sphinx_theme import pyansys_logo_black, ansys_logo_black, ansys_favicon
 
-      html_logo = pyansys_logo_black
-      html_favicon = ansys_favicon
+    html_logo = pyansys_logo_black
+    html_favicon = ansys_favicon
 
-   ``favicon`` is the icon that appears in the browser tab.
+``favicon`` is the icon that appears in the browser tab.
 
 #. **Version switcher**
 

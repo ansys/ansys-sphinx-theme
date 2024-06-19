@@ -10,7 +10,7 @@ This section provides information on how to customize the Ansys Sphinx theme.
    :padding: 2
    :margin: 2
 
-   .. grid-item-card:: :octicon:`gear` :ref:`ref_user_guide_configuration`
+   .. grid-item-card:: :octicon:`tools` :ref:`ref_user_guide_configuration`
       :link: user-guide/configuration
       :link-type: doc
 
@@ -22,11 +22,17 @@ This section provides information on how to customize the Ansys Sphinx theme.
 
       Theme options
 
-   .. grid-item-card:: :octicon:`package` :ref:`ref_user_guide_extension`
+   .. grid-item-card:: :octicon:`link` :ref:`ref_user_guide_extension`
       :link: user-guide/linkcode
       :link-type: doc
 
-      Extensions
+      See how to use the linkcode extension with the Ansys sphinx theme
+
+   .. grid-item-card:: :octicon:`cross-reference` :ref:`ref_user_guide_autoapi`
+      :link: user-guide/autoapi
+      :link-type: doc
+
+      See how to use the autoapi extension with the Ansys sphinx theme
 
 
 .. toctree::
