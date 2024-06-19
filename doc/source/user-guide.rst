@@ -14,7 +14,7 @@ This section provides information on how to customize the Ansys Sphinx theme.
       :link: user-guide/configuration
       :link-type: doc
 
-        Basic configuration
+      Basic configuration
 
    .. grid-item-card:: :octicon:`gear` :ref:`ref_user_guide_html_theme`
       :link: user-guide/options
@@ -26,7 +26,7 @@ This section provides information on how to customize the Ansys Sphinx theme.
       :link: user-guide/linkcode
       :link-type: doc
 
-        Extensions
+      Extensions
 
 
 .. toctree::
