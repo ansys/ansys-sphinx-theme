@@ -28,6 +28,12 @@ extensions are rendered in the theme.
 
          Examples of sphinx gallery rendered using the `ansys-sphinx-theme`.
 
+   .. grid-item-card:: Admonitions
+         :link: admonitions
+         :link-type: ref
+
+         Examples of admonitions rendered using the `ansys-sphinx-theme`.
+
 
 .. toctree::
    :hidden:
@@ -35,4 +41,5 @@ extensions are rendered in the theme.
 
    examples/sphinx-design
    examples/table
+   examples/admonitions
 

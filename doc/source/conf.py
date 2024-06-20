@@ -77,6 +77,7 @@ extensions = [
     "sphinx_design",
     "sphinx_jinja",
     "sphinx_gallery.gen_gallery",
+    "sphinx.ext.todo",
 ]
 
 # Intersphinx mapping
@@ -180,7 +181,7 @@ if switcher_version != "dev":
 
 
 def extract_example_links(
-    repo_fullname: str, path_relative_to_root: str, exclude_files: List[str]
+    repo_fullname: str, path_relative_to_root: str, exclude_files: List[str] = []
 ) -> List[str]:
     """
     Extract example links from a specific GitHub repository.
@@ -202,7 +203,8 @@ def extract_example_links(
     g = Github()
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
-
+    if not isinstance(contents, list):
+        contents = [contents]
     example_links = []
     for content in contents:
         if content.type == "dir":
@@ -252,8 +254,17 @@ example_links = extract_example_links(
 )
 file_names = download_and_process_files(example_links)
 
+admonitions_links = extract_example_links(
+    "pydata/pydata-sphinx-theme",
+    "docs/examples/kitchen-sink/admonitions.rst",
+)
+
+admonitions_links = download_and_process_files(admonitions_links)
+print(admonitions_links)
+
 jinja_contexts = {
     "examples": {"inputs_examples": file_names},
+    "admonitions": {"inputs_admonitions": admonitions_links},
     "install_guide": {
         "version": f"v{version}" if not version.endswith("dev0") else "main",
     },
