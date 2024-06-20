@@ -6,7 +6,6 @@ import os
 from github import Github
 import pyvista
 from sphinx.builders.latex import LaTeXBuilder
-from sphinx_gallery.sorting import FileNameSortKey
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
@@ -113,19 +112,12 @@ sphinx_gallery_conf = {
     # path to your examples scripts
     "examples_dirs": ["examples/gallery-examples"],  # ["../../examples/"],
     # path where to save gallery generated examples
-    "gallery_dirs": ["examples/gallery-examples/rendered"],
+    "gallery_dirs": ["rendered"],
     # Pattern to search for example files
-    "filename_pattern": r"\.py",
+    "filename_pattern": r"pyvista_examples\.py",
     # Remove the "Download all examples" button from the top level gallery
     "download_all_examples": False,
-    # Remove sphinx configuration comments from code blocks
-    "remove_config_comments": True,
-    # Sort gallery example by file name instead of number of lines (default)
-    "within_subsection_order": FileNameSortKey,
-    # directory where function granular galleries are stored
-    "backreferences_dir": None,
     # Modules for which function level galleries are created.  In
-    "doc_module": "dev-guide",
     "image_scrapers": ("pyvista", "matplotlib"),
 }
 
@@ -133,6 +125,7 @@ sphinx_gallery_conf = {
 # Preferred plotting style for documentation
 pyvista.BUILDING_GALLERY = True
 pyvista.OFF_SCREEN = True
+show_warnings_type = True
 
 suppress_warnings = ["config.cache"]
 # Favicon
