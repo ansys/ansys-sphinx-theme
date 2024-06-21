@@ -21,9 +21,9 @@ extensions are rendered in the theme.
 
          Examples of tables with JavaScript and RST rendered using the `ansys-sphinx-theme`.
 
-   .. grid-item-card:: :octicon:`link-external` :ref:`sphinx_gallery_example`
-         :link: sphinx_gallery_example
-         :link-type: ref
+   .. grid-item-card:: :octicon:`link-external` Sphinx gallery
+         :link: examples/gallery-examples/index
+         :link-type: doc
 
          Examples of sphinx gallery rendered using the `ansys-sphinx-theme`.
 
@@ -41,4 +41,4 @@ extensions are rendered in the theme.
    examples/sphinx-design
    examples/table
    examples/admonitions
-   Sphinx gallery<sphinx-gallery/index>
+   examples/gallery-examples/index

@@ -157,5 +157,5 @@ cython_debug/
 
 # Sphinx auto-generated
 doc/source/_autosummary/
-doc/source/sphinx-gallery/*
+doc/source/examples/gallery-examples/
 doc/source/sg_execution_times.rst

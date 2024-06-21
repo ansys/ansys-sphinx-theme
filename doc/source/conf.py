@@ -34,7 +34,6 @@ switcher_version = get_version_match(__version__)
 html_logo = ansys_logo_black
 html_theme = "ansys_sphinx_theme"
 
-
 # In the html_context dictionary in conf.py
 html_context = {
     "github_user": "ansys",
@@ -42,7 +41,6 @@ html_context = {
     "github_version": "main",
     "doc_path": "doc/source",
 }
-
 
 # specify the location of your github repo
 html_theme_options = {
@@ -139,7 +137,7 @@ notfound_context = {
 notfound_no_urls_prefix = True
 
 # ONLY FOR ANSYS-SPHINX-THEME
-exclude_patterns = ["links.rst"]
+exclude_patterns = ["links.rst", "examples/sphinx-gallery/README.rst"]
 rst_epilog = ""
 with open("links.rst") as f:
     rst_epilog += f.read()
@@ -152,13 +150,12 @@ import requests
 THIS_PATH = Path(__file__).parent.resolve()
 
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
-SPHINX_GALLERY_OUTPUT_PATH = (THIS_PATH / "sphinx-gallery").resolve()
 
 sphinx_gallery_conf = {
     # path to your examples scripts
-    "examples_dirs": ["examples/gallery-examples/"],
+    "examples_dirs": ["examples/sphinx-gallery"],
     # path where to save gallery generated examples
-    "gallery_dirs": [SPHINX_GALLERY_OUTPUT_PATH],
+    "gallery_dirs": ["examples/gallery-examples"],
     # Pattern to search for example files
     "filename_pattern": r"sphinx_gallery\.py",
     # Remove the "Download all examples" button from the top level gallery
@@ -199,7 +196,8 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github()
+    access_token = os.getenv("GITHUB_ACCESS_TOKEN")
+    g = Github(access_token)
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):
@@ -259,7 +257,6 @@ admonitions_links = extract_example_links(
 )
 
 admonitions_links = download_and_process_files(admonitions_links)
-print(admonitions_links)
 
 jinja_contexts = {
     "examples": {"inputs_examples": file_names},

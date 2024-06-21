@@ -20,11 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# noqa: D205, D400
 """
-This is a gallery example.
-
-.. _sphinx_gallery_example:
-
 Sphinx gallery
 ==============
 

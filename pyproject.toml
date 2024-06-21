@@ -83,7 +83,6 @@ source = ["src"]
 [tool.coverage.report]
 show_missing = true
 
-
 [tool.towncrier]
 directory = "doc/changelog.d"
 filename = "doc/source/changelog.rst"

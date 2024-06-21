@@ -18,10 +18,12 @@ help:
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-# customized clean due to api examples
+# customized clean due to api examples and sphinx-gallery
 clean:
 	rm -rf $(BUILDDIR)
 	find . -type d -name "_autosummary" -exec rm -rf {} +
+	find . -type d -name "examples/gallery-examples" -exec rm -rf {} +
+
 
 # customized pdf due to svg issue
 pdf:

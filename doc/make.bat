@@ -9,9 +9,11 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=source
 set BUILDDIR=_build
+set GALLERY_EXAMPLES=%SOURCEDIR%\examples\gallery-examples
 
 if "%1" == "" goto help
 if "%1" == "pdf" goto pdf
+if "%1" == "clean" goto clean
 
 %SPHINXBUILD% >NUL 2>NUL
 if errorlevel 9009 (
@@ -33,10 +35,15 @@ goto end
 %SPHINXBUILD% -M help %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
 
 :pdf
-	%SPHINXBUILD% -M latex %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
-	cd "%BUILDDIR%\latex"
-	for %%f in (*.tex) do (
-	pdflatex "%%f" --interaction=nonstopmode)
+%SPHINXBUILD% -M latex %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
+cd "%BUILDDIR%\latex"
+for %%f in (*.tex) do (
+pdflatex "%%f" --interaction=nonstopmode)
+
+:clean
+if not exist %BUILDDIR% goto end
+rmdir /S /Q %BUILDDIR%
+rmdir /S /Q %GALLERY_EXAMPLES%
 
 :end
 popd
