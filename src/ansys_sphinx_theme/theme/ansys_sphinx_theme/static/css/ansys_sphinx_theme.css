@@ -4,7 +4,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap");
 @import "../sg_gallery.css";
 @import "../design-style.4045f2051d55cab465a707391d5b2007.min.css";
-@import "../styles/pydata-sphinx-theme.css";
 
 @font-face {
   font-family: "Source Sans Pro Light";
@@ -453,56 +452,6 @@ label {
 }
 
 /*
-##########
-Scroll-bar
-##########
-*/
-
-body::-webkit-scrollbar {
-  width: 1rem;
-  height: 1rem;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-}
-
-body::-webkit-scrollbar-track {
-  background: var(--pst-color-background);
-}
-
-.bd-sidebar::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
-.bd-sidebar::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-  visibility: hidden !important;
-}
-
-.bd-sidebar::-webkit-scrollbar-track {
-  background: var(--pst-color-border);
-  visibility: hidden !important;
-}
-
-.bd-toc::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
-.bd-toc::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-}
-
-.bd-toc::-webkit-scrollbar-track {
-  background: var(--pst-color-border);
-}
-
-/*
 ############
 Autosummary
 ############
@@ -523,85 +472,6 @@ a > code.download {
   color: var(--pst-color-link);
   text-decoration: none;
   font-weight: normal;
-}
-
-/*
-###############
-Dropdown button
-###############
-*/
-
-.navbar button.navbar-toggler {
-  margin-right: 1em;
-  border-color: rgb(255, 255, 255);
-  color: rgb(255, 255, 255);
-}
-
-/*
-####################################################
-Side column size (first and second column from left)
-####################################################
-*/
-
-.col-md-3 {
-  flex: 0 0 20%;
-  max-width: 20%;
-}
-
-a.headerlink {
-  color: #222;
-}
-
-@media (min-width: 1200px) {
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl {
-    max-width: 1200px;
-  }
-}
-
-@media (min-width: 1600px) {
-  .container,
-  .container-lg,
-  .container-md,
-  .container-sm,
-  .container-xl {
-    max-width: 1600px;
-  }
-}
-
-/*
-############################################
-Navigation column (according to side column)
-############################################
-*/
-.col-lg-9 {
-  padding-right: 5px;
-  padding-left: 20px;
-}
-.bd-main .bd-content {
-  display: flex;
-  height: 100%;
-  justify-content: end;
-}
-
-.bd-main .bd-content .bd-article-container .bd-article {
-  padding-left: 1rem;
-  padding-top: 1rem;
-  padding-right: 1rem;
-}
-.bd-header .navbar-nav li a.nav-link {
-  color: #ddd;
-}
-.bd-header .navbar-nav .dropdown button {
-  color: #ddd;
-  display: unset;
-}
-
-.theme-switch-button span {
-  color: #fff;
 }
 
 /*
@@ -1069,34 +939,6 @@ div#searchbox p.highlight-link a {
 .table > :not(caption) > * > * {
   background-color: transparent !important;
   color: var(--pst-color-text-base) !important;
-}
-
-nav.bd-links li > a {
-  text-decoration: none;
-}
-
-.bd-header .navbar-nav li a.nav-link:hover {
-  text-decoration: none;
-  font-weight: 600;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:active,
-a:visited,
-a:visited:hover,
-a:active:hover,
-a:hover {
-  text-decoration: underline;
-  color: var(--pst-color-link);
-  font-weight: 500;
-}
-
-a:visited,
-a:visited:hover {
-  color: var(--pst-color-link-visted);
 }
 
 /* Cheat sheet sidebar */

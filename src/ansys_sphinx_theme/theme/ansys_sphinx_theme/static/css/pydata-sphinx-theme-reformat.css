@@ -1,0 +1,160 @@
+/* Changes associated with the Ansys Sphinx Theme */
+/* for pydata-sphinx-theme */
+@import "../styles/pydata-sphinx-theme.css";
+
+/*
+##########
+Scroll-bar
+##########
+*/
+
+body::-webkit-scrollbar {
+  width: 1rem;
+  height: 1rem;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--pst-color-background);
+}
+
+.bd-sidebar::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.bd-sidebar::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+  visibility: hidden !important;
+}
+
+.bd-sidebar::-webkit-scrollbar-track {
+  background: var(--pst-color-border);
+  visibility: hidden !important;
+}
+
+.bd-toc::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.bd-toc::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+}
+
+.bd-toc::-webkit-scrollbar-track {
+  background: var(--pst-color-border);
+}
+
+/*
+###############
+Dropdown button
+###############
+*/
+
+.navbar button.navbar-toggler {
+  margin-right: 1em;
+  border-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+/*
+####################################################
+Side column size (first and second column from left)
+####################################################
+*/
+
+.col-md-3 {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+a.headerlink {
+  color: #222;
+}
+
+@media (min-width: 1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1600px;
+  }
+}
+
+/*
+  ############################################
+  Navigation column (according to side column)
+  ############################################
+  */
+.col-lg-9 {
+  padding-right: 5px;
+  padding-left: 20px;
+}
+.bd-main .bd-content {
+  display: flex;
+  height: 100%;
+  justify-content: end;
+}
+
+.bd-main .bd-content .bd-article-container .bd-article {
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+}
+.bd-header .navbar-nav li a.nav-link {
+  color: #ddd;
+}
+.bd-header .navbar-nav .dropdown button {
+  color: #ddd;
+  display: unset;
+}
+
+.theme-switch-button span {
+  color: #fff;
+}
+
+nav.bd-links li > a {
+  text-decoration: none;
+}
+
+.bd-header .navbar-nav li a.nav-link:hover {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:active,
+a:visited,
+a:visited:hover,
+a:active:hover,
+a:hover {
+  text-decoration: underline;
+  color: var(--pst-color-link);
+  font-weight: 500;
+}
+
+a:visited,
+a:visited:hover {
+  color: var(--pst-color-link-visted);
+}
