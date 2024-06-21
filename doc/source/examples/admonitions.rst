@@ -10,8 +10,8 @@ This page shows how the admonitions are rendered in the documentation with ansys
 
 Credits and acknowledgments
 ---------------------------
-The examples shown below is downloaded from the pydata sphinx theme project.
-The original page can be found at `Pydata sphinx theme <https://pydata-sphinx-theme.readthedocs.io/en/stable/examples/kitchen-sink/index.html>`_ .
+The examples shown below is downloaded from the PyData sphinx theme project.
+The original page can be found at `PyData sphinx theme <https://pydata-sphinx-theme.readthedocs.io/en/stable/examples/kitchen-sink/index.html>`_ .
 
 
 .. jinja:: admonitions
