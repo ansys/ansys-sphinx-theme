@@ -1,6 +1,7 @@
 /* Changes associated with the Ansys Sphinx Theme */
 /* for pydata-sphinx-theme */
 @import "../styles/pydata-sphinx-theme.css";
+@import "ansys-sphinx-theme-variable.css";
 
 /*
 ##########
@@ -157,4 +158,99 @@ a:hover {
 a:visited,
 a:visited:hover {
   color: var(--pst-color-link-visted);
+}
+/*
+##################
+icon, button, logo
+##################
+*/
+
+button.btn.version-switcher__button {
+  border-color: var(--pst-color-border);
+  color: #ddd;
+}
+
+button.version-switcher__button {
+  color: #f8f9fa;
+}
+
+.search-button {
+  color: #ddd;
+}
+
+kbd {
+  background-color: #f8f9fa;
+}
+
+/*
+  #####################################
+  icon, button, logo  for small screen
+  #####################################
+  */
+@media screen and (max-width: 576px) {
+  html[data-theme="light"] .theme-switch-button span {
+    color: rgb(19, 18, 18) !important;
+  }
+  button.btn.version-switcher__button {
+    border-color: var(--pst-color-border);
+    color: var(--pst-color-text-base);
+    font-weight: 700;
+  }
+  button.btn.version-switcher__button {
+    border-color: var(--pst-color-border);
+    color: var(--pst-color-text-base);
+  }
+  button.version-switcher__button {
+    color: var(--pst-color-text-base);
+  }
+  .navbar-nav li a:focus,
+  .navbar-nav li a:hover,
+  .navbar-nav li.current > a {
+    color: var(--pst-color-text-base) !important;
+    font-weight: 700;
+  }
+  button,
+  input,
+  optgroup,
+  select,
+  textarea,
+  button:hover {
+    color: var(--pst-color-text-base);
+  }
+}
+
+.navbar-icon-links {
+  column-gap: 0.2rem;
+}
+
+.search-button-field {
+  color: white;
+  background-color: transparent;
+}
+
+.search-button-field:hover {
+  color: var(--pst-color-border);
+}
+
+/* make the github logo white */
+
+.version-switcher__menu a.list-group-item:hover {
+  background-color: #d09735 !important;
+  border-color: var(--pst-color-text-base) !important;
+  color: #000 !important;
+}
+
+.version-switcher__menu a.list-group-item {
+  background-color: #f8f9fa;
+  border-color: var(--pst-color-border);
+  color: #000;
+}
+
+.fa-wrench:before {
+  content: "\f0ad";
+  color: white;
+}
+
+html[data-theme="light"] #pst-back-to-top {
+  background-color: var(--pst-color-link);
 }

@@ -1,0 +1,179 @@
+/*Contains variables for colors and fonts used in the theme*/
+
+@font-face {
+  font-family: "Source Sans Pro Light";
+  src: url(../fonts/SourceSansPro-Light.ttf);
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url(../fonts/SourceSansPro-Regular.ttf);
+}
+
+:root {
+  /* Ansys specific changes to the theme */
+
+  /*****************************************************************************
+    * Ansys Font family
+    **/
+  /* These are adapted from https://systemfontstack.com/ */
+  --pst-font-family-base-system: -apple-system, BlinkMacSystemFont, Segoe UI,
+    "Helvetica Neue", Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol;
+  --pst-font-family-monospace-system: "SFMono-Regular", Menlo, Consolas, Monaco,
+    Liberation Mono, Lucida Console, monospace;
+
+  --pst-font-family-base: "Source Sans Pro", sans-serif,
+    var(--pst-font-family-base-system);
+  --pst-font-family-heading: "Source Sans Pro", sans-serif,
+    var(--pst-font-family-base-system);
+  --pst-font-family-monospace: monospace, Courier,
+    var(--pst-font-family-monospace-system);
+
+  /*****************************************************************************
+    * Ansys compatible colors
+    *
+    * Colors are defined in rgb string way, "red, green, blue"
+    **/
+  --ansysGold: rgb(255, 183, 27); /* #FFB71B */
+  --ansysBronze: rgb(200, 146, 17); /* #C89211 */
+  --pythonBlue: rgb(57, 114, 161); /* #3972a1 */
+
+  --pst-color-active-navigation: var(--ansysBronze); /* --ansysBronze */
+  --pst-color-navbar-link: rgb(255, 255, 255);
+  --pst-color-navbar-link-hover: var(--ansysBronze); /* --ansysBronze */
+  --pst-color-navbar-link-active: var(--ansysGold); /* --ansysBronze */
+  --pst-font-size-h1: 48px;
+  --pst-font-size-h2: 36px;
+  --pst-font-size-h3: 28px;
+  --pst-font-size-h4: 20px;
+  --pst-font-size-h5: 14px;
+  --pst-font-size-h6: 11px;
+}
+
+html[data-theme="light"] {
+  /*****************************************************************************
+    * main colors
+    */
+  --pst-color-primary: #fff;
+  --pst-color-secondary: rgb(200, 146, 17);
+  --pst-color-success: rgb(40, 167, 69);
+  --pst-color-text-base: rgb(0, 0, 0);
+  --pst-color-text-muted: rgb(26, 24, 24);
+  --pst-color-border: #a19d9d;
+  --pst-color-shadow: rgb(216, 216, 216);
+  --pst-color-info: var(--pst-color-link);
+
+  /*****************************************************************************
+    * depth colors
+    */
+  --pst-color-on-background: rgb(0, 0, 0);
+  --pst-color-on-surface: #f2f2f2;
+
+  /*****************************************************************************
+    * extensions
+    */
+
+  --pst-color-panel-background: var(--pst-color-on-background);
+
+  /*****************************************************************************
+    * layout
+    */
+
+  --pst-color-link: #1e6ddc;
+  --pst-color-link-hover: #32cfea;
+  --pst-color-link-visted: #9428f2;
+  --pst-color-inline-code: #000;
+  --pst-color-target: rgb(255, 255, 255);
+
+  /*****************************************************************************
+    * color for sphinx-gallery-code output
+    */
+  --pst-color-codecell: #fafae2;
+  --pst-color-codeout: var(--pst-color-inline-code);
+  --pst-color-sig: #0965c8;
+  --pst-color-code-s1: #b35000;
+  --pst-color-code-c1: #095d0a;
+  /*****************************************************************************
+    * sphinx design primary color
+    */
+  --sd-color-primary: var(--pst-color-text-base);
+
+  /*****************************************************************************
+    * table hovering
+    */
+  --pst-color-table-hover: var(--pst-color-border);
+
+  /*****************************************************************************
+    * search hide match
+    */
+  --pst-color-search-match: #91969b;
+}
+
+html[data-theme="dark"] {
+  /*****************************************************************************
+    * main colors
+    */
+  --pst-color-primary: #d09735;
+  --pst-color-secondary: #c58e30;
+  --pst-color-success: rgb(72, 135, 87);
+  --pst-color-text-base: rgb(201, 209, 217);
+  --pst-color-text-muted: rgb(192, 192, 192);
+  --pst-color-border: rgb(192, 192, 192);
+  --pst-color-shadow: rgb(104, 102, 102);
+  --pst-color-background: rgb(18, 18, 18);
+  --pst-color-on-background: rgb(0, 0, 0);
+  --pst-color-surface: rgb(41, 41, 41);
+  --pst-color-on-surface: rgb(55, 55, 55);
+  --pst-color-info: var(--pst-color-secondary);
+
+  /*****************************************************************************
+    * extensions
+    */
+
+  --pst-color-panel-background: var(--pst-color-on-background);
+
+  /*****************************************************************************
+    * layout
+    */
+
+  --pst-color-link: #579ce5;
+  --pst-color-link-hover: #12b2e2;
+  --pst-color-link-visted: #c58af9;
+  --pst-color-inline-code: #fff;
+  --pst-color-target: rgb(71, 39, 0);
+
+  /*****************************************************************************
+    * color for sphinx-gallery-code output
+    */
+  --pst-color-codecell: #495057;
+  --pst-color-codeout: #f2f4f6;
+  --pst-color-sig: #d6ab1e;
+  --pst-color-code-s1: #d79a60;
+  --pst-color-code-c1: #8fb842;
+
+  /*****************************************************************************
+    * table hovering
+    */
+  --pst-color-table-hover: var(--pst-color-target);
+
+  /*****************************************************************************
+    * search hide match
+    */
+  --pst-color-search-match: var(--pst-color-primary);
+}
+
+/*
+  #################
+  body and content
+  #################
+  */
+
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+h1,
+h2 {
+  color: var(--pst-color-text-base);
+}
