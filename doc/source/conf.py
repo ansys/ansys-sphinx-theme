@@ -108,26 +108,6 @@ numpydoc_validation_checks = {
     # type, unless multiple values are being returned"
 }
 
-# -- Sphinx Gallery Options ---------------------------------------------------
-sphinx_gallery_conf = {
-    # path to your examples scripts
-    "examples_dirs": ["examples/gallery-examples"],  # ["../../examples/"],
-    # path where to save gallery generated examples
-    "gallery_dirs": ["rendered"],
-    # Pattern to search for example files
-    "filename_pattern": r"pyvista_examples\.py",
-    # Remove the "Download all examples" button from the top level gallery
-    "download_all_examples": False,
-    # Modules for which function level galleries are created.  In
-    "image_scrapers": ("pyvista", "matplotlib"),
-}
-
-# Ensure that offscreen rendering is used for docs generation
-# Preferred plotting style for documentation
-pyvista.BUILDING_GALLERY = True
-pyvista.OFF_SCREEN = True
-show_warnings_type = True
-
 suppress_warnings = ["config.cache"]
 # Favicon
 html_favicon = ansys_favicon
@@ -172,6 +152,25 @@ import requests
 THIS_PATH = Path(__file__).parent.resolve()
 
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
+SPHINX_GALLERY_OUTPUT_PATH = (THIS_PATH / "sphinx-gallery").resolve()
+
+sphinx_gallery_conf = {
+    # path to your examples scripts
+    "examples_dirs": ["examples/gallery-examples/"],
+    # path where to save gallery generated examples
+    "gallery_dirs": [SPHINX_GALLERY_OUTPUT_PATH],
+    # Pattern to search for example files
+    "filename_pattern": r"sphinx_gallery\.py",
+    # Remove the "Download all examples" button from the top level gallery
+    "download_all_examples": False,
+    # Modules for which function level galleries are created.  In
+    "image_scrapers": ("pyvista", "matplotlib"),
+}
+
+# Ensure that offscreen rendering is used for docs generation
+# Preferred plotting style for documentation
+pyvista.BUILDING_GALLERY = True
+pyvista.OFF_SCREEN = True
 
 linkcheck_ignore = []
 if switcher_version != "dev":

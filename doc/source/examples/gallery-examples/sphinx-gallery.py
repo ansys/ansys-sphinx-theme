@@ -23,10 +23,10 @@
 """
 This is a gallery example.
 
-.. _sphinx_gallery_example_template:
+.. _sphinx_gallery_example:
 
-Sphinx gallery example template
-================================
+Sphinx gallery
+==============
 
 This example shows how to add a new example to the PyAnsys `Sphinx-Gallery
 <https://sphinx-gallery.github.io/>`_.
