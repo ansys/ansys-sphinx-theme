@@ -197,8 +197,6 @@ def link_code(app: Sphinx, doctree: Node):
     The `link_code_library` configuration option can be used to specify a custom library
     for link resolution.
 
-    Notes
-    -----
     Adapted from the original `linkcode` extension in Sphinx, see
     https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py
     """

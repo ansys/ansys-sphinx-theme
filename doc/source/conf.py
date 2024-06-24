@@ -2,10 +2,19 @@
 
 from datetime import datetime
 import os
+from pathlib import Path
+from typing import List
 
 from github import Github
 import pyvista
+import requests
 from sphinx.builders.latex import LaTeXBuilder
+
+THIS_PATH = Path(__file__).parent.resolve()
+
+EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
+API_TEMPLATES = (THIS_PATH / "examples" / "autoapi").resolve()
+print("API_TEMPLATES", API_TEMPLATES)
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
@@ -42,6 +51,7 @@ html_context = {
     "doc_path": "doc/source",
 }
 
+
 # specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
@@ -60,8 +70,14 @@ html_theme_options = {
             f"ansys-sphinx-theme-v{convert_version_to_pymeilisearch(__version__)}": "ansys-sphinx-theme",  # noqa: E501
         },
     },
+    "ansys_sphinx_theme_autoapi": {
+        "project": project,
+        "directory": "src/ansys_sphinx_theme/extension",
+        "output": "examples/api",
+        "ignore": ["latex/*", "theme/*"],
+        "own_page_level": "function",
+    },
 }
-
 html_short_title = html_title = "Ansys Sphinx Theme"
 
 # Sphinx extensions
@@ -76,6 +92,7 @@ extensions = [
     "sphinx_jinja",
     "sphinx_gallery.gen_gallery",
     "sphinx.ext.todo",
+    "ansys_sphinx_theme.extension.autoapi",
 ]
 
 # Intersphinx mapping
@@ -142,15 +159,6 @@ rst_epilog = ""
 with open("links.rst") as f:
     rst_epilog += f.read()
 
-from pathlib import Path
-from typing import List
-
-import requests
-
-THIS_PATH = Path(__file__).parent.resolve()
-
-EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
-
 sphinx_gallery_conf = {
     # path to your examples scripts
     "examples_dirs": ["examples/sphinx-gallery"],
@@ -169,7 +177,7 @@ sphinx_gallery_conf = {
 pyvista.BUILDING_GALLERY = True
 pyvista.OFF_SCREEN = True
 
-linkcheck_ignore = []
+linkcheck_ignore = ["https://sphinxdocs.ansys.com/version/dev/*"]
 if switcher_version != "dev":
     linkcheck_ignore.append(
         f"https://github.com/ansys/ansys-sphinx-theme/releases/tag/v{__version__}"

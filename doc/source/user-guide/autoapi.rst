@@ -24,13 +24,16 @@ and set the ``ansys_sphinx_theme_autoapi`` theme options in the ``html_theme_opt
 - ``options``: The options to pass to the autoapi extension. By default,
   this is set to ``["members", "undoc-members", "show-inheritance", "show-module-summary", "special-members"]``.
 - ``class_content``: The content of the class. By default this is set to ``class``.
+- ``ignore``: The list of directories to ignore. By default, this is empty.
+- ``add_toctree_entry``: If set to ``True``, the autoapi extension adds the generated files to the TOC tree.
+  By default, this is set to ``False``.
 
 All these options can be set in the ``conf.py`` file of your Sphinx project.
 
 .. code:: python
 
     html_theme_options = {
-        "ansys-sphinx-theme-autoapi": {
+        "ansys_sphinx_theme_autoapi": {
             "project": "My Project",
             "output": "api",
             "directory": "src/ansys",
@@ -46,6 +49,8 @@ All these options can be set in the ``conf.py`` file of your Sphinx project.
                 "special-members",
             ],
             "class_content": "class",
+            "ignore": [],
+            "add_toctree_entry": False,
         }
     }
 

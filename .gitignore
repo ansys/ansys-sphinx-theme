@@ -159,3 +159,4 @@ cython_debug/
 doc/source/_autosummary/
 doc/source/examples/gallery-examples/
 doc/source/sg_execution_times.rst
+doc/source/examples/api/

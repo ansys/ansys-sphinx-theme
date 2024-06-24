@@ -37,8 +37,17 @@ extensions are rendered in the theme.
 .. toctree::
    :hidden:
    :maxdepth: 2
+   :caption: Sphinx extensions
 
    examples/sphinx-design
+   examples/gallery-examples/index
+   examples/api/extension/index
+
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: Documentation components
+
    examples/table
    examples/admonitions
-   examples/gallery-examples/index
+
