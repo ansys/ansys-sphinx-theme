@@ -44,7 +44,7 @@ doc = [
     "PyGitHub==2.3.0",
     "sphinx-gallery==0.16.0",
     "Pillow>=9.0",
-    "pyvista==0.43.9",
+    "pyvista[jupyter]==0.43.9",
     "sphinx-autoapi==3.1.2",
     "jupytext==1.16.2",
     "nbsphinx==0.9.4",

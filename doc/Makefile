@@ -23,7 +23,6 @@ help:
 # customized clean due to api examples and sphinx-gallery
 clean:
 	rm -rf $(BUILDDIR)
-	find . -type d -name "_autosummary" -exec rm -rf {} +
 	find . -type d -name "$(GALLERY_EXAMPLES)" -exec rm -rf {} +
 	find . -type d -path "./$(AUTOAPI_OUTDIR)" -exec rm -rf {} +
 	echo Cleanup complete.
