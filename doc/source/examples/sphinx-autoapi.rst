@@ -1,3 +1,5 @@
+.. _sphinx-autoapi:
+
 Sphinx autoapi
 ==============
 

@@ -1,3 +1,5 @@
+.. _nbsphinx:
+
 Jupyter notebook - nbsphinx
 ===========================
 
