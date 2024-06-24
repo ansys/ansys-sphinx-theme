@@ -80,18 +80,20 @@ html_theme_options = {
 
 # Sphinx extensions
 extensions = [
-    "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
-    "numpydoc",
-    "sphinx.ext.intersphinx",
-    "notfound.extension",
-    "sphinx_copybutton",
-    "sphinx_design",
-    "sphinx_jinja",
-    "sphinx.ext.todo",
     "ansys_sphinx_theme.extension.autoapi",
     "nbsphinx",
+    "numpydoc",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
+    "sphinx_copybutton",
+    "sphinx_design",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.todo",
     "sphinx_gallery.gen_gallery",
+    "sphinx_jinja",
+    "notfound.extension",
 ]
 
 # Intersphinx mapping
@@ -161,7 +163,7 @@ sphinx_gallery_conf = {
 # Ensure that offscreen rendering is used for docs generation
 # Preferred plotting style for documentation
 pyvista.BUILDING_GALLERY = True
-pyvista.OFF_SCREEN = True
+# pyvista.OFF_SCREEN = True
 
 linkcheck_ignore = ["https://sphinxdocs.ansys.com/version/dev/*"]
 if switcher_version != "dev":
