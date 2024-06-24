@@ -61,6 +61,8 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           add-pdf-html-docs-as-assets: true
+          requires-xvfb: true
+          dependencies: 'pandoc'
 
   doc-deploy-development:
     name: Doc dev version deploy

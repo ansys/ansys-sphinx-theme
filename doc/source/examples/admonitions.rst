@@ -21,7 +21,7 @@ Credits and copyright
 ---------------------
 
 The examples shown below are derived from the PyData Sphinx Theme project, copyrighted by pandas, 2018.
-Original examples can be found at `PyData sphinx theme examples <pydata_examples>`_.
+Original examples can be found at `PyData sphinx theme examples <pydata_examples_>`_.
 These examples are licensed under the BSD 3-Clause License.
 
 Original copyright
