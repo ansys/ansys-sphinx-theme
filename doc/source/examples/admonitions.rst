@@ -3,10 +3,8 @@
 Admonitions
 ===========
 
-Admonitions are a way to highlight important information in your documentation. They are a way to draw attention to important information,
-and can be used to provide additional context or information to the reader.
-
-This page shows how the admonitions are rendered in the documentation with ansys sphinx theme.
+Admonitions are a way to highlight important information in documentation.
+This page shows how the admonitions are rendered in the documentation with ``ansys sphinx theme``.
 
 
 .. jinja:: admonitions
@@ -20,7 +18,7 @@ This page shows how the admonitions are rendered in the documentation with ansys
 Credits and copyright
 ---------------------
 
-The examples shown below are derived from the PyData Sphinx Theme project, copyrighted by pandas, 2018.
+The examples shown above are derived from the PyData Sphinx Theme project, copyrighted by pandas, 2018.
 Original examples can be found at `PyData sphinx theme examples <pydata_examples_>`_.
 These examples are licensed under the BSD 3-Clause License.
 

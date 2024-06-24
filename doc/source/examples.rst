@@ -1,14 +1,12 @@
 Examples
 ########
 
-This show how the different extensions get rendered in ansys-sphinx-theme.
-It is intended to be used as a reference for the users to see how the different
-extensions are rendered in the theme.
+This show how the different extensions and documentation components are rendered in the ``ansys-sphinx-theme``.
 
 Sphinx extensions
 =================
 
-These examples show how the different sphinx extensions are rendered in the `ansys-sphinx-theme`.
+These examples show how the different sphinx extensions are rendered in the ``ansys-sphinx-theme``.
 
 .. grid:: 2
    :gutter: 2 2 3 4
@@ -40,7 +38,8 @@ These examples show how the different sphinx extensions are rendered in the `ans
 
 Documentation components
 ========================
-These examples show how the different documentation components are rendered in the `ansys-sphinx-theme`.
+
+These examples show how the different documentation components are rendered in the ``ansys-sphinx-theme``.
 
 
 .. grid:: 2

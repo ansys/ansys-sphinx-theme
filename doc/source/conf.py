@@ -190,8 +190,7 @@ def extract_example_links(
     list
         List of example links.
     """
-    access_token = os.getenv("GITHUB_ACCESS_TOKEN")
-    g = Github(access_token)
+    g = Github()
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):

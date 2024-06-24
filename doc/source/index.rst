@@ -12,6 +12,7 @@ useful extensions are included in the theme to make documentation more
 appealing and user-friendly.
 
 .. grid:: 2
+    :gutter: 2 2 3 4
 
     .. grid-item-card:: Getting started :fa:`person-running`
         :link: getting-started
@@ -24,14 +25,6 @@ appealing and user-friendly.
         :link-type: doc
 
         Learn about the capabilitie, features, and key topics of this theme.
-
-.. grid:: 2
-
-    .. grid-item-card:: Extensions :fas:`puzzle-piece`
-        :link: getting-started
-        :link-type: doc
-
-        A detailed guide describing the extensions provided by this theme.
 
     .. grid-item-card:: Examples :fa:`laptop-code`
         :link: examples
