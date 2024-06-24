@@ -11,10 +11,12 @@
 .. _Sphinx_PyPI: https://pypi.org/project/Sphinx/
 .. _PyData_PyPI: https://pypi.org/project/pydata-sphinx-theme/
 .. _Jinja2_PyPI: https://pypi.org/project/Jinja2/
-.. _Sphinx_AutoAPI_PyPI: https://pypi.org/project/sphinx-autoapi/
-.. _Sphinx_Design_PyPI: https://pypi.org/project/sphinx_design/
-.. _Sphinx_Jinja_PyPI: https://pypi.org/project/sphinx-jinja/
 .. _pip: https://pypi.org/project/pip/
+
+.. dependency docs links
+.. _sphinx_design_examples: https://github.com/executablebooks/sphinx-design/tree/furo-theme/docs/snippets/rst
+.. _sphinx_design_docs: https://sphinx-design.readthedocs.io/en/latest/index.html
+.. _pydata_examples: https://pydata-sphinx-theme.readthedocs.io/en/stable/examples/kitchen-sink/index.html
 
 
 .. ansys_sphinx_theme links

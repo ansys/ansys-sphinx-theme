@@ -89,9 +89,10 @@ extensions = [
     "sphinx_copybutton",
     "sphinx_design",
     "sphinx_jinja",
-    "sphinx_gallery.gen_gallery",
     "sphinx.ext.todo",
     "ansys_sphinx_theme.extension.autoapi",
+    "nbsphinx",
+    "sphinx_gallery.gen_gallery",
 ]
 
 # Intersphinx mapping
@@ -153,7 +154,11 @@ notfound_context = {
 notfound_no_urls_prefix = True
 
 # ONLY FOR ANSYS-SPHINX-THEME
-exclude_patterns = ["links.rst", "examples/sphinx-gallery/README.rst"]
+exclude_patterns = [
+    "links.rst",
+    "examples/sphinx-gallery/README.rst",
+    "examples/gallery-examples/*.ipynb",
+]
 rst_epilog = ""
 with open("links.rst") as f:
     rst_epilog += f.read()
@@ -273,3 +278,5 @@ jinja_contexts = {
     },
     "pdf_guide": {"version": get_version_match(__version__)},  # noqa: E501
 }
+
+todo_include_todos = True

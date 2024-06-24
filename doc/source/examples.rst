@@ -34,14 +34,17 @@ extensions are rendered in the theme.
          Examples of admonitions rendered using the `ansys-sphinx-theme`.
 
 
+
 .. toctree::
    :hidden:
    :maxdepth: 2
    :caption: Sphinx extensions
 
    examples/sphinx-design
+   examples/nbsphinx
    examples/gallery-examples/index
    examples/api/api.rst
+
 
 .. toctree::
    :hidden:

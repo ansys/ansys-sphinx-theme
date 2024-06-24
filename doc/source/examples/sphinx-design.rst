@@ -4,13 +4,15 @@ Sphinx design
 =============
 The rendering of sphinx design with ansys sphinx theme.
 To access the full documentation for the sphinx design package,
-please refer `sphinx design <https://sphinx-design.readthedocs.io/en/latest/index.html>`_.
+please refer `sphinx design <sphinx_design_docs>`_.
 
 credits and acknowledgments
 ---------------------------
 
-The examples shown below is downloaded from the sphinx design project.
-The original project can be found at `sphinx design <https://sphinx-design.readthedocs.io/en/latest/index.html>`_.
+The examples presented below are sourced from the Sphinx Design project
+Copyright (c) by Chris Sewell (2023),
+available at `sphinx design examples <sphinx_design_examples>`_.
+This project is licensed under the MIT License.
 
 .. jinja:: examples
 
