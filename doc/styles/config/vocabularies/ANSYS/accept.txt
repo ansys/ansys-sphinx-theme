@@ -16,5 +16,7 @@ multi-version
 PDF
 namespaces
 (?i)pydata
-Pradyun Gedam
-Chris Sewell
+Pradyun
+Gedam
+Chris
+Sewell
