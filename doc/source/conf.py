@@ -10,13 +10,6 @@ import pyvista
 import requests
 from sphinx.builders.latex import LaTeXBuilder
 
-THIS_PATH = Path(__file__).parent.resolve()
-
-EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
-API_TEMPLATES = (THIS_PATH / "examples" / "autoapi").resolve()
-
-LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
-
 from ansys_sphinx_theme import (
     __version__,
     ansys_favicon,
@@ -30,6 +23,10 @@ from ansys_sphinx_theme import (
     watermark,
 )
 
+THIS_PATH = Path(__file__).parent.resolve()
+EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
+API_TEMPLATES = (THIS_PATH / "examples" / "autoapi").resolve()
+
 # Project information
 project = "ansys_sphinx_theme"
 copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
@@ -38,11 +35,16 @@ release = version = __version__
 cname = os.getenv("DOCUMENTATION_CNAME", "sphinxdocs.ansys.com")
 switcher_version = get_version_match(__version__)
 
-# use the default ansys logo
+# HTML configuration
 html_logo = ansys_logo_black
+html_favicon = ansys_favicon
 html_theme = "ansys_sphinx_theme"
+html_short_title = html_title = "Ansys Sphinx Theme"
+# static path
+html_static_path = ["_static"]
+# Add any paths that contain templates here, relative to this directory.
+templates_path = ["_templates"]
 
-# In the html_context dictionary in conf.py
 html_context = {
     "github_user": "ansys",
     "github_repo": "ansys-sphinx-theme",
@@ -50,8 +52,6 @@ html_context = {
     "doc_path": "doc/source",
 }
 
-
-# specify the location of your github repo
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
     "contact_mail": "pyansys.support@ansys.com",
@@ -72,12 +72,11 @@ html_theme_options = {
     "ansys_sphinx_theme_autoapi": {
         "project": project,
         "directory": "src/ansys_sphinx_theme/examples",
-        "output": "examples/api/",
+        "output": "examples/",
         "ignore": ["latex/*", "theme/*"],
         "own_page_level": "function",
     },
 }
-html_short_title = html_title = "Ansys Sphinx Theme"
 
 # Sphinx extensions
 extensions = [
@@ -104,34 +103,19 @@ intersphinx_mapping = {
 # numpydoc configuration
 numpydoc_show_class_members = False
 numpydoc_xref_param_type = True
-
-# Consider enabling numpydoc validation. See:
-# https://numpydoc.readthedocs.io/en/latest/validation.html#
 numpydoc_validate = True
 numpydoc_validation_checks = {
     "GL06",  # Found unknown section
     "GL07",  # Sections are in the wrong order.
-    # "GL08",  # The object does not have a docstring
     "GL09",  # Deprecation warning should precede extended summary
     "GL10",  # reST directives {directives} must be followed by two colons
     "SS01",  # No summary found
     "SS02",  # Summary does not start with a capital letter
-    # "SS03", # Summary does not end with a period
     "SS04",  # Summary contains heading whitespaces
-    # "SS05", # Summary must start with infinitive verb, not third person
-    "RT02",  # The first line of the Returns section should contain only the
-    # type, unless multiple values are being returned"
+    "RT02",  # The first line of the Returns section should contain only the type
 }
 
 suppress_warnings = ["config.cache"]
-# Favicon
-html_favicon = ansys_favicon
-
-# static path
-html_static_path = ["_static"]
-
-# Add any paths that contain templates here, relative to this directory.
-templates_path = ["_templates"]
 
 # The suffix(es) of source filenames.
 source_suffix = ".rst"
@@ -140,17 +124,14 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # additional logos for the latex coverpage
+LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
-
-# change the preamble of latex with customized title page
-# variables are the title of pdf, watermark
 latex_elements = {"preamble": latex.generate_preamble(html_title)}
 
 # Not found page
 notfound_context = {
     "body": generate_404(),
 }
-
 notfound_no_urls_prefix = True
 
 # ONLY FOR ANSYS-SPHINX-THEME
@@ -159,6 +140,7 @@ exclude_patterns = [
     "examples/sphinx-gallery/README.rst",
     "examples/gallery-examples/*.ipynb",
 ]
+
 rst_epilog = ""
 with open("links.rst") as f:
     rst_epilog += f.read()
@@ -269,6 +251,7 @@ admonitions_links = extract_example_links(
 )
 
 admonitions_links = download_and_process_files(admonitions_links)
+todo_include_todos = True  # admonition todo needs this to be True
 
 jinja_contexts = {
     "examples": {"inputs_examples": file_names},
@@ -278,5 +261,3 @@ jinja_contexts = {
     },
     "pdf_guide": {"version": get_version_match(__version__)},  # noqa: E501
 }
-
-todo_include_todos = True

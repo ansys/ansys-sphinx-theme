@@ -6,7 +6,7 @@ The rendering of sphinx design with ansys sphinx theme.
 To access the full documentation for the sphinx design package,
 please refer `sphinx design <sphinx_design_docs>`_.
 
-credits and acknowledgments
+Credits and acknowledgments
 ---------------------------
 
 The examples presented below are sourced from the Sphinx Design project

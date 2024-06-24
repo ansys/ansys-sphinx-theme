@@ -43,7 +43,7 @@ extensions are rendered in the theme.
    examples/sphinx-design
    examples/nbsphinx
    examples/gallery-examples/index
-   examples/api/api.rst
+   examples/sphinx-autoapi
 
 
 .. toctree::

@@ -157,6 +157,8 @@ cython_debug/
 
 # Sphinx auto-generated
 doc/source/_autosummary/
+# rendering of sphinx gallery examples
 doc/source/examples/gallery-examples/
 doc/source/sg_execution_times.rst
-doc/source/examples/api/examples/
+# rendering of sphinx autoapi examples
+doc/source/examples/examples/

@@ -17,14 +17,14 @@ This page shows how the admonitions are rendered in the documentation with ansys
 
     {% endfor %}
 
-Credits and Copyright
+Credits and copyright
 ---------------------
 
 The examples shown below are derived from the PyData Sphinx Theme project, copyrighted by pandas, 2018.
 Original examples can be found at `PyData sphinx theme examples <pydata_examples>`_.
 These examples are licensed under the BSD 3-Clause License.
 
-Original Copyright
+Original copyright
 ~~~~~~~~~~~~~~~~~~
 
 The examples included here were originally copyrighted and licensed as follows:
