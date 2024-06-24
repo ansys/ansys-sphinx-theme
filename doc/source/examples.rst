@@ -41,7 +41,7 @@ extensions are rendered in the theme.
 
    examples/sphinx-design
    examples/gallery-examples/index
-   examples/api/extension/index
+   examples/api/api.rst
 
 .. toctree::
    :hidden:

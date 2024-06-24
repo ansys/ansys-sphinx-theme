@@ -10,6 +10,7 @@ if "%SPHINXBUILD%" == "" (
 set SOURCEDIR=source
 set BUILDDIR=_build
 set GALLERY_EXAMPLES=%SOURCEDIR%\examples\gallery-examples
+set AUTOAPI_OUTDIR=%SOURCEDIR%\examples\api\examples\
 
 if "%1" == "" goto help
 if "%1" == "pdf" goto pdf
@@ -41,9 +42,9 @@ for %%f in (*.tex) do (
 pdflatex "%%f" --interaction=nonstopmode)
 
 :clean
-if not exist %BUILDDIR% goto end
-rmdir /S /Q %BUILDDIR%
-rmdir /S /Q %GALLERY_EXAMPLES%
+if exist %BUILDDIR% rmdir /S /Q %BUILDDIR%
+if exist %GALLERY_EXAMPLES% rmdir /S /Q %GALLERY_EXAMPLES%
+if exist %AUTOAPI_OUTDIR% rmdir /S /Q %AUTOAPI_OUTDIR%
 
 :end
 popd

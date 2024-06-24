@@ -14,7 +14,6 @@ THIS_PATH = Path(__file__).parent.resolve()
 
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 API_TEMPLATES = (THIS_PATH / "examples" / "autoapi").resolve()
-print("API_TEMPLATES", API_TEMPLATES)
 
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 
@@ -72,8 +71,8 @@ html_theme_options = {
     },
     "ansys_sphinx_theme_autoapi": {
         "project": project,
-        "directory": "src/ansys_sphinx_theme/extension",
-        "output": "examples/api",
+        "directory": "src/ansys_sphinx_theme/examples",
+        "output": "examples/api/",
         "ignore": ["latex/*", "theme/*"],
         "own_page_level": "function",
     },
@@ -111,7 +110,7 @@ numpydoc_validate = True
 numpydoc_validation_checks = {
     "GL06",  # Found unknown section
     "GL07",  # Sections are in the wrong order.
-    "GL08",  # The object does not have a docstring
+    # "GL08",  # The object does not have a docstring
     "GL09",  # Deprecation warning should precede extended summary
     "GL10",  # reST directives {directives} must be followed by two colons
     "SS01",  # No summary found

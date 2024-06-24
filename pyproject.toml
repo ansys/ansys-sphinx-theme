@@ -45,6 +45,7 @@ doc = [
     "sphinx-gallery==0.16.0",
     "Pillow>=9.0",
     "pyvista==0.43.9",
+    "sphinx-autoapi==3.1.2",
 ]
 
 [project.entry-points."sphinx.html_themes"]

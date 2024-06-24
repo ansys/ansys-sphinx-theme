@@ -6,12 +6,14 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = _build
+AUTOAPI_OUTDIR = source/examples/api/examples
+GALLERY_EXAMPLES = gallery-examples
 
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile
+.PHONY: help Makefile clean pdf
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
@@ -22,8 +24,9 @@ help:
 clean:
 	rm -rf $(BUILDDIR)
 	find . -type d -name "_autosummary" -exec rm -rf {} +
-	find . -type d -name "examples/gallery-examples" -exec rm -rf {} +
-
+	find . -type d -name "$(GALLERY_EXAMPLES)" -exec rm -rf {} +
+	find . -type d -path "./$(AUTOAPI_OUTDIR)" -exec rm -rf {} +
+	echo Cleanup complete.
 
 # customized pdf due to svg issue
 pdf:
