@@ -34,7 +34,7 @@ Ansys Sphinx theme
 Introduction
 ------------
 The Ansys Sphinx theme is an extension of the popular
-`PyData Sphinx theme <https://github.com/pydata/pydata-sphinx-theme>`_ 
+`PyData Sphinx theme <https://github.com/pydata/pydata-sphinx-theme>`_
 that is used by `numpy <https://numpy.org/doc/stable/>`_,
 `pandas <https://pandas.pydata.org/docs/>`_,
 `pyvista <https://docs.pyvista.org>`_, and many more
@@ -92,10 +92,10 @@ You can optionally install and use this tool. For more information, see its
 <https://pre-commit.com/#usage>`_ documentation.
 
 Before contributing to a PyAnsys library, see
-`Contributing <https://dev.docs.pyansys.com//how-to/contributing.html>`_ 
+`Contributing <https://dev.docs.pyansys.com//how-to/contributing.html>`_
 in the *PyAnsys Developer's Guide* for overall guidance, paying particular
-attention to `How-to <https://dev.docs.pyansys.com//how-to/index.html>`_ for 
-guidelines and best practices. 
+attention to `How-to <https://dev.docs.pyansys.com//how-to/index.html>`_ for
+guidelines and best practices.
 
 License
 ~~~~~~~

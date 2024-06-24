@@ -28,7 +28,7 @@ for the documentation landing page for the Ansys repository:
        ],
    }
 
-When you are on the landing page for your documentation, the breadcrumb shows the title for this 
+When you are on the landing page for your documentation, the breadcrumb shows the title for this
 page. However, Sphinx cannot access this title from other documentation pages. Thus, after
 ``html_theme_options`` dictionary, you must set ``html_short_title`` to the display text to
 use for this breadcrumb.
@@ -111,12 +111,12 @@ If you want to hide all icons, use the ``show_icons`` Boolean variable:
 Use MeiliSearch
 ----------------
 
-MeiliSearch is an open source search engine that allows developers to 
+MeiliSearch is an open source search engine that allows developers to
 easily integrate search functionality into their applications.
 
 To use MeiliSearch in your documentation, in the ``conf.py`` file,
 a child dictionary named ``use_meilisearch``is added to the ``html_theme_options``
-dictionary. 
+dictionary.
 
 This dictionary contains these keys, in the order given:
 
@@ -128,7 +128,7 @@ This dictionary contains these keys, in the order given:
 #. ``api_key``: API key for your MeiliSearch instance. If no value is provided,
    the default public API key for PyAnsys is used. If added security is needed,
    you can use the ``os.getenv()`` function to set the key using an environment
-   variable. 
+   variable.
 
 #. ``index_uids``: Dictionary that provides the mapping between the unique
    identifier (UID) of an index and its corresponding user-friendly name.
@@ -192,7 +192,7 @@ your documentation.
 .. note::
 
     If you do not set the ``use_meilisearch`` dictionary, the
-    Ansys Sphinx Theme uses the default search functionality 
+    Ansys Sphinx Theme uses the default search functionality
     inherited from the PyData Sphinx Theme.
 
 Cheat sheets
@@ -201,7 +201,7 @@ Cheat sheets
 If a cheat sheet has been created for your PyAnsys library, you can show a thumbnail
 image of it in the left navigation pane of one or more sections of your documentation.
 
-In the ``html_theme_options`` dictionary, you add a child dictionary named ``cheatsheet`` 
+In the ``html_theme_options`` dictionary, you add a child dictionary named ``cheatsheet``
 that contain these keys, in the order given:
 
 #. ``url``: URL of the cheat sheet.
@@ -210,7 +210,7 @@ that contain these keys, in the order given:
 #. ``needs_download``: Whether to download the cheat sheet locally during the documentation build.
    The default is ``False``, in which case the cheat sheet is accessed directly from the provided URL.
    If ``True``, the cheat sheet is downloaded to the ``_build/html/_static/`` directory and accessed
-   from here. 
+   from here.
 #. ``pages``: List of names for the reStructuredText (RST) files to show the cheat sheet on. If no list
    is provided, the cheat sheet is shown in the left navigation pane of the main ``index.rst`` file.
 
@@ -247,9 +247,9 @@ main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" s
         },
     )
 
-.. note:: 
+.. note::
 
-    If you set ``"needs_download": True", you should provide the ``html_static_path`` option 
+    If you set ``"needs_download": True", you should provide the ``html_static_path`` option
     in the ``conf.py`` file to specify the location for downloading the cheat sheet to.
 
     For example, if you want to download the cheat sheet to the ``_build/html/_static/`` directory,

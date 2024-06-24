@@ -3,13 +3,13 @@
 Extensions
 ==========
 
-This page contains the shipped extensions that seamlessly integrate with this theme to enhance 
+This page contains the shipped extensions that seamlessly integrate with this theme to enhance
 documentation functionality.
 
 Linkcode extension
 -------------------
 
-The Linkcode extension automatically adds "Source" links to the documentation for Python, C, C++, 
+The Linkcode extension automatically adds "Source" links to the documentation for Python, C, C++,
 and JavaScript objects. It allows you to link to the source code hosted on GitHub.
 
 Installation
@@ -26,8 +26,8 @@ To use the ``ansys-sphinx-theme`` linkcode extension, you need to add it to the 
 Configuration options
 ---------------------
 
-The Linkcode extension provides a way to configure its behavior by using certain options within your ``conf.py`` file. 
-Depending on your preferred approach, you can utilize the direct 
+The Linkcode extension provides a way to configure its behavior by using certain options within your ``conf.py`` file.
+Depending on your preferred approach, you can utilize the direct
 configuration options or the ``html_context`` dictionary to streamline your settings.
 
 If both sets of configuration options are given, the direct configuration options (that is, ``link_code_library``,
@@ -46,7 +46,7 @@ Direct configuration options
 - ``link_code_branch`` (str, optional, default: 'main'):
   The GitHub branch. It can be a specific version like ``main`` or ``dev``.
 
-If the ``link_code_source`` and ``link_code_branch`` options are not provided in the configuration, 
+If the ``link_code_source`` and ``link_code_branch`` options are not provided in the configuration,
 the following default values are used:
 
 - ``link_code_source``: An empty string (``''``). This links to the root of the repository.
@@ -61,8 +61,8 @@ the following default values are used:
 
 Using ``html_context`` dictionary
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-You also have the option to centralize your GitHub-related configuration by incorporating it 
-directly into the ``html_context`` dictionary within your ``conf.py`` file. This approach allows you to 
+You also have the option to centralize your GitHub-related configuration by incorporating it
+directly into the ``html_context`` dictionary within your ``conf.py`` file. This approach allows you to
 minimize redundancy and manage the GitHub-related information more effectively for the extension:
 
 .. code-block:: python
@@ -75,5 +75,5 @@ minimize redundancy and manage the GitHub-related information more effectively f
        "source_path": "<path-from-root-to-your-source_file>",
    }
 
-With this setup, you can fine-tune your configuration according to your preferences and requirements, 
+With this setup, you can fine-tune your configuration according to your preferences and requirements,
 enhancing the integration of the ``linkcode`` extension into your documentation.

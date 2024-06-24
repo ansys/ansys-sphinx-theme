@@ -9,6 +9,46 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`0.16.6 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.6>`_ - 2024-06-18
+=========================================================================================
+
+Fixed
+^^^^^
+
+- fix: wrong env var name for PACKAGE_NAME `#395 <https://github.com/ansys/ansys-sphinx-theme/pull/395>`_
+
+`0.16.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.5>`_ - 2024-05-31
+=========================================================================================
+
+Fixed
+^^^^^
+
+- fix:  sphinx design card font size `#393 <https://github.com/ansys/ansys-sphinx-theme/pull/393>`_
+
+`0.16.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.4>`_ - 2024-05-29
+=========================================================================================
+
+Added
+^^^^^
+
+- feat: adapt package to general PyAnsys repository layout `#387 <https://github.com/ansys/ansys-sphinx-theme/pull/387>`_
+
+
+Dependencies
+^^^^^^^^^^^^
+
+- chore(deps): bump sphinx-design from 0.5.0 to 0.6.0 `#383 <https://github.com/ansys/ansys-sphinx-theme/pull/383>`_
+- chore(deps): bump sphinx-notfound-page from 1.0.1 to 1.0.2 `#384 <https://github.com/ansys/ansys-sphinx-theme/pull/384>`_
+- chore(deps): bump sphinx-autoapi from 3.1.0 to 3.1.1 `#385 <https://github.com/ansys/ansys-sphinx-theme/pull/385>`_
+
+`0.16.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.3>`_ - 2024-05-29
+=========================================================================================
+
+Fixed
+^^^^^
+
+- fix: update the sphinx design style to disable display of name `#388 <https://github.com/ansys/ansys-sphinx-theme/pull/388>`_
+
 `0.16.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.2>`_ - 2024-05-22
 =========================================================================================
 

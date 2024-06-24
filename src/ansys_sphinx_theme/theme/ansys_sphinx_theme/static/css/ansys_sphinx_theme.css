@@ -38,7 +38,7 @@
 
   /*****************************************************************************
   * Ansys compatible colors
-  * 
+  *
   * Colors are defined in rgb string way, "red, green, blue"
   **/
   --ansysGold: rgb(255, 183, 27); /* #FFB71B */
@@ -199,7 +199,6 @@ span.highlighted {
   color: var(--pst-color-inline-code);
   font-family: var(--pst-font-family-monospace);
   font-weight: 500;
-  font-size: 87.5%;
 }
 
 code.literal {
@@ -257,7 +256,7 @@ p.rubric {
 
 /*
 ########
-Table 
+Table
 ########
 */
 
@@ -298,7 +297,7 @@ div.rendered_html table.dataframe td {
 
 /*
 ###############
-Table-centered 
+Table-centered
 ################
 Same as table but with horizontally centered text.
 
@@ -505,7 +504,7 @@ body::-webkit-scrollbar-track {
 
 /*
 ############
-Autosummary 
+Autosummary
 ############
 */
 
@@ -601,6 +600,10 @@ Navigation column (according to side column)
   display: unset;
 }
 
+.theme-switch-button span {
+  color: #fff;
+}
+
 /*
 #################################
 Syntax highlighting in code block
@@ -640,7 +643,7 @@ strong {
 
 /*
 ###########################
-Left side toc-tree hovering 
+Left side toc-tree hovering
 ###########################
 */
 
@@ -674,30 +677,13 @@ nav.bd-links li > a:hover {
 
 /*
 ##################
-icon, button, logo  
+icon, button, logo
 ##################
 */
-
-button,
-input,
-optgroup,
-select,
-textarea,
-button:hover {
-  color: #ddd;
-}
-
-.theme-switch-button {
-  border-color: #f8f9fa;
-}
 
 button.btn.version-switcher__button {
   border-color: var(--pst-color-border);
   color: #ddd;
-}
-
-button.version-switcher__button:hover {
-  color: #f8f8f2;
 }
 
 button.version-switcher__button {
@@ -749,15 +735,6 @@ icon, button, logo  for small screen
   }
 }
 
-.theme-switch-button span {
-  color: #f8f9fa;
-}
-
-.theme-switch-button span:hover {
-  color: var(--ansysGold);
-  border-color: white;
-}
-
 .navbar-icon-links {
   column-gap: 0.2rem;
 }
@@ -772,12 +749,6 @@ icon, button, logo  for small screen
 }
 
 /* make the github logo white */
-
-i.fa-github-square:before,
-i.fa-square-github:before {
-  color: white;
-  font-size: 1rem;
-}
 
 .version-switcher__menu a.list-group-item:hover {
   background-color: #d09735 !important;
@@ -796,17 +767,12 @@ i.fa-square-github:before {
   color: white;
 }
 
-.navbar-icon-links {
-  font-size: 1.5rem;
-  color: white;
-}
-
 html[data-theme="light"] #pst-back-to-top {
   background-color: var(--pst-color-link);
 }
 /*
 ##############################
-image padding before and after 
+image padding before and after
 ##############################
 */
 
@@ -826,7 +792,7 @@ img.logo__image {
 
 /*
 ##########################
-Nav-bar entity right side. 
+Nav-bar entity right side.
 ##########################
 */
 
@@ -873,7 +839,6 @@ blockquote {
 }
 .sd-sphinx-override,
 .sd-sphinx-override * {
-  font-size: medium;
   flex: auto;
 }
 
