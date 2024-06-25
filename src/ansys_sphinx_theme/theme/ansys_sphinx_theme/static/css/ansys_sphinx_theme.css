@@ -527,6 +527,10 @@ div#searchbox p.highlight-link a {
 
 /* Cheat sheet sidebar */
 
+.sidebar-cheatsheets {
+  text-align: center;
+}
+
 .sidebar-cheatsheets h4 {
   font-weight: var(--pst-sidebar-header-font-weight) !important;
   font-size: var(--pst-sidebar-header-font-size) !important;
