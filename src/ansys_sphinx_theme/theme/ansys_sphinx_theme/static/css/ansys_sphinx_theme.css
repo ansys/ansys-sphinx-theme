@@ -6,8 +6,9 @@
 @import "pydata-sphinx-theme-reformat.css";
 @import "breadcrumbs.css";
 @import "meilisearch.css";
-@import "sphinx_design.css";
+@import "sphinx-design.css";
 @import "table-reformat.css";
+@import "sphinx-gallery.css";
 
 /*
 ##########
