@@ -15,13 +15,7 @@
 Codecell
 ##########
 */
-
-dt:target,
-span.highlighted {
-  background-color: var(--pst-color-codecell) !important;
-}
-
-.xref.std.std-ref {
+/* .xref.std.std-ref {
   color: var(--pst-color-inline-code);
   font-family: "Inconsolata";
   font-weight: normal;
@@ -35,27 +29,7 @@ span.highlighted {
   background-color: var(--pst-color-on-surface);
   border: 1px solid var(--pst-color-border);
   border-radius: 0.25rem;
-}
-
-.sig {
-  font-family: "Consolas", "Menlo", "DejaVu Sans Mono",
-    "Bitstream Vera Sans Mono", monospace;
-}
-
-.sig-name.descname {
-  color: var(--pst-color-inline-code);
-}
-
-.sig-name {
-  color: var(--pst-color-sig);
-}
-
-/* Increase empty-space around classes, methods, properties, etc. that are descendants
- of other items */
-dl.class dl.py {
-  margin-top: 2.5em;
-  margin-bottom: 2.5em;
-}
+} */
 
 /* Reduce empty-space around Notes and Examples headings */
 p.rubric {
@@ -72,66 +46,6 @@ Autosummary
 .autosummary tr:nth-child(odd),
 .autosummary tr:nth-child(even) {
   background-color: var(--pst-color-background);
-}
-
-/*
-#############################
-Bold font weight for **code**
-#############################
-*/
-
-b,
-strong {
-  font-weight: 900;
-}
-
-.bd-header .navbar-header-items__start {
-  width: fit-content;
-  padding-right: 3rem;
-}
-
-.navbar-nav li a:focus,
-.navbar-nav li a:hover,
-.navbar-nav li.current > a {
-  color: white !important;
-}
-
-.navbar-nav .dropdown .dropdown-menu {
-  min-width: 250px;
-}
-
-/*
-###########################
-Left side toc-tree hovering
-###########################
-*/
-
-nav.bd-links .active:hover > a {
-  font-weight: bold;
-  color: var(--pst-color-text-base);
-  border-left: 2px solid var(--pst-color-text-base);
-}
-
-nav.bd-links .active > a {
-  font-weight: bold;
-  color: var(--pst-color-text-muted) !important;
-  border-left: 2px solid var(--pst-color-text-base);
-  border-bottom: none !important;
-  padding-left: 0.5rem;
-}
-
-nav.bd-links li > a:hover {
-  font-weight: 900;
-  color: var(--pst-color-link) !important;
-}
-
-.bd-header .navbar-nav .dropdown button:hover {
-  color: white;
-}
-
-.dropdown-item:hover {
-  font-weight: bold;
-  background-color: transparent;
 }
 
 /*
@@ -277,8 +191,4 @@ div#searchbox p.highlight-link a {
 
 .header-article__inner {
   padding: 0 1rem;
-}
-
-.sig-prename.descclassname {
-  display: none;
 }

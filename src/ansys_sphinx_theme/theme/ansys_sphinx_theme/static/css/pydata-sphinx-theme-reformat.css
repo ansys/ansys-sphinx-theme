@@ -59,6 +59,34 @@ Dropdown button
 ###############
 */
 
+nav.bd-links .active:hover > a {
+  font-weight: bold;
+  color: var(--pst-color-text-base);
+  border-left: 2px solid var(--pst-color-text-base);
+}
+
+nav.bd-links .active > a {
+  font-weight: bold;
+  color: var(--pst-color-text-muted) !important;
+  border-left: 2px solid var(--pst-color-text-base);
+  border-bottom: none !important;
+  padding-left: 0.5rem;
+}
+
+nav.bd-links li > a:hover {
+  font-weight: 900;
+  color: var(--pst-color-link) !important;
+}
+
+.bd-header .navbar-nav .dropdown button:hover {
+  color: white;
+}
+
+.dropdown-item:hover {
+  font-weight: bold;
+  background-color: transparent;
+}
+
 .navbar button.navbar-toggler {
   margin-right: 1em;
   border-color: rgb(255, 255, 255);
@@ -159,6 +187,16 @@ a:visited,
 a:visited:hover {
   color: var(--pst-color-link-visted);
 }
+
+/*#############################
+Bold font weight for **code**
+#############################
+*/
+
+b,
+strong {
+  font-weight: 900;
+}
 /*
 ##################
 icon, button, logo
@@ -208,6 +246,21 @@ kbd {
   .navbar-nav li.current > a {
     color: var(--pst-color-text-base) !important;
     font-weight: 700;
+  }
+
+  .bd-header .navbar-header-items__start {
+    width: fit-content;
+    padding-right: 3rem;
+  }
+
+  .navbar-nav li a:focus,
+  .navbar-nav li a:hover,
+  .navbar-nav li.current > a {
+    color: white !important;
+  }
+
+  .navbar-nav .dropdown .dropdown-menu {
+    min-width: 250px;
   }
   button,
   input,
@@ -259,4 +312,35 @@ html[data-theme="light"] #pst-back-to-top {
 .docutils {
   font-family: var(--pst-font-family-monospace);
   font-weight: 500;
+}
+
+/* _api.scss related changes */
+
+.sig-prename.descclassname {
+  display: none;
+} /* hide the class 'descclassname' for autoapi */
+
+.sig {
+  font-family: "Consolas", "Menlo", "DejaVu Sans Mono",
+    "Bitstream Vera Sans Mono", monospace;
+}
+
+.sig-name.descname {
+  color: var(--pst-color-inline-code);
+}
+
+.sig-name {
+  color: var(--pst-color-sig);
+}
+
+dt:target,
+span.highlighted {
+  background-color: var(--pst-color-codecell) !important;
+}
+
+/* Increase empty-space around classes, methods, properties, etc. that are descendants
+ of other items */
+dl.class dl.py {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
 }
