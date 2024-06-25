@@ -84,7 +84,7 @@ html[data-theme="light"] {
   --pst-color-link: #1e6ddc;
   --pst-color-link-hover: #32cfea;
   --pst-color-link-visted: #9428f2;
-  --pst-color-inline-code: #000;
+  --pst-color-inline-code: #000; /* inline code color for docutils (_base.scss)*/
   --pst-color-target: rgb(255, 255, 255);
 
   /*****************************************************************************

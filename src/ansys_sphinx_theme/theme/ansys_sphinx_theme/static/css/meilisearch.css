@@ -79,12 +79,6 @@ div[data-ds-theme] .searchbox input {
   box-shadow: none !important;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: right;
-}
-
 div[data-ds-theme] .meilisearch-autocomplete {
   text-align: center;
   color: var(--pst-color-text-base);

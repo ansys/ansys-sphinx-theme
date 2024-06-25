@@ -254,3 +254,9 @@ kbd {
 html[data-theme="light"] #pst-back-to-top {
   background-color: var(--pst-color-link);
 }
+
+/* _code.scss related changes */
+.docutils {
+  font-family: var(--pst-font-family-monospace);
+  font-weight: 500;
+}
