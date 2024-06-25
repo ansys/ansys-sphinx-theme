@@ -142,7 +142,6 @@ exclude_patterns = [
     "examples/sphinx-gallery/README.rst",
     "examples/gallery-examples/*.ipynb",
 ]
-
 rst_epilog = ""
 with open("links.rst") as f:
     rst_epilog += f.read()
@@ -159,11 +158,14 @@ sphinx_gallery_conf = {
     # Modules for which function level galleries are created.  In
     "image_scrapers": ("pyvista", "matplotlib"),
 }
+nbsphinx_execute = "always"
+nbsphinx_thumbnails = {
+    "examples/nbsphinx/jupyter-notebook": "_static/pyansys_light_square.png",
+}
 
 # Ensure that offscreen rendering is used for docs generation
 # Preferred plotting style for documentation
 pyvista.BUILDING_GALLERY = True
-# pyvista.OFF_SCREEN = True
 
 linkcheck_ignore = ["https://sphinxdocs.ansys.com/version/dev/*"]
 if switcher_version != "dev":
@@ -192,7 +194,8 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github()
+    accept = os.getenv("GITHUB_ACCESS_TOKEN", None)
+    g = Github(accept)
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):
@@ -262,3 +265,23 @@ jinja_contexts = {
     },
     "pdf_guide": {"version": get_version_match(__version__)},  # noqa: E501
 }
+
+
+# from sphinx.application import Sphinx
+
+
+# def rewrite_exclude_patterns(app: Sphinx, doctree, docname):
+#     """Rewrite the exclude patterns to remove the gallery examples."""
+
+#     excluded = app.env.config.exclude_patterns
+#     print(excluded)
+#     if "examples/gallery-examples/*.ipynb" in excluded:
+#         excluded.remove("examples/gallery-examples/*.ipynb")
+#     # env.config.exclude_patterns.remove("examples/gallery-examples/*")
+#     print(excluded)
+#     # examples/gallery-examples/*.ipynb
+
+
+# def setup(app: Sphinx):
+#     """Set up the Sphinx application."""
+#     app.connect("build-finished", rewrite_exclude_patterns)

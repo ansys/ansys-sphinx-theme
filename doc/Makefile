@@ -6,7 +6,7 @@ SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SOURCEDIR     = source
 BUILDDIR      = _build
-AUTOAPI_OUTDIR = source/examples/api/examples
+AUTOAPI_OUTDIR = source/examples/examples
 GALLERY_EXAMPLES = gallery-examples
 
 # Put it first so that "make" without argument is like "make help".
