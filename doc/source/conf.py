@@ -73,7 +73,6 @@ html_theme_options = {
         "project": project,
         "directory": "src/ansys_sphinx_theme/examples",
         "output": "examples/",
-        "ignore": ["latex/*", "theme/*"],
         "own_page_level": "function",
     },
 }
