@@ -265,23 +265,3 @@ jinja_contexts = {
     },
     "pdf_guide": {"version": get_version_match(__version__)},  # noqa: E501
 }
-
-
-# from sphinx.application import Sphinx
-
-
-# def rewrite_exclude_patterns(app: Sphinx, doctree, docname):
-#     """Rewrite the exclude patterns to remove the gallery examples."""
-
-#     excluded = app.env.config.exclude_patterns
-#     print(excluded)
-#     if "examples/gallery-examples/*.ipynb" in excluded:
-#         excluded.remove("examples/gallery-examples/*.ipynb")
-#     # env.config.exclude_patterns.remove("examples/gallery-examples/*")
-#     print(excluded)
-#     # examples/gallery-examples/*.ipynb
-
-
-# def setup(app: Sphinx):
-#     """Set up the Sphinx application."""
-#     app.connect("build-finished", rewrite_exclude_patterns)
