@@ -333,6 +333,7 @@ html[data-theme="light"] #pst-back-to-top {
   color: var(--pst-color-sig);
 }
 
+/* highlighted objects inside the api reference */
 dt:target,
 span.highlighted {
   background-color: var(--pst-color-codecell) !important;
@@ -343,4 +344,40 @@ span.highlighted {
 dl.class dl.py {
   margin-top: 2.5em;
   margin-bottom: 2.5em;
+}
+
+/*
+#################################
+Right side toctree color and font
+#################################
+*/
+.toc-entry a.nav-link {
+  padding: 0.125rem 1.5rem;
+  color: var(--pst-color-link);
+}
+
+.toc-entry a.nav-link.active {
+  font-weight: bold;
+  color: var(--pst-color-text-base);
+  background-color: transparent;
+  border-left: 2px solid var(--pst-color-text-muted);
+}
+
+.toc-h2 {
+  font-size: 0.98rem;
+  padding: 0.05em;
+}
+
+.toc-h3 {
+  font-size: 0.96rem;
+}
+
+.toc-h4 {
+  font-size: 0.9rem;
+}
+
+.toc-entry a.nav-link:hover {
+  color: var(--pst-color-link);
+  text-decoration: none;
+  font-weight: 600;
 }
