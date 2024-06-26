@@ -83,6 +83,8 @@ html[data-theme="light"] {
 */
   --pst-color-table-background: #ffffff;
   --pst-color-enabled-table-text: #353535;
+  --pst-color-table-row-hover-bg: #ececec;
+  --pst-color-table: #ffffff;
 
   --pst-color-panel-background: var(--pst-color-on-background);
 

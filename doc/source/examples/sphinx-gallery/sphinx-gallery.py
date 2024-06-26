@@ -94,3 +94,21 @@ Latex(r"This is a \LaTeX{} equation: $a^2 + b^2 = c^2$")
 # ====== ====== =======
 
 ###############################################################################
+# Render a table using pandas
+
+import pandas as pd
+
+# Create a dictionary of data
+data = {
+    "A": [True, False, True, False],
+    "B": [False, True, False, True],
+    "C": [True, True, False, False],
+}
+
+# Create DataFrame from the dictionary
+df = pd.DataFrame(data)
+
+# Display the DataFrame
+df.head()
+
+###############################################################################
