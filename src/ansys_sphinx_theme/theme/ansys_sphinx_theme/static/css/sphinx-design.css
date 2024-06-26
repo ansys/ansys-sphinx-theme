@@ -41,6 +41,7 @@ blockquote {
 .bd-content .sd-tab-set > input:not(:checked) + label:hover {
   color: var(--pst-color-text-base);
   border-color: var(--pst-color-text-base);
+  background-color: transparent;
 }
 
 /* Media query for medium-sized screens */
@@ -142,5 +143,10 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
 }
 
 details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
+  background-color: transparent;
+}
+
+.bd-content .sd-tab-set .sd-tab-content,
+.bd-content .sd-tab-set > label {
   background-color: transparent;
 }
