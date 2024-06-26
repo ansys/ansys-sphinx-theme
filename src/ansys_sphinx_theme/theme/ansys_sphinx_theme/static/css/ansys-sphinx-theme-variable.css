@@ -41,10 +41,10 @@
   --ansysBronze: rgb(200, 146, 17); /* #C89211 */
   --pythonBlue: rgb(57, 114, 161); /* #3972a1 */
 
-  --pst-color-active-navigation: var(--ansysBronze); /* --ansysBronze */
+  --pst-color-active-navigation: var(--ansysBronze);
   --pst-color-navbar-link: rgb(255, 255, 255);
-  --pst-color-navbar-link-hover: var(--ansysBronze); /* --ansysBronze */
-  --pst-color-navbar-link-active: var(--ansysGold); /* --ansysBronze */
+  --pst-color-navbar-link-hover: var(--ansysBronze);
+  --pst-color-navbar-link-active: var(--ansysGold);
   --pst-font-size-h1: 48px;
   --pst-font-size-h2: 36px;
   --pst-font-size-h3: 28px;
