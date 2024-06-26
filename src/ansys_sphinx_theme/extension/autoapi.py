@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""Module containing an extension for creating autoapi templates provided by theme."""
+"""Module containing an extension for creating Sphinx AutoAPI templates for the Ansys Sphinx Theme."""
 
 import os
 from typing import Any, Dict

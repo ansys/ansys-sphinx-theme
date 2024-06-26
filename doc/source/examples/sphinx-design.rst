@@ -2,9 +2,9 @@
 
 Sphinx design
 =============
-The rendering of sphinx design with ansys sphinx theme.
-To access the full documentation for the sphinx design package,
-please refer `sphinx design <sphinx_design_docs_>`_.
+This example shows how the Ansys Sphinx Theme renders documentation components
+using the ``sphinx-design`` extension. For comprehensive information, see its
+`documentation <sphinx_design_docs_>`_.
 
 Credits and acknowledgments
 ---------------------------

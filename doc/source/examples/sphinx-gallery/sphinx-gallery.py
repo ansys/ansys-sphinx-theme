@@ -28,13 +28,13 @@ Sphinx gallery
 This example shows how to add a new example to the PyAnsys `Sphinx-Gallery
 <https://sphinx-gallery.github.io/>`_.
 
-To add sphinx-gallery in to your project, you need to install the following packages:
+To use Sphinx-Gallery, first install the package with this command:
 
 .. code-block:: bash
 
         pip install sphinx-gallery
 
-then add the following to your ``conf.py`` file:
+Then, add the package to the ``extensions`` variable in your Sphinx ``conf.py`` file:
 
 .. code-block:: python
 
@@ -43,9 +43,9 @@ then add the following to your ``conf.py`` file:
         ]
 """
 ###############################################################################
-# Plotting a simple sphere using pyvista
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# This example demonstrates how to plot a simple sphere using PyVista.
+# Plot a simple sphere using PyVista
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# This code plots a simple sphere using PyVista.
 
 import pyvista as pv
 
@@ -55,7 +55,7 @@ sphere = pv.Sphere()
 sphere.plot()
 
 ###############################################################################
-# Plotting a simple sphere using pyvista with a plotter
+# Plot a simple sphere using PyVista with a plotter
 
 plotter = pv.Plotter(notebook=True)
 plotter.add_mesh(sphere, color="white", show_edges=True)
@@ -63,9 +63,9 @@ plotter.title = "3D Sphere Visualization"
 plotter.show()
 
 ###############################################################################
-# Rending equations using Math
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# This example demonstrates how to render equations using Math.
+# Render equations using IPython ``math``
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# This example shows how to render equations using the IPython ``math`` module.
 
 from IPython.display import Math, display
 

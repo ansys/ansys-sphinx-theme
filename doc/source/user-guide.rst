@@ -20,25 +20,25 @@ This section provides information on how to customize the Ansys Sphinx theme.
       :link: user-guide/options
       :link-type: doc
 
-      Theme options
+      Set theme options
 
    .. grid-item-card:: :octicon:`link` :ref:`ref_user_guide_extension`
       :link: user-guide/linkcode
       :link-type: doc
 
-      See how to use the linkcode extension with the Ansys sphinx theme
+      See how to use the ``linkcode`` extension with the Ansys Sphinx Theme.
 
    .. grid-item-card:: :octicon:`cross-reference` :ref:`ref_user_guide_autoapi`
       :link: user-guide/autoapi
       :link-type: doc
 
-      See how to use the autoapi extension with the Ansys sphinx theme
+      See how to use Sphinx AutoAPI with the Ansys Sphinx Theme.
 
 
 .. toctree::
    :maxdepth: 2
    :hidden:
-   :caption: Ansys sphinx theme configuration
+   :caption: Ansys Sphinx Theme configuration
 
    user-guide/configuration
    user-guide/pdf
@@ -53,7 +53,7 @@ This section provides information on how to customize the Ansys Sphinx theme.
 .. toctree::
     :maxdepth: 2
     :hidden:
-    :caption: Ansys sphinx theme extensions
+    :caption: Ansys Sphinx Theme extensions
 
     user-guide/linkcode
     user-guide/autoapi

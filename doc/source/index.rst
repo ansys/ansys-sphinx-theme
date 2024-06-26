@@ -18,19 +18,19 @@ appealing and user-friendly.
         :link: getting-started
         :link-type: doc
 
-        Step-by-step guidelines on how to install the Ansys Sphinx theme.
+        Learn how to install the Ansys Sphinx Theme.
 
     .. grid-item-card:: User guide :fa:`book-open-reader`
         :link: user-guide
         :link-type: doc
 
-        Learn about the capabilitie, features, and key topics of this theme.
+        Learn how to use the capabilities and features of this theme.
 
     .. grid-item-card:: Examples :fa:`laptop-code`
         :link: examples
         :link-type: doc
 
-        Gallery of examples showing how third-party extensions integrate with this theme.
+        Explore examples that show how to integrate third-party extensions with this theme.
 
 .. toctree::
    :hidden:

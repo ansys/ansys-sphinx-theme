@@ -1,9 +1,9 @@
 .. _ref_user_guide_autoapi:
 
-Autoapi extension
-==================
+Sphinx AutoAPI
+==============
 
-To use the ``autoapi`` along with the ``ansys-sphinx-theme``, you need to
+To use Sphinx AutoAPI with the Ansys Sphinx Theme, you must
 add ``ansys_sphinx_theme.extension.autoapi`` to the ``extensions`` list in your ``conf.py`` file
 and set the ``ansys_sphinx_theme_autoapi`` theme options in the ``html_theme_options`` dictionary.
 

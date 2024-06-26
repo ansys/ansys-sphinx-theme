@@ -1,7 +1,7 @@
 Installation
 ############
 
-There are multiple sources for installing the latest stable version. These
+There are multiple sources for installing the latest stable version of the Ansys Sphinx Theme. These
 include public PyPI, Ansys PyPI, and GitHub.
 
 .. jinja:: install_guide

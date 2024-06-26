@@ -1,6 +1,6 @@
 .. _sphinx-autoapi:
 
-Sphinx autoapi
+Sphinx AutoAPI
 ==============
 
 This section describes ansys-sphinx-theme endpoints, their capabilities, and how
