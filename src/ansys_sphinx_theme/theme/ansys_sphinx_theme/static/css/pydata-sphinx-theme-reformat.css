@@ -54,6 +54,22 @@ body::-webkit-scrollbar-track {
 }
 
 /*
+########################################
+_secondary sidebar and primary sidebars
+#######################################
+*/
+.bd-sidebar-primary,
+.bd-sidebar-secondary {
+  max-height: calc(100vh - var(--pst-header-height) - 1vh);
+}
+
+.bd-toc {
+  padding-top: 5em;
+}
+
+/* secondary sidebar*/
+
+/*
 ###############
 Dropdown button
 ###############
@@ -131,16 +147,29 @@ a.headerlink {
 /*
   ############################################
   Navigation column (according to side column)
+  _header.scss
   ############################################
   */
-.col-lg-9 {
-  padding-right: 5px;
-  padding-left: 20px;
+.bd-header .navbar-header-items__start {
+  width: fit-content;
+  padding-right: 3rem;
 }
+/* header logo*/
+
 .bd-main .bd-content {
   display: flex;
   height: 100%;
   justify-content: end;
+}
+
+a:active,
+a:visited,
+a:visited:hover,
+a:active:hover,
+a:hover {
+  text-decoration: underline;
+  color: var(--pst-color-link);
+  font-weight: 500;
 }
 
 .bd-main .bd-content .bd-article-container .bd-article {
@@ -151,9 +180,14 @@ a.headerlink {
 .bd-header .navbar-nav li a.nav-link {
   color: #ddd;
 }
+/* nav sections headings */
 .bd-header .navbar-nav .dropdown button {
   color: #ddd;
   display: unset;
+}
+
+.bd-header ul.navbar-nav > li.nav-item > .nav-link {
+  color: #ddd;
 }
 
 .theme-switch-button span {
@@ -173,14 +207,9 @@ a {
   text-decoration: none;
 }
 
-a:active,
-a:visited,
-a:visited:hover,
-a:active:hover,
-a:hover {
-  text-decoration: underline;
+nav.bd-links li > a {
   color: var(--pst-color-link);
-  font-weight: 500;
+  font-size: 0.98rem;
 }
 
 a:visited,
@@ -246,11 +275,6 @@ kbd {
   .navbar-nav li.current > a {
     color: var(--pst-color-text-base) !important;
     font-weight: 700;
-  }
-
-  .bd-header .navbar-header-items__start {
-    width: fit-content;
-    padding-right: 3rem;
   }
 
   .navbar-nav li a:focus,

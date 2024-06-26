@@ -74,20 +74,6 @@ Nav-bar entity right side.
 ##########################
 */
 
-nav.bd-links li > a {
-  color: var(--pst-color-link);
-  font-size: 0.98rem;
-}
-
-html[data-theme="dark"] .highlight pre {
-  line-height: 125%;
-  font-size: 0.9em;
-}
-
-.bd-toc {
-  padding-top: 5em;
-}
-
 #version_switcher_button {
   background-color: var(--pst-color-background);
 }
@@ -127,16 +113,6 @@ div.nboutput
 
 aside.topic > p {
   color: var(--pst-color-text-base) !important;
-}
-
-/*
-############
-Border lines
-############
-*/
-.bd-sidebar-primary,
-.bd-sidebar-secondary {
-  max-height: calc(100vh - var(--pst-header-height) - 1vh);
 }
 
 /*
