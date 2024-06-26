@@ -92,10 +92,6 @@ html[data-theme="dark"] .highlight pre {
   background-color: var(--pst-color-background);
 }
 
-.editthispage a {
-  color: var(--pst-color-text-base);
-}
-
 .list-group-item.active {
   z-index: 2;
   color: var(--pst-color-text-base) !important;
@@ -103,7 +99,7 @@ html[data-theme="dark"] .highlight pre {
 
 /*
 ###########
-Directives
+admontions
 ###########
 */
 

@@ -381,3 +381,9 @@ Right side toctree color and font
   text-decoration: none;
   font-weight: 600;
 }
+
+/* _base.scss related changes */
+
+.editthispage a {
+  color: var(--pst-color-text-base);
+}
