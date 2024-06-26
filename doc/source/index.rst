@@ -1,7 +1,5 @@
-Ansys Sphinx Theme documentation
-################################
-
-Version: |version|
+Ansys Sphinx Theme documentation |version|
+##########################################
 
 The Ansys Sphinx theme is a custom theme for Sphinx, a documentation generator
 used for creating project documentation from reStructuredText source files.

@@ -3,5 +3,5 @@
 Sphinx-Gallery
 ==============
 
-This is an example of a gallery generated with `Sphinx gallery`` and its
-rendering with ansys sphinx theme.
+This example shows how the Ansys Sphinx Theme renders examples
+using Sphinx-Gallery.

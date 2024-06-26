@@ -82,7 +82,7 @@ Latex(r"This is a \LaTeX{} equation: $a^2 + b^2 = c^2$")
 ###############################################################################
 # Rendering a table in markdown
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# This is an example to render the table inside the notebook
+# This is an example to render a table inside the markdown with Sphinx-Gallery.
 #
 # ====== ====== =======
 # A      B      A and B

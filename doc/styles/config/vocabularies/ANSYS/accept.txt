@@ -20,3 +20,4 @@ Pradyun
 Gedam
 Chris
 Sewell
+(?i)Sphinx-Gallery

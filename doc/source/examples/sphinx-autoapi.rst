@@ -3,8 +3,7 @@
 Sphinx AutoAPI
 ==============
 
-This section describes ansys-sphinx-theme endpoints, their capabilities, and how
-to interact with them programmatically.
+This example shows how the Ansys Sphinx Theme renders API documentation using the Sphinx AutoAPI extension.
 
 .. toctree::
    :titlesonly:

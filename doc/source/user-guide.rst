@@ -3,7 +3,8 @@
 User guide
 ##########
 
-This section provides information on how to customize the Ansys Sphinx theme.
+This section outlines the fundamental configurations of the Ansys Sphinx theme and how to integrate
+third-party extensions with this theme to customize your documentation.
 
 .. grid:: 1 1 2 2
    :gutter: 2
