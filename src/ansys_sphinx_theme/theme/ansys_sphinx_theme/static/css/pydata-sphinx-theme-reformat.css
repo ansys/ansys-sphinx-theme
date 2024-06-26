@@ -72,6 +72,7 @@ _secondary sidebar and primary sidebars
 /*
 ###############
 Dropdown button
+_header.scss
 ###############
 */
 
@@ -97,6 +98,12 @@ nav.bd-links li > a:hover {
 .bd-header .navbar-nav .dropdown button:hover {
   color: white;
 }
+
+.bd-header .navbar-nav .dropdown button {
+  color: #ddd;
+  display: unset;
+}
+/* dropdown button after 5 sections */
 
 .dropdown-item:hover {
   font-weight: bold;
@@ -181,10 +188,6 @@ a:hover {
   color: #ddd;
 }
 /* nav sections headings */
-.bd-header .navbar-nav .dropdown button {
-  color: #ddd;
-  display: unset;
-}
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link {
   color: #ddd;
