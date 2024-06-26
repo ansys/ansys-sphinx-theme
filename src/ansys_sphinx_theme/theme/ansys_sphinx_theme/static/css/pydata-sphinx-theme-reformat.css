@@ -190,8 +190,8 @@ a:hover {
   color: #ddd;
 }
 
-.theme-switch-button span {
-  color: #fff;
+html .pst-navbar-icon {
+  color: #ddd;
 }
 
 nav.bd-links li > a {
