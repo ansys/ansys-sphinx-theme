@@ -15,7 +15,7 @@ third-party extensions with this theme to customize your documentation.
       :link: user-guide/configuration
       :link-type: doc
 
-      Ansys sphinx theme configuration
+      Configure the Ansys Sphinx Theme
 
    .. grid-item-card:: :octicon:`gear` :ref:`ref_user_guide_html_theme`
       :link: user-guide/options
