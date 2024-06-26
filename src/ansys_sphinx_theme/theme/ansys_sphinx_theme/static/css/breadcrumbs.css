@@ -17,12 +17,6 @@ div.related > ul {
   padding: 10px 0 20px 0;
 }
 
-*,
-:after,
-:before {
-  box-sizing: border-box;
-}
-
 /*
 ###########################
 vesrion warning announcement
