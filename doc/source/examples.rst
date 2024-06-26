@@ -1,12 +1,12 @@
 Examples
 ########
 
-This show how the different extensions and documentation components are rendered in the ``ansys-sphinx-theme``.
+This section provides examples that show how the Ansys Sphinx Theme renders different Sphinx extensions and documentation components.
 
 Sphinx extensions
 =================
 
-These examples show how the different sphinx extensions are rendered in the ``ansys-sphinx-theme``.
+These examples show how the Ansys Sphinx Theme renders different Sphinx extensions.
 
 .. grid:: 2
    :gutter: 2 2 3 4
@@ -16,30 +16,30 @@ These examples show how the different sphinx extensions are rendered in the ``an
       :link: sphinx-design
       :link-type: ref
 
-      Examples of the sphinx design rendered using the `ansys-sphinx-theme`.
+      Examples of how the Sphinx design is rendered.
 
    .. grid-item-card:: :octicon:`book` Jupyter notebook - nbsphinx
       :link: nbsphinx
       :link-type: ref
 
-      Examples of notebooks rendered using the `ansys-sphinx-theme`.
+      Examples of how notebooks are rendered.
 
    .. grid-item-card:: :octicon:`link-external` Sphinx gallery
       :link: examples/gallery-examples/index
       :link-type: doc
 
-      Examples of sphinx gallery rendered using the `ansys-sphinx-theme`.
+      Examples of how the Sphinx gallery is rendered.
 
    .. grid-item-card:: :octicon:`bookmark` Sphinx autoapi
       :link: sphinx-autoapi
       :link-type: ref
 
-      Examples of autoapi rendered using the `ansys-sphinx-theme`.
+      Examples of how Sphinx AutoAPI documentation is rendered.
 
 Documentation components
 ========================
 
-These examples show how the different documentation components are rendered in the ``ansys-sphinx-theme``.
+These examples show how the Ansys Sphinx Theme renders different documentation components.
 
 
 .. grid:: 2
@@ -56,7 +56,7 @@ These examples show how the different documentation components are rendered in t
       :link: admonitions
       :link-type: ref
 
-      Examples of admonitions rendered using the `ansys-sphinx-theme`.
+      Examples of how admonitions are rendered.
 
 
 
