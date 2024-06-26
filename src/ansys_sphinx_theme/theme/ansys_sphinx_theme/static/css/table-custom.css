@@ -4,6 +4,11 @@ Table
 ########
 */
 
+/** Table
+*
+* the table variables.
+*/
+
 .table {
   --bs-table-bg: var(--pst-color-table-background);
   width: 100%;
@@ -17,6 +22,22 @@ Table
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
+  padding: 0px, 16px;
+}
+
+/**
+* Table header
+*/
+th {
+  font-size: var(--pst-table-font-size);
+  line-height: 40px;
+  color: #686868 !important;
+}
+
+tr {
+  font-size: var(--pst-table-font-size);
+  line-height: 56px;
+  color: #353535;
 }
 
 /* tr {
@@ -36,9 +57,9 @@ tr:nth-child(even) {
   background-color: var(--pst-color-table-hover);
 } */
 
-div.rendered_html table.dataframe td {
+/* div.rendered_html table.dataframe td {
   color: var(--pst-color-text-base);
-}
+} */
 
 /*
   ###############
@@ -48,7 +69,7 @@ div.rendered_html table.dataframe td {
 
   see examples.
   */
-table.table-centered {
+/* table.table-centered {
   width: 100%;
   max-width: 100%;
   border-spacing: 0;
@@ -57,13 +78,12 @@ table.table-centered {
   vertical-align: middle;
   text-align: center;
 
-  /* Disabling scroll bars */
   overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-}
+  scrollbar-width: none; /
+  -ms-overflow-style: none;
+} */
 
-.table-centered tr {
+/* .table-centered tr {
   background-color: var(--pst-color-background);
   text-align: center;
 }
@@ -86,14 +106,14 @@ table.table-centered {
 
 table.dataframe {
   table-layout: auto !important;
-}
+} */
 
 /*
   ###################
   longtable-centered
   ####################
   */
-
+/*
 table.longtable-centered {
   text-align: center;
 }
@@ -117,7 +137,7 @@ table.longtable-centered {
 table.longtable-centered tr:hover td {
   background-color: var(--pst-color-table-hover);
   text-align: center;
-}
+} */
 
 /*
   #########
@@ -125,7 +145,7 @@ table.longtable-centered tr:hover td {
   #########
   */
 
-.dataframe tr {
+/* .dataframe tr {
   background-color: var(--pst-color-background);
 }
 
@@ -136,7 +156,7 @@ table.longtable-centered tr:hover td {
 
 .dataframe tr:hover td {
   background-color: var(--pst-color-table-hover);
-}
+} */
 
 /*
   ###################
@@ -144,7 +164,7 @@ table.longtable-centered tr:hover td {
   ###################
   */
 
-.dataframe-centered tr {
+/* .dataframe-centered tr {
   background-color: var(--pst-color-background);
   text-align: center;
 }
@@ -166,14 +186,14 @@ table.longtable-centered tr:hover td {
 
 .dataframe thead th {
   text-align: center;
-}
+} */
 
 /*
   ############
   data table
   ############
   */
-
+/*
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
@@ -195,7 +215,7 @@ table.dataTable tbody td {
 
 label {
   color: var(--pst-color-text-base);
-}
+} */
 
 /* .table > :not(caption) > * > * {
   background-color: transparent !important;

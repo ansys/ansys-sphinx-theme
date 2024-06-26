@@ -51,6 +51,12 @@
   --pst-font-size-h4: 20px;
   --pst-font-size-h5: 14px;
   --pst-font-size-h6: 11px;
+
+  /**
+* table font sizes
+*/
+  --pst-table-enable-font-size: var(--pst-font-size-h5);
+  --pst-table-font-size: 16px;
 }
 
 html[data-theme="light"] {
@@ -76,6 +82,7 @@ html[data-theme="light"] {
 * extensions
 */
   --pst-color-table-background: #ffffff;
+  --pst-color-enabled-table-text: #353535;
 
   --pst-color-panel-background: var(--pst-color-on-background);
 
