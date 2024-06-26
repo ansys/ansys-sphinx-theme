@@ -10,12 +10,12 @@ repos:
   - id: isort
 
 - repo: https://github.com/PyCQA/flake8
-  rev: 7.0.0
+  rev: 7.1.0
   hooks:
   - id: flake8
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.2.6
+  rev: v2.3.0
   hooks:
   - id: codespell
 
@@ -41,7 +41,7 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.28.4
+  rev: 0.28.5
   hooks:
     - id: check-github-workflows
 
@@ -54,7 +54,7 @@ repos:
     exclude: 'src/ansys_sphinx_theme/theme/ansys_sphinx_theme/_templates/'
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.3.1
+  rev: v0.3.2
   hooks:
   - id: add-license-headers
     args:

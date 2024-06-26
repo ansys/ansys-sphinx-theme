@@ -35,3 +35,8 @@ import them and then add them to the ``latex_additional_files`` dictionary:
 .. code-block:: python
 
     latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
+
+.. jinja:: pdf_guide
+
+    For an example of a rendered PDF cover page, see the
+    `PDF documentation <https://sphinxdocs.ansys.com/version/{{ version }}/_static/assets/download/ansys_sphinx_theme.pdf>`_.

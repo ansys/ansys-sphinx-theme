@@ -1,3 +1,5 @@
+:orphan:
+
 .. _ref_user_guide_404_page:
 
 ********

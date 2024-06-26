@@ -22,6 +22,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""Module containing an extension for creating Sphinx AutoAPI templates for the Ansys Sphinx Theme."""  # noqa: E501
+
 import os
 from typing import Any, Dict
 
@@ -79,6 +81,8 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     app.config["autoapi_keep_files"] = autoapi.get("keep_files", True)
     app.config["autoapi_python_class_content"] = autoapi.get("class_content", "class")
     app.config["autoapi_options"] = autoapi.get("options", AUTOAPI_OPTIONS)
+    app.config["autoapi_ignore"] = autoapi.get("ignore", [])
+    app.config["autoapi_add_toctree_entry"] = autoapi.get("add_toctree_entry", False)
 
     # HACK: The ``autoapi_dirs`` should be given as a relative path to the conf.py.
     relative_autoapi_dir = os.path.relpath(

@@ -52,16 +52,17 @@ CSS_PATH = STYLE_PATH / "ansys_sphinx_theme.css"
 TEMPLATES_PATH = THEME_PATH / "_templates"
 AUTOAPI_TEMPLATES_PATH = TEMPLATES_PATH / "autoapi"
 JS_FILE = JS_PATH / "table.js"
+LOGOS_PATH = STATIC_PATH / "logos"
 
 # make logo paths available
-ansys_favicon = str((STATIC_PATH / "ansys-favicon.png").absolute())
-ansys_logo_black = str((STATIC_PATH / "ansys_logo_black_cropped.jpg").absolute())
-ansys_logo_white = str((STATIC_PATH / "ansys_logo_white.pdf").absolute())
-ansys_logo_white_cropped = str((STATIC_PATH / "ansys_logo_white_cropped.pdf").absolute())
+ansys_favicon = str((LOGOS_PATH / "ansys-favicon.png").absolute())
+ansys_logo_black = str((LOGOS_PATH / "ansys_logo_black_cropped.jpg").absolute())
+ansys_logo_white = str((LOGOS_PATH / "ansys_logo_white.pdf").absolute())
+ansys_logo_white_cropped = str((LOGOS_PATH / "ansys_logo_white_cropped.pdf").absolute())
 page_404 = str((STATIC_PATH / "404.rst").absolute())
-pyansys_logo_black = str((STATIC_PATH / "pyansys-logo-black-cropped.png").absolute())
-pyansys_logo_white = str((STATIC_PATH / "pyansys-logo-white-cropped.png").absolute())
-watermark = str((STATIC_PATH / "watermark.pdf").absolute())
+pyansys_logo_black = str((LOGOS_PATH / "pyansys-logo-black-cropped.png").absolute())
+pyansys_logo_white = str((LOGOS_PATH / "pyansys-logo-white-cropped.png").absolute())
+watermark = str((LOGOS_PATH / "watermark.pdf").absolute())
 
 
 def get_html_theme_path() -> pathlib.Path:

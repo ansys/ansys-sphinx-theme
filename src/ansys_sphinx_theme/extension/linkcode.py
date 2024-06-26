@@ -187,20 +187,19 @@ def link_code(app: Sphinx, doctree: Node):
 
     Notes
     -----
-    The function uses the `sphinx_linkcode_resolve` function to resolve the link for each
+    The function uses the ``sphinx_linkcode_resolve`` function to resolve the link for each
     documented object. The link is added as a "View Source" link to the documentation
     when rendered.
 
     For Python, the function extracts information such as module name and fullname from
     the signature node to create the link.
 
-    The `link_code_library` configuration option can be used to specify a custom library
+    You can use the ``link_code_library`` configuration option to specify a custom library
     for link resolution.
 
-    Notes
-    -----
-    Adapted from the original `linkcode` extension in Sphinx, see
-    https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py
+    The ``linkcode`` extension in this version has been adapted from the original
+    `Sphinx linkcode extension <https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py>`_. # noqa: E501
+    This adaptation involves modifying the original code and functionality from the Sphinx library.
     """
     env = app.builder.env
     html_context = getattr(env.config, "html_context", {})
