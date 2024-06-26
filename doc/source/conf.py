@@ -156,6 +156,7 @@ sphinx_gallery_conf = {
     "download_all_examples": False,
     # Modules for which function level galleries are created.  In
     "image_scrapers": ("pyvista", "matplotlib"),
+    "default_thumb_file": "source/_static/pyansys_light_square.png",
 }
 nbsphinx_execute = "always"
 nbsphinx_thumbnails = {

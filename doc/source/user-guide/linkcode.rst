@@ -1,14 +1,13 @@
 .. _ref_user_guide_extension:
 
-Linkcode extension
+The ``linkcode`` extension
 ===========================
 
 The ``linkcode`` extension automatically adds *source* links to the documentation for Python, C, C++,
 and JavaScript objects. It allows you to link to the source code hosted on GitHub.
 
-To use the ``ansys-sphinx-theme`` linkcode extension, you need to add it to the Sphinx configuration:
-
-#. Add the following line in the ``conf.py`` file:
+To use the ``linkcode`` extension, you must add it to the ``extensions`` variable in your
+project's Sphinx ``conf.py`` file:
 
 .. code-block:: python
 

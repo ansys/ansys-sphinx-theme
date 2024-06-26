@@ -9,7 +9,12 @@ To use the Ansys Sphinx Theme, add the following line to your project's Sphinx `
 
    html_theme = "ansys_sphinx_theme"
 
-From ansys sphinx theme you can use the following features:
+The Ansys Sphinx Theme provides these features:
+
+- `PyAnsys and Ansys logos`_
+- `Version switcher`_
+- `PDF cover page`_
+- `Custom CSS`_
 
 PyAnsys and Ansys logos
 ~~~~~~~~~~~~~~~~~~~~~~~

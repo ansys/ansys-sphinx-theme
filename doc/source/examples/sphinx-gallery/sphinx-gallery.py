@@ -41,8 +41,6 @@ Then, add the package to the ``extensions`` variable in your Sphinx ``conf.py`` 
         extensions = [
             "sphinx_gallery.gen_gallery",
         ]
-# sphinx_gallery_thumbnail_path = '_static/pyansys_light_square.png'
-
 """
 ###############################################################################
 # Plot a simple sphere using PyVista
