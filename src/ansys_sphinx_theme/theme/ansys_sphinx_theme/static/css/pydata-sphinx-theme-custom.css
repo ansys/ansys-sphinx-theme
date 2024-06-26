@@ -1,0 +1,497 @@
+/* Changes associated with the Ansys Sphinx Theme */
+/* for pydata-sphinx-theme */
+@import "../styles/pydata-sphinx-theme.css";
+@import "ansys-sphinx-theme-variable.css";
+
+/*
+##########
+Scroll-bar
+##########
+*/
+
+body::-webkit-scrollbar {
+  width: 1rem;
+  height: 1rem;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--pst-color-background);
+}
+
+.bd-sidebar::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.bd-sidebar::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+  visibility: hidden !important;
+}
+
+.bd-sidebar::-webkit-scrollbar-track {
+  background: var(--pst-color-border);
+  visibility: hidden !important;
+}
+
+.bd-toc::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+.bd-toc::-webkit-scrollbar-thumb {
+  background: var(--pst-color-border);
+  border-radius: inherit;
+}
+
+.bd-toc::-webkit-scrollbar-track {
+  background: var(--pst-color-border);
+}
+
+/*
+########################################
+_secondary sidebar and primary sidebars
+#######################################
+*/
+.bd-sidebar-primary,
+.bd-sidebar-secondary {
+  max-height: calc(100vh - var(--pst-header-height) - 1vh);
+}
+
+.bd-toc {
+  padding-top: 5em;
+}
+
+/* secondary sidebar*/
+
+/*
+###############
+Dropdown button
+_header.scss
+###############
+*/
+
+nav.bd-links .active:hover > a {
+  font-weight: bold;
+  color: var(--pst-color-text-base);
+  border-left: 2px solid var(--pst-color-text-base);
+}
+
+nav.bd-links .active > a {
+  font-weight: bold;
+  color: var(--pst-color-text-muted) !important;
+  border-left: 2px solid var(--pst-color-text-base);
+  border-bottom: none !important;
+  padding-left: 0.5rem;
+}
+
+nav.bd-links li > a:hover {
+  font-weight: 900;
+  color: var(--pst-color-link) !important;
+}
+
+.bd-header .navbar-nav .dropdown button:hover {
+  color: white;
+}
+
+.bd-header .navbar-nav .dropdown button {
+  color: #ddd;
+  display: unset;
+}
+/* dropdown button after 5 sections */
+
+.dropdown-item:hover {
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.navbar button.navbar-toggler {
+  margin-right: 1em;
+  border-color: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+}
+
+/*
+####################################################
+Side column size (first and second column from left)
+####################################################
+*/
+
+.col-md-3 {
+  flex: 0 0 20%;
+  max-width: 20%;
+}
+
+a.headerlink {
+  color: #222;
+}
+
+@media (min-width: 1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1600px;
+  }
+}
+
+/*
+  ############################################
+  Navigation column (according to side column)
+  _header.scss
+  ############################################
+  */
+.bd-header .navbar-header-items__start {
+  width: fit-content;
+  padding-right: 3rem;
+}
+/* header logo*/
+
+.bd-main .bd-content {
+  display: flex;
+  height: 100%;
+  justify-content: end;
+}
+
+a:active,
+a:visited,
+a:visited:hover,
+a:active:hover,
+a:hover {
+  text-decoration: underline;
+  color: var(--pst-color-link);
+  font-weight: 500;
+}
+
+.bd-main .bd-content .bd-article-container .bd-article {
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+}
+.bd-header .navbar-nav li a.nav-link {
+  color: #ddd;
+}
+/* nav sections headings */
+
+.bd-header ul.navbar-nav > li.nav-item > .nav-link {
+  color: #ddd;
+}
+
+html .pst-navbar-icon {
+  color: #ddd;
+}
+
+nav.bd-links li > a {
+  text-decoration: none;
+}
+
+.bd-header .navbar-nav li a.nav-link:hover {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+}
+
+nav.bd-links li > a {
+  color: var(--pst-color-link);
+  font-size: 0.98rem;
+}
+
+a:visited,
+a:visited:hover {
+  color: var(--pst-color-link-visted);
+}
+
+/*#############################
+Bold font weight for **code**
+#############################
+*/
+
+b,
+strong {
+  font-weight: 900;
+}
+/*
+##################
+icon, button, logo
+##################
+*/
+
+button.btn.version-switcher__button {
+  border-color: var(--pst-color-border);
+  color: #ddd;
+}
+
+button.version-switcher__button {
+  color: #f8f9fa;
+}
+
+.search-button {
+  color: #ddd;
+}
+
+kbd {
+  background-color: #f8f9fa;
+}
+
+/*
+  #####################################
+  icon, button, logo  for small screen
+  #####################################
+  */
+@media screen and (max-width: 576px) {
+  html[data-theme="light"] .theme-switch-button span {
+    color: rgb(19, 18, 18) !important;
+  }
+  button.btn.version-switcher__button {
+    border-color: var(--pst-color-border);
+    color: var(--pst-color-text-base);
+    font-weight: 700;
+  }
+  button.btn.version-switcher__button {
+    border-color: var(--pst-color-border);
+    color: var(--pst-color-text-base);
+  }
+  button.version-switcher__button {
+    color: var(--pst-color-text-base);
+  }
+  .navbar-nav li a:focus,
+  .navbar-nav li a:hover,
+  .navbar-nav li.current > a {
+    color: var(--pst-color-text-base) !important;
+    font-weight: 700;
+  }
+
+  .navbar-nav li a:focus,
+  .navbar-nav li a:hover,
+  .navbar-nav li.current > a {
+    color: white !important;
+  }
+
+  .navbar-nav .dropdown .dropdown-menu {
+    min-width: 250px;
+  }
+  button,
+  input,
+  optgroup,
+  select,
+  textarea,
+  button:hover {
+    color: var(--pst-color-text-base);
+  }
+}
+
+.navbar-icon-links {
+  column-gap: 0.2rem;
+}
+
+.search-button-field {
+  color: white;
+  background-color: transparent;
+}
+
+.search-button-field:hover {
+  color: var(--pst-color-border);
+}
+
+/* make the github logo white */
+
+.version-switcher__menu a.list-group-item:hover {
+  background-color: #d09735 !important;
+  border-color: var(--pst-color-text-base) !important;
+  color: #000 !important;
+}
+
+.version-switcher__menu a.list-group-item {
+  background-color: #f8f9fa;
+  border-color: var(--pst-color-border);
+  color: #000;
+}
+
+.fa-wrench:before {
+  content: "\f0ad";
+  color: white;
+}
+
+html[data-theme="light"] #pst-back-to-top {
+  background-color: var(--pst-color-link);
+}
+
+/* _code.scss related changes */
+.docutils {
+  font-family: var(--pst-font-family-monospace);
+  font-weight: 500;
+}
+
+/* _api.scss related changes */
+
+.sig-prename.descclassname {
+  display: none;
+} /* hide the class 'descclassname' for autoapi */
+
+.sig {
+  font-family: "Consolas", "Menlo", "DejaVu Sans Mono",
+    "Bitstream Vera Sans Mono", monospace;
+}
+
+.sig-name.descname {
+  color: var(--pst-color-inline-code);
+}
+
+.sig-name {
+  color: var(--pst-color-sig);
+}
+
+/* highlighted objects inside the api reference */
+dt:target,
+span.highlighted {
+  background-color: var(--pst-color-codecell) !important;
+}
+
+/* Increase empty-space around classes, methods, properties, etc. that are descendants
+ of other items */
+dl.class dl.py {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+/*
+#################################
+Right side toctree color and font
+#################################
+*/
+.toc-entry a.nav-link {
+  padding: 0.125rem 1.5rem;
+  color: var(--pst-color-link);
+}
+
+.toc-entry a.nav-link.active {
+  font-weight: bold;
+  color: var(--pst-color-text-base);
+  background-color: transparent;
+  border-left: 2px solid var(--pst-color-text-muted);
+}
+
+.toc-h2 {
+  font-size: 0.98rem;
+  padding: 0.05em;
+}
+
+.toc-h3 {
+  font-size: 0.96rem;
+}
+
+.toc-h4 {
+  font-size: 0.9rem;
+}
+
+.toc-entry a.nav-link:hover {
+  color: var(--pst-color-link);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* _base.scss related changes */
+
+.editthispage a {
+  color: var(--pst-color-text-base);
+}
+
+/*
+##############################
+image padding before and after
+##############################
+*/
+
+img {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+html[data-theme="dark"] .bd-content img:not(.only-dark):not(.dark-light) {
+  background: transparent;
+}
+
+img.logo__image {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}
+
+/*
+##########################
+Nav-bar entity right side.
+##########################
+*/
+
+#version_switcher_button {
+  background-color: var(--pst-color-background);
+}
+
+.list-group-item.active {
+  z-index: 2;
+  color: var(--pst-color-text-base) !important;
+}
+
+/*
+###########
+admontions
+###########
+*/
+
+div.deprecated {
+  border-color: var(--pst-color-danger);
+  background-color: #dc354514;
+}
+
+div.deprecated,
+div.versionadded,
+div.versionchanged {
+  background-color: transparent;
+}
+
+.admonition,
+div.admonition {
+  background-color: var(--pst-color-on-surface);
+}
+
+/* Select only divisions that contain a dataframe, with enough specificity to override pydata css */
+div.nboutput
+  div.output_area.rendered_html.docutils.container:has(table.dataframe) {
+  background-color: transparent;
+}
+
+aside.topic > p {
+  color: var(--pst-color-text-base) !important;
+}
+
+/*
+#################
+search hide match
+#################
+*/
+
+div#searchbox p.highlight-link a {
+  background-color: var(--pst-color-search-match);
+}
+
+.header-article__inner {
+  padding: 0 1rem;
+}
