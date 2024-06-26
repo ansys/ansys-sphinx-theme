@@ -29,7 +29,7 @@ dependencies = [
 
 [project.optional-dependencies]
 autoapi = [
-    "sphinx-autoapi==3.1.1",
+    "sphinx-autoapi==3.1.2",
     "sphinx-design==0.6.0",
     "sphinx-jinja==2.0.2",
 ]

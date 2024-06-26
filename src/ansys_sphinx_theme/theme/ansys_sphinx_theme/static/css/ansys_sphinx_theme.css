@@ -600,6 +600,10 @@ Navigation column (according to side column)
   display: unset;
 }
 
+.theme-switch-button span {
+  color: #fff;
+}
+
 /*
 #################################
 Syntax highlighting in code block
@@ -677,26 +681,9 @@ icon, button, logo
 ##################
 */
 
-button,
-input,
-optgroup,
-select,
-textarea,
-button:hover {
-  color: #ddd;
-}
-
-.theme-switch-button {
-  border-color: #f8f9fa;
-}
-
 button.btn.version-switcher__button {
   border-color: var(--pst-color-border);
   color: #ddd;
-}
-
-button.version-switcher__button:hover {
-  color: #f8f8f2;
 }
 
 button.version-switcher__button {
@@ -748,15 +735,6 @@ icon, button, logo  for small screen
   }
 }
 
-.theme-switch-button span {
-  color: #f8f9fa;
-}
-
-.theme-switch-button span:hover {
-  color: var(--ansysGold);
-  border-color: white;
-}
-
 .navbar-icon-links {
   column-gap: 0.2rem;
 }
@@ -772,12 +750,6 @@ icon, button, logo  for small screen
 
 /* make the github logo white */
 
-i.fa-github-square:before,
-i.fa-square-github:before {
-  color: white;
-  font-size: 1rem;
-}
-
 .version-switcher__menu a.list-group-item:hover {
   background-color: #d09735 !important;
   border-color: var(--pst-color-text-base) !important;
@@ -792,11 +764,6 @@ i.fa-square-github:before {
 
 .fa-wrench:before {
   content: "\f0ad";
-  color: white;
-}
-
-.navbar-icon-links {
-  font-size: 1.5rem;
   color: white;
 }
 
@@ -1133,6 +1100,10 @@ a:visited:hover {
 }
 
 /* Cheat sheet sidebar */
+
+.sidebar-cheatsheets {
+  text-align: center;
+}
 
 .sidebar-cheatsheets h4 {
   font-weight: var(--pst-sidebar-header-font-weight) !important;

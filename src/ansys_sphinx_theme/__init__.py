@@ -113,23 +113,6 @@ def get_version_match(semver: str) -> str:
     return ".".join([major, minor])
 
 
-def get_autoapi_templates_dir_relative_path(path: pathlib.Path) -> str:
-    """Return a string representing the relative path for autoapi templates.
-
-    Parameters
-    ----------
-    path : pathlib.Path
-        Path to the desired file.
-    Returns
-    -------
-    str
-        A string rerpesenting the relative path to the autoapi templates.
-    """
-    return os.path.relpath(
-        str(AUTOAPI_TEMPLATES_PATH.absolute()), start=str(path.parent.absolute())
-    )
-
-
 def convert_version_to_pymeilisearch(semver: str) -> str:
     """Convert a semantic version number to pymeilisearch-compatible format.
 
@@ -167,12 +150,25 @@ def setup_default_html_theme_options(app):
 
     """
     # Place all switchers and icons at the end of the navigation bar
-    if app.config.html_theme_options.get("switcher"):
-        app.config.html_theme_options.setdefault(
+    theme_options = app.config.html_theme_options
+    # Place all switchers and icons at the end of the navigation bar
+    if theme_options.get("switcher"):
+        theme_options.setdefault(
             "navbar_end", ["version-switcher", "theme-switcher", "navbar-icon-links"]
         )
-    app.config.html_theme_options.setdefault("collapse_navigation", True)
-    app.config.html_theme_options.setdefault("navigation_with_keys", True)
+    theme_options.setdefault("collapse_navigation", True)
+    theme_options.setdefault("navigation_with_keys", True)
+
+    # Update the icon links. If not given, add a default GitHub icon.
+    if not theme_options.get("icon_links") and theme_options.get("github_url"):
+        theme_options["icon_links"] = [
+            {
+                "name": "GitHub",
+                "url": theme_options["github_url"],
+                "icon": "fa-brands fa-github",
+            }
+        ]
+        theme_options["github_url"] = None
 
 
 def fix_edit_html_page_context(
