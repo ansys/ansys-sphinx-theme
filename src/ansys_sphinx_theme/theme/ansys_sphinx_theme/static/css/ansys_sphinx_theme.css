@@ -15,7 +15,7 @@
 Codecell
 ##########
 */
-/* .xref.std.std-ref {
+.xref.std.std-ref {
   color: var(--pst-color-inline-code);
   font-family: "Inconsolata";
   font-weight: normal;
@@ -29,7 +29,7 @@ Codecell
   background-color: var(--pst-color-on-surface);
   border: 1px solid var(--pst-color-border);
   border-radius: 0.25rem;
-} */
+}
 
 /* Reduce empty-space around Notes and Examples headings */
 p.rubric {
@@ -46,85 +46,4 @@ Autosummary
 .autosummary tr:nth-child(odd),
 .autosummary tr:nth-child(even) {
   background-color: var(--pst-color-background);
-}
-
-/*
-##############################
-image padding before and after
-##############################
-*/
-
-img {
-  padding-top: 1em;
-  padding-bottom: 1em;
-}
-
-html[data-theme="dark"] .bd-content img:not(.only-dark):not(.dark-light) {
-  background: transparent;
-}
-
-img.logo__image {
-  padding-top: 0rem;
-  padding-bottom: 0rem;
-}
-
-/*
-##########################
-Nav-bar entity right side.
-##########################
-*/
-
-#version_switcher_button {
-  background-color: var(--pst-color-background);
-}
-
-.list-group-item.active {
-  z-index: 2;
-  color: var(--pst-color-text-base) !important;
-}
-
-/*
-###########
-admontions
-###########
-*/
-
-div.deprecated {
-  border-color: var(--pst-color-danger);
-  background-color: #dc354514;
-}
-
-div.deprecated,
-div.versionadded,
-div.versionchanged {
-  background-color: transparent;
-}
-
-.admonition,
-div.admonition {
-  background-color: var(--pst-color-on-surface);
-}
-
-/* Select only divisions that contain a dataframe, with enough specificity to override pydata css */
-div.nboutput
-  div.output_area.rendered_html.docutils.container:has(table.dataframe) {
-  background-color: transparent;
-}
-
-aside.topic > p {
-  color: var(--pst-color-text-base) !important;
-}
-
-/*
-#################
-search hide match
-#################
-*/
-
-div#searchbox p.highlight-link a {
-  background-color: var(--pst-color-search-match);
-}
-
-.header-article__inner {
-  padding: 0 1rem;
 }
