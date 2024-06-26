@@ -75,6 +75,7 @@ html[data-theme="light"] {
   /**
 * extensions
 */
+  --pst-color-table-background: #ffffff;
 
   --pst-color-panel-background: var(--pst-color-on-background);
 
@@ -158,6 +159,7 @@ html[data-theme="dark"] {
 * table hovering
 */
   --pst-color-table-hover: var(--pst-color-target);
+  --pst-color-table-background: #2d2d2d;
 
   /**
 * search hide match

@@ -5,6 +5,7 @@ Table
 */
 
 .table {
+  --bs-table-bg: var(--pst-color-table-background);
   width: 100%;
   max-width: 100%;
   border-spacing: 0;
@@ -18,7 +19,7 @@ Table
   -ms-overflow-style: none; /* Internet Explorer 10+ */
 }
 
-tr {
+/* tr {
   background-color: var(--pst-color-background);
 }
 
@@ -33,7 +34,7 @@ tr:nth-child(even) {
 
 .table tr:hover td {
   background-color: var(--pst-color-table-hover);
-}
+} */
 
 div.rendered_html table.dataframe td {
   color: var(--pst-color-text-base);
@@ -196,7 +197,7 @@ label {
   color: var(--pst-color-text-base);
 }
 
-.table > :not(caption) > * > * {
+/* .table > :not(caption) > * > * {
   background-color: transparent !important;
   color: var(--pst-color-text-base) !important;
-}
+} */
