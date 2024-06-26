@@ -9,8 +9,15 @@ link_code_library
 link_code_source
 link_code_branch
 html_context
-autoapi
+(?i)autoapi
 (?i)HTML
-CSS
+multi-version
+(?i)css
 PDF
 namespaces
+(?i)pydata
+Pradyun
+Gedam
+Chris
+Sewell
+(?i)Sphinx-Gallery
