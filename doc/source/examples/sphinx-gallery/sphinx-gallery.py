@@ -22,10 +22,10 @@
 
 # noqa: D205, D400
 """
-Sphinx gallery
+Sphinx-Gallery
 ==============
 
-This example shows how to add a new example to the PyAnsys `Sphinx-Gallery
+This example shows how to add a new example when using `Sphinx-Gallery
 <https://sphinx-gallery.github.io/>`_.
 
 To use Sphinx-Gallery, first install the package with this command:
@@ -41,6 +41,8 @@ Then, add the package to the ``extensions`` variable in your Sphinx ``conf.py`` 
         extensions = [
             "sphinx_gallery.gen_gallery",
         ]
+# sphinx_gallery_thumbnail_path = '_static/pyansys_light_square.png'
+
 """
 ###############################################################################
 # Plot a simple sphere using PyVista
@@ -80,9 +82,9 @@ from IPython.display import Latex
 Latex(r"This is a \LaTeX{} equation: $a^2 + b^2 = c^2$")
 
 ###############################################################################
-# Rendering a table in markdown
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# This is an example to render the table inside the notebook
+# Render a table in markdown
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~
+# This is an example to render a table inside the notebook.
 #
 # ====== ====== =======
 # A      B      A and B
