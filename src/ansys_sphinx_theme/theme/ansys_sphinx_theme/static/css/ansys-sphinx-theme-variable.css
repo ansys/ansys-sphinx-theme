@@ -55,7 +55,6 @@
   /**
 * table font sizes
 */
-  --pst-table-enable-font-size: var(--pst-font-size-h5);
   --pst-table-font-size: 16px;
 }
 

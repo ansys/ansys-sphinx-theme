@@ -59,13 +59,11 @@ th :hover,
 thead :hover,
 tr :hover {
   background-color: var(--pst-color-table-row-hover-bg);
-  font-size: var(--pst-table-enabled-font-size);
   font-family: var(--pst-font-family-base);
 }
 
 .table :hover {
   background-color: var(--pst-color-table-row-hover-bg);
-  font-size: var(--pst-table-enabled-font-size);
 }
 
 /**
@@ -74,7 +72,6 @@ tr :hover {
 
 .table :active {
   background-color: var(--pst-color-table-active-bg);
-  font-size: var(--pst-table-enabled-font-size);
 }
 /**
 * Table dataframes
@@ -94,13 +91,11 @@ table.dataframe th {
 
 table.dataframe :hover {
   background-color: var(--pst-color-table-row-hover-bg);
-  font-size: var(--pst-table-enabled-font-size);
   font-family: var(--pst-font-family-base);
 }
 
 table.dataframe :active {
   background-color: var(--pst-color-table-active-bg);
-  font-size: var(--pst-table-enabled-font-size);
   font-family: var(--pst-font-family-base);
 }
 
