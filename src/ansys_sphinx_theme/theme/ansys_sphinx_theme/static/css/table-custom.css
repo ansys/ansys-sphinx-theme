@@ -41,31 +41,31 @@ tr {
 */
 th {
   line-height: 40px;
-  color: #686868 !important;
+  color: var(--pst-color-table-header-text) !important;
 }
 
 tr {
   line-height: 56px;
-  color: #353535;
+  color: var(--pst-color-table-cell-text);
 }
 
-tbody,
-td,
-tfoot,
-th,
-thead,
+tbody :hover,
+td :hover,
+tfoot :hover,
+th :hover,
+thead :hover,
 tr :hover {
-  background-color: #ececec;
+  background-color: var(--pst-color-table-row-hover-bg);
   font-size: var(--pst-table-enabled-font-size);
 }
 
 .table :hover {
-  background-color: #ececec;
+  background-color: var(--pst-color-table-row-hover-bg);
   font-size: var(--pst-table-enabled-font-size);
 }
 
 .table :active {
-  background-color: #e9f4fe;
+  background-color: var(--pst-color-table-active-bg);
   font-size: var(--pst-table-enabled-font-size);
 }
 /**
@@ -75,22 +75,22 @@ tr :hover {
 table.dataframe tr {
   font-size: var(--pst-table-font-size);
   line-height: 56px;
-  color: #353535;
+  color: var(--past-color-table-cell-text);
 }
 
 table.dataframe th {
   font-size: var(--pst-table-font-size);
   line-height: 40px;
-  color: #686868 !important;
+  color: var(--pst-color-table-header-text) !important;
 }
 
 table.dataframe :hover {
-  background-color: #ececec;
+  background-color: var(--pst-color-table-row-hover-bg);
   font-size: var(--pst-table-enabled-font-size);
 }
 
 table.dataframe :active {
-  background-color: #e9f4fe;
+  background-color: var(--pst-color-table-active-bg);
   font-size: var(--pst-table-enabled-font-size);
 }
 
