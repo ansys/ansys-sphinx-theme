@@ -52,6 +52,7 @@
   --pst-font-size-h5: 14px;
   --pst-font-size-h6: 11px;
   --pst-global-line-height: 24px;
+  --bs-nav-link-font-size: 14px;
 
   /**
 * table font sizes
@@ -64,7 +65,7 @@ html[data-theme="light"] {
 * main colors
 */
   --pst-color-background: #f7f7f7;
-  --pst-color-primary: #fff;
+  --pst-color-primary: #353535;
   --pst-color-secondary: #f2f2f2;
   --pst-color-success: rgb(40, 167, 69);
   --pst-color-text-base: rgb(0, 0, 0);
@@ -80,6 +81,10 @@ html[data-theme="light"] {
   --pst-color-on-background: var(
     --pst-color-background
   ); /* important tag from pydata-sphinx-theme */
+  --bs-navbar-color: #686868;
+  --bs-navbar-hover-color: #353535;
+  --bs-navbar-active-color: #353535;
+  --bs-active-border-color: #686868;
 
   /**
 * depth colors
@@ -199,11 +204,4 @@ body {
 h1,
 h2 {
   color: var(--pst-color-text-base);
-}
-
-.navbar {
-  --bs-navbar-color: #686868;
-  --bs-navbar-hover-color: #353535;
-  --bs-navbar-active-color: #353535;
-  --bs-active-border-color: #686868;
 }
