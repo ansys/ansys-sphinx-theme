@@ -74,9 +74,17 @@ html[data-theme="light"] {
   --pst-color-info: var(--pst-color-link);
 
   /**
+* Navigation colors
+*/
+
+  --pst-color-on-background: var(
+    --pst-color-background
+  ); /* important tag from pydata-sphinx-theme */
+
+  /**
 * depth colors
 */
-  --pst-color-on-background: rgb(0, 0, 0);
+  /* --pst-color-on-background: rgb(0, 0, 0); */
   --pst-color-on-surface: #f2f2f2;
 
   /**
@@ -191,4 +199,11 @@ body {
 h1,
 h2 {
   color: var(--pst-color-text-base);
+}
+
+.navbar {
+  --bs-navbar-color: #686868;
+  --bs-navbar-hover-color: #353535;
+  --bs-navbar-active-color: #353535;
+  --bs-active-border-color: #686868;
 }
