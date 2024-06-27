@@ -63,7 +63,6 @@ html[data-theme="light"] {
   /**
 * main colors
 */
-
   --pst-color-background: #f7f7f7;
   --pst-color-primary: #fff;
   --pst-color-secondary: #f2f2f2;
@@ -186,6 +185,7 @@ html[data-theme="dark"] {
 
 body {
   font-family: "Open Sans", sans-serif;
+  line-height: var(--pst-global-line-height);
 }
 
 h1,
