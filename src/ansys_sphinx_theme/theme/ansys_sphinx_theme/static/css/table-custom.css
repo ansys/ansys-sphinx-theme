@@ -1,10 +1,5 @@
-/*
-########
-Table
-########
-*/
-
-/** Table
+/**
+* Table
 *
 * the table variables.
 */
@@ -44,10 +39,18 @@ th {
   color: var(--pst-color-table-header-text) !important;
 }
 
+/**
+* Table body
+*/
+
 tr {
   line-height: 56px;
   color: var(--pst-color-table-cell-text);
 }
+
+/**
+* Table hover
+*/
 
 tbody :hover,
 td :hover,
@@ -63,6 +66,10 @@ tr :hover {
   background-color: var(--pst-color-table-row-hover-bg);
   font-size: var(--pst-table-enabled-font-size);
 }
+
+/**
+* Table active
+*/
 
 .table :active {
   background-color: var(--pst-color-table-active-bg);
