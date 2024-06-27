@@ -51,6 +51,7 @@
   --pst-font-size-h4: 20px;
   --pst-font-size-h5: 14px;
   --pst-font-size-h6: 11px;
+  --pst-global-line-height: 24px;
 
   /**
 * table font sizes
@@ -62,6 +63,8 @@ html[data-theme="light"] {
   /**
 * main colors
 */
+
+  --pst-color-background: #f7f7f7;
   --pst-color-primary: #fff;
   --pst-color-secondary: #f2f2f2;
   --pst-color-success: rgb(40, 167, 69);
