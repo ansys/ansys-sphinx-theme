@@ -67,32 +67,34 @@ _secondary sidebar and primary sidebars
   padding-top: 5em;
 }
 
-/* secondary sidebar*/
-
-/*
-###############
-Dropdown button
-_header.scss
-###############
+/**
+*
+* Dropdown button
+* _header.scss
+*
 */
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link {
   color: var(--bs-navbar-color);
+  font-weight: bold;
 }
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:hover::before {
   color: var(--bs-navbar-hover-color);
+  font-weight: bold;
 }
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:hover {
   color: var(--bs-navbar-hover-color);
   border-color: var(--bs-navbar-hover-color);
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
+  font-weight: bold;
 }
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:active {
   color: var(--bs-navbar-active-color);
   border-color: var(--bs-active-border-color);
+  font-weight: bold;
 }
 
 .bd-header ul.navbar-nav > li.nav-item.current > .nav-link::before,
@@ -101,30 +103,63 @@ _header.scss
   border-bottom: 3px solid var(--bs-active-border-color);
 }
 
-nav.bd-links .active:hover > a {
-  font-weight: bold;
-  color: var(--pst-color-text-base);
-  border-left: 2px solid var(--pst-color-text-base);
-}
-
-nav.bd-links .active > a {
-  font-weight: bold;
-  color: var(--pst-color-text-muted) !important;
-  border-left: 2px solid var(--pst-color-text-base);
-  border-bottom: none !important;
-  padding-left: 0.5rem;
-}
-
-nav.bd-links li > a:hover {
-  font-weight: 900;
-  color: var(--pst-color-link) !important;
-}
-
 /* dropdown button after 5 sections */
 
 .dropdown-item:hover {
   font-weight: bold;
   background-color: transparent;
+}
+
+/**
+* Switcher button
+*/
+button.btn.version-switcher__button {
+  background-color: transparent;
+  border-color: var(--bs-active-border-color);
+  color: var(--bs-navbar-color);
+  font-size: var(--bs-nav-link-font-size);
+  font-weight: bold;
+}
+
+button.btn.version-switcher__button:hover {
+  border-color: var(--bs-active-border-color);
+  color: var(--bs-navbar-hover-color);
+  font-weight: bold;
+}
+
+.version-switcher__menu a.list-group-item:hover {
+  background-color: transparent;
+  border-color: var(--bs-active-border-color);
+  color: var(--bs-navbar-hover-color);
+  font-size: var(--bs-nav-link-font-size);
+  font-weight: bold;
+}
+
+.version-switcher__menu a.list-group-item {
+  background-color: transparent;
+  border-color: var(--pst-color-border);
+  color: var(--bs-navbar-color);
+  font-size: var(--bs-nav-link-font-size);
+  font-weight: bold;
+}
+
+/**
+* _search.scss
+* Search bar
+*/
+
+.search-button-field {
+  border-color: var(--bs-active-border-color);
+  font-size: var(--bs-nav-link-font-size);
+  background-color: transparent;
+  color: var(--bs-navbar-color);
+}
+
+.search-button-field:hover {
+  border-color: var(--bs-active-border-color);
+  color: var(--bs-navbar-hover-color);
+  font-weight: bold;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 /*
@@ -196,22 +231,8 @@ a:hover {
   padding-right: 1rem;
 }
 
-nav.bd-links li > a {
-  text-decoration: none;
-}
-
-.bd-header .navbar-nav li a.nav-link:hover {
-  text-decoration: none;
-  font-weight: 600;
-}
-
 a {
   text-decoration: none;
-}
-
-nav.bd-links li > a {
-  color: var(--pst-color-link);
-  font-size: 0.98rem;
 }
 
 a:visited,
@@ -228,68 +249,8 @@ b,
 strong {
   font-weight: 900;
 }
-/*
-##################
-icon, button, logo
-##################
-*/
-
-/*
-  #####################################
-  icon, button, logo  for small screen
-  #####################################
-  */
-@media screen and (max-width: 576px) {
-  html[data-theme="light"] .theme-switch-button span {
-    color: rgb(19, 18, 18) !important;
-  }
-  button.btn.version-switcher__button {
-    border-color: var(--pst-color-border);
-    color: var(--pst-color-text-base);
-    font-weight: 700;
-  }
-  button.btn.version-switcher__button {
-    border-color: var(--pst-color-border);
-    color: var(--pst-color-text-base);
-  }
-  button.version-switcher__button {
-    color: var(--pst-color-text-base);
-  }
-
-  .navbar-nav .dropdown .dropdown-menu {
-    min-width: 250px;
-  }
-  button,
-  input,
-  optgroup,
-  select,
-  textarea,
-  button:hover {
-    color: var(--pst-color-text-base);
-  }
-}
-
-.navbar-icon-links {
-  column-gap: 0.2rem;
-}
-
-.search-button-field:hover {
-  color: var(--pst-color-border);
-}
 
 /* make the github logo white */
-
-.version-switcher__menu a.list-group-item:hover {
-  background-color: #d09735 !important;
-  border-color: var(--pst-color-text-base) !important;
-  color: #000 !important;
-}
-
-.version-switcher__menu a.list-group-item {
-  background-color: #f8f9fa;
-  border-color: var(--pst-color-border);
-  color: #000;
-}
 
 html[data-theme="light"] #pst-back-to-top {
   background-color: var(--pst-color-link);
@@ -400,10 +361,6 @@ img.logo__image {
 Nav-bar entity right side.
 ##########################
 */
-
-#version_switcher_button {
-  background-color: var(--pst-color-background);
-}
 
 .list-group-item.active {
   z-index: 2;

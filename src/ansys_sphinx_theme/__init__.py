@@ -63,7 +63,8 @@ page_404 = str((STATIC_PATH / "404.rst").absolute())
 pyansys_logo_black = str((LOGOS_PATH / "pyansys-logo-black-cropped.png").absolute())
 pyansys_logo_white = str((LOGOS_PATH / "pyansys-logo-white-cropped.png").absolute())
 watermark = str((LOGOS_PATH / "watermark.pdf").absolute())
-pyansys_transparent = str((LOGOS_PATH / "pyansys-logo-light_mode.png").absolute())
+pyansys_logo = str((LOGOS_PATH / "pyansys_light_transparent.png").absolute())
+ansys_logo = str((LOGOS_PATH / "ansys_logo_transparent.png").absolute())
 
 
 def get_html_theme_path() -> pathlib.Path:
