@@ -51,6 +51,11 @@
   --pst-font-size-h4: 20px;
   --pst-font-size-h5: 14px;
   --pst-font-size-h6: 11px;
+
+  /**
+* table font sizes
+*/
+  --pst-table-font-size: 16px;
 }
 
 html[data-theme="light"] {
@@ -75,6 +80,12 @@ html[data-theme="light"] {
   /**
 * extensions
 */
+  --pst-color-table-background: #ffffff;
+  --pst-color-enabled-table-text: #353535;
+  --pst-color-table-row-hover-bg: #ececec;
+  --pst-color-table-active-bg: #e9f4fe;
+  --pst-color-table-header-text: #686868;
+  --pst-color-table-cell-text: #353535;
 
   --pst-color-panel-background: var(--pst-color-on-background);
 
@@ -100,11 +111,6 @@ html[data-theme="light"] {
 * sphinx design primary color
 */
   --sd-color-primary: var(--pst-color-text-base);
-
-  /**
-* table hovering
-*/
-  --pst-color-table-hover: var(--pst-color-border);
 
   /**
 * search hide match
@@ -157,7 +163,12 @@ html[data-theme="dark"] {
   /**
 * table hovering
 */
-  --pst-color-table-hover: var(--pst-color-target);
+  --pst-color-table-background: #2d2d2d;
+  --pst-color-enabled-table-text: #d3d3d3;
+  --pst-color-table-row-hover-bg: #3d3d3d;
+  --pst-color-table-header-text: #d3d3d3;
+  --pst-color-table-cell-text: #d3d3d3;
+  --pst-color-table-active-bg: #3d3d3d;
 
   /**
 * search hide match

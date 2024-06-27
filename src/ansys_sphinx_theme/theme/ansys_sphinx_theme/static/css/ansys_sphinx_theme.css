@@ -3,11 +3,11 @@
 @import "../basic.css";
 @import "../sg_gallery.css";
 @import "ansys-sphinx-theme-variables.css";
-@import "pydata-sphinx-theme-reformat.css";
+@import "pydata-sphinx-theme-custom.css";
 @import "breadcrumbs.css";
 @import "meilisearch.css";
 @import "sphinx-design.css";
-@import "table-reformat.css";
+@import "table-custom.css";
 @import "sphinx-gallery.css";
 
 /*

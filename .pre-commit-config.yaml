@@ -57,5 +57,6 @@ repos:
   rev: v0.3.2
   hooks:
   - id: add-license-headers
+    files: '(src|doc/source/examples)/.*\.(py)'
     args:
     - --start_year=2021
