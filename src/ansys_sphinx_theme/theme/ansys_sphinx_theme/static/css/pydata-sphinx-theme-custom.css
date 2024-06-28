@@ -10,9 +10,22 @@ Scroll-bar
 */
 
 body::-webkit-scrollbar {
-  width: 1rem;
-  height: 1rem;
+  color: #7e1c1c;
 }
+
+body::-webkit-scrollbar:hover,
+.bd-sidebar::-webkit-scrollbar:hover,
+.bd-toc::-webkit-scrollbar:hover {
+  color: #8e8e8e;
+}
+
+body::-webkit-scrollbar-thumb::after,
+.bd-sidebar::-webkit-scrollbar-thumb::after,
+.bd-toc::-webkit-scrollbar-thumb::after {
+  background: #686868;
+}
+
+/*
 
 body::-webkit-scrollbar-thumb {
   background: var(--pst-color-border);
@@ -51,7 +64,7 @@ body::-webkit-scrollbar-track {
 
 .bd-toc::-webkit-scrollbar-track {
   background: var(--pst-color-border);
-}
+} */
 
 /*
 ########################################
