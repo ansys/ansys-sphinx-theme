@@ -37,7 +37,6 @@ cname = os.getenv("DOCUMENTATION_CNAME", "sphinxdocs.ansys.com")
 switcher_version = get_version_match(__version__)
 
 # HTML configuration
-# html_logo = ansys_logo_black
 html_favicon = ansys_favicon
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = "Ansys Sphinx Theme"
@@ -77,8 +76,8 @@ html_theme_options = {
         "own_page_level": "function",
     },
     "logo": {
-        "image_light": ansys_logo_light,
-        "image_dark": ansys_logo_dark,
+        "image_light": ansys_logo_dark,
+        "image_dark": ansys_logo_light,
     },
 }
 
