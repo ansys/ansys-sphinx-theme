@@ -4,69 +4,6 @@
 @import "ansys-sphinx-theme-variable.css";
 
 /*
-##########
-Scroll-bar
-##########
-*/
-
-body::-webkit-scrollbar {
-  color: #7e1c1c;
-}
-
-body::-webkit-scrollbar:hover,
-.bd-sidebar::-webkit-scrollbar:hover,
-.bd-toc::-webkit-scrollbar:hover {
-  color: #8e8e8e;
-}
-
-body::-webkit-scrollbar-thumb::after,
-.bd-sidebar::-webkit-scrollbar-thumb::after,
-.bd-toc::-webkit-scrollbar-thumb::after {
-  background: #686868;
-}
-
-/*
-
-body::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-}
-
-body::-webkit-scrollbar-track {
-  background: var(--pst-color-background);
-}
-
-.bd-sidebar::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
-.bd-sidebar::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-  visibility: hidden !important;
-}
-
-.bd-sidebar::-webkit-scrollbar-track {
-  background: var(--pst-color-border);
-  visibility: hidden !important;
-}
-
-.bd-toc::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
-.bd-toc::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-}
-
-.bd-toc::-webkit-scrollbar-track {
-  background: var(--pst-color-border);
-} */
-
-/*
 ########################################
 _secondary sidebar and primary sidebars
 #######################################
