@@ -25,42 +25,62 @@ _secondary sidebar and primary sidebars
 */
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link {
-  color: var(--bs-navbar-color);
+  color: var(--ast-navbar-color);
   font-weight: bold;
 }
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:hover::before {
-  color: var(--bs-navbar-hover-color);
+  color: var(--ast-navbar-hover-color);
   font-weight: bold;
+  border-bottom: none;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
 }
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:hover {
-  color: var(--bs-navbar-hover-color);
-  border-color: var(--bs-navbar-hover-color);
+  color: var(--ast-navbar-hover-color);
+  border-color: var(--ast-navbar-hover-color);
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
   font-weight: bold;
 }
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:active {
-  color: var(--bs-navbar-active-color);
-  border-color: var(--bs-active-border-color);
+  color: var(--ast-navbar-active-color);
+  border-color: var(--ast-navbar-active-border-color);
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.12));
   font-weight: bold;
 }
 
 .bd-header ul.navbar-nav > li.nav-item.current > .nav-link::before,
 ::after {
-  color: var(--bs-navbar-active-color);
-  border-bottom: 3px solid var(--bs-active-border-color);
+  color: var(--ast-navbar-active-color);
+  border-bottom: 3px solid var(--ast-navbar-active-border-color);
 }
 
 html .pst-navbar-icon {
-  color: var(--bs-navbar-color);
+  color: var(--ast-navbar-color);
 }
 
 html .pst-navbar-icon:hover {
-  color: var(--bs-navbar-hover-color);
-  border-color: var(--bs-navbar-hover-color);
+  color: var(--ast-navbar-hover-color);
+  border-color: var(--ast-navbar-hover-color);
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
+}
+
+a.nav-link.pst-navbar-icon {
+  color: var(--ast-navbar-color);
+  font-weight: bold;
+}
+
+a.nav-link.pst-navbar-icon:hover {
+  color: var(--ast-navbar-hover-color);
+  border-color: var(--ast-navbar-hover-color);
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
+  font-weight: bold;
+}
+
+a.nav-link.pst-navbar-icon:active {
+  color: var(--ast-navbar-active-color);
+  border-color: var(--ast-navbar-active-border-color);
   font-weight: bold;
 }
 
@@ -76,31 +96,31 @@ html .pst-navbar-icon:hover {
 */
 button.btn.version-switcher__button {
   background-color: transparent;
-  border-color: var(--bs-active-border-color);
-  color: var(--bs-navbar-color);
-  font-size: var(--bs-nav-link-font-size);
+  border-color: var(--ast-navbar-active-border-color);
+  color: var(--ast-navbar-color);
+  font-size: var(--ast-nav-link-font-size);
   font-weight: bold;
 }
 
 button.btn.version-switcher__button:hover {
-  border-color: var(--bs-active-border-color);
-  color: var(--bs-navbar-hover-color);
+  border-color: var(--ast-navbar-active-border-color);
+  color: var(--ast-navbar-hover-color);
   font-weight: bold;
 }
 
 .version-switcher__menu a.list-group-item:hover {
   background-color: transparent;
-  border-color: var(--bs-active-border-color);
-  color: var(--bs-navbar-hover-color);
-  font-size: var(--bs-nav-link-font-size);
+  border-color: var(--ast-navbar-active-border-color);
+  color: var(--ast-navbar-hover-color);
+  font-size: var(--ast-nav-link-font-size);
   font-weight: bold;
 }
 
 .version-switcher__menu a.list-group-item {
   background-color: transparent;
   border-color: var(--pst-color-border);
-  color: var(--bs-navbar-color);
-  font-size: var(--bs-nav-link-font-size);
+  color: var(--ast-navbar-color);
+  font-size: var(--ast-nav-link-font-size);
   font-weight: bold;
 }
 
@@ -110,15 +130,15 @@ button.btn.version-switcher__button:hover {
 */
 
 .search-button-field {
-  border-color: var(--bs-active-border-color);
-  font-size: var(--bs-nav-link-font-size);
+  border-color: var(--ast-navbar-active-border-color);
+  font-size: var(--ast-nav-link-font-size);
   background-color: transparent;
-  color: var(--bs-navbar-color);
+  color: var(--ast-navbar-color);
 }
 
 .search-button-field:hover {
-  border-color: var(--bs-active-border-color);
-  color: var(--bs-navbar-hover-color);
+  border-color: var(--ast-navbar-active-border-color);
+  color: var(--ast-navbar-hover-color);
   font-weight: bold;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }

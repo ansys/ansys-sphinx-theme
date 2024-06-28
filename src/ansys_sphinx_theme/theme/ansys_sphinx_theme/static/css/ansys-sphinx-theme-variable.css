@@ -40,11 +40,6 @@
   --ansysGold: rgb(255, 183, 27); /* #FFB71B */
   --ansysBronze: rgb(200, 146, 17); /* #C89211 */
   --pythonBlue: rgb(57, 114, 161); /* #3972a1 */
-
-  --pst-color-active-navigation: var(--ansysBronze);
-  --pst-color-navbar-link: rgb(255, 255, 255);
-  --pst-color-navbar-link-hover: var(--ansysBronze);
-  --pst-color-navbar-link-active: var(--ansysGold);
   --pst-font-size-h1: 36px;
   --pst-font-size-h2: 32px;
   --pst-font-size-h3: 28px;
@@ -53,11 +48,10 @@
   --pst-font-size-h6: 11px;
   --pst-global-line-height: 24px;
   --bs-nav-link-font-size: 14px;
-
-  /**
+  --bs-navbar-color: var(--bs-ast-navbar-color) /**
 * table font sizes
 */
-  --pst-table-font-size: 16px;
+    --pst-table-font-size: 16px;
 }
 
 html[data-theme="light"] {
@@ -81,11 +75,10 @@ html[data-theme="light"] {
   --pst-color-on-background: var(
     --pst-color-background
   ); /* important tag from pydata-sphinx-theme */
-  --bs-navbar-color: #686868;
-  --bs-navbar-hover-color: #353535;
-  --bs-navbar-active-color: #353535;
-  --bs-active-border-color: #686868;
-  --bs-nav-link-color: var(--bs-navbar-color);
+  --ast-navbar-color: #686868;
+  --ast-navbar-hover-color: #353535;
+  --ast-navbar-active-color: #353535;
+  --ast-navbar-active-border-color: #686868;
 
   /**
 * depth colors
@@ -138,15 +131,14 @@ html[data-theme="dark"] {
   /**
 * main colors
 */
-  --pst-color-primary: #d09735;
-  --pst-color-secondary: #c58e30;
+  --pst-color-primary: #ececec;
+  --pst-color-secondary: #353535;
   --pst-color-success: rgb(72, 135, 87);
   --pst-color-text-base: rgb(201, 209, 217);
   --pst-color-text-muted: rgb(192, 192, 192);
   --pst-color-border: rgb(192, 192, 192);
   --pst-color-shadow: rgb(104, 102, 102);
   --pst-color-background: rgb(18, 18, 18);
-  --pst-color-on-background: rgb(0, 0, 0);
   --pst-color-surface: rgb(41, 41, 41);
   --pst-color-on-surface: rgb(55, 55, 55);
   --pst-color-info: var(--pst-color-secondary);
@@ -156,6 +148,19 @@ html[data-theme="dark"] {
 */
 
   --pst-color-panel-background: var(--pst-color-on-background);
+
+  /**
+* Navigation colors
+*/
+
+  --pst-color-on-background: var(
+    --pst-color-background
+  ); /* important tag from pydata-sphinx-theme */
+  --ast-navbar-color: #d5d5d5;
+  --ast-navbar-hover-color: #ececec;
+  --ast-navbar-active-color: #ececec;
+  --ast-navbar-active-border-color: #d5d5d5;
+  --ast-nav-link-color: var(--ast-navbar-color);
 
   /**
 * layout
