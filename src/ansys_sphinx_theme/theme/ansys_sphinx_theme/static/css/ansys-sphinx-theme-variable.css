@@ -85,6 +85,7 @@ html[data-theme="light"] {
   --bs-navbar-hover-color: #353535;
   --bs-navbar-active-color: #353535;
   --bs-active-border-color: #686868;
+  --bs-nav-link-color: var(--bs-navbar-color);
 
   /**
 * depth colors

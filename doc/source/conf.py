@@ -13,7 +13,8 @@ from sphinx.builders.latex import LaTeXBuilder
 from ansys_sphinx_theme import (
     __version__,
     ansys_favicon,
-    ansys_logo_black,
+    ansys_logo_dark,
+    ansys_logo_light,
     ansys_logo_white,
     ansys_logo_white_cropped,
     convert_version_to_pymeilisearch,
@@ -36,7 +37,7 @@ cname = os.getenv("DOCUMENTATION_CNAME", "sphinxdocs.ansys.com")
 switcher_version = get_version_match(__version__)
 
 # HTML configuration
-html_logo = ansys_logo_black
+# html_logo = ansys_logo_black
 html_favicon = ansys_favicon
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = "Ansys Sphinx Theme"
@@ -74,6 +75,10 @@ html_theme_options = {
         "directory": "src/ansys_sphinx_theme/examples",
         "output": "examples/",
         "own_page_level": "function",
+    },
+    "logo": {
+        "image_light": ansys_logo_light,
+        "image_dark": ansys_logo_dark,
     },
 }
 
