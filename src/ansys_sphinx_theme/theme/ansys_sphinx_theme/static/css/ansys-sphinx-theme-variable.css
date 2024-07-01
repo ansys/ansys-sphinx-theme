@@ -46,7 +46,7 @@
   --pst-font-size-h4: 20px;
   --pst-font-size-h5: 14px;
   --pst-font-size-h6: 11px;
-  --pst-global-line-height: 24px;
+  --ast-global-line-height: 24px;
   --bs-nav-link-font-size: 14px;
   --bs-navbar-color: var(--bs-ast-navbar-color);
   --ast-font-sidebar-header: var(--pst-font-size-h5);
@@ -229,7 +229,7 @@ html[data-theme="dark"] {
 
 body {
   font-family: "Open Sans", sans-serif;
-  line-height: var(--pst-global-line-height);
+  line-height: var(--ast-global-line-height);
   font-size: 14px;
 }
 
