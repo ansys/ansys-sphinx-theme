@@ -48,16 +48,21 @@
   --pst-font-size-h6: 11px;
   --pst-global-line-height: 24px;
   --bs-nav-link-font-size: 14px;
-  --bs-navbar-color: var(--bs-ast-navbar-color) /**
+  --bs-navbar-color: var(--bs-ast-navbar-color);
+  --ast-font-sidebar-header: var(--pst-font-size-h5);
+  /**
 * table font sizes
 */
-    --pst-table-font-size: 16px;
+  --pst-table-font-size: 16px;
 }
 
 html[data-theme="light"] {
   /**
 * main colors
 */
+  --ast-color-text: #353535;
+  --ast-color-active-text: #353535;
+  --ast-color-hover-text: #353535;
   --pst-color-background: #f7f7f7;
   --pst-color-primary: #353535;
   --pst-color-secondary: #f2f2f2;
@@ -71,14 +76,19 @@ html[data-theme="light"] {
   /**
 * Navigation colors
 */
-
   --pst-color-on-background: var(
     --pst-color-background
   ); /* important tag from pydata-sphinx-theme */
   --ast-navbar-color: #686868;
-  --ast-navbar-hover-color: #353535;
-  --ast-navbar-active-color: #353535;
+  --ast-navbar-hover-color: var(--ast-color-hover-text);
+  --ast-navbar-active-color: var(--ast-color-active-text);
   --ast-navbar-active-border-color: #686868;
+
+  /**
+* sidebar colors
+*/
+  --ast-sidebar-primary-text: var(--ast-color-text);
+  --ast-sidebar-hover-background: #ececec;
 
   /**
 * depth colors
@@ -90,11 +100,11 @@ html[data-theme="light"] {
 * extensions
 */
   --pst-color-table-background: #ffffff;
-  --pst-color-enabled-table-text: #353535;
+  --pst-color-enabled-table-text: var(--ast-color-text);
   --pst-color-table-row-hover-bg: #ececec;
   --pst-color-table-active-bg: #e9f4fe;
   --pst-color-table-header-text: #686868;
-  --pst-color-table-cell-text: #353535;
+  --pst-color-table-cell-text: var(--ast-color-text);
 
   --pst-color-panel-background: var(--pst-color-on-background);
 

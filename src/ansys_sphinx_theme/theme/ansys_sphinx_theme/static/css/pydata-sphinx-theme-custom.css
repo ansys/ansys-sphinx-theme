@@ -6,6 +6,7 @@
 /*
 *
 * _secondary sidebar and primary sidebars
+* _sidebar-primary.scss
 *
 */
 .bd-sidebar-primary,
@@ -15,6 +16,30 @@
 
 .bd-toc {
   padding-top: 5em;
+}
+nav.bd-links p.bd-links__title,
+nav.bd-links p.caption {
+  font-size: var(--ast-font-sidebar-header);
+  color: var(--ast-sidebar-primary-text);
+}
+
+nav.bd-links li > a {
+  font-size: var(--ast-font-sidebar-header);
+  color: var(--ast-sidebar-primary-text);
+}
+
+nav.bd-links li > a:hover {
+  color: var(--ast-sidebar-primary-text);
+  background: var(--ast-sidebar-hover-background);
+  text-decoration: none;
+}
+
+nav.bd-links li > a.active,
+nav.bd-links li > a.current {
+  color: var(--ast-color-text);
+  background: var(--ast-sidebar-hover-background);
+  text-decoration-thickness: 4px;
+  font-weight: bold;
 }
 
 /**
