@@ -5,6 +5,53 @@ Sphinx design
 ##############
 */
 
+html[data-theme="light"] {
+  --sd-color-primary: #141414;
+  --sd-color-primary-highlight: #353535;
+  --sd-color-primary-text: #ffffff;
+  --sd-color-secondary: #ffffff;
+  --sd-color-secondary-text: #141414;
+  --sd-color-secondary-bg: #ffffff;
+  --ast-sd-bg-secondary-hover: #ececec;
+  --ast-border-color-secondary-hover: #8e8e8e;
+  --ast-sd-bg-secondary-active: #d9d9d9;
+  --ast-sd-border-secondary-active: #8e8e8e;
+  --sd-color-primary: #141414;
+  --sd-color-secondary-highlight: #ececec;
+}
+
+/*sphinx design button*/
+
+.sd-d-grid .sd-btn-outline-secondary:hover {
+  border-color: var(--ast-border-color-secondary-hover);
+  color: var(--ast-sd-bg-secondary-hover);
+}
+.sd-sphinx-override .sd-btn-outline-secondary:active {
+  border-color: var(--ast-sd-border-secondary-active);
+  color: var(--ast-sd-bg-secondary-active);
+}
+
+.sd-btn-secondary {
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Open Sans";
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: var(--sd-color-secondary-text);
+  background-color: var(--sd-color-secondary);
+  border-color: var(--sd-color-secondary);
+}
+
+.sd-btn-outline-secondary:hover {
+  background-color: var(--ast-sd-bg-secondary-hover);
+  border-color: var(--ast-border-color-secondary-hover);
+}
+
+.sd-btn-outline-secondary:focus {
+  background-color: var(--ast-sd-bg-secondary-active);
+  border-color: var(--ast-sd-border-secondary-active);
+}
+
 blockquote {
   background-color: var(--pst-color-background);
 }
