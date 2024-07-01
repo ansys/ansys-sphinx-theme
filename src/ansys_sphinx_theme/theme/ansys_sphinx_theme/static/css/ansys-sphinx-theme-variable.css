@@ -68,7 +68,7 @@ html[data-theme="light"] {
   --pst-color-secondary: #f2f2f2;
   --pst-color-success: rgb(40, 167, 69);
   --pst-color-text-base: rgb(0, 0, 0);
-  --pst-color-text-muted: rgb(26, 24, 24);
+  --pst-color-text-muted: #353535;
   --pst-color-border: #a19d9d;
   --pst-color-shadow: rgb(216, 216, 216);
   --pst-color-info: var(--pst-color-link);
@@ -113,10 +113,13 @@ html[data-theme="light"] {
 * layout
 */
 
-  --pst-color-link: #1e6ddc;
-  --pst-color-link-hover: #32cfea;
-  --pst-color-link-visted: #9428f2;
-  --pst-color-inline-code: #000; /* inline code color for docutils (_base.scss)*/
+  --ast-color-link: #1e6ddc;
+  --ast-color-link-hover: #1856af;
+  --ast-color-link-active: #104188;
+  --ast-color-link-visited: #7b1fa2;
+  --ast-color-inline-code: var(
+    --pst-color-text-muted
+  ); /* inline code color for docutils (_base.scss)*/
   --pst-color-target: rgb(255, 255, 255);
 
   /**
