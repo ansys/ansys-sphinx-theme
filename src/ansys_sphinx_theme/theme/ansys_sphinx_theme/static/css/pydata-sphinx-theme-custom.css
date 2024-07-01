@@ -4,59 +4,9 @@
 @import "ansys-sphinx-theme-variable.css";
 
 /*
-##########
-Scroll-bar
-##########
-*/
-
-body::-webkit-scrollbar {
-  width: 1rem;
-  height: 1rem;
-}
-
-body::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-}
-
-body::-webkit-scrollbar-track {
-  background: var(--pst-color-background);
-}
-
-.bd-sidebar::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
-.bd-sidebar::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-  visibility: hidden !important;
-}
-
-.bd-sidebar::-webkit-scrollbar-track {
-  background: var(--pst-color-border);
-  visibility: hidden !important;
-}
-
-.bd-toc::-webkit-scrollbar {
-  width: 0.5rem;
-  height: 0.5rem;
-}
-
-.bd-toc::-webkit-scrollbar-thumb {
-  background: var(--pst-color-border);
-  border-radius: inherit;
-}
-
-.bd-toc::-webkit-scrollbar-track {
-  background: var(--pst-color-border);
-}
-
-/*
-########################################
-_secondary sidebar and primary sidebars
-#######################################
+*
+* _secondary sidebar and primary sidebars
+*
 */
 .bd-sidebar-primary,
 .bd-sidebar-secondary {
@@ -67,42 +17,73 @@ _secondary sidebar and primary sidebars
   padding-top: 5em;
 }
 
-/* secondary sidebar*/
-
-/*
-###############
-Dropdown button
-_header.scss
-###############
+/**
+*
+* Dropdown button
+* _header.scss
+*
 */
 
-nav.bd-links .active:hover > a {
+.bd-header ul.navbar-nav > li.nav-item > .nav-link {
+  color: var(--ast-navbar-color);
   font-weight: bold;
-  color: var(--pst-color-text-base);
-  border-left: 2px solid var(--pst-color-text-base);
 }
 
-nav.bd-links .active > a {
+.bd-header ul.navbar-nav > li.nav-item > .nav-link:hover::before {
+  color: var(--ast-navbar-hover-color);
   font-weight: bold;
-  color: var(--pst-color-text-muted) !important;
-  border-left: 2px solid var(--pst-color-text-base);
-  border-bottom: none !important;
-  padding-left: 0.5rem;
+  border-bottom: none;
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
 }
 
-nav.bd-links li > a:hover {
-  font-weight: 900;
-  color: var(--pst-color-link) !important;
+.bd-header ul.navbar-nav > li.nav-item > .nav-link:hover {
+  color: var(--ast-navbar-hover-color);
+  border-color: var(--ast-navbar-hover-color);
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
+  font-weight: bold;
 }
 
-.bd-header .navbar-nav .dropdown button:hover {
-  color: white;
+.bd-header ul.navbar-nav > li.nav-item > .nav-link:active {
+  color: var(--ast-navbar-active-color);
+  border-color: var(--ast-navbar-active-border-color);
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.12));
+  font-weight: bold;
 }
 
-.bd-header .navbar-nav .dropdown button {
-  color: #ddd;
-  display: unset;
+.bd-header ul.navbar-nav > li.nav-item.current > .nav-link::before,
+::after {
+  color: var(--ast-navbar-active-color);
+  border-bottom: 3px solid var(--ast-navbar-active-border-color);
 }
+
+html .pst-navbar-icon {
+  color: var(--ast-navbar-color);
+}
+
+html .pst-navbar-icon:hover {
+  color: var(--ast-navbar-hover-color);
+  border-color: var(--ast-navbar-hover-color);
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
+}
+
+a.nav-link.pst-navbar-icon {
+  color: var(--ast-navbar-color);
+  font-weight: bold;
+}
+
+a.nav-link.pst-navbar-icon:hover {
+  color: var(--ast-navbar-hover-color);
+  border-color: var(--ast-navbar-hover-color);
+  filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
+  font-weight: bold;
+}
+
+a.nav-link.pst-navbar-icon:active {
+  color: var(--ast-navbar-active-color);
+  border-color: var(--ast-navbar-active-border-color);
+  font-weight: bold;
+}
+
 /* dropdown button after 5 sections */
 
 .dropdown-item:hover {
@@ -110,10 +91,56 @@ nav.bd-links li > a:hover {
   background-color: transparent;
 }
 
-.navbar button.navbar-toggler {
-  margin-right: 1em;
-  border-color: rgb(255, 255, 255);
-  color: rgb(255, 255, 255);
+/**
+* Switcher button
+*/
+button.btn.version-switcher__button {
+  background-color: transparent;
+  border-color: var(--ast-navbar-active-border-color);
+  color: var(--ast-navbar-color);
+  font-size: var(--ast-nav-link-font-size);
+  font-weight: bold;
+}
+
+button.btn.version-switcher__button:hover {
+  border-color: var(--ast-navbar-active-border-color);
+  color: var(--ast-navbar-hover-color);
+  font-weight: bold;
+}
+
+.version-switcher__menu a.list-group-item:hover {
+  background-color: transparent;
+  border-color: var(--ast-navbar-active-border-color);
+  color: var(--ast-navbar-hover-color);
+  font-size: var(--ast-nav-link-font-size);
+  font-weight: bold;
+}
+
+.version-switcher__menu a.list-group-item {
+  background-color: transparent;
+  border-color: var(--pst-color-border);
+  color: var(--ast-navbar-color);
+  font-size: var(--ast-nav-link-font-size);
+  font-weight: bold;
+}
+
+/**
+* _search.scss
+* Search bar
+*/
+
+.search-button-field {
+  border-color: var(--ast-navbar-active-border-color);
+  font-size: var(--ast-nav-link-font-size);
+  background-color: transparent;
+  color: var(--ast-navbar-color);
+}
+
+.search-button-field:hover {
+  border-color: var(--ast-navbar-active-border-color);
+  color: var(--ast-navbar-hover-color);
+  font-weight: bold;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 /*
@@ -184,35 +211,9 @@ a:hover {
   padding-top: 1rem;
   padding-right: 1rem;
 }
-.bd-header .navbar-nav li a.nav-link {
-  color: #ddd;
-}
-/* nav sections headings */
-
-.bd-header ul.navbar-nav > li.nav-item > .nav-link {
-  color: #ddd;
-}
-
-html .pst-navbar-icon {
-  color: #ddd;
-}
-
-nav.bd-links li > a {
-  text-decoration: none;
-}
-
-.bd-header .navbar-nav li a.nav-link:hover {
-  text-decoration: none;
-  font-weight: 600;
-}
 
 a {
   text-decoration: none;
-}
-
-nav.bd-links li > a {
-  color: var(--pst-color-link);
-  font-size: 0.98rem;
 }
 
 a:visited,
@@ -229,107 +230,8 @@ b,
 strong {
   font-weight: 900;
 }
-/*
-##################
-icon, button, logo
-##################
-*/
-
-button.btn.version-switcher__button {
-  border-color: var(--pst-color-border);
-  color: #ddd;
-}
-
-button.version-switcher__button {
-  color: #f8f9fa;
-}
-
-.search-button {
-  color: #ddd;
-}
-
-kbd {
-  background-color: #f8f9fa;
-}
-
-/*
-  #####################################
-  icon, button, logo  for small screen
-  #####################################
-  */
-@media screen and (max-width: 576px) {
-  html[data-theme="light"] .theme-switch-button span {
-    color: rgb(19, 18, 18) !important;
-  }
-  button.btn.version-switcher__button {
-    border-color: var(--pst-color-border);
-    color: var(--pst-color-text-base);
-    font-weight: 700;
-  }
-  button.btn.version-switcher__button {
-    border-color: var(--pst-color-border);
-    color: var(--pst-color-text-base);
-  }
-  button.version-switcher__button {
-    color: var(--pst-color-text-base);
-  }
-  .navbar-nav li a:focus,
-  .navbar-nav li a:hover,
-  .navbar-nav li.current > a {
-    color: var(--pst-color-text-base) !important;
-    font-weight: 700;
-  }
-
-  .navbar-nav li a:focus,
-  .navbar-nav li a:hover,
-  .navbar-nav li.current > a {
-    color: white !important;
-  }
-
-  .navbar-nav .dropdown .dropdown-menu {
-    min-width: 250px;
-  }
-  button,
-  input,
-  optgroup,
-  select,
-  textarea,
-  button:hover {
-    color: var(--pst-color-text-base);
-  }
-}
-
-.navbar-icon-links {
-  column-gap: 0.2rem;
-}
-
-.search-button-field {
-  color: white;
-  background-color: transparent;
-}
-
-.search-button-field:hover {
-  color: var(--pst-color-border);
-}
 
 /* make the github logo white */
-
-.version-switcher__menu a.list-group-item:hover {
-  background-color: #d09735 !important;
-  border-color: var(--pst-color-text-base) !important;
-  color: #000 !important;
-}
-
-.version-switcher__menu a.list-group-item {
-  background-color: #f8f9fa;
-  border-color: var(--pst-color-border);
-  color: #000;
-}
-
-.fa-wrench:before {
-  content: "\f0ad";
-  color: white;
-}
 
 html[data-theme="light"] #pst-back-to-top {
   background-color: var(--pst-color-link);
@@ -440,10 +342,6 @@ img.logo__image {
 Nav-bar entity right side.
 ##########################
 */
-
-#version_switcher_button {
-  background-color: var(--pst-color-background);
-}
 
 .list-group-item.active {
   z-index: 2;
