@@ -22,15 +22,6 @@ html[data-theme="light"] {
 
 /*sphinx design button*/
 
-.sd-d-grid .sd-btn-outline-secondary:hover {
-  border-color: var(--ast-border-color-secondary-hover);
-  color: var(--ast-sd-bg-secondary-hover);
-}
-.sd-sphinx-override .sd-btn-outline-secondary:active {
-  border-color: var(--ast-sd-border-secondary-active);
-  color: var(--ast-sd-bg-secondary-active);
-}
-
 .sd-btn-secondary {
   font-size: 14px;
   font-weight: 400;
@@ -40,16 +31,6 @@ html[data-theme="light"] {
   color: var(--sd-color-secondary-text);
   background-color: var(--sd-color-secondary);
   border-color: var(--sd-color-secondary);
-}
-
-.sd-btn-outline-secondary:hover {
-  background-color: var(--ast-sd-bg-secondary-hover);
-  border-color: var(--ast-border-color-secondary-hover);
-}
-
-.sd-btn-outline-secondary:focus {
-  background-color: var(--ast-sd-bg-secondary-active);
-  border-color: var(--ast-sd-border-secondary-active);
 }
 
 blockquote {
