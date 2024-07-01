@@ -26,19 +26,24 @@ nav.bd-links p.caption {
 nav.bd-links li > a {
   font-size: var(--ast-font-sidebar-header);
   color: var(--ast-sidebar-primary-text);
+  text-decoration: none;
 }
 
 nav.bd-links li > a:hover {
   color: var(--ast-sidebar-primary-text);
   background: var(--ast-sidebar-hover-background);
+  box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
+  border-radius: 4px;
   text-decoration: none;
 }
 
 nav.bd-links li > a.active,
 nav.bd-links li > a.current {
   color: var(--ast-color-text);
-  background: var(--ast-sidebar-hover-background);
-  text-decoration-thickness: 4px;
+  background: var(--ast-sidebar-active-background);
+  text-decoration: none;
+  box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
+  border-radius: 4px;
   font-weight: bold;
 }
 

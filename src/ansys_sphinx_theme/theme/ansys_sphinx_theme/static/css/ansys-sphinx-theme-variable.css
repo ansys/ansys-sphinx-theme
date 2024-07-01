@@ -89,6 +89,7 @@ html[data-theme="light"] {
 */
   --ast-sidebar-primary-text: var(--ast-color-text);
   --ast-sidebar-hover-background: #ececec;
+  --ast-sidebar-active-background: #d9d9d9;
 
   /**
 * depth colors
@@ -141,6 +142,9 @@ html[data-theme="dark"] {
   /**
 * main colors
 */
+  --ast-color-text: #ececec;
+  --ast-color-active-text: #d5d5d5;
+  --ast-color-hover-text: #d5d5d5;
   --pst-color-primary: #ececec;
   --pst-color-secondary: #353535;
   --pst-color-success: rgb(72, 135, 87);
@@ -167,10 +171,17 @@ html[data-theme="dark"] {
     --pst-color-background
   ); /* important tag from pydata-sphinx-theme */
   --ast-navbar-color: #d5d5d5;
-  --ast-navbar-hover-color: #ececec;
-  --ast-navbar-active-color: #ececec;
+  --ast-navbar-hover-color: var(--ast-color-hover-text);
+  --ast-navbar-active-color: var(--ast-color-active-text);
   --ast-navbar-active-border-color: #d5d5d5;
   --ast-nav-link-color: var(--ast-navbar-color);
+
+  /**
+* sidebar colors
+*/
+  --ast-sidebar-primary-text: var(--ast-color-text);
+  --ast-sidebar-hover-background: #3d3d3d;
+  --ast-sidebar-active-background: #2d2d2d;
 
   /**
 * layout
