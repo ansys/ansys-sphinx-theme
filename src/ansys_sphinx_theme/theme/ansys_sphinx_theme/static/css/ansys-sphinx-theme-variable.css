@@ -51,7 +51,7 @@
   --bs-navbar-color: var(--bs-ast-navbar-color) /**
 * table font sizes
 */
-  --pst-table-font-size: 16px;
+    --pst-table-font-size: 16px;
 }
 
 html[data-theme="light"] {
