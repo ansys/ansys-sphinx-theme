@@ -190,9 +190,10 @@ html[data-theme="dark"] {
 * layout
 */
 
-  --pst-color-link: #579ce5;
-  --pst-color-link-hover: #12b2e2;
-  --pst-color-link-visted: #c58af9;
+  --ast-color-link: #1e6ddc;
+  --ast-color-link-hover: #1856af;
+  --ast-color-link-active: #579ce5;
+  --ast-color-link-visited: #c58ac5;
   --pst-color-inline-code: #fff;
   --pst-color-target: rgb(71, 39, 0);
 
