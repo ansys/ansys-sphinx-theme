@@ -28,6 +28,7 @@ nav.bd-links li > a {
   color: var(--ast-sidebar-primary-text);
   text-decoration: none;
   line-height: var(--ast-global-line-height);
+  padding: 4px 24px;
 }
 
 nav.bd-links li > a:hover {
@@ -46,6 +47,13 @@ nav.bd-links li > a.current {
   box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
   border-radius: 4px;
   font-weight: bold;
+}
+
+/* sidebar primary with children */
+
+.bd-sidebar-primary li.has-children .caption,
+.bd-sidebar-primary li.has-children > .reference {
+  padding: 4px 32px;
 }
 /**
 * secondary sidebar
