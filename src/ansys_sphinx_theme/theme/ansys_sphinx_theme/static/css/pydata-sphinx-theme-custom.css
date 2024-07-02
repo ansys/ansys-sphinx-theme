@@ -6,15 +6,108 @@
 /*
 *
 * _secondary sidebar and primary sidebars
+* _sidebar-primary.scss
 *
 */
 .bd-sidebar-primary,
 .bd-sidebar-secondary {
   max-height: calc(100vh - var(--pst-header-height) - 1vh);
+  line-height: var(--ast-global-line-height);
 }
 
-.bd-toc {
-  padding-top: 5em;
+nav.bd-links p.bd-links__title,
+nav.bd-links p.caption {
+  font-size: var(--ast-font-sidebar-header);
+  color: var(--ast-sidebar-primary-text);
+}
+
+nav.bd-links li > a {
+  font-size: var(--ast-font-sidebar-header);
+  color: var(--ast-sidebar-primary-text);
+  text-decoration: none;
+  line-height: var(--ast-global-line-height);
+  padding: 4px 24px;
+}
+
+nav.bd-links li > a:hover {
+  color: var(--ast-sidebar-primary-text);
+  background: var(--ast-sidebar-hover-background);
+  box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+nav.bd-links li > a.active,
+nav.bd-links li > a.current {
+  color: var(--ast-color-text);
+  background: var(--ast-sidebar-active-background);
+  text-decoration: none;
+  box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+/* sidebar primary with children */
+
+.bd-sidebar-primary li.has-children .caption,
+.bd-sidebar-primary li.has-children > .reference {
+  padding: 4px 32px;
+}
+
+nav.bd-links .current > a {
+  color: var(--ast-color-text);
+  background: var(--ast-sidebar-active-background);
+  text-decoration: none;
+  box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
+  border-radius: 4px;
+  font-weight: bold;
+}
+/**
+* secondary sidebar
+* _toc-inpage.scss
+*/
+.toc-entry a.nav-link {
+  color: var(--ast-sidebar-primary-text);
+  line-height: var(--ast-global-line-height);
+}
+
+.toc-entry a.nav-link.active,
+.toc-entry a.nav-link.current {
+  color: var(--ast-color-link);
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.toc-entry a.nav-link.active:hover,
+.toc-entry a.nav-link.current:hover {
+  color: var(--ast-color-link-hover);
+  text-decoration: none;
+  box-shadow: none;
+  font-weight: bold;
+}
+
+.toc-h2 {
+  font-size: 14px;
+  padding: 0.05em;
+}
+
+.toc-h3 {
+  font-size: 14px;
+}
+
+.toc-h4 {
+  font-size: 14px;
+}
+
+.toc-entry a.nav-link:hover {
+  color: var(--ast-color-link-hover);
+  text-decoration: none;
+}
+
+/* _base.scss related changes */
+
+.editthispage a {
+  color: var(--pst-color-text-base);
 }
 
 /**
@@ -46,6 +139,7 @@
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:active {
   color: var(--ast-navbar-active-color);
   border-color: var(--ast-navbar-active-border-color);
+  border-width: 2px;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.12));
   font-weight: bold;
 }
@@ -54,6 +148,11 @@
 ::after {
   color: var(--ast-navbar-active-color);
   border-bottom: 3px solid var(--ast-navbar-active-border-color);
+}
+
+.bd-header ul.navbar-nav > li.nav-item > .nav-link:focus {
+  color: var(--ast-navbar-color);
+  box-shadow: var(--ast-ring-shadow-focused);
 }
 
 html .pst-navbar-icon {
@@ -196,29 +295,10 @@ a.headerlink {
   justify-content: end;
 }
 
-a:active,
-a:visited,
-a:visited:hover,
-a:active:hover,
-a:hover {
-  text-decoration: underline;
-  color: var(--pst-color-link);
-  font-weight: 500;
-}
-
 .bd-main .bd-content .bd-article-container .bd-article {
   padding-left: 1rem;
   padding-top: 1rem;
   padding-right: 1rem;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:visited,
-a:visited:hover {
-  color: var(--pst-color-link-visted);
 }
 
 /*#############################
@@ -273,48 +353,6 @@ span.highlighted {
 dl.class dl.py {
   margin-top: 2.5em;
   margin-bottom: 2.5em;
-}
-
-/*
-#################################
-Right side toctree color and font
-#################################
-*/
-.toc-entry a.nav-link {
-  padding: 0.125rem 1.5rem;
-  color: var(--pst-color-link);
-}
-
-.toc-entry a.nav-link.active {
-  font-weight: bold;
-  color: var(--pst-color-text-base);
-  background-color: transparent;
-  border-left: 2px solid var(--pst-color-text-muted);
-}
-
-.toc-h2 {
-  font-size: 0.98rem;
-  padding: 0.05em;
-}
-
-.toc-h3 {
-  font-size: 0.96rem;
-}
-
-.toc-h4 {
-  font-size: 0.9rem;
-}
-
-.toc-entry a.nav-link:hover {
-  color: var(--pst-color-link);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-/* _base.scss related changes */
-
-.editthispage a {
-  color: var(--pst-color-text-base);
 }
 
 /*
@@ -392,4 +430,48 @@ div#searchbox p.highlight-link a {
 
 .header-article__inner {
   padding: 0 1rem;
+}
+
+/**
+*
+* _links.scss
+*/
+
+/**
+* links on paragraphs
+*/
+a {
+  color: var(--ast-color-link);
+  text-decoration: none;
+}
+
+a:active {
+  color: var(--ast-color-link-active);
+}
+
+a:hover,
+a:active:hover {
+  color: var(--ast-color-link-hover);
+  text-decoration: underline;
+}
+
+a:visited:hover {
+  color: var(--ast-color-link-visited-hover);
+}
+
+a:visited {
+  color: var(--ast-color-link-visited);
+}
+
+a:focus {
+  color: var(--ast-color-link);
+  box-shadow: var(--ast-ring-shadow-focused);
+}
+
+a > code {
+  color: var(--ast-color-inline-code);
+}
+
+code.literal {
+  color: var(--ast-color-inline-code);
 }
