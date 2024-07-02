@@ -73,11 +73,16 @@ nav.bd-links .current > a {
 
 .toc-entry a.nav-link.active,
 .toc-entry a.nav-link.current {
-  color: var(--ast-color-text);
-  background: var(--ast-sidebar-active-background);
+  color: var(--ast-color-link);
   text-decoration: none;
-  box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
-  border-radius: 4px;
+  box-shadow: none;
+}
+
+.toc-entry a.nav-link.active:hover,
+.toc-entry a.nav-link.current:hover {
+  color: var(--ast-color-link-hover);
+  text-decoration: none;
+  box-shadow: none;
   font-weight: bold;
 }
 
@@ -95,10 +100,7 @@ nav.bd-links .current > a {
 }
 
 .toc-entry a.nav-link:hover {
-  color: var(--ast-sidebar-primary-text);
-  background: var(--ast-sidebar-hover-background);
-  box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
-  border-radius: 4px;
+  color: var(--ast-color-link-hover);
   text-decoration: none;
 }
 
