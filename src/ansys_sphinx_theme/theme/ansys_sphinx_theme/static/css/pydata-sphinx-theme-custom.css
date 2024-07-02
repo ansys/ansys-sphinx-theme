@@ -12,11 +12,9 @@
 .bd-sidebar-primary,
 .bd-sidebar-secondary {
   max-height: calc(100vh - var(--pst-header-height) - 1vh);
+  line-height: var(--ast-global-line-height);
 }
 
-.bd-toc {
-  padding-top: 5em;
-}
 nav.bd-links p.bd-links__title,
 nav.bd-links p.caption {
   font-size: var(--ast-font-sidebar-header);
@@ -54,6 +52,15 @@ nav.bd-links li > a.current {
 .bd-sidebar-primary li.has-children .caption,
 .bd-sidebar-primary li.has-children > .reference {
   padding: 4px 32px;
+}
+
+nav.bd-links .current > a {
+  color: var(--ast-color-text);
+  background: var(--ast-sidebar-active-background);
+  text-decoration: none;
+  box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
+  border-radius: 4px;
+  font-weight: bold;
 }
 /**
 * secondary sidebar
@@ -460,5 +467,9 @@ a:focus {
 }
 
 a > code {
+  color: var(--ast-color-inline-code);
+}
+
+code.literal {
   color: var(--ast-color-inline-code);
 }
