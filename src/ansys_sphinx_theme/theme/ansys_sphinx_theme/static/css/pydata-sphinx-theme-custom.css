@@ -427,12 +427,22 @@ a:active {
 }
 
 a:hover,
-a:active:hover,
-a:visited:hover {
+a:active:hover {
   color: var(--ast-color-link-hover);
   text-decoration: underline;
 }
 
+a:visited:hover {
+  color: var(--ast-color-link-visited-hover);
+}
+
 a:visited {
   color: var(--ast-color-link-visited);
+}
+
+a:focus {
+  color: var(--ast-color-link);
+  box-shadow:
+    0px 0px 0px 2px #ffffff,
+    0px 0px 0px 4px #1a78c2;
 }

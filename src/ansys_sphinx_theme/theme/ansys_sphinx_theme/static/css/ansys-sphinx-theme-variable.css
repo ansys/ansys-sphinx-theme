@@ -116,7 +116,8 @@ html[data-theme="light"] {
   --ast-color-link: #1e6ddc;
   --ast-color-link-hover: #1856af;
   --ast-color-link-active: #104188;
-  --ast-color-link-visited: #7b1fa2;
+  --ast-color-link-visited: #9a33cb;
+  --ast-color-link-visited-hover: #7f29a2;
   --ast-color-inline-code: var(
     --pst-color-text-muted
   ); /* inline code color for docutils (_base.scss)*/
@@ -194,6 +195,7 @@ html[data-theme="dark"] {
   --ast-color-link-hover: #1856af;
   --ast-color-link-active: #579ce5;
   --ast-color-link-visited: #c58ac5;
+  --ast-color-link-visited-hover: #a96ba9;
   --pst-color-inline-code: #fff;
   --pst-color-target: rgb(71, 39, 0);
 
