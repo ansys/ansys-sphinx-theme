@@ -82,7 +82,8 @@ html[data-theme="light"] {
   --ast-navbar-color: #686868;
   --ast-navbar-hover-color: var(--ast-color-hover-text);
   --ast-navbar-active-color: var(--ast-color-active-text);
-  --ast-navbar-active-border-color: #686868;
+  --ast-navbar-active-border-color: #000000;
+  --ast-ring-shadow-focused: 0px 0px 0px 2px #ffffff, 0px 0px 0px 4px #1a78c2;
 
   /**
 * sidebar colors
@@ -156,7 +157,7 @@ html[data-theme="dark"] {
   --pst-color-text-muted: rgb(192, 192, 192);
   --pst-color-border: rgb(192, 192, 192);
   --pst-color-shadow: rgb(104, 102, 102);
-  --pst-color-background: rgb(18, 18, 18);
+  --pst-color-background: #1a1a1a;
   --pst-color-surface: rgb(41, 41, 41);
   --pst-color-on-surface: rgb(55, 55, 55);
   --pst-color-info: var(--pst-color-secondary);
@@ -174,11 +175,12 @@ html[data-theme="dark"] {
   --pst-color-on-background: var(
     --pst-color-background
   ); /* important tag from pydata-sphinx-theme */
-  --ast-navbar-color: #d5d5d5;
+  --ast-navbar-color: #8e8e8e;
   --ast-navbar-hover-color: var(--ast-color-hover-text);
   --ast-navbar-active-color: var(--ast-color-active-text);
-  --ast-navbar-active-border-color: #d5d5d5;
+  --ast-navbar-active-border-color: #ffffff;
   --ast-nav-link-color: var(--ast-navbar-color);
+  --ast-ring-shadow-focused: 0px 0px 0px 2px #282828, 0px 0px 0px 4px #4dabf5;
 
   /**
 * sidebar colors
@@ -186,6 +188,9 @@ html[data-theme="dark"] {
   --ast-sidebar-primary-text: var(--ast-color-text);
   --ast-sidebar-hover-background: #3d3d3d;
   --ast-sidebar-active-background: #2d2d2d;
+  --ast-color-inline-code: var(
+    --pst-color-text-muted
+  ); /* inline code color for docutils (_base.scss)*/
 
   /**
 * layout
@@ -196,7 +201,6 @@ html[data-theme="dark"] {
   --ast-color-link-active: #579ce5;
   --ast-color-link-visited: #c58ac5;
   --ast-color-link-visited-hover: #a96ba9;
-  --pst-color-inline-code: #fff;
   --pst-color-target: rgb(71, 39, 0);
 
   /**

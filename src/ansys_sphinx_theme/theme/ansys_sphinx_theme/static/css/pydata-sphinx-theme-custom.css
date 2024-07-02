@@ -130,6 +130,7 @@ nav.bd-links li > a.current {
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:active {
   color: var(--ast-navbar-active-color);
   border-color: var(--ast-navbar-active-border-color);
+  border-width: 2px;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.12));
   font-weight: bold;
 }
@@ -138,6 +139,11 @@ nav.bd-links li > a.current {
 ::after {
   color: var(--ast-navbar-active-color);
   border-bottom: 3px solid var(--ast-navbar-active-border-color);
+}
+
+.bd-header ul.navbar-nav > li.nav-item > .nav-link:focus {
+  color: var(--ast-navbar-color);
+  box-shadow: var(--ast-ring-shadow-focused);
 }
 
 html .pst-navbar-icon {
@@ -450,7 +456,9 @@ a:visited {
 
 a:focus {
   color: var(--ast-color-link);
-  box-shadow:
-    0px 0px 0px 2px #ffffff,
-    0px 0px 0px 4px #1a78c2;
+  box-shadow: var(--ast-ring-shadow-focused);
+}
+
+a > code {
+  color: var(--ast-color-inline-code);
 }
