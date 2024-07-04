@@ -36,10 +36,6 @@ html[data-theme="light"] {
 blockquote {
   background-color: var(--pst-color-background);
 }
-.sd-sphinx-override,
-.sd-sphinx-override * {
-  flex: auto;
-}
 
 /* Sphinx-design tab */
 
@@ -86,7 +82,7 @@ blockquote {
   }
 }
 
-/* Sphinx-design card */
+/* Sphinx-design card
 
 /* Common styles for all screen sizes */
 .sd-card .sd-card-text {
@@ -94,7 +90,7 @@ blockquote {
   background-color: var(--pst-color-background) !important;
 }
 
-.bd-content .sd-card .sd-card-header {
+/* .bd-content .sd-card-header {
   border: none;
   background-color: transparent;
   color: var(--pst-color-text-base) !important;
@@ -102,7 +98,7 @@ blockquote {
   font-weight: bold;
   font-family: var(--pst-font-family-base);
   padding: 0.5rem 0rem 0.5rem 0rem;
-}
+}*/
 
 .sd-card .sd-card-footer .sd-card-text {
   max-width: 220px;
@@ -130,11 +126,11 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
 }
 
 /* Common styles for all screen sizes */
-.sd-card {
+/* .sd-card {
   border-radius: 0;
   padding: 10px 10px 10px 10px;
   font-family: var(--pst-font-family-base) !important;
-}
+} */
 
 /* Media query for medium-sized screens */
 @media screen and (max-width: 768px) {
@@ -156,15 +152,22 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
     box-sizing: content-box !important;
   }
 }
+*/
 
 /*
   Sphinx-design dropdown
   */
+  details.sd-dropdown {
+  max-width: 100%;
+  width: 500px;
+}
 
-.bd-content details.sd-dropdown .sd-summary-title {
-  border: 1px solid var(--pst-color-text-base) !important;
-  color: var(--pst-color-text-base) !important;
-  font-family: var(monospace) !important;
+.bd-content.sd-dropdown .sd-summary-title {
+  font-family: "open sans", sans-serif;
+  font-size: 12px;
+  background: ffffff;
+  border: 1px solid #656565;
+  border-radius: 4px;
   font-size: medium;
   text-align: left;
   padding-left: 1rem;
