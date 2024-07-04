@@ -46,24 +46,29 @@
   --pst-font-size-h4: 20px;
   --pst-font-size-h5: 14px;
   --pst-font-size-h6: 11px;
-  --pst-global-line-height: 24px;
+  --ast-global-line-height: 24px;
   --bs-nav-link-font-size: 14px;
-  --bs-navbar-color: var(--bs-ast-navbar-color) /**
+  --bs-navbar-color: var(--bs-ast-navbar-color);
+  --ast-font-sidebar-header: var(--pst-font-size-h5);
+  /**
 * table font sizes
 */
-    --pst-table-font-size: 16px;
+  --pst-table-font-size: 16px;
 }
 
 html[data-theme="light"] {
   /**
 * main colors
 */
+  --ast-color-text: #353535;
+  --ast-color-active-text: #353535;
+  --ast-color-hover-text: #353535;
   --pst-color-background: #f7f7f7;
   --pst-color-primary: #353535;
   --pst-color-secondary: #f2f2f2;
   --pst-color-success: rgb(40, 167, 69);
   --pst-color-text-base: rgb(0, 0, 0);
-  --pst-color-text-muted: rgb(26, 24, 24);
+  --pst-color-text-muted: #353535;
   --pst-color-border: #a19d9d;
   --pst-color-shadow: rgb(216, 216, 216);
   --pst-color-info: var(--pst-color-link);
@@ -71,14 +76,21 @@ html[data-theme="light"] {
   /**
 * Navigation colors
 */
-
   --pst-color-on-background: var(
     --pst-color-background
   ); /* important tag from pydata-sphinx-theme */
   --ast-navbar-color: #686868;
-  --ast-navbar-hover-color: #353535;
-  --ast-navbar-active-color: #353535;
-  --ast-navbar-active-border-color: #686868;
+  --ast-navbar-hover-color: var(--ast-color-hover-text);
+  --ast-navbar-active-color: var(--ast-color-active-text);
+  --ast-navbar-active-border-color: #000000;
+  --ast-ring-shadow-focused: 0px 0px 0px 2px #ffffff, 0px 0px 0px 4px #1a78c2;
+
+  /**
+* sidebar colors
+*/
+  --ast-sidebar-primary-text: var(--ast-color-text);
+  --ast-sidebar-hover-background: #ececec;
+  --ast-sidebar-active-background: #d9d9d9;
 
   /**
 * depth colors
@@ -90,11 +102,11 @@ html[data-theme="light"] {
 * extensions
 */
   --pst-color-table-background: #ffffff;
-  --pst-color-enabled-table-text: #353535;
+  --pst-color-enabled-table-text: var(--ast-color-text);
   --pst-color-table-row-hover-bg: #ececec;
   --pst-color-table-active-bg: #e9f4fe;
   --pst-color-table-header-text: #686868;
-  --pst-color-table-cell-text: #353535;
+  --pst-color-table-cell-text: var(--ast-color-text);
 
   --pst-color-panel-background: var(--pst-color-on-background);
 
@@ -102,10 +114,14 @@ html[data-theme="light"] {
 * layout
 */
 
-  --pst-color-link: #1e6ddc;
-  --pst-color-link-hover: #32cfea;
-  --pst-color-link-visted: #9428f2;
-  --pst-color-inline-code: #000; /* inline code color for docutils (_base.scss)*/
+  --ast-color-link: #1e6ddc;
+  --ast-color-link-hover: #1856af;
+  --ast-color-link-active: #104188;
+  --ast-color-link-visited: #9a33cb;
+  --ast-color-link-visited-hover: #7f29a2;
+  --ast-color-inline-code: var(
+    --pst-color-text-muted
+  ); /* inline code color for docutils (_base.scss)*/
   --pst-color-target: rgb(255, 255, 255);
 
   /**
@@ -131,6 +147,9 @@ html[data-theme="dark"] {
   /**
 * main colors
 */
+  --ast-color-text: #ececec;
+  --ast-color-active-text: #d5d5d5;
+  --ast-color-hover-text: #d5d5d5;
   --pst-color-primary: #ececec;
   --pst-color-secondary: #353535;
   --pst-color-success: rgb(72, 135, 87);
@@ -138,7 +157,7 @@ html[data-theme="dark"] {
   --pst-color-text-muted: rgb(192, 192, 192);
   --pst-color-border: rgb(192, 192, 192);
   --pst-color-shadow: rgb(104, 102, 102);
-  --pst-color-background: rgb(18, 18, 18);
+  --pst-color-background: #1a1a1a;
   --pst-color-surface: rgb(41, 41, 41);
   --pst-color-on-surface: rgb(55, 55, 55);
   --pst-color-info: var(--pst-color-secondary);
@@ -156,20 +175,32 @@ html[data-theme="dark"] {
   --pst-color-on-background: var(
     --pst-color-background
   ); /* important tag from pydata-sphinx-theme */
-  --ast-navbar-color: #d5d5d5;
-  --ast-navbar-hover-color: #ececec;
-  --ast-navbar-active-color: #ececec;
-  --ast-navbar-active-border-color: #d5d5d5;
+  --ast-navbar-color: #8e8e8e;
+  --ast-navbar-hover-color: var(--ast-color-hover-text);
+  --ast-navbar-active-color: var(--ast-color-active-text);
+  --ast-navbar-active-border-color: #ffffff;
   --ast-nav-link-color: var(--ast-navbar-color);
+  --ast-ring-shadow-focused: 0px 0px 0px 2px #282828, 0px 0px 0px 4px #4dabf5;
+
+  /**
+* sidebar colors
+*/
+  --ast-sidebar-primary-text: var(--ast-color-text);
+  --ast-sidebar-hover-background: #3d3d3d;
+  --ast-sidebar-active-background: #2d2d2d;
+  --ast-color-inline-code: var(
+    --pst-color-text-muted
+  ); /* inline code color for docutils (_base.scss)*/
 
   /**
 * layout
 */
 
-  --pst-color-link: #579ce5;
-  --pst-color-link-hover: #12b2e2;
-  --pst-color-link-visted: #c58af9;
-  --pst-color-inline-code: #fff;
+  --ast-color-link: #1e6ddc;
+  --ast-color-link-hover: #1856af;
+  --ast-color-link-active: #579ce5;
+  --ast-color-link-visited: #c58ac5;
+  --ast-color-link-visited-hover: #a96ba9;
   --pst-color-target: rgb(71, 39, 0);
 
   /**
@@ -204,7 +235,7 @@ html[data-theme="dark"] {
 
 body {
   font-family: "Open Sans", sans-serif;
-  line-height: var(--pst-global-line-height);
+  line-height: var(--ast-global-line-height);
   font-size: 14px;
 }
 
