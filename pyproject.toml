@@ -41,7 +41,7 @@ doc = [
     "pandas==2.2.2",
     "Pillow>=9.0",
     "PyGitHub==2.3.0",
-    "pyvista[jupyter]==0.43.10",
+    "pyvista[jupyter]==0.44.0",
     "requests==2.32.3",
     "Sphinx==7.3.7",
     "sphinx-autoapi==3.1.2",
