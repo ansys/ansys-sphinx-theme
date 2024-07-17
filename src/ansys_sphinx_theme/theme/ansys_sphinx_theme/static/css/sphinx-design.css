@@ -170,7 +170,7 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
   width: 500px;
 }
 
-.bd-content.sd-dropdown .sd-summary-title {
+details.sd-dropdown summary.sd-summary-title {
   font-family: "open sans", sans-serif;
   font-size: 12px;
   background: ffffff;
@@ -188,4 +188,32 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
 .bd-content .sd-tab-set .sd-tab-content,
 .bd-content .sd-tab-set > label {
   background-color: transparent;
+}
+
+.bd-content
+  details.sd-dropdown
+  .sd-summary-title:active
+  + div.sd-summary-content:active {
+  background-color: var(--ast-color-enable-card-background) !important;
+  border-color: var(--ast-color-enable-border) !important;
+}
+
+.bd-content
+  details.sd-dropdown
+  .sd-summary-title:hover
+  + div.sd-summary-content:hover {
+  background-color: var(--ast-color-hover-card-background) !important;
+  border-color: var(--ast-color-hover-border) !important;
+}
+
+details.sd-dropdown summary.sd-card-header + div.sd-summary-content,
+details.sd-dropdown
+  summary.sd-summary-title:focus
+  + div.sd-summary-content:focus {
+  border-left: none !important;
+}
+
+details.sd-dropdown summary.sd-summary-title:focus {
+  background-color: #ffffff;
+  border-color: #686868;
 }
