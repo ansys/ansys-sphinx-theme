@@ -64,7 +64,7 @@ an easy way to preview the theme itself.
 On the `Issues page <https://github.com/ansys/ansys-sphinx-theme/issues>`_
 for this repository, you can create issues to submit questions, report bugs,
 and request new features. To reach the PyAnsys support team, email
-`pyansys.support@ansys.com <pyansys.support@ansys.com>`_.
+`pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
 
 Getting started
 ~~~~~~~~~~~~~~~
