@@ -136,6 +136,10 @@ html[data-theme="light"] {
 * sphinx design primary color
 */
   --sd-color-primary: var(--pst-color-text-base);
+  --ast-color-enable-card-background: #ffffff;
+  --ast-color-enable-border: #d9d9d9;
+  --ast-color-hover-card-background: #ececec;
+  --ast-color-hover-border: #8e8e8e;
 
   /**
 * search hide match
