@@ -171,8 +171,8 @@ details.sd-dropdown:not([open])>.sd-card-header {
 
 details.sd-dropdown {
   color: #686868;
-  max-width: 100%;
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
 }
 
 details.sd-dropdown summary.sd-summary-title {
@@ -181,8 +181,13 @@ details.sd-dropdown summary.sd-summary-title {
   background: #ffffff !important;
   border: 1px solid #656565 !important;
   border-radius: 4px !important;
-  padding: 8px 16px !important;
+  padding: 8px 12px !important;
   text-align: left !important;
+}
+
+details.sd-dropdown summary.sd-summary-title:hover {
+  background-color: var(--ast-color-hover-card-background) !important;
+  border-color: var(--ast-color-enable-border) !important;
 }
 
 details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
