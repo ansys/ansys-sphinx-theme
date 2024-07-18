@@ -48,7 +48,7 @@ blockquote {
 /* Sphinx-design tab */
 
 /* Common styles for all screen sizes */
-.sd-tab-set > input:not(.focus-visible) + label {
+/* .sd-tab-set > input:not(.focus-visible) + label {
   outline: none;
   font-size: large;
   -webkit-tap-highlight-color: var(--pst-color-background) !important;
@@ -67,14 +67,14 @@ blockquote {
 
 .sd-tab-content {
   font-family: var(--pst-font-family-base);
-}
+} */
 
-.bd-content .sd-tab-set > input:checked + label,
+/* .bd-content .sd-tab-set > input:checked + label,
 .bd-content .sd-tab-set > input:not(:checked) + label:hover {
   color: var(--pst-color-text-base);
   border-color: var(--pst-color-text-base);
   background-color: transparent;
-}
+} */
 
 /* Media query for medium-sized screens */
 @media screen and (max-width: 768px) {
@@ -219,4 +219,45 @@ details.sd-dropdown
   border-radius: 4px;
   border-color: #686868 !important;
   border-left: none !important;
+}
+
+/**
+  * Sphinx-design tab
+  */
+
+.bd-content .sd-tab-set > input:checked + label {
+  background-color: transparent;
+  font-family: "open sans", sans-serif;
+  padding: 12px 0px;
+  border-color: transparent transparent #000000 transparent;
+  border-width: 0px 0px 2px 0px;
+  border-style: none none solid none;
+  color: #353535;
+  font-size: 14px;
+}
+
+.bd-content .sd-tab-set > input:not(:checked, :focus-visible) + label {
+  background-color: #f5f5f5;
+  color: #353535;
+  border: none;
+  border-color: transparent;
+  border-width: 0px;
+}
+
+.bd-content .sd-tab-set > input:not(:checked, :focus-visible) + label:hover {
+  background-color: #f5f5f5;
+  color: #353535;
+  border-color: transparent transparent #8e8e8e transparent;
+  border-width: 0px 0px 2px 0px;
+  border-style: none none solid none;
+}
+.bd-content .sd-tab-set .sd-tab-content {
+  border: none;
+}
+
+.bd-content .sd-tab-set > input:not(:checked, :focus-visible) + label {
+  background-color: #f5f5f5;
+  color: #353535;
+  border-color: #8e8e8e;
+  text-decoration: none;
 }
