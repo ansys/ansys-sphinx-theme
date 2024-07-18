@@ -177,13 +177,12 @@ details.sd-dropdown {
 
 details.sd-dropdown summary.sd-summary-title {
   font-family: "open sans", sans-serif;
-  font-size: 12px !important;
+  font-size: 14px !important;
   background: #ffffff !important;
   border: 1px solid #656565 !important;
   border-radius: 4px !important;
   padding: 8px 16px !important;
   text-align: left !important;
-  border-left: none !important;
 }
 
 details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
