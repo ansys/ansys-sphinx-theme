@@ -95,7 +95,6 @@ blockquote {
 /* Common styles for all screen sizes */
 .sd-card .sd-card-text {
   font-family: var(--pst-font-family-base) !important;
-  background-color: var(--pst-color-background) !important;
 }
 
 /* .bd-content .sd-card-header {
@@ -166,10 +165,11 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
   Sphinx-design dropdown
   */
 
+details.sd-dropdown:not([open])>.sd-card-header {
+  border-radius: 4px;
+}
+
 details.sd-dropdown {
-  font-family: "Source Sans Pro", sans-serif !important;
-  font-size: 14px !important;
-  padding: 8px 12px;
   color: #686868;
   max-width: 100%;
   width: 500px;
@@ -177,22 +177,18 @@ details.sd-dropdown {
 
 details.sd-dropdown summary.sd-summary-title {
   font-family: "open sans", sans-serif;
-  font-size: 12px;
-  background: ffffff;
-  border: 1px solid #656565;
-  border-radius: 4px;
-  font-size: medium;
-  text-align: left;
-  padding-left: 1rem;
+  font-size: 12px !important;
+  background: #ffffff !important;
+  border: 1px solid #656565 !important;
+  border-radius: 4px !important;
+  padding: 8px 16px !important;
+  text-align: left !important;
+  border-left: none !important;
 }
 
 details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
-  background-color: transparent;
-}
-
-.bd-content .sd-tab-set .sd-tab-content,
-.bd-content .sd-tab-set > label {
-  background-color: transparent;
+  background-color: #ffffff;
+  border-left: none !important;
 }
 
 .bd-content
@@ -209,16 +205,14 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
   + div.sd-summary-content:hover {
   background-color: var(--ast-color-hover-card-background) !important;
   border-color: var(--ast-color-hover-border) !important;
-}
-
-details.sd-dropdown summary.sd-card-header + div.sd-summary-content,
-details.sd-dropdown
-  summary.sd-summary-title:focus
-  + div.sd-summary-content:focus {
   border-left: none !important;
 }
 
-details.sd-dropdown summary.sd-summary-title:focus {
-  background-color: #ffffff;
-  border-color: #686868;
+details.sd-dropdown
+  summary.sd-summary-title:focus
+  + div.sd-summary-content:focus {
+  background-color: #ffffff !important;
+  border-radius: 4px;
+  border-color: #686868 !important;
+  border-left: none !important;
 }
