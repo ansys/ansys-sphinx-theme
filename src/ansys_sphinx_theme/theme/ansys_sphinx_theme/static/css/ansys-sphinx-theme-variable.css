@@ -162,6 +162,7 @@ html[data-theme="dark"] {
   --pst-color-surface: rgb(41, 41, 41);
   --pst-color-on-surface: rgb(55, 55, 55);
   --pst-color-info: var(--pst-color-secondary);
+  --pst-color-link-hover: #b3b3b3;
 
   /**
 * extensions
