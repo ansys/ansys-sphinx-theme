@@ -311,18 +311,16 @@ strong {
   font-weight: 900;
 }
 
-/* make the github logo white */
-
-html[data-theme="light"] #pst-back-to-top {
-  background-color: var(--pst-color-link);
-}
-
 /* _code.scss related changes */
 .docutils {
   font-family: var(--pst-font-family-monospace);
   font-weight: 500;
 }
 
+#pst-back-to-top {
+  background: var(--ast-color-link);
+  color: var(--ast-color-text);
+}
 /* _api.scss related changes */
 
 .sig-prename.descclassname {
