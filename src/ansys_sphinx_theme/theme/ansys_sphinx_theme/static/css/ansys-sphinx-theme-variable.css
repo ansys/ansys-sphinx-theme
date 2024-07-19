@@ -72,6 +72,7 @@ html[data-theme="light"] {
   --pst-color-border: #a19d9d;
   --pst-color-shadow: rgb(216, 216, 216);
   --pst-color-info: var(--pst-color-link);
+  --pst-color-link-hover: #686868;
 
   /**
 * Navigation colors
