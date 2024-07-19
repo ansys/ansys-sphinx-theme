@@ -228,7 +228,7 @@ details.sd-dropdown
 .bd-content .sd-tab-set > input:checked + label {
   background-color: transparent;
   font-family: "open sans", sans-serif;
-  padding: 12px 15px 12px 0px;
+  padding: 12px 7.5px 12px 7.5px;
   border-color: transparent transparent #000000 transparent;
   border-width: 0px 0px 2px 0px;
   border-style: none none solid none;
@@ -244,7 +244,9 @@ details.sd-dropdown
   border-width: 0px;
   text-decoration-line: none;
   font-weight: normal;
-  padding: 12px 15px 12px 0px;
+  padding: 12px 7.5px 12px 7.5px;
+  font-size: 14px;
+  font-family: "open sans", sans-serif;
 }
 
 .bd-content .sd-tab-set > input:not(:checked, :focus-visible) + label:hover {
@@ -254,7 +256,9 @@ details.sd-dropdown
   border-width: 0px 0px 2px 0px;
   border-style: none none solid none;
   text-decoration: none;
-  padding: 12px 15px 12px 0px;
+  padding: 12px 7.5px 12px 7.5px;
+  font-size: 14px;
+  font-family: "open sans", sans-serif;
 }
 .bd-content .sd-tab-set .sd-tab-content {
   border: none;
