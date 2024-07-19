@@ -54,6 +54,16 @@
 * table font sizes
 */
   --pst-table-font-size: 16px;
+
+  /**
+sphinx design font sizes
+*/
+
+  --ast-sphinx-design-font-size: 14px;
+  --ast-sphinx-design-font-family: "Open Sans", sans-serif;
+  --ast-sphinx-design-border-radius: 4px;
+
+  /**
 }
 
 html[data-theme="light"] {
@@ -141,6 +151,8 @@ html[data-theme="light"] {
   --ast-color-hover-card-background: #ececec;
   --ast-color-hover-border: #8e8e8e;
 
+  --ast-color-sphinx-design-primary: #353535;
+  --ast-color-sphinx-design-background: #ffffff;
   /**
 * search hide match
 */
