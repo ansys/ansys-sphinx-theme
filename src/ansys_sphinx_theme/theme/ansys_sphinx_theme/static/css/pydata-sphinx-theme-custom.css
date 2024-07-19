@@ -145,7 +145,7 @@ nav.bd-links .current > a {
 }
 
 .bd-header ul.navbar-nav > li.nav-item.current > .nav-link::before,
-::after {
+.bd-header ul.navbar-nav > li.nav-item.current > .nav-link::after {
   color: var(--ast-navbar-active-color);
   border-bottom: 3px solid var(--ast-navbar-active-border-color);
 }

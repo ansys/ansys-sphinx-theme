@@ -62,8 +62,6 @@ sphinx design font sizes
   --ast-sphinx-design-font-size: 14px;
   --ast-sphinx-design-font-family: "Open Sans", sans-serif;
   --ast-sphinx-design-border-radius: 4px;
-
-  /**
 }
 
 html[data-theme="light"] {

@@ -134,32 +134,35 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
   Sphinx-design dropdown
   */
 
-details.sd-dropdown:not([open])>.sd-card-header {
+.bd-content details.sd-dropdown:not([open])>.sd-card-header {
   border-radius: var(--ast-sphinx-design-border-radius);
 }
 
-details.sd-dropdown {
+.bd-content details.sd-dropdown {
   color: #686868;
   max-width: 500px;
   width: 100%;
 }
 
-details.sd-dropdown summary.sd-summary-title {
+.bd-content details.sd-dropdown summary.sd-summary-title {
   font-family: var(--ast-sphinx-design-font-family);
-  font-size: var(--ast-sphinx-design-font-size) !important;
+  font-size: var(--ast-sphinx-design-font-size);
   background: var(--ast-color-sphinx-design-background) !important;
   border: 1px solid #656565 !important;
-  border-radius: var(--ast-sphinx-design-border-radius) !important;
-  padding: 8px 12px !important;
-  text-align: left !important;
+  border-radius: var(--ast-sphinx-design-border-radius);
+  padding: 8px 12px;
+  text-align: left;
 }
 
-details.sd-dropdown summary.sd-summary-title:hover {
+.bd-content details.sd-dropdown summary.sd-summary-title:hover {
   background-color: var(--ast-color-hover-card-background) !important;
-  border-color: var(--ast-color-enable-border) !important;
+  border-color: var(--ast-color-enable-border);
 }
 
-details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
+.bd-content
+  details.sd-dropdown
+  summary.sd-card-header
+  + div.sd-summary-content {
   background-color: var(--ast-color-sphinx-design-background);
   border-left: none !important;
 }
@@ -168,26 +171,27 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
   details.sd-dropdown
   .sd-summary-title:active
   + div.sd-summary-content:active {
-  background-color: var(--ast-color-enable-card-background) !important;
-  border-color: var(--ast-color-enable-border) !important;
+  background-color: var(--ast-color-enable-card-background);
+  border-color: var(--ast-color-enable-border);
 }
 
 .bd-content
   details.sd-dropdown
   .sd-summary-title:hover
   + div.sd-summary-content:hover {
-  background-color: var(--ast-color-hover-card-background) !important;
-  border-color: var(--ast-color-hover-border) !important;
-  border-left: none !important;
+  background-color: var(--ast-color-hover-card-background);
+  border-color: var(--ast-color-hover-border);
+  border-left: none;
 }
 
-details.sd-dropdown
+.bd-content
+  details.sd-dropdown
   summary.sd-summary-title:focus
   + div.sd-summary-content:focus {
-  background-color: var(--ast-color-sphinx-design-background) !important;
+  background-color: var(--ast-color-sphinx-design-background);
   border-radius: var(--ast-sphinx-design-border-radius);
-  border-color: #686868 !important;
-  border-left: none !important;
+  border-color: #686868;
+  border-left: none;
 }
 
 /**
