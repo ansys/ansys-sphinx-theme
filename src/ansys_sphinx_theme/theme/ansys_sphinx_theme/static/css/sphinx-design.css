@@ -45,54 +45,6 @@ blockquote {
   background-color: var(--pst-color-background);
 }
 
-/* Media query for medium-sized screens */
-@media screen and (max-width: 768px) {
-  .sd-tab-set > input:not(.focus-visible) + label {
-    font-size: 14px;
-  }
-}
-
-/* Media query for small-sized screens */
-@media screen and (max-width: 576px) {
-  .sd-tab-set > input:not(.focus-visible) + label {
-    font-size: 12px;
-  }
-}
-
-/* Sphinx-design card
-
-/* Common styles for all screen sizes */
-.sd-card .sd-card-text {
-  font-family: var(--pst-font-family-base) !important;
-}
-
-/* .bd-content .sd-card-header {
-  border: none;
-  background-color: transparent;
-  color: var(--pst-color-text-base) !important;
-  font-size: var(--pst-font-size-h5);
-  font-weight: bold;
-  font-family: var(--pst-font-family-base);
-  padding: 0.5rem 0rem 0.5rem 0rem;
-}*/
-
-.sd-card .sd-card-footer .sd-card-text {
-  max-width: 220px;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: var(--pst-font-family-base);
-}
-
-.sd-card-title {
-  font-family: var(--pst-font-family-base-system);
-}
-
-.bd-content .sd-card .sd-card-body,
-.bd-content .sd-card .sd-card-footer,
-.bd-content .sd-card .sd-card-text {
-  background-color: transparent;
-}
-
 html[data-theme="dark"] .sd-shadow-sm {
   box-shadow: 0 0.1rem 1rem rgba(250, 250, 250, 0.6) !important;
 }
@@ -100,13 +52,6 @@ html[data-theme="dark"] .sd-shadow-sm {
 html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
   filter: invert(0.82) brightness(0.8) contrast(1.2);
 }
-
-/* Common styles for all screen sizes */
-/* .sd-card {
-  border-radius: 0;
-  padding: 10px 10px 10px 10px;
-  font-family: var(--pst-font-family-base) !important;
-} */
 
 /* Media query for medium-sized screens */
 @media screen and (max-width: 768px) {
@@ -128,13 +73,12 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
     box-sizing: content-box !important;
   }
 }
-*/
 
 /*
   Sphinx-design dropdown
   */
 
-.bd-content details.sd-dropdown:not([open])>.sd-card-header {
+.bd-content details.sd-dropdown:not([open]) > .sd-card-header {
   border-radius: var(--ast-sphinx-design-border-radius);
 }
 
@@ -194,6 +138,12 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
   border-left: none;
 }
 
+details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
+  color: var(--ast-color-sphinx-design-primary);
+  font-family: var(--ast-sphinx-design-font-family);
+  font-size: var(--ast-sphinx-design-font-size);
+}
+
 /**
   * Sphinx-design tab
   */
@@ -235,4 +185,60 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
 }
 .bd-content .sd-tab-set .sd-tab-content {
   border: none;
+}
+
+/* Media query for medium-sized screens */
+@media screen and (max-width: 768px) {
+  .sd-tab-set > input:not(.focus-visible) + label {
+    font-size: 14px;
+  }
+}
+
+/* Media query for small-sized screens */
+@media screen and (max-width: 576px) {
+  .sd-tab-set > input:not(.focus-visible) + label {
+    font-size: 12px;
+  }
+}
+
+/**
+  * Sphinx-design card
+  */
+
+.bd-content .sd-card .sd-card-body,
+.bd-content .sd-card .sd-card-footer {
+  background-color: var(--ast-color-sphinx-design-background);
+  color: var(--ast-color-sphinx-design-primary);
+  font-family: var(--ast-sphinx-design-font-family);
+  font-size: var(--ast-sphinx-design-font-size);
+}
+
+.bd-content .sd-card .sd-card-title {
+  color: var(--ast-color-sphinx-design-primary);
+  font-family: var(--ast-sphinx-design-font-family);
+  font-size: 16px;
+}
+
+.bd-content .sd-card .sd-card-header {
+  color: var(--ast-color-sphinx-design-primary);
+  font-family: var(--ast-sphinx-design-font-family);
+  font-size: 16px;
+  background-color: var(--ast-color-sphinx-design-background);
+}
+
+.bd-content .sd-card {
+  background-color: var(--ast-color-sphinx-design-background);
+}
+
+.bd-content .sd-card .sd-card-body {
+  box-shadow:
+    0px 1px 2px 0px rgba(0, 0, 0, 0.08),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  padding: 24px;
+}
+
+.bd-content .sd-card .sd-card-body:hover {
+  box-shadow:
+    0px 1px 2px 0px rgba(0, 0, 0, 0.08),
+    0px 4px 8px 2px rgba(0, 0, 0, 0.12);
 }
