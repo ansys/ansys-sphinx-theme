@@ -14,7 +14,7 @@
 :root {
   /** Ansys specific changes to the theme */
 
-  /***
+  /**
   * Ansys Font family
   *
   * These are adapted from https://systemfontstack.com/
@@ -32,7 +32,7 @@
   --pst-font-family-monospace: monospace, Courier,
     var(--pst-font-family-monospace-system);
 
-  /***
+  /**
   * Ansys compatible colors
   *
   * Colors are defined in rgb string way, "red, green, blue"
@@ -56,7 +56,7 @@
   --pst-table-font-size: 16px;
 
   /**
-sphinx design font sizes
+* sphinx design font sizes
 */
 
   --ast-sphinx-design-font-size: 14px;
@@ -80,6 +80,7 @@ html[data-theme="light"] {
   --pst-color-border: #686868;
   --pst-color-shadow: rgb(216, 216, 216);
   --pst-color-info: var(--pst-color-link);
+  --pst-color-link-hover: #686868;
 
   /**
 * Navigation colors
@@ -163,6 +164,10 @@ html[data-theme="light"] {
   --ast-background-tab-hover: #ececec;
   --ast-tab-border-color: #000000;
   --ast-dropdown-text-color: #686868;
+  --ast-box-shadow-active: 0px 1px 2px 0px rgba(0, 0, 0, 0.08),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  --ast-box-shadow-hover: 0px 1px 2px 0px rgba(0, 0, 0, 0.08),
+    0px 4px 8px 2px rgba(0, 0, 0, 0.12);
   /**
 * search hide match
 */
@@ -187,6 +192,7 @@ html[data-theme="dark"] {
   --pst-color-surface: rgb(41, 41, 41);
   --pst-color-on-surface: rgb(55, 55, 55);
   --pst-color-info: var(--pst-color-secondary);
+  --pst-color-link-hover: #b3b3b3;
 
   /**
 * extensions
@@ -258,13 +264,13 @@ html[data-theme="dark"] {
 */
 
   --sd-color-primary: var(--pst-color-text-base);
-  --ast-color-enable-card-background: #1a1a1a;
+  --ast-color-enable-card-background: #353535;
   --ast-color-enable-border: #e5e5e5;
   --ast-color-hover-card-background: #3d3d3d;
   --ast-color-hover-border: #8e8e8e;
 
   --ast-color-sphinx-design-primary: #ececec;
-  --ast-color-sphinx-design-background: #1a1a1a;
+  --ast-color-sphinx-design-background: #353535;
   --sd-color-primary: #d5d5d5;
   --sd-color-primary-highlight: var(--ast-color-sphinx-design-primary);
   --sd-color-primary-text: var(--ast-color-sphinx-design-background);
@@ -277,6 +283,10 @@ html[data-theme="dark"] {
   --ast-background-tab-hover: #3d3d3d;
   --ast-tab-border-color: #ffffff;
   --ast-dropdown-text-color: #e5e5e5;
+  --ast-box-shadow-active: 0px 1px 2px 0px rgba(0, 0, 0, 0.4),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.48);
+  --ast-box-shadow-hover: 0px 1px 2px 0px rgba(0, 0, 0, 0.4),
+    0px 4px 8px 2px rgba(0, 0, 0, 0.48);
 }
 
 /**
