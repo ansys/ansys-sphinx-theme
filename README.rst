@@ -6,7 +6,7 @@ Ansys Sphinx theme
    :target: https://github.com/ansys
    :alt: Ansys
 
-.. |python| image:: https://img.shields.io/badge/Python-%3E%3D3.8-blue
+.. |python| image:: https://img.shields.io/badge/Python-%3E%3D3.9-blue
    :target: https://pypi.org/project/ansys-sphinx-theme/
    :alt: Python
 

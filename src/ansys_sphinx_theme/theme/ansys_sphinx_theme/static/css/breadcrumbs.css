@@ -9,12 +9,32 @@ breadcrumbs
 ############
 */
 
-#breadcrumbs-spacer {
-  border-right: 10rem solid var(--pst-color-background);
+ul.bd-breadcrumbs li.breadcrumb-item {
+  padding: 0px;
+  font-size: 12px;
+  display: flex;
 }
 
-div.related > ul {
-  padding: 10px 0 20px 0;
+ul.bd-breadcrumbs li.breadcrumb-item:hover {
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+ul.bd-breadcrumbs li.breadcrumb-item a {
+  color: var(--ast-navbar-color);
+  font-size: 12px;
+}
+
+ul.bd-breadcrumbs li.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+ul.bd-breadcrumbs li.breadcrumb-item a:active {
+  color: var(--ast-color-text);
+}
+
+.breadcrumb-item.active {
+  color: var(--ast-color-text);
 }
 
 /*
