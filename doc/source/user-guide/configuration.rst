@@ -67,8 +67,8 @@ For example:
        }
    }
 
-favicon
-~~~~~~~
+``favicon``
+~~~~~~~~~~~
 
 The ``favicon`` setting specifies the icon that appears in the browser tab. To use the Ansys favicon, add the following code to your project's Sphinx ``conf.py`` file:
 
