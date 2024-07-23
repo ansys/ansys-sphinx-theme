@@ -193,6 +193,21 @@ html[data-theme="light"] {
   --ast-admonition-danger-icon: #b72e2a;
   --ast-admonition-danger-border: #e53935;
   --ast-admonitions-color: var(--ast-color-text);
+
+  /**
+  * admonitions
+  */
+  --ast-admonition-neutral-icon: #353535;
+  --ast-admonition-neutral-border: #686868;
+  --ast-admonition-info-icon: #1a78c2;
+  --ast-admonition-info-border: #1a78c2;
+  --ast-admonition-success-icon: #006600;
+  --ast-admonition-success-border: #000800;
+  --ast-admonition-warning-icon: #caad2a;
+  --ast-admonition-warning-border: #fdd835;
+  --ast-admonition-danger-icon: #b72e2a;
+  --ast-admonition-danger-border: #e53935;
+  --ast-admonitions-color: var(--ast-color-text);
 }
 
 html[data-theme="dark"] {
@@ -319,6 +334,7 @@ body {
   font-family: "Open Sans", sans-serif;
   line-height: var(--ast-global-line-height);
   font-size: 14px;
+  color: var(--ast-color-text);
   color: var(--ast-color-text);
 }
 
