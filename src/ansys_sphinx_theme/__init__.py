@@ -461,6 +461,9 @@ def configure_theme_logo(app: Sphinx):
                 f"Invalid logo option: {theme_options.get('logo')}, The logo option must be either 'ansys', 'pyansys', or 'no_logo'"  # noqa: E501
             )
 
+    elif isinstance(theme_options.get("logo"), dict):
+        theme_options["logo"] = theme_options.get("logo")
+
 
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
