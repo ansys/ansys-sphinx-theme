@@ -475,3 +475,99 @@ a > code {
 code.literal {
   color: var(--ast-color-inline-code);
 }
+
+/**
+* Admonitions
+*/
+
+aside.topic,
+div.topic,
+div.topic.contents {
+}
+
+.admonition > .admonition-title,
+div.admonition > .admonition-title {
+  color: var(--ast-admonitions-color);
+  font-size: var(--ast-admonitions-font-size);
+  background-color: transparent !important; /* important tag because the admonition has a background color */
+}
+
+.admonition > .admonition-title:after,
+div.admonition > .admonition-title:after {
+  left: 0px;
+  top: 30px;
+  font-size: 15px;
+}
+
+.admonition,
+div.admonition {
+  border: 2px solid;
+  padding: 8px 16px;
+}
+
+.admonition.attention > .admonition-title:after,
+div.admonition.attention > .admonition-title:after,
+.admonition.caution > .admonition-title:after,
+div.admonition.caution > .admonition-title:after,
+.admonition.important > .admonition-title:after,
+div.admonition.important > .admonition-title:after,
+.admonition.warning > .admonition-title:after,
+div.admonition.warning > .admonition-title:after {
+  color: var(--ast-admonition-warning-icon);
+}
+
+.admonition.caution,
+div.admonition.caution,
+.admonition.attention,
+div.admonition.attention,
+.admonition.important,
+div.admonition.important,
+.admonition.warning,
+div.admonition.warning {
+  border-color: var(--ast-admonition-warning-border);
+}
+
+/* --ast-admonition-neutral-icon: #353535;
+  --ast-admonition-neutral-border: #686868;
+  --ast-admonition-info-icon: #1a78c2;
+  --ast-admonition-info-border: #1a78c2;
+  --ast-admonition-success-icon: #006600;
+  --ast-admonition-success-border: #000800;
+  --ast-admonition-warning-icon: #caad2a;
+  --ast-admonition-warning-border: #fdd835;
+  --ast-admonition-danger-icon: #b72e2a;
+  --ast-admonition-danger-border: #e53935; */
+
+/* # write admonition respetct to above color scheme */
+
+.admonition.danger > .admonition-title:after,
+div.admonition.danger > .admonition-title:after {
+  color: var(--ast-admonition-danger-icon);
+}
+
+.admonition.danger,
+div.admonition.danger {
+  border-color: var(--ast-admonition-danger-border);
+}
+
+.admonition.info > .admonition-title:after,
+div.admonition.info > .admonition-title:after {
+  color: var(--ast-admonition-info-icon);
+}
+
+.admonition.info,
+div.admonition.info {
+  border-color: var(--ast-admonition-info-border);
+}
+
+.admonition.success > .admonition-title:after,
+div.admonition.success > .admonition-title:after {
+  color: var(--ast-admonition-success-icon);
+}
+
+.admonition.success,
+div.admonition.success {
+  border-color: var(--ast-admonition-success-border);
+}
+
+/* neutral is todo, version-change, topic */
