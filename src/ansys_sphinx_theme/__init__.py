@@ -422,6 +422,46 @@ def replace_html_tag(app, exception):
             file.write(modified_content)
 
 
+def configure_theme_logo(app: Sphinx):
+    """
+    Configure the theme logo based on the theme options.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    """
+    # Define logo configurations
+    pyansys_logo = {
+        "image_dark": pyansys_logo_dark_mode,
+        "image_light": pyansys_logo_light_mode,
+    }
+
+    ansys_logo = {
+        "image_dark": ansys_logo_dark_mode,
+        "image_light": ansys_logo_light_mode,
+    }
+    theme_options = app.config.html_theme_options
+
+    if not theme_options.get("logo"):
+        theme_options["logo"] = pyansys_logo
+
+    if isinstance(theme_options.get("logo"), str):
+        if theme_options.get("logo") == "ansys":
+            theme_options["logo"] = ansys_logo
+
+        elif theme_options.get("logo") == "pyansys":
+            theme_options["logo"] = pyansys_logo
+
+        elif theme_options.get("logo") == "no_logo":
+            theme_options["logo"] = None
+
+        else:
+            raise ValueError(
+                f"Invalid logo option: {theme_options.get('logo')}, The logo option must be either 'ansys', 'pyansys', or 'no_logo'"  # noqa: E501
+            )
+
+
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -453,6 +493,7 @@ def setup(app: Sphinx) -> Dict:
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
+    app.connect("builder-inited", configure_theme_logo)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
