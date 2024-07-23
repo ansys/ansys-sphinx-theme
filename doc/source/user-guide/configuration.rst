@@ -22,16 +22,60 @@ PyAnsys and Ansys logos
 The Ansys Sphinx Theme includes the PyAnsys and Ansys logos. All the logos
 are available in the
 `ansys_sphinx_theme/static/ <static_files_>`_
-directory. You can use the following code to add the logos to your documentation:
+directory.
+
+To use the logo in both dark and light modes, add the following code to your `html_theme_options` in your project's Sphinx ``conf.py`` file:
+
+
+.. tab-set::
+
+   .. tab-item:: Ansys logo
+
+      .. code-block:: python
+
+         html_theme_options = {
+             "logo": "ansys",
+         }
+
+
+   .. tab-item:: PyAnsys logo
+
+      .. code-block:: python
+
+         html_theme_options = {
+             "logo": "pyansys",
+         }
+
+   .. tab-item:: No logo
+
+      .. code-block:: python
+
+         html_theme_options = {
+             "logo": "no_logo",
+         }
+
+You can also add your custom logo by specifying the path to the logo file as specified in `pydata-sphinx-theme <pydata_logo_>`_.
+
+For example:
 
 .. code-block:: python
 
-    from ansys_sphinx_theme import pyansys_logo_black, ansys_logo_black, ansys_favicon
+   html_theme_options = {
+       "logo": {
+           "image_light": "_static/logo-light.png",
+           "image_dark": "_static/logo-dark.png",
+       }
+   }
 
-    html_logo = pyansys_logo_black
+favicon
+~~~~~~~
+
+The ``favicon`` setting specifies the icon that appears in the browser tab. To use the Ansys favicon, add the following code to your project's Sphinx ``conf.py`` file:
+
+.. code-block:: python
+
     html_favicon = ansys_favicon
 
-The ``favicon`` setting specifies the icon that appears in the browser tab.
 
 Version switcher
 ~~~~~~~~~~~~~~~~
