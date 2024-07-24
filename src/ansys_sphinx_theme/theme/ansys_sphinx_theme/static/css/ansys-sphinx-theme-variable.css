@@ -187,22 +187,7 @@ html[data-theme="light"] {
   --ast-admonition-info-icon: #1a78c2;
   --ast-admonition-info-border: #1a78c2;
   --ast-admonition-success-icon: #006600;
-  --ast-admonition-success-border: #000800;
-  --ast-admonition-warning-icon: #caad2a;
-  --ast-admonition-warning-border: #fdd835;
-  --ast-admonition-danger-icon: #b72e2a;
-  --ast-admonition-danger-border: #e53935;
-  --ast-admonitions-color: var(--ast-color-text);
-
-  /**
-  * admonitions
-  */
-  --ast-admonition-neutral-icon: #353535;
-  --ast-admonition-neutral-border: #686868;
-  --ast-admonition-info-icon: #1a78c2;
-  --ast-admonition-info-border: #1a78c2;
-  --ast-admonition-success-icon: #006600;
-  --ast-admonition-success-border: #000800;
+  --ast-admonition-success-border: #008000;
   --ast-admonition-warning-icon: #caad2a;
   --ast-admonition-warning-border: #fdd835;
   --ast-admonition-danger-icon: #b72e2a;
@@ -323,6 +308,21 @@ html[data-theme="dark"] {
     0px 2px 4px 0px rgba(0, 0, 0, 0.48);
   --ast-box-shadow-hover: 0px 1px 2px 0px rgba(0, 0, 0, 0.4),
     0px 4px 8px 2px rgba(0, 0, 0, 0.48);
+
+  /**
+* admonitions
+*/
+  --ast-admonition-neutral-icon: #ececec;
+  --ast-admonition-neutral-border: #8e8e8e;
+  --ast-admonition-info-icon: #1a78c2;
+  --ast-admonition-info-border: #1a78c2;
+  --ast-admonition-success-icon: #006600;
+  --ast-admonition-success-border: #008000;
+  --ast-admonition-warning-icon: #caad2a;
+  --ast-admonition-warning-border: #fdd835;
+  --ast-admonition-danger-icon: #b72e2a;
+  --ast-admonition-danger-border: #e53935;
+  --ast-admonitions-color: var(--ast-color-text);
 }
 
 /**
