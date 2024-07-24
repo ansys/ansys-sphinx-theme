@@ -13,6 +13,12 @@
 .bd-sidebar-secondary {
   max-height: calc(100vh - var(--pst-header-height) - 1vh);
   line-height: var(--ast-global-line-height);
+  border: none;
+  overflow: hidden;
+}
+
+.sidebar-secondary-item {
+  border: none;
 }
 
 nav.bd-links p.bd-links__title,
