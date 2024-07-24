@@ -17,8 +17,9 @@
 .. _sphinx_design_examples: https://github.com/executablebooks/sphinx-design/tree/furo-theme/docs/snippets/rst
 .. _sphinx_design_docs: https://sphinx-design.readthedocs.io/en/latest/index.html
 .. _pydata_examples: https://pydata-sphinx-theme.readthedocs.io/en/stable/examples/kitchen-sink/index.html
+.. _pydata_logo: https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/branding.html#different-logos-for-light-and-dark-mode
 
 
 .. ansys_sphinx_theme links
 
-.. _static_files: https://github.com/ansys/ansys-sphinx-theme/blob/main/src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/
+.. _static_files: https://github.com/ansys/ansys-sphinx-theme/blob/main/src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/logos/
