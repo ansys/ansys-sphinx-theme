@@ -21,3 +21,4 @@ Gedam
 Chris
 Sewell
 (?i)Sphinx-Gallery
+(?i)favicon
