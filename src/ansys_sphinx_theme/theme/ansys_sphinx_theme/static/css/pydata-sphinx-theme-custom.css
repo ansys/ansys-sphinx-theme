@@ -493,7 +493,6 @@ div.admonition > .admonition-title {
 .admonition > .admonition-title:after,
 div.admonition > .admonition-title:after {
   left: 0px;
-  top: 30px;
   font-size: 15px;
 }
 
@@ -536,7 +535,7 @@ div.admonition.warning {
   --ast-admonition-danger-icon: #b72e2a;
   --ast-admonition-danger-border: #e53935; */
 
-/* # write admonition respetct to above color scheme */
+/* # write admonition respect to above color scheme */
 
 .admonition.danger > .admonition-title:after,
 div.admonition.danger > .admonition-title:after {
@@ -548,6 +547,8 @@ div.admonition.danger {
   border-color: var(--ast-admonition-danger-border);
 }
 
+/*info are hint, note, see also, tip */
+
 .admonition.info > .admonition-title:after,
 div.admonition.info > .admonition-title:after {
   color: var(--ast-admonition-info-icon);
@@ -557,6 +558,8 @@ div.admonition.info > .admonition-title:after {
 div.admonition.info {
   border-color: var(--ast-admonition-info-border);
 }
+
+/* success is version added */
 
 .admonition.success > .admonition-title:after,
 div.admonition.success > .admonition-title:after {
@@ -569,3 +572,23 @@ div.admonition.success {
 }
 
 /* neutral is todo, version-change, topic */
+
+div.deprecated,
+div.versionadded,
+div.versionchanged {
+  border: 2px solid;
+  padding: 8px 16px;
+}
+
+span.versionmodified.changed:before,
+.admonition.admonition-todo > .admonition-title:after,
+div.admonition.admonition-todo > .admonition-title:after {
+  color: var(--ast-admonition-neutral-icon);
+}
+
+.admonition.admonition-todo,
+div.admonition.admonition-todo,
+aside.topic,
+div.versionchanged {
+  border-color: var(--ast-admonition-neutral-border);
+}
