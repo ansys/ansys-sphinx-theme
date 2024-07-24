@@ -24,6 +24,7 @@
 import logging
 import os
 import pathlib
+import subprocess
 from typing import Any, Dict
 
 from docutils.nodes import document
@@ -446,7 +447,11 @@ def configure_theme_logo(app: Sphinx):
     if not theme_options.get("logo"):
         theme_options["logo"] = pyansys_logo
 
-    if not isinstance(theme_options.get("logo"), str):
+    if isinstance(theme_options.get("logo"), str) and theme_options.get("logo") not in [
+        "ansys",
+        "pyansys",
+        "no_logo",
+    ]:
         raise ValueError(
             f"Invalid logo option: {theme_options.get('logo')}, The logo option must be either 'ansys', 'pyansys', or 'no_logo'"  # noqa: E501
         )
@@ -462,6 +467,49 @@ def configure_theme_logo(app: Sphinx):
 
     elif isinstance(theme_options.get("logo"), dict):
         theme_options["logo"] = theme_options.get("logo")
+
+
+def build_quarto_cheatsheet(app: Sphinx):
+    """
+    Build the Quarto cheatsheet.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    """
+    cheatsheet_options = app.config.html_theme_options.get("cheatsheet", {})
+    if cheatsheet_options:
+        cheatsheet_file = cheatsheet_options.get("file", "")
+        if cheatsheet_file:
+            cheatsheet_file = pathlib.Path(cheatsheet_file)
+            cheatsheet_file = os.path.join(app.srcdir, cheatsheet_file)
+
+            cheatsheet_file = pathlib.Path(cheatsheet_file)
+            file_name = str(cheatsheet_file.name)
+            file_path = cheatsheet_file.parent
+            try:
+                result = subprocess.run(
+                    ["quarto", "add", "ansys/pyansys-quarto-cheatsheet@v1", "--no-prompt"],
+                    cwd=file_path,
+                    capture_output=True,
+                    text=True,
+                )
+
+                render_result = subprocess.run(
+                    ["quarto", "render", file_name, "--to", "cheat_sheet-pdf"],
+                    cwd=file_path,
+                    capture_output=True,
+                    text=True,
+                )
+
+            except Exception as e:
+                print(f"Failed to build Quarto cheatsheet: {e}")
+
+            # remove all _extension dirs an supllimentary files
+
+            for file in cheatsheet_file.parent.rglob("_extension"):
+                file.unlink()
 
 
 def setup(app: Sphinx) -> Dict:
@@ -496,6 +544,7 @@ def setup(app: Sphinx) -> Dict:
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     app.connect("builder-inited", configure_theme_logo)
+    app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
