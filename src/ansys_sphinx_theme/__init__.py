@@ -449,10 +449,10 @@ def configure_theme_logo(app: Sphinx):
     if not isinstance(theme_options.get("logo"), str):
         raise ValueError(
             f"Invalid logo option: {theme_options.get('logo')}, The logo option must be either 'ansys', 'pyansys', or 'no_logo'"  # noqa: E501
-            )
-      
+        )
+
     logo = theme_options.get("logo")
-      
+
     if logo == "ansys":
         theme_options["logo"] = ansys_logo
     elif logo == "pyansys":
