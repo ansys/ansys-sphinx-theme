@@ -501,7 +501,7 @@ div.admonition > .admonition-title:after {
 div.admonition {
   border: 2px solid;
   padding: 8px 16px;
-  box-shadow: none;
+  box-shadow: none !important; /* important tag because the admonition has a box-shadow  from pydata sphinx theme*/
 }
 
 /* warning attention caution important, warning */
