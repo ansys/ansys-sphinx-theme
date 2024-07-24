@@ -24,7 +24,7 @@ are available in the
 `ansys_sphinx_theme/static/ <static_files_>`_
 directory.
 
-To use the logo in both dark and light modes, add the following code to your `html_theme_options` in your project's Sphinx ``conf.py`` file:
+To use the logo in both dark and light modes, add the following code to the``html_theme_options`` dictionary in your project's Sphinx ``conf.py`` file:
 
 
 .. tab-set::
@@ -54,7 +54,7 @@ To use the logo in both dark and light modes, add the following code to your `ht
              "logo": "no_logo",
          }
 
-You can also add your custom logo by specifying the path to the logo file as specified in `pydata-sphinx-theme <pydata_logo_>`_.
+You can also add a custom logo by specifying the path to the logo file as specified in `pydata-sphinx-theme <pydata_logo_>`_.
 
 For example:
 
