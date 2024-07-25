@@ -28,6 +28,7 @@ import subprocess
 from typing import Any, Dict
 
 from docutils.nodes import document
+import pymupdf  # import the bindings
 import requests
 from sphinx import addnodes
 from sphinx.application import Sphinx
@@ -469,6 +470,28 @@ def configure_theme_logo(app: Sphinx):
         theme_options["logo"] = theme_options.get("logo")
 
 
+def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_png: str):
+    """
+    Convert PDF to PNG images.
+
+    Parameters
+    ----------
+    pdf_path : pathlib.Path
+        Path to the PDF file.
+    output_dir : pathlib.Path
+        Path to the output directory.
+    output_png : str
+        Name of the output PNG file.
+    """
+    try:
+        doc = pymupdf.open(pdf_path)  # open document
+        for page in doc:
+            pix = page.get_pixmap()
+            pix.save(os.path.join(output_dir, output_png))
+    except Exception as e:
+        raise RuntimeError(f"Failed to convert PDF to PNG: {e}")
+
+
 def build_quarto_cheatsheet(app: Sphinx):
     """
     Build the Quarto cheatsheet.
@@ -479,37 +502,60 @@ def build_quarto_cheatsheet(app: Sphinx):
         Application instance for rendering the documentation.
     """
     cheatsheet_options = app.config.html_theme_options.get("cheatsheet", {})
-    if cheatsheet_options:
-        cheatsheet_file = cheatsheet_options.get("file", "")
-        if cheatsheet_file:
-            cheatsheet_file = pathlib.Path(cheatsheet_file)
-            cheatsheet_file = os.path.join(app.srcdir, cheatsheet_file)
 
-            cheatsheet_file = pathlib.Path(cheatsheet_file)
-            file_name = str(cheatsheet_file.name)
-            file_path = cheatsheet_file.parent
-            try:
-                result = subprocess.run(
-                    ["quarto", "add", "ansys/pyansys-quarto-cheatsheet@v1", "--no-prompt"],
-                    cwd=file_path,
-                    capture_output=True,
-                    text=True,
-                )
+    if not cheatsheet_options:
+        return
 
-                render_result = subprocess.run(
-                    ["quarto", "render", file_name, "--to", "cheat_sheet-pdf"],
-                    cwd=file_path,
-                    capture_output=True,
-                    text=True,
-                )
+    cheatsheet_file = cheatsheet_options.get("file", "")
+    output_dir = cheatsheet_options.get("output_dir", "")
 
-            except Exception as e:
-                print(f"Failed to build Quarto cheatsheet: {e}")
+    if not cheatsheet_file:
+        return
 
-            # remove all _extension dirs an supllimentary files
+    cheatsheet_file = pathlib.Path(app.srcdir) / cheatsheet_file
+    file_name = str(cheatsheet_file.name)
+    file_path = cheatsheet_file.parent
+    output_dir = pathlib.Path(app.outdir) / output_dir
+    try:
+        # Add the cheatsheet to the Quarto project
+        result = subprocess.run(
+            ["quarto", "add", "ansys/pyansys-quarto-cheatsheet@v1", "--no-prompt"],
+            cwd=file_path,
+            capture_output=True,
+            text=True,
+        )
 
-            for file in cheatsheet_file.parent.rglob("_extension"):
-                file.unlink()
+        # Render the cheatsheet
+        render_result = subprocess.run(
+            ["quarto", "render", file_name, "--to", "cheat_sheet-pdf", "--output-dir", output_dir],
+            cwd=file_path,
+            capture_output=True,
+            text=True,
+        )
+
+        # Remove the cheatsheet from the Quarto project
+        remove_extension = subprocess.run(
+            ["quarto", "remove", "ansys/cheat_sheet", "--no-prompt"],
+            cwd=file_path,
+            capture_output=True,
+            text=True,
+        )
+
+        # Remove all supplementary files
+        supplementary_files = ["_static/slash.png", "_static/bground.png", "_static/ansys.png"]
+        for file in supplementary_files:
+            file_path = cheatsheet_file.parent / file
+            if file_path.exists():
+                file_path.unlink()
+
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Failed to build Quarto cheatsheet: {e}, ensure Quarto is installed.")
+
+    output_file = output_dir / file_name.replace(".qmd", ".pdf")
+    app.config.html_theme_options["cheatsheet"]["url"] = f"{output_file}"
+    output_png = file_name.replace(".qmd", ".png")
+    convert_pdf_to_png(output_file, output_dir, output_png)
+    app.config.html_theme_options["cheatsheet"]["thumbnail"] = f"{output_dir}/{output_png}"
 
 
 def setup(app: Sphinx) -> Dict:
