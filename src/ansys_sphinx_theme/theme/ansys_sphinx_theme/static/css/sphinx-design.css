@@ -44,7 +44,7 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
     font-size: var(--pst-font-size-h5);
   }
   .sd-card {
-    padding: 5px 5px 5px 5px;
+    padding: 4px;
   }
   .sd-sphinx-override,
   .sd-sphinx-override * {
@@ -129,7 +129,7 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
 .bd-content .sd-tab-set > input:checked + label {
   background-color: transparent;
   font-family: var(--ast-sphinx-design-font-family);
-  padding: 12px 7.5px 12px 7.5px;
+  padding: 12px 8px 12px 8px;
   border-color: transparent transparent var(--ast-tab-border-color) transparent;
   border-width: 0px 0px 2px 0px;
   border-style: none none solid none;
@@ -145,7 +145,7 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
   border-width: 0px;
   text-decoration-line: none;
   font-weight: normal;
-  padding: 12px 7.5px 12px 7.5px;
+  padding: 12px 8px 12px 8px;
   font-size: var(--ast-sphinx-design-font-size);
   font-family: var(--ast-sphinx-design-font-family);
 }
@@ -158,7 +158,7 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
   border-width: 0px 0px 2px 0px;
   border-style: none none solid none;
   text-decoration: none;
-  padding: 12px 7.5px 12px 7.5px;
+  padding: 12px 8px 12px 8px;
   font-size: var(--ast-sphinx-design-font-size);
   font-family: var(--ast-sphinx-design-font-family);
 }
