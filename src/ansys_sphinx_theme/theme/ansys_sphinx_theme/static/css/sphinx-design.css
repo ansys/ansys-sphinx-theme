@@ -46,12 +46,7 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
   .sd-card {
     padding: 4px;
   }
-  .sd-sphinx-override,
-  .sd-sphinx-override * {
-    box-sizing: content-box !important;
-  }
 }
-
 /*
   Sphinx-design dropdown
   */
@@ -70,7 +65,7 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
   font-family: var(--ast-sphinx-design-font-family);
   font-size: var(--ast-sphinx-design-font-size);
   background: var(--ast-color-sphinx-design-background) !important;
-  border: 1px solid #656565 !important;
+  border: 1px solid var(--ast-dropdown-border-color) !important;
   border-radius: var(--ast-sphinx-design-border-radius);
   padding: 8px 12px;
   text-align: left;
@@ -78,7 +73,8 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
 
 .bd-content details.sd-dropdown summary.sd-summary-title:hover {
   background-color: var(--ast-color-hover-card-background) !important;
-  border-color: var(--ast-color-enable-border);
+  border: 1px solid var(--ast-dropdown-border-color-hover) !important;
+  border-radius: var(--ast-sphinx-design-border-radius);
 }
 
 .bd-content
@@ -234,7 +230,7 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
 .bd-content .sd-card {
   border: none;
   border-radius: 8px;
-  box-shadow: var(--ast-box-shadow-hover);
+  box-shadow: var(--ast-box-shadow-hover) !important;
   color: var(--ast-color-sphinx-design-primary);
   background-color: var(--ast-color-sphinx-design-background);
 }

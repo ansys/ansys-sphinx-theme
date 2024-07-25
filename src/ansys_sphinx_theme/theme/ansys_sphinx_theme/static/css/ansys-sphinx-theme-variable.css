@@ -150,6 +150,9 @@ html[data-theme="light"] {
   --ast-color-enable-border: #d9d9d9;
   --ast-color-hover-card-background: #ececec;
 
+  --ast-dropdown-border-color: #d9d9d9;
+  --ast-dropdown-border-color-hover: #8e8e8e;
+
   --ast-color-sphinx-design-primary: #353535;
   --ast-color-sphinx-design-background: #ffffff;
   --sd-color-primary: #141414;
@@ -269,6 +272,9 @@ html[data-theme="dark"] {
   --ast-color-enable-card-background: #353535;
   --ast-color-enable-border: #e5e5e5;
   --ast-color-hover-card-background: #3d3d3d;
+
+  --ast-dropdown-border-color: #3d3d3d;
+  --ast-dropdown-border-color-hover: #8e8e8e;
 
   --ast-color-sphinx-design-primary: #ececec;
   --ast-color-sphinx-design-background: #353535;
