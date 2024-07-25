@@ -1,12 +1,16 @@
 @import "ansys-sphinx-theme-variable.css";
 
-/* Sphinx gallery output cell */
+/**
+* Sphinx gallery output cell
+*/
 
 .highlight pre {
   font-size: 0.9em;
 }
 
-/* Sphinx gallery download butto text */
+/**
+* Sphinx gallery download button text
+*/
 
 a > code.download {
   font-family: var(--pst-font-family-base);

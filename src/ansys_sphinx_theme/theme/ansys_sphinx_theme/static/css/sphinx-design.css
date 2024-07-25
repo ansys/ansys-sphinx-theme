@@ -1,7 +1,7 @@
 @import "../design-style.4045f2051d55cab465a707391d5b2007.min.css";
 
 /**
-sphinx design button
+* sphinx design button
 */
 
 .sd-btn {
@@ -47,9 +47,9 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
     padding: 4px;
   }
 }
-/*
-  Sphinx-design dropdown
-  */
+/**
+* Sphinx-design dropdown
+*/
 
 .bd-content details.sd-dropdown:not([open]) > .sd-card-header {
   border-radius: var(--ast-sphinx-design-border-radius);
@@ -119,8 +119,8 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
 }
 
 /**
-  * Sphinx-design tab
-  */
+* Sphinx-design tab
+*/
 
 .bd-content .sd-tab-set > label {
   font-family: var(--ast-sphinx-design-font-family);
@@ -206,8 +206,8 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
 }
 
 /**
-  * Sphinx-design card
-  */
+* Sphinx-design card
+*/
 
 .bd-content .sd-card .sd-card-body,
 .bd-content .sd-card .sd-card-footer {
