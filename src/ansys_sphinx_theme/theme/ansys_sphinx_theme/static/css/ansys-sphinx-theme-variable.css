@@ -148,7 +148,6 @@ html[data-theme="light"] {
   --ast-color-enable-card-background: #ffffff;
   --ast-color-enable-border: #d9d9d9;
   --ast-color-hover-card-background: #ececec;
-  --ast-color-hover-border: #8e8e8e;
 
   --ast-color-sphinx-design-primary: #353535;
   --ast-color-sphinx-design-background: #ffffff;
@@ -160,9 +159,11 @@ html[data-theme="light"] {
   --sd-color-secondary-highlight: var(--ast-color-hover-card-background);
   --sd-color-secondary-bg: var(--ast-color-sphinx-design-background);
   --ast-sd-bg-secondary-hover: var(--ast-color-hover-card-background);
-  --ast-background-tab-focus: #f5f5f5;
+  --ast-background-tab-focus: #d9d9d9;
   --ast-background-tab-hover: #ececec;
-  --ast-tab-border-color: #000000;
+  --ast-tab-border-color: #d9d9d9;
+  --ast-tab-border-color-hover: #8e8e8e;
+  --ast-tab-border-color-active: #000000;
   --ast-dropdown-text-color: #686868;
   --ast-box-shadow-active: 0px 1px 2px 0px rgba(0, 0, 0, 0.08),
     0px 2px 4px 0px rgba(0, 0, 0, 0.12);
@@ -267,7 +268,6 @@ html[data-theme="dark"] {
   --ast-color-enable-card-background: #353535;
   --ast-color-enable-border: #e5e5e5;
   --ast-color-hover-card-background: #3d3d3d;
-  --ast-color-hover-border: #8e8e8e;
 
   --ast-color-sphinx-design-primary: #ececec;
   --ast-color-sphinx-design-background: #353535;
@@ -281,7 +281,9 @@ html[data-theme="dark"] {
   --ast-sd-bg-secondary-hover: var(--ast-color-hover-card-background);
   --ast-background-tab-focus: #2d2d2d;
   --ast-background-tab-hover: #3d3d3d;
-  --ast-tab-border-color: #ffffff;
+  --ast-tab-border-color: #e5e5e5;
+  --ast-tab-border-color-hover: #8e8e8e;
+  --ast-tab-border-color-active: #ffffff;
   --ast-dropdown-text-color: #e5e5e5;
   --ast-box-shadow-active: 0px 1px 2px 0px rgba(0, 0, 0, 0.4),
     0px 2px 4px 0px rgba(0, 0, 0, 0.48);

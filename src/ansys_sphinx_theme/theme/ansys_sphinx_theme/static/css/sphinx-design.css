@@ -126,44 +126,73 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
   * Sphinx-design tab
   */
 
-.bd-content .sd-tab-set > input:checked + label {
-  background-color: transparent;
+.bd-content .sd-tab-set > label {
   font-family: var(--ast-sphinx-design-font-family);
-  padding: 12px 8px 12px 8px;
-  border-color: transparent transparent var(--ast-tab-border-color) transparent;
-  border-width: 0px 0px 2px 0px;
+  padding: 12px 0px;
   border-style: none none solid none;
   color: var(--ast-color-sphinx-design-primary);
   font-size: var(--ast-sphinx-design-font-size);
+  margin-inline-end: 16px;
+  transform: none;
+  margin-bottom: 1px;
+}
+
+.bd-content .sd-tab-set > input:checked + label:hover,
+.bd-content .sd-tab-set > input:not(:checked, :focus-visible) + label:hover {
+  color: var(--ast-color-sphinx-design-primary);
+  font-family: var(--ast-sphinx-design-font-family);
+}
+
+.bd-content .sd-tab-set > input + label:focus-visible,
+.bd-content
+  .sd-tab-set
+  > input:not(:checked, :focus-visible)
+  + label:focus-visible {
+  background-color: var(--ast-background-tab-focus);
+  border-color: transparent transparent var(--ast-tab-border-color-hover)
+    transparent;
+  border-width: 0px 0px 2px 0px;
+  text-decoration-line: none;
+}
+
+.bd-content .sd-tab-set > input:checked + label {
+  background-color: transparent;
+  border-color: transparent transparent var(--ast-tab-border-color-active)
+    transparent;
+  border-width: 0px 0px 2px 0px;
+  border-style: none none solid none;
+  transform: none;
+}
+
+.bd-content .sd-tab-set > input:checked + label:hover {
+  background-color: var(--ast-background-tab-hover);
+  border-color: transparent transparent var(--ast-tab-border-color-hover)
+    transparent;
+  border-width: 0px 0px 2px 0px;
 }
 
 .bd-content .sd-tab-set > input:not(:checked, :focus-visible) + label {
-  background-color: var(--ast-background-tab-focus);
-  color: var(--ast-color-sphinx-design-primary);
-  border: none;
-  border-color: var(--ast-color-hover-border);
-  border-width: 0px;
+  background-color: transparent;
+  border-color: transparent transparent var(--ast-tab-border-color) transparent;
+  border-width: 0px 0px 1px 0px;
   text-decoration-line: none;
   font-weight: normal;
-  padding: 12px 8px 12px 8px;
-  font-size: var(--ast-sphinx-design-font-size);
-  font-family: var(--ast-sphinx-design-font-family);
 }
 
 .bd-content .sd-tab-set > input:not(:checked, :focus-visible) + label:hover {
   background-color: var(--ast-background-tab-hover);
-  color: var(--ast-color-sphinx-design-primary);
-  border-color: transparent transparent var(--ast-color-hover-border)
+  border-color: transparent transparent var(--ast-tab-border-color-hover)
     transparent;
   border-width: 0px 0px 2px 0px;
   border-style: none none solid none;
   text-decoration: none;
-  padding: 12px 8px 12px 8px;
-  font-size: var(--ast-sphinx-design-font-size);
-  font-family: var(--ast-sphinx-design-font-family);
 }
+
 .bd-content .sd-tab-set .sd-tab-content {
   border: none;
+  font-family: var(--ast-sphinx-design-font-family);
+  font-size: var(--ast-sphinx-design-font-size);
+  color: var(--ast-color-sphinx-design-primary);
 }
 
 /* Media query for medium-sized screens */
