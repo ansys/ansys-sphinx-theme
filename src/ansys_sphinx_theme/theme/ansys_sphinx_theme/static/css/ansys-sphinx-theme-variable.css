@@ -53,7 +53,8 @@
   /**
 * table font sizes
 */
-  --pst-table-font-size: 16px;
+  --pst-table-font-size: 14px;
+  --pst-table-header-font-size: 12px;
 
   /**
 * sphinx design font sizes
