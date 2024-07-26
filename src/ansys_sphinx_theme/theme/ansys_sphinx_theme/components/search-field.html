@@ -1,51 +1,82 @@
 <!-- Debugging: html_theme_options = {{ html_theme_options }} -->
-{% if theme_use_meilisearch %} {% set API_KEY = theme_use_meilisearch.api_key %}
-<!-- Include the MeiliSearch CSS stylesheet only if theme present -->
-<link href="{{ pathto('_static/css/meilisearch.css', 1) }}" rel="stylesheet" />
+{% if theme_use_meilisearch %}
+  {% set API_KEY = theme_use_meilisearch.api_key %}
+  <!-- Include the MeiliSearch CSS stylesheet only if theme present -->
+  <link href="{{ pathto('_static/css/meilisearch.css', 1) }}" rel="stylesheet" />
 
-<!-- Create a search bar form with a text input and a dropdown selector for the search index -->
-<form
-  class="bd-search d-flex align-items-center"
-  action="{{ pathto('search') }}"
-  method="get"
->
-  <i class="fa fa-search" aria-hidden="true" id="search-icon"></i>
-  <input
-    type="search"
-    placeholder="Search"
-    class="form-control"
-    id="search-bar-input"
-    autofocus
-  />
-  <span class="search-button__kbd-shortcut"
-    ><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span
-  >
-  <style>
-    .bd-search .search-button__kbd-shortcut {
-      right: 33%;
-    }
-  </style>
-  {% if theme_use_meilisearch.index_uids %}
-  <select id="indexUidSelector" class="index-select">
-    {% for index_uid, index_name in theme_use_meilisearch.index_uids.items() %}
-    <option value="{{ index_uid }}">{{ index_name }}</option>
-    {% endfor %}
-  </select>
-  {% endif %}
-  <!-- Include the MeiliSearch JavaScript library for the search bar -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+  <!-- Create a search bar form with a text input and a dropdown selector for the search index -->
+  <form class="bd-search d-flex align-items-center" action="{{ pathto('search') }}" method="get">
+    <i class="fa fa-search" aria-hidden="true" id="search-icon"></i>
+    <input type="search" placeholder="Search" class="form-control" id="search-bar-input" autofocus />
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+    <!-- Conditionally display the dropdown selector if there are multiple indices -->
+    {% if theme_use_meilisearch.index_uids | length > 1 %}
+      <select id="indexUidSelector" class="index-select">
+        {% for index_uid, index_name in theme_use_meilisearch.index_uids.items() %}
+          <option value="{{ index_uid }}">{{ index_name }}</option>
+        {% endfor %}
+      </select>
+    {% endif %}
+    <!-- Include the MeiliSearch JavaScript library for the search bar -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 
-  {% if not theme_use_meilisearch.host %} {% set HOST_URL =
-  "https://backend.search.pyansys.com/" %} {% else %} {% set HOST_URL =
-  theme_use_meilisearch.host %} {% endif %}
-  <script>
-    var HOST_URL = "{{ HOST_URL }}";
-    var API_KEY = "{{ API_KEY }}";
-    var indexUid = "{{ theme_use_meilisearch.index_uids.items()|first|first }}";
-  </script>
+    {% if not theme_use_meilisearch.host %}
+      {% set HOST_URL = "https://backend.search.pyansys.com/" %}
+    {% else %}
+      {% set HOST_URL = theme_use_meilisearch.host %}
+    {% endif %}
+    <script>
+      var HOST_URL = "{{ HOST_URL }}";
+      var API_KEY = "{{ API_KEY }}";
+      var indexUid = "{{ theme_use_meilisearch.index_uids.items()|first|first }}";
 
-  <script src="{{ pathto('_static/js/meilisearch_theme_wrap.js', 1) }}"></script>
-</form>
+      // Function to check if the MeiliSearch host URL is reachable
+      function checkMeiliSearchHost(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('HEAD', url, true);
+        xhr.onload = function () {
+          if (xhr.status === 404) {
+            callback(false);
+          } else {
+            callback(true);
+          }
+        };
+        xhr.onerror = function () {
+          callback(false);
+        };
+        xhr.send();
+      }
+
+      // Check the MeiliSearch host URL and load the appropriate search script
+      checkMeiliSearchHost(HOST_URL, function (isReachable) {
+        if (isReachable) {
+          var script = document.createElement('script');
+          script.src = "{{ pathto('_static/js/meilisearch_theme_wrap.js', 1) }}";
+          document.head.appendChild(script);
+        } else {
+          // Fallback to PyData search
+          var pyDataSearch = document.createElement('div');
+          pyDataSearch.innerHTML = `<form class="bd-search d-flex align-items-center"
+      action="{{ pathto('search') }}"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="{{ theme_search_bar_text }}"
+         aria-label="{{ theme_search_bar_text }}"
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>`;
+          document.querySelector('.bd-search').innerHTML = pyDataSearch.innerHTML;
+        }
+      });
+    </script>
+  </form>
 {% else %}
-<!-- If there is no MiliSearch enabled, use the PyData search -->
-{%- include "pydata_sphinx_theme/components/search-field.html" -%} {% endif %}
+  <!-- If there is no MeiliSearch enabled, use the PyData search -->
+  {%- include "pydata_sphinx_theme/components/search-field.html" -%}
+{% endif %}
