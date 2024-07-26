@@ -515,6 +515,8 @@ def build_quarto_cheatsheet(app: Sphinx):
     cheatsheet_file = pathlib.Path(app.srcdir) / cheatsheet_file
     file_name = str(cheatsheet_file.name)
     file_path = cheatsheet_file.parent
+    if not output_dir:
+        output_dir = app.outdir / "_static"
     output_dir = pathlib.Path(app.outdir) / output_dir
     try:
         # Add the cheatsheet to the Quarto project
@@ -542,11 +544,20 @@ def build_quarto_cheatsheet(app: Sphinx):
         )
 
         # Remove all supplementary files
-        supplementary_files = ["_static/slash.png", "_static/bground.png", "_static/ansys.png"]
+        supplementary_files = [
+            "_static/slash.png",
+            "_static/bground.png",
+            "_static/ansys.png",
+            "cheat_sheet.sty",
+        ]
         for file in supplementary_files:
             file_path = cheatsheet_file.parent / file
             if file_path.exists():
                 file_path.unlink()
+
+            # if static folder is clean, delete it
+        if not list(cheatsheet_file.parent.glob("_static/*")):
+            cheatsheet_file.parent.joinpath("_static").rmdir()
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to build Quarto cheatsheet: {e}, ensure Quarto is installed.")
