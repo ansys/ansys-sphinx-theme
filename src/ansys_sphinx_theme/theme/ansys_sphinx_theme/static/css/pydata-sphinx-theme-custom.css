@@ -129,6 +129,7 @@ nav.bd-links .current > a {
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link {
   color: var(--ast-navbar-color);
+  font-weight: 600;
 }
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:hover::before {
@@ -163,7 +164,6 @@ nav.bd-links .current > a {
 
 html .pst-navbar-icon {
   color: var(--ast-navbar-color);
-  font-weight: 600;
 }
 
 html .pst-navbar-icon:hover {
