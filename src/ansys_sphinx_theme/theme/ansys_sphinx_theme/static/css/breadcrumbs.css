@@ -3,10 +3,8 @@ styles exclusively for the ansys-sphinx-theme classes. */
 
 @import "ansys-sphinx-theme-variable.css";
 
-/*
-############
-breadcrumbs
-############
+/**
+* Breadcrumbs
 */
 
 ul.bd-breadcrumbs li.breadcrumb-item {
@@ -37,10 +35,8 @@ ul.bd-breadcrumbs li.breadcrumb-item a:active {
   color: var(--ast-color-text);
 }
 
-/*
-###########################
-vesrion warning announcement
-############################
+/**
+* Version warning announcement
 */
 
 #announcement_msg {
