@@ -87,7 +87,6 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
 
 .bd-content
   details.sd-dropdown
-
   .sd-summary-title:active
   + div.sd-summary-content:active {
   background-color: var(--ast-color-enable-card-background);

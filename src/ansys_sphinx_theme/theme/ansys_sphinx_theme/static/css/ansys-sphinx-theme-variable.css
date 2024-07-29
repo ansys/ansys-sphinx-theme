@@ -69,7 +69,6 @@
 */
   --ast-admonitions-font-size: 14px;
   --ast-admonitions-padding: 8px 16px;
-
 }
 
 html[data-theme="light"] {
@@ -331,8 +330,6 @@ html[data-theme="dark"] {
   --ast-admonition-danger-icon: #b72e2a;
   --ast-admonition-danger-border: #e53935;
   --ast-admonitions-color: var(--ast-color-text);
-
-
 }
 
 /**
