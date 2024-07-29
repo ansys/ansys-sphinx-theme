@@ -611,6 +611,12 @@ div.versionchanged {
   padding: 8px 16px;
 }
 
+div.deprecated > p,
+div.versionadded > p,
+div.versionchanged > p {
+  margin-left: 8px;
+}
+
 span.versionmodified.changed:before,
 .admonition.admonition-todo > .admonition-title:after,
 div.admonition.admonition-todo > .admonition-title:after {
