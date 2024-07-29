@@ -629,3 +629,12 @@ aside.topic,
 div.versionchanged {
   border-color: var(--ast-admonition-neutral-border);
 }
+
+span.versionmodified:before,
+span.versionmodified:before,
+span.versionmodified:before {
+  font-size: 15px;
+  height: 24px;
+  width: 24px;
+  margin-right: 16px;
+}
