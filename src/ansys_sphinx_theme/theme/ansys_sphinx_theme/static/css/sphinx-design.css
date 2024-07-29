@@ -1,7 +1,7 @@
 @import "../design-style.4045f2051d55cab465a707391d5b2007.min.css";
 
 /**
-sphinx design button
+* sphinx design button
 */
 
 .sd-btn {
@@ -44,17 +44,12 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
     font-size: var(--pst-font-size-h5);
   }
   .sd-card {
-    padding: 5px 5px 5px 5px;
-  }
-  .sd-sphinx-override,
-  .sd-sphinx-override * {
-    box-sizing: content-box !important;
+    padding: 4px;
   }
 }
-
-/*
-  Sphinx-design dropdown
-  */
+/**
+* Sphinx-design dropdown
+*/
 
 .bd-content details.sd-dropdown:not([open]) > .sd-card-header {
   border-radius: var(--ast-sphinx-design-border-radius);
@@ -70,7 +65,7 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
   font-family: var(--ast-sphinx-design-font-family);
   font-size: var(--ast-sphinx-design-font-size);
   background: var(--ast-color-sphinx-design-background) !important;
-  border: 1px solid #656565 !important;
+  border: 1px solid var(--ast-dropdown-border-color) !important;
   border-radius: var(--ast-sphinx-design-border-radius);
   padding: 8px 12px;
   text-align: left;
@@ -78,7 +73,8 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
 
 .bd-content details.sd-dropdown summary.sd-summary-title:hover {
   background-color: var(--ast-color-hover-card-background) !important;
-  border-color: var(--ast-color-enable-border);
+  border: 1px solid var(--ast-dropdown-border-color-hover) !important;
+  border-radius: var(--ast-sphinx-design-border-radius);
 }
 
 .bd-content
@@ -91,6 +87,7 @@ html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
 
 .bd-content
   details.sd-dropdown
+
   .sd-summary-title:active
   + div.sd-summary-content:active {
   background-color: var(--ast-color-enable-card-background);
@@ -123,47 +120,76 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
 }
 
 /**
-  * Sphinx-design tab
-  */
+* Sphinx-design tab
+*/
 
-.bd-content .sd-tab-set > input:checked + label {
-  background-color: transparent;
+.bd-content .sd-tab-set > label {
   font-family: var(--ast-sphinx-design-font-family);
-  padding: 12px 7.5px 12px 7.5px;
-  border-color: transparent transparent var(--ast-tab-border-color) transparent;
-  border-width: 0px 0px 2px 0px;
+  padding: 12px 0px;
   border-style: none none solid none;
   color: var(--ast-color-sphinx-design-primary);
   font-size: var(--ast-sphinx-design-font-size);
+  margin-inline-end: 16px;
+  transform: none;
+  margin-bottom: 1px;
+}
+
+.bd-content .sd-tab-set > input:checked + label:hover,
+.bd-content .sd-tab-set > input:not(:checked, :focus-visible) + label:hover {
+  color: var(--ast-color-sphinx-design-primary);
+  font-family: var(--ast-sphinx-design-font-family);
+}
+
+.bd-content .sd-tab-set > input + label:focus-visible,
+.bd-content
+  .sd-tab-set
+  > input:not(:checked, :focus-visible)
+  + label:focus-visible {
+  background-color: var(--ast-background-tab-focus);
+  border-color: transparent transparent var(--ast-tab-border-color-hover)
+    transparent;
+  border-width: 0px 0px 2px 0px;
+  text-decoration-line: none;
+}
+
+.bd-content .sd-tab-set > input:checked + label {
+  background-color: transparent;
+  border-color: transparent transparent var(--ast-tab-border-color-active)
+    transparent;
+  border-width: 0px 0px 2px 0px;
+  border-style: none none solid none;
+  transform: none;
+}
+
+.bd-content .sd-tab-set > input:checked + label:hover {
+  background-color: var(--ast-background-tab-hover);
+  border-color: transparent transparent var(--ast-tab-border-color-hover)
+    transparent;
+  border-width: 0px 0px 2px 0px;
 }
 
 .bd-content .sd-tab-set > input:not(:checked, :focus-visible) + label {
-  background-color: var(--ast-background-tab-focus);
-  color: var(--ast-color-sphinx-design-primary);
-  border: none;
-  border-color: var(--ast-color-hover-border);
-  border-width: 0px;
+  background-color: transparent;
+  border-color: transparent transparent var(--ast-tab-border-color) transparent;
+  border-width: 0px 0px 1px 0px;
   text-decoration-line: none;
   font-weight: normal;
-  padding: 12px 7.5px 12px 7.5px;
-  font-size: var(--ast-sphinx-design-font-size);
-  font-family: var(--ast-sphinx-design-font-family);
 }
 
 .bd-content .sd-tab-set > input:not(:checked, :focus-visible) + label:hover {
   background-color: var(--ast-background-tab-hover);
-  color: var(--ast-color-sphinx-design-primary);
-  border-color: transparent transparent var(--ast-color-hover-border)
+  border-color: transparent transparent var(--ast-tab-border-color-hover)
     transparent;
   border-width: 0px 0px 2px 0px;
   border-style: none none solid none;
   text-decoration: none;
-  padding: 12px 7.5px 12px 7.5px;
-  font-size: var(--ast-sphinx-design-font-size);
-  font-family: var(--ast-sphinx-design-font-family);
 }
+
 .bd-content .sd-tab-set .sd-tab-content {
   border: none;
+  font-family: var(--ast-sphinx-design-font-family);
+  font-size: var(--ast-sphinx-design-font-size);
+  color: var(--ast-color-sphinx-design-primary);
 }
 
 /* Media query for medium-sized screens */
@@ -181,8 +207,8 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
 }
 
 /**
-  * Sphinx-design card
-  */
+* Sphinx-design card
+*/
 
 .bd-content .sd-card .sd-card-body,
 .bd-content .sd-card .sd-card-footer {
@@ -204,7 +230,7 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
 .bd-content .sd-card {
   border: none;
   border-radius: 8px;
-  box-shadow: var(--ast-box-shadow-hover);
+  box-shadow: var(--ast-box-shadow-hover) !important;
   color: var(--ast-color-sphinx-design-primary);
   background-color: var(--ast-color-sphinx-design-background);
 }
