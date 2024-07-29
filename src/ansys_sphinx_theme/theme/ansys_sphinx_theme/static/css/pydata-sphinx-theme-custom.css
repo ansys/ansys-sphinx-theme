@@ -499,13 +499,25 @@ div.admonition > .admonition-title {
   margin-left: 8px;
 }
 
+/**
+* Admonitions icons
+*/
 .admonition > .admonition-title:after,
-div.admonition > .admonition-title:after {
+div.admonition > .admonition-title:after,
+span.versionmodified:before {
+  font-size: var(--ast-admonitions-icon-size);
+  height: var(--ast-admonition-icon-height);
+  width: var(--ast-admonition-icon-width);
   left: 0px;
-  font-size: 15px;
-  height: 24px;
-  width: 24px;
 }
+
+span.versionmodified:before {
+  margin-right: 16px; /* separate component, to alligh with title, 8px padding + 8px padding from icon  */
+}
+
+/**
+* Admonitions title
+*/
 
 .admonition p.admonition-title ~ *,
 div.admonition p.admonition-title ~ * {
@@ -517,7 +529,7 @@ div.admonition p.admonition-title ~ * {
 .admonition,
 div.admonition {
   border: 2px solid;
-  padding: 8px 16px;
+  padding: var(--ast-admonitions-padding);
   box-shadow: none !important; /* important tag because the admonition has a box-shadow  from pydata sphinx theme*/
   border-radius: var(--ast-admonitions-border-radius);
 }
@@ -609,7 +621,7 @@ div.versionadded,
 div.versionchanged {
   border-width: 2px;
   border-style: solid;
-  padding: 8px 16px;
+  padding: var(--ast-admonitions-padding);
   border-radius: var(--ast-admonitions-border-radius);
 }
 
@@ -630,13 +642,4 @@ div.admonition.admonition-todo,
 aside.topic,
 div.versionchanged {
   border-color: var(--ast-admonition-neutral-border);
-}
-
-span.versionmodified:before,
-span.versionmodified:before,
-span.versionmodified:before {
-  font-size: 15px;
-  height: 24px;
-  width: 24px;
-  margin-right: 16px;
 }
