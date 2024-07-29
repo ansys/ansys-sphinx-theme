@@ -12,7 +12,9 @@ div[data-ds-theme] .searchbox {
   text-align: left;
 }
 
-/* Styles for screens with a width of 576px or less */
+/**
+* Styles for screens with a width of 576px or less
+*/
 @media screen and (max-width: 576px) {
   div[data-ds-theme] .searchbox {
     width: 100%;
@@ -27,7 +29,9 @@ div[data-ds-theme] .searchbox {
   }
 }
 
-/* Styles for screens with a width of 1200px or less */
+/**
+* Styles for screens with a width of 1200px or less
+*/
 @media screen and (min-width: 1200px) {
   div[data-ds-theme] .searchbox {
     width: 100%;
@@ -157,7 +161,9 @@ div[data-ds-theme] .meilisearch-autocomplete .docs-searchbar-suggestion--title {
   width: 100%;
 }
 
-/* Styling the scrollbar */
+/**
+* Styling the scrollbar
+*/
 div[data-ds-theme]
   .meilisearch-autocomplete
   .dsb-dropdown-menu::-webkit-scrollbar {
