@@ -28,7 +28,7 @@ import subprocess
 from typing import Any, Dict
 
 from docutils.nodes import document
-import pymupdf  # import the bindings
+import pymupdf
 import requests
 from sphinx import addnodes
 from sphinx.application import Sphinx
