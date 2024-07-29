@@ -488,7 +488,7 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
         for page in doc:
             pix = page.get_pixmap()
             pix.save(os.path.join(output_dir, output_png))
-    except Exception as e:
+    except RuntimeError as e:
         raise RuntimeError(f"Failed to convert PDF to PNG: {e}")
 
 
