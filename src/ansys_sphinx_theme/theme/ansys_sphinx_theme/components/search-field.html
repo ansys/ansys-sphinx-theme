@@ -72,6 +72,9 @@
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 </form>`;
           document.querySelector('.bd-search').innerHTML = pyDataSearch.innerHTML;
+          var script = document.createElement('script');
+          script.src = "{{ pathto('_static/js/pydata_search.js', 1) }}";
+          document.head.appendChild(script);
         }
       });
     </script>
