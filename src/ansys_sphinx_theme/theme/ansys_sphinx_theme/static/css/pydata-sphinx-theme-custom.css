@@ -519,6 +519,7 @@ div.admonition {
   border: 2px solid;
   padding: 8px 16px;
   box-shadow: none !important; /* important tag because the admonition has a box-shadow  from pydata sphinx theme*/
+  border-radius: var(--ast-admonitions-border-radius);
 }
 
 /* warning attention caution important, warning */
@@ -609,6 +610,7 @@ div.versionchanged {
   border-width: 2px;
   border-style: solid;
   padding: 8px 16px;
+  border-radius: var(--ast-admonitions-border-radius);
 }
 
 div.deprecated > p,
