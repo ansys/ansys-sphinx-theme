@@ -53,7 +53,9 @@ nav.bd-links li > a.current {
   font-weight: bold;
 }
 
-/* sidebar primary with children */
+/**
+* sidebar primary with children
+*/
 
 .bd-sidebar-primary li.has-children .caption,
 .bd-sidebar-primary li.has-children > .reference {
@@ -110,7 +112,9 @@ nav.bd-links .current > a {
   text-decoration: none;
 }
 
-/* _base.scss related changes */
+/**
+* _base.scss related changes
+*/
 
 .editthispage a {
   color: var(--pst-color-text-base);
@@ -125,12 +129,11 @@ nav.bd-links .current > a {
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link {
   color: var(--ast-navbar-color);
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:hover::before {
   color: var(--ast-navbar-hover-color);
-  font-weight: bold;
   border-bottom: none;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
 }
@@ -139,7 +142,6 @@ nav.bd-links .current > a {
   color: var(--ast-navbar-hover-color);
   border-color: var(--ast-navbar-hover-color);
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
-  font-weight: bold;
 }
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:active {
@@ -147,13 +149,12 @@ nav.bd-links .current > a {
   border-color: var(--ast-navbar-active-border-color);
   border-width: 2px;
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.12));
-  font-weight: bold;
 }
 
 .bd-header ul.navbar-nav > li.nav-item.current > .nav-link::before,
-::after {
+.bd-header ul.navbar-nav > li.nav-item.current > .nav-link::after {
   color: var(--ast-navbar-active-color);
-  border-bottom: 3px solid var(--ast-navbar-active-border-color);
+  border-bottom: 2px solid var(--ast-navbar-active-border-color);
 }
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:focus {
@@ -189,7 +190,9 @@ a.nav-link.pst-navbar-icon:active {
   font-weight: bold;
 }
 
-/* dropdown button after 5 sections */
+/*
+* dropdown button after 5 sections
+*/
 
 .dropdown-item:hover {
   font-weight: bold;
@@ -248,10 +251,10 @@ button.btn.version-switcher__button:hover {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
-/*
-####################################################
-Side column size (first and second column from left)
-####################################################
+/**
+*
+* Side column size (first and second column from left)
+*
 */
 
 .col-md-3 {
@@ -283,17 +286,19 @@ a.headerlink {
   }
 }
 
-/*
-  ############################################
-  Navigation column (according to side column)
-  _header.scss
-  ############################################
-  */
+/**
+*
+* Navigation column (according to side column)
+* _header.scss
+*
+*/
 .bd-header .navbar-header-items__start {
   width: fit-content;
   padding-right: 3rem;
 }
-/* header logo*/
+/**
+* header logo
+*/
 
 .bd-main .bd-content {
   display: flex;
@@ -307,9 +312,8 @@ a.headerlink {
   padding-right: 1rem;
 }
 
-/*#############################
-Bold font weight for **code**
-#############################
+/**
+* Bold font weight for **code**
 */
 
 b,
@@ -317,19 +321,21 @@ strong {
   font-weight: 900;
 }
 
-/* make the github logo white */
-
-html[data-theme="light"] #pst-back-to-top {
-  background-color: var(--pst-color-link);
-}
-
-/* _code.scss related changes */
+/**
+* _code.scss related changes
+*/
 .docutils {
   font-family: var(--pst-font-family-monospace);
   font-weight: 500;
 }
 
-/* _api.scss related changes */
+#pst-back-to-top {
+  background: var(--ast-color-link);
+  color: var(--ast-color-text);
+}
+/**
+* _api.scss related changes
+*/
 
 .sig-prename.descclassname {
   display: none;
@@ -348,23 +354,25 @@ html[data-theme="light"] #pst-back-to-top {
   color: var(--pst-color-sig);
 }
 
-/* highlighted objects inside the api reference */
+/**
+* highlighted objects inside the api reference
+*/
 dt:target,
 span.highlighted {
   background-color: var(--pst-color-codecell) !important;
 }
 
-/* Increase empty-space around classes, methods, properties, etc. that are descendants
- of other items */
+/**
+* Increase empty-space around classes, methods, properties, etc. that are descendants
+* of other items
+*/
 dl.class dl.py {
   margin-top: 2.5em;
   margin-bottom: 2.5em;
 }
 
-/*
-##############################
-image padding before and after
-##############################
+/**
+* image padding before and after
 */
 
 img {
@@ -381,10 +389,8 @@ img.logo__image {
   padding-bottom: 0rem;
 }
 
-/*
-##########################
-Nav-bar entity right side.
-##########################
+/**
+*Nav-bar entity right side.
 */
 
 .list-group-item.active {
@@ -392,10 +398,8 @@ Nav-bar entity right side.
   color: var(--pst-color-text-base) !important;
 }
 
-/*
-###########
-admontions
-###########
+/**
+* admontions
 */
 
 div.deprecated {
@@ -414,7 +418,9 @@ div.admonition {
   background-color: var(--pst-color-on-surface);
 }
 
-/* Select only divisions that contain a dataframe, with enough specificity to override pydata css */
+/**
+* Select only divisions that contain a dataframe, with enough specificity to override pydata css
+*/
 div.nboutput
   div.output_area.rendered_html.docutils.container:has(table.dataframe) {
   background-color: transparent;
@@ -424,10 +430,8 @@ aside.topic > p {
   color: var(--pst-color-text-base) !important;
 }
 
-/*
-#################
-search hide match
-#################
+/**
+* search hide match
 */
 
 div#searchbox p.highlight-link a {
