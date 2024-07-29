@@ -496,12 +496,22 @@ div.admonition > .admonition-title {
   color: var(--ast-admonitions-color);
   font-size: var(--ast-admonitions-font-size);
   background-color: transparent !important; /* important tag because the admonition has a background color */
+  margin-left: 8px;
 }
 
 .admonition > .admonition-title:after,
 div.admonition > .admonition-title:after {
   left: 0px;
   font-size: 15px;
+  height: 24px;
+  width: 24px;
+}
+
+.admonition p.admonition-title ~ *,
+div.admonition p.admonition-title ~ * {
+  margin-left: 40px; /* separate component, to alligh with title, 8px padding + 24px icon + 8px padding from icon  */
+  margin-right: 8px;
+  margin-top: 0px;
 }
 
 .admonition,
