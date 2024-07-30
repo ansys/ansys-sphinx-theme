@@ -333,6 +333,7 @@ strong {
   background: var(--ast-color-link);
   color: var(--ast-color-text);
 }
+
 /**
 * _api.scss related changes
 */
@@ -484,4 +485,161 @@ a > code {
 
 code.literal {
   color: var(--ast-color-inline-code);
+}
+
+/**
+* Admonitions
+*/
+
+.admonition > .admonition-title,
+div.admonition > .admonition-title {
+  color: var(--ast-admonitions-color);
+  font-size: var(--ast-admonitions-font-size);
+  background-color: transparent !important; /* important tag because the admonition has a background color */
+  margin-left: 8px;
+}
+
+/**
+* Admonitions icons
+*/
+.admonition > .admonition-title:after,
+div.admonition > .admonition-title:after,
+span.versionmodified:before {
+  font-size: var(--ast-admonitions-icon-size);
+  height: var(--ast-admonition-icon-height);
+  width: var(--ast-admonition-icon-width);
+  left: 0px;
+}
+
+span.versionmodified:before {
+  margin-right: 16px; /* separate component, to alligh with title, 8px padding + 8px padding from icon  */
+}
+
+/**
+* Admonitions title
+*/
+
+.admonition p.admonition-title ~ *,
+div.admonition p.admonition-title ~ * {
+  margin-left: 40px; /* separate component, to alligh with title, 8px padding + 24px icon + 8px padding from icon  */
+  margin-right: 8px;
+  margin-top: 0px;
+}
+
+.admonition,
+div.admonition {
+  border: 2px solid;
+  padding: var(--ast-admonitions-padding);
+  box-shadow: none !important; /* important tag because the admonition has a box-shadow  from pydata sphinx theme*/
+  border-radius: var(--ast-admonitions-border-radius);
+}
+
+/* warning attention caution important, warning */
+
+.admonition.attention > .admonition-title:after,
+div.admonition.attention > .admonition-title:after,
+.admonition.caution > .admonition-title:after,
+div.admonition.caution > .admonition-title:after,
+.admonition.important > .admonition-title:after,
+div.admonition.important > .admonition-title:after,
+.admonition.warning > .admonition-title:after,
+div.admonition.warning > .admonition-title:after {
+  color: var(--ast-admonition-warning-icon);
+}
+
+.admonition.caution,
+div.admonition.caution,
+.admonition.attention,
+div.admonition.attention,
+.admonition.important,
+div.admonition.important,
+.admonition.warning,
+div.admonition.warning {
+  border-color: var(--ast-admonition-warning-border);
+}
+
+/* danger are error, danger, depreciated */
+
+.admonition.danger > .admonition-title:after,
+div.admonition.danger > .admonition-title:after,
+.admonition.error > .admonition-title:after,
+div.admonition.error > .admonition-title:after,
+span.depreciated.changed:before {
+  color: var(--ast-admonition-danger-icon);
+}
+
+.admonition.danger,
+div.admonition.danger,
+.admonition.error,
+div.admonition.error,
+div.deprecated {
+  border-color: var(--ast-admonition-danger-border);
+}
+
+/*info are hint, note, see also, tip */
+
+.admonition.info > .admonition-title:after,
+div.admonition.info > .admonition-title:after,
+.admonition.hint > .admonition-title:after,
+div.admonition.hint > .admonition-title:after,
+.admonition.note > .admonition-title:after,
+div.admonition.note > .admonition-title:after,
+.admonition.seealso > .admonition-title:after,
+div.admonition.seealso > .admonition-title:after,
+.admonition.tip > .admonition-title:after,
+div.admonition.tip > .admonition-title:after {
+  color: var(--ast-admonition-info-icon);
+}
+
+.admonition.info,
+div.admonition.info,
+.admonition.hint,
+div.admonition.hint,
+.admonition.note,
+div.admonition.note,
+.admonition.seealso,
+div.admonition.seealso,
+.admonition.tip,
+div.admonition.tip {
+  border-color: var(--ast-admonition-info-border);
+}
+
+/* success is version-added */
+
+span.versionadded.changed:before {
+  color: var(--ast-admonition-success-icon);
+}
+
+div.versionadded {
+  border-color: var(--ast-admonition-success-border);
+}
+
+/* neutral is todo, version-change, topic */
+
+div.deprecated,
+div.versionadded,
+div.versionchanged {
+  border-width: 2px;
+  border-style: solid;
+  padding: var(--ast-admonitions-padding);
+  border-radius: var(--ast-admonitions-border-radius);
+}
+
+div.deprecated > p,
+div.versionadded > p,
+div.versionchanged > p {
+  margin-left: 8px;
+}
+
+span.versionmodified.changed:before,
+.admonition.admonition-todo > .admonition-title:after,
+div.admonition.admonition-todo > .admonition-title:after {
+  color: var(--ast-admonition-neutral-icon);
+}
+
+.admonition.admonition-todo,
+div.admonition.admonition-todo,
+aside.topic,
+div.versionchanged {
+  border-color: var(--ast-admonition-neutral-border);
 }
