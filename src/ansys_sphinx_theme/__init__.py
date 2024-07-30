@@ -442,26 +442,27 @@ def configure_theme_logo(app: Sphinx):
         "image_light": ansys_logo_light_mode,
     }
     theme_options = app.config.html_theme_options
+    logo_option = theme_options.get("logo")
 
-    if not theme_options.get("logo"):
+    if not logo_option:
         theme_options["logo"] = pyansys_logo
 
-    if not isinstance(theme_options.get("logo"), str):
+    if isinstance(logo_option, str) and logo_option not in {"ansys", "pyansys", "no_logo"}:
         raise ValueError(
-            f"Invalid logo option: {theme_options.get('logo')}, The logo option must be either 'ansys', 'pyansys', or 'no_logo'"  # noqa: E501
+            f"Invalid logo option: '{logo_option}'. Valid options are 'ansys', 'pyansys', or 'no_logo'."  # noqa: E501
         )
 
-    logo = theme_options.get("logo")
+    logo = logo_option
 
     if logo == "ansys":
         theme_options["logo"] = ansys_logo
     elif logo == "pyansys":
         theme_options["logo"] = pyansys_logo
-    elif theme_options.get("logo") == "no_logo":
+    elif logo_option == "no_logo":
         theme_options["logo"] = None
 
-    elif isinstance(theme_options.get("logo"), dict):
-        theme_options["logo"] = theme_options.get("logo")
+    elif isinstance(logo_option, dict):
+        theme_options["logo"] = logo_option
 
 
 def setup(app: Sphinx) -> Dict:
