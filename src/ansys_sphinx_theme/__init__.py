@@ -444,30 +444,25 @@ def configure_theme_logo(app: Sphinx):
         "image_light": ansys_logo_light_mode,
     }
     theme_options = app.config.html_theme_options
+    logo_option = theme_options.get("logo")
 
-    if not theme_options.get("logo"):
+    if not logo_option:
         theme_options["logo"] = pyansys_logo
 
-    if isinstance(theme_options.get("logo"), str) and theme_options.get("logo") not in [
-        "ansys",
-        "pyansys",
-        "no_logo",
-    ]:
+    if isinstance(logo_option, str) and logo_option not in {"ansys", "pyansys", "no_logo"}:
         raise ValueError(
-            f"Invalid logo option: {theme_options.get('logo')}, The logo option must be either 'ansys', 'pyansys', or 'no_logo'"  # noqa: E501
+            f"Invalid logo option: '{logo_option}'. The logo option must be either 'ansys', 'pyansys', or 'no_logo'"  # noqa: E501
         )
 
-    logo = theme_options.get("logo")
-
-    if logo == "ansys":
+    if logo_option == "ansys":
         theme_options["logo"] = ansys_logo
-    elif logo == "pyansys":
+    elif logo_option == "pyansys":
         theme_options["logo"] = pyansys_logo
-    elif theme_options.get("logo") == "no_logo":
+    elif logo_option == "no_logo":
         theme_options["logo"] = None
 
-    elif isinstance(theme_options.get("logo"), dict):
-        theme_options["logo"] = theme_options.get("logo")
+    elif isinstance(logo_option, dict):
+        theme_options["logo"] = logo_option
 
 
 def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_png: str):
