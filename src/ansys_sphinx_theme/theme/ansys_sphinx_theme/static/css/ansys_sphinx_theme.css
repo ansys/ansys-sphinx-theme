@@ -11,9 +11,7 @@
 @import "sphinx-gallery.css";
 
 /*
-##########
-Codecell
-##########
+* Code cell
 */
 .xref.std.std-ref {
   color: var(--pst-color-inline-code);
@@ -38,9 +36,7 @@ p.rubric {
 }
 
 /*
-############
-Autosummary
-############
+* Autosummary
 */
 
 .autosummary tr:nth-child(odd),

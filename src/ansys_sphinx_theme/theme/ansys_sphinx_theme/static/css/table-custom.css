@@ -7,7 +7,7 @@
 .table {
   --bs-table-bg: var(--pst-color-table-background);
   border-spacing: 0;
-  border-collapse: collapse;
+  border-collapse: separate;
   overflow: hidden;
   vertical-align: middle;
   overflow-y: scroll;
@@ -22,6 +22,7 @@ tfoot,
 th,
 thead,
 tr {
+  border-bottom: 1px solid var(--pst-color-table-inner-border);
   background-color: var(--pst-color-table-background);
   font-family: var(--pst-font-family-base);
   font-size: var(--pst-table-font-size);
@@ -37,6 +38,7 @@ tr {
 th {
   line-height: 40px;
   color: var(--pst-color-table-header-text) !important;
+  font-size: var(--pst-table-header-font-size) !important;
 }
 
 /**

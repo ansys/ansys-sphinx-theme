@@ -14,7 +14,7 @@
 :root {
   /** Ansys specific changes to the theme */
 
-  /***
+  /**
   * Ansys Font family
   *
   * These are adapted from https://systemfontstack.com/
@@ -32,7 +32,7 @@
   --pst-font-family-monospace: monospace, Courier,
     var(--pst-font-family-monospace-system);
 
-  /***
+  /**
   * Ansys compatible colors
   *
   * Colors are defined in rgb string way, "red, green, blue"
@@ -51,15 +51,35 @@
   --bs-navbar-color: var(--bs-ast-navbar-color);
   --ast-font-sidebar-header: var(--pst-font-size-h5);
   /**
-* table font sizes
+  * table font sizes
+  */
+  --pst-table-font-size: 14px;
+  --pst-table-header-font-size: 12px;
+
+  /**
+  * sphinx design font sizes
+  */
+
+  --ast-sphinx-design-font-size: 14px;
+  --ast-sphinx-design-font-family: "Open Sans", sans-serif;
+  --ast-sphinx-design-border-radius: 4px;
+
+  /**
+* admonitions
 */
-  --pst-table-font-size: 16px;
+  --ast-admonitions-font-size: 14px;
+  --ast-admonitions-padding: 8px 16px;
+  --ast-admonitions-border-radius: 8px;
+  --ast-admonitions-icon-size: 15px;
+  --ast-admonition-icon-height: 24px;
+  --ast-admonition-icon-width: 24px;
+  --ast-admonition-icon-margin-left: 8px;
 }
 
 html[data-theme="light"] {
   /**
-* main colors
-*/
+  * main colors
+  */
   --ast-color-text: #353535;
   --ast-color-active-text: #353535;
   --ast-color-hover-text: #353535;
@@ -69,14 +89,14 @@ html[data-theme="light"] {
   --pst-color-success: rgb(40, 167, 69);
   --pst-color-text-base: rgb(0, 0, 0);
   --pst-color-text-muted: #353535;
-  --pst-color-border: #a19d9d;
+  --pst-color-border: #686868;
   --pst-color-shadow: rgb(216, 216, 216);
   --pst-color-info: var(--pst-color-link);
   --pst-color-link-hover: #686868;
 
   /**
-* Navigation colors
-*/
+  * Navigation colors
+  */
   --pst-color-on-background: var(
     --pst-color-background
   ); /* important tag from pydata-sphinx-theme */
@@ -87,21 +107,21 @@ html[data-theme="light"] {
   --ast-ring-shadow-focused: 0px 0px 0px 2px #ffffff, 0px 0px 0px 4px #1a78c2;
 
   /**
-* sidebar colors
-*/
+  * sidebar colors
+  */
   --ast-sidebar-primary-text: var(--ast-color-text);
   --ast-sidebar-hover-background: #ececec;
   --ast-sidebar-active-background: #d9d9d9;
 
   /**
-* depth colors
-*/
+  * depth colors
+  */
   /* --pst-color-on-background: rgb(0, 0, 0); */
   --pst-color-on-surface: #f2f2f2;
 
   /**
-* extensions
-*/
+  * extensions
+  */
   --pst-color-table-background: #ffffff;
   --pst-color-enabled-table-text: var(--ast-color-text);
   --pst-color-table-row-hover-bg: #ececec;
@@ -112,8 +132,8 @@ html[data-theme="light"] {
   --pst-color-panel-background: var(--pst-color-on-background);
 
   /**
-* layout
-*/
+  * layout
+  */
 
   --ast-color-link: #1e6ddc;
   --ast-color-link-hover: #1856af;
@@ -126,28 +146,68 @@ html[data-theme="light"] {
   --pst-color-target: rgb(255, 255, 255);
 
   /**
-* color for sphinx-gallery-code output
-*/
+  * color for sphinx-gallery-code output
+  */
   --pst-color-codecell: #fafae2;
   --pst-color-codeout: var(--pst-color-inline-code);
   --pst-color-sig: #0965c8;
   --pst-color-code-s1: #b35000;
   --pst-color-code-c1: #095d0a;
   /**
-* sphinx design primary color
-*/
+  * sphinx design
+  */
   --sd-color-primary: var(--pst-color-text-base);
+  --ast-color-enable-card-background: #ffffff;
+  --ast-color-enable-border: #d9d9d9;
+  --ast-color-hover-card-background: #ececec;
+  --ast-dropdown-border-color: #d9d9d9;
+  --ast-dropdown-border-color-hover: #8e8e8e;
+
+  --ast-color-sphinx-design-primary: #353535;
+  --ast-color-sphinx-design-background: #ffffff;
+  --sd-color-primary: #141414;
+  --sd-color-primary-highlight: var(--ast-color-sphinx-design-primary);
+  --sd-color-primary-text: var(--ast-color-sphinx-design-background);
+  --sd-color-secondary: var(--ast-color-sphinx-design-background);
+  --sd-color-secondary-text: #141414;
+  --sd-color-secondary-highlight: var(--ast-color-hover-card-background);
+  --sd-color-secondary-bg: var(--ast-color-sphinx-design-background);
+  --ast-sd-bg-secondary-hover: var(--ast-color-hover-card-background);
+  --ast-background-tab-focus: #d9d9d9;
+  --ast-background-tab-hover: #ececec;
+  --ast-tab-border-color: #d9d9d9;
+  --ast-tab-border-color-hover: #8e8e8e;
+  --ast-tab-border-color-active: #000000;
+  --ast-dropdown-text-color: #686868;
+  --ast-box-shadow-active: 0px 1px 2px 0px rgba(0, 0, 0, 0.08),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  --ast-box-shadow-hover: 0px 1px 2px 0px rgba(0, 0, 0, 0.08),
+    0px 4px 8px 2px rgba(0, 0, 0, 0.12);
+  /**
+  * search hide match
+  */
+  --pst-color-search-match: #91969b;
 
   /**
-* search hide match
-*/
-  --pst-color-search-match: #91969b;
+  * admonitions
+  */
+  --ast-admonition-neutral-icon: #353535;
+  --ast-admonition-neutral-border: #686868;
+  --ast-admonition-info-icon: #1a78c2;
+  --ast-admonition-info-border: #1a78c2;
+  --ast-admonition-success-icon: #006600;
+  --ast-admonition-success-border: #008000;
+  --ast-admonition-warning-icon: #caad2a;
+  --ast-admonition-warning-border: #fdd835;
+  --ast-admonition-danger-icon: #b72e2a;
+  --ast-admonition-danger-border: #e53935;
+  --ast-admonitions-color: var(--ast-color-text);
 }
 
 html[data-theme="dark"] {
   /**
-* main colors
-*/
+  * main colors
+  */
   --ast-color-text: #ececec;
   --ast-color-active-text: #d5d5d5;
   --ast-color-hover-text: #d5d5d5;
@@ -165,14 +225,14 @@ html[data-theme="dark"] {
   --pst-color-link-hover: #b3b3b3;
 
   /**
-* extensions
-*/
+  * extensions
+  */
 
   --pst-color-panel-background: var(--pst-color-on-background);
 
   /**
-* Navigation colors
-*/
+  * Navigation colors
+  */
 
   --pst-color-on-background: var(
     --pst-color-background
@@ -185,8 +245,8 @@ html[data-theme="dark"] {
   --ast-ring-shadow-focused: 0px 0px 0px 2px #282828, 0px 0px 0px 4px #4dabf5;
 
   /**
-* sidebar colors
-*/
+  * sidebar colors
+  */
   --ast-sidebar-primary-text: var(--ast-color-text);
   --ast-sidebar-hover-background: #3d3d3d;
   --ast-sidebar-active-background: #2d2d2d;
@@ -195,8 +255,8 @@ html[data-theme="dark"] {
   ); /* inline code color for docutils (_base.scss)*/
 
   /**
-* layout
-*/
+  * layout
+  */
 
   --ast-color-link: #1e6ddc;
   --ast-color-link-hover: #1856af;
@@ -206,8 +266,8 @@ html[data-theme="dark"] {
   --pst-color-target: rgb(71, 39, 0);
 
   /**
-* color for sphinx-gallery-code output
-*/
+  * color for sphinx-gallery-code output
+    */
   --pst-color-codecell: #495057;
   --pst-color-codeout: #f2f4f6;
   --pst-color-sig: #d6ab1e;
@@ -215,8 +275,8 @@ html[data-theme="dark"] {
   --pst-color-code-c1: #8fb842;
 
   /**
-* table hovering
-*/
+  * table hovering
+  */
   --pst-color-table-background: #2d2d2d;
   --pst-color-enabled-table-text: #d3d3d3;
   --pst-color-table-row-hover-bg: #3d3d3d;
@@ -225,9 +285,56 @@ html[data-theme="dark"] {
   --pst-color-table-active-bg: #3d3d3d;
 
   /**
-* search hide match
-*/
+  * search hide match
+  */
   --pst-color-search-match: var(--pst-color-primary);
+
+  /**
+  * sphinx design
+  */
+
+  --sd-color-primary: var(--pst-color-text-base);
+  --ast-color-enable-card-background: #353535;
+  --ast-color-enable-border: #e5e5e5;
+  --ast-color-hover-card-background: #3d3d3d;
+  --ast-dropdown-border-color: #3d3d3d;
+  --ast-dropdown-border-color-hover: #8e8e8e;
+
+  --ast-color-sphinx-design-primary: #ececec;
+  --ast-color-sphinx-design-background: #353535;
+  --sd-color-primary: #d5d5d5;
+  --sd-color-primary-highlight: var(--ast-color-sphinx-design-primary);
+  --sd-color-primary-text: var(--ast-color-sphinx-design-background);
+  --sd-color-secondary: var(--ast-color-sphinx-design-background);
+  --sd-color-secondary-text: #d5d5d5;
+  --sd-color-secondary-highlight: var(--ast-color-hover-card-background);
+  --sd-color-secondary-bg: var(--ast-color-sphinx-design-background);
+  --ast-sd-bg-secondary-hover: var(--ast-color-hover-card-background);
+  --ast-background-tab-focus: #2d2d2d;
+  --ast-background-tab-hover: #3d3d3d;
+  --ast-tab-border-color: #e5e5e5;
+  --ast-tab-border-color-hover: #8e8e8e;
+  --ast-tab-border-color-active: #ffffff;
+  --ast-dropdown-text-color: #e5e5e5;
+  --ast-box-shadow-active: 0px 1px 2px 0px rgba(0, 0, 0, 0.4),
+    0px 2px 4px 0px rgba(0, 0, 0, 0.48);
+  --ast-box-shadow-hover: 0px 1px 2px 0px rgba(0, 0, 0, 0.4),
+    0px 4px 8px 2px rgba(0, 0, 0, 0.48);
+
+  /**
+* admonitions
+*/
+  --ast-admonition-neutral-icon: #ececec;
+  --ast-admonition-neutral-border: #8e8e8e;
+  --ast-admonition-info-icon: #1a78c2;
+  --ast-admonition-info-border: #1a78c2;
+  --ast-admonition-success-icon: #006600;
+  --ast-admonition-success-border: #008000;
+  --ast-admonition-warning-icon: #caad2a;
+  --ast-admonition-warning-border: #fdd835;
+  --ast-admonition-danger-icon: #b72e2a;
+  --ast-admonition-danger-border: #e53935;
+  --ast-admonitions-color: var(--ast-color-text);
 }
 
 /**
@@ -239,6 +346,7 @@ body {
   font-family: "Open Sans", sans-serif;
   line-height: var(--ast-global-line-height);
   font-size: 14px;
+  color: var(--ast-color-text);
 }
 
 h1,
