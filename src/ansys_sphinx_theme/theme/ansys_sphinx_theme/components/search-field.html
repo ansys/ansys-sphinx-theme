@@ -16,6 +16,11 @@
           <option value="{{ index_uid }}">{{ index_name }}</option>
         {% endfor %}
       </select>
+      <style>
+        #search-bar-input {
+          width:500px;
+        }
+      </style>
     {% endif %}
     <!-- Include the MeiliSearch JavaScript library for the search bar -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>

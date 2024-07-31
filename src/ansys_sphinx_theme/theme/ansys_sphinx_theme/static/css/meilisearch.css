@@ -7,9 +7,11 @@ div[data-ds-theme] .searchbox {
 }
 
 .docs-searchbar-suggestion--category-header {
-  background-color: var(--pst-color-border);
+  background-color: var(--ast-suggestion-header-background);
   border-radius: 7px;
   text-align: left;
+  color: var(--ast-catagory-header-text);
+  width: 680px;
 }
 
 /**
@@ -20,9 +22,9 @@ div[data-ds-theme] .searchbox {
     width: 100%;
     max-width: 100%;
   }
-  .bd-search input {
+  /* .bd-search input {
     width: 100% !important;
-  }
+  } */
 
   .index-select {
     width: 30%;
@@ -38,9 +40,9 @@ div[data-ds-theme] .searchbox {
     max-width: 100%;
   }
 
-  .bd-search input {
+  /* .bd-search input {
     width: 600px !important;
-  }
+  } */
   .index-select {
     width: 250px;
   }
@@ -51,9 +53,9 @@ div[data-ds-theme] .searchbox {
 }
 
 div[data-ds-theme] .meilisearch-autocomplete .dsb-dropdown-menu {
-  max-width: 200%;
-  min-width: 100%;
-  width: 140%;
+  max-width: 1200px;
+  min-width: 800px;
+  width: 800px;
 }
 div[data-ds-theme] .meilisearch-autocomplete .docs-searchbar-suggestion {
   width: 100%;
@@ -89,26 +91,27 @@ div[data-ds-theme] .meilisearch-autocomplete {
 }
 
 #search-bar-input {
-  background-color: var(--pst-color-background);
-  color: var(--pst-color-text-base);
-  font-size: var(--pst-font-size-icon);
-  position: relative;
-  padding-left: 1rem;
-  outline-color: var(--pst-color-border);
-  margin-left: 1rem;
+  background-color: var(--ast-search-bar-enable-background);
+  color: var(--ast-search-bar-enable-text);
+  font-size: 16px;
+  outline-color: var(--ast-search-bar-enable-border);
+  border: 0.5px solid var(--ast-search-bar-enable-border);
+  width: 680px;
+  max-width: 200%;
+  height: 40px;
 }
 
 .index-select {
-  color: var(--pst-color-text-base);
-  background: var(--pst-color-background);
-  height: 47px;
-  border: 1px solid var(--pst-color-border);
-  border-radius: 0.25rem;
-  font-size: 20px;
+  color: var(--ast-search-bar-enable-text);
+  background: var(--ast-search-bar-enable-background);
+  height: 40px;
+  font-size: 14px;
   font-family: "Open Sans", sans-serif;
-  box-shadow: 0px 0px 20px var(--pst-color-border);
-  padding: 0 10px 0px 10px;
-  margin-left: 5px;
+  border: 0.5px solid var(--ast-search-bar-enable-border);
+  border-radius: 4px;
+  box-shadow: none;
+  padding: 0px 8px;
+  margin-left: 2px;
 }
 
 div[data-ds-theme]
@@ -117,18 +120,19 @@ div[data-ds-theme]
   [class^="dsb-dataset-"] {
   position: relative;
   border: 1px solid #d9d9d9;
-  background: var(--pst-color-background);
+  background: var(--ast-search-bar-enable-background);
   border-radius: 4px;
   padding: 0 8px 8px;
 }
 div[data-ds-theme] .meilisearch-autocomplete .dsb-dropdown-menu {
-  max-height: 600px !important;
+  max-height: 500px !important;
   overflow-y: auto !important;
   border: 1px solid #ccc;
+  left: -30px;
 }
 
 div[data-ds-theme] .meilisearch-autocomplete .docs-searchbar-suggestion {
-  background: var(--pst-color-background);
+  background: var(--ast-search-bar-enable-background);
 }
 
 div[data-ds-theme]
@@ -155,7 +159,7 @@ div[data-ds-theme]
 
 div[data-ds-theme] .meilisearch-autocomplete .docs-searchbar-suggestion--title {
   margin-bottom: 4px;
-  color: var(--pst-color-text-base);
+  color: var(--ast-search-bar-enable-text);
   font-size: 0.9em;
   font-weight: 700;
   width: 100%;
@@ -174,21 +178,29 @@ div[data-ds-theme]
 div[data-ds-theme]
   .meilisearch-autocomplete
   .dsb-dropdown-menu::-webkit-scrollbar-thumb {
-  background: var(--pst-color-text-base);
+  background: var(--ast-search-bar-enable-background);
   border-radius: inherit;
 }
 
 div[data-ds-theme]
   .meilisearch-autocomplete
   .dsb-dropdown-menu::-webkit-scrollbar-track {
-  background: var(--pst-color-background);
+  background: var(--ast-search-bar-enable-background);
 }
 
 .bd-search {
-  margin-bottom: 200px;
   gap: 0em;
-  border: 0px solid var(--pst-color-border);
+  background-color: var(--ast-search-bar-enable-background);
+  border: 0px solid var(--ast-search-bar-enable-border);
+  margin-bottom: 300px;
 }
 #search-icon {
-  font-size: 1.5rem;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: var(--ast-search-bar-enable-text);
+}
+
+.form-control:focus {
+  box-shadow: none;
 }
