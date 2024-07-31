@@ -51,12 +51,16 @@ endif %} {% block docs_navbar %}
           {# Article content #} {% block docs_body %}
 
           <div class="bd-search-container">
-            <h1>{{ _("Search") }}</h1>
             <style>
-              .bd-search .search-button__kbd-shortcut {
-                display: none;
+              .bd-search {
+                margin-bottom: 2px;
+              }
+
+              div[data-ds-theme] .meilisearch-autocomplete .dsb-dropdown-menu {
+                overflow-y: none;
               }
             </style>
+            <h1>{{ _("Search") }}</h1>
             {% include "components/search-field.html" %}
           </div>
           {% endblock docs_body %} {# Article Footer #} {% if

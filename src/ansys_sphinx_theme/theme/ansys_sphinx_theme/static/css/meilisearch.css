@@ -8,45 +8,13 @@ div[data-ds-theme] .searchbox {
 
 .docs-searchbar-suggestion--category-header {
   background-color: var(--ast-suggestion-header-background);
-  border-radius: 7px;
+  border-radius: 4px;
   text-align: left;
-  color: var(--ast-catagory-header-text);
+  color: var(--ast-catagory-header-text) !important;
   width: 680px;
+  padding: 4px;
 }
 
-/**
-* Styles for screens with a width of 576px or less
-*/
-@media screen and (max-width: 576px) {
-  div[data-ds-theme] .searchbox {
-    width: 100%;
-    max-width: 100%;
-  }
-  /* .bd-search input {
-    width: 100% !important;
-  } */
-
-  .index-select {
-    width: 30%;
-  }
-}
-
-/**
-* Styles for screens with a width of 1200px or less
-*/
-@media screen and (min-width: 1200px) {
-  div[data-ds-theme] .searchbox {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* .bd-search input {
-    width: 600px !important;
-  } */
-  .index-select {
-    width: 250px;
-  }
-}
 .dsb-suggestions {
   width: 100%;
   max-width: 140%;
@@ -126,9 +94,9 @@ div[data-ds-theme]
 }
 div[data-ds-theme] .meilisearch-autocomplete .dsb-dropdown-menu {
   max-height: 500px !important;
-  overflow-y: auto !important;
   border: 1px solid #ccc;
   left: -30px;
+  overflow-y: auto;
 }
 
 div[data-ds-theme] .meilisearch-autocomplete .docs-searchbar-suggestion {
