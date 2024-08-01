@@ -66,10 +66,10 @@ div[data-ds-theme] .meilisearch-autocomplete {
   font-size: 14px;
   outline-color: var(--ast-search-bar-enable-border);
   border: 0.5px solid var(--ast-search-bar-enable-border);
-  width: 680px;
+  width: 670px;
   max-width: 200%;
   height: 40px;
-  margin-left: 2px;
+  margin-left: 5px;
 }
 
 .search-button__wrapper.show input,
@@ -97,6 +97,9 @@ div[data-ds-theme] .meilisearch-autocomplete {
   box-shadow: none;
   padding: 0px 8px;
   margin-left: 2px;
+}
+:focus-visible {
+  outline: none;
 }
 
 div[data-ds-theme]
@@ -134,6 +137,10 @@ div[data-ds-theme]
   .docs-searchbar-suggestion--subcategory-column {
   width: None;
   text-align: left;
+}
+
+.meilisearch-autocomplete .docs-searchbar-suggestion--category-header {
+  width: 100%;
 }
 
 div[data-ds-theme]
@@ -174,7 +181,7 @@ div[data-ds-theme]
 }
 
 .bd-search {
-  gap: 0em;
+  gap: 8px;
   background-color: var(--ast-search-bar-enable-background);
   border: 0px solid var(--ast-search-bar-enable-border);
   margin-bottom: 300px;
