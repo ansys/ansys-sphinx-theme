@@ -442,7 +442,7 @@ def build_quarto_cheatsheet(app: Sphinx):
         return
 
     cheatsheet_file = cheatsheet_options.get("file", "")
-    output_dir = cheatsheet_options.get("output_dir", "")
+    output_dir = cheatsheet_options.get("output_dir", "_static")
 
     if not cheatsheet_file:
         return
@@ -450,9 +450,7 @@ def build_quarto_cheatsheet(app: Sphinx):
     cheatsheet_file = pathlib.Path(app.srcdir) / cheatsheet_file
     file_name = str(cheatsheet_file.name)
     file_path = cheatsheet_file.parent
-    if not output_dir:
-        output_dir = app.outdir / "_static"
-    output_dir = pathlib.Path(app.outdir) / output_dir
+    output_dir_path = pathlib.Path(app.outdir) / output_dir
     try:
         # Add the cheatsheet to the Quarto project
         result = subprocess.run(
@@ -464,7 +462,15 @@ def build_quarto_cheatsheet(app: Sphinx):
 
         # Render the cheatsheet
         render_result = subprocess.run(
-            ["quarto", "render", file_name, "--to", "cheat_sheet-pdf", "--output-dir", output_dir],
+            [
+                "quarto",
+                "render",
+                file_name,
+                "--to",
+                "cheat_sheet-pdf",
+                "--output-dir",
+                output_dir_path,
+            ],
             cwd=file_path,
             capture_output=True,
             text=True,
@@ -496,10 +502,10 @@ def build_quarto_cheatsheet(app: Sphinx):
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to build Quarto cheatsheet: {e}, ensure Quarto is installed.")
 
-    output_file = output_dir / file_name.replace(".qmd", ".pdf")
-    app.config.html_theme_options["cheatsheet"]["output_dir"] = f"{output_file}"
+    output_file = output_dir_path / file_name.replace(".qmd", ".pdf")
+    app.config.html_theme_options["cheatsheet"]["output_dir"] = f"{output_dir}/{output_file.name}"
     output_png = file_name.replace(".qmd", ".png")
-    convert_pdf_to_png(output_file, output_dir, output_png)
+    convert_pdf_to_png(output_file, output_dir_path, output_png)
     app.config.html_theme_options["cheatsheet"]["thumbnail"] = f"{output_dir}/{output_png}"
 
 
