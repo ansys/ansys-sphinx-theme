@@ -1,24 +1,32 @@
 {% if theme_use_meilisearch %}
 {%- extends "page.html" %}
 {# Over-ride the body to be custom search structure we want #}
-{% block docs_body %}  <div class="bd-search-container">
-    <h1>{{ _("Search") }}</h1>
-    {% include "components/search-field.html" %}
-  </div>
-  <script>
-    function removeDuplicateForms() {
+{% block docs_body %}
+<div class="bd-search-container">
+  <h1>{{ _("Search") }}</h1>
+  {% include "components/search-field.html" %}
+</div>
+<script>
+  function removeDuplicateForms() {
   // Select all form elements matching the specific class and action
   var forms = document.querySelectorAll('form.bd-search.d-flex.align-items-center[action="#"]');
-
   // Check if there are more than one instance
   if (forms.length > 1) {
     // Remove the first instance (index 0)
     forms[0].remove();
   }
-}
+  }
 // Call the function to remove duplicate forms
-removeDuplicateForms();
-  </script>
+  removeDuplicateForms();
+</script>
+<style>
+  .bd-search {
+    margin-bottom: 0;
+  }
+  div[data-ds-theme] .meilisearch-autocomplete .dsb-dropdown-menu{
+    overflow-y: initial;
+  }
+</style>
 {% endblock %}
 {% else %}
 {%- include "pydata_sphinx_theme/search.html" -%}{% endif %}

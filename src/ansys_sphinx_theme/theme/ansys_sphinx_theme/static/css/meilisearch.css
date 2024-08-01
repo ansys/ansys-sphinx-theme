@@ -58,15 +58,32 @@ div[data-ds-theme] .meilisearch-autocomplete {
   color: var(--pst-color-text-base);
 }
 
-#search-bar-input {
+.form-control:focus,
+.form-control:focus-visible,
+.form-control {
   background-color: var(--ast-search-bar-enable-background);
   color: var(--ast-search-bar-enable-text);
-  font-size: 16px;
+  font-size: 14px;
   outline-color: var(--ast-search-bar-enable-border);
   border: 0.5px solid var(--ast-search-bar-enable-border);
   width: 680px;
   max-width: 200%;
   height: 40px;
+  margin-left: 2px;
+}
+
+.search-button__wrapper.show input,
+.search-button__wrapper.show svg {
+  font-size: 14px;
+}
+
+.bd-search .search-button__kbd-shortcut {
+  background-color: var(--ast-search-bar-enable-background) !important;
+  box-shadow: none !important;
+  height: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 .index-select {
