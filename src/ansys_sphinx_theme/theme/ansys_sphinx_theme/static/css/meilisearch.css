@@ -141,6 +141,7 @@ div[data-ds-theme]
 
 .meilisearch-autocomplete .docs-searchbar-suggestion--category-header {
   width: 100%;
+  padding: 4px 8px;
 }
 
 div[data-ds-theme]
