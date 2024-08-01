@@ -12,7 +12,7 @@ require(["docsSearchBar"], function (docsSearchBar) {
     hostUrl: HOST_URL,
     apiKey: API_KEY,
     indexUid: indexUid,
-    inputSelector: "#search-bar-input",
+    inputSelector: "form.bd-search input",
     debug: true, // Set debug to true if you want to inspect the dropdown
     meilisearchOptions: {
       limit: 10,
@@ -36,7 +36,7 @@ require(["docsSearchBar"], function (docsSearchBar) {
   }
 
   document
-    .getElementById("search-bar-input")
+    .getElementById("form.bd-search input")
     .addEventListener("input", function () {
       const inputValue = this.value.trim(); // Trim whitespace from input value
       // Show the spinner icon only when there is input and no suggestions
