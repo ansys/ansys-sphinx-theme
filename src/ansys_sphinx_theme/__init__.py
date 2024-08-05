@@ -453,8 +453,9 @@ def build_quarto_cheatsheet(app: Sphinx):
     output_dir_path = pathlib.Path(app.outdir) / output_dir
     try:
         # Add the cheatsheet to the Quarto project
+        VERSION = "v1"
         result = subprocess.run(
-            ["quarto", "add", "ansys/pyansys-quarto-cheatsheet@v1", "--no-prompt"],
+            ["quarto", "add", f"ansys/pyansys-quarto-cheatsheet@{VERSION}", "--no-prompt"],
             cwd=file_path,
             capture_output=True,
             text=True,
@@ -500,7 +501,7 @@ def build_quarto_cheatsheet(app: Sphinx):
             cheatsheet_file.parent.joinpath("_static").rmdir()
 
     except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Failed to build Quarto cheatsheet: {e}, ensure Quarto is installed.")
+        raise RuntimeError(f"Failed to build Quarto cheatsheet: {e}. Ensure Quarto is installed.")
 
     output_file = output_dir_path / file_name.replace(".qmd", ".pdf")
     app.config.html_theme_options["cheatsheet"]["output_dir"] = f"{output_dir}/{output_file.name}"
