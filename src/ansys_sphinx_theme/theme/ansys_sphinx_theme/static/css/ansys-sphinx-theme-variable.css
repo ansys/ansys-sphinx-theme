@@ -212,6 +212,11 @@ html[data-theme="light"] {
   --ast-suggestion-header-background: #d9d9d9;
   --ast-catagory-header-text: #353535;
   --ast-suggestion-text-color: #000000;
+
+  /**
+  * dropdown header
+  */
+  --ast-dropdown-header-border: #d9d9d9;
 }
 
 html[data-theme="dark"] {
@@ -355,6 +360,11 @@ html[data-theme="dark"] {
   --ast-suggestion-header-background: #3d3d3d;
   --ast-catagory-header-text: #ececec;
   --ast-suggestion-text-color: #ffffff;
+
+  /**
+  * dropdown header
+  */
+  --ast-dropdown-header-border: #3d3d3d;
 }
 
 /**

@@ -643,3 +643,28 @@ aside.topic,
 div.versionchanged {
   border-color: var(--ast-admonition-neutral-border);
 }
+
+/**
+* Dropdown _header.scss
+*/
+.bd-header ul.navbar-nav > li.nav-item.dropdown > .dropdown-toggle {
+  color: var(--ast-navbar-color);
+  font-weight: 600;
+  font-size: var(--bs-nav-link-font-size);
+  border-radius: 4px;
+  border-color: var(--ast-dropdown-header-border);
+}
+
+.bd-header ul.navbar-nav > li.nav-item.dropdown > .dropdown-toggle:hover {
+  color: var(--ast-navbar-hover-color);
+  border-bottom: none;
+  box-shadow: var(--ast-box-shadow-hover);
+}
+
+.bd-header ul.navbar-nav .dropdown .dropdown-menu .dropdown-item {
+  color: var(--ast-navbar-color);
+  font-size: var(--bs-nav-link-font-size);
+  font-weight: 600;
+  border-radius: 4px;
+  border-color: var(--ast-dropdown-header-border);
+}
