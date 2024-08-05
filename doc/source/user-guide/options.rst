@@ -208,8 +208,8 @@ that contain these keys, in the order given:
    include the directory name relative to the root of the documentation. For example, if the cheat sheet
    is in the ``getting_started`` directory, the file name is ``getting_started/cheat_sheet.qmd``.
 #. ``title``: Title of the cheat sheet to be displayed in the left navigation pane.
-#. ``output_dir``: Directory where the cheat sheet is saved relative to the output directory after building the documentation.
-   By default, the cheat sheet is saved in the ``_build/html/_static/`` directory.
+#. ``pages``: List of names for the pages to include the cheat sheet on. If no value is provided,
+   the cheat sheet is displayed only on the main ``index.html`` file.
 
 Here is an example of how to add the ``cheatsheet`` dictionary to the `html_theme_options`` dictionary:
 
@@ -220,7 +220,6 @@ Here is an example of how to add the ``cheatsheet`` dictionary to the `html_them
             "cheatsheet": {
                 "file": "<file name including the extension of the cheat sheet>",
                 "pages": "<list of names for the pages to include the cheat sheet on>",  # Optional
-                output_dir: "<directory where the cheat sheet is saved relative to the output directory>",  # Optional
             },
         },
     )

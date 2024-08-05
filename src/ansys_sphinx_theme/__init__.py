@@ -442,7 +442,7 @@ def build_quarto_cheatsheet(app: Sphinx):
         return
 
     cheatsheet_file = cheatsheet_options.get("file", "")
-    output_dir = cheatsheet_options.get("output_dir", "_static")
+    output_dir = "_static"
 
     if not cheatsheet_file:
         return
