@@ -41,6 +41,8 @@
   <script>
   var HOST_URL = "{{ HOST_URL }}";
   var API_KEY = "{{ API_KEY }}";
+  // Iterates of the dictionary of index_uids and index_names to get the first child dicts
+  // and then the first key of the child dict to get the index_uid
   var indexUid = "{{ theme_use_meilisearch.index_uids.items()|first|first }}";
 
   // Function to check if the MeiliSearch host URL is reachable
