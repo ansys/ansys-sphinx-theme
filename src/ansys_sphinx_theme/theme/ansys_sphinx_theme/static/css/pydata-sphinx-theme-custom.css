@@ -590,6 +590,7 @@ div.versionchanged {
   border-style: solid;
   padding: var(--ast-admonitions-padding);
   border-radius: var(--ast-admonitions-border-radius);
+  box-shadow: none !important; /* important tag because the admonition has a box-shadow  from pydata sphinx theme*/
 }
 
 div.deprecated > p,

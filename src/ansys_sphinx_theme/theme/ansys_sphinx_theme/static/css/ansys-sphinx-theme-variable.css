@@ -120,14 +120,16 @@ html[data-theme="light"] {
   --pst-color-on-surface: #f2f2f2;
 
   /**
-  * extensions
+  * table
   */
-  --pst-color-table-background: #ffffff;
-  --pst-color-enabled-table-text: var(--ast-color-text);
-  --pst-color-table-row-hover-bg: #ececec;
-  --pst-color-table-active-bg: #e9f4fe;
-  --pst-color-table-header-text: #686868;
-  --pst-color-table-cell-text: var(--ast-color-text);
+  --ast-color-table-background: #ffffff;
+  --ast-color-enabled-table-text: var(--ast-color-text);
+  --ast-color-table-row-hover-bg: #ececec;
+  --ast-color-table-active-bg: #e9f4fe;
+  --ast-color-table-header-text: #686868;
+  --ast-color-table-cell-text: var(--ast-color-text);
+  --ast-table-outer-border: #ececec;
+  --ast-color-table-inner-border: #ececec;
 
   --pst-color-panel-background: var(--pst-color-on-background);
 
@@ -153,6 +155,11 @@ html[data-theme="light"] {
   --pst-color-sig: #0965c8;
   --pst-color-code-s1: #b35000;
   --pst-color-code-c1: #095d0a;
+
+  --ast-sphinx-gallery-download-background: #1a1a1a;
+  --ast-sphinx-gallery-download-background-hover: #353535;
+  --ast-sphinx-gallery-download-text: #fdfdfd;
+
   /**
   * sphinx design
   */
@@ -283,21 +290,27 @@ html[data-theme="dark"] {
   /**
   * color for sphinx-gallery-code output
     */
-  --pst-color-codecell: #495057;
+  --pst-color-codecell: #353535;
   --pst-color-codeout: #f2f4f6;
   --pst-color-sig: #d6ab1e;
   --pst-color-code-s1: #d79a60;
   --pst-color-code-c1: #8fb842;
 
+  --ast-sphinx-gallery-download-background: #ffffff;
+  --ast-sphinx-gallery-download-background-hover: #ececec;
+  --ast-sphinx-gallery-download-text: #1a1a1a;
+
   /**
   * table hovering
   */
-  --pst-color-table-background: #2d2d2d;
-  --pst-color-enabled-table-text: #d3d3d3;
-  --pst-color-table-row-hover-bg: #3d3d3d;
-  --pst-color-table-header-text: #d3d3d3;
-  --pst-color-table-cell-text: #d3d3d3;
-  --pst-color-table-active-bg: #3d3d3d;
+  --ast-color-table-background: #353535;
+  --ast-color-enabled-table-text: #ececec;
+  --ast-color-table-row-hover-bg: #3d3d3d;
+  --ast-color-table-header-text: #d3d3d3;
+  --ast-color-table-cell-text: #ececec;
+  --ast-color-table-active-bg: #3d3d3d;
+  --ast-table-outer-border: #353535;
+  ---ast-color-table-inner-border: #353535;
 
   /**
   * search hide match
@@ -309,14 +322,14 @@ html[data-theme="dark"] {
   */
 
   --sd-color-primary: var(--pst-color-text-base);
-  --ast-color-enable-card-background: #353535;
+  --ast-color-enable-card-background: #282828;
   --ast-color-enable-border: #e5e5e5;
   --ast-color-hover-card-background: #3d3d3d;
   --ast-dropdown-border-color: #3d3d3d;
   --ast-dropdown-border-color-hover: #8e8e8e;
 
   --ast-color-sphinx-design-primary: #ececec;
-  --ast-color-sphinx-design-background: #353535;
+  --ast-color-sphinx-design-background: #282828;
   --sd-color-primary: #d5d5d5;
   --sd-color-primary-highlight: var(--ast-color-sphinx-design-primary);
   --sd-color-primary-text: var(--ast-color-sphinx-design-background);
@@ -342,13 +355,13 @@ html[data-theme="dark"] {
   --ast-admonition-neutral-icon: #ececec;
   --ast-admonition-neutral-border: #8e8e8e;
   --ast-admonition-info-icon: #1a78c2;
-  --ast-admonition-info-border: #1a78c2;
+  --ast-admonition-info-border: #1856af;
   --ast-admonition-success-icon: #006600;
-  --ast-admonition-success-border: #008000;
+  --ast-admonition-success-border: #147914;
   --ast-admonition-warning-icon: #caad2a;
-  --ast-admonition-warning-border: #fdd835;
+  --ast-admonition-warning-border: #bba12e;
   --ast-admonition-danger-icon: #b72e2a;
-  --ast-admonition-danger-border: #e53935;
+  --ast-admonition-danger-border: #b12422;
   --ast-admonitions-color: var(--ast-color-text);
 
   /**
