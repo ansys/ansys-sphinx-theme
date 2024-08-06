@@ -395,7 +395,7 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
         doc = pymupdf.open(pdf_path)  # open document
         for page in doc:
             pix = page.get_pixmap()
-            pix.save(os.path.join(output_dir, output_png))
+            pix.save(output_dir / output_png)
     except RuntimeError as e:
         raise RuntimeError(f"Failed to convert PDF to PNG: {e}")
 
@@ -496,7 +496,7 @@ def build_quarto_cheatsheet(app: Sphinx):
             if file_path.exists():
                 file_path.unlink()
 
-            # if static folder is clean, delete it
+        # If static folder is clean, delete it
         if not list(cheatsheet_file.parent.glob("_static/*")):
             cheatsheet_file.parent.joinpath("_static").rmdir()
 
