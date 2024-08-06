@@ -238,3 +238,7 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
 .bd-content .sd-card:hover {
   box-shadow: var(--ast-box-shadow-hover) !important;
 }
+
+.sd-hide-link-text {
+  display: none;
+}

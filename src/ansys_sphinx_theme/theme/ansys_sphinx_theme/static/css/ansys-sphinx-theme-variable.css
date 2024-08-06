@@ -350,13 +350,13 @@ html[data-theme="dark"] {
   --ast-admonition-neutral-icon: #ececec;
   --ast-admonition-neutral-border: #8e8e8e;
   --ast-admonition-info-icon: #1a78c2;
-  --ast-admonition-info-border: #1a78c2;
+  --ast-admonition-info-border: #1856af;
   --ast-admonition-success-icon: #006600;
-  --ast-admonition-success-border: #008000;
+  --ast-admonition-success-border: #063d06;
   --ast-admonition-warning-icon: #caad2a;
   --ast-admonition-warning-border: #fdd835;
   --ast-admonition-danger-icon: #b72e2a;
-  --ast-admonition-danger-border: #e53935;
+  --ast-admonition-danger-border: #7e201f;
   --ast-admonitions-color: var(--ast-color-text);
 
   /**

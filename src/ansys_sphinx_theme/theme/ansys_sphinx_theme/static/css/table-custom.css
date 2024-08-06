@@ -110,6 +110,7 @@ table.dataframe {
 .table td ~ td,
 .table td ~ th,
 .table th ~ td,
-.table th ~ th {
+.table th ~ th,
+.bd-content .nboutput .output_area.rendered_html table.dataframe th ~ td {
   border-left: 1px solid var(--ast-color-table-inner-border);
 }
