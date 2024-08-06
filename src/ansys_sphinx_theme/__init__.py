@@ -69,6 +69,9 @@ pyansys_logo_light_mode = str((LOGOS_PATH / "pyansys_logo_transparent_black.png"
 ansys_logo_light_mode = str((LOGOS_PATH / "ansys_logo_transparent_black.png").absolute())
 ansys_logo_dark_mode = str((LOGOS_PATH / "ansys_logo_transparent_white.png").absolute())
 
+# Cheat sheet extension version
+CHEAT_SHEET_QUARTO_EXTENTION_VERSION = "v1"
+
 
 def get_html_theme_path() -> pathlib.Path:
     """Return list of HTML theme paths.
@@ -453,9 +456,13 @@ def build_quarto_cheatsheet(app: Sphinx):
     output_dir_path = pathlib.Path(app.outdir) / output_dir
     try:
         # Add the cheatsheet to the Quarto project
-        VERSION = "v1"
         result = subprocess.run(
-            ["quarto", "add", f"ansys/pyansys-quarto-cheatsheet@{VERSION}", "--no-prompt"],
+            [
+                "quarto",
+                "add",
+                f"ansys/pyansys-quarto-cheatsheet@{CHEAT_SHEET_QUARTO_EXTENTION_VERSION}",
+                "--no-prompt",
+            ],
             cwd=file_path,
             capture_output=True,
             text=True,
