@@ -15,6 +15,7 @@
   -ms-overflow-style: none;
   padding: 0px 16px;
   border-color: var(--ast-table-outer-border);
+  background-color: var(--ast-color-table-background);
 }
 
 tbody,
@@ -104,4 +105,11 @@ table.dataframe :active {
 
 table.dataframe {
   background-color: var(--ast-color-table-background);
+}
+
+.table td ~ td,
+.table td ~ th,
+.table th ~ td,
+.table th ~ th {
+  border-left: 1px solid var(--ast-color-table-inner-border);
 }

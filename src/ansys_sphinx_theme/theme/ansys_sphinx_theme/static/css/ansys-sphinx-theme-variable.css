@@ -129,7 +129,7 @@ html[data-theme="light"] {
   --ast-color-table-header-text: #686868;
   --ast-color-table-cell-text: var(--ast-color-text);
   --ast-table-outer-border: #ececec;
-  ---ast-color-table-inner-border: #ececec;
+  --ast-color-table-inner-border: #ececec;
 
   --pst-color-panel-background: var(--pst-color-on-background);
 
@@ -292,7 +292,7 @@ html[data-theme="dark"] {
   --pst-color-code-c1: #8fb842;
 
   --ast-sphinx-gallery-download-background: #ffffff;
-  --ast-sphinx-gallery-download-background-hover: #f2f2f2;
+  --ast-sphinx-gallery-download-background-hover: #ececec;
   --ast-sphinx-gallery-download-text: #1a1a1a;
 
   /**

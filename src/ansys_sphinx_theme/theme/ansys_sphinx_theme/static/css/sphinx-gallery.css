@@ -19,8 +19,8 @@ a > code.download {
   font-weight: normal;
 }
 
-div.sphx-glr-download a {
-  background-color: var(--ast-sphinx-gallery-download-background);
+div.sphx-glr-download a,
+div.sphx-glr-download a:hover {
   background-image: none;
   color: var(--ast-sphinx-gallery-download-text);
   text-decoration: none;
@@ -39,6 +39,10 @@ a.reference.download:before {
 }
 div.sphx-glr-download a:hover {
   background-color: var(--ast-sphinx-gallery-download-background-hover);
+}
+
+div.sphx-glr-download a {
+  background-color: var(--ast-sphinx-gallery-download-background);
 }
 
 .docutils.container {
