@@ -5,7 +5,7 @@
 */
 
 .table {
-  --bs-table-bg: var(--pst-color-table-background);
+  --bs-table-bg: var(--ast-color-table-background);
   border-spacing: 0;
   border-collapse: separate;
   overflow: hidden;
@@ -14,6 +14,7 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: 0px 16px;
+  border-color: var(--ast-table-outer-border);
 }
 
 tbody,
@@ -22,10 +23,10 @@ tfoot,
 th,
 thead,
 tr {
-  border-bottom: 1px solid var(--pst-color-table-inner-border);
-  background-color: var(--pst-color-table-background);
-  font-family: var(--pst-font-family-base);
-  font-size: var(--pst-table-font-size);
+  border-bottom: 1px solid var(--ast-color-table-inner-border);
+  background-color: var(--ast-color-table-background);
+  font-family: var(--ast-font-family-base);
+  font-size: var(--ast-table-font-size);
 }
 
 .table > :not(caption) > * > * {
@@ -37,8 +38,8 @@ tr {
 */
 th {
   line-height: 40px;
-  color: var(--pst-color-table-header-text) !important;
-  font-size: var(--pst-table-header-font-size) !important;
+  color: var(--ast-color-table-header-text) !important;
+  font-size: var(--ast-table-header-font-size) !important;
 }
 
 /**
@@ -47,7 +48,7 @@ th {
 
 tr {
   line-height: 56px;
-  color: var(--pst-color-table-cell-text);
+  color: var(--ast-color-table-cell-text);
 }
 
 /**
@@ -60,12 +61,12 @@ tfoot :hover,
 th :hover,
 thead :hover,
 tr :hover {
-  background-color: var(--pst-color-table-row-hover-bg);
-  font-family: var(--pst-font-family-base);
+  background-color: var(--ast-color-table-row-hover-bg);
+  font-family: var(--ast-font-family-base);
 }
 
 .table :hover {
-  background-color: var(--pst-color-table-row-hover-bg);
+  background-color: var(--ast-color-table-row-hover-bg);
 }
 
 /**
@@ -73,34 +74,34 @@ tr :hover {
 */
 
 .table :active {
-  background-color: var(--pst-color-table-active-bg);
+  background-color: var(--ast-color-table-active-bg);
 }
 /**
 * Table dataframes
 */
 
 table.dataframe tr {
-  font-size: var(--pst-table-font-size);
+  font-size: var(--ast-table-font-size);
   line-height: 56px;
-  color: var(--past-color-table-cell-text);
+  color: var(--ast-color-table-cell-text);
 }
 
 table.dataframe th {
-  font-size: var(--pst-table-font-size);
+  font-size: var(--ast-table-font-size);
   line-height: 40px;
-  color: var(--pst-color-table-header-text) !important;
+  color: var(--ast-color-table-header-text) !important;
 }
 
 table.dataframe :hover {
-  background-color: var(--pst-color-table-row-hover-bg);
-  font-family: var(--pst-font-family-base);
+  background-color: var(--ast-color-table-row-hover-bg);
+  font-family: var(--ast-font-family-base);
 }
 
 table.dataframe :active {
-  background-color: var(--pst-color-table-active-bg);
-  font-family: var(--pst-font-family-base);
+  background-color: var(--ast-color-table-active-bg);
+  font-family: var(--ast-font-family-base);
 }
 
 table.dataframe {
-  background-color: var(--pst-color-table-background);
+  background-color: var(--ast-color-table-background);
 }
