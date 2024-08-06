@@ -352,11 +352,11 @@ html[data-theme="dark"] {
   --ast-admonition-info-icon: #1a78c2;
   --ast-admonition-info-border: #1856af;
   --ast-admonition-success-icon: #006600;
-  --ast-admonition-success-border: #063d06;
+  --ast-admonition-success-border: #147914;
   --ast-admonition-warning-icon: #caad2a;
-  --ast-admonition-warning-border: #fdd835;
+  --ast-admonition-warning-border: #bba12e;
   --ast-admonition-danger-icon: #b72e2a;
-  --ast-admonition-danger-border: #7e201f;
+  --ast-admonition-danger-border: #b12422;
   --ast-admonitions-color: var(--ast-color-text);
 
   /**
