@@ -28,7 +28,6 @@ import subprocess
 from typing import Any, Dict
 
 from docutils.nodes import document
-from pdf2image import convert_from_path
 from sphinx import addnodes
 from sphinx.application import Sphinx
 
@@ -394,6 +393,12 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
     output_png : str
         Name of the output PNG file.
     """
+    try:
+        from pdf2image import convert_from_path
+    except ImportError as e:
+        raise ImportError(
+            f"Failed to import `pdf2image`: {e}. Install the package using `pip install pdf2image`"  # noqa: E501
+        )
     try:
         images = convert_from_path(pdf_path, 500)
         images[0].save(output_dir / output_png, "PNG")
