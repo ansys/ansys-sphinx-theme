@@ -243,3 +243,8 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
   outline: none;
   box-shadow: none;
 }
+
+.bd-content .sd-card .sd-stretched-link:focus-visible:after {
+  outline: none;
+  box-shadow: var(--ast-ring-shadow-focused);
+}
