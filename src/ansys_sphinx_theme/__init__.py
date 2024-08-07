@@ -28,7 +28,7 @@ import subprocess
 from typing import Any, Dict
 
 from docutils.nodes import document
-import pymupdf
+from pdf2image import convert_from_path
 from sphinx import addnodes
 from sphinx.application import Sphinx
 
@@ -395,12 +395,12 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
         Name of the output PNG file.
     """
     try:
-        doc = pymupdf.open(pdf_path)  # open document
-        for page in doc:
-            pix = page.get_pixmap()
-            pix.save(output_dir / output_png)
-    except RuntimeError as e:
-        raise RuntimeError(f"Failed to convert PDF to PNG: {e}")
+        images = convert_from_path(pdf_path, 500)
+        images[0].save(output_dir / output_png, "PNG")
+    except Exception as e:
+        raise RuntimeError(
+            f"Failed to convert PDF to PNG: {e}, ensure `poppler` is installed. See https://pypi.org/project/pdf2image/"  # noqa: E501
+        )
 
 
 def add_cheat_sheet(
