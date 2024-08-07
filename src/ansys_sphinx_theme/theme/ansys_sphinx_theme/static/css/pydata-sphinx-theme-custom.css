@@ -157,9 +157,11 @@ nav.bd-links .current > a {
   border-bottom: 2px solid var(--ast-navbar-active-border-color);
 }
 
-.bd-header ul.navbar-nav > li.nav-item > .nav-link:focus {
+.bd-header ul.navbar-nav > li.nav-item > .nav-link:focus-visible {
   color: var(--ast-navbar-color);
   box-shadow: var(--ast-ring-shadow-focused);
+  outline: none;
+  outline-offset: 0px;
 }
 
 html .pst-navbar-icon {
@@ -441,7 +443,7 @@ a:visited {
   color: var(--ast-color-link-visited);
 }
 
-a:focus {
+a:focus-visible {
   color: var(--ast-color-link);
   box-shadow: var(--ast-ring-shadow-focused);
 }
@@ -452,6 +454,15 @@ a > code {
 
 code.literal {
   color: var(--ast-color-inline-code);
+}
+
+nav.bd-links li > a:focus-visible,
+.nav-link:focus-visible,
+a.nav-link.pst-navbar-icon:focus-visible,
+.toc-entry a.nav-link:focus-visible,
+nav.bd-links .current > a:focus-visible {
+  box-shadow: var(--ast-ring-shadow-focused);
+  outline: none;
 }
 
 /**
