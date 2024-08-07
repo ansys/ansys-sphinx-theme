@@ -240,6 +240,6 @@ main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" s
 
 .. note::
 
-    To use this feature, you must have the `quarto <https://quarto.org/>` package installed. To create thumbnails of generated pdf files,
+    To use this feature, you must have the `quarto <https://quarto.org/>` package installed. To create thumbnails of generated PDF files,
     the theme is using `pdf2image`. So you should have the ``poppler`` package installed in your system.
     For more information, see the `pdf2image documentation <https://pypi.org/project/pdf2image/>`_.
