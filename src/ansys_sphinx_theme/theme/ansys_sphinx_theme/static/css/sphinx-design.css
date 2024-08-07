@@ -239,6 +239,7 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
   box-shadow: var(--ast-box-shadow-hover) !important;
 }
 
-.sd-hide-link-text {
-  display: none;
+.sd-hide-link-text:focus {
+  outline: none;
+  box-shadow: none;
 }
