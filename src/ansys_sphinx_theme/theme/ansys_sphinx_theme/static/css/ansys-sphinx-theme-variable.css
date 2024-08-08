@@ -218,6 +218,7 @@ html[data-theme="light"] {
   --ast-search-bar-enable-text: #686868;
   --ast-suggestion-header-background: #d9d9d9;
   --ast-catagory-header-text: #353535;
+  --ast-catagory-suggestion-text: #8e8e8e;
   --ast-suggestion-text-color: #000000;
 
   /**
@@ -372,6 +373,7 @@ html[data-theme="dark"] {
   --ast-search-bar-enable-text: #d3d3d3;
   --ast-suggestion-header-background: #3d3d3d;
   --ast-catagory-header-text: #ececec;
+  --ast-catagory-suggestion-text: #686868;
   --ast-suggestion-text-color: #ffffff;
 
   /**

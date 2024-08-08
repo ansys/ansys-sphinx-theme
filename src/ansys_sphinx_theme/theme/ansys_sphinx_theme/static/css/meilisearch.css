@@ -126,10 +126,16 @@ div[data-ds-theme] .meilisearch-autocomplete .docs-searchbar-suggestion {
 div[data-ds-theme]
   .meilisearch-autocomplete
   .docs-searchbar-suggestion--highlight {
-  color: var(--pst-color-info) !important;
+  color: var(--ast-suggestion-text-color) !important;
   font-weight: 900;
   background: transparent;
   padding: 0 0.05em;
+}
+
+.meilisearch-autocomplete .docs-searchbar-suggestion--text {
+  color: var(--ast-catagory-suggestion-text);
+  font-size: 12px;
+  line-height: var(--ast-global-line-height);
 }
 
 div[data-ds-theme]

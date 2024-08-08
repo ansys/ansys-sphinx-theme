@@ -192,6 +192,15 @@ a.nav-link.pst-navbar-icon:active {
   font-weight: bold;
 }
 
+ul.navbar-icon-links {
+  column-gap: 10px;
+}
+
+.bd-header .navbar-header-items__center,
+.bd-header .navbar-header-items__end {
+  column-gap: 10px;
+}
+
 /*
 * dropdown button after 5 sections
 */
