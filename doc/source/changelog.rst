@@ -9,6 +9,80 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.0.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.0>`_ - 2024-08-08
+=======================================================================================
+
+Added
+^^^^^
+
+- fix: update the github icon `#401 <https://github.com/ansys/ansys-sphinx-theme/pull/401>`_
+- feat: add default logo and update logo option with theme `#425 <https://github.com/ansys/ansys-sphinx-theme/pull/425>`_
+- feat: add quarto cheat sheet extension with cheat sheet option `#428 <https://github.com/ansys/ansys-sphinx-theme/pull/428>`_
+
+
+Changed
+^^^^^^^
+
+- chore: update CHANGELOG for v0.16.2 `#381 <https://github.com/ansys/ansys-sphinx-theme/pull/381>`_
+- chore: update CHANGELOG for v0.16.3 `#389 <https://github.com/ansys/ansys-sphinx-theme/pull/389>`_
+- chore: update CHANGELOG for v0.16.4 `#390 <https://github.com/ansys/ansys-sphinx-theme/pull/390>`_
+- chore: update CHANGELOG for v0.16.5 `#394 <https://github.com/ansys/ansys-sphinx-theme/pull/394>`_
+- chore: update CHANGELOG for v0.16.6 `#402 <https://github.com/ansys/ansys-sphinx-theme/pull/402>`_
+
+
+Fixed
+^^^^^
+
+- fix: Align cheat sheet center `#382 <https://github.com/ansys/ansys-sphinx-theme/pull/382>`_
+- fix: reformat the style files `#406 <https://github.com/ansys/ansys-sphinx-theme/pull/406>`_
+- fix: reformat the table styles `#408 <https://github.com/ansys/ansys-sphinx-theme/pull/408>`_
+- fix: reformat navigation bar and background `#409 <https://github.com/ansys/ansys-sphinx-theme/pull/409>`_
+- fix: `primary` ,`secondary` sidebars and links `#411 <https://github.com/ansys/ansys-sphinx-theme/pull/411>`_
+- fix: sphinx design reformat `#412 <https://github.com/ansys/ansys-sphinx-theme/pull/412>`_
+- fix: update the breadcrumbs `#419 <https://github.com/ansys/ansys-sphinx-theme/pull/419>`_
+- fix: admonitions style `#424 <https://github.com/ansys/ansys-sphinx-theme/pull/424>`_
+- fix: sidebar borders and overflow `#427 <https://github.com/ansys/ansys-sphinx-theme/pull/427>`_
+- fix: search bar styles `#429 <https://github.com/ansys/ansys-sphinx-theme/pull/429>`_
+- fix: updated the logo options `#431 <https://github.com/ansys/ansys-sphinx-theme/pull/431>`_
+- fix: add dropdown styles for the header navigation bar `#437 <https://github.com/ansys/ansys-sphinx-theme/pull/437>`_
+- fix: dark theme variables `#438 <https://github.com/ansys/ansys-sphinx-theme/pull/438>`_
+- fix: sphinx card `box shadow` on focus `#439 <https://github.com/ansys/ansys-sphinx-theme/pull/439>`_
+- fix: focus links with keyboard `#440 <https://github.com/ansys/ansys-sphinx-theme/pull/440>`_
+- fix: search bar style for dark theme, icons links `#442 <https://github.com/ansys/ansys-sphinx-theme/pull/442>`_
+
+
+Dependencies
+^^^^^^^^^^^^
+
+- build(deps-dev): update pydata-sphinx-theme requirement from <0.15,>=0.14 to >=0.15 `#336 <https://github.com/ansys/ansys-sphinx-theme/pull/336>`_
+- chore: version 0.17.dev0 `#386 <https://github.com/ansys/ansys-sphinx-theme/pull/386>`_
+- chore(deps): bump requests from 2.32.2 to 2.32.3 `#391 <https://github.com/ansys/ansys-sphinx-theme/pull/391>`_
+- docs: reformat the documentation `#396 <https://github.com/ansys/ansys-sphinx-theme/pull/396>`_
+- chore(deps): bump sphinx-autoapi from 3.1.1 to 3.1.2 `#405 <https://github.com/ansys/ansys-sphinx-theme/pull/405>`_
+- build(deps): bump pyvista[jupyter] from 0.43.10 to 0.44.0 `#413 <https://github.com/ansys/ansys-sphinx-theme/pull/413>`_
+- build(deps): bump jupytext from 1.16.2 to 1.16.3 `#415 <https://github.com/ansys/ansys-sphinx-theme/pull/415>`_
+- build(deps): bump sphinx from 7.3.7 to 7.4.4 `#416 <https://github.com/ansys/ansys-sphinx-theme/pull/416>`_
+- build(deps): bump sphinx from 7.4.4 to 7.4.5 `#417 <https://github.com/ansys/ansys-sphinx-theme/pull/417>`_
+- build(deps): bump sphinx from 7.4.5 to 7.4.6 `#418 <https://github.com/ansys/ansys-sphinx-theme/pull/418>`_
+- build(deps): bump sphinx-autoapi from 3.1.2 to 3.2.0 `#420 <https://github.com/ansys/ansys-sphinx-theme/pull/420>`_
+- build(deps): bump sphinx-gallery from 0.16.0 to 0.17.0 `#421 <https://github.com/ansys/ansys-sphinx-theme/pull/421>`_
+- build(deps): bump pyvista[jupyter] from 0.44.0 to 0.44.1 `#422 <https://github.com/ansys/ansys-sphinx-theme/pull/422>`_
+- build(deps): bump sphinx from 7.4.6 to 7.4.7 `#423 <https://github.com/ansys/ansys-sphinx-theme/pull/423>`_
+- build(deps): bump sphinx-autoapi from 3.2.0 to 3.2.1 `#426 <https://github.com/ansys/ansys-sphinx-theme/pull/426>`_
+- build(deps): bump sphinx-notfound-page from 1.0.2 to 1.0.3 `#432 <https://github.com/ansys/ansys-sphinx-theme/pull/432>`_
+- build(deps): bump jupytext from 1.16.3 to 1.16.4 `#433 <https://github.com/ansys/ansys-sphinx-theme/pull/433>`_
+- build(deps): bump sphinx-notfound-page from 1.0.3 to 1.0.4 `#434 <https://github.com/ansys/ansys-sphinx-theme/pull/434>`_
+- build(deps): bump sphinx-design from 0.6.0 to 0.6.1 `#435 <https://github.com/ansys/ansys-sphinx-theme/pull/435>`_
+- build(deps): bump sphinx from 7.4.7 to 8.0.2 `#436 <https://github.com/ansys/ansys-sphinx-theme/pull/436>`_
+- build(deps): bump sphinx-gallery from 0.17.0 to 0.17.1 `#441 <https://github.com/ansys/ansys-sphinx-theme/pull/441>`_
+
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- refactor: remove function duplicate `#407 <https://github.com/ansys/ansys-sphinx-theme/pull/407>`_
+- docs: Update `mail id` in README.rst `#414 <https://github.com/ansys/ansys-sphinx-theme/pull/414>`_
+
 `0.16.6 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.6>`_ - 2024-06-18
 =========================================================================================
 
