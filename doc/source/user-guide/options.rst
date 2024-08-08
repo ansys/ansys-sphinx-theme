@@ -227,7 +227,7 @@ Here is an example of how to add the ``cheatsheet`` dictionary to the `html_them
 Here is an example of how to show a thumbnail of a PyMAPDL cheat sheet in the left navigation pane of its
 main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" section:
 
- .. code-block:: python
+.. code-block:: python
 
     html_theme_options = (
         {
