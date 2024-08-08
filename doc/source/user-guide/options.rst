@@ -198,21 +198,18 @@ your documentation.
 Cheat sheets
 ------------
 
-If a cheat sheet has been created for your PyAnsys library, you can show a thumbnail
-image of it in the left navigation pane of one or more sections of your documentation.
+If a cheat sheet has been created for your PyAnsys library, with ``quarto``, you can
+add it to the left navigation pane of your documentation.
 
 In the ``html_theme_options`` dictionary, you add a child dictionary named ``cheatsheet``
 that contain these keys, in the order given:
 
-#. ``url``: URL of the cheat sheet.
-#. ``title``: Title of the cheat sheet.
-#. ``thumbnail``: URL of the thumbnail image for the cheat sheet.
-#. ``needs_download``: Whether to download the cheat sheet locally during the documentation build.
-   The default is ``False``, in which case the cheat sheet is accessed directly from the provided URL.
-   If ``True``, the cheat sheet is downloaded to the ``_build/html/_static/`` directory and accessed
-   from here.
-#. ``pages``: List of names for the reStructuredText (RST) files to show the cheat sheet on. If no list
-   is provided, the cheat sheet is shown in the left navigation pane of the main ``index.rst`` file.
+#. ``file``: File name including the extension of the cheat sheet. If the file is inside a directory,
+   include the directory name relative to the root of the documentation. For example, if the cheat sheet
+   is in the ``getting_started`` directory, the file name is ``getting_started/cheat_sheet.qmd``.
+#. ``title``: Title of the cheat sheet to be displayed in the left navigation pane.
+#. ``pages``: List of names for the pages to include the cheat sheet on. If no value is provided,
+   the cheat sheet is displayed only on the main ``index.html`` file.
 
 Here is an example of how to add the ``cheatsheet`` dictionary to the `html_theme_options`` dictionary:
 
@@ -221,10 +218,7 @@ Here is an example of how to add the ``cheatsheet`` dictionary to the `html_them
     html_theme_options = (
         {
             "cheatsheet": {
-                "url": "<URL of the cheat sheet>",
-                "title": "<title of the cheat sheet>",
-                "thumbnail": "<URL of the thumbnail image>",
-                "needs_download": True,  # True if you want to download and access the cheat sheet locally
+                "file": "<file name including the extension of the cheat sheet>",
                 "pages": "<list of names for the pages to include the cheat sheet on>",  # Optional
             },
         },
@@ -238,10 +232,7 @@ main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" s
     html_theme_options = (
         {
             "cheatsheet": {
-                "url": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.pdf",
-                "title": "PyMAPDL cheat sheet",
-                "thumbnail": "https://cheatsheets.docs.pyansys.com/pymapdl_cheat_sheet.png",
-                "needs_download": True,
+                "file": "getting_started/cheat_sheet.qmd",
                 "pages": ["index", "getting_started/learning"],
             },
         },
@@ -249,12 +240,6 @@ main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" s
 
 .. note::
 
-    If you set ``"needs_download": True", you should provide the ``html_static_path`` option
-    in the ``conf.py`` file to specify the location for downloading the cheat sheet to.
-
-    For example, if you want to download the cheat sheet to the ``_build/html/_static/`` directory,
-    you should add the following line in the ``conf.py`` file:
-
-    .. code-block:: pycon
-
-        html_static_path = ["_static"]
+    To use this feature, you must have the `quarto <https://quarto.org/>` package installed. To create thumbnails of generated PDF files,
+    the theme is using `pdf2image`. So you should have the ``poppler`` package installed in your system.
+    For more information, see the `pdf2image documentation <https://pypi.org/project/pdf2image/>`_.

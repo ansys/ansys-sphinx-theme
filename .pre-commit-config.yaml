@@ -41,20 +41,20 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.28.5
+  rev: 0.29.1
   hooks:
     - id: check-github-workflows
 
 
 - repo: https://github.com/adamchainz/blacken-docs
-  rev: 1.16.0
+  rev: 1.18.0
   hooks:
   - id: blacken-docs
     additional_dependencies: [black==24.4.2]
     exclude: 'src/ansys_sphinx_theme/theme/ansys_sphinx_theme/_templates/'
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.3.2
+  rev: v0.3.1
   hooks:
   - id: add-license-headers
     files: '(src|doc/source/examples)/.*\.(py)'
