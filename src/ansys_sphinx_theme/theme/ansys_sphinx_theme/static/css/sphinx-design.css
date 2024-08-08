@@ -27,10 +27,6 @@ blockquote {
   background-color: var(--pst-color-background);
 }
 
-html[data-theme="dark"] .sd-card-img-top[src*=".png"] {
-  filter: invert(0.82) brightness(0.8) contrast(1.2);
-}
-
 /* Media query for medium-sized screens */
 @media screen and (max-width: 768px) {
   .sd-card .sd-card-header {
