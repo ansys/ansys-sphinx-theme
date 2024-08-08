@@ -54,6 +54,11 @@ To use the logo in both dark and light modes, add the following code to the``htm
              "logo": "no_logo",
          }
 
+.. note::
+
+    If you use the ``logo`` option, make sure to remove the ``html_logo`` option from the ``conf.py`` file.
+    ``logo`` will override the ``html_logo`` option and display the specified logo.
+
 You can also add a custom logo by specifying the path to the logo file as specified in `pydata-sphinx-theme <pydata_logo_>`_.
 
 For example:
@@ -66,6 +71,7 @@ For example:
            "image_dark": "_static/logo-dark.png",
        }
    }
+
 
 ``favicon``
 ~~~~~~~~~~~
