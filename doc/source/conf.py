@@ -166,7 +166,7 @@ nbsphinx_thumbnails = {
 # Preferred plotting style for documentation
 pyvista.BUILDING_GALLERY = True
 
-linkcheck_ignore = ["https://sphinxdocs.ansys.com/version/dev/*"]
+linkcheck_ignore = ["https://sphinxdocs.ansys.com/version/*"]
 if switcher_version != "dev":
     linkcheck_ignore.append(
         f"https://github.com/ansys/ansys-sphinx-theme/releases/tag/v{__version__}"
