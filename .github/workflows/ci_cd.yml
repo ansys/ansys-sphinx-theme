@@ -10,7 +10,7 @@ on:
       - main
 env:
   MAIN_PYTHON_VERSION : '3.10'
-  PACKAGE_NAME: 'ansys-sphinx-theme'
+  PACKAGE_NAME: 'ansys_sphinx_theme'
   DOCUMENTATION_CNAME: 'sphinxdocs.ansys.com'
   MEILISEARCH_API_KEY: ${{ secrets.MEILISEARCH_API_KEY }}
   MEILISEARCH_PUBLIC_API_KEY: ${{ secrets.MEILISEARCH_PUBLIC_API_KEY }}
@@ -177,8 +177,8 @@ jobs:
 
       - name: Scrape the stable documentation to PyMeilisearch
         run: |
-          VERSION=$(python -c "from ${{ env.PACKAGE_NAME }} import __version__; print('.'.join(__version__.split('.')[:2]))")
-          VERSION_MEILI=$(python -c "from ${{ env.PACKAGE_NAME }} import __version__; print('-'.join(__version__.split('.')[:2]))")
+          VERSION=$(python -c "from ansys_sphinx_theme import __version__; print('.'.join(__version__.split('.')[:2]))")
+          VERSION_MEILI=$(python -c "from ansys_sphinx_theme import __version__; print('-'.join(__version__.split('.')[:2]))")
           echo "Calculated VERSION: $VERSION"
           echo "Calculated VERSION_MEILI: $VERSION_MEILI"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
