@@ -180,7 +180,7 @@ def setup_default_html_theme_options(app):
 
     # Add default pygments style options
     if not theme_options.get("pygments_light_style"):
-        theme_options["pygments_light_style"] = "tango"
+        theme_options["pygments_light_style"] = "friendly"
     if not theme_options.get("pygments_dark_style"):
         theme_options["pygments_dark_style"] = "monokai"
 
