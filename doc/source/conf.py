@@ -24,7 +24,6 @@ from ansys_sphinx_theme import (
 
 THIS_PATH = Path(__file__).parent.resolve()
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
-API_TEMPLATES = (THIS_PATH / "examples" / "autoapi").resolve()
 
 # Project information
 project = "ansys_sphinx_theme"
@@ -72,6 +71,8 @@ html_theme_options = {
         "directory": "src/ansys_sphinx_theme/examples",
         "output": "examples/",
         "own_page_level": "function",
+        "add_toctree_entry": False,
+        
     },
     "logo": "ansys",
 }
