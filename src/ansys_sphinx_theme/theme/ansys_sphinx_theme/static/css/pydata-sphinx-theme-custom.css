@@ -706,3 +706,16 @@ button.btn.version-switcher__button:hover {
   filter: box-shadow(var(--ast-box-shadow-active));
   border: none;
 }
+
+/**
+* Article content (_article.scss)
+*/
+
+.bd-main .bd-content .bd-article-container {
+  padding: 8px;
+  width: 1000px;
+}
+
+.bd-sidebar-primary {
+  width: 20%;
+}

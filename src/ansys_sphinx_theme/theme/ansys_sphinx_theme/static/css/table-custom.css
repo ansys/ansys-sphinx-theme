@@ -48,7 +48,8 @@ th {
 */
 
 tr {
-  line-height: 56px;
+  line-height: var(--ast-global-line-height);
+  height: 56px;
   color: var(--ast-color-table-cell-text);
 }
 
