@@ -53,8 +53,8 @@ blockquote {
 
 .bd-content details.sd-dropdown {
   color: var(--ast-dropdown-text-color);
-  max-width: 500px;
-  width: 100%;
+  width: fit-content;
+  min-width: 400px;
 }
 
 .bd-content details.sd-dropdown summary.sd-summary-title {
