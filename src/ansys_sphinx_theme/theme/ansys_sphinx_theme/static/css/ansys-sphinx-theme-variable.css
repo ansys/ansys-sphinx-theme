@@ -310,8 +310,8 @@ html[data-theme="dark"] {
   --ast-color-table-header-text: #d3d3d3;
   --ast-color-table-cell-text: #ececec;
   --ast-color-table-active-bg: #3d3d3d;
-  --ast-table-outer-border: #353535;
-  ---ast-color-table-inner-border: #353535;
+  --ast-table-outer-border: #d3d3d3;
+  --ast-color-table-inner-border: #d3d3d3;
 
   /**
   * search hide match
