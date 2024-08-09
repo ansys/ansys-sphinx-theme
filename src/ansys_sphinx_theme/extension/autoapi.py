@@ -82,7 +82,7 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     app.config["autoapi_python_class_content"] = autoapi.get("class_content", "class")
     app.config["autoapi_options"] = autoapi.get("options", AUTOAPI_OPTIONS)
     app.config["autoapi_ignore"] = autoapi.get("ignore", [])
-    app.config["autoapi_add_toctree_entry"] = autoapi.get("add_toctree_entry", False)
+    app.config["autoapi_add_toctree_entry"] = autoapi.get("add_toctree_entry", True)
 
     # HACK: The ``autoapi_dirs`` should be given as a relative path to the conf.py.
     relative_autoapi_dir = os.path.relpath(
