@@ -9,6 +9,16 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.0.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.3>`_ - 2024-08-09
+=======================================================================================
+
+Fixed
+^^^^^
+
+- fix: minor style changes `#452 <https://github.com/ansys/ansys-sphinx-theme/pull/452>`_
+- fix: downgrade the autoapi and keep ``autoapi`` toctree to ``True`` by default `#453 <https://github.com/ansys/ansys-sphinx-theme/pull/453>`_
+- fix: `pygment_styles` with dark and light theme and dark theme table `#454 <https://github.com/ansys/ansys-sphinx-theme/pull/454>`_
+
 `1.0.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.2>`_ - 2024-08-08
 =======================================================================================
 
