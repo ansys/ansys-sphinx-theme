@@ -72,7 +72,6 @@ html_theme_options = {
         "output": "examples/",
         "own_page_level": "function",
         "add_toctree_entry": False,
-        
     },
     "logo": "ansys",
 }
