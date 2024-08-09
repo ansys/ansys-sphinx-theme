@@ -178,6 +178,12 @@ def setup_default_html_theme_options(app):
         ]
         theme_options["github_url"] = None
 
+    # Add default pygments style options
+    if not theme_options.get("pygments_light_style"):
+        theme_options["pygments_light_style"] = "friendly"
+    if not theme_options.get("pygments_dark_style"):
+        theme_options["pygments_dark_style"] = "monokai"
+
 
 def fix_edit_html_page_context(
     app: Sphinx, pagename: str, templatename: str, context: dict, doctree: document
