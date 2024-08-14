@@ -463,6 +463,7 @@ a > code {
 
 code.literal {
   color: var(--ast-color-inline-code);
+  font-family: "open sans", sans-serif;
 }
 
 nav.bd-links li > a:focus-visible,

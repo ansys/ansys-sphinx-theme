@@ -9,6 +9,21 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.0.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.4>`_ - 2024-08-13
+=======================================================================================
+
+Fixed
+^^^^^
+
+- fix: tables and cell output `#460 <https://github.com/ansys/ansys-sphinx-theme/pull/460>`_
+
+
+Dependencies
+^^^^^^^^^^^^
+
+- ci: bump ansys/actions from 6 to 7 `#457 <https://github.com/ansys/ansys-sphinx-theme/pull/457>`_
+- build(deps): bump numpydoc from 1.7.0 to 1.8.0 `#459 <https://github.com/ansys/ansys-sphinx-theme/pull/459>`_
+
 `1.0.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.3>`_ - 2024-08-09
 =======================================================================================
 

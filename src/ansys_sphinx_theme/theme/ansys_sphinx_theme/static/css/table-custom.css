@@ -13,7 +13,6 @@
   overflow-y: scroll;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding: 0px 16px;
   border-color: var(--ast-table-outer-border);
   background-color: var(--ast-color-table-background);
 }
