@@ -54,6 +54,9 @@ AUTOAPI_TEMPLATES_PATH = TEMPLATES_PATH / "autoapi"
 JS_FILE = JS_PATH / "table.js"
 LOGOS_PATH = STATIC_PATH / "logos"
 
+ANSYS_LOGO_LINK = "https://www.ansys.com/"
+PYANSYS_LOGO_LINK = "https://docs.pyansys.com/"
+
 # make logo paths available
 ansys_favicon = str((LOGOS_PATH / "ansys-favicon.png").absolute())
 ansys_logo_black = str((LOGOS_PATH / "ansys_logo_black_cropped.jpg").absolute())
@@ -377,8 +380,10 @@ def configure_theme_logo(app: Sphinx):
 
     if logo_option == "ansys":
         theme_options["logo"] = ansys_logo
+        theme_options["logo_link"] = theme_options.get("logo_link", ANSYS_LOGO_LINK)
     elif logo_option == "pyansys":
         theme_options["logo"] = pyansys_logo
+        theme_options["logo_link"] = theme_options.get("logo_link", PYANSYS_LOGO_LINK)
     elif logo_option == "no_logo":
         theme_options["logo"] = None
 
