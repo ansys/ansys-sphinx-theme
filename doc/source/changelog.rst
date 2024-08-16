@@ -9,6 +9,20 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.0.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.5>`_ - 2024-08-16
+=======================================================================================
+
+Fixed
+^^^^^
+
+- feat: add default logo links for Ansys and PyAnsys logos `#469 <https://github.com/ansys/ansys-sphinx-theme/pull/469>`_
+
+
+Dependencies
+^^^^^^^^^^^^
+
+- build(deps): bump nbsphinx from 0.9.4 to 0.9.5 `#465 <https://github.com/ansys/ansys-sphinx-theme/pull/465>`_
+
 `1.0.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.4>`_ - 2024-08-13
 =======================================================================================
 
