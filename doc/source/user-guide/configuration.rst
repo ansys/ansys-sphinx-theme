@@ -57,7 +57,7 @@ To use the logo in both dark and light modes, add the following code to the``htm
 .. note::
 
     By default, if ``ansys`` logo is displayed, the logo links to the Ansys website. If the PyAnsys logo is displayed, the logo links to the PyAnsys website.
-    if you want to change the link, you can set the ``logo_link`` option in the ``conf.py`` file.
+    If you want to change the link, you can set the ``logo_link`` option in the ``conf.py`` file.
 
     For example:
 

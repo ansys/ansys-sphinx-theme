@@ -380,18 +380,10 @@ def configure_theme_logo(app: Sphinx):
 
     if logo_option == "ansys":
         theme_options["logo"] = ansys_logo
-        theme_options["logo_link"] = (
-            ANSYS_LOGO_LINK
-            if not theme_options.get("logo_link")
-            else theme_options.get("logo_link")
-        )
+        theme_options["logo_link"] = theme_options.get("logo_link", ANSYS_LOGO_LINK)
     elif logo_option == "pyansys":
         theme_options["logo"] = pyansys_logo
-        theme_options["logo_link"] = (
-            PYANSYS_LOGO_LINK
-            if not theme_options.get("logo_link")
-            else theme_options.get("logo_link")
-        )
+        theme_options["logo_link"] = theme_options.get("logo_link", PYANSYS_LOGO_LINK)
     elif logo_option == "no_logo":
         theme_options["logo"] = None
 
