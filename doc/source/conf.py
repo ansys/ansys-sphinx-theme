@@ -86,12 +86,12 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx_copybutton",
-    "sphinx_design",
+    # "sphinx_design",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx_gallery.gen_gallery",
-    "sphinx_jinja",
-    "notfound.extension",
+    # "sphinx_jinja"
+    # "notfound.extension",
 ]
 
 # Intersphinx mapping

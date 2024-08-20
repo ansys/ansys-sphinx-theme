@@ -45,7 +45,7 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
         return
 
     # HACK: The ``sphinx_jinja`` and ``sphinx_design`` should be added to the extensions.
-    required_extensions = ["sphinx_jinja", "sphinx_design"]
+    required_extensions = ["sphinx_design", "sphinx_jinja"]
 
     for extension in required_extensions:
         if extension not in app.config["extensions"]:
