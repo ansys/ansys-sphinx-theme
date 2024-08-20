@@ -76,6 +76,13 @@ html_theme_options = {
     "logo": "ansys",
 }
 
+
+nbsphinx_prolog = """
+Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb>`.
+
+----
+"""
+
 # Sphinx extensions
 extensions = [
     "ansys_sphinx_theme.extension.autoapi",
