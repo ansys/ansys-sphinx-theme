@@ -34,15 +34,21 @@ div.sphx-glr-download a:hover {
   flex-direction: column;
 }
 div.sphx-glr-download code.download,
-a.reference.download:before {
+div.sphx-glr-download a.reference.download:before {
   color: var(--ast-sphinx-gallery-download-text);
 }
+
+a.reference.download:before {
+  color: var(--ast-color-text);
+}
+
 div.sphx-glr-download a:hover {
   background-color: var(--ast-sphinx-gallery-download-background-hover);
 }
 
 div.sphx-glr-download a {
   background-color: var(--ast-sphinx-gallery-download-background);
+  color: var(--ast-sphinx-gallery-download-text);
 }
 
 .docutils.container {
