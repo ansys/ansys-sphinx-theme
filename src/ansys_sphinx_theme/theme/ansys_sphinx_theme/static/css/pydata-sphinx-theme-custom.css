@@ -730,6 +730,12 @@ button.btn.version-switcher__button:hover {
 
 @media (min-width: 960px) {
   .bd-page-width {
-    max-width: min(100%, 1600px) !important;
+    max-width: min(100%, 1700px) !important;
+  }
+}
+
+@media (min-width: 960px) {
+  .bd-main .bd-content .bd-article-container {
+    width: min(100%, 1200px);
   }
 }
