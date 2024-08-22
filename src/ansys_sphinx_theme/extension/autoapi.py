@@ -44,13 +44,6 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     if not autoapi:
         return
 
-    # HACK: The ``sphinx_jinja`` and ``sphinx_design`` should be added to the extensions.
-    required_extensions = ["sphinx_design", "sphinx_jinja"]
-
-    for extension in required_extensions:
-        if extension not in app.config["extensions"]:
-            app.config["extensions"].append(extension)
-
     AUTOAPI_OPTIONS = [
         "members",
         "undoc-members",
@@ -112,8 +105,12 @@ def setup(app: Sphinx) -> Dict[str, Any]:
     Dict[str, Any]
         A dictionary containing the version and parallel read/write safety flags.
     """
-    # HACK: The ``autoapi.extension`` should add here to initialize the extension.
-    app.setup_extension("autoapi.extension")
+    # HACK: The ``autoapi.extension``,  ``sphinx_design``, and ``sphinx_jinja`` extensions should be
+    # added to the Sphinx
+    required_extensions = ["sphinx_design", "sphinx_jinja", "autoapi.extension"]
+    for extension in required_extensions:
+        if extension not in app.config["extensions"]:
+            app.setup_extension(extension)
     app.connect("builder-inited", add_autoapi_theme_option, priority=400)
     app.connect("config-inited", add_extension_to_env, priority=400)
     return {

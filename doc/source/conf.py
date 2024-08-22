@@ -68,10 +68,10 @@ html_theme_options = {
     },
     "ansys_sphinx_theme_autoapi": {
         "project": project,
-        "directory": "src/ansys_sphinx_theme",
+        "directory": "src/ansys_sphinx_theme/examples",
         "output": "examples/api",
         "own_page_level": "function",
-        "package_depth": 2,
+        "package_depth": 1,
     },
     "logo": "ansys",
 }
@@ -200,7 +200,8 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github()
+    token = os.getenv("GITHUB_TOKEN")
+    g = Github(token)
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):
