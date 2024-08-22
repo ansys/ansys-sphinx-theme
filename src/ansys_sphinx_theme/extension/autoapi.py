@@ -50,6 +50,7 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     for extension in required_extensions:
         if extension not in app.config["extensions"]:
             app.config["extensions"].append(extension)
+
     AUTOAPI_OPTIONS = [
         "members",
         "undoc-members",
@@ -68,6 +69,7 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     def prepare_jinja_env(jinja_env) -> None:
         """Prepare the Jinja environment for the theme."""
         jinja_env.globals["project_name"] = autoapi_project_name
+        jinja_env.globals["autoapi_depth"] = autoapi.get("package_depth", 3)
 
     # Set the autoapi options
 
@@ -91,6 +93,12 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     app.config["autoapi_dirs"] = [relative_autoapi_dir]
 
 
+def add_extension_to_env(app: Sphinx, config: Dict[str, Any]) -> None:
+    """Add the ``sphinx_design`` and ``sphinx_jinja`` extensions to the Sphinx environment."""
+    app.config["extensions"].append("sphinx_design")
+    app.config["extensions"].append("sphinx_jinja")
+
+
 def setup(app: Sphinx) -> Dict[str, Any]:
     """Add the autoapi extension to the Sphinx application.
 
@@ -107,6 +115,7 @@ def setup(app: Sphinx) -> Dict[str, Any]:
     # HACK: The ``autoapi.extension`` should add here to initialize the extension.
     app.setup_extension("autoapi.extension")
     app.connect("builder-inited", add_autoapi_theme_option, priority=400)
+    app.connect("config-inited", add_extension_to_env, priority=400)
     return {
         "version": __version__,
         "parallel_read_safe": True,

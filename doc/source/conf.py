@@ -68,10 +68,10 @@ html_theme_options = {
     },
     "ansys_sphinx_theme_autoapi": {
         "project": project,
-        "directory": "src/ansys_sphinx_theme/examples",
-        "output": "examples/",
+        "directory": "src/ansys_sphinx_theme",
+        "output": "examples/api",
         "own_page_level": "function",
-        "add_toctree_entry": False,
+        "package_depth": 2,
     },
     "logo": "ansys",
 }
