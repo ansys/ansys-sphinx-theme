@@ -98,7 +98,7 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx_gallery.gen_gallery",
     # "sphinx_jinja"
-    # "notfound.extension",
+    "notfound.extension",
 ]
 
 # Intersphinx mapping
