@@ -14,7 +14,12 @@
   max-height: calc(100vh - var(--pst-header-height) - 1vh);
   line-height: var(--ast-global-line-height);
   border: none;
-  overflow: hidden;
+  overflow: auto;
+}
+
+.bd-sidebar-primary .sidebar-primary-items__end {
+  margin-bottom: unset;
+  margin-top: unset;
 }
 
 .sidebar-secondary-item {
