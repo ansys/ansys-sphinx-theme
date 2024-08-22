@@ -265,7 +265,7 @@ def fix_edit_html_page_context(
                     logging.debug(f"An error occurred: {e}")  # Log the exception as debug info
                     return link
 
-        elif pagename in ["autoapi", "api"]:
+        elif "api" in pagename:
             for obj_node in list(doctree.findall(addnodes.desc)):
                 domain = obj_node.get("domain")
                 if domain != "py":
@@ -275,7 +275,7 @@ def fix_edit_html_page_context(
                     if not isinstance(signode, addnodes.desc_signature):
                         continue
 
-                    fullname = signode["module"]
+                    fullname = signode["fullname"]
                     modname = fullname.replace(".", "/")
 
                     if github_source:
