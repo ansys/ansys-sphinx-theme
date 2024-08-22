@@ -1,5 +1,3 @@
-"""Module for adding the autoapi extension with the theme."""
-
 # Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
