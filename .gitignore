@@ -161,4 +161,4 @@ doc/source/_autosummary/
 doc/source/examples/gallery-examples/
 doc/source/sg_execution_times.rst
 # rendering of sphinx autoapi examples
-doc/source/examples/examples/
+doc/source/examples/api/
