@@ -10,7 +10,7 @@ if "%SPHINXBUILD%" == "" (
 set SOURCEDIR=source
 set BUILDDIR=_build
 set GALLERY_EXAMPLES=%SOURCEDIR%\examples\gallery-examples
-set AUTOAPI_OUTDIR=%SOURCEDIR%\examples\examples\
+set AUTOAPI_OUTDIR=%SOURCEDIR%\examples\api\
 
 if "%1" == "" goto help
 if "%1" == "pdf" goto pdf

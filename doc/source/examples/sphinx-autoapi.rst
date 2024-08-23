@@ -7,6 +7,6 @@ This example shows how the Ansys Sphinx Theme renders API documentation using th
 
 .. toctree::
    :titlesonly:
-   :maxdepth: 5
+   :maxdepth: 1
 
-   <span class="nf nf-md-package"></span> The examples package<examples/index.rst>
+   api/index
