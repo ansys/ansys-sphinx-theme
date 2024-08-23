@@ -502,6 +502,7 @@ span.versionmodified:before {
   height: var(--ast-admonition-icon-height);
   width: var(--ast-admonition-icon-width);
   left: 0px;
+  color: var(--ast-color-text);
 }
 
 span.versionmodified:before {
@@ -638,6 +639,12 @@ div.versionchanged {
   border-color: var(--ast-admonition-neutral-border);
 }
 
+aside.topic p,
+div.topic p,
+div.topic.contents p,
+nav.contents p {
+  color: var(--ast-admonition-neutral-icon) !important;
+}
 /**
 * Dropdown _header.scss
 */
