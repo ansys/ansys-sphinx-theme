@@ -27,6 +27,8 @@ and set the ``ansys_sphinx_theme_autoapi`` theme options in the ``html_theme_opt
 - ``ignore``: The list of directories to ignore. By default, this is empty.
 - ``add_toctree_entry``: If set to ``True``, the autoapi extension adds the generated files to the TOC tree.
   By default, this is set to ``False``.
+- ``package_depth``: The depth of the package. By default, this is set to ``3``. This is the ``namespace`` depth of the package.
+  For example, if the package is ``ansys``, the depth is ``1``. If the package is ``ansys.foo``, the depth is ``2``.
 
 All these options can be set in the ``conf.py`` file of your Sphinx project.
 
@@ -51,6 +53,7 @@ All these options can be set in the ``conf.py`` file of your Sphinx project.
             "class_content": "class",
             "ignore": [],
             "add_toctree_entry": False,
+            "package_depth": 3,
         }
     }
 

@@ -69,12 +69,19 @@ html_theme_options = {
     "ansys_sphinx_theme_autoapi": {
         "project": project,
         "directory": "src/ansys_sphinx_theme/examples",
-        "output": "examples/",
+        "output": "examples/api",
         "own_page_level": "function",
-        "add_toctree_entry": False,
+        "package_depth": 1,
     },
     "logo": "ansys",
 }
+
+
+nbsphinx_prolog = """
+Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb>`.
+
+----
+"""
 
 # Sphinx extensions
 extensions = [
@@ -86,11 +93,9 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx_copybutton",
-    "sphinx_design",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx_gallery.gen_gallery",
-    "sphinx_jinja",
     "notfound.extension",
 ]
 

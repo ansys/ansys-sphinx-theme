@@ -54,6 +54,9 @@ AUTOAPI_TEMPLATES_PATH = TEMPLATES_PATH / "autoapi"
 JS_FILE = JS_PATH / "table.js"
 LOGOS_PATH = STATIC_PATH / "logos"
 
+ANSYS_LOGO_LINK = "https://www.ansys.com/"
+PYANSYS_LOGO_LINK = "https://docs.pyansys.com/"
+
 # make logo paths available
 ansys_favicon = str((LOGOS_PATH / "ansys-favicon.png").absolute())
 ansys_logo_black = str((LOGOS_PATH / "ansys_logo_black_cropped.jpg").absolute())
@@ -208,8 +211,8 @@ def fix_edit_html_page_context(
 
     Notes
     -----
-    .. [1] Originally implemented by `Alex Kaszynski <https://github.com/akaszynski>`_ in
-    `PyVista <https://github.com/pyvista/pyvista>`_,
+    [1] Originally implemented by `Alex Kaszynski <https://github.com/akaszynski>`_ in
+    `PyVista <https://github.com/pyvista/pyvista>`_ ,
     see https://github.com/pyvista/pyvista/pull/4113
     """
 
@@ -262,7 +265,7 @@ def fix_edit_html_page_context(
                     logging.debug(f"An error occurred: {e}")  # Log the exception as debug info
                     return link
 
-        elif pagename in ["autoapi", "api"]:
+        elif "api" in pagename:
             for obj_node in list(doctree.findall(addnodes.desc)):
                 domain = obj_node.get("domain")
                 if domain != "py":
@@ -272,7 +275,7 @@ def fix_edit_html_page_context(
                     if not isinstance(signode, addnodes.desc_signature):
                         continue
 
-                    fullname = signode["module"]
+                    fullname = signode["fullname"]
                     modname = fullname.replace(".", "/")
 
                     if github_source:
@@ -377,8 +380,10 @@ def configure_theme_logo(app: Sphinx):
 
     if logo_option == "ansys":
         theme_options["logo"] = ansys_logo
+        theme_options["logo_link"] = theme_options.get("logo_link", ANSYS_LOGO_LINK)
     elif logo_option == "pyansys":
         theme_options["logo"] = pyansys_logo
+        theme_options["logo_link"] = theme_options.get("logo_link", PYANSYS_LOGO_LINK)
     elif logo_option == "no_logo":
         theme_options["logo"] = None
 

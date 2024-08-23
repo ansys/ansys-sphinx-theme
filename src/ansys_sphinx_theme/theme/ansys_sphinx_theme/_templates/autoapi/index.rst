@@ -9,7 +9,8 @@ to interact with them programmatically.
    :maxdepth: 3
 
    {% for page in pages %}
-   {% if (page.top_level_object or page.name.split('.') | length == 3) and page.display %}
+   {% set length = autoapi_depth | int %}
+   {% if (page.top_level_object or page.name.split('.') | length == length) and page.display %}
    <span class="nf nf-md-package"></span> {{ page.name }}<{{ page.include_path }}>
    {% endif %}
    {% endfor %}
