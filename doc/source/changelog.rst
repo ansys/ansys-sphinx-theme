@@ -9,6 +9,22 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.0.6 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.6>`_ - 2024-08-23
+=======================================================================================
+
+Fixed
+^^^^^
+
+- fix: download icon with sphinx-gallery and nbsphinx `#471 <https://github.com/ansys/ansys-sphinx-theme/pull/471>`_
+- feat: add different width for different media for main content `#473 <https://github.com/ansys/ansys-sphinx-theme/pull/473>`_
+- fix: the scrollbar on sidebar `#474 <https://github.com/ansys/ansys-sphinx-theme/pull/474>`_
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- chore: update CHANGELOG for v1.0.5 `#470 <https://github.com/ansys/ansys-sphinx-theme/pull/470>`_
+
 `1.0.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.5>`_ - 2024-08-16
 =======================================================================================
 
