@@ -9,6 +9,15 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.0.7 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.7>`_ - 2024-08-23
+=======================================================================================
+
+Fixed
+^^^^^
+
+- fix: autoapi extension `#472 <https://github.com/ansys/ansys-sphinx-theme/pull/472>`_
+- fix: admonitions styles for ``topic`` admonition `#477 <https://github.com/ansys/ansys-sphinx-theme/pull/477>`_
+
 `1.0.6 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.6>`_ - 2024-08-23
 =======================================================================================
 
