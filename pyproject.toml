@@ -36,7 +36,7 @@ autoapi = [
 ]
 doc = [
     "jupytext==1.16.4",
-    "notebook==7.2.1",
+    "notebook==7.2.2",
     "nbsphinx==0.9.5",
     "numpydoc==1.8.0",
     "pandas==2.2.2",
