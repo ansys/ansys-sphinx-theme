@@ -268,3 +268,42 @@ jinja_contexts = {
     },
     "pdf_guide": {"version": get_version_match(__version__)},  # noqa: E501
 }
+
+
+import json
+from typing import Any, Dict
+
+from sphinx.application import Sphinx
+
+
+def create_index(app, env, docnames):
+    """Create a search index from the rst files."""
+    # Get the current document's path
+    search_index = []
+    for docname in docnames:
+        source = env.get_doctree(docname).traverse(nodes.paragraph)[0].astext()
+        # Get the title of the current document
+        title = source[0].strip()
+
+        # Get the body text of the current document
+        body_text = "\n".join(source[1:]).strip()
+
+        search_index.append(
+            {
+                "objectID": docname,  # Unique ID (document name)
+                "href": docname + ".html",  # Relative file path
+                "title": title,  # Title of the document
+                "section": "",  # Empty for now
+                "text": body_text,  # Body text of the document
+            }
+        )
+
+    with open("search.json", "w", encoding="utf-8") as f:
+        json.dump(search_index, f, ensure_ascii=False, indent=4)
+
+    # Save the search index to a search.json file
+
+
+def setup(app: Sphinx) -> Dict[str, Any]:
+    """Set up the Sphinx extension."""
+    app.connect("env-merge-info", create_index)
