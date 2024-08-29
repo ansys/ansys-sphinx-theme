@@ -245,19 +245,46 @@ def download_and_process_files(example_links: List[str]) -> List[str]:
     return file_names
 
 
-example_links = extract_example_links(
-    "executablebooks/sphinx-design",
-    "docs/snippets/rst",
-    exclude_files=["article-info.txt"],
-)
-file_names = download_and_process_files(example_links)
+# example_links = extract_example_links(
+#     "executablebooks/sphinx-design",
+#     "docs/snippets/rst",
+#     exclude_files=["article-info.txt"],
+# )
+# file_names = download_and_process_files(example_links)
+file_names = [
+    "badge-basic.txt",
+    "badge-link.txt",
+    "button-link.txt",
+    "card-basic.txt",
+    "card-carousel.txt",
+    "card-head-foot.txt",
+    "card-images.txt",
+    "card-link.txt",
+    "card-title-link.txt",
+    "div-basic.txt",
+    "dropdown-basic.txt",
+    "dropdown-options.txt",
+    "grid-basic.txt",
+    "grid-card-columns.txt",
+    "grid-card.txt",
+    "grid-gutter.txt",
+    "grid-nested.txt",
+    "icon-fontawesome.txt",
+    "icon-material-design.txt",
+    "icon-octicon.txt",
+    "tab-basic.txt",
+    "tab-code-set.txt",
+    "tab-options.txt",
+    "tab-sync.txt",
+]
 
-admonitions_links = extract_example_links(
-    "pydata/pydata-sphinx-theme",
-    "docs/examples/kitchen-sink/admonitions.rst",
-)
+# admonitions_links = extract_example_links(
+#     "pydata/pydata-sphinx-theme",
+#     "docs/examples/kitchen-sink/admonitions.rst",
+# )
 
-admonitions_links = download_and_process_files(admonitions_links)
+# admonitions_links = download_and_process_files(admonitions_links)
+admonitions_links = ["admonitions.rst"]
 todo_include_todos = True  # admonition todo needs this to be True
 
 jinja_contexts = {
@@ -273,37 +300,36 @@ jinja_contexts = {
 import json
 from typing import Any, Dict
 
+from docutils import nodes
 from sphinx.application import Sphinx
 
 
-def create_index(app, env, docnames):
+def create_search_index(app, exception):
     """Create a search index from the rst files."""
     # Get the current document's path
-    search_index = []
-    for docname in docnames:
-        source = env.get_doctree(docname).traverse(nodes.paragraph)[0].astext()
-        # Get the title of the current document
-        title = source[0].strip()
+    all_docs = app.env.found_docs
+    search_index_list = []
+    for doc in all_docs:
+        doc_name = doc
+        doc_path = doc + ".html"
+        doc_title = app.env.titles[doc].astext()
+        doc_source = app.env.get_doctree(doc).traverse(nodes.paragraph)
+        doc_text = "\n".join([node.astext() for node in doc_source]).strip()
+        search_index = {
+            "objectID": doc_name,  # Unique ID (document name)
+            "href": doc_path,  # Relative file path
+            "title": doc_title,  # Title of the document
+            "section": "",  # Empty for now
+            "text": doc_text,  # Body text of the document
+        }
+        search_index_list.append(search_index)
 
-        # Get the body text of the current document
-        body_text = "\n".join(source[1:]).strip()
-
-        search_index.append(
-            {
-                "objectID": docname,  # Unique ID (document name)
-                "href": docname + ".html",  # Relative file path
-                "title": title,  # Title of the document
-                "section": "",  # Empty for now
-                "text": body_text,  # Body text of the document
-            }
-        )
-
-    with open("search.json", "w", encoding="utf-8") as f:
-        json.dump(search_index, f, ensure_ascii=False, indent=4)
-
-    # Save the search index to a search.json file
+    # create search.json in outdir
+    outdir = app.builder.outdir
+    with open(outdir / "search.json", "w", encoding="utf-8") as f:
+        json.dump(search_index_list, f, ensure_ascii=False, indent=4)
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:
     """Set up the Sphinx extension."""
-    app.connect("env-merge-info", create_index)
+    app.connect("build-finished", create_search_index)
