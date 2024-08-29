@@ -29,6 +29,14 @@ from sphinx.application import Sphinx
 
 from ansys_sphinx_theme import __version__, get_autoapi_templates_dir_relative_path
 
+AUTOAPI_OPTIONS = [
+    "members",
+    "undoc-members",
+    "show-inheritance",
+    "show-module-summary",
+    "special-members",
+]
+
 
 def add_autoapi_theme_option(app: Sphinx) -> None:
     """Add the autoapi template path to the theme options.
@@ -41,14 +49,6 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     autoapi = app.config.html_theme_options.get("ansys_sphinx_theme_autoapi", {})
     if not autoapi:
         return
-
-    AUTOAPI_OPTIONS = [
-        "members",
-        "undoc-members",
-        "show-inheritance",
-        "show-module-summary",
-        "special-members",
-    ]
     autoapi_template_dir = autoapi.get("templates", "")
     autoapi_project_name = autoapi.get("project", "")
 

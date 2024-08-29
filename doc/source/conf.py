@@ -146,7 +146,7 @@ exclude_patterns = [
     "examples/gallery-examples/*.ipynb",
 ]
 rst_epilog = ""
-with open("links.rst") as f:
+with Path.open(THIS_PATH / "links.rst", "r") as f:
     rst_epilog += f.read()
 
 sphinx_gallery_conf = {
@@ -234,7 +234,7 @@ def download_and_process_files(example_links: List[str]) -> List[str]:
     for link in example_links:
         file_name = link.split("/")[-1]
         file_path = str((EXAMPLE_PATH / file_name).absolute())
-        with open(file_path, "wb") as f:
+        with Path.open(file_path, "wb") as f:
             response = requests.get(link)
             content = response.content.decode()
             lines = content.splitlines()
