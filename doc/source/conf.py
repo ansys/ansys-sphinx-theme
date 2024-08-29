@@ -234,7 +234,7 @@ def download_and_process_files(example_links: List[str]) -> List[str]:
     for link in example_links:
         file_name = link.split("/")[-1]
         file_path = str((EXAMPLE_PATH / file_name).absolute())
-        with Path.open(file_path, "wb") as f:
+        with open(file_path, "wb") as f:  # noqa: PTH123
             response = requests.get(link)
             content = response.content.decode()
             lines = content.splitlines()
