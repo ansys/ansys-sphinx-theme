@@ -82,6 +82,7 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
         autoapi.get("directory", "src/ansys"), start=str(app.confdir / "conf.py")
     )
     app.config["autoapi_dirs"] = [relative_autoapi_dir]
+    print(f"AutoAPI directories: {app.config['autoapi_dirs']}")
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:

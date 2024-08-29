@@ -141,7 +141,6 @@ def sphinx_linkcode_resolve(
             return None
         return None
 
-    # make fn in pathlib
     fn = Path(fn).resolve().relative_to(Path(__file__).resolve().parent)
     fn_components = fn.parts
 
