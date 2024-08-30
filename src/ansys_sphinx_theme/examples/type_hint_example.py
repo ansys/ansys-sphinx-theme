@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 """Module containing an example function using type hinting."""
+
 from typing import Union
 
 
@@ -46,7 +47,7 @@ def type_hint_func(param1: int = 1, param2: str = "test", param3: Union[int, flo
 
     Examples
     --------
-    >>> func(1, 'foo', 1)
+    >>> func(1, "foo", 1)
     True
 
     """

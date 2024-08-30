@@ -6,7 +6,7 @@ Ansys Sphinx theme
    :target: https://github.com/ansys
    :alt: Ansys
 
-.. |python| image:: https://img.shields.io/badge/Python-%3E%3D3.9-blue
+.. |python| image:: https://img.shields.io/pypi/pyversions/ansys_sphinx_theme?logo=pypi
    :target: https://pypi.org/project/ansys-sphinx-theme/
    :alt: Python
 
@@ -55,47 +55,24 @@ If you are new to using Sphinx, see `Sphinx Getting Started
 
 Documentation and issues
 ~~~~~~~~~~~~~~~~~~~~~~~~
-In addition to installation information, the
-`Ansys Sphinx theme documentation <https://sphinxdocs.ansys.com>`_
-provides information on how you can customize the theme. Because
-this documentation is created using this theme, viewing it is
-an easy way to preview the theme itself.
+Documentation for the latest stabe release of Ansys Sphinx theme is hosted at
+`Ansys Sphinx Theme documentation <https://sphinxdocs.ansys.com>`_.
+
+The documentation has these sections:
+
+- `Getting started <https://sphinxdocs.ansys.com/version/stable/getting_started.html>`_ : Learn
+  how to install the theme and use it in your Sphinx project.
+- `User guide <https://sphinxdocs.ansys.com/version/stable/user_guide.html>`_ : Learn how to
+  customize the theme and use its features.
+- `Examples <https://sphinxdocs.ansys.com/version/stable/examples.html>`_ : See examples of
+  Sphinx components and how it renders with the Ansys Sphinx theme.
+- `Release notes <https://sphinxdocs.ansys.com/version/stable/changelog.html>`_ : See the
+  changes in each release of the theme.
 
 On the `Issues page <https://github.com/ansys/ansys-sphinx-theme/issues>`_
 for this repository, you can create issues to submit questions, report bugs,
 and request new features. To reach the PyAnsys support team, email
 `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
-
-Getting started
-~~~~~~~~~~~~~~~
-Install the ``ansys-sphinx-theme`` package with:
-
-.. code::
-
-   python -m pip install ansys-sphinx-theme
-
-Modify your Sphinx ``conf.py`` file to use ``html_theme =
-'ansys_sphinx_theme'``.
-
-Development and contributions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-If you want to contribute to the PyAnsys Sphinx theme, install
-the ``ansys-sphinx-theme`` package in development mode with::
-
-   git clone https://github.com/ansys/ansys-sphinx-theme.git
-   python -m pip install -U pip tox
-   tox -e style,doc
-
-To simplify checks, this repository uses `pre-commit <https://pre-commit.com/>`_.
-You can optionally install and use this tool. For more information, see its
-`installation <https://pre-commit.com/#install>`_ and `usage
-<https://pre-commit.com/#usage>`_ documentation.
-
-Before contributing to a PyAnsys library, see
-`Contributing <https://dev.docs.pyansys.com//how-to/contributing.html>`_
-in the *PyAnsys Developer's Guide* for overall guidance, paying particular
-attention to `How-to <https://dev.docs.pyansys.com//how-to/index.html>`_ for
-guidelines and best practices.
 
 License
 ~~~~~~~

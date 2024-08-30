@@ -20,7 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""This is the ansys-sphinx-theme module."""
+"""Module for the Ansys Sphinx theme."""
+
 import logging
 import os
 import pathlib
@@ -341,9 +342,9 @@ def replace_html_tag(app, exception):
 
     file_names = list(api_path.rglob("*.html"))
     for file_name in file_names:
-        with open(api_dir / file_name, "r", encoding="utf-8") as file:
+        with pathlib.Path.open(api_dir / file_name, "r", encoding="utf-8") as file:
             content = file.read()
-        with open(api_dir / file_name, "w", encoding="utf-8") as file:
+        with pathlib.Path.open(api_dir / file_name, "w", encoding="utf-8") as file:
             modified_content = content.replace("&lt;", "<").replace("&gt;", ">")
             file.write(modified_content)
 
@@ -472,7 +473,7 @@ def build_quarto_cheatsheet(app: Sphinx):
     output_dir_path = pathlib.Path(app.outdir) / output_dir
     try:
         # Add the cheatsheet to the Quarto project
-        result = subprocess.run(
+        subprocess.run(
             [
                 "quarto",
                 "add",
@@ -485,7 +486,7 @@ def build_quarto_cheatsheet(app: Sphinx):
         )
 
         # Render the cheatsheet
-        render_result = subprocess.run(
+        subprocess.run(
             [
                 "quarto",
                 "render",
@@ -501,7 +502,7 @@ def build_quarto_cheatsheet(app: Sphinx):
         )
 
         # Remove the cheatsheet from the Quarto project
-        remove_extension = subprocess.run(
+        subprocess.run(
             ["quarto", "remove", "ansys/cheat_sheet", "--no-prompt"],
             cwd=file_path,
             capture_output=True,

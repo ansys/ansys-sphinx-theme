@@ -8,7 +8,7 @@ name = "ansys-sphinx-theme"
 version = "1.1.dev0"
 description = "A theme devised by ANSYS, Inc. for Sphinx documentation."
 readme = "README.rst"
-requires-python = ">=3.9,<4"
+requires-python = ">=3.10,<4"
 license = {file = "LICENSE"}
 authors = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
 maintainers = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
@@ -18,7 +18,9 @@ classifiers = [
     "Framework :: Sphinx :: Theme",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
     "Sphinx>=4.2.0",
@@ -30,7 +32,7 @@ dependencies = [
 
 [project.optional-dependencies]
 autoapi = [
-    "sphinx-autoapi==3.2.1",
+    "sphinx-autoapi==3.3.0",
     "sphinx-design==0.6.1",
     "sphinx-jinja==2.0.2",
 ]
@@ -45,7 +47,7 @@ doc = [
     "pyvista[jupyter]==0.44.1",
     "requests==2.32.3",
     "Sphinx==8.0.2",
-    "sphinx-autoapi==3.2.1",
+    "sphinx-autoapi==3.3.0",
     "sphinx-copybutton==0.5.2",
     "sphinx-design==0.6.1",
     "sphinx-gallery==0.17.1",
@@ -74,14 +76,39 @@ Source = "https://github.com/ansys/ansys-sphinx-theme"
 Tracker = "https://github.com/ansys/ansys-sphinx-theme/issues"
 Documentation = "https://sphinxdocs.ansys.com/"
 
-[tool.black]
+[tool.ruff]
 line-length = 100
+fix = true
 
-[tool.isort]
-profile = "black"
-force_sort_within_sections = true
-line_length = 100
-src_paths = ["doc", "src"]
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle, see https://docs.astral.sh/ruff/rules/#pycodestyle-e-w
+    "D",    # pydocstyle, see https://docs.astral.sh/ruff/rules/#pydocstyle-d
+    "F",    # pyflakes, see https://docs.astral.sh/ruff/rules/#pyflakes-f
+    "I",    # isort, see https://docs.astral.sh/ruff/rules/#isort-i
+    "N",    # pep8-naming, see https://docs.astral.sh/ruff/rules/#pep8-naming-n
+    "PTH",  # flake8-use-pathlib, https://docs.astral.sh/ruff/rules/#flake8-use-pathlib-pth
+    "TD",   # flake8-todos, https://docs.astral.sh/ruff/rules/#flake8-todos-td
+]
+ignore = [
+    "TD002", # Missing author in TODOs comment
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"doc/source/examples/sphinx-gallery/sphinx-gallery.py" = ["D205", "E402", "D400"]
+"src/ansys_sphinx_theme/extension/linkcode.py" = ["E501"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.isort]
+combine-as-imports = true
+force-sort-within-sections = true
 
 [tool.coverage.run]
 source = ["src"]
@@ -121,8 +148,6 @@ showcontent = true
 directory = "miscellaneous"
 name = "Miscellaneous"
 showcontent = true
-
-
 
 [[tool.towncrier.type]]
 directory = "documentation"
