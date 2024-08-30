@@ -20,14 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-"""This module creates the title page for a LaTeX pdf."""
+"""Module creates the title page for a LaTeX pdf."""
+
 from datetime import datetime
-import os
 from pathlib import Path
 
 import jinja2
 
-LATEX_SUBPKG = Path(os.path.dirname(os.path.realpath(__file__)))
+LATEX_SUBPKG = Path(__file__).resolve().parent
 COVER_TEX = LATEX_SUBPKG / "cover.tex"
 PAGE_404 = LATEX_SUBPKG / "404.html"
 

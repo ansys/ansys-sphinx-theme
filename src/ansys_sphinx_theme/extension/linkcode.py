@@ -21,10 +21,10 @@
 # SOFTWARE.
 
 """A module containing the an extension for creating links to original source code files."""
+
 import inspect
 import logging
-import os
-import os.path as op
+from pathlib import Path
 import sys
 
 from docutils import nodes
@@ -141,8 +141,8 @@ def sphinx_linkcode_resolve(
             return None
         return None
 
-    fn = op.relpath(fn, start=os.path.dirname(os.path.abspath(__file__)))
-    fn_components = op.normpath(fn).split(os.sep)
+    fn = Path(fn).resolve().relative_to(Path(__file__).resolve().parent)
+    fn_components = fn.parts
 
     if not source_path:
         module = modname.split(".")[0]
@@ -198,7 +198,7 @@ def link_code(app: Sphinx, doctree: Node):
     for link resolution.
 
     The ``linkcode`` extension in this version has been adapted from the original
-    `Sphinx linkcode extension <https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py>`_. # noqa: E501
+    `Sphinx linkcode extension <https://github.com/sphinx-doc/sphinx/blob/main/sphinx/ext/linkcode.py>`_.  # noqa: E501
     This adaptation involves modifying the original code and functionality from the Sphinx library.
     """
     env = app.builder.env
