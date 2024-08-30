@@ -1,13 +1,16 @@
 """Sphinx documentation configuration file."""
 
 from datetime import datetime
+import json
 import os
 from pathlib import Path
-from typing import List
+from typing import Any, Dict, List
 
+from docutils import nodes
 from github import Github
 import pyvista
 import requests
+from sphinx.application import Sphinx
 from sphinx.builders.latex import LaTeXBuilder
 
 from ansys_sphinx_theme import (
@@ -297,13 +300,6 @@ jinja_contexts = {
 }
 
 
-import json
-from typing import Any, Dict
-
-from docutils import nodes
-from sphinx.application import Sphinx
-
-
 def create_search_index(app, exception):
     """Create a search index from the rst files."""
     # Get the current document's path
@@ -326,7 +322,7 @@ def create_search_index(app, exception):
 
     # create search.json in outdir
     outdir = app.builder.outdir
-    with open(outdir / "search.json", "w", encoding="utf-8") as f:
+    with open(outdir / "search.json", "w", encoding="utf-8") as f:  # noqa: PTH123
         json.dump(search_index_list, f, ensure_ascii=False, indent=4)
 
 
