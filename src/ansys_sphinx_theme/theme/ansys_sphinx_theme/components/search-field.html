@@ -101,7 +101,7 @@
 
         // Add click event listener to navigate to the URL
         item.addEventListener('click', () => {
-          window.location.href = href;
+          navigateToHref(href);
         });
 
         resultsContainer.appendChild(item);
@@ -119,6 +119,12 @@
       return text.replace(regex, '<span class="highlight">$1</span>');
     }
 
+    function navigateToHref(href) {
+      const baseUrl = window.location.origin;
+      const relativeUrl = href.startsWith('/') ? href : `/${href}`;
+      window.location.href = new URL(relativeUrl, baseUrl).href;
+    }
+
     // Set up the search box event listener
     const searchBox = document.querySelector(".bd-search input");
     searchBox.addEventListener("input", function () {
@@ -131,7 +137,9 @@
       if (event.key === "Enter") {
         const firstResult = document.querySelector('.result-item');
         if (firstResult) {
-          window.location.href = firstResult.getAttribute('data-href');
+          // Navigate to the first result's URL
+          navigateToHref(firstResult.getAttribute('data-href'));
+          // window.location.href = firstResult.getAttribute('data-href');
         }
         event.preventDefault(); // Prevent the default form submission
       }
