@@ -1,148 +1,155 @@
-<form class="bd-search d-flex align-items-center"
-      action="{{ pathto('search') }}"
-      method="get">
+<form class="bd-search d-flex align-items-center" action="{{ pathto('search') }}" method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search"
-         class="form-control"
-         name="q"
-         placeholder="{{ theme_search_bar_text }}"
-         aria-label="{{ theme_search_bar_text }}"
-         autocomplete="off"
-         autocorrect="off"
-         autocapitalize="off"
-         spellcheck="false"/>
+  <input type="search" class="form-control" name="q" placeholder="{{ theme_search_bar_text }}" aria-label="{{ theme_search_bar_text }}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-
 </form>
 
-  <!-- Add this div to show the search results -->
-  <div id="results" class="results"></div>
+<!-- Add this div to show the search results -->
+<div id="results" class="results"></div>
 
-  <style>
-    .results {
-      margin-top: 3rem;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-content: flex-start;
-        justify-content: center;
-        position: absolute;
-        background-color: white;
-        width: 800px;
-        padding: 0 10px;
+<style>
+  .results {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center;
+    position: absolute;
+    background-color: white;
+    width: 800px;
+    padding: 0 10px;
+    border: 1px solid #ddd; /* Optional: Add border for better visibility */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Add shadow for better visibility */
+  }
+
+  .result-item {
+    margin-bottom: 1rem;
+    cursor: pointer; /* Indicate that the item is clickable */
+  }
+
+  .result-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .result-text {
+    font-size: 1em;
+  }
+
+  .highlight {
+    background-color: rgb(177, 177, 34);
+  }
+
+  .no-results {
+    font-style: italic;
+    color: #777;
+  }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+<!-- Script tag for search functionality -->
+<script>
+  require.config({
+    paths: {
+      fuse: "https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min"
+    }
+  });
+
+  require(['fuse'], function(Fuse) {
+    let fuseInstance;
+    let searchData = [];
+
+    function initializeFuse(data) {
+      const fuseOptions = {
+        keys: ['title', 'text'],
+        includeScore: true,
+        threshold: 0.4
+      };
+
+      fuseInstance = new Fuse(data, fuseOptions);
+      searchData = data; // Save the search data for later use
     }
 
-    .result-item {
-      margin-bottom: 1rem;
+    function performSearch(query) {
+      const results = fuseInstance.search(query);
+      const resultsContainer = document.getElementById('results');
+      resultsContainer.innerHTML = '';
+
+      if (results.length === 0) {
+        const noResultsMessage = document.createElement('div');
+        noResultsMessage.className = 'no-results';
+        noResultsMessage.textContent = 'No matched documents';
+        resultsContainer.appendChild(noResultsMessage);
+        return; // Exit the function early
+      }
+
+      results.forEach(result => {
+        const item = document.createElement('div');
+        item.className = 'result-item';
+        const { title, text, href } = result.item;
+
+        // Highlight the search query in the text
+        const highlightedTitle = highlightTerms(title, query);
+        const highlightedText = highlightTerms(text, query);
+
+        item.innerHTML =
+          `<div class="result-title">${highlightedTitle}</div>` +
+          `<div class="result-text">${highlightedText}</div>`;
+        item.setAttribute('data-href', href); // Add href data attribute
+
+        // Add click event listener to navigate to the URL
+        item.addEventListener('click', () => {
+          window.location.href = href;
+        });
+
+        resultsContainer.appendChild(item);
+      });
     }
 
-    .result-title {
-      font-size: 1.25rem;
-      font-weight: bold;
+    function highlightTerms(text, query) {
+      if (!query.trim()) return text;
+
+      // Escape special characters and create regex for each term
+      const escapedQuery = query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      const regex = new RegExp(`(${escapedQuery})`, 'gi');
+
+      // Replace matched text with highlighted version
+      return text.replace(regex, '<span class="highlight">$1</span>');
     }
 
-    .result-text {
-      font-size: 1em;
-    }
+    // Set up the search box event listener
+    const searchBox = document.querySelector(".bd-search input");
+    searchBox.addEventListener("input", function () {
+      const query = this.value.trim();
+      performSearch(query);
+    });
 
-    .highlight {
-      background-color: rgb(177, 177, 34);
-    }
-  </style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
-
-  <!-- Script tag for search functionality -->
-  <script>
-    require.config({
-      paths: {
-        fuse: "https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min"
+    // Add event listener for Enter key press
+    searchBox.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        const firstResult = document.querySelector('.result-item');
+        if (firstResult) {
+          window.location.href = firstResult.getAttribute('data-href');
+        }
+        event.preventDefault(); // Prevent the default form submission
       }
     });
 
-    require(['fuse'], function(Fuse) {
-      // Function to initialize Fuse.js and set up search functionality
-      function initializeFuse(data) {
-        const fuseOptions = {
-          keys: ['title', 'text'],
-          includeScore: true,
-          threshold: 0.4
-        };
-
-        const fuse = new Fuse(data, fuseOptions);
-
-        function performSearch(query) {
-          const results = fuse.search(query);
-          const resultsContainer = document.getElementById('results');
-          resultsContainer.innerHTML = '';
-
-          if (results.length === 0) {
-          const noResultsMessage = document.createElement('div');
-          noResultsMessage.className = 'no-results';
-          noResultsMessage.textContent = 'No matched documents';
-          resultsContainer.appendChild(noResultsMessage);
-          return; // Exit the function early
-          }
-
-          results.forEach(result => {
-            const item = document.createElement('div');
-            item.className = 'result-item';
-            const { title, text } = result.item;
-
-            // Highlight the search query in the text
-            const highlightedTitle = highlightTerms(title, query);
-            const highlightedText = highlightTerms(text, query);
-
-            item.innerHTML =
-              `<div class="result-title">${highlightedTitle}</div>` +
-              `<div class="result-text">${highlightedText}</div>`;
-            resultsContainer.appendChild(item);
-            });
-          }
-
-          // Function to highlight multiple search terms in text
-          function highlightTerms(text, query) {
-            if (!query.trim()) return text;
-
-          // Escape special characters and create regex for each term
-          const escapedQuery = query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-          const regex = new RegExp(`(${escapedQuery})`, 'gi');
-
-          console.log('Regex:', regex);
-          console.log('Text to search in:', text);
-
-          // Replace matched text with highlighted version
-          return text.replace(regex, '<span class="highlight">$1</span>');
-
-          if (highlightedText === text) {
-            return "No matched documents"; // If no match, return a default message
-          }
-          return highlightedText;
-          }
-
-
-        // Use querySelector instead of getElementById
-        document.querySelector(".bd-search input")
-                .addEventListener("input", function () {
-            const query = this.value.trim();
-            performSearch(query);
-        });
-      }
-
-      // Fetch the data from search.json and initialize Fuse.js
-      fetch('{{ pathto("search.json", 1) }}')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-          }
-          return response.json();
-        })
-        .then(data => {
-          initializeFuse(data);
-        })
-        .catch(error => {
-          console.error('There was a problem with the fetch operation:', error);
-        });
-    });
-  </script>
-
+    // Fetch the data from search.json and initialize Fuse.js
+    fetch('{{ pathto("search.json", 1) }}')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        initializeFuse(data);
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+  });
+</script>
