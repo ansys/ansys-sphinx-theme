@@ -42,11 +42,11 @@
     }
 
     .result-text {
-      font-size: 1rem;
+      font-size: 1em;
     }
 
     .highlight {
-      background-color: yellow;
+      background-color: rgb(177, 177, 34);
     }
   </style>
 
@@ -65,7 +65,8 @@
       function initializeFuse(data) {
         const fuseOptions = {
           keys: ['title', 'text'],
-          includeScore: true
+          includeScore: true,
+          threshold: 0.4
         };
 
         const fuse = new Fuse(data, fuseOptions);
@@ -87,32 +88,38 @@
             const item = document.createElement('div');
             item.className = 'result-item';
             const { title, text } = result.item;
-            const snippet = getSnippet(text, query);
+
+            // Highlight the search query in the text
+            const highlightedTitle = highlightTerms(title, query);
+            const highlightedText = highlightTerms(text, query);
+
             item.innerHTML =
-              `<div class="result-title">${highlightTerms(title, query)}</div>` +
-              `<div class="result-text">${snippet}</div>`;
+              `<div class="result-title">${highlightedTitle}</div>` +
+              `<div class="result-text">${highlightedText}</div>`;
             resultsContainer.appendChild(item);
-          });
-        }
+            });
+          }
 
-        function highlightTerms(text, query) {
-          if (!query.trim()) return text;
-          const terms = query.split(/\s+/);
-          const regex = new RegExp(`(${terms.map(term => term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('|')})`, 'gi');
+          // Function to highlight multiple search terms in text
+          function highlightTerms(text, query) {
+            if (!query.trim()) return text;
+
+          // Escape special characters and create regex for each term
+          const escapedQuery = query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+          const regex = new RegExp(`(${escapedQuery})`, 'gi');
+
+          console.log('Regex:', regex);
+          console.log('Text to search in:', text);
+
+          // Replace matched text with highlighted version
           return text.replace(regex, '<span class="highlight">$1</span>');
-        }
 
-        function getSnippet(text, query) {
-          if (!query.trim()) return text;
-          const terms = query.split(/\s+/);
-          const regex = new RegExp(`(${terms.map(term => term.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')).join('|')})`, 'gi');
-          const match = regex.exec(text);
-          if (!match) return text;
-          const startIndex = Math.max(0, match.index - 50);
-          const endIndex = Math.min(text.length, match.index + match[0].length + 50);
-          const snippet = text.slice(startIndex, endIndex);
-          return highlightTerms(snippet, query);
-        }
+          if (highlightedText === text) {
+            return "No matched documents"; // If no match, return a default message
+          }
+          return highlightedText;
+          }
+
 
         // Use querySelector instead of getElementById
         document.querySelector(".bd-search input")
