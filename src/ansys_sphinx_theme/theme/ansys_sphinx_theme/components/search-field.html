@@ -13,12 +13,23 @@
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
 
+</form>
+
   <!-- Add this div to show the search results -->
   <div id="results" class="results"></div>
 
   <style>
     .results {
-      margin-top: 1rem;
+      margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        justify-content: center;
+        position: absolute;
+        background-color: white;
+        width: 800px;
+        padding: 0 10px;
     }
 
     .result-item {
@@ -63,6 +74,14 @@
           const results = fuse.search(query);
           const resultsContainer = document.getElementById('results');
           resultsContainer.innerHTML = '';
+
+          if (results.length === 0) {
+          const noResultsMessage = document.createElement('div');
+          noResultsMessage.className = 'no-results';
+          noResultsMessage.textContent = 'No matched documents';
+          resultsContainer.appendChild(noResultsMessage);
+          return; // Exit the function early
+          }
 
           results.forEach(result => {
             const item = document.createElement('div');
@@ -119,4 +138,4 @@
         });
     });
   </script>
-</form>
+
