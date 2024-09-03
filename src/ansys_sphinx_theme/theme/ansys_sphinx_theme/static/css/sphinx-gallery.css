@@ -50,13 +50,3 @@ div.sphx-glr-download a {
   background-color: var(--ast-sphinx-gallery-download-background);
   color: var(--ast-sphinx-gallery-download-text);
 }
-
-.docutils.container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: flex-start;
-  gap: 10px;
-  margin: initial;
-}
