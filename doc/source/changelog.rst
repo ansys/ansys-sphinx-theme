@@ -9,6 +9,15 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.0.8 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.8>`_ - 2024-09-03
+=======================================================================================
+
+Fixed
+^^^^^
+
+- fix: Align jupyter cell output `#489 <https://github.com/ansys/ansys-sphinx-theme/pull/489>`_
+- fix: the download in sphinx gallery `#490 <https://github.com/ansys/ansys-sphinx-theme/pull/490>`_
+
 `1.0.7 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.7>`_ - 2024-08-23
 =======================================================================================
 
