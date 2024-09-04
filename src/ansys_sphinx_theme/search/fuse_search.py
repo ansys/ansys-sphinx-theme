@@ -23,38 +23,90 @@
 """Module to fuse search."""
 
 import json
-from typing import Any, Dict
+import re
 
 from docutils import nodes
-from sphinx.application import Sphinx
+
+
+class GetSearchIndex:
+    """Class to get search index."""
+
+    def __init__(self, doc_name, app):
+        """Initialize the class.
+
+        Parameters
+        ----------
+        doc_name : str
+            Document name.
+        app : Sphinx
+            Sphinx application.
+        """
+        self._doc_name = doc_name
+        self.doc_path = self._doc_name + ".html"
+        self.doc_title = app.env.titles[self._doc_name].astext()
+        self._doc_tree = app.env.get_doctree(self._doc_name)
+        self.sections = []
+
+    def _title_to_anchor(self, title: str) -> str:
+        """Convert title to anchor."""
+        return re.sub(r"[^\w\s-]", "", title.lower().strip().replace(" ", "-"))
+
+    def iterate_through_docs(self):
+        """Iterate through the document."""
+        for node in self._doc_tree.traverse(nodes.section):
+            self.section_title = node[0].astext()
+            self.section_text = "\n".join(
+                n.astext()
+                for node_type in [nodes.paragraph, nodes.literal_block]
+                for n in node.traverse(node_type)
+            )
+            self.section_anchor_id = self._title_to_anchor(self.section_title)
+            self.sections.append(
+                {
+                    "section_title": self.section_title,
+                    "section_text": self.section_text,
+                    "section_anchor_id": self.section_anchor_id,
+                }
+            )
+
+    def get_search_index(self):
+        """Get search index."""
+        search_index_list = []
+        for sections in self.sections:
+            search_index = {
+                "objectID": self._doc_name,
+                "href": f"{self.doc_path}#{sections['section_anchor_id']}",
+                "title": self.doc_title,
+                "section": sections["section_title"],
+                "text": sections["section_text"],
+            }
+            search_index_list.append(search_index)
+        return search_index_list
 
 
 def create_search_index(app, exception):
-    """Create a search index from the rst files."""
-    # Get the current document's path
+    """Create search index for the document in build finished.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application.
+    exception : Any
+        Exception.
+    """
+    if exception:
+        return
+
+    if not app.config.html_theme_options.get("static_search"):
+        return
+
     all_docs = app.env.found_docs
     search_index_list = []
+
     for doc in all_docs:
-        doc_name = doc
-        doc_path = doc + ".html"
-        doc_title = app.env.titles[doc].astext()
-        doc_source = app.env.get_doctree(doc).traverse(nodes.paragraph)
-        doc_text = "\n".join([node.astext() for node in doc_source]).strip()
-        search_index = {
-            "objectID": doc_name,  # Unique ID (document name)
-            "href": doc_path,  # Relative file path
-            "title": doc_title,  # Title of the document
-            "section": "",  # Empty for now
-            "text": doc_text,  # Body text of the document
-        }
-        search_index_list.append(search_index)
+        doc_search = GetSearchIndex(doc, app)
+        doc_search.iterate_through_docs()
+        search_index_list.extend(doc_search.get_search_index())
 
-    # create search.json in outdir
-    outdir = app.builder.outdir
-    with open(outdir / "search.json", "w", encoding="utf-8") as f:  # noqa: PTH123
+    with open(app.builder.outdir / "search.json", "w", encoding="utf-8") as f:  # noqa: PTH123
         json.dump(search_index_list, f, ensure_ascii=False, indent=4)
-
-
-def setup(app: Sphinx) -> Dict[str, Any]:
-    """Set up the Sphinx extension."""
-    app.connect("build-finished", create_search_index)

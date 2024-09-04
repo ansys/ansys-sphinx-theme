@@ -65,7 +65,7 @@
       const fuseOptions = {
         keys: ['title', 'text'],
         includeScore: true,
-        threshold: 0.4
+        threshold: 0.2
       };
 
       fuseInstance = new Fuse(data, fuseOptions);
@@ -91,8 +91,14 @@
         const { title, text, href } = result.item;
 
         // Highlight the search query in the text
+        const strippedText = stripText(text, query);
+        const highlightedText = highlightTerms(strippedText, query);
         const highlightedTitle = highlightTerms(title, query);
-        const highlightedText = highlightTerms(text, query);
+
+        // if stripped length is 200, add ... to the end
+        // if (highlightedText.length > 200) {
+        //   highlightedText = highlightedText.substring(0, 200) + '...';
+        // }
 
         item.innerHTML =
           `<div class="result-title">${highlightedTitle}</div>` +
@@ -106,6 +112,11 @@
 
         resultsContainer.appendChild(item);
       });
+    }
+
+    function stripText(text, query) {
+      // get only the sentences that contain the query
+      return text.replace(/<[^>]*>?/gm, '').split('.').filter((sentence) => sentence.includes(query)).join('. ');
     }
 
     function highlightTerms(text, query) {

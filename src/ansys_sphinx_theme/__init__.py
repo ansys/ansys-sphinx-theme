@@ -34,6 +34,7 @@ from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
+from ansys_sphinx_theme.search.fuse_search import create_search_index
 
 try:
     import importlib.metadata as importlib_metadata
@@ -571,6 +572,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
     app.connect("build-finished", replace_html_tag)
+    app.connect("build-finished", create_search_index)
     return {
         "version": __version__,
         "parallel_read_safe": True,
