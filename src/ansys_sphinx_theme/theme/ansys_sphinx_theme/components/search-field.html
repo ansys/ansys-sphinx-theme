@@ -65,7 +65,8 @@
       const fuseOptions = {
         keys: ['title', 'text'],
         includeScore: true,
-        threshold: 0.2
+        threshold: 0.0,
+        distance: 5,
       };
 
       fuseInstance = new Fuse(data, fuseOptions);
@@ -73,7 +74,7 @@
     }
 
     function performSearch(query) {
-      const results = fuseInstance.search(query);
+      const results = fuseInstance.search(query, { limit: 20 });
       const resultsContainer = document.getElementById('results');
       resultsContainer.innerHTML = '';
 
