@@ -31,16 +31,13 @@
   }
 
   .result-title {
-    font-size: 1.25rem;
+    font-size: 1em;
     font-weight: bold;
+    background-color: #f3f4f5;
   }
 
   .result-text {
-    font-size: 1em;
-  }
-
-  .highlight {
-    background-color: rgb(177, 177, 34);
+    font-size: 10px;
   }
 
   .no-results {
@@ -51,7 +48,14 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 
+
 <!-- Script tag for search functionality -->
+ {% set theme_static_search = theme_static_search | default({}) %}
+  {% set threshold = theme_static_search.threshold | default(0.5) %}
+  {% set use_extended_search = theme_static_search.use_extended_search | default(true) %}
+  {% set should_sort = theme_static_search.should_sort | default(true) %}
+  {% set ignoreLocation = theme_static_search.ignoreLocation | default(false) %}
+  {% set limit = theme_static_search.docs_limit | default(20) %}
 <script>
   require.config({
     paths: {
@@ -66,9 +70,10 @@
     function initializeFuse(data) {
       const fuseOptions = {
         keys: ['title', 'text'],
-        threshold: 0.5,
-        shouldSort: true,
-        useExtendedSearch: true
+        threshold: "{{ threshold }}",
+        shouldSort: "{{ should_sort }}",
+        useExtendedSearch: "{{ use_extended_search }}",
+        ignoreLocation: "{{ ignoreLocation }}"
       };
 
       fuseInstance = new Fuse(data, fuseOptions);
@@ -76,7 +81,7 @@
     }
 
     function performSearch(query) {
-      const results = fuseInstance.search(query, { limit: 20 });
+      const results = fuseInstance.search(query, { limit: parseInt("{{ limit }}") });
       const resultsContainer = document.getElementById('results');
       resultsContainer.innerHTML = '';
 
@@ -86,6 +91,14 @@
         noResultsMessage.textContent = 'No matched documents';
         resultsContainer.appendChild(noResultsMessage);
         return; // Exit the function early
+      }
+
+      //if query is empty,  dont show the div result container
+      if (query === '') {
+        resultsContainer.style.display = 'none';
+        return;
+      } else {
+        resultsContainer.style.display = 'block';
       }
 
       results.forEach(result => {

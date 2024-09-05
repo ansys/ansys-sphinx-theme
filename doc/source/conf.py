@@ -74,7 +74,10 @@ html_theme_options = {
         "package_depth": 1,
     },
     "logo": "ansys",
-    "static_search": True,
+    "static_search": {
+        "threshold": 0.5,
+        "ignoreLocation": True,
+    },
 }
 
 
