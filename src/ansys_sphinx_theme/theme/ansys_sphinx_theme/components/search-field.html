@@ -66,9 +66,9 @@
     function initializeFuse(data) {
       const fuseOptions = {
         keys: ['title', 'text'],
-        includeScore: true,
         threshold: 0.5,
-        distance: 10,
+        shouldSort: true,
+        useExtendedSearch: true
       };
 
       fuseInstance = new Fuse(data, fuseOptions);
