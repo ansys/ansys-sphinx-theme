@@ -22,7 +22,9 @@
     border: 1px solid #ddd; /* Optional: Add border for better visibility */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Add shadow for better visibility */
   }
-
+  .search-button__wrapper.show .search-button__search-container {
+    overflow: auto;
+  }
   .result-item {
     margin-bottom: 1rem;
     cursor: pointer; /* Indicate that the item is clickable */
@@ -65,8 +67,8 @@
       const fuseOptions = {
         keys: ['title', 'text'],
         includeScore: true,
-        threshold: 0.0,
-        distance: 5,
+        threshold: 0.5,
+        distance: 10,
       };
 
       fuseInstance = new Fuse(data, fuseOptions);
@@ -91,15 +93,8 @@
         item.className = 'result-item';
         const { title, text, href } = result.item;
 
-        // Highlight the search query in the text
-        const strippedText = stripText(text, query);
-        const highlightedText = highlightTerms(strippedText, query);
+        const highlightedText = highlightTerms(text, query);
         const highlightedTitle = highlightTerms(title, query);
-
-        // if stripped length is 200, add ... to the end
-        // if (highlightedText.length > 200) {
-        //   highlightedText = highlightedText.substring(0, 200) + '...';
-        // }
 
         item.innerHTML =
           `<div class="result-title">${highlightedTitle}</div>` +
@@ -121,15 +116,18 @@
     }
 
     function highlightTerms(text, query) {
-      if (!query.trim()) return text;
+    if (!query.trim()) return text;
 
-      // Escape special characters and create regex for each term
-      const escapedQuery = query.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-      const regex = new RegExp(`(${escapedQuery})`, 'gi');
+    // Split query into words and escape special characters for each word
+    const words = query.trim().split(/\s+/);
+    const escapedWords = words.map(word => word.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
 
-      // Replace matched text with highlighted version
-      return text.replace(regex, '<span class="highlight">$1</span>');
-    }
+    // Create a regex to match any of the words
+    const regex = new RegExp(`(${escapedWords.join('|')})`, 'gi');
+
+    // Replace matched text with highlighted version
+    return text.replace(regex, '<span class="highlight">$1</span>');
+}
 
     function navigateToHref(href) {
       const baseUrl = window.location.origin;
