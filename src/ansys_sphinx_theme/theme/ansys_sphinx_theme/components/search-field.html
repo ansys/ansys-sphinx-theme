@@ -7,44 +7,7 @@
 <!-- Add this div to show the search results -->
 <div id="results" class="results"></div>
 
-<style>
-  .results {
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    justify-content: center;
-    position: absolute;
-    background-color: white;
-    width: 800px;
-    padding: 0 10px;
-    border: 1px solid #ddd; /* Optional: Add border for better visibility */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: Add shadow for better visibility */
-  }
-  .search-button__wrapper.show .search-button__search-container {
-    overflow: auto;
-  }
-  .result-item {
-    margin-bottom: 1rem;
-    cursor: pointer; /* Indicate that the item is clickable */
-  }
-
-  .result-title {
-    font-size: 1em;
-    font-weight: bold;
-    background-color: #f3f4f5;
-  }
-
-  .result-text {
-    font-size: 10px;
-  }
-
-  .no-results {
-    font-style: italic;
-    color: #777;
-  }
-</style>
+<link href="{{ pathto('_static/css/fuse-search.css', 1) }}" rel="stylesheet" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 
