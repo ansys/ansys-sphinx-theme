@@ -1,7 +1,20 @@
-{%- extends "pydata_sphinx_theme/layout.html" -%} {# Append our custom CSS after
-the bootstrap stylesheet so we can override where necessary #} {%- block css %}
-{{ super() }} {% if theme_show_breadcrumbs %}
-<link href="{{ pathto('_static/css/breadcrumbs.css', 1) }}" rel="stylesheet" />
-{% endif %} {%- endblock %}{% block docs_navbar %} {{ super() }} {% if
-theme_switcher %} {% include 'components/announcement_version.html' %} {% endif
-%} {% endblock %}
+{%- extends "pydata_sphinx_theme/layout.html" -%}
+
+{% block htmltitle %}
+    <title>
+        {{ meta.thispagetitle if meta is mapping and 'thispagetitle' in meta else super() }}
+    </title>
+{% endblock %}
+{# Append our custom CSS afterthe bootstrap stylesheet so we can override where necessary #}
+{%- block css %}
+    {{ super() }}
+    {% if theme_show_breadcrumbs %}
+        <link href="{{ pathto('_static/css/breadcrumbs.css', 1) }}" rel="stylesheet" />
+    {% endif %}
+{%- endblock %}
+{% block docs_navbar %}
+    {{ super() }}
+    {% if theme_switcher %}
+    {% include 'components/announcement_version.html' %}
+    {% endif %}
+{% endblock %}
