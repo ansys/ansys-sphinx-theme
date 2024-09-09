@@ -28,6 +28,7 @@ import pathlib
 import subprocess
 from typing import Any, Dict
 
+from docutils import nodes
 from docutils.nodes import document
 from sphinx import addnodes
 from sphinx.application import Sphinx
@@ -534,6 +535,29 @@ def build_quarto_cheatsheet(app: Sphinx):
     app.config.html_theme_options["cheatsheet"]["thumbnail"] = f"{output_dir}/{output_png}"
 
 
+def handle_notitle(app: Sphinx, doctree, docname):
+    """Handle the <notitle> directive in the document title."""
+    # Retrieve the current title node
+    title_node = app.env.titles.get(docname, None)
+
+    if isinstance(title_node, nodes.title):
+        # Extract text from title node and check for <notitle>
+        title_text = title_node.astext().strip()
+        print(f"Title node for '{docname}' is '{title_text}'")
+
+        if title_text == "<notitle>":
+            # Create a new title node with the desired title
+            new_title = f"{app.config.html_title}"
+            new_title_node = nodes.title(text=new_title)
+            # Update the environment with the new title node
+            app.env.titles[docname] = new_title_node
+            print(f"Title updated for '{docname}' to '{new_title}'")
+        else:
+            print(f"Title for '{docname}' is '{title_text}'")
+    else:
+        print(f"No valid title node found for '{docname}'")
+
+
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -567,6 +591,7 @@ def setup(app: Sphinx) -> Dict:
     app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
+    app.connect("env-merge-info", handle_notitle)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
