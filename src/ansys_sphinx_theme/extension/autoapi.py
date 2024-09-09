@@ -23,6 +23,7 @@
 """Module containing an extension for creating Sphinx AutoAPI templates for the Ansys Sphinx Theme."""  # noqa: E501
 
 import os
+import pathlib
 from typing import Any, Dict
 
 from sphinx.application import Sphinx
@@ -78,11 +79,11 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
     app.config["autoapi_add_toctree_entry"] = autoapi.get("add_toctree_entry", True)
 
     # HACK: The ``autoapi_dirs`` should be given as a relative path to the conf.py.
-    relative_autoapi_dir = os.path.relpath(
-        autoapi.get("directory", "src/ansys"), start=str(app.config["autoapi_root"])
-    )
-    app.config["autoapi_dirs"] = [relative_autoapi_dir]
-    print(f"AutoAPI directories: {app.config['autoapi_dirs']}")
+    autoapi_dir = autoapi.get("directory", "src/ansys")
+    doc_source_root_dir = pathlib.Path(app.srcdir).resolve().parent.parent
+    path_to_autoapi_dir = (doc_source_root_dir / autoapi_dir).resolve()
+    relative_autoapi_dir = os.path.relpath(path_to_autoapi_dir, start=app.srcdir)
+    app.config["autoapi_dirs"] = [str(relative_autoapi_dir)]
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:
