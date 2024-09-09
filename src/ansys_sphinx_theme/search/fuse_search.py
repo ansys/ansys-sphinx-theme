@@ -97,7 +97,7 @@ def create_search_index(app, exception):
     if exception:
         return
 
-    if not app.config.html_theme_options.get("static_search"):
+    if not app.config.html_theme_options.get("static_search", {}):
         return
 
     all_docs = app.env.found_docs
