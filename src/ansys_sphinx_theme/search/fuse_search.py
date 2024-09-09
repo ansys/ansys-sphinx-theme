@@ -104,8 +104,9 @@ def create_search_index(app, exception):
 
     for document in all_docs:
         search_index = SearchIndex(document, app)
+        search_index.iterate_through_docs()
         search_index_list.extend(search_index.indices)
 
     search_index = app.builder.outdir / "search.json"
     with search_index.open("w", encoding="utf-8") as index_file:
-        json.dump(indices, index_file, ensure_ascii=False, indent=4)
+        json.dump(search_index_list, index_file, ensure_ascii=False, indent=4)
