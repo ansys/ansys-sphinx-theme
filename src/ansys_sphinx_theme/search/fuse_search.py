@@ -28,7 +28,7 @@ import re
 from docutils import nodes
 
 
-class GetSearchIndex:
+class SearchIndex:
     """Class to get search index."""
 
     def __init__(self, doc_name, app):
@@ -42,7 +42,7 @@ class GetSearchIndex:
             Sphinx application.
         """
         self._doc_name = doc_name
-        self.doc_path = self._doc_name + ".html"
+        self.doc_path = f"{self._doc_name}.html"
         self.doc_title = app.env.titles[self._doc_name].astext()
         self._doc_tree = app.env.get_doctree(self._doc_name)
         self.sections = []
@@ -108,5 +108,6 @@ def create_search_index(app, exception):
         doc_search.iterate_through_docs()
         search_index_list.extend(doc_search.get_search_index())
 
-    with open(app.builder.outdir / "search.json", "w", encoding="utf-8") as f:  # noqa: PTH123
-        json.dump(search_index_list, f, ensure_ascii=False, indent=4)
+    search_index = app.builder.outdir / "search.json"
+    with search_index.open("w", encoding="utf-8") as index_file:
+        json.dump(indices, index_file, ensure_ascii=False, indent=4)
