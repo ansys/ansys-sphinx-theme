@@ -69,9 +69,9 @@ class SearchIndex:
                 }
             )
 
-    def get_search_index(self):
+    @property
+    def indices(self):
         """Get search index."""
-        search_index_list = []
         for sections in self.sections:
             search_index = {
                 "objectID": self._doc_name,
@@ -80,8 +80,7 @@ class SearchIndex:
                 "section": sections["section_title"],
                 "text": sections["section_text"],
             }
-            search_index_list.append(search_index)
-        return search_index_list
+            yield search_index
 
 
 def create_search_index(app, exception):
@@ -103,10 +102,9 @@ def create_search_index(app, exception):
     all_docs = app.env.found_docs
     search_index_list = []
 
-    for doc in all_docs:
-        doc_search = GetSearchIndex(doc, app)
-        doc_search.iterate_through_docs()
-        search_index_list.extend(doc_search.get_search_index())
+    for document in all_docs:
+        search_index = SearchIndex(document, app)
+        search_index_list.extend(search_index.indices)
 
     search_index = app.builder.outdir / "search.json"
     with search_index.open("w", encoding="utf-8") as index_file:
