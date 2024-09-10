@@ -29,6 +29,9 @@ and set the ``ansys_sphinx_theme_autoapi`` theme options in the ``html_theme_opt
   By default, this is set to ``False``.
 - ``package_depth``: The depth of the package. By default, this is set to ``3``. This is the ``namespace`` depth of the package.
   For example, if the package is ``ansys``, the depth is ``1``. If the package is ``ansys.foo``, the depth is ``2``.
+- ``member_order``: The order to document members. By default, this is set to ``bysource``. Other options include
+  ``alphabetical``, which orders members by their name (case sensitive), or ``groupwise``, which orders members by their type
+  and alphabetically.
 
 All these options can be set in the ``conf.py`` file of your Sphinx project.
 
@@ -54,6 +57,7 @@ All these options can be set in the ``conf.py`` file of your Sphinx project.
             "ignore": [],
             "add_toctree_entry": False,
             "package_depth": 3,
+            "member_order": "bysource",
         }
     }
 
