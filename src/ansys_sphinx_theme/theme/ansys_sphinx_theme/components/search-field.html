@@ -13,6 +13,7 @@
 
 {% set theme_static_search = theme_static_search | default({}) %}
 {% set theme_limit = theme_static_search.limit | default(10) %}
+{% set start_search_at = theme_static_search.start_search_at | default(1) %}
 <script>
   require.config({
     paths: {
@@ -105,6 +106,11 @@
     const searchBox = document.querySelector(".bd-search input");
     searchBox.addEventListener("input", function () {
       const query = this.value.trim();
+      // look for min letters in query
+      if (query.length < parseInt("{{ start_search_at }}")) {
+        document.getElementById('results').innerHTML = '';
+        return;
+      }
       performSearch(query);
     });
 
