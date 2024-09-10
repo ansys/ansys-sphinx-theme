@@ -42,3 +42,4 @@ def update_search_config(app: Sphinx) -> None:
     theme_static_options["useExtendedSearch"] = theme_static_options.get(
         "useExtendedSearch", "True"
     )
+    theme_static_options["limit"] = theme_static_options.get("limit", 10)
