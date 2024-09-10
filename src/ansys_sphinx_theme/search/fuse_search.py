@@ -47,10 +47,6 @@ class SearchIndex:
         self._doc_tree = app.env.get_doctree(self._doc_name)
         self.sections = []
 
-    def _title_to_anchor(self, title: str) -> str:
-        """Convert title to anchor."""
-        return re.sub(r"[^\w\s-]", "", title.lower().strip().replace(" ", "-"))
-
     def iterate_through_docs(self):
         """Iterate through the document."""
         for node in self._doc_tree.traverse(nodes.section):
@@ -60,7 +56,7 @@ class SearchIndex:
                 for node_type in [nodes.paragraph, nodes.literal_block]
                 for n in node.traverse(node_type)
             )
-            self.section_anchor_id = self._title_to_anchor(self.section_title)
+            self.section_anchor_id = _title_to_anchor(self.section_title)
             self.sections.append(
                 {
                     "section_title": self.section_title,
@@ -81,6 +77,11 @@ class SearchIndex:
                 "text": sections["section_text"],
             }
             yield search_index
+
+
+def _title_to_anchor(title: str) -> str:
+    """Convert title to anchor."""
+    return re.sub(r"[^\w\s-]", "", title.lower().strip().replace(" ", "-"))
 
 
 def create_search_index(app, exception):

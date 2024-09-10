@@ -20,3 +20,25 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 """Initiate the search."""
+
+from sphinx.application import Sphinx
+
+from ansys_sphinx_theme.search.fuse_search import create_search_index
+
+
+def update_search_config(app: Sphinx) -> None:
+    """Update the search configuration.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application.
+    """
+    theme_static_options = app.config.html_theme_options.get("static_search", {})
+    theme_static_options["keys"] = ["title", "text"]
+    theme_static_options["threshold"] = theme_static_options.get("threshold", 0.5)
+    theme_static_options["shouldSort"] = theme_static_options.get("shouldSort", "True")
+    theme_static_options["ignoreLocation"] = theme_static_options.get("ignoreLocation", "False")
+    theme_static_options["useExtendedSearch"] = theme_static_options.get(
+        "useExtendedSearch", "True"
+    )

@@ -11,14 +11,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 
-
-<!-- Script tag for search functionality -->
- {% set theme_static_search = theme_static_search | default({}) %}
-  {% set threshold = theme_static_search.threshold | default(0.5) %}
-  {% set use_extended_search = theme_static_search.use_extended_search | default(true) %}
-  {% set should_sort = theme_static_search.should_sort | default(true) %}
-  {% set ignoreLocation = theme_static_search.ignoreLocation | default(false) %}
-  {% set limit = theme_static_search.docs_limit | default(20) %}
+{% set theme_static_search = theme_static_search | default({}) %}
 <script>
   require.config({
     paths: {
@@ -26,18 +19,14 @@
     }
   });
 
+  const theme_static_search = JSON.parse('{{ theme_static_search | tojson | safe }}');
+
   require(['fuse'], function(Fuse) {
     let fuseInstance;
     let searchData = [];
 
     function initializeFuse(data) {
-      const fuseOptions = {
-        keys: ['title', 'text'],
-        threshold: "{{ threshold }}",
-        shouldSort: "{{ should_sort }}",
-        useExtendedSearch: "{{ use_extended_search }}",
-        ignoreLocation: "{{ ignoreLocation }}"
-      };
+      const fuseOptions = theme_static_search;
 
       fuseInstance = new Fuse(data, fuseOptions);
       searchData = data; // Save the search data for later use

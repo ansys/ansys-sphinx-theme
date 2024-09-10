@@ -34,7 +34,7 @@ from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
-from ansys_sphinx_theme.search.fuse_search import create_search_index
+from ansys_sphinx_theme.search import create_search_index, update_search_config
 
 try:
     import importlib.metadata as importlib_metadata
@@ -556,6 +556,8 @@ def setup(app: Sphinx) -> Dict:
 
     # Add default HTML configuration
     setup_default_html_theme_options(app)
+
+    update_search_config(app)
 
     # Verify that the main CSS file exists
     if not CSS_PATH.exists():
