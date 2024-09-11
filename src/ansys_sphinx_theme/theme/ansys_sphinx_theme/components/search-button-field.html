@@ -1,32 +1,19 @@
 <!-- Button to trigger search expansion -->
 <button id="searchButton" class="btn search-button__button pst-js-only" title="Search" aria-label="Search">
   <i class="fa-solid fa-magnifying-glass"></i>
+
 </button>
 
 <!-- Search Form (Initially hidden) -->
 <div id="searchContainer" class="search-container" style="display: none;">
   <form class="bd-search d-flex align-items-center" action="{{ pathto('search') }}" method="get">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <input type="search" class="form-control" name="q" placeholder="{{ theme_search_bar_text }}" aria-label="{{ theme_search_bar_text }}" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+    <input type="search" class="form-control" name="q" placeholder="Type your search..." aria-label="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
     <button type="submit" class="btn btn-primary">Search</button>
   </form>
 </div>
+
 <!-- Container for search results -->
-<div id="results" class="results"></div>
-
-
-<script>
-  // Get the button and search container
-  document.getElementById('searchButton').addEventListener('click', function() {
-    const searchContainer = document.getElementById('searchContainer');
-    if (searchContainer.style.display === 'none') {
-      searchContainer.style.display = 'block';
-      document.querySelector('.bd-search input').focus(); // Focus on the input after expanding
-    } else {
-      searchContainer.style.display = 'none';
-    }
-  });
-</script>
+<div id="results" class="results" style="display: none;"></div>
 
 
 <link href="{{ pathto('_static/css/fuse-search.css', 1) }}" rel="stylesheet" />
@@ -37,18 +24,6 @@
 {% set theme_limit = theme_static_search.limit | default(10) %}
 {% set start_search_at = theme_static_search.start_search_at | default(1) %}
 <script>
-  // Get the button and search container
-  document.getElementById('searchButton').addEventListener('click', function() {
-    const searchContainer = document.getElementById('searchContainer');
-    if (searchContainer.style.display === 'none') {
-      searchContainer.style.display = 'block';
-      document.getElementById('searchInput').focus(); // Focus on the input after expanding
-    } else {
-      searchContainer.style.display = 'none';
-    }
-  });
-
-
   require.config({
     paths: {
       fuse: "https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min"

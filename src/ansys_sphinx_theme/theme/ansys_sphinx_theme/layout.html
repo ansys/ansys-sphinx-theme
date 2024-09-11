@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchButton = document.getElementById('searchButton');
   const searchContainer = document.getElementById('searchContainer');
   const resultsContainer = document.getElementById('results');
+  const searchInput = searchContainer.querySelector('input[name="q"]');
 
   searchButton.addEventListener('click', () => {
     if (searchContainer.style.display === 'none') {
@@ -20,13 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
       searchContainer.style.display = 'flex';
       searchButton.classList.add('expanded');
       searchContainer.classList.add('expanded');
-      searchContainer.querySelector('input[name="q"]').focus(); // Focus the input field
+      searchInput.focus(); // Focus the input field
     } else {
       // Collapse the search container
       searchContainer.style.display = 'none';
       searchButton.classList.remove('expanded');
       searchContainer.classList.remove('expanded');
       resultsContainer.style.display = 'none'; // Hide results when collapsing
+    }
+  });
+
+  // Function to perform the search and update results
+  const performSearch = (query) => {
+    // Mock search results for demonstration purposes
+    // Replace this with actual search logic, e.g., fetch API
+    const resultsContainer = document.getElementById("results");
+    resultsContainer.innerHTML = `<p>Results for: ${query}</p>`;
+    // Example: make an AJAX request to fetch search results and update resultsContainer
+  };
+
+  // Set up the button click event to toggle search container
+  searchButton.addEventListener("click", toggleSearchField);
+
+  // Hide the search container when clicking outside
+  document.addEventListener("click", (event) => {
+    if (!searchButton.contains(event.target) && !searchContainer.contains(event.target)) {
+      searchContainer.style.display = "none";
+      searchButton.classList.remove("expanded");
     }
   });
 });

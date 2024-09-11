@@ -68,10 +68,17 @@ html[data-theme="light"] .highlight {
 }
 
 .search-button__button.expanded {
-  width: 300px; /* Same as search container */
+  width: 30px; /* Same as search container */
 }
 
 /* Result Container Styling */
 .results {
   margin-top: 10px;
+}
+
+.bd-search {
+  gap: 8px;
+  background-color: var(--ast-search-bar-enable-background);
+  border: 0px solid var(--ast-search-bar-enable-border);
+  margin-bottom: 0px;
 }
