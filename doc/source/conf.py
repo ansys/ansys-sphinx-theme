@@ -202,7 +202,8 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github()
+    token = os.getenv("GITHUB_TOKEN", None)
+    g = Github(token)
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):
@@ -249,19 +250,46 @@ def download_and_process_files(example_links: List[str]) -> List[str]:
     return file_names
 
 
-example_links = extract_example_links(
-    "executablebooks/sphinx-design",
-    "docs/snippets/rst",
-    exclude_files=["article-info.txt"],
-)
-file_names = download_and_process_files(example_links)
+# example_links = extract_example_links(
+#     "executablebooks/sphinx-design",
+#     "docs/snippets/rst",
+#     exclude_files=["article-info.txt"],
+# )
+# file_names = download_and_process_files(example_links)
+file_names = [
+    "badge-basic.txt",
+    "badge-link.txt",
+    "button-link.txt",
+    "card-basic.txt",
+    "card-carousel.txt",
+    "card-head-foot.txt",
+    "card-images.txt",
+    "card-link.txt",
+    "card-title-link.txt",
+    "div-basic.txt",
+    "dropdown-basic.txt",
+    "dropdown-options.txt",
+    "grid-basic.txt",
+    "grid-card-columns.txt",
+    "grid-card.txt",
+    "grid-gutter.txt",
+    "grid-nested.txt",
+    "icon-fontawesome.txt",
+    "icon-material-design.txt",
+    "icon-octicon.txt",
+    "tab-basic.txt",
+    "tab-code-set.txt",
+    "tab-options.txt",
+    "tab-sync.txt",
+]
 
-admonitions_links = extract_example_links(
-    "pydata/pydata-sphinx-theme",
-    "docs/examples/kitchen-sink/admonitions.rst",
-)
+# admonitions_links = extract_example_links(
+#     "pydata/pydata-sphinx-theme",
+#     "docs/examples/kitchen-sink/admonitions.rst",
+# )
 
-admonitions_links = download_and_process_files(admonitions_links)
+# admonitions_links = download_and_process_files(admonitions_links)
+admonitions_links = ["admonitions.rst"]
 todo_include_todos = True  # admonition todo needs this to be True
 
 jinja_contexts = {

@@ -191,7 +191,7 @@ div[data-ds-theme]
   gap: 8px;
   background-color: var(--ast-search-bar-enable-background);
   border: 0px solid var(--ast-search-bar-enable-border);
-  margin-bottom: 300px;
+  /* margin-bottom: 300px; */
 }
 #search-icon {
   font-size: 24px;

@@ -43,3 +43,35 @@ html[data-theme="light"] .highlight {
   background-color: #ececec;
   color: var(--ast-highlight-color);
 }
+
+/* Button Styling */
+.search-button__button {
+  transition: width 0.3s ease;
+  width: 50px; /* Initial width */
+}
+
+/* Expanded Search Container */
+.search-container {
+  transition: width 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.search-container.expanded {
+  display: flex;
+  width: 300px; /* Adjust to fit your design */
+}
+
+.search-container form {
+  display: flex;
+  width: 100%;
+}
+
+.search-button__button.expanded {
+  width: 300px; /* Same as search container */
+}
+
+/* Result Container Styling */
+.results {
+  margin-top: 10px;
+}
