@@ -525,7 +525,7 @@ def check_for_depreciated_theme_options(app: Sphinx):
     theme_options = app.config.html_theme_options
     if "use_meilisearch" in theme_options:
         raise DeprecationWarning(
-            "The 'use_meilisearch' option is deprecated. Use 'static_search' instead."
+            "The 'use_meilisearch' option is deprecated. Remove the option from your configuration file."  # noqa: E501
         )
 
 
