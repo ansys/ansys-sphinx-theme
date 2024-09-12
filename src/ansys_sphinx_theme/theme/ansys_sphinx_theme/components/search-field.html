@@ -135,9 +135,8 @@
         const firstResult = document.querySelector(".result-item");
         if (firstResult) {
           navigateToHref(firstResult.getAttribute("data-href"));
-        } else {
-          window.location.href = "{{ pathto('search') }}?q=" + searchBox.value;
         }
+        event.preventDefault();
       }
     });
 
