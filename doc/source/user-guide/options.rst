@@ -108,24 +108,24 @@ If you want to hide all icons, use the ``show_icons`` Boolean variable:
         ...
     }
 
-Static search options
+Static Search Options
 ----------------------
-The Ansys Sphinx theme supports static search options to customise your search bar.
 
-The static search bar is created using ``Fuse.js``. You can provide all the options that are supported by ``Fuse.js`` through
-the ``static_search`` dictionary in the ``html_theme_options``.
+The Ansys Sphinx theme supports static search options to customize your search bar.
 
-Additional options are:
+The static search bar is created using ``Fuse.js``. You can provide all options supported by ``Fuse.js`` through the ``static_search`` dictionary in the ``html_theme_options``.
 
-#. ``keys``: List of keys to search in the documents. Default is ``["title", "text"]``.
-#. ``threshold``: The minimum score a search result must have to be included in the results. Default is ``0.5``.
-#. ``IgnoreLocation``: Whether to ignore the location of the search term in the document. Default is ``False``. This can reduce the search time for larger documents.
-#. ``limit`` : The maximum number of search results to display. Default is ``10``.
-#. ``min_chars_for_search``: The minimum number of characters to start the search. Default is ``1``.
+Additional options include:
+
+1. ``keys``: List of keys to search in the documents. Default is ``["title", "text"]``.
+2. ``threshold``: The minimum score a search result must have to be included in the results. Default is ``0.5``.
+3. ``ignoreLocation``: Whether to ignore the location of the search term in the document. Default is ``False``. Ignoring the location can increase the search speed for large documents.
+4. ``limit``: The maximum number of search results to display. Default is ``10``.
+5. ``min_chars_for_search``: The minimum number of characters required to start the search. Default is ``1``.
 
 .. note::
 
-    All other options can be found in the `Fuse.js documentation <https://fusejs.io/api/options.html>`_.
+    All other options are available in the `Fuse.js documentation <https://fusejs.io/api/options.html>`_.
 
 Here is an example of how to add the ``static_search`` dictionary to the ``html_theme_options`` dictionary:
 
@@ -142,13 +142,14 @@ Here is an example of how to add the ``static_search`` dictionary to the ``html_
 
 .. note::
 
-    To use the search bar in local documentation, you have to open the documentation in a local server.
-    The search bar will not work if you open the HTML files directly in the browser.
+    To use the search bar in local documentation, you must open the documentation through a local server.
+    The search bar does not work if you open the HTML files directly in the browser.
+
     To open the documentation in a local server, run the following command in the directory where the HTML files are located:
 
     .. code-block:: bash
 
-        python -m http.server .
+        python -m http.server
 
     Then, open the browser and go to ``http://localhost:8000``.
 
