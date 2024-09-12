@@ -13,7 +13,7 @@
 
 {% set theme_static_search = theme_static_search | default({}) %}
 {% set theme_limit = theme_static_search.limit | default(10) %}
-{% set start_search_at = theme_static_search.start_search_at | default(1) %}
+{% min_chars_for_search = theme_static_search.min_chars_for_search | default(1) %}
 <script>
   require.config({
     paths: {
@@ -107,7 +107,7 @@
     searchBox.addEventListener("input", function () {
       const query = this.value.trim();
       // look for min letters in query
-      if (query.length < parseInt("{{ start_search_at }}")) {
+      if (query.length < parseInt("{{ min_chars_for_search }}")) {
         document.getElementById('results').innerHTML = '';
         return;
       }
