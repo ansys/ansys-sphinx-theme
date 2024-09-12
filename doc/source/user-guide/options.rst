@@ -112,7 +112,7 @@ Static search options
 ----------------------
 The Ansys Sphinx theme supports static search options to customise your search bar.
 
-The static searchbar is created using ``Fuse.js``. You can provide all the options that are supported by ``Fuse.js`` through
+The static search bar is created using ``Fuse.js``. You can provide all the options that are supported by ``Fuse.js`` through
 the ``static_search`` dictionary in the ``html_theme_options``.
 
 Additional options are:
@@ -122,6 +122,36 @@ Additional options are:
 #. ``IgnoreLocation``: Whether to ignore the location of the search term in the document. Default is ``False``. This can reduce the search time for larger documents.
 #. ``limit`` : The maximum number of search results to display. Default is ``10``.
 #. ``min_chars_for_search``: The minimum number of characters to start the search. Default is ``1``.
+
+.. note::
+
+    All other options can be found in the `Fuse.js documentation <https://fusejs.io/api/options.html>`_.
+
+Here is an example of how to add the ``static_search`` dictionary to the ``html_theme_options`` dictionary:
+
+.. code-block:: python
+
+    html_theme_options = {
+        "static_search": {
+            "threshold": 0.5,
+            "limit": 10,
+            "min_chars_for_search": 1,
+        },
+    }
+
+
+.. note::
+
+    To use the search bar in local documentation, you have to open the documentation in a local server.
+    The search bar will not work if you open the HTML files directly in the browser.
+    To open the documentation in a local server, run the following command in the directory where the HTML files are located:
+
+    .. code-block:: bash
+
+        python -m http.server .
+
+    Then, open the browser and go to ``http://localhost:8000``.
+
 
 Cheat sheets
 ------------
