@@ -7,8 +7,6 @@
 <!-- Add this div to show the search results -->
 <div id="results" class="results"></div>
 
-<link href="{{ pathto('_static/css/fuse-search.css', 1) }}" rel="stylesheet" />
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 
 {% set theme_static_search = theme_static_search | default({}) %}
@@ -21,19 +19,19 @@
   require.config({
   paths: {
     fuse: "https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min",
-  },
-});
+    },
+  });
 
-require(["fuse"], function (Fuse) {
-  let fuseInstance;
-  let searchData = [];
+  require(["fuse"], function (Fuse) {
+    let fuseInstance;
+    let searchData = [];
 
-  function initializeFuse(data) {
-    const fuseOptions = theme_static_search;
+    function initializeFuse(data) {
+      const fuseOptions = theme_static_search;
 
-    fuseInstance = new Fuse(data, fuseOptions);
-    searchData = data; // Save the search data for later use
-  }
+      fuseInstance = new Fuse(data, fuseOptions);
+      searchData = data; // Save the search data for later use
+    }
 
   function performSearch(query) {
     const results = fuseInstance.search(query, {
@@ -150,6 +148,6 @@ require(["fuse"], function (Fuse) {
     .catch(error => {
       console.error('There was a problem with the fetch operation:', error);
     });
-});
+  });
 </script>
 
