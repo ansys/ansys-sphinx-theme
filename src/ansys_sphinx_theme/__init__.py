@@ -34,6 +34,7 @@ from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
+from ansys_sphinx_theme.search import create_search_index, update_search_config
 
 try:
     import importlib.metadata as importlib_metadata
@@ -123,27 +124,6 @@ def get_version_match(semver: str) -> str:
         return "dev"
     major, minor, *_ = semver.split(".")
     return ".".join([major, minor])
-
-
-def convert_version_to_pymeilisearch(semver: str) -> str:
-    """Convert a semantic version number to pymeilisearch-compatible format.
-
-    This function evaluates the given semantic version number and returns a
-    version number that is compatible with `pymeilisearch`, where dots are
-    replaced with hyphens.
-
-    Parameters
-    ----------
-    semver : str
-        Semantic version number in the form of a string.
-
-    Returns
-    -------
-    str
-        pymeilisearch-compatible version number.
-    """
-    version = get_version_match(semver).replace(".", "-")
-    return version
 
 
 def setup_default_html_theme_options(app):
@@ -534,6 +514,21 @@ def build_quarto_cheatsheet(app: Sphinx):
     app.config.html_theme_options["cheatsheet"]["thumbnail"] = f"{output_dir}/{output_png}"
 
 
+def check_for_depreciated_theme_options(app: Sphinx):
+    """Check for depreciated theme options.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    """
+    theme_options = app.config.html_theme_options
+    if "use_meilisearch" in theme_options:
+        raise DeprecationWarning(
+            "The 'use_meilisearch' option is deprecated. Remove the option from your configuration file."  # noqa: E501
+        )
+
+
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -556,6 +551,8 @@ def setup(app: Sphinx) -> Dict:
     # Add default HTML configuration
     setup_default_html_theme_options(app)
 
+    update_search_config(app)
+
     # Verify that the main CSS file exists
     if not CSS_PATH.exists():
         raise FileNotFoundError(f"Unable to locate ansys-sphinx theme at {CSS_PATH.absolute()}")
@@ -567,10 +564,12 @@ def setup(app: Sphinx) -> Dict:
     app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
+    app.connect("builder-inited", check_for_depreciated_theme_options)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
     app.connect("build-finished", replace_html_tag)
+    app.connect("build-finished", create_search_index)
     return {
         "version": __version__,
         "parallel_read_safe": True,
