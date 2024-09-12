@@ -62,6 +62,7 @@ html[data-theme="light"] .highlight {
 .search-button__wrapper.show svg {
   font-size: 14px;
 }
+
 .bd-search {
   gap: 8px;
   background-color: var(--ast-search-bar-enable-background);
