@@ -111,13 +111,13 @@ If you want to hide all icons, use the ``show_icons`` Boolean variable:
 Static search options
 ----------------------
 
-The Ansys Sphinx theme supports static search options to customize your search bar.
+The Ansys Sphinx theme supports static search options to customize the search experience.
 
 The static search bar is created using ``Fuse.js``. You can provide all options supported by ``Fuse.js`` through the ``static_search`` dictionary in the ``html_theme_options``.
 
 Additional options include:
 
-1. ``keys``: List of keys to search in the documents. Default is ``["title", "text"]``.
+1. ``keys``: List of keys to search in the documents. Default are ``["title", "text"]``.
 2. ``threshold``: The minimum score a search result must have to be included in the results. Default is ``0.5``.
 3. ``ignoreLocation``: Whether to ignore the location of the search term in the document. Default is ``False``. Ignoring the location can increase the search speed for large documents.
 4. ``limit``: The maximum number of search results to display. Default is ``10``.
@@ -142,7 +142,7 @@ Here is an example of how to add the ``static_search`` dictionary to the ``html_
 
 .. note::
 
-    To use the search bar in local documentation, you must open the documentation through a local server.
+    Serve locally your documentation using the ``python -m http.server -d /path/to/docs/html/`` to have a live-preview of your search results. This method is compliant with the `CORS policy <https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS>`_ and allows to load the generated resource files containing the indices of your documentation.
     The search bar does not work if you open the HTML files directly in the browser.
 
     To open the documentation in a local server, run the following command in the directory where the HTML files are located:
