@@ -5,7 +5,7 @@
 </form>
 
 <!-- Add this div to show the search results -->
-<div id="results" class="results"></div>
+<div id="results" class="results" style="display: none;"></div>
 
 <style src='{{ pathto("fuse-search.css", 1) }}'></style>
 
@@ -131,7 +131,10 @@
         // Navigate to the first result's URL
         navigateToHref(firstResult.getAttribute("data-href"));
       }
-      event.preventDefault(); // Prevent the default form submission
+      else {
+      // event.preventDefault(); // Prevent the default form submission
+      window.location.href = "{{ pathto('search') }}?q=" + searchBox.value;
+      }
     }
 
   });
