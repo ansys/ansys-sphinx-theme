@@ -108,7 +108,7 @@ If you want to hide all icons, use the ``show_icons`` Boolean variable:
         ...
     }
 
-Static Search Options
+Static search options
 ----------------------
 
 The Ansys Sphinx theme supports static search options to customize your search bar.
