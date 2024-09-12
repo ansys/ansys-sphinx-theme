@@ -9,13 +9,7 @@ require(["fuse"], function (Fuse) {
   let searchData = [];
 
   function initializeFuse(data) {
-    const fuseOptions = {
-      keys: ["title", "text"],
-      threshold: "{{ threshold }}",
-      shouldSort: "{{ should_sort }}",
-      useExtendedSearch: "{{ use_extended_search }}",
-      ignoreLocation: "{{ ignoreLocation }}",
-    };
+    const fuseOptions = theme_static_search;
 
     fuseInstance = new Fuse(data, fuseOptions);
     searchData = data; // Save the search data for later use
@@ -23,7 +17,7 @@ require(["fuse"], function (Fuse) {
 
   function performSearch(query) {
     const results = fuseInstance.search(query, {
-      limit: parseInt("{{ limit }}"),
+      limit: parseInt("{{ theme_limit }}"),
     });
     const resultsContainer = document.getElementById("results");
     resultsContainer.innerHTML = "";
@@ -36,7 +30,7 @@ require(["fuse"], function (Fuse) {
       return; // Exit the function early
     }
 
-    //if query is empty,  dont show the div result container
+    // If query is empty,  dont show the result container
     if (query === "") {
       resultsContainer.style.display = "none";
       return;
@@ -101,6 +95,11 @@ require(["fuse"], function (Fuse) {
   const searchBox = document.querySelector(".bd-search input");
   searchBox.addEventListener("input", function () {
     const query = this.value.trim();
+    // look for min letters in query
+    if (query.length < parseInt("{{ min_chars_for_search }}")) {
+      document.getElementById("results").innerHTML = "";
+      return;
+    }
     performSearch(query);
   });
 
@@ -111,24 +110,24 @@ require(["fuse"], function (Fuse) {
       if (firstResult) {
         // Navigate to the first result's URL
         navigateToHref(firstResult.getAttribute("data-href"));
-        // window.location.href = firstResult.getAttribute('data-href');
       }
       event.preventDefault(); // Prevent the default form submission
     }
   });
-
-  // Fetch the data from search.json and initialize Fuse.js
-  fetch('{{ pathto("search.json", 1) }}')
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok " + response.statusText);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      initializeFuse(data);
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation:", error);
-    });
 });
+
+//   // Fetch the data from search.json and initialize Fuse.js
+//   fetch('{{ pathto("search.json", 1) }}')
+//     .then(response => {
+//       if (!response.ok) {
+//         throw new Error('Network response was not ok ' + response.statusText);
+//       }
+//       return response.json();
+//     })
+//     .then(data => {
+//       initializeFuse(data);
+//     })
+//     .catch(error => {
+//       console.error('There was a problem with the fetch operation:', error);
+//     });
+// });

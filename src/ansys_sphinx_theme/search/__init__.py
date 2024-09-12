@@ -43,3 +43,6 @@ def update_search_config(app: Sphinx) -> None:
         "useExtendedSearch", "True"
     )
     theme_static_options["limit"] = theme_static_options.get("limit", 10)
+    theme_static_options["min_chars_for_search"] = theme_static_options.get(
+        "min_chars_for_search", 1
+    )
