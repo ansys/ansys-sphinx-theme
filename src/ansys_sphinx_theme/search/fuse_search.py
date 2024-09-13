@@ -31,7 +31,7 @@ from docutils import nodes
 class SearchIndex:
     """Class to get search index."""
 
-    def __init__(self, doc_name, app, version):
+    def __init__(self, doc_name, app, version_url_prefix):
         """Initialize the class.
 
         Parameters
@@ -40,13 +40,15 @@ class SearchIndex:
             Document name.
         app : Sphinx
             Sphinx application.
+        version : str
+            Version of the document for prefixing the path.
         """
         self._doc_name = doc_name
         self.doc_path = f"{self._doc_name}.html"
         self.doc_title = app.env.titles[self._doc_name].astext()
         self._doc_tree = app.env.get_doctree(self._doc_name)
         self.sections = []
-        self.version = version
+        self.url_prefix = version_url_prefix
 
     def iterate_through_docs(self):
         """Iterate through the document."""
@@ -72,7 +74,7 @@ class SearchIndex:
         for sections in self.sections:
             search_index = {
                 "objectID": self._doc_name,
-                "href": f"{self.version}{self.doc_path}#{sections['section_anchor_id']}",
+                "href": f"{self.url_prefix}{self.doc_path}#{sections['section_anchor_id']}",
                 "title": self.doc_title,
                 "section": sections["section_title"],
                 "text": sections["section_text"],
@@ -101,14 +103,14 @@ def create_search_index(app, exception):
     if not app.config.html_theme_options.get("static_search", {}):
         return
 
-    switcher_version = app.config.html_theme_options.get("switcher", {}).get("version_match")
-    version_string = f"version/{switcher_version}/" if switcher_version else ""
+    switcher_version = app.config.html_theme_options.get("switcher", {}).get("version_match", "")
+    version_url_prefix = f"version/{switcher_version}/" if switcher_version else ""
 
     all_docs = app.env.found_docs
     search_index_list = []
 
     for document in all_docs:
-        search_index = SearchIndex(document, app, version_string)
+        search_index = SearchIndex(document, app, version_url_prefix)
         search_index.iterate_through_docs()
         search_index_list.extend(search_index.indices)
 
