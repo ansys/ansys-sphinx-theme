@@ -1,0 +1,107 @@
+.results {
+  margin-top: 3rem !important;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: center;
+  position: absolute;
+  background-color: white;
+  width: 800px;
+  padding: 0 10px;
+  border: 1px solid #ddd; /* Optional: Add border for better visibility */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+}
+.search-button__wrapper.show .search-button__search-container {
+  overflow: auto;
+}
+.result-item {
+  margin-bottom: 1rem;
+  cursor: pointer; /* Indicate that the item is clickable */
+}
+
+.result-title {
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #f3f4f5;
+  font-family: "Open Sans", sans-serif;
+}
+
+.result-text {
+  font-size: 12px;
+  font-family: "Open Sans", sans-serif;
+  color: var(--ast-search-bar-enable-text);
+}
+
+.no-results {
+  font-style: italic;
+  color: #777;
+  font-family: "Open Sans", sans-serif;
+}
+
+html[data-theme="light"] .highlight {
+  background-color: #ececec;
+  color: var(--ast-highlight-color);
+}
+
+.form-control:focus,
+.form-control:focus-visible,
+.form-control {
+  background-color: var(--ast-search-bar-enable-background);
+  color: var(--ast-search-bar-enable-text);
+  font-size: 14px;
+  outline-color: var(--ast-search-bar-enable-border);
+  border: 0.5px solid var(--ast-search-bar-enable-border);
+  width: 670px;
+  max-width: 200%;
+  height: 40px;
+  margin-left: 5px;
+}
+
+.search-button__wrapper.show input,
+.search-button__wrapper.show svg {
+  font-size: 14px;
+}
+
+.bd-search {
+  gap: 8px;
+  background-color: var(--ast-search-bar-enable-background);
+  border: 0px solid var(--ast-search-bar-enable-border);
+  margin-bottom: 300px;
+}
+
+.bd-search .search-button__kbd-shortcut {
+  background-color: var(--ast-search-bar-enable-background) !important;
+  box-shadow: none !important;
+  height: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.index-select {
+  color: var(--ast-search-bar-enable-text);
+  background: var(--ast-search-bar-enable-background);
+  height: 40px;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
+  border: 0.5px solid var(--ast-search-bar-enable-border);
+  border-radius: 4px;
+  box-shadow: none;
+  padding: 0px 8px;
+  margin-left: 2px;
+}
+:focus-visible {
+  outline: none;
+}
+
+#search-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: var(--ast-search-bar-enable-text);
+}
+
+.form-control:focus {
+  box-shadow: none;
+}

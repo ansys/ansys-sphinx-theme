@@ -15,7 +15,6 @@ from ansys_sphinx_theme import (
     ansys_favicon,
     ansys_logo_white,
     ansys_logo_white_cropped,
-    convert_version_to_pymeilisearch,
     generate_404,
     get_version_match,
     latex,
@@ -60,12 +59,6 @@ html_theme_options = {
         "json_url": f"https://{cname}/versions.json",
         "version_match": get_version_match(__version__),
     },
-    "use_meilisearch": {
-        "api_key": os.getenv("MEILISEARCH_PUBLIC_API_KEY", ""),
-        "index_uids": {
-            f"ansys-sphinx-theme-v{convert_version_to_pymeilisearch(__version__)}": "ansys-sphinx-theme",  # noqa: E501
-        },
-    },
     "ansys_sphinx_theme_autoapi": {
         "project": project,
         "directory": "src/ansys_sphinx_theme/examples",
@@ -74,6 +67,10 @@ html_theme_options = {
         "package_depth": 1,
     },
     "logo": "ansys",
+    "static_search": {
+        "threshold": 0.5,
+        "ignoreLocation": True,
+    },
 }
 
 
