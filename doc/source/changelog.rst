@@ -9,6 +9,20 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.0.9 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.9>`_ - 2024-09-16
+=======================================================================================
+
+Added
+^^^^^
+
+- feat: add member_order to autoapi `#495 <https://github.com/ansys/ansys-sphinx-theme/pull/495>`_
+
+
+Fixed
+^^^^^
+
+- fix: ``autoapi`` relative directory path wrt ``tox`` env `#494 <https://github.com/ansys/ansys-sphinx-theme/pull/494>`_
+
 `1.0.8 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.8>`_ - 2024-09-03
 =======================================================================================
 
