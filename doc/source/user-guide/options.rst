@@ -108,92 +108,51 @@ If you want to hide all icons, use the ``show_icons`` Boolean variable:
         ...
     }
 
-Use MeiliSearch
-----------------
+Static search options
+----------------------
 
-MeiliSearch is an open source search engine that allows developers to
-easily integrate search functionality into their applications.
+The Ansys Sphinx theme supports static search options to customize the search experience.
 
-To use MeiliSearch in your documentation, in the ``conf.py`` file,
-a child dictionary named ``use_meilisearch``is added to the ``html_theme_options``
-dictionary.
+The static search bar is created using ``Fuse.js``. You can provide all options supported by ``Fuse.js`` through the ``static_search`` dictionary in the ``html_theme_options``.
 
-This dictionary contains these keys, in the order given:
+Additional options include:
 
-#. ``host``: Host name of your MeiliSearch instance. If no value is provided,
-   the default public host for PyAnsys is used: ``https://backend.search.pyansys.com``
-   on port ``7700``. If added security is needed, you can use the ``os.getenv()`` function
-   to set the instance using an environment variable.
-
-#. ``api_key``: API key for your MeiliSearch instance. If no value is provided,
-   the default public API key for PyAnsys is used. If added security is needed,
-   you can use the ``os.getenv()`` function to set the key using an environment
-   variable.
-
-#. ``index_uids``: Dictionary that provides the mapping between the unique
-   identifier (UID) of an index and its corresponding user-friendly name.
-   Each key-value pair in the dictionary represents an index, with the key
-   being the index UID and the value being the index name. The index UID
-   points to an index on the server.
-
-Here is an example of how to configure MeiliSearch for use in the ``conf.py`` file:
-
-.. code-block:: python
-
-    import os
-
-    use_meilisearch = {
-        "host": os.getenv("MEILISEARCH_HOST_NAME", ""),
-        "api_key": os.getenv("MEILISEARCH_API_KEY", ""),
-        "index_uids": {
-            "index-uid of current project": "index name to display",
-            "another-index-uid": "index name to display",
-        },
-    }
-
-
-If your project features multiple documentation versions, it's crucial to adapt the
-``index_uids`` mapping to accommodate different versions. To ensure seamless search
-integration across versions, use the following format to dynamically generate
-version-specific index ``UIDs``:
-
-.. code-block:: python
-
-    from ansys_sphinx_theme import convert_version_to_pymeilisearch
-
-    use_meilisearch = {
-        "api_key": os.getenv("MEILISEARCH_PUBLIC_API_KEY", ""),
-        "index_uids": {
-            f"ansys-sphinx-theme-v{convert_version_to_pymeilisearch(__version__)}": "ansys-sphinx-theme",
-        },
-    }
-
-
-Here is an example configuration of how to configure MeiliSearch in the ``conf.py`` file
-for the Ansys Sphinx Theme:
-
-.. code-block:: python
-
-    import os
-
-    html_theme_options = {
-        "use_meilisearch": {
-            "index_uids": {
-                "ansys-sphinx-theme-sphinx-docs": "ansys-sphinx-theme",
-                "pyansys-docs-all-public": "PyAnsys",
-            },
-        },
-    }
-
-
-With these options set, MeiliSearch is available for performing searches of
-your documentation.
+1. ``keys``: List of keys to search in the documents. Default are ``["title", "text"]``.
+2. ``threshold``: The minimum score a search result must have to be included in the results. Default is ``0.5``.
+3. ``ignoreLocation``: Whether to ignore the location of the search term in the document. Default is ``False``. Ignoring the location can increase the search speed for large documents.
+4. ``limit``: The maximum number of search results to display. Default is ``10``.
+5. ``min_chars_for_search``: The minimum number of characters required to start the search. Default is ``1``.
 
 .. note::
 
-    If you do not set the ``use_meilisearch`` dictionary, the
-    Ansys Sphinx Theme uses the default search functionality
-    inherited from the PyData Sphinx Theme.
+    All other options are available in the `Fuse.js documentation <https://fusejs.io/api/options.html>`_.
+
+Here is an example of how to add the ``static_search`` dictionary to the ``html_theme_options`` dictionary:
+
+.. code-block:: python
+
+    html_theme_options = {
+        "static_search": {
+            "threshold": 0.5,
+            "limit": 10,
+            "min_chars_for_search": 1,
+        },
+    }
+
+
+.. note::
+
+    Serve locally your documentation using the ``python -m http.server -d /path/to/docs/html/`` to have a live-preview of your search results. This method is compliant with the `CORS policy <https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS>`_ and allows to load the generated resource files containing the indices of your documentation.
+    The search bar does not work if you open the HTML files directly in the browser.
+
+    To open the documentation in a local server, run the following command in the directory where the HTML files are located:
+
+    .. code-block:: bash
+
+        python -m http.server
+
+    Then, open the browser and go to ``http://localhost:8000``.
+
 
 Cheat sheets
 ------------

@@ -126,27 +126,6 @@ def get_version_match(semver: str) -> str:
     return ".".join([major, minor])
 
 
-def convert_version_to_pymeilisearch(semver: str) -> str:
-    """Convert a semantic version number to pymeilisearch-compatible format.
-
-    This function evaluates the given semantic version number and returns a
-    version number that is compatible with `pymeilisearch`, where dots are
-    replaced with hyphens.
-
-    Parameters
-    ----------
-    semver : str
-        Semantic version number in the form of a string.
-
-    Returns
-    -------
-    str
-        pymeilisearch-compatible version number.
-    """
-    version = get_version_match(semver).replace(".", "-")
-    return version
-
-
 def setup_default_html_theme_options(app):
     """Set up the default configuration for the HTML options.
 
@@ -535,6 +514,21 @@ def build_quarto_cheatsheet(app: Sphinx):
     app.config.html_theme_options["cheatsheet"]["thumbnail"] = f"{output_dir}/{output_png}"
 
 
+def check_for_depreciated_theme_options(app: Sphinx):
+    """Check for depreciated theme options.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    """
+    theme_options = app.config.html_theme_options
+    if "use_meilisearch" in theme_options:
+        raise DeprecationWarning(
+            "The 'use_meilisearch' option is deprecated. Remove the option from your configuration file."  # noqa: E501
+        )
+
+
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -570,6 +564,7 @@ def setup(app: Sphinx) -> Dict:
     app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
+    app.connect("builder-inited", check_for_depreciated_theme_options)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)

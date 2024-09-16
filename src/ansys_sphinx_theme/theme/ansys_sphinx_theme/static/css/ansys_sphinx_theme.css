@@ -5,7 +5,7 @@
 @import "ansys-sphinx-theme-variables.css";
 @import "pydata-sphinx-theme-custom.css";
 @import "breadcrumbs.css";
-@import "meilisearch.css";
+@import "fuse-search.css";
 @import "sphinx-design.css";
 @import "table-custom.css";
 @import "sphinx-gallery.css";
