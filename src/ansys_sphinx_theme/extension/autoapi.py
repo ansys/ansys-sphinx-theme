@@ -81,9 +81,13 @@ def add_autoapi_theme_option(app: Sphinx) -> None:
 
     # HACK: The ``autoapi_dirs`` should be given as a relative path to the conf.py.
     autoapi_dir = autoapi.get("directory", "src/ansys")
-    doc_source_root_dir = Path(app.srcdir).resolve().parent.parent
-    path_to_autoapi_dir = (doc_source_root_dir / autoapi_dir).resolve()
-    relative_autoapi_dir = os.path.relpath(path_to_autoapi_dir, start=app.srcdir)
+    # assume the docs are in doc/source directory
+    root_dir = Path(app.srcdir).resolve().parent.parent
+    path_to_autoapi_dir = (root_dir / autoapi_dir).resolve()
+    if path_to_autoapi_dir.exists():
+        relative_autoapi_dir = os.path.relpath(path_to_autoapi_dir, start=app.srcdir)
+    else:
+        relative_autoapi_dir = autoapi_dir
     app.config["autoapi_dirs"] = [str(relative_autoapi_dir)]
 
 
