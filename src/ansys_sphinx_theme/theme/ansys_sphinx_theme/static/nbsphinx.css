@@ -6,5 +6,5 @@
  * Do not display the caption paragraph in the body content for 'nbgallery'
  */
 .toctree-wrapper > p.caption {
-    display: none;
+  display: none;
 }
