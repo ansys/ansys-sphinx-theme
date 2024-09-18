@@ -460,9 +460,10 @@ def build_quarto_cheatsheet(app: Sphinx):
                 f"ansys/pyansys-quarto-cheatsheet@{CHEAT_SHEET_QUARTO_EXTENTION_VERSION}",
                 "--no-prompt",
             ],
-            cwd=file_path,
+            cwd=f"{file_path}",
             capture_output=True,
             text=True,
+            shell=True,
         )
 
         # Render the cheatsheet
@@ -476,9 +477,10 @@ def build_quarto_cheatsheet(app: Sphinx):
                 "--output-dir",
                 output_dir_path,
             ],
-            cwd=file_path,
+            cwd=f"{file_path}",
             capture_output=True,
             text=True,
+            shell=True,
         )
 
         # Remove the cheatsheet from the Quarto project
@@ -506,6 +508,13 @@ def build_quarto_cheatsheet(app: Sphinx):
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to build Quarto cheatsheet: {e}. Ensure Quarto is installed.")
+
+    # print the out dir
+    # also the path of cheatsheet
+
+    print(output_dir_path)
+    print(file_name)
+    print(f"output pdf file: {output_dir_path / file_name.replace('.qmd', '.pdf')}")
 
     output_file = output_dir_path / file_name.replace(".qmd", ".pdf")
     app.config.html_theme_options["cheatsheet"]["output_dir"] = f"{output_dir}/{output_file.name}"
