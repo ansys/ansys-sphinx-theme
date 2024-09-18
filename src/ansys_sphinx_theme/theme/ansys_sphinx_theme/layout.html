@@ -9,44 +9,10 @@
 {%- block content %}
 {{ super()}}
 {%- include "components/ast-search-button.html" %}
-<!-- <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const searchButton = document.getElementById('searchButton');
-  const searchContainer = document.getElementById('searchContainer');
-  const resultsContainer = document.getElementById('results');
-  const searchInput = searchContainer.querySelector('input[name="q"]');
-
-  searchButton.addEventListener('click', () => {
-    if (searchContainer.style.display === 'none') {
-      // Expand the search container
-      searchContainer.style.display = 'flex';
-      searchButton.classList.add('expanded');
-      searchContainer.classList.add('expanded');
-      searchInput.focus(); // Focus the input field
-      resultsContainer.style.display = 'block'; // Show results when expanding
-    } else {
-      // Collapse the search container
-      searchContainer.style.display = 'none';
-      searchButton.classList.remove('expanded');
-      searchContainer.classList.remove('expanded');
-      resultsContainer.style.display = 'none'; // Hide results when collapsing
-    }
-  });
-});
-
-</script> -->
 {%- endblock %}
-{%- block footer %}
-    {{ super() }}
-{% endblock %}
 
-
-<!-- <dialog id="pst-search-dialog">
-  {% include "../components/search-field.html" %}
-</dialog> -->
- <!-- remove this dialog box-->
-  <script>
+  <!-- <script>
     var dialog = document.getElementById('pst-search-dialog');
     dialog.parentNode.removeChild(dialog);
-  </script>
+  </script> -->
 

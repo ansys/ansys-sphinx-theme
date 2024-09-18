@@ -1,5 +1,5 @@
 
-<link rel="stylesheet" href="{{ pathto('static/css/fuse-search.css', 1) }}">
+<link rel="stylesheet" href="{{ pathto('_static/css/fuse-search.css', 1) }}">
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
@@ -103,7 +103,7 @@
     }
 
     // Event listeners
-    const searchBox = document.querySelector(".bd-search input");
+    const searchBox = document.getElementById("search-button").querySelector(".bd-search input");
 
     // Handle input in the search box
     searchBox.addEventListener("input", function () {
@@ -133,29 +133,3 @@
       .catch(error => console.error('Fetch operation failed:', error));
   });
 </script>
-<!--
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // once click on the search button, expand, increase the width
-
-    const searchButton = document.querySelector('.bd-search i');
-    const searchContainer = document.querySelector('.bd-search');
-    const resultsContainer = document.getElementById('results');
-    const searchInput = searchContainer.querySelector('input[name="q"]');
-
-    searchButton.addEventListener('click', () => {
-      if (searchContainer.classList.contains('expanded')) {
-        // Collapse the search container
-        searchContainer.classList.remove('expanded');
-        resultsContainer.style.display = 'none'; // Hide results when collapsing
-      } else {
-        // Expand the search container
-        searchContainer.classList.add('expanded');
-        searchInput.focus(); // Focus the input field
-        resultsContainer.style.display = 'flex'; // Show results when expanding
-      }
-    });
-
-  });
-
-</script> -->
