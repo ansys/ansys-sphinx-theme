@@ -133,3 +133,29 @@
       .catch(error => console.error('Fetch operation failed:', error));
   });
 </script>
+<!--
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // once click on the search button, expand, increase the width
+
+    const searchButton = document.querySelector('.bd-search i');
+    const searchContainer = document.querySelector('.bd-search');
+    const resultsContainer = document.getElementById('results');
+    const searchInput = searchContainer.querySelector('input[name="q"]');
+
+    searchButton.addEventListener('click', () => {
+      if (searchContainer.classList.contains('expanded')) {
+        // Collapse the search container
+        searchContainer.classList.remove('expanded');
+        resultsContainer.style.display = 'none'; // Hide results when collapsing
+      } else {
+        // Expand the search container
+        searchContainer.classList.add('expanded');
+        searchInput.focus(); // Focus the input field
+        resultsContainer.style.display = 'flex'; // Show results when expanding
+      }
+    });
+
+  });
+
+</script> -->
