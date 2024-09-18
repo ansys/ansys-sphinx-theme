@@ -7,7 +7,9 @@
     {% endif %}
 {%- endblock %}
 {%- block content %}
-<script>
+{{ super()}}
+{%- include "components/search-script.html" %}
+<!-- <script>
 document.addEventListener('DOMContentLoaded', () => {
   const searchButton = document.getElementById('searchButton');
   const searchContainer = document.getElementById('searchContainer');
@@ -32,13 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-</script>
-{{ super() }}
+</script> -->
 {%- endblock %}
 {%- block footer %}
     {{ super() }}
 {% endblock %}
-{{ super() }}
+
 
 <!-- <dialog id="pst-search-dialog">
   {% include "../components/search-field.html" %}

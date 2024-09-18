@@ -1,39 +1,19 @@
-<!-- Button to trigger search expansion -->
-<button id="searchButton" class="btn search-button__button pst-js-only" title="Search" aria-label="Search">
+<form class="bd-search d-flex align-items-center" action="{{ pathto('search') }}" method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" placeholder="{{ theme_search_bar_text }}"
+         aria-label="{{ theme_search_bar_text }}" autocomplete="off" autocorrect="off"
+         autocapitalize="off" spellcheck="false"/>
+  <span class="search-button__kbd-shortcut">
+    <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+  </span>
+</form>
 
-</button>
-
-<!-- Search Form (Initially hidden) -->
-<div id="searchContainer" class="search-container">
-  <form class="bd-search d-flex align-items-center" action="{{ pathto('search') }}" method="get">
-    <input type="search" class="form-control" name="q" placeholder="Type your search..." aria-label="Search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-  </form>
-</div>
-
-<!-- Container for search results -->
+<!-- Search results container -->
 <div id="results" class="results" style="display: none;"></div>
-<script>
-var searchButton = document.getElementById('searchButton');
-var searchInput = document.getElementById('searchInput');
 
-// Toggle the search input expansion
-searchButton.addEventListener('click', function() {
-  searchInput.classList.toggle('expanded');
-  searchInput.focus(); // Automatically focus the input
-});
+<!-- External CSS -->
 
-// Optional: Close input when user clicks outside
-document.addEventListener('click', function(event) {
-  if (!searchButton.contains(event.target) && !searchInput.contains(event.target)) {
-    searchInput.classList.remove('expanded');
-  }
-});
-</script>
-
-<link rel="stylesheet" href="{{ pathto('fuse-search.css', 1) }}">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
-
+<!--
 {% set theme_static_search = theme_static_search | default({}) %}
 {% set theme_limit = theme_static_search.limit | default(10) %}
 {% set min_chars_for_search = theme_static_search.min_chars_for_search | default(1) %}
@@ -56,16 +36,12 @@ document.addEventListener('click', function(event) {
     let fuseInstance;
     let searchData = [];
 
-    console.log('Fuse.js loaded');
-
     // Initialize Fuse.js with search data and options
     function initializeFuse(data) {
       const fuseOptions = theme_static_search;
       fuseInstance = new Fuse(data, fuseOptions);
       searchData = data;  // Save the search data for later use
     }
-
-    console.log('Fuse.js initialized');
 
     // Perform search with Fuse.js
     function performSearch(query) {
@@ -100,8 +76,6 @@ document.addEventListener('click', function(event) {
       noResultsMessage.textContent = "No matched documents";
       container.appendChild(noResultsMessage);
     }
-
-    console.log('Search performed');
 
     // Create and return a result item
     function createResultItem(title, text, href, query) {
@@ -167,6 +141,5 @@ document.addEventListener('click', function(event) {
       .then(response => response.ok ? response.json() : Promise.reject('Error: ' + response.statusText))
       .then(data => initializeFuse(data))
       .catch(error => console.error('Fetch operation failed:', error));
-      console.log('Search data fetched');
   });
-</script>
+</script> -->

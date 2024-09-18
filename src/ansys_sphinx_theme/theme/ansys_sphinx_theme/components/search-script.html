@@ -1,19 +1,5 @@
-<!-- Search form -->
-<form class="bd-search d-flex align-items-center" action="{{ pathto('search') }}" method="get">
-  <i class="fa-solid fa-magnifying-glass"></i>
-  <input type="search" class="form-control" name="q" placeholder="{{ theme_search_bar_text }}"
-         aria-label="{{ theme_search_bar_text }}" autocomplete="off" autocorrect="off"
-         autocapitalize="off" spellcheck="false"/>
-  <span class="search-button__kbd-shortcut">
-    <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
-  </span>
-</form>
 
-<!-- Search results container -->
-<div id="results" class="results" style="display: none;"></div>
-
-<!-- External CSS -->
-<link rel="stylesheet" href="{{ pathto('fuse-search.css', 1) }}">
+<link rel="stylesheet" href="{{ pathto('static/css/fuse-search.css', 1) }}">
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
