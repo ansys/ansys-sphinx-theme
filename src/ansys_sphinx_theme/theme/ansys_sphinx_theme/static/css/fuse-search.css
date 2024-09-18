@@ -1,16 +1,17 @@
 .results {
-  margin-top: 3rem !important;
+  margin-top: 35rem !important;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   align-content: flex-start;
   justify-content: center;
   position: absolute;
   background-color: white;
-  width: 800px;
-  padding: 0 10px;
+  width: 700px;
+  padding: 10px;
   border: 1px solid #ddd; /* Optional: Add border for better visibility */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+  overflow: auto;
+  height: 500px;
 }
 .search-button__wrapper.show .search-button__search-container {
   overflow: auto;
@@ -52,7 +53,7 @@ html[data-theme="light"] .highlight {
   font-size: 14px;
   outline-color: var(--ast-search-bar-enable-border);
   border: 0.5px solid var(--ast-search-bar-enable-border);
-  width: 670px;
+  width: 300px;
   max-width: 200%;
   height: 40px;
   margin-left: 5px;
@@ -66,7 +67,7 @@ html[data-theme="light"] .highlight {
 .bd-search .search-button__kbd-shortcut {
   background-color: var(--ast-search-bar-enable-background) !important;
   box-shadow: none !important;
-  height: 40px;
+  height: 36px;
   display: flex;
   flex-wrap: wrap;
   align-content: center;

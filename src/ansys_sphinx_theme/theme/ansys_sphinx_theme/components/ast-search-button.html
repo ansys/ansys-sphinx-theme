@@ -133,3 +133,37 @@
       .catch(error => console.error('Fetch operation failed:', error));
   });
 </script>
+
+<script>
+  const searchButton = document.getElementById("search-button");
+  const searchBox = searchButton.querySelector(".bd-search input");
+
+  // Expand search box on click
+  searchBox.addEventListener("click", function () {
+    searchBox.style.width = "600px"
+  });
+  // also expand the search box on pressing ctrl + k
+  document.addEventListener("keydown", function (event) {
+    if (event.ctrlKey && event.key === "k") {
+      searchBox.style.width = "600px";
+      searchBox.focus();
+    }
+  });
+
+  const resultsContainer = document.getElementById("results");
+  document.addEventListener("click", function (event) {
+    if (!resultsContainer.contains(event.target) && event.target !== searchBox) {
+      resultsContainer.style.display = "none";
+      searchBox.style.width = "100%";
+    }
+  });
+
+  // Close the result container on pressing the escape key
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      resultsContainer.style.display = "none";
+      searchBox.style.width = "100%";
+    }
+  });
+
+  </script>
