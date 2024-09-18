@@ -9,6 +9,14 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.0.10 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.10>`_ - 2024-09-18
+=========================================================================================
+
+Fixed
+^^^^^
+
+- fix: do not display captions for nbgallery `#503 <https://github.com/ansys/ansys-sphinx-theme/pull/503>`_
+
 `1.0.9 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.9>`_ - 2024-09-16
 =======================================================================================
 
