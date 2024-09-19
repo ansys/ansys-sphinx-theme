@@ -100,9 +100,6 @@ def create_search_index(app, exception):
     if exception:
         return
 
-    if not app.config.html_theme_options.get("static_search", {}):
-        return
-
     switcher_version = app.config.html_theme_options.get("switcher", {}).get("version_match", "")
     version_url_prefix = f"version/{switcher_version}/" if switcher_version else ""
 
