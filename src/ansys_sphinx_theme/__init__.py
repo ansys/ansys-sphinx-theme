@@ -451,6 +451,9 @@ def build_quarto_cheatsheet(app: Sphinx):
     file_name = str(cheatsheet_file.name)
     file_path = cheatsheet_file.parent
     output_dir_path = pathlib.Path(app.outdir) / output_dir
+    print(f"cheatsheet file: {cheatsheet_file}")
+    print(f"output dir: {output_dir_path}")
+
     try:
         # Add the cheatsheet to the Quarto project
         subprocess.run(
