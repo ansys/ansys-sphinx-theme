@@ -141,12 +141,22 @@
   // Expand search box on click
   searchBox.addEventListener("click", function () {
     searchBox.classList.add("expanded");
+    searchBox.focus();
+
+    if (searchBox.value.trim().length >= parseInt(min_chars_for_search)) {
+      resultsContainer.style.display = "flex";
+    }
+
   });
   // also expand the search box on pressing ctrl + k
   document.addEventListener("keydown", function (event) {
     if (event.ctrlKey && event.key === "k") {
       searchBox.classList.add("expanded");
       searchBox.focus();
+
+      if (searchBox.value.trim().length >= parseInt(min_chars_for_search)) {
+      resultsContainer.style.display = "flex";
+    }
     }
   });
 
