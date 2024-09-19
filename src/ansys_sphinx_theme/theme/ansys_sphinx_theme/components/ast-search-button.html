@@ -140,12 +140,12 @@
 
   // Expand search box on click
   searchBox.addEventListener("click", function () {
-    searchBox.style.width = "600px"
+    searchBox.classList.add("expanded");
   });
   // also expand the search box on pressing ctrl + k
   document.addEventListener("keydown", function (event) {
     if (event.ctrlKey && event.key === "k") {
-      searchBox.style.width = "600px";
+      searchBox.classList.add("expanded");
       searchBox.focus();
     }
   });
@@ -154,7 +154,7 @@
   document.addEventListener("click", function (event) {
     if (!resultsContainer.contains(event.target) && event.target !== searchBox) {
       resultsContainer.style.display = "none";
-      searchBox.style.width = "100%";
+      searchBox.classList.remove("expanded");
     }
   });
 
@@ -162,7 +162,7 @@
   document.addEventListener("keydown", function (event) {
     if (event.key === "Escape") {
       resultsContainer.style.display = "none";
-      searchBox.style.width = "100%";
+      searchBox.classList.remove("expanded");
     }
   });
 

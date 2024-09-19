@@ -277,7 +277,7 @@ a.headerlink {
 */
 .bd-header .navbar-header-items__start {
   width: fit-content;
-  padding-right: 3rem;
+  /* padding-right: 3rem; */
 }
 /**
 * header logo
