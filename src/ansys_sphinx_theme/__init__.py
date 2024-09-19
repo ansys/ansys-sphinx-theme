@@ -451,6 +451,10 @@ def build_quarto_cheatsheet(app: Sphinx):
     file_name = str(cheatsheet_file.name)
     file_path = cheatsheet_file.parent
     output_dir_path = pathlib.Path(app.outdir) / output_dir
+    if not output_dir_path.exists():
+        output_dir_path = pathlib.Path(app.srcdir).parent / "_build" / "html" / output_dir
+        output_dir_path.mkdir(parents=True, exist_ok=True)
+
     print(f"cheatsheet file: {cheatsheet_file}")
     print(f"output dir: {output_dir_path}")
 
