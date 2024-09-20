@@ -1,10 +1,6 @@
 // Global search options
 src = "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
 
-// var theme_static_search = JSON.parse('{{ theme_static_search | tojson | safe }}');
-// var theme_limit = "{{ theme_limit }}";
-// var min_chars_for_search = "{{ min_chars_for_search }}";
-
 // Configure RequireJS
 require.config({
   paths: {
@@ -132,48 +128,4 @@ require(["fuse"], function (Fuse) {
     )
     .then((data) => initializeFuse(data))
     .catch((error) => console.error("Fetch operation failed:", error));
-});
-
-const searchBar = document.getElementById("search-bar");
-const searchBarBox = document
-  .getElementById("search-bar")
-  .querySelector(".bd-search input");
-
-// Expand search box on click
-searchBarBox.addEventListener("click", function () {
-  searchBarBox.classList.add("expanded");
-  searchBarBox.focus();
-
-  if (searchBarBox.value.trim().length >= parseInt(min_chars_for_search)) {
-    resultsContainer.style.display = "flex";
-  }
-});
-// also expand the search box on pressing ctrl + k
-document.addEventListener("keydown", function (event) {
-  if (event.ctrlKey && event.key === "k") {
-    searchBarBox.classList.add("expanded");
-    searchBarBox.focus();
-
-    if (searchBarBox.value.trim().length >= parseInt(min_chars_for_search)) {
-      resultsContainer.style.display = "flex";
-    }
-  }
-});
-
-document.addEventListener("click", function (event) {
-  if (
-    !resultsContainer.contains(event.target) &&
-    event.target !== searchBarBox
-  ) {
-    resultsContainer.style.display = "none";
-    searchBarBox.classList.remove("expanded");
-  }
-});
-
-// Close the result container on pressing the escape key
-document.addEventListener("keydown", function (event) {
-  if (event.key === "Escape") {
-    resultsContainer.style.display = "none";
-    searchBarBox.classList.remove("expanded");
-  }
 });
