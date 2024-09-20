@@ -473,6 +473,10 @@ def build_quarto_cheatsheet(app: Sphinx):
             shell=True,
         )
 
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Failed to add Quarto cheatsheet: {e}. Ensure Quarto is installed.")
+
+    try:
         # Render the cheatsheet
         subprocess.run(
             [
@@ -489,7 +493,10 @@ def build_quarto_cheatsheet(app: Sphinx):
             text=True,
             shell=True,
         )
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Failed to render Quarto cheatsheet: {e}. Ensure Quarto is installed.")
 
+    try:
         # Remove the cheatsheet from the Quarto project
         subprocess.run(
             ["quarto", "remove", "ansys/cheat_sheet", "--no-prompt"],
