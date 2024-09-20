@@ -391,6 +391,11 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
         raise ImportError(
             f"Failed to import `pdf2image`: {e}. Install the package using `pip install pdf2image`"  # noqa: E501
         )
+
+    # cheack if pdf file exists
+    if not pdf_path.exists():
+        raise FileNotFoundError(f"PDF file not found: {pdf_path}")
+
     try:
         images = convert_from_path(pdf_path, 500)
         images[0].save(output_dir / output_png, "PNG")
@@ -450,12 +455,14 @@ def build_quarto_cheatsheet(app: Sphinx):
     cheatsheet_file = pathlib.Path(app.srcdir) / cheatsheet_file
     file_name = str(cheatsheet_file.name)
     file_path = cheatsheet_file.parent
+
     output_dir_path = pathlib.Path(app.outdir) / output_dir
     if not output_dir_path.exists():
         output_dir_path = pathlib.Path(app.srcdir).parent / "_build" / "html" / output_dir
         output_dir_path.mkdir(parents=True, exist_ok=True)
 
     print(f"cheatsheet file: {cheatsheet_file}")
+    print(f"file_path: {file_path}")
     print(f"output dir: {output_dir_path}")
 
     try:
@@ -482,11 +489,11 @@ def build_quarto_cheatsheet(app: Sphinx):
             [
                 "quarto",
                 "render",
-                file_name,
+                f"{file_name}",
                 "--to",
                 "cheat_sheet-pdf",
                 "--output-dir",
-                output_dir_path,
+                f"{output_dir_path}",
             ],
             cwd=f"{file_path}",
             capture_output=True,
@@ -523,11 +530,6 @@ def build_quarto_cheatsheet(app: Sphinx):
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to build Quarto cheatsheet: {e}. Ensure Quarto is installed.")
 
-    # print the out dir
-    # also the path of cheatsheet
-
-    print(output_dir_path)
-    print(file_name)
     print(f"output pdf file: {output_dir_path / file_name.replace('.qmd', '.pdf')}")
 
     output_file = output_dir_path / file_name.replace(".qmd", ".pdf")
