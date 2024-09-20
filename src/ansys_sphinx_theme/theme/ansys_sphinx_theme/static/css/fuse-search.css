@@ -105,27 +105,6 @@ html[data-theme="light"] .highlight {
   width: 50px; /* Initial width */
 }
 
-/* Expanded Search Container */
-/* .search-container {
-  transition: width 0.3s ease;
-  display: flex;
-  align-items: center;
-}
-
-.search-container.expanded {
-  display: flex;
-  width: 300px;
-}
-
-.search-container form {
-  display: flex;
-  width: 100%;
-}
-
-.search-button__button.expanded {
-  width: 30px;
-} */
-
 /* Result Container Styling */
 .bd-search {
   gap: 8px;
