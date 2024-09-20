@@ -46,6 +46,3 @@ def update_search_config(app: Sphinx) -> None:
     theme_static_options["min_chars_for_search"] = theme_static_options.get(
         "min_chars_for_search", 1
     )
-
-    print("Creating search index", theme_static_options)
-    print("here===========================================")
