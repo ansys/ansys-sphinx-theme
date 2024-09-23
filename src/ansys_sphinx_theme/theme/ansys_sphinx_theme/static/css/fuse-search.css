@@ -18,6 +18,7 @@
 .result-item {
   margin-bottom: 1rem;
   cursor: pointer; /* Indicate that the item is clickable */
+  transition: box-shadow 0.3s ease; /* Smooth transition */
 }
 
 .result-title {
@@ -25,6 +26,17 @@
   font-weight: bold;
   background-color: #f3f4f5;
   font-family: "Open Sans", sans-serif;
+}
+
+.result-title:focus,
+.result-title:focus-visible,
+.result-text:focus,
+.result-text:focus-visible {
+  box-shadow: var(--ast-ring-shadow-focused);
+}
+
+.result-item.selected {
+  box-shadow: var(--ast-ring-shadow-focused);
 }
 
 .result-text {
@@ -38,6 +50,7 @@
   outline: none; /* Remove default focus outline */
   cursor: pointer;
   box-shadow: var(--ast-ring-shadow-focused);
+  z-index: 1;
 }
 
 .result-item:hover {

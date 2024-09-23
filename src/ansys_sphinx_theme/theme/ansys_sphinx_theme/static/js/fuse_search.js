@@ -11,38 +11,34 @@ require.config({
 // Main script for search functionality
 require(["fuse"], function (Fuse) {
   let fuseInstance;
-  let searchData = []; // Track selected result
+  let searchData = [];
   let currentIndex = -1;
 
-  // Initialize Fuse.js with search data and options
   function initializeFuse(data) {
     const fuseOptions = theme_static_search;
     fuseInstance = new Fuse(data, fuseOptions);
-    searchData = data; // Save the search data for later use
+    searchData = data;
   }
 
-  // Perform search with Fuse.js
   function performSearch(query) {
     const results = fuseInstance.search(query, {
       limit: parseInt(theme_limit),
     });
     const resultsContainer = document.getElementById("results");
     resultsContainer.innerHTML = "";
-    currentIndex = -1; // Reset index on each new search
+    currentIndex = -1;
 
     if (results.length === 0) {
       displayNoResultsMessage(resultsContainer);
       return;
     }
 
-    // Show the results container if there's a query
     if (query === "") {
       resultsContainer.style.display = "none";
       return;
     }
     resultsContainer.style.display = "block";
 
-    // Populate results
     results.forEach((result) => {
       const { title, text, href } = result.item;
       const item = createResultItem(title, text, href, query);
@@ -50,7 +46,6 @@ require(["fuse"], function (Fuse) {
     });
   }
 
-  // Display "No matched documents" message
   function displayNoResultsMessage(container) {
     const noResultsMessage = document.createElement("div");
     noResultsMessage.className = "no-results";
@@ -58,11 +53,9 @@ require(["fuse"], function (Fuse) {
     container.appendChild(noResultsMessage);
   }
 
-  // Create and return a result item
   function createResultItem(title, text, href, query) {
     const item = document.createElement("div");
     item.className = "result-item";
-    item.setAttribute("tabindex", "0"); // Make result focusable
 
     const highlightedTitle = highlightTerms(title, query);
     const highlightedText = highlightTerms(text, query);
@@ -73,12 +66,10 @@ require(["fuse"], function (Fuse) {
     `;
     item.setAttribute("data-href", href);
 
-    // Navigate to the result's href on click
     item.addEventListener("click", () => navigateToHref(href));
     return item;
   }
 
-  // Highlight matching terms in search results
   function highlightTerms(text, query) {
     if (!query.trim()) return text;
     const words = query.trim().split(/\s+/);
@@ -89,19 +80,16 @@ require(["fuse"], function (Fuse) {
     return text.replace(regex, '<span class="highlight">$1</span>');
   }
 
-  // Navigate to the href
   function navigateToHref(href) {
     const baseUrl = window.location.origin;
     const relativeUrl = href.startsWith("/") ? href : `/${href}`;
     window.location.href = new URL(relativeUrl, baseUrl).href;
   }
 
-  // Event listeners
   const searchBox = document
     .getElementById("search-bar")
     .querySelector(".bd-search input");
 
-  // Handle input in the search box
   searchBox.addEventListener("input", function () {
     const query = this.value.trim();
     if (query.length < parseInt(min_chars_for_search)) {
@@ -115,49 +103,76 @@ require(["fuse"], function (Fuse) {
     const resultsContainer = document.getElementById("results");
     const resultItems = resultsContainer.querySelectorAll(".result-item");
 
-    // Handle Enter key press
-    if (event.key === "Enter") {
-      if (currentIndex >= 0 && currentIndex < resultItems.length) {
-        const selectedResult = resultItems[currentIndex];
-        navigateToHref(selectedResult.getAttribute("data-href"));
-      }
-      event.preventDefault();
-    }
+    switch (event.key) {
+      case "Enter":
+        event.preventDefault(); // Prevent form submission
+        if (currentIndex >= 0 && currentIndex < resultItems.length) {
+          const href = resultItems[currentIndex].getAttribute("data-href");
+          navigateToHref(href);
+        }
+        break;
 
-    // use keycode
+      case "ArrowDown":
+        if (resultItems.length > 0) {
+          currentIndex = (currentIndex + 1) % resultItems.length; // Move down
+          console.log("move down");
+          focusSelected(resultItems);
+        }
+        break;
 
-    // Handle arrow down key
-    if (event.key === "ArrowDown") {
-      if (resultItems.length > 0) {
-        // Move to the next item
-        currentIndex = (currentIndex + 1) % resultItems.length; // Wrap around
-        focusSelected(resultItems);
-      }
-    }
+      case "ArrowUp":
+        if (resultItems.length > 0) {
+          console.log("move up");
+          currentIndex =
+            (currentIndex - 1 + resultItems.length) % resultItems.length; // Move up
+          focusSelected(resultItems);
+        }
+        break;
 
-    // Handle arrow up key
-    if (event.key === "ArrowUp") {
-      if (resultItems.length > 0) {
-        // Move to the previous item
-        currentIndex =
-          (currentIndex - 1 + resultItems.length) % resultItems.length; // Wrap around
-        focusSelected(resultItems);
-      }
+      case "Tab":
+        // Handle Tab key for navigation
+        if (event.shiftKey) {
+          // Shift + Tab: Move focus to the previous item
+          if (currentIndex > 0) {
+            currentIndex -= 1;
+          } else {
+            currentIndex = resultItems.length - 1; // Cycle to the last item
+          }
+        } else {
+          // Tab: Move focus to the next item
+          if (currentIndex < resultItems.length - 1) {
+            currentIndex += 1;
+          } else {
+            currentIndex = 0; // Cycle to the first item
+          }
+        }
+        event.preventDefault(); // Prevent default tab action
+        focusSelected(resultItems, currentIndex);
+        break;
+
+      default:
+        return; // Allow other keys to function normally
     }
   });
 
   function focusSelected(resultItems) {
-    // Clear focus from all items
-    resultItems.forEach((item) => item.blur());
-
-    // Focus the selected item only if currentIndex is valid
+    // Ensure currentIndex is valid
     if (currentIndex >= 0 && currentIndex < resultItems.length) {
-      resultItems[currentIndex].focus();
-      resultItems[currentIndex].scrollIntoView({ block: "nearest" });
+      // Remove selected class from all items
+      resultItems.forEach((item) => item.classList.remove("selected"));
+      console.log(currentIndex);
+      const currentItem = resultItems[currentIndex];
+      currentItem.classList.add("selected"); // Add selected class
+
+      // Apply native focus
+      console.log(currentItem);
+      currentItem.focus();
+
+      // Scroll the focused item into view
+      currentItem.scrollIntoView({ block: "nearest" });
     }
   }
 
-  // Fetch search data and initialize Fuse.js
   fetch("../../search.json")
     .then((response) =>
       response.ok
