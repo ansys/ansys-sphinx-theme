@@ -33,6 +33,17 @@
   color: var(--ast-search-bar-enable-text);
 }
 
+.result-item:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: var(--ast-ring-shadow-focused);
+}
+
+.result-item:hover {
+  background-color: var(
+    --ast-color-hover-card-background
+  ); /* Background when hovered */
+}
+
 .no-results {
   font-style: italic;
   color: #777;

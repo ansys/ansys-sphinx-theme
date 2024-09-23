@@ -12,6 +12,7 @@ require.config({
 require(["fuse"], function (Fuse) {
   let fuseInstance;
   let searchData = [];
+  let currentIndex = -1; // For tracking selected result
 
   // Initialize Fuse.js with search data and options
   function initializeFuse(data) {
@@ -27,6 +28,7 @@ require(["fuse"], function (Fuse) {
     });
     const resultsContainer = document.getElementById("results");
     resultsContainer.innerHTML = "";
+    currentIndex = -1; // Reset index on each new search
 
     if (results.length === 0) {
       displayNoResultsMessage(resultsContainer);
@@ -60,6 +62,7 @@ require(["fuse"], function (Fuse) {
   function createResultItem(title, text, href, query) {
     const item = document.createElement("div");
     item.className = "result-item";
+    item.setAttribute("tabindex", "0"); // Make result focusable
 
     const highlightedTitle = highlightTerms(title, query);
     const highlightedText = highlightTerms(text, query);
@@ -110,14 +113,41 @@ require(["fuse"], function (Fuse) {
 
   // Handle Enter key press in the search box
   searchBox.addEventListener("keydown", function (event) {
+    const resultsContainer = document.getElementById("results");
+    const resultItems = resultsContainer.querySelectorAll(".result-item");
+
     if (event.key === "Enter") {
-      const firstResult = document.querySelector(".result-item");
-      if (firstResult) {
-        navigateToHref(firstResult.getAttribute("data-href"));
+      if (currentIndex >= 0 && resultItems.length > 0) {
+        const selectedResult = resultItems[currentIndex];
+        navigateToHref(selectedResult.getAttribute("data-href"));
+      }
+      event.preventDefault();
+    }
+
+    // Handle arrow down key
+    if (event.key === "ArrowDown") {
+      if (resultItems.length > 0) {
+        currentIndex = (currentIndex + 1) % resultItems.length;
+        focusSelected(resultItems);
+      }
+      event.preventDefault();
+    }
+
+    // Handle arrow up key
+    if (event.key === "ArrowUp") {
+      if (resultItems.length > 0) {
+        currentIndex =
+          (currentIndex - 1 + resultItems.length) % resultItems.length;
+        focusSelected(resultItems);
       }
       event.preventDefault();
     }
   });
+
+  // Focus the selected result item
+  function focusSelected(resultItems) {
+    resultItems[currentIndex].focus();
+  }
 
   // Fetch search data and initialize Fuse.js
   fetch("../../search.json")
