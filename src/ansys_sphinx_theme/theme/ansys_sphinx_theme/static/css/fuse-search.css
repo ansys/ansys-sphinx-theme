@@ -33,8 +33,10 @@
   color: var(--ast-search-bar-enable-text);
 }
 
+.result-item:focus-visible,
 .result-item:focus {
   outline: none; /* Remove default focus outline */
+  cursor: pointer;
   box-shadow: var(--ast-ring-shadow-focused);
 }
 

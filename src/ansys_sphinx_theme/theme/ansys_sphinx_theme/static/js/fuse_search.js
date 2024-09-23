@@ -11,8 +11,8 @@ require.config({
 // Main script for search functionality
 require(["fuse"], function (Fuse) {
   let fuseInstance;
-  let searchData = [];
-  let currentIndex = -1; // For tracking selected result
+  let searchData = []; // Track selected result
+  let currentIndex = -1;
 
   // Initialize Fuse.js with search data and options
   function initializeFuse(data) {
@@ -111,42 +111,50 @@ require(["fuse"], function (Fuse) {
     performSearch(query);
   });
 
-  // Handle Enter key press in the search box
   searchBox.addEventListener("keydown", function (event) {
     const resultsContainer = document.getElementById("results");
     const resultItems = resultsContainer.querySelectorAll(".result-item");
 
+    // Handle Enter key press
     if (event.key === "Enter") {
-      if (currentIndex >= 0 && resultItems.length > 0) {
+      if (currentIndex >= 0 && currentIndex < resultItems.length) {
         const selectedResult = resultItems[currentIndex];
         navigateToHref(selectedResult.getAttribute("data-href"));
       }
       event.preventDefault();
     }
 
+    // use keycode
+
     // Handle arrow down key
     if (event.key === "ArrowDown") {
       if (resultItems.length > 0) {
-        currentIndex = (currentIndex + 1) % resultItems.length;
+        // Move to the next item
+        currentIndex = (currentIndex + 1) % resultItems.length; // Wrap around
         focusSelected(resultItems);
       }
-      event.preventDefault();
     }
 
     // Handle arrow up key
     if (event.key === "ArrowUp") {
       if (resultItems.length > 0) {
+        // Move to the previous item
         currentIndex =
-          (currentIndex - 1 + resultItems.length) % resultItems.length;
+          (currentIndex - 1 + resultItems.length) % resultItems.length; // Wrap around
         focusSelected(resultItems);
       }
-      event.preventDefault();
     }
   });
 
-  // Focus the selected result item
   function focusSelected(resultItems) {
-    resultItems[currentIndex].focus();
+    // Clear focus from all items
+    resultItems.forEach((item) => item.blur());
+
+    // Focus the selected item only if currentIndex is valid
+    if (currentIndex >= 0 && currentIndex < resultItems.length) {
+      resultItems[currentIndex].focus();
+      resultItems[currentIndex].scrollIntoView({ block: "nearest" });
+    }
   }
 
   // Fetch search data and initialize Fuse.js
