@@ -80,10 +80,20 @@ require(["fuse"], function (Fuse) {
     return text.replace(regex, '<span class="highlight">$1</span>');
   }
 
+  const pathParts = window.location.pathname.split("/");
+  let basePath;
+
+  // Check if the path contains a version directory
+  if (pathParts.includes("version")) {
+    basePath = pathParts.slice(0, 3).join("/"); // Extract up to /version/{version}
+  } else {
+    basePath = ""; // If there's no version, just use the base path
+  }
+
   function navigateToHref(href) {
-    const baseUrl = window.location.origin;
     const relativeUrl = href.startsWith("/") ? href : `/${href}`;
-    window.location.href = new URL(relativeUrl, baseUrl).href;
+    const finalUrl = `${window.location.origin}${basePath}${relativeUrl}`;
+    window.location.href = finalUrl;
   }
 
   const searchBox = document
@@ -173,7 +183,9 @@ require(["fuse"], function (Fuse) {
     }
   }
 
-  fetch("_static/search.json")
+  const searchPath = `${window.location.origin}${basePath}/_static/search.json`;
+
+  fetch(searchPath)
     .then((response) =>
       response.ok
         ? response.json()

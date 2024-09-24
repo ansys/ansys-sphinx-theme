@@ -74,7 +74,7 @@ class SearchIndex:
         for sections in self.sections:
             search_index = {
                 "objectID": self._doc_name,
-                "href": f"{self.url_prefix}{self.doc_path}#{sections['section_anchor_id']}",
+                "href": f"{self.doc_path}#{sections['section_anchor_id']}",
                 "title": self.doc_title,
                 "section": sections["section_title"],
                 "text": sections["section_text"],
