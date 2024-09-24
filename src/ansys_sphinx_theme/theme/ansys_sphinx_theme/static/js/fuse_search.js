@@ -173,7 +173,7 @@ require(["fuse"], function (Fuse) {
     }
   }
 
-  fetch("../../search.json")
+  fetch("_static/search.json")
     .then((response) =>
       response.ok
         ? response.json()
