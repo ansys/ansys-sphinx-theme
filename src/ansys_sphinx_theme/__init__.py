@@ -532,9 +532,9 @@ def build_quarto_cheatsheet(app: Sphinx):
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to build Quarto cheatsheet: {e}. Ensure Quarto is installed.")
 
-    print(f"output pdf file: {output_dir_path / file_name.replace('.qmd', '.pdf')}")
+    output_file = output_dir_path / output_pdf_name
 
-    output_file = output_dir_path / file_name.replace(".qmd", ".pdf")
+    print(f"output file: {output_file}")
     app.config.html_theme_options["cheatsheet"]["output_dir"] = f"{output_dir}/{output_file.name}"
     output_png = file_name.replace(".qmd", ".png")
     convert_pdf_to_png(output_file, output_dir_path, output_png)
