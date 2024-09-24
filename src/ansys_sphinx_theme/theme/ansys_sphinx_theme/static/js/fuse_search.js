@@ -80,19 +80,15 @@ require(["fuse"], function (Fuse) {
     return text.replace(regex, '<span class="highlight">$1</span>');
   }
 
-  const pathParts = window.location.pathname.split("/");
-  let basePath;
-
-  // Check if the path contains a version directory
-  if (pathParts.includes("version")) {
-    basePath = pathParts.slice(0, 3).join("/"); // Extract up to /version/{version}
-  } else {
-    basePath = ""; // If there's no version, just use the base path
+  function getDynamicPath(targetFile) {
+    // Get the content root from the HTML element
+    const contentRoot =
+      document.documentElement.getAttribute("data-content_root");
+    return `${contentRoot}${targetFile}`;
   }
 
   function navigateToHref(href) {
-    const relativeUrl = href.startsWith("/") ? href : `/${href}`;
-    const finalUrl = `${window.location.origin}${basePath}${relativeUrl}`;
+    const finalUrl = getDynamicPath(href);
     window.location.href = finalUrl;
   }
 
@@ -119,20 +115,21 @@ require(["fuse"], function (Fuse) {
         if (currentIndex >= 0 && currentIndex < resultItems.length) {
           const href = resultItems[currentIndex].getAttribute("data-href");
           navigateToHref(href);
+        } else if (resultItems.length > 0) {
+          const href = resultItems[0].getAttribute("data-href");
+          navigateToHref(href);
         }
         break;
 
       case "ArrowDown":
         if (resultItems.length > 0) {
           currentIndex = (currentIndex + 1) % resultItems.length; // Move down
-          console.log("move down");
           focusSelected(resultItems);
         }
         break;
 
       case "ArrowUp":
         if (resultItems.length > 0) {
-          console.log("move up");
           currentIndex =
             (currentIndex - 1 + resultItems.length) % resultItems.length; // Move up
           focusSelected(resultItems);
@@ -170,21 +167,16 @@ require(["fuse"], function (Fuse) {
     if (currentIndex >= 0 && currentIndex < resultItems.length) {
       // Remove selected class from all items
       resultItems.forEach((item) => item.classList.remove("selected"));
-      console.log(currentIndex);
       const currentItem = resultItems[currentIndex];
       currentItem.classList.add("selected"); // Add selected class
 
-      // Apply native focus
-      console.log(currentItem);
+      // Apply native focus to the current item
       currentItem.focus();
 
       // Scroll the focused item into view
       currentItem.scrollIntoView({ block: "nearest" });
     }
   }
-
-  const searchPath = `${window.location.origin}${basePath}/_static/search.json`;
-
   fetch(searchPath)
     .then((response) =>
       response.ok
