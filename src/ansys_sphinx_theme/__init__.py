@@ -482,7 +482,7 @@ def build_quarto_cheatsheet(app: Sphinx):
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to add Quarto cheatsheet: {e}. Ensure Quarto is installed.")
-
+    output_pdf_name = file_name.replace(".qmd", ".pdf")
     try:
         # Render the cheatsheet
         subprocess.run(
@@ -492,6 +492,8 @@ def build_quarto_cheatsheet(app: Sphinx):
                 f"{file_name}",
                 "--to",
                 "cheat_sheet-pdf",
+                "--output",
+                f"{output_pdf_name}",
                 "--output-dir",
                 f"{output_dir_path}",
             ],
