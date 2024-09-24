@@ -74,7 +74,7 @@ ansys_logo_light_mode = str((LOGOS_PATH / "ansys_logo_transparent_black.png").ab
 ansys_logo_dark_mode = str((LOGOS_PATH / "ansys_logo_transparent_white.png").absolute())
 
 # Cheat sheet extension version
-CHEAT_SHEET_QUARTO_EXTENTION_VERSION = "v1"
+CHEAT_SHEET_QUARTO_EXTENTION_VERSION = "fix/update-package"
 
 
 def get_html_theme_path() -> pathlib.Path:
