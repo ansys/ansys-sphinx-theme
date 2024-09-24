@@ -71,7 +71,7 @@ jobs:
     needs: build-library
     steps:
       - name: "Deploy developers documentation"
-        uses: ansys/actions/doc-deploy-dev@v7
+        uses: ansys/actions/doc-deploy-dev@fix/url-with-search
         with:
             cname: ${{ env.DOCUMENTATION_CNAME }}
             token: ${{ secrets.GITHUB_TOKEN }}
