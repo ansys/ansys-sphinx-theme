@@ -4,11 +4,11 @@
   align-content: flex-start;
   justify-content: center;
   position: absolute;
-  background-color: white;
+  background-color: var(--ast-color-enable-card-background);
   width: 700px;
   padding: 10px;
   border: 1px solid #ddd; /* Optional: Add border for better visibility */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+  box-shadow: var(--ast-box-shadow-active);
   overflow: auto;
   height: 500px;
 }
@@ -24,7 +24,7 @@
 .result-title {
   font-size: 1em;
   font-weight: bold;
-  background-color: #f3f4f5;
+  background-color: var(--ast-background-tab-hover);
   font-family: "Open Sans", sans-serif;
 }
 
@@ -61,12 +61,11 @@
 
 .no-results {
   font-style: italic;
-  color: #777;
+  color: var(--ast-color-text);
   font-family: "Open Sans", sans-serif;
 }
 
 html[data-theme="light"] .highlight {
-  background-color: #ececec;
   color: var(--ast-highlight-color);
 }
 
