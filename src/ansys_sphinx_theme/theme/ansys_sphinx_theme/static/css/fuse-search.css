@@ -1,3 +1,4 @@
+@import "ansys-sphinx-theme-variable.css";
 .results {
   display: flex;
   flex-direction: column;
