@@ -513,6 +513,15 @@ def build_quarto_cheatsheet(app: Sphinx):
         else:
             print("PDF rendered successfully:")
             print(result.stdout)  # Print standard output
+
+        # check if the output file exists
+
+        print(f"output file: {output_dir_path / output_pdf_name}")
+        if not (output_dir_path / output_pdf_name).exists():
+            raise FileNotFoundError(
+                f"Failed to render Quarto cheatsheet: {output_pdf_name} not found."
+            )
+
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to render Quarto cheatsheet: {e}. Ensure Quarto is installed.")
 
