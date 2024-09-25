@@ -485,7 +485,7 @@ def build_quarto_cheatsheet(app: Sphinx):
     output_pdf_name = file_name.replace(".qmd", ".pdf")
     try:
         # Render the cheatsheet
-        subprocess.run(
+        result = subprocess.run(
             [
                 "quarto",
                 "render",
@@ -502,6 +502,17 @@ def build_quarto_cheatsheet(app: Sphinx):
             text=True,
             shell=True,
         )
+
+        print(f"quarto render result: {result}")
+
+        # Check if the process was successful
+        if result.returncode != 0:
+            # Log the error messages
+            print("Error rendering PDF:")
+            print(result.stderr)  # Print standard error
+        else:
+            print("PDF rendered successfully:")
+            print(result.stdout)  # Print standard output
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to render Quarto cheatsheet: {e}. Ensure Quarto is installed.")
 
