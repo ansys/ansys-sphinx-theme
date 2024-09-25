@@ -461,27 +461,26 @@ def build_quarto_cheatsheet(app: Sphinx):
         output_dir_path = pathlib.Path(app.srcdir).parent / "_build" / "html" / output_dir
         output_dir_path.mkdir(parents=True, exist_ok=True)
 
-    cwd = pathlib.Path(file_path).resolve()
-
     print(f"cheatsheet file: {cheatsheet_file}")
     print(f"file_path: {file_path}")
     print(f"output dir: {output_dir_path}")
-    print(("file_name: ", file_name))
 
     try:
         # Add the cheatsheet to the Quarto project
-        subprocess.run(
+        result = subprocess.run(
             [
                 "quarto",
                 "add",
                 f"ansys/pyansys-quarto-cheatsheet@{CHEAT_SHEET_QUARTO_EXTENTION_VERSION}",
                 "--no-prompt",
             ],
-            cwd=cwd,
+            cwd=file_path,
             capture_output=True,
             text=True,
             shell=True,
         )
+
+        print(f"quarto add result: {result}")
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to add Quarto cheatsheet: {e}. Ensure Quarto is installed.")
@@ -489,11 +488,18 @@ def build_quarto_cheatsheet(app: Sphinx):
     try:
         # Render the cheatsheet
         result = subprocess.run(
-            ["quarto", "render", f"{file_name}"],
-            cwd=cwd,
+            [
+                "quarto",
+                "render",
+                file_name,
+                "--output",
+                output_pdf_name,
+                "--output-dir",
+                output_dir_path,
+            ],
+            cwd=file_path,
             capture_output=True,
             text=True,
-            shell=True,
         )
 
         print(f"quarto render result: {result}")
