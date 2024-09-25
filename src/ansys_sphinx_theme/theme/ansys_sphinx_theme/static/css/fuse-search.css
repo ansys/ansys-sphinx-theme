@@ -4,10 +4,10 @@
   align-content: flex-start;
   justify-content: center;
   position: absolute;
-  background-color: var(--ast-color-enable-card-background);
+  background-color: var(--ast-search-bar-enable-background);
   width: 700px;
   padding: 10px;
-  border: 1px solid #ddd; /* Optional: Add border for better visibility */
+  border: 1px solid var(--ast-search-bar-enable-border);
   box-shadow: var(--ast-box-shadow-active);
   overflow: auto;
   height: 500px;
@@ -24,8 +24,9 @@
 .result-title {
   font-size: 1em;
   font-weight: bold;
-  background-color: var(--ast-background-tab-hover);
+  background-color: var(--ast-suggestion-header-background);
   font-family: "Open Sans", sans-serif;
+  color: var(--ast-catagory-header-text);
 }
 
 .result-title:focus,
@@ -55,7 +56,7 @@
 
 .result-item:hover {
   background-color: var(
-    --ast-color-hover-card-background
+    --ast-hover-suggestion-text-background
   ); /* Background when hovered */
 }
 
