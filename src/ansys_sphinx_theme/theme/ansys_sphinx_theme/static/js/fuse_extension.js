@@ -6,7 +6,6 @@ const content = document.querySelector(".bd-main");
 // Function to expand the search bar and display results
 function expandSearchBox() {
   searchBarBox.classList.add("expanded");
-  // content.style.opacity = 0.5;
   content.classList.add("blurred");
   searchBarBox.focus();
 
