@@ -161,3 +161,8 @@ html[data-theme="light"] .highlight {
 .search-icon {
   cursor: pointer;
 }
+
+.bd-main.blurred {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}

@@ -1,10 +1,13 @@
 const searchBar = document.getElementById("search-bar");
 const searchBarBox = searchBar.querySelector(".bd-search input");
 resultsContainer = document.getElementById("results");
+const content = document.querySelector(".bd-main");
 
 // Function to expand the search bar and display results
 function expandSearchBox() {
   searchBarBox.classList.add("expanded");
+  // content.style.opacity = 0.5;
+  content.classList.add("blurred");
   searchBarBox.focus();
 
   if (searchBarBox.value.trim().length >= parseInt(min_chars_for_search)) {
@@ -26,6 +29,7 @@ document.addEventListener("keydown", function (event) {
     case "Escape":
       resultsContainer.style.display = "none";
       searchBarBox.classList.remove("expanded");
+      content.classList.remove("blurred");
       break;
   }
 });
@@ -38,5 +42,6 @@ document.addEventListener("click", function (event) {
   ) {
     resultsContainer.style.display = "none";
     searchBarBox.classList.remove("expanded");
+    content.classList.remove("blurred");
   }
 });
