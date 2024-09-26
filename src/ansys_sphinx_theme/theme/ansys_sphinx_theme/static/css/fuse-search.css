@@ -171,17 +171,3 @@ html[data-theme="light"] .highlight {
     display: none;
   }
 }
-
-/* .search-bar{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  position: relative;
-  background-color: var(--ast-search-bar-enable-background);
-  border: 1px solid var(--ast-search-bar-enable-border);
-  height:40px;
-  width:300px;
-
-} */

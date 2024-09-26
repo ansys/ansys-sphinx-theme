@@ -15,9 +15,7 @@ require(["fuse"], function (Fuse) {
   let currentIndex = -1;
 
   function initializeFuse(data) {
-    console.log("Initializing Fuse.js");
     const fuseOptions = theme_static_search;
-    console.log(fuseOptions);
     fuseInstance = new Fuse(data, fuseOptions);
     searchData = data;
   }
@@ -40,8 +38,6 @@ require(["fuse"], function (Fuse) {
       return;
     }
     resultsContainer.style.display = "block";
-
-    console.log(results);
 
     results.forEach((result) => {
       const { title, text, href } = result.item;
