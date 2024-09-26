@@ -220,6 +220,7 @@ html[data-theme="light"] {
   --ast-catagory-header-text: #353535;
   --ast-catagory-suggestion-text: #8e8e8e;
   --ast-suggestion-text-color: #000000;
+  --ast-hover-suggestion-text-background: #ececec;
 
   /**
   * dropdown header
@@ -375,6 +376,7 @@ html[data-theme="dark"] {
   --ast-catagory-header-text: #ececec;
   --ast-catagory-suggestion-text: #686868;
   --ast-suggestion-text-color: #ffffff;
+  --ast-hover-suggestion-text-background: #3d3d3d;
 
   /**
   * dropdown header
