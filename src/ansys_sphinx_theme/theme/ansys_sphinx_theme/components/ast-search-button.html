@@ -7,6 +7,10 @@
 {% if theme_static_search %}
 
 {% set theme_static_search = theme_static_search | default({}) %}
+{% else %}
+{% set theme_static_search = {'keys': ['title', 'text'], 'threshold': 0.5, 'shouldSort': 'True', 'ignoreLocation': 'False', 'useExtendedSearch': 'True'} %}
+{% endif %}
+
 {% set theme_limit = theme_static_search.limit | default(10) %}
 {% set min_chars_for_search = theme_static_search.min_chars_for_search | default(1) %}
 

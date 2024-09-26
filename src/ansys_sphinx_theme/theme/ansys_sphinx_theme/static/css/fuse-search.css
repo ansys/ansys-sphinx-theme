@@ -1,14 +1,15 @@
+@import "ansys-sphinx-theme-variable.css";
 .results {
   display: flex;
   flex-direction: column;
   align-content: flex-start;
   justify-content: center;
   position: absolute;
-  background-color: white;
+  background-color: var(--ast-search-bar-enable-background);
   width: 700px;
   padding: 10px;
-  border: 1px solid #ddd; /* Optional: Add border for better visibility */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for better visibility */
+  border: 1px solid var(--ast-search-bar-enable-border);
+  box-shadow: var(--ast-box-shadow-active);
   overflow: auto;
   height: 500px;
 }
@@ -24,8 +25,9 @@
 .result-title {
   font-size: 1em;
   font-weight: bold;
-  background-color: #f3f4f5;
+  background-color: var(--ast-suggestion-header-background);
   font-family: "Open Sans", sans-serif;
+  color: var(--ast-catagory-header-text);
 }
 
 .result-title:focus,
@@ -55,18 +57,17 @@
 
 .result-item:hover {
   background-color: var(
-    --ast-color-hover-card-background
+    --ast-hover-suggestion-text-background
   ); /* Background when hovered */
 }
 
 .no-results {
   font-style: italic;
-  color: #777;
+  color: var(--ast-color-text);
   font-family: "Open Sans", sans-serif;
 }
 
 html[data-theme="light"] .highlight {
-  background-color: #ececec;
   color: var(--ast-highlight-color);
 }
 
@@ -159,4 +160,9 @@ html[data-theme="light"] .highlight {
 
 .search-icon {
   cursor: pointer;
+}
+
+.bd-main.blurred {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
 }
