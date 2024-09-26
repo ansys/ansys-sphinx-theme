@@ -140,20 +140,6 @@ html[data-theme="light"] .highlight {
   margin-bottom: 0px;
 }
 
-@media (max-width: 768px) {
-  .form-control:focus,
-  .form-control:focus-visible,
-  .form-control {
-    width: 100px;
-  }
-  .bd-search input.expanded {
-    width: 200px;
-  }
-  .bd-search .search-button__kbd-shortcut {
-    display: none;
-  }
-}
-
 .bd-search input.expanded {
   width: 600px;
 }
