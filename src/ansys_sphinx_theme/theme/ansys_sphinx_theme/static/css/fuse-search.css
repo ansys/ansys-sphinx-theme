@@ -155,15 +155,6 @@ html[data-theme="light"] .highlight {
 }
 
 @media (max-width: 768px) {
-  .bd-header .navbar-header-items {
-    display: flex;
-  }
-
-  .bd-header .navbar-header-items__center,
-  .bd-header .navbar-header-items__end {
-    display: none;
-  }
-
   .bd-search input.expanded {
     width: 100px;
   }
