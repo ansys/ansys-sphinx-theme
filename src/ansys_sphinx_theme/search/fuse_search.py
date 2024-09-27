@@ -50,16 +50,6 @@ class SearchIndex:
         self._doc_tree = app.env.get_doctree(self._doc_name)
         self.sections = []
 
-    def get_title_breadcrumbs(self):
-        """Generate title breadcrumbs from the document name."""
-        docs_parts = self._doc_name.split("/")[:-1]
-        title_string = [
-            self.env.titles[doc_part].astext()
-            for doc_part in docs_parts
-            if self.env.titles.get(doc_part)
-        ]
-        self.breadcrumbs_title = " > ".join(title_string)
-
     def iterate_through_docs(self):
         """Iterate through the document."""
         for node in self._doc_tree.traverse(nodes.section):
@@ -79,7 +69,18 @@ class SearchIndex:
             )
 
     def construct_title_breadcrumbs(self, section_title: str) -> str:
-        """Construct the title breadcrumbs based on the current section."""
+        """Generate title breadcrumbs from the document name."""
+        # removing the last part of the doc_name because it is the file name taken from the nodes
+        docs_parts = self._doc_name.split("/")[:-1]
+
+        title_string = [
+            self.env.titles[doc_part].astext()
+            for doc_part in docs_parts
+            if doc_part in self.env.titles
+        ]
+
+        self.breadcrumbs_title = " > ".join(title_string)
+
         if self.breadcrumbs_title:
             if self.section_title == self.doc_title:
                 return f"{self.breadcrumbs_title} > {section_title}"
@@ -96,17 +97,15 @@ class SearchIndex:
     def indices(self):
         """Get search index."""
         for sections in self.sections:
-            self.get_title_breadcrumbs()
             title_breadcrumbs = self.construct_title_breadcrumbs(sections["section_title"])
 
-            search_index = {
+            yield {
                 "objectID": self._doc_name,
                 "href": f"{self.doc_path}#{sections['section_anchor_id']}",
                 "title": title_breadcrumbs,
                 "section": sections["section_title"],
                 "text": sections["section_text"],
             }
-            yield search_index
 
 
 def _title_to_anchor(title: str) -> str:
