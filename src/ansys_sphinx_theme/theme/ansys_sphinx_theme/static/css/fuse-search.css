@@ -1,4 +1,5 @@
 @import "ansys-sphinx-theme-variable.css";
+
 .results {
   display: flex;
   flex-direction: column;
@@ -136,22 +137,8 @@ html[data-theme="light"] .highlight {
 .bd-search {
   gap: 8px;
   background-color: var(--ast-search-bar-enable-background);
-  border: 1px solid var(--ast-search-bar-enable-border);
+  border: 0px solid var(--ast-search-bar-enable-border);
   margin-bottom: 0px;
-}
-
-@media (max-width: 768px) {
-  .form-control:focus,
-  .form-control:focus-visible,
-  .form-control {
-    width: 100px;
-  }
-  .bd-search input.expanded {
-    width: 200px;
-  }
-  .bd-search .search-button__kbd-shortcut {
-    display: none;
-  }
 }
 
 .bd-search input.expanded {
@@ -165,4 +152,22 @@ html[data-theme="light"] .highlight {
 .bd-main.blurred {
   opacity: 0.5;
   transition: opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .bd-search input.expanded {
+    width: 100px;
+  }
+
+  .form-control {
+    width: 50px;
+  }
+
+  .result {
+    width: 100px;
+  }
+
+  .bd-search .search-button__kbd-shortcut {
+    display: none;
+  }
 }
