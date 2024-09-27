@@ -45,9 +45,23 @@ class SearchIndex:
         """
         self._doc_name = doc_name
         self.doc_path = f"{self._doc_name}.html"
+        self.env = app.env
         self.doc_title = app.env.titles[self._doc_name].astext()
         self._doc_tree = app.env.get_doctree(self._doc_name)
         self.sections = []
+
+    def get_title_breadcrumbs(self):
+        """Generate title breadcrumbs from the document name."""
+        # Split the document name into parts and exclude the last part
+        document_parts = self._doc_name.split("/")[:-1]
+
+        # Collect valid title segments
+        title_segments = [
+            self.env.titles[part].astext() for part in document_parts if part in self.env.titles
+        ]
+
+        # Create the final breadcrumbs title
+        self.breadcrumbs_title = " > ".join(title_segments)
 
     def iterate_through_docs(self):
         """Iterate through the document."""
@@ -67,14 +81,24 @@ class SearchIndex:
                 }
             )
 
+    def construct_title_bread_crumbs(self, section_title: str) -> str:
+        """Construct the title breadcrumbs based on the current section."""
+        if self.section_title == self.doc_title:
+            return f"{self.breadcrumbs_title} > {section_title}"
+        else:
+            return f"{self.breadcrumbs_title} > {self.doc_title} > {section_title}"
+
     @property
     def indices(self):
         """Get search index."""
         for sections in self.sections:
+            self.get_title_breadcrumbs()
+            title_breadcrumbs = self.construct_title_bread_crumbs(sections["section_title"])
+
             search_index = {
                 "objectID": self._doc_name,
                 "href": f"{self.doc_path}#{sections['section_anchor_id']}",
-                "title": self.doc_title,
+                "title": title_breadcrumbs,
                 "section": sections["section_title"],
                 "text": sections["section_text"],
             }
