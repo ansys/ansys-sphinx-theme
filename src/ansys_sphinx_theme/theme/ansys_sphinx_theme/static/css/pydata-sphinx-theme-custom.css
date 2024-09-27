@@ -225,6 +225,10 @@ ul.navbar-icon-links {
   column-gap: 10px;
 }
 
+.bd-header .navbar-item {
+  gap: 8px;
+}
+
 /*
 * dropdown button after 5 sections
 */
