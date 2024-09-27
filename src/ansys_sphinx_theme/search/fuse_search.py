@@ -52,16 +52,13 @@ class SearchIndex:
 
     def get_title_breadcrumbs(self):
         """Generate title breadcrumbs from the document name."""
-        # Split the document name into parts and exclude the last part
-        document_parts = self._doc_name.split("/")[:-1]
-
-        # Collect valid title segments
-        title_segments = [
-            self.env.titles[part].astext() for part in document_parts if part in self.env.titles
+        docs_parts = self._doc_name.split("/")[:-1]
+        title_string = [
+            self.env.titles[doc_part].astext()
+            for doc_part in docs_parts
+            if self.env.titles.get(doc_part)
         ]
-
-        # Create the final breadcrumbs title
-        self.breadcrumbs_title = " > ".join(title_segments)
+        self.breadcrumbs_title = " > ".join(title_string)
 
     def iterate_through_docs(self):
         """Iterate through the document."""
@@ -81,19 +78,26 @@ class SearchIndex:
                 }
             )
 
-    def construct_title_bread_crumbs(self, section_title: str) -> str:
+    def construct_title_breadcrumbs(self, section_title: str) -> str:
         """Construct the title breadcrumbs based on the current section."""
-        if self.section_title == self.doc_title:
-            return f"{self.breadcrumbs_title} > {section_title}"
+        if self.breadcrumbs_title:
+            if self.section_title == self.doc_title:
+                return f"{self.breadcrumbs_title} > {section_title}"
+            else:
+                return f"{self.breadcrumbs_title} > {self.doc_title} > {section_title}"
         else:
-            return f"{self.breadcrumbs_title} > {self.doc_title} > {section_title}"
+            return (
+                section_title
+                if self.section_title == self.doc_title
+                else f"{self.doc_title} > {section_title}"
+            )
 
     @property
     def indices(self):
         """Get search index."""
         for sections in self.sections:
             self.get_title_breadcrumbs()
-            title_breadcrumbs = self.construct_title_bread_crumbs(sections["section_title"])
+            title_breadcrumbs = self.construct_title_breadcrumbs(sections["section_title"])
 
             search_index = {
                 "objectID": self._doc_name,
