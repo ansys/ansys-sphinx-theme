@@ -13,15 +13,6 @@
 
 {% set theme_limit = theme_static_search.limit | default(10) %}
 {% set min_chars_for_search = theme_static_search.min_chars_for_search | default(1) %}
-
-{% else %}
-
-{% set theme_static_search = {'keys': ['title', 'text'], 'threshold': 0.5, 'shouldSort': 'True', 'ignoreLocation': 'False', 'useExtendedSearch': 'True', 'limit': 10, 'min_chars_for_search': 1} %}
-{% set theme_limit = theme_static_search.limit %}
-{% set min_chars_for_search = theme_static_search.min_chars_for_search %}
-
-{% endif %}
-
 <script>
 var theme_static_search = JSON.parse('{{ theme_static_search | tojson | safe }}');
 var theme_limit = "{{ theme_limit }}";
