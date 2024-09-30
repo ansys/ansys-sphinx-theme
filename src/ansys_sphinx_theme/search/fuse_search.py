@@ -29,7 +29,7 @@ from docutils import nodes
 
 
 class SearchIndex:
-    """Generates a search index for a Sphinx document."""
+    """Generate a search index for a Sphinx document."""
 
     def __init__(self, doc_name, app):
         """
