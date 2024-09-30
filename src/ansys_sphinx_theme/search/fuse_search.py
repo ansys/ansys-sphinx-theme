@@ -119,7 +119,7 @@ class SearchIndex:
     def indices(self):
         """Get search index."""
         for sections in self.sections:
-            title_breadcrumbs = self.construct_title_breadcrumbs(sections["section_title"])
+            title_breadcrumbs = self.convert_title_to_breadcrumb(sections["section_title"])
             yield {
                 "objectID": self._doc_name,
                 "href": f"{self.doc_path}#{sections['section_anchor_id']}",
