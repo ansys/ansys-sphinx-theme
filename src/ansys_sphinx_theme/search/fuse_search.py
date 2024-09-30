@@ -99,7 +99,7 @@ class SearchIndex:
         breadcrumbs_title = " > ".join(title_string)
 
         # Check whether to avoid including duplicated items
-        ignore_doc_title = self.section_title == self.doc_title
+        ignore_doc_title = section_title == self.doc_title
 
         # Determine the final breadcrumb output
         if ignore_doc_title:
