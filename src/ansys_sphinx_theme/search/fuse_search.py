@@ -99,16 +99,27 @@ class SearchIndex:
         self.breadcrumbs_title = " > ".join(title_string)
 
         if self.breadcrumbs_title:
-            if self.section_title == self.doc_title:
+    # Join the titles with " > "
+    breadcrumbs = " > ".join(title_parts)
+    
+    # Check whether to avoid including duplicated items
+    ignore_doc_title = self.section_title == self.doc_title
+
+    # Determine the final breadcrumb output
+    if ignore_doc_title:
+        breadcrumb = f"{breadcrumbs} > {section_title}" if breadcrumbs else section_title
+    else:
+        breadcrumb = f"{breadcrumbs} > {self.doc_title} > {section_title}" if breadcrumbs else f"{self.doc_title} > {section_title}"
+    
+    return breadcrumb
                 return f"{self.breadcrumbs_title} > {section_title}"
             else:
                 return f"{self.breadcrumbs_title} > {self.doc_title} > {section_title}"
-        else:
-            return (
-                section_title
-                if self.section_title == self.doc_title
-                else f"{self.doc_title} > {section_title}"
-            )
+        return (
+            section_title
+            if self.section_title == self.doc_title
+            else f"{self.doc_title} > {section_title}"
+        )
 
     @property
     def indices(self):
