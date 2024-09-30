@@ -68,7 +68,7 @@ class SearchIndex:
                 }
             )
 
-    def construct_title_breadcrumbs(self, section_title: str) -> str:
+    def convert_title_to_breadcrumb(self, section_title: str) -> str:
         """Generate title breadcrumbs from the document name.
 
         Parameters
