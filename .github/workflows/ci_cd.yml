@@ -48,6 +48,8 @@ jobs:
       - uses: ansys/actions/doc-deploy-changelog@v8
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
   doc-build:
     name: Doc building
@@ -72,7 +74,9 @@ jobs:
         uses: ansys/actions/doc-deploy-dev@v8
         with:
             cname: ${{ env.DOCUMENTATION_CNAME }}
-            token: ${{ secrets.GITHUB_TOKEN }}
+            token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+            bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+            bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
   doc-deploy-stable:
     name: Doc stable version deploy
@@ -84,8 +88,10 @@ jobs:
         uses: ansys/actions/doc-deploy-stable@v8
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
   smoke-tests:
     name: Build and smoke tests
