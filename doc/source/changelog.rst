@@ -9,6 +9,60 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.1.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.0>`_ - 2024-10-01
+=======================================================================================
+
+Added
+^^^^^
+
+- feat: add static search `#487 <https://github.com/ansys/ansys-sphinx-theme/pull/487>`_
+
+
+Changed
+^^^^^^^
+
+- chore: update CHANGELOG for v1.0.0 `#445 <https://github.com/ansys/ansys-sphinx-theme/pull/445>`_
+- chore: update CHANGELOG for v1.0.1 `#447 <https://github.com/ansys/ansys-sphinx-theme/pull/447>`_
+- chore: update CHANGELOG for v1.0.2 `#451 <https://github.com/ansys/ansys-sphinx-theme/pull/451>`_
+- chore: update CHANGELOG for v1.0.3 `#455 <https://github.com/ansys/ansys-sphinx-theme/pull/455>`_
+
+
+Fixed
+^^^^^
+
+- maint: update tooling, cleanup and drop python 3.9 `#484 <https://github.com/ansys/ansys-sphinx-theme/pull/484>`_
+- feat: implement default search bar expansion behavior `#496 <https://github.com/ansys/ansys-sphinx-theme/pull/496>`_
+- fix: the anchor url of search with the switcher version `#497 <https://github.com/ansys/ansys-sphinx-theme/pull/497>`_
+- fix: change file location for `search.json` file `#509 <https://github.com/ansys/ansys-sphinx-theme/pull/509>`_
+- maint: styles for dark theme search bar `#511 <https://github.com/ansys/ansys-sphinx-theme/pull/511>`_
+- fix: style for smaller media `#513 <https://github.com/ansys/ansys-sphinx-theme/pull/513>`_
+- fix: navigation end columns `#514 <https://github.com/ansys/ansys-sphinx-theme/pull/514>`_
+- fix: add title breadcrumbs `#515 <https://github.com/ansys/ansys-sphinx-theme/pull/515>`_
+
+
+Dependencies
+^^^^^^^^^^^^
+
+- maint: version 1.1.dev0 `#448 <https://github.com/ansys/ansys-sphinx-theme/pull/448>`_
+- build(deps): bump pygithub from 2.3.0 to 2.4.0 `#480 <https://github.com/ansys/ansys-sphinx-theme/pull/480>`_
+- build(deps): bump notebook from 7.2.1 to 7.2.2 `#482 <https://github.com/ansys/ansys-sphinx-theme/pull/482>`_
+- build(deps): bump sphinx-autoapi from 3.2.1 to 3.3.0 `#485 <https://github.com/ansys/ansys-sphinx-theme/pull/485>`_
+- build(deps): bump sphinx-autoapi from 3.3.0 to 3.3.1 `#488 <https://github.com/ansys/ansys-sphinx-theme/pull/488>`_
+- build(deps): bump pandas from 2.2.2 to 2.2.3 `#508 <https://github.com/ansys/ansys-sphinx-theme/pull/508>`_
+- build(deps): bump sphinx-autoapi from 3.3.1 to 3.3.2 `#512 <https://github.com/ansys/ansys-sphinx-theme/pull/512>`_
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- chore: update CHANGELOG for v1.0.4 `#463 <https://github.com/ansys/ansys-sphinx-theme/pull/463>`_
+- chore: update CHANGELOG for v1.0.6 `#476 <https://github.com/ansys/ansys-sphinx-theme/pull/476>`_
+- chore: update CHANGELOG for v1.0.7 `#478 <https://github.com/ansys/ansys-sphinx-theme/pull/478>`_
+- chore: update CHANGELOG for v1.0.8 `#491 <https://github.com/ansys/ansys-sphinx-theme/pull/491>`_
+- chore: update CHANGELOG for v1.0.9 `#501 <https://github.com/ansys/ansys-sphinx-theme/pull/501>`_
+- chore: update CHANGELOG for v1.0.10 `#504 <https://github.com/ansys/ansys-sphinx-theme/pull/504>`_
+- chore: update CHANGELOG for v1.0.11 `#507 <https://github.com/ansys/ansys-sphinx-theme/pull/507>`_
+
 `1.0.11 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.11>`_ - 2024-09-19
 =========================================================================================
 
