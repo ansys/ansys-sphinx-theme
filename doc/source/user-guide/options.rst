@@ -169,6 +169,7 @@ that contain these keys, in the order given:
 #. ``title``: Title of the cheat sheet to be displayed in the left navigation pane.
 #. ``pages``: List of names for the pages to include the cheat sheet on. If no value is provided,
    the cheat sheet is displayed only on the main ``index.html`` file.
+#. ``version``: Version of the cheat sheet. If no value is provided, the version is ``main`` by default.
 
 Here is an example of how to add the ``cheatsheet`` dictionary to the `html_theme_options`` dictionary:
 
@@ -178,6 +179,7 @@ Here is an example of how to add the ``cheatsheet`` dictionary to the `html_them
         {
             "cheatsheet": {
                 "file": "<file name including the extension of the cheat sheet>",
+                "version": "<version of the cheat sheet>",
                 "pages": "<list of names for the pages to include the cheat sheet on>",  # Optional
             },
         },
@@ -192,6 +194,7 @@ main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" s
         {
             "cheatsheet": {
                 "file": "getting_started/cheat_sheet.qmd",
+                "version": f"{version}",
                 "pages": ["index", "getting_started/learning"],
             },
         },

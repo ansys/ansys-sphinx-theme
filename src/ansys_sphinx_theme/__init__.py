@@ -443,6 +443,7 @@ def build_quarto_cheatsheet(app: Sphinx):
 
     cheatsheet_file = cheatsheet_options.get("file", "")
     output_dir = "_static"
+    version = cheatsheet_options.get("version", "main")
 
     if not cheatsheet_file:
         return
@@ -475,6 +476,8 @@ def build_quarto_cheatsheet(app: Sphinx):
                 "cheat_sheet-pdf",
                 "--output-dir",
                 output_dir_path,
+                "-V",
+                f"version={version}",
             ],
             cwd=file_path,
             capture_output=True,
