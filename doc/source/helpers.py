@@ -1,10 +1,11 @@
 """Helper classes and functions for documentation build."""
 
 from docutils.parsers.rst import Directive
-import sphinx
+from sphinx.addnodes import document as doctree
+from sphinx.application import Sphinx as App
 
 
-def get_page_vars(app: sphinx.app, pagename: str) -> dict:
+def get_page_vars(app: App, pagename: str) -> dict:
     """Get page variables.
 
     Get each page variables.
@@ -28,7 +29,7 @@ def get_page_vars(app: sphinx.app, pagename: str) -> dict:
         or not env.pages_vars
         or not env.pages_vars.get(pagename, None)
     ):
-        return
+        return {}
 
     return env.pages_vars[pagename]
 
@@ -77,11 +78,11 @@ class SetPageVariableDirective(Directive):
 
 
 def add_custom_variables_to_context(
-    app: sphinx.app,
+    app: App,
     pagename: str,
     templatename: str,
-    context: sphinx.context,
-    doctree: sphinx.doctree,
+    context: dict,
+    doctree: doctree,
 ) -> None:
     """Add customs variables to build context.
 
@@ -89,15 +90,15 @@ def add_custom_variables_to_context(
 
     Parameters
     ----------
-    app : Sphinx.app
+    app : sphinx.application.Sphinx
         Sphinx app.
     pagename : str
         Page name
     templatename : str
         Template page
-    context : Sphinx.context
+    context : dict
         Page context
-    doctree : Sphinx.doctree
+    doctree : sphinx.addnodes.document
         Page doctree
     """
     env = app.builder.env
