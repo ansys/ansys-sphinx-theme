@@ -3,11 +3,13 @@
 from datetime import datetime
 import os
 from pathlib import Path
+import sys
 from typing import List
 
 from github import Github
 import pyvista
 import requests
+import sphinx
 from sphinx.builders.latex import LaTeXBuilder
 
 from ansys_sphinx_theme import (
@@ -23,6 +25,9 @@ from ansys_sphinx_theme import (
 
 THIS_PATH = Path(__file__).parent.resolve()
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
+
+# To allow using 'helper' python file as a module
+sys.path.append(Path(__file__).parent)
 
 # Project information
 project = "ansys_sphinx_theme"
@@ -265,3 +270,126 @@ jinja_contexts = {
     },
     "pdf_guide": {"version": get_version_match(__version__)},  # noqa: E501
 }
+
+
+def remove_edit_this_page_if_directive(
+    app: sphinx.app,
+    pagename: str,
+    templatename: str,
+    context: sphinx.context,
+    doctree: sphinx.doctree,
+    page_vars: dict,
+):
+    """Remove 'edit this page' button.
+
+    Remove the 'edit this page' link in this page if the page variable
+    'hide_edit_page_button' is true.
+
+    Parameters
+    ----------
+    app : sphinx.app
+        Sphinx app
+    pagename : str
+        Page name
+    templatename : str
+        Template name
+    context : sphinx.context
+        Page context
+    doctree : sphinx.doctree
+        Page doctree
+    page_vars : dict
+        Page variables
+    """
+    # Remove the edit button for the index page
+    if "hide_edit_page_button" in page_vars:
+        if page_vars["hide_edit_page_button"].lower() == "true":
+            # breakpoint()
+            context.pop("theme_use_edit_page_button", False)
+
+
+def remove_show_source_if_directive(
+    app: sphinx.app,
+    pagename: str,
+    templatename: str,
+    context: sphinx.context,
+    doctree: sphinx.doctree,
+    page_vars: dict,
+):
+    """Remove the 'show_source' link.
+
+    Remove the 'show_source' link in this page if the page variable
+    'hide_show_source' is true.
+
+    Parameters
+    ----------
+    app : sphinx.app
+        Sphinx app
+    pagename : str
+        Page name
+    templatename : str
+        Template name
+    context : sphinx.context
+        Page context
+    doctree : sphinx.doctree
+        Page doctree
+    page_vars : dict
+        Page variables
+    """
+    # Remove the edit button for the index page
+    if "hide_show_source" in page_vars:
+        if page_vars["hide_show_source"].lower() == "true":
+            context["show_source"] = False
+
+
+def pre_build_page_html(
+    app: sphinx.app,
+    pagename: str,
+    templatename: str,
+    context: sphinx.context,
+    doctree: sphinx.doctree,
+):
+    """Apply hooks before building HTML.
+
+    Apply the hooks as functions before building the HTML files.
+
+    Parameters
+    ----------
+    app : sphinx.app
+        Sphinx app
+    pagename : str
+        Page name
+    templatename : str
+        Template name
+    context : sphinx.context
+        Page context
+    doctree : sphinx.doctree
+        Page doctree
+    """
+    from helpers import get_page_vars
+
+    page_vars = get_page_vars(app, pagename)
+
+    ## Hooks
+    remove_edit_this_page_if_directive(app, pagename, templatename, context, doctree, page_vars)
+
+    remove_show_source_if_directive(app, pagename, templatename, context, doctree, page_vars)
+
+
+def setup(app: sphinx):
+    """Add custom configuration to sphinx app.
+
+    Parameters
+    ----------
+    app : sphinx.application.sphinx
+        The Sphinx application.
+    """
+    from helpers import SetPageVariableDirective, add_custom_variables_to_context
+
+    # Register the directive
+    app.add_directive("setpagevar", SetPageVariableDirective)
+
+    # Hook into the html-page-context event
+    app.connect("html-page-context", add_custom_variables_to_context)
+
+    # setting pre-build functions
+    app.connect("html-page-context", pre_build_page_html)
