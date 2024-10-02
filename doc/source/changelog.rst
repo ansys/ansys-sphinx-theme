@@ -9,6 +9,14 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.1.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.2>`_ - 2024-10-02
+=======================================================================================
+
+Fixed
+^^^^^
+
+- fix: add version as params in cheatsheet `#521 <https://github.com/ansys/ansys-sphinx-theme/pull/521>`_
+
 `1.1.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.1>`_ - 2024-10-01
 =======================================================================================
 
