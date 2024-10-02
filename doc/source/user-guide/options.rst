@@ -179,6 +179,7 @@ Here is an example of how to add the ``cheatsheet`` dictionary to the `html_them
         {
             "cheatsheet": {
                 "file": "<file name including the extension of the cheat sheet>",
+                "title": "<title of the cheat sheet>",
                 "version": "<version of the cheat sheet>",
                 "pages": "<list of names for the pages to include the cheat sheet on>",  # Optional
             },
@@ -194,6 +195,7 @@ main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" s
         {
             "cheatsheet": {
                 "file": "getting_started/cheat_sheet.qmd",
+                "title": "My awesome cheat sheet",
                 "version": f"{version}",
                 "pages": ["index", "getting_started/learning"],
             },
