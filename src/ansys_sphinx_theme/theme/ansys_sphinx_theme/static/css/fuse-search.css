@@ -7,7 +7,7 @@
   justify-content: center;
   position: absolute;
   background-color: var(--ast-search-bar-enable-background);
-  width: 700px;
+  width: 630px;
   padding: 10px;
   border: 1px solid var(--ast-search-bar-enable-border);
   box-shadow: var(--ast-box-shadow-active);
@@ -23,10 +23,22 @@
   transition: box-shadow 0.3s ease; /* Smooth transition */
 }
 
+.result-item::after {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 100%;
+  background-color: black;
+  margin-top: 20px;
+}
+
+.result-item:last-child::after {
+  display: none;
+}
+
 .result-title {
   font-size: 1em;
   font-weight: bold;
-  background-color: var(--ast-suggestion-header-background);
   font-family: "Open Sans", sans-serif;
   color: var(--ast-catagory-header-text);
 }
