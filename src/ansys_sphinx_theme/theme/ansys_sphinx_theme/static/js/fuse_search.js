@@ -1,15 +1,16 @@
-// Global search options
-src = "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js";
+// Load the desired version of Fuse.js
 
-// Configure RequireJS
+const FUSE_VERSION = "6.4.6";
+
 require.config({
   paths: {
-    fuse: "https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min",
+    fuse: `https://cdn.jsdelivr.net/npm/fuse.js@${FUSE_VERSION}/dist/fuse.min`,
   },
 });
 
 // Main script for search functionality
 require(["fuse"], function (Fuse) {
+
   let fuseInstance;
   let searchData = [];
   let currentIndex = -1;
@@ -174,6 +175,7 @@ require(["fuse"], function (Fuse) {
       currentItem.scrollIntoView({ block: "nearest" });
     }
   }
+
   fetch(searchPath)
     .then((response) =>
       response.ok
@@ -182,4 +184,7 @@ require(["fuse"], function (Fuse) {
     )
     .then((data) => initializeFuse(data))
     .catch((error) => console.error("Fetch operation failed:", error));
+
+
+
 });
