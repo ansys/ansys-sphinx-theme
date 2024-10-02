@@ -1,8 +1,7 @@
 const SEARCH_BAR = document.getElementById("search-bar");
 const SEARCH_INPUT = SEARCH_BAR.querySelector(".bd-search input");
-const RESULTS_CONTAINER = document.getElementById("results");
+const RESULTS = document.getElementById("results");
 const MAIN_PAGE_CONTENT = document.querySelector(".bd-main");
-
 
 const FUSE_VERSION = "6.4.6";
 
@@ -14,10 +13,19 @@ require.config({
 
 require(["fuse"], function (Fuse) {
 
+    // Declare global variables
     let fuse;
-    let results = [];
 
-    // Initiali Fuse when the data is fetched
+    // Debounce function to limit the rate of function calls
+    function debounce(func, delay) {
+        let timeout;
+        return function (...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+
+    // Initialize Fuse when the data is fetched
     function initializeFuse(data, options) {
         fuse = new Fuse(data, options);
     }
@@ -31,7 +39,7 @@ require(["fuse"], function (Fuse) {
 
     // Collapse the search bar input and hide any results
     function collapseSearchInput() {
-        RESULTS_CONTAINER.style.display = "none";
+        RESULTS.style.display = "none";
         SEARCH_INPUT.classList.remove("expanded");
         SEARCH_INPUT.value = "";
         MAIN_PAGE_CONTENT.classList.remove("blurred");
@@ -39,27 +47,48 @@ require(["fuse"], function (Fuse) {
 
     // Display search results
     function displayResults(results) {
-        // the RESULTS_CONTAINER is a div element
-        RESULTS_CONTAINER.style.display = "block";
+        if (results.length === 0) {
+            RESULTS.style.display = "none";
+            return;
+        }
+
+        RESULTS.style.display = "flex";
+        RESULTS.innerHTML = '';
+
         results.forEach((result) => {
             const { title, text, href } = result.item;
+
+            const resultItem = document.createElement("div");
+            resultItem.className = "result-item";
+
+            const resultTitle = document.createElement("a")
+            resultTitle.className = "result-title";
+            resultTitle.innerHTML = title;
+            resultTitle.href = href;
+
+            const resultText = document.createElement("p")
+            resultText.className = "result-text";
+            resultText.innerHTML = text;
+
+            resultItem.appendChild(resultTitle);
+            resultItem.appendChild(resultText);
+            RESULTS.appendChild(resultItem);
         });
     }
 
     // Handle search input
-    function handleSearchInput() {
+    const handleSearchInput = debounce(() => {
         const query = SEARCH_INPUT.value.trim();
         if (query.length > 0) {
-            const results = fuse.search(query);
-            if (results.length > 0) {
-                displayResults(results);
-            }
+            const searchResults = fuse.search(query, {limit: parseInt(SEARCH_OPTIONS.limit)});
+            displayResults(searchResults);
+        } else {
+            RESULTS.style.display = "none";
         }
-    }
+    }, parseInt(SEARCH_OPTIONS.delay) || 0); // Adjust the delay as necessary
 
     // Handle keydown event for the search input
     function handleKeyDownSearchInput(event) {
-
         switch (event.key) {
             case "Tab":
                 event.preventDefault();
@@ -67,28 +96,53 @@ require(["fuse"], function (Fuse) {
 
             case "Escape":
                 collapseSearchInput();
+                break; // Added break to avoid fall-through
 
             case "Enter":
+                // Optionally handle Enter key here
                 break;
 
             default:
                 handleSearchInput();
+        }
+    }
 
+    // Handle keydown event globally
+    function handleGlobalKeyDown(event) {
+        switch (event.key) {
+            case "k":
+                if (event.ctrlKey) {
+                    expandSearchInput();
+                }
+                break;
+
+            case "Escape":
+                collapseSearchInput();
+                break;
+        }
+    }
+
+    // Handle click event globally
+    function handleGlobalClick(event) {
+        if (!RESULTS.contains(event.target) && event.target !== SEARCH_INPUT) {
+            collapseSearchInput();
         }
     }
 
     // Add event listeners
     SEARCH_INPUT.addEventListener("click", expandSearchInput);
     SEARCH_INPUT.addEventListener("keydown", handleKeyDownSearchInput);
+    document.addEventListener("keydown", handleGlobalKeyDown);
+    document.addEventListener("click", handleGlobalClick);
 
-    // Search file and options are passed via "ast-search-button.html"
+    // Fetch search data and initialize Fuse
     fetch(SEARCH_FILE)
-      .then((response) =>
-        response.ok
-          ? response.json()
-          : Promise.reject("Error from search: " + response.statusText),
-      )
-    .then((SEARCH_DATA) => initializeFuse(SEARCH_DATA, SEARCH_OPTIONS))
-      .catch((error) => console.error("Fetch operation failed:", error));
-
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`[AST]: HTTPS error ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then((SEARCH_DATA) => initializeFuse(SEARCH_DATA, SEARCH_OPTIONS))
+      .catch((error) => console.error(`[AST]: Can not fetch ${SEARCH_FILE}`, error.message));
 });
