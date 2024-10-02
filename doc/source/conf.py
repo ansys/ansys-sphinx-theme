@@ -9,7 +9,8 @@ from typing import List
 from github import Github
 import pyvista
 import requests
-import sphinx
+from sphinx.addnodes import document as doctree
+from sphinx.application import Sphinx as App
 from sphinx.builders.latex import LaTeXBuilder
 
 from ansys_sphinx_theme import (
@@ -27,7 +28,7 @@ THIS_PATH = Path(__file__).parent.resolve()
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 
 # To allow using 'helper' python file as a module
-sys.path.append(Path(__file__).parent)
+sys.path.append(str(Path(__file__).parent))
 
 # Project information
 project = "ansys_sphinx_theme"
@@ -273,11 +274,11 @@ jinja_contexts = {
 
 
 def remove_edit_this_page_if_directive(
-    app: sphinx.app,
+    app: App,
     pagename: str,
     templatename: str,
-    context: sphinx.context,
-    doctree: sphinx.doctree,
+    context: dict,
+    doctree: doctree,
     page_vars: dict,
 ):
     """Remove 'edit this page' button.
@@ -287,15 +288,15 @@ def remove_edit_this_page_if_directive(
 
     Parameters
     ----------
-    app : sphinx.app
+    app : sphinx.application.Sphinx
         Sphinx app
     pagename : str
         Page name
     templatename : str
         Template name
-    context : sphinx.context
+    context : dict
         Page context
-    doctree : sphinx.doctree
+    doctree : sphinx.addnodes.document
         Page doctree
     page_vars : dict
         Page variables
@@ -308,11 +309,11 @@ def remove_edit_this_page_if_directive(
 
 
 def remove_show_source_if_directive(
-    app: sphinx.app,
+    app: App,
     pagename: str,
     templatename: str,
-    context: sphinx.context,
-    doctree: sphinx.doctree,
+    context: dict,
+    doctree: doctree,
     page_vars: dict,
 ):
     """Remove the 'show_source' link.
@@ -322,15 +323,15 @@ def remove_show_source_if_directive(
 
     Parameters
     ----------
-    app : sphinx.app
+    app : sphinx.application.Sphinx
         Sphinx app
     pagename : str
         Page name
     templatename : str
         Template name
-    context : sphinx.context
+    context : dict
         Page context
-    doctree : sphinx.doctree
+    doctree : sphinx.addnodes.document
         Page doctree
     page_vars : dict
         Page variables
@@ -342,11 +343,11 @@ def remove_show_source_if_directive(
 
 
 def pre_build_page_html(
-    app: sphinx.app,
+    app: App,
     pagename: str,
     templatename: str,
-    context: sphinx.context,
-    doctree: sphinx.doctree,
+    context: dict,
+    doctree: doctree,
 ):
     """Apply hooks before building HTML.
 
@@ -354,15 +355,15 @@ def pre_build_page_html(
 
     Parameters
     ----------
-    app : sphinx.app
+    app : sphinx.application.Sphinx
         Sphinx app
     pagename : str
         Page name
     templatename : str
         Template name
-    context : sphinx.context
+    context : dict
         Page context
-    doctree : sphinx.doctree
+    doctree : sphinx.addnodes.document
         Page doctree
     """
     from helpers import get_page_vars
@@ -375,12 +376,12 @@ def pre_build_page_html(
     remove_show_source_if_directive(app, pagename, templatename, context, doctree, page_vars)
 
 
-def setup(app: sphinx):
+def setup(app: App):
     """Add custom configuration to sphinx app.
 
     Parameters
     ----------
-    app : sphinx.application.sphinx
+    app : sphinx.application.Sphinxlication.sphinx
         The Sphinx application.
     """
     from helpers import SetPageVariableDirective, add_custom_variables_to_context
