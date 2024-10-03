@@ -12,137 +12,152 @@ require.config({
 });
 
 require(["fuse"], function (Fuse) {
+  // Declare global variables
+  let fuse;
 
-    // Declare global variables
-    let fuse;
+  // Debounce function to limit the rate of function calls
+  function debounce(func, delay) {
+    let timeout;
+    return function (...args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => func.apply(this, args), delay);
+    };
+  }
 
-    // Debounce function to limit the rate of function calls
-    function debounce(func, delay) {
-        let timeout;
-        return function (...args) {
-            clearTimeout(timeout);
-            timeout = setTimeout(() => func.apply(this, args), delay);
-        };
+  // Initialize Fuse when the data is fetched
+  function initializeFuse(data, options) {
+    fuse = new Fuse(data, options);
+  }
+
+  // Expand the search bar input
+  function expandSearchInput() {
+    SEARCH_INPUT.classList.add("expanded");
+    MAIN_PAGE_CONTENT.classList.add("blurred");
+    SEARCH_INPUT.focus();
+  }
+
+  // Collapse the search bar input and hide any results
+  function collapseSearchInput() {
+    RESULTS.style.display = "none";
+    SEARCH_INPUT.classList.remove("expanded");
+    SEARCH_INPUT.value = "";
+    MAIN_PAGE_CONTENT.classList.remove("blurred");
+  }
+
+  // Display search results
+  function displayResults(results) {
+    if (!RESULTS) {
+      console.error("RESULTS element is not defined.");
+      return;
     }
 
-    // Initialize Fuse when the data is fetched
-    function initializeFuse(data, options) {
-        fuse = new Fuse(data, options);
+    if (results.length === 0) {
+      RESULTS.style.display = "none";
+      return;
     }
 
-    // Expand the search bar input
-    function expandSearchInput() {
-        SEARCH_INPUT.classList.add("expanded");
-        MAIN_PAGE_CONTENT.classList.add("blurred");
-        SEARCH_INPUT.focus();
-    }
+    RESULTS.style.display = "flex";
+    RESULTS.innerHTML = "";
 
-    // Collapse the search bar input and hide any results
-    function collapseSearchInput() {
-        RESULTS.style.display = "none";
-        SEARCH_INPUT.classList.remove("expanded");
-        SEARCH_INPUT.value = "";
-        MAIN_PAGE_CONTENT.classList.remove("blurred");
-    }
+    const fragment = document.createDocumentFragment();
 
-    // Display search results
-    function displayResults(results) {
-        if (results.length === 0) {
-            RESULTS.style.display = "none";
-            return;
-        }
+    results.forEach((result) => {
+      const { title, text, href } = result.item;
 
-        RESULTS.style.display = "flex";
-        RESULTS.innerHTML = '';
+      const resultItem = document.createElement("div");
+      resultItem.className = "result-item";
+      resultItem.dataset.href = href;
 
-        results.forEach((result) => {
-            const { title, text, href } = result.item;
+      const resultTitle = document.createElement("div");
+      resultTitle.className = "result-title";
+      resultTitle.textContent = title;
+      resultItem.appendChild(resultTitle);
 
-            const resultItem = document.createElement("div");
-            resultItem.className = "result-item";
+      const resultText = document.createElement("div");
+      resultText.className = "result-text";
+      resultText.textContent = text;
+      resultItem.appendChild(resultText);
 
-            const resultTitle = document.createElement("a")
-            resultTitle.className = "result-title";
-            resultTitle.innerHTML = title;
-            resultTitle.href = href;
+      fragment.appendChild(resultItem);
+    });
 
-            const resultText = document.createElement("p")
-            resultText.className = "result-text";
-            resultText.innerHTML = text;
+    RESULTS.appendChild(fragment);
+  }
 
-            resultItem.appendChild(resultTitle);
-            resultItem.appendChild(resultText);
-            RESULTS.appendChild(resultItem);
+  // Handle search input
+  const handleSearchInput = debounce(
+    () => {
+      const query = SEARCH_INPUT.value.trim();
+      if (query.length > 0) {
+        const searchResults = fuse.search(query, {
+          limit: parseInt(SEARCH_OPTIONS.limit),
         });
+        displayResults(searchResults);
+      } else {
+        RESULTS.style.display = "none";
+      }
+    },
+    parseInt(SEARCH_OPTIONS.delay) || 0,
+  ); // Adjust the delay as necessary
+
+  // Handle keydown event for the search input
+  function handleKeyDownSearchInput(event) {
+    switch (event.key) {
+      case "Tab":
+        event.preventDefault();
+        break;
+
+      case "Escape":
+        collapseSearchInput();
+        break; // Added break to avoid fall-through
+
+      case "Enter":
+        // Optionally handle Enter key here
+        break;
+
+      default:
+        handleSearchInput();
     }
+  }
 
-    // Handle search input
-    const handleSearchInput = debounce(() => {
-        const query = SEARCH_INPUT.value.trim();
-        if (query.length > 0) {
-            const searchResults = fuse.search(query, {limit: parseInt(SEARCH_OPTIONS.limit)});
-            displayResults(searchResults);
-        } else {
-            RESULTS.style.display = "none";
+  // Handle keydown event globally
+  function handleGlobalKeyDown(event) {
+    switch (event.key) {
+      case "k":
+        if (event.ctrlKey) {
+          expandSearchInput();
         }
-    }, parseInt(SEARCH_OPTIONS.delay) || 0); // Adjust the delay as necessary
+        break;
 
-    // Handle keydown event for the search input
-    function handleKeyDownSearchInput(event) {
-        switch (event.key) {
-            case "Tab":
-                event.preventDefault();
-                break;
-
-            case "Escape":
-                collapseSearchInput();
-                break; // Added break to avoid fall-through
-
-            case "Enter":
-                // Optionally handle Enter key here
-                break;
-
-            default:
-                handleSearchInput();
-        }
+      case "Escape":
+        collapseSearchInput();
+        break;
     }
+  }
 
-    // Handle keydown event globally
-    function handleGlobalKeyDown(event) {
-        switch (event.key) {
-            case "k":
-                if (event.ctrlKey) {
-                    expandSearchInput();
-                }
-                break;
-
-            case "Escape":
-                collapseSearchInput();
-                break;
-        }
+  // Handle click event globally
+  function handleGlobalClick(event) {
+    if (!RESULTS.contains(event.target) && event.target !== SEARCH_INPUT) {
+      collapseSearchInput();
     }
+  }
 
-    // Handle click event globally
-    function handleGlobalClick(event) {
-        if (!RESULTS.contains(event.target) && event.target !== SEARCH_INPUT) {
-            collapseSearchInput();
-        }
-    }
+  // Add event listeners
+  SEARCH_INPUT.addEventListener("click", expandSearchInput);
+  SEARCH_INPUT.addEventListener("keydown", handleKeyDownSearchInput);
+  document.addEventListener("keydown", handleGlobalKeyDown);
+  document.addEventListener("click", handleGlobalClick);
 
-    // Add event listeners
-    SEARCH_INPUT.addEventListener("click", expandSearchInput);
-    SEARCH_INPUT.addEventListener("keydown", handleKeyDownSearchInput);
-    document.addEventListener("keydown", handleGlobalKeyDown);
-    document.addEventListener("click", handleGlobalClick);
-
-    // Fetch search data and initialize Fuse
-    fetch(SEARCH_FILE)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`[AST]: HTTPS error ${response.statusText}`);
-        }
-        return response.json();
-      })
-      .then((SEARCH_DATA) => initializeFuse(SEARCH_DATA, SEARCH_OPTIONS))
-      .catch((error) => console.error(`[AST]: Can not fetch ${SEARCH_FILE}`, error.message));
+  // Fetch search data and initialize Fuse
+  fetch(SEARCH_FILE)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`[AST]: HTTPS error ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then((SEARCH_DATA) => initializeFuse(SEARCH_DATA, SEARCH_OPTIONS))
+    .catch((error) =>
+      console.error(`[AST]: Can not fetch ${SEARCH_FILE}`, error.message),
+    );
 });

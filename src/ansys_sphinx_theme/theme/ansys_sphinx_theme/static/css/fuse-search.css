@@ -8,7 +8,7 @@
   position: absolute;
   background-color: var(--ast-search-bar-enable-background);
   width: 630px;
-  padding: 10px;
+  padding: 1em;
   border: 1px solid var(--ast-search-bar-enable-border);
   box-shadow: var(--ast-box-shadow-active);
   overflow: auto;
@@ -16,8 +16,16 @@
 }
 
 .result-item {
-  cursor: pointer; /* Indicate that the item is clickable */
-  transition: box-shadow 0.3s ease; /* Smooth transition */
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  border-bottom: thin solid var(--ast-search-bar-enable-border);
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.result-item:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
 }
 
 .result-title {
@@ -27,41 +35,10 @@
   color: var(--ast-catagory-header-text);
 }
 
-.result-title:focus,
-.result-title:focus-visible,
-.result-text:focus,
-.result-text:focus-visible {
-  box-shadow: var(--ast-ring-shadow-focused);
-}
-
-.result-item.selected {
-  box-shadow: var(--ast-ring-shadow-focused);
-}
-
 .result-text {
   font-size: 12px;
   font-family: "Open Sans", sans-serif;
   color: var(--ast-search-bar-enable-text);
-}
-
-.result-item:focus-visible,
-.result-item:focus {
-  outline: none; /* Remove default focus outline */
-  cursor: pointer;
-  box-shadow: var(--ast-ring-shadow-focused);
-  z-index: 1;
-}
-
-.result-item:hover {
-  background-color: var(
-    --ast-hover-suggestion-text-background
-  ); /* Background when hovered */
-}
-
-.no-results {
-  font-style: italic;
-  color: var(--ast-color-text);
-  font-family: "Open Sans", sans-serif;
 }
 
 html[data-theme="light"] .highlight {
