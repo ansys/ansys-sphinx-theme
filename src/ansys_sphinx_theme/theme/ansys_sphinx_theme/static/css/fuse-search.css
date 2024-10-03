@@ -3,8 +3,8 @@
 .results {
   display: flex;
   flex-direction: column;
-  align-content: flex-start;
-  justify-content: center;
+  align-content: stretch;
+  justify-content: flex-start;
   position: absolute;
   background-color: var(--ast-search-bar-enable-background);
   width: 630px;
@@ -12,28 +12,12 @@
   border: 1px solid var(--ast-search-bar-enable-border);
   box-shadow: var(--ast-box-shadow-active);
   overflow: auto;
-  height: 500px;
+  max-height: 500px;
 }
-.search-button__wrapper.show .search-button__search-container {
-  overflow: auto;
-}
+
 .result-item {
-  margin-bottom: 1rem;
   cursor: pointer; /* Indicate that the item is clickable */
   transition: box-shadow 0.3s ease; /* Smooth transition */
-}
-
-.result-item::after {
-  content: "";
-  display: block;
-  height: 1px;
-  width: 100%;
-  background-color: black;
-  margin-top: 20px;
-}
-
-.result-item:last-child::after {
-  display: none;
 }
 
 .result-title {
