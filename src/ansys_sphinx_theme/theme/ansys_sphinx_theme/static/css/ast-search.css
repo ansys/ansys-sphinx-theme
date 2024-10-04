@@ -41,6 +41,10 @@
   color: var(--ast-search-bar-enable-text);
 }
 
+.result-item.selected {
+  box-shadow: var(--ast-ring-shadow-focused);
+}
+
 html[data-theme="light"] .highlight {
   color: var(--ast-highlight-color);
 }
