@@ -1,6 +1,7 @@
 # Contributors
 
 ## Project Lead
+
 * [Revathy Venugopal](https://github.com/Revathyvenugopal162)
 
 ## Individual Contributors
