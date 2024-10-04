@@ -2,6 +2,7 @@ const SEARCH_BAR = document.getElementById("search-bar");
 const SEARCH_INPUT = SEARCH_BAR.querySelector(".bd-search input");
 const RESULTS = document.getElementById("results");
 const MAIN_PAGE_CONTENT = document.querySelector(".bd-main");
+let CURRENT_INDEX = -1;
 
 const FUSE_VERSION = "6.4.6";
 
@@ -102,6 +103,8 @@ require(["fuse"], function (Fuse) {
 
   // Handle keydown event for the search input
   function handleKeyDownSearchInput(event) {
+    const resultItems = RESULTS.querySelectorAll(".result-item");
+
     switch (event.key) {
       case "Tab":
         event.preventDefault();
@@ -113,6 +116,21 @@ require(["fuse"], function (Fuse) {
 
       case "Enter":
         // Optionally handle Enter key here
+        break;
+
+      case "ArrowDown":
+        if (resultItems.length > 0) {
+          CURRENT_INDEX = (CURRENT_INDEX + 1) % resultItems.length; // Move down
+          focusSelected(resultItems);
+        }
+        break;
+
+      case "ArrowUp":
+        if (resultItems.length > 0) {
+          CURRENT_INDEX =
+            (CURRENT_INDEX - 1 + resultItems.length) % resultItems.length; // Move up
+          focusSelected(resultItems);
+        }
         break;
 
       default:
@@ -132,6 +150,16 @@ require(["fuse"], function (Fuse) {
       case "Escape":
         collapseSearchInput();
         break;
+    }
+  }
+
+  function focusSelected(resultsItems) {
+    if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultsItems.length) {
+      resultsItems.forEach((item) => item.classList.remove("selected"));
+      const currentItem = resultsItems[CURRENT_INDEX];
+      currentItem.classList.add("selected");
+      currentItem.focus();
+      currentItem.scrollIntoView({ block: "nearest" });
     }
   }
 
