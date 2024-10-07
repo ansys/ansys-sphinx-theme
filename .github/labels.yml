@@ -25,3 +25,11 @@
 - name: release
   description: Anything related to an incoming release
   color: ffffff
+
+- name: hacktoberfest
+  description: Hacktoberfest related
+  color: 62ca50
+
+- name: hacktoberfest-accepted
+  description: Hacktoberfest accepted contribution
+  color: 62ca50
