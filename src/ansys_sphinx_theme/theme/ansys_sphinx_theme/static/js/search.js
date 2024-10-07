@@ -53,6 +53,7 @@ require(["fuse"], function (Fuse) {
     }
 
     if (results.length === 0) {
+      noResultsFoundBanner();
       RESULTS.style.display = "none";
       return;
     }
@@ -85,6 +86,19 @@ require(["fuse"], function (Fuse) {
     RESULTS.appendChild(fragment);
   }
 
+  // Handle search for results and no results found divs
+  function noResultsFoundBanner() {
+    RESULTS.innerHTML = "";
+    RESULTS.style.display = "flex";
+    const warningBanner = document.createElement("div");
+    warningBanner.className = "warning-banner";
+    warningBanner.textContent = "No results found.";
+    warningBanner.style.display = "block";
+    // show in italic
+    warningBanner.style.fontStyle = "italic";
+    RESULTS.appendChild(warningBanner);
+  }
+
   // Handle search input
   const handleSearchInput = debounce(
     () => {
@@ -93,7 +107,11 @@ require(["fuse"], function (Fuse) {
         const searchResults = fuse.search(query, {
           limit: parseInt(SEARCH_OPTIONS.limit),
         });
-        displayResults(searchResults);
+        if (searchResults.length === 0) {
+          noResultsFoundBanner();
+        } else {
+          displayResults(searchResults);
+        }
       } else {
         RESULTS.style.display = "none";
       }
