@@ -27,7 +27,7 @@
   font-size: 1em;
   font-weight: bold;
   background-color: var(--ast-suggestion-header-background);
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--ast-sphinx-design-font-family);
   color: var(--ast-catagory-header-text);
 }
 
@@ -44,7 +44,7 @@
 
 .result-text {
   font-size: 12px;
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--ast-sphinx-design-font-family);
   color: var(--ast-search-bar-enable-text);
 }
 
@@ -65,7 +65,7 @@
 .no-results {
   font-style: italic;
   color: var(--ast-color-text);
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--ast-sphinx-design-font-family);
 }
 
 html[data-theme="light"] .highlight {
@@ -105,7 +105,7 @@ html[data-theme="light"] .highlight {
   background: var(--ast-search-bar-enable-background);
   height: 40px;
   font-size: 14px;
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--ast-sphinx-design-font-family);
   border: 0.5px solid var(--ast-search-bar-enable-border);
   border-radius: 4px;
   box-shadow: none;
