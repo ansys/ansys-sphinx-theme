@@ -8,6 +8,11 @@ This theme is specifically tailored for documentation related to Ansys projects
 helping to ensure consistency in its look and feel. Various useful extensions
 are included in the theme to make documentation more appealing and user-friendly.
 
+
+.. setpagevar:: hide_edit_page_button True
+
+.. setpagevar:: hide_show_source True
+
 .. grid:: 2
     :gutter: 2 2 3 4
 
