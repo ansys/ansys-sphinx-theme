@@ -1,6 +1,6 @@
 const SEARCH_BAR = document.getElementById("search-bar");
 const SEARCH_INPUT = SEARCH_BAR.querySelector(".bd-search input");
-const RESULTS = document.getElementById("results");
+const RESULTS = document.getElementById("search-results");
 const MAIN_PAGE_CONTENT = document.querySelector(".bd-main");
 let CURRENT_INDEX = -1;
 
@@ -99,17 +99,33 @@ require(["fuse"], function (Fuse) {
     RESULTS.appendChild(warningBanner);
   }
 
+  function searchingForResultsBanner() {
+    RESULTS.innerHTML = "";
+    RESULTS.style.display = "flex";
+    const searchingBanner = document.createElement("div");
+    searchingBanner.className = "searching-banner";
+    searchingBanner.textContent = "Searching...";
+    searchingBanner.style.display = "block";
+    console.log("Searching...");
+    // show in italic
+    searchingBanner.style.fontStyle = "italic";
+    RESULTS.appendChild(searchingBanner);
+  }
+
   // Handle search input
   const handleSearchInput = debounce(
     () => {
       const query = SEARCH_INPUT.value.trim();
+      searchingForResultsBanner();
       if (query.length > 0) {
         const searchResults = fuse.search(query, {
           limit: parseInt(SEARCH_OPTIONS.limit),
         });
+        searchingForResultsBanner();
         if (searchResults.length === 0) {
           noResultsFoundBanner();
         } else {
+          searchingForResultsBanner();
           displayResults(searchResults);
         }
       } else {
