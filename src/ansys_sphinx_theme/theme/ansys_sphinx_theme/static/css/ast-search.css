@@ -1,6 +1,6 @@
 @import "ansys-sphinx-theme-variable.css";
 
-.results {
+.search-results {
   display: flex;
   flex-direction: column;
   align-content: stretch;
