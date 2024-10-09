@@ -32,6 +32,8 @@ require(["fuse"], function (Fuse) {
 
   // Expand the search bar input
   function expandSearchInput() {
+    RESULTS.style.display = "flex";
+    searchingForResultsBanner();
     SEARCH_INPUT.classList.add("expanded");
     MAIN_PAGE_CONTENT.classList.add("blurred");
     SEARCH_INPUT.focus();
@@ -116,16 +118,13 @@ require(["fuse"], function (Fuse) {
   const handleSearchInput = debounce(
     () => {
       const query = SEARCH_INPUT.value.trim();
-      searchingForResultsBanner();
       if (query.length > 0) {
         const searchResults = fuse.search(query, {
           limit: parseInt(SEARCH_OPTIONS.limit),
         });
-        searchingForResultsBanner();
         if (searchResults.length === 0) {
           noResultsFoundBanner();
         } else {
-          searchingForResultsBanner();
           displayResults(searchResults);
         }
       } else {
@@ -168,6 +167,7 @@ require(["fuse"], function (Fuse) {
         break;
 
       default:
+        searchingForResultsBanner();
         handleSearchInput();
     }
   }
