@@ -46,6 +46,12 @@ require(["fuse"], function (Fuse) {
     SEARCH_INPUT.value = "";
     MAIN_PAGE_CONTENT.classList.remove("blurred");
   }
+  function truncateText(text, maxLength = 200) {
+    if (text.length <= maxLength) {
+      return text; // If the text is already within the limit, return as is
+    }
+    return text.slice(0, maxLength) + "...";
+  }
 
   // Display search results
   function displayResults(results) {
@@ -79,7 +85,8 @@ require(["fuse"], function (Fuse) {
 
       const resultText = document.createElement("div");
       resultText.className = "result-text";
-      resultText.textContent = text;
+      const highlightedText = truncateText(text);
+      resultText.textContent = highlightedText;
       resultItem.appendChild(resultText);
 
       fragment.appendChild(resultItem);
