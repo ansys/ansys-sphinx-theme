@@ -53,16 +53,20 @@ class SearchIndex:
         """Build sections from the document tree."""
         for node in self.doc_tree.traverse(nodes.section):
             section_title = node[0].astext()
-            section_text = "\n".join(
-                n.astext()
-                for node_type in [nodes.paragraph, nodes.literal_block]
-                for n in node.traverse(node_type)
-            )
+            # section_text = "\n".join(
+            #     n.astext()
+            #     for node_type in [nodes.paragraph, nodes.literal_block]
+            #     for n in node.traverse(node_type)
+            # )
+            # get all the text in the section
+
+            text = "\n".join(node.astext() for node in node.traverse(nodes.Text))
+
             section_anchor_id = _title_to_anchor(section_title)
             self.sections.append(
                 {
                     "title": section_title,
-                    "text": section_text,
+                    "text": text,
                     "anchor_id": section_anchor_id,
                 }
             )
