@@ -2,25 +2,13 @@
 <link rel="stylesheet" href="{{ pathto('_static/css/fuse-search.css', 1) }}">
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
-
-{% if theme_static_search %}
-
-{% set theme_static_search = theme_static_search | default({}) %}
-{% else %}
-{% set theme_static_search = {'keys': ['title', 'text'], 'threshold': 0.5, 'shouldSort': 'True', 'ignoreLocation': 'False', 'useExtendedSearch': 'True'} %}
-{% endif %}
-
-{% set theme_limit = theme_static_search.limit | default(10) %}
-{% set min_chars_for_search = theme_static_search.min_chars_for_search | default(1) %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
 
 <script>
-var theme_static_search = JSON.parse('{{ theme_static_search | tojson | safe }}');
-var theme_limit = "{{ theme_limit }}";
-var min_chars_for_search = "{{ min_chars_for_search }}";
-var searchPath = "{{ pathto('_static/search.json', 1) }}";
-
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{{ theme_static_search | tojson | safe }}');
+const SEARCH_FILE = "{{ pathto('_static/search.json', 1) }}";
 </script>
 
-<script src="{{ pathto('_static/js/fuse_search.js', 1) }}"></script>
-<script src="{{ pathto('_static/js/fuse_extension.js', 1) }}"></script>
+
+<script src="{{ pathto('_static/js/search.js', 1) }}"></script>

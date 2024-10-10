@@ -37,12 +37,7 @@ def update_search_config(app: Sphinx) -> None:
     theme_static_options = app.config.html_theme_options.get("static_search", {})
     theme_static_options["keys"] = ["title", "text"]
     theme_static_options["threshold"] = theme_static_options.get("threshold", 0.5)
-    theme_static_options["shouldSort"] = theme_static_options.get("shouldSort", "True")
-    theme_static_options["ignoreLocation"] = theme_static_options.get("ignoreLocation", "False")
-    theme_static_options["useExtendedSearch"] = theme_static_options.get(
-        "useExtendedSearch", "True"
-    )
     theme_static_options["limit"] = theme_static_options.get("limit", 10)
-    theme_static_options["min_chars_for_search"] = theme_static_options.get(
-        "min_chars_for_search", 1
-    )
+
+
+__all__ = ["create_search_index", "update_search_config"]
