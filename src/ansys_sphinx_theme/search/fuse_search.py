@@ -55,9 +55,17 @@ class SearchIndex:
             section_title = node[0].astext()
             section_text = "\n".join(
                 n.astext()
-                for node_type in [nodes.paragraph, nodes.literal_block]
+                for node_type in [
+                    nodes.paragraph,
+                    nodes.literal_block,
+                    nodes.literal,
+                    nodes.list_item,
+                    nodes.field_list,
+                    nodes.compound,
+                ]
                 for n in node.traverse(node_type)
             )
+
             section_anchor_id = _title_to_anchor(section_title)
             self.sections.append(
                 {
