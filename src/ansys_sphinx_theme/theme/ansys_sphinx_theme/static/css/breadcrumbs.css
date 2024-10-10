@@ -76,7 +76,7 @@ html[data-theme="dark"] #announcement_msg :after {
 }
 
 #announcement_msg a {
-  color: #1e6ddc;
+  color: var(--ast-color-link);
 }
 
 .sidebar-cheatsheets {
