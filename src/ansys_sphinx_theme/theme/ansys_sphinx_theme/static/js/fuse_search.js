@@ -111,12 +111,9 @@ require(["fuse"], function (Fuse) {
 
     switch (event.key) {
       case "Enter":
-        event.preventDefault(); // Prevent form submission
         if (currentIndex >= 0 && currentIndex < resultItems.length) {
+          event.preventDefault(); // Prevent default enter action
           const href = resultItems[currentIndex].getAttribute("data-href");
-          navigateToHref(href);
-        } else if (resultItems.length > 0) {
-          const href = resultItems[0].getAttribute("data-href");
           navigateToHref(href);
         }
         break;
