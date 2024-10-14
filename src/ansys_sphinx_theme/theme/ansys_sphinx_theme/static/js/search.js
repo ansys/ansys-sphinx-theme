@@ -120,6 +120,11 @@ require(["fuse"], function (Fuse) {
     RESULTS.appendChild(warningBanner);
   }
 
+  function navigateToHref(href) {
+    const finalUrl = getDynamicPath(href);
+    window.location.href = finalUrl;
+  }
+
   // Display a banner indicating that no results were found
   function searchingForResultsBanner() {
     RESULTS.innerHTML = "";
@@ -168,6 +173,11 @@ require(["fuse"], function (Fuse) {
 
       case "Enter":
         // Optionally handle Enter key here
+        if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultItems.length) {
+          event.preventDefault(); // Prevent default enter action
+          const href = resultItems[CURRENT_INDEX].dataset.href;
+          navigateToHref(href);
+        }
         break;
 
       case "ArrowDown":
