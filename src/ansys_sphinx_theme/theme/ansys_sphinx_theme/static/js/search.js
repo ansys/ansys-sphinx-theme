@@ -46,7 +46,9 @@ require(["fuse"], function (Fuse) {
     SEARCH_INPUT.value = "";
     MAIN_PAGE_CONTENT.classList.remove("blurred");
   }
-  function truncateText(text, maxLength = 200) {
+
+  // Truncate the preview of the text
+  function truncateTextPreview(text, maxLength = 200) {
     if (text.length <= maxLength) {
       return text; // If the text is already within the limit, return as is
     }
@@ -85,7 +87,7 @@ require(["fuse"], function (Fuse) {
 
       const resultText = document.createElement("div");
       resultText.className = "result-text";
-      const highlightedText = truncateText(text);
+      const highlightedText = truncateTextPreview(text);
       resultText.textContent = highlightedText;
       resultItem.appendChild(resultText);
 
@@ -95,7 +97,18 @@ require(["fuse"], function (Fuse) {
     RESULTS.appendChild(fragment);
   }
 
-  // Handle search for results and no results found divs
+  // Focus the selected result item
+  function focusSelected(resultsItems) {
+    if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultsItems.length) {
+      resultsItems.forEach((item) => item.classList.remove("selected"));
+      const currentItem = resultsItems[CURRENT_INDEX];
+      currentItem.classList.add("selected");
+      currentItem.focus();
+      currentItem.scrollIntoView({ block: "nearest" });
+    }
+  }
+
+  // Display a banner indicating that the search is running
   function noResultsFoundBanner() {
     RESULTS.innerHTML = "";
     RESULTS.style.display = "flex";
@@ -103,11 +116,11 @@ require(["fuse"], function (Fuse) {
     warningBanner.className = "warning-banner";
     warningBanner.textContent = "No results found.";
     warningBanner.style.display = "block";
-    // show in italic
     warningBanner.style.fontStyle = "italic";
     RESULTS.appendChild(warningBanner);
   }
 
+  // Display a banner indicating that no results were found
   function searchingForResultsBanner() {
     RESULTS.innerHTML = "";
     RESULTS.style.display = "flex";
@@ -116,7 +129,6 @@ require(["fuse"], function (Fuse) {
     searchingBanner.textContent = "Searching...";
     searchingBanner.style.display = "block";
     console.log("Searching...");
-    // show in italic
     searchingBanner.style.fontStyle = "italic";
     RESULTS.appendChild(searchingBanner);
   }
@@ -139,7 +151,7 @@ require(["fuse"], function (Fuse) {
       }
     },
     parseInt(SEARCH_OPTIONS.delay) || 0,
-  ); // Adjust the delay as necessary
+  );
 
   // Handle keydown event for the search input
   function handleKeyDownSearchInput(event) {
@@ -191,16 +203,6 @@ require(["fuse"], function (Fuse) {
       case "Escape":
         collapseSearchInput();
         break;
-    }
-  }
-
-  function focusSelected(resultsItems) {
-    if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultsItems.length) {
-      resultsItems.forEach((item) => item.classList.remove("selected"));
-      const currentItem = resultsItems[CURRENT_INDEX];
-      currentItem.classList.add("selected");
-      currentItem.focus();
-      currentItem.scrollIntoView({ block: "nearest" });
     }
   }
 
