@@ -165,7 +165,7 @@ require(["fuse"], function (Fuse) {
         RESULTS.style.display = "none";
       }
     },
-    parseInt(SEARCH_OPTIONS.delay) || 0,
+    parseInt(SEARCH_OPTIONS.delay) || 150,
   );
 
   // Handle keydown event for the search input

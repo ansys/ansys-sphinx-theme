@@ -119,9 +119,10 @@ options <https://www.fusejs.io/api/options.html>`_ supported by ``Fuse.js``
 through the ``static_search`` dictionary in the ``html_theme_options``.
 
 To improve the search performance, a debounce function is available. By
-default, no delay is applied, meaning no debounce function is used. To add a
-delay, declare the ``delay`` key in the ``static_search`` dictionary with a
-value specifying the amount of milliseconds to wait before executing the search.
+default, a delay of 300 milliseconds is applied. To modify this value, declare
+the ``delay`` key in the ``static_search`` dictionary with a value specifying
+the amount of milliseconds to wait before executing the search. A value of
+``0`` disables the debounce function.
 
 .. note::
 
