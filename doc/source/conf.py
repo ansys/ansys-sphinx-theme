@@ -68,8 +68,9 @@ html_theme_options = {
     },
     "logo": "ansys",
     "static_search": {
-        "threshold": 0.5,
-        "ignoreLocation": True,
+        "threshold": 0.2,
+        "limit": 7,
+        "minMatchCharLength": 3,
     },
 }
 
