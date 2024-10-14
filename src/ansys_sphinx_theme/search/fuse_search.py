@@ -62,6 +62,7 @@ class SearchIndex:
                     nodes.list_item,
                     nodes.field_list,
                     nodes.compound,
+                    nodes.block_quote,
                 ]
                 for n in node.traverse(node_type)
             )
