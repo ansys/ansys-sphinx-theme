@@ -100,7 +100,6 @@ require(["fuse"], function (Fuse) {
 
   // Focus the selected result item
   function focusSelected(resultsItems) {
-    console.log("CURRENT INDEX: ", CURRENT_INDEX);
     if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultsItems.length) {
       resultsItems.forEach((item) => item.classList.remove("selected"));
       const currentItem = resultsItems[CURRENT_INDEX];
@@ -165,7 +164,7 @@ require(["fuse"], function (Fuse) {
         RESULTS.style.display = "none";
       }
     },
-    parseInt(SEARCH_OPTIONS.delay) || 150,
+    parseInt(SEARCH_OPTIONS.delay) || 300,
   );
 
   // Handle keydown event for the search input
