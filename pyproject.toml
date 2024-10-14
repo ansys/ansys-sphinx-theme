@@ -46,11 +46,11 @@ doc = [
     "PyGitHub==2.4.0",
     "pyvista[jupyter]==0.44.1",
     "requests==2.32.3",
-    "Sphinx==8.0.2",
+    "Sphinx==8.1.3",
     "sphinx-autoapi==3.3.2",
     "sphinx-copybutton==0.5.2",
     "sphinx-design==0.6.1",
-    "sphinx-gallery==0.17.1",
+    "sphinx-gallery==0.18.0",
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.0.4",
 ]
