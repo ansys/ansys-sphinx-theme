@@ -79,6 +79,7 @@ require(["fuse"], function (Fuse) {
       const resultItem = document.createElement("div");
       resultItem.className = "result-item";
       resultItem.dataset.href = href;
+      resultItem.addEventListener("click", () => navigateToHref(href));
 
       const resultTitle = document.createElement("div");
       resultTitle.className = "result-title";
