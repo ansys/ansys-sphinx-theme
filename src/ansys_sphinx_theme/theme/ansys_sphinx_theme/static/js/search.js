@@ -100,6 +100,7 @@ require(["fuse"], function (Fuse) {
 
   // Focus the selected result item
   function focusSelected(resultsItems) {
+    console.log("CURRENT INDEX: ", CURRENT_INDEX);
     if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultsItems.length) {
       resultsItems.forEach((item) => item.classList.remove("selected"));
       const currentItem = resultsItems[CURRENT_INDEX];
@@ -121,6 +122,14 @@ require(["fuse"], function (Fuse) {
     RESULTS.appendChild(warningBanner);
   }
 
+  // Build the complete hyperlink for the target file
+  function getDynamicPath(targetFile) {
+    const contentRoot =
+      document.documentElement.getAttribute("data-content_root");
+    return `${contentRoot}${targetFile}`;
+  }
+
+  // Navigate to the desired file
   function navigateToHref(href) {
     const finalUrl = getDynamicPath(href);
     window.location.href = finalUrl;
