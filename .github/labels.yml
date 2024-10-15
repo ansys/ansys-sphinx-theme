@@ -33,3 +33,15 @@
 - name: hacktoberfest-accepted
   description: Hacktoberfest accepted contribution
   color: 62ca50
+
+- name: css
+  description: Requires or modifies cascading style sheets
+  color: d4c5f9
+
+- name: js
+  description: Requires or modifies JavaScript code
+  color: fef2c0
+
+- name: ui/ux
+  description: Related with UI/UX design
+  color: ffffff
