@@ -5,6 +5,7 @@
 
 ## Individual Contributors
 
+* [Abhinav Deshpande](https://github.com/Abhinav-gh)
 * [Alexander Kaszynski](https://github.com/akaszynski)
 * [Andy Grigg](https://github.com/Andy-Grigg)
 * [Dipin Nair](https://github.com/dipinknair)
