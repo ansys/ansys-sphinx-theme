@@ -28,6 +28,7 @@ import pathlib
 import subprocess
 from typing import Any, Dict
 
+from docutils import nodes
 from docutils.nodes import document
 from sphinx import addnodes
 from sphinx.application import Sphinx
@@ -532,6 +533,51 @@ def check_for_depreciated_theme_options(app: Sphinx):
         )
 
 
+def extract_whatsnew(app, docname, source):
+    """Extract the what's new content from the document."""
+    config_options = app.config.html_theme_options
+    whats_new_options = config_options.get("whatsnew")
+    if not whats_new_options:
+        return
+
+    document_name = whats_new_options.get("file", "whatsnew")
+
+    if docname != document_name:
+        return
+
+    whatsnew_content = []
+    doctree = app.env.get_doctree(docname)
+    docs_content = doctree.traverse(nodes.section)
+    for docs_content in docs_content:
+        contents = {
+            "title": docs_content[0].astext(),
+            "children": docs_content.traverse(nodes.paragraph)[0].astext(),
+            "url": "",
+        }
+        whatsnew_content.append(contents)
+    whats_new_content = [
+        content for content in whatsnew_content if content["title"].startswith("v0")
+    ]
+    app.env.whatsnew_content = whats_new_content
+
+
+def add_whatsnew(app, pagename, templatename, context, doctree):
+    """Add what's new section to the context."""
+    config_options = app.config.html_theme_options
+    whats_new_options = config_options.get("whatsnew")
+    if not whats_new_options:
+        return
+
+    pages = whats_new_options.get("pages", ["index"])
+
+    if pagename not in pages:
+        return
+
+    whatsnew = context.get("whatsnew", [])
+    whatsnew.extend(app.env.whatsnew_content)
+    context["whatsnew"] = whatsnew
+
+
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -568,6 +614,8 @@ def setup(app: Sphinx) -> Dict:
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("builder-inited", check_for_depreciated_theme_options)
+    app.connect("source-read", extract_whatsnew)
+    app.connect("html-page-context", add_whatsnew)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
