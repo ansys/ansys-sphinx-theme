@@ -45,6 +45,7 @@ class SearchIndex:
         self.doc_name = doc_name
         self.doc_path = f"{self.doc_name}.html"
         self.env = app.env
+        self.theme_options = app.config.html_theme_options.get("static_search", {})
         self.doc_title = self.env.titles[self.doc_name].astext()
         self.doc_tree = self.env.get_doctree(self.doc_name)
         self.sections = []
@@ -135,6 +136,23 @@ def _title_to_anchor(title: str) -> str:
     return re.sub(r"[^\w\s-]", "", title.lower().strip().replace(" ", "-"))
 
 
+def group_the_pages_with_pattern(app, all_docs):
+    """Group the pages with the pattern in the search index."""
+    options = app.config.html_theme_options.get("static_search", {})
+    pattern = options.get("index_pattern", {})
+    new_pattern = {}
+    # group docs with pages with pattern
+    print(all_docs)
+    for filename, pattern in pattern.items():
+        for doc in all_docs:
+            if doc.startswith(pattern):
+                if filename not in new_pattern:
+                    new_pattern[filename] = pattern
+                new_pattern[filename].append(doc)
+
+    return new_pattern
+
+
 def create_search_index(app, exception):
     """
     Generate search index at the end of the Sphinx build process.
@@ -150,6 +168,8 @@ def create_search_index(app, exception):
         return
 
     search_index_list = []
+
+    # get_pattern = group_the_pages_with_pattern(app, app.env.found_docs)
 
     for document in app.env.found_docs:
         search_index = SearchIndex(document, app)

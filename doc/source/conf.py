@@ -70,6 +70,10 @@ html_theme_options = {
     "static_search": {
         "threshold": 0.5,
         "ignoreLocation": True,
+        "index_patterns": {
+            "examples/api/*": "ALL_NODES",
+            "examples/sphinx_examples/*": "TITLES + PARAGRAPHS",
+        },
     },
 }
 
