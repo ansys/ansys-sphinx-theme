@@ -1,0 +1,44 @@
+.whatsnew-sidebar {
+  border: 1px solid var(--ast-color-table-inner-border);
+  padding: 8px;
+  background-color: var(--pst-color-background);
+  border-radius: 10px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
+  margin-bottom: 20px;
+}
+
+.whatsnew-sidebar h2 {
+  font-size: 1em;
+  font-family: var(--ast-font-family-base);
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.whatsnew-sidebar ul {
+  list-style: none;
+  padding-left: 0; /* Remove default padding */
+}
+
+.whatsnew-sidebar li {
+  margin-bottom: 10px; /* Space between versions */
+}
+
+.whatsnew-sidebar li ul {
+  margin-left: 15px; /* Indent sub-items */
+}
+
+.whatsnew-sidebar li ul li {
+  list-style-type: disc; /* Bullet points */
+  margin-left: 20px; /* Spacing for bullet points */
+}
+
+.whatsnew-sidebar a {
+  text-decoration: none; /* Remove underline */
+  color: var(--ast-color-link); /* Blue link color */
+}
+
+.whatsnew-sidebar a:hover {
+  text-decoration: underline; /* Underline on hover */
+  color: var(--ast-color-link-hover); /* Blue link color on hover */
+}

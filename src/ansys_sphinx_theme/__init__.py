@@ -533,15 +533,15 @@ def check_for_depreciated_theme_options(app: Sphinx):
         )
 
 
-def extract_whatsnew(app, doctree):
+def extract_whatsnew(app, doctree, docname):
     """Extract the what's new content from the document."""
     config_options = app.config.html_theme_options
+
     whats_new_options = config_options.get("whatsnew")
     if not whats_new_options:
         return
 
     document_name = whats_new_options.get("file", "whatsnew")
-
     get_doctree = app.env.get_doctree(document_name)
     whatsnew_content = []
     docs_content = get_doctree.traverse(nodes.section)
@@ -613,7 +613,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("builder-inited", check_for_depreciated_theme_options)
-    app.connect("doctree-read", extract_whatsnew)
+    app.connect("doctree-resolved", extract_whatsnew)
     app.connect("html-page-context", add_whatsnew)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
