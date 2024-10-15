@@ -533,7 +533,9 @@ def check_for_depreciated_theme_options(app: Sphinx):
         )
 
 
-def extract_whatsnew(app, docname, source):
+def extract_whatsnew(
+    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree
+):
     """Extract the what's new content from the document."""
     config_options = app.config.html_theme_options
     whats_new_options = config_options.get("whatsnew")
@@ -542,11 +544,11 @@ def extract_whatsnew(app, docname, source):
 
     document_name = whats_new_options.get("file", "whatsnew")
 
-    if docname != document_name:
+    if pagename != document_name:
         return
 
     whatsnew_content = []
-    doctree = app.env.get_doctree(docname)
+    doctree = app.env.get_doctree(pagename)
     docs_content = doctree.traverse(nodes.section)
     for docs_content in docs_content:
         contents = {
@@ -570,12 +572,22 @@ def add_whatsnew(app, pagename, templatename, context, doctree):
 
     pages = whats_new_options.get("pages", ["index"])
 
+    extract_whatsnew(app, pagename, templatename, context, doctree)
+
+    print(app.env.whatsnew_content)
+
+    print("here=======================")
+    exit(1)
+
     if pagename not in pages:
         return
 
     whatsnew = context.get("whatsnew", [])
     whatsnew.extend(app.env.whatsnew_content)
     context["whatsnew"] = whatsnew
+    sidebar = context.get("sidebars", [])
+    sidebar.append("whatsnew_sidebar.html")
+    context["sidebars"] = sidebar
 
 
 def setup(app: Sphinx) -> Dict:
@@ -614,7 +626,6 @@ def setup(app: Sphinx) -> Dict:
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("builder-inited", check_for_depreciated_theme_options)
-    app.connect("source-read", extract_whatsnew)
     app.connect("html-page-context", add_whatsnew)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
