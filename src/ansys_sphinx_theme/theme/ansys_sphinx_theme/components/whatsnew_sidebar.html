@@ -8,7 +8,10 @@
         <li>
           <strong>{{ title }}</strong>  <!-- Display version title -->
           <ul>
-            <li><a href="{{ url }}">{{ children }}</a></li> <!-- Display child element as a link -->
+            <!-- child element is list with one url-->
+             {% for child in children %}
+             <li><a href="{{ url }}">{{ child }}</a></li> <!-- Display child element as a link -->
+             {% endfor %}
           </ul>
         </li>
       {% endfor %}

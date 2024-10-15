@@ -543,18 +543,25 @@ def extract_whatsnew(app, doctree, docname):
 
     document_name = whats_new_options.get("file", "whatsnew")
     get_doctree = app.env.get_doctree(document_name)
-    whatsnew_content = []
+    whats_new_content = []
     docs_content = get_doctree.traverse(nodes.section)
-    for docs_content in docs_content:
+    selected_docs = [
+        doc_content for doc_content in docs_content if doc_content[0].astext().startswith("v0")
+    ]
+    for docs_content in selected_docs:
+        children_section_headers = [child for child in docs_content.traverse(nodes.section)]
+        headers = [child[0].astext() for child in children_section_headers]
+        # if not more than one content, then children is the 2nd and 3rd , if not get paragraph
+        if len(children_section_headers) > 1:
+            children = headers[1:]
+        else:
+            children = [docs_content.traverse(nodes.paragraph)[0].astext()]
         contents = {
             "title": docs_content[0].astext(),
-            "children": docs_content.traverse(nodes.paragraph)[0].astext(),
-            "url": "",
+            "children": children,
+            "url": f"{document_name}.html#{docs_content['ids'][0]}",
         }
-        whatsnew_content.append(contents)
-    whats_new_content = [
-        content for content in whatsnew_content if content["title"].startswith("v0")
-    ]
+        whats_new_content.append(contents)
     app.env.whatsnew_content = whats_new_content
 
 
