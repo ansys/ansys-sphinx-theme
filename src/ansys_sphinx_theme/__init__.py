@@ -533,9 +533,7 @@ def check_for_depreciated_theme_options(app: Sphinx):
         )
 
 
-def extract_whatsnew(
-    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree
-):
+def extract_whatsnew(app, doctree):
     """Extract the what's new content from the document."""
     config_options = app.config.html_theme_options
     whats_new_options = config_options.get("whatsnew")
@@ -544,12 +542,9 @@ def extract_whatsnew(
 
     document_name = whats_new_options.get("file", "whatsnew")
 
-    if pagename != document_name:
-        return
-
+    get_doctree = app.env.get_doctree(document_name)
     whatsnew_content = []
-    doctree = app.env.get_doctree(pagename)
-    docs_content = doctree.traverse(nodes.section)
+    docs_content = get_doctree.traverse(nodes.section)
     for docs_content in docs_content:
         contents = {
             "title": docs_content[0].astext(),
@@ -571,14 +566,6 @@ def add_whatsnew(app, pagename, templatename, context, doctree):
         return
 
     pages = whats_new_options.get("pages", ["index"])
-
-    extract_whatsnew(app, pagename, templatename, context, doctree)
-
-    print(app.env.whatsnew_content)
-
-    print("here=======================")
-    exit(1)
-
     if pagename not in pages:
         return
 
@@ -626,6 +613,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("builder-inited", check_for_depreciated_theme_options)
+    app.connect("doctree-read", extract_whatsnew)
     app.connect("html-page-context", add_whatsnew)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
