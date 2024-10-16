@@ -68,7 +68,9 @@ html_theme_options = {
     },
     "logo": "ansys",
     "static_search": {
-        "threshold": 0.5,
+        "threshold": 0.2,
+        "limit": 7,
+        "minMatchCharLength": 3,
         "ignoreLocation": True,
         "index_patterns": {
             "examples/api/*": "ALL_NODES",

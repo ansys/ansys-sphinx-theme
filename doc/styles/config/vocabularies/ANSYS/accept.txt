@@ -3,6 +3,7 @@
 (?i)theme
 (?i)Boolean
 datatable
+debounce
 MeiliSearch
 (?i)linkcode
 link_code_library
