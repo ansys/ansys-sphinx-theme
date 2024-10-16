@@ -27,11 +27,16 @@ import re
 
 from docutils import nodes
 
+PARAGRAPHS = [nodes.paragraph]
+TITLE = [nodes.title]
+LITERAL = [nodes.literal, nodes.literal_block]
+ALL_NODES = [nodes.raw]
+
 
 class SearchIndex:
     """Generate a search index for a Sphinx document."""
 
-    def __init__(self, doc_name, app):
+    def __init__(self, doc_name, app, pattern=None):
         """
         Initialize the search index object.
 
@@ -49,6 +54,7 @@ class SearchIndex:
         self.doc_title = self.env.titles[self.doc_name].astext()
         self.doc_tree = self.env.get_doctree(self.doc_name)
         self.sections = []
+        self.pattern = pattern
 
     def build_sections(self):
         """Build sections from the document tree."""
@@ -139,17 +145,18 @@ def _title_to_anchor(title: str) -> str:
 def group_the_pages_with_pattern(app, all_docs):
     """Group the pages with the pattern in the search index."""
     options = app.config.html_theme_options.get("static_search", {})
-    pattern = options.get("index_pattern", {})
-    new_pattern = {}
-    # group docs with pages with pattern
-    print(all_docs)
-    for filename, pattern in pattern.items():
-        for doc in all_docs:
-            if doc.startswith(pattern):
-                if filename not in new_pattern:
-                    new_pattern[filename] = pattern
-                new_pattern[filename].append(doc)
+    patterns = options.get("index_patterns", {})
 
+    new_pattern = {}
+    if not isinstance(patterns, dict):
+        raise ValueError("index_patterns must be a dictionary")
+
+    for filename, pattern in patterns.items():
+        files = [doc for doc in all_docs if doc.startswith(filename)]
+        new_pattern[pattern] = files
+
+    other_files = [doc for doc in all_docs if doc not in new_pattern]
+    new_pattern["TITLES + PARAGRAPHS"] = other_files
     return new_pattern
 
 
@@ -169,7 +176,12 @@ def create_search_index(app, exception):
 
     search_index_list = []
 
-    # get_pattern = group_the_pages_with_pattern(app, app.env.found_docs)
+    get_pattern = group_the_pages_with_pattern(app, app.env.found_docs)
+    for pattern, docs in get_pattern.items():
+        for document in docs:
+            search_index = SearchIndex(document, app, pattern)
+            search_index.build_sections()
+            search_index_list.extend(search_index.indices)
 
     for document in app.env.found_docs:
         search_index = SearchIndex(document, app)

@@ -73,8 +73,8 @@ html_theme_options = {
         "minMatchCharLength": 3,
         "ignoreLocation": True,
         "index_patterns": {
-            "examples/api/*": "ALL_NODES",
-            "examples/sphinx_examples/*": "TITLES + PARAGRAPHS",
+            "examples/api/": "ALL_NODES",
+            "examples/sphinx_examples/": "TITLES + PARAGRAPHS",
         },
     },
 }
@@ -201,7 +201,8 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github()
+    token = os.getenv("GITHUB_TOKEN")
+    g = Github(token)
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):
