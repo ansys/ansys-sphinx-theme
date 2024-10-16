@@ -28,13 +28,20 @@ import pathlib
 import subprocess
 from typing import Any, Dict
 
-from docutils.nodes import document
+from docutils import nodes
 from sphinx import addnodes
 from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404  # noqa: F401
-from ansys_sphinx_theme.search import create_search_index, update_search_config
+from ansys_sphinx_theme.search import (  # noqa: F401
+    ALL_NODES,
+    LITERAL,
+    PARAGRAPHS,
+    TITLE,
+    create_search_index,
+    update_search_config,
+)
 
 try:
     import importlib.metadata as importlib_metadata
@@ -170,7 +177,7 @@ def setup_default_html_theme_options(app):
 
 
 def fix_edit_html_page_context(
-    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: document
+    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
 ) -> None:
     """Add a function that Jinja can access for returning an "edit this page" link .
 
@@ -271,7 +278,7 @@ def fix_edit_html_page_context(
 
 
 def update_footer_theme(
-    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: document
+    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document
 ) -> None:
     """Update the version number of the Ansys Sphinx theme in the footer.
 
@@ -401,7 +408,7 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
 
 
 def add_cheat_sheet(
-    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: document
+    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document
 ) -> None:
     """Add a cheat sheet to the left navigation sidebar.
 

@@ -31,6 +31,16 @@ PARAGRAPHS = [nodes.paragraph]
 TITLE = [nodes.title]
 LITERAL = [nodes.literal, nodes.literal_block]
 ALL_NODES = [nodes.raw]
+ALL_NODES_WITHOUT_RAW = [
+    nodes.paragraph,
+    nodes.title,
+    nodes.literal_block,
+    nodes.literal,
+    nodes.list_item,
+    nodes.field_list,
+    nodes.compound,
+    nodes.block_quote,
+]
 
 
 class SearchIndex:
@@ -156,7 +166,7 @@ def group_the_pages_with_pattern(app, all_docs):
         new_pattern[pattern] = files
 
     other_files = [doc for doc in all_docs if doc not in new_pattern]
-    new_pattern["TITLES + PARAGRAPHS"] = other_files
+    new_pattern["other"] = other_files
     return new_pattern
 
 
@@ -177,16 +187,18 @@ def create_search_index(app, exception):
     search_index_list = []
 
     get_pattern = group_the_pages_with_pattern(app, app.env.found_docs)
+    print(get_pattern)
+    exit(1)
     for pattern, docs in get_pattern.items():
         for document in docs:
             search_index = SearchIndex(document, app, pattern)
             search_index.build_sections()
             search_index_list.extend(search_index.indices)
 
-    for document in app.env.found_docs:
-        search_index = SearchIndex(document, app)
-        search_index.build_sections()
-        search_index_list.extend(search_index.indices)
+    # for document in app.env.found_docs:
+    #     search_index = SearchIndex(document, app)
+    #     search_index.build_sections()
+    #     search_index_list.extend(search_index.indices)
 
     search_index_path = app.builder.outdir / "_static" / "search.json"
     with search_index_path.open("w", encoding="utf-8") as index_file:
