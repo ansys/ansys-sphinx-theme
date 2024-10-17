@@ -36,9 +36,7 @@ switcher_version = get_version_match(__version__)
 html_favicon = ansys_favicon
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = "Ansys Sphinx Theme"
-# static path
 html_static_path = ["_static"]
-# Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
 
 html_context = {
@@ -59,13 +57,6 @@ html_theme_options = {
         "json_url": f"https://{cname}/versions.json",
         "version_match": get_version_match(__version__),
     },
-    "ansys_sphinx_theme_autoapi": {
-        "project": project,
-        "directory": "src/ansys_sphinx_theme/examples",
-        "output": "examples/api",
-        "own_page_level": "function",
-        "package_depth": 1,
-    },
     "logo": "ansys",
     "static_search": {
         "threshold": 0.2,
@@ -75,17 +66,10 @@ html_theme_options = {
 }
 
 
-nbsphinx_prolog = """
-Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb>`.
-
-----
-"""
-
 # Sphinx extensions
 extensions = [
-    "ansys_sphinx_theme.extension.autoapi",
-    "nbsphinx",
     "numpydoc",
+    "sphinx_design",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
@@ -93,8 +77,8 @@ extensions = [
     "sphinx_copybutton",
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
-    "sphinx_gallery.gen_gallery",
     "notfound.extension",
+    "sphinx_jinja",
 ]
 
 # Intersphinx mapping
@@ -142,32 +126,12 @@ exclude_patterns = [
     "links.rst",
     "examples/sphinx-gallery/README.rst",
     "examples/gallery-examples/*.ipynb",
+    "sg_execution_times.rst",
 ]
 rst_epilog = ""
 with Path.open(THIS_PATH / "links.rst", "r") as f:
     rst_epilog += f.read()
 
-sphinx_gallery_conf = {
-    # path to your examples scripts
-    "examples_dirs": ["examples/sphinx-gallery"],
-    # path where to save gallery generated examples
-    "gallery_dirs": ["examples/gallery-examples"],
-    # Pattern to search for example files
-    "filename_pattern": r"sphinx_gallery\.py",
-    # Remove the "Download all examples" button from the top level gallery
-    "download_all_examples": False,
-    # Modules for which function level galleries are created.  In
-    "image_scrapers": ("pyvista", "matplotlib"),
-    "default_thumb_file": "source/_static/pyansys_light_square.png",
-}
-nbsphinx_execute = "always"
-nbsphinx_thumbnails = {
-    "examples/nbsphinx/jupyter-notebook": "_static/pyansys_light_square.png",
-}
-
-# Ensure that offscreen rendering is used for docs generation
-# Preferred plotting style for documentation
-pyvista.BUILDING_GALLERY = True
 
 linkcheck_ignore = ["https://sphinxdocs.ansys.com/version/*"]
 if switcher_version != "dev":
@@ -262,6 +226,44 @@ if not BUILD_EXAMPLES:
 
 
 else:
+    # Autoapi examples
+    extensions.append("ansys_sphinx_theme.extension.autoapi")
+    html_theme_options["ansys_sphinx_theme_autoapi"] = {
+        "project": project,
+        "directory": "src/ansys_sphinx_theme/examples",
+        "output": "examples/api",
+        "own_page_level": "function",
+        "package_depth": 1,
+    }
+
+    # Gallery of examples
+    extensions.extend(["nbsphinx", "sphinx_gallery.gen_gallery"])
+    sphinx_gallery_conf = {
+        # path to your examples scripts
+        "examples_dirs": ["examples/sphinx-gallery"],
+        # path where to save gallery generated examples
+        "gallery_dirs": ["examples/gallery-examples"],
+        # Pattern to search for example files
+        "filename_pattern": r"sphinx_gallery\.py",
+        # Remove the "Download all examples" button from the top level gallery
+        "download_all_examples": False,
+        # Modules for which function level galleries are created.  In
+        "image_scrapers": ("pyvista", "matplotlib"),
+        "default_thumb_file": "source/_static/pyansys_light_square.png",
+    }
+
+    nbsphinx_prolog = """
+    Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb>`.
+
+    ----
+    """
+    nbsphinx_execute = "always"
+    nbsphinx_thumbnails = {
+        "examples/nbsphinx/jupyter-notebook": "_static/pyansys_light_square.png",
+    }
+
+    pyvista.BUILDING_GALLERY = True
+
     # Third party examples
     example_links = extract_example_links(
         "executablebooks/sphinx-design",
