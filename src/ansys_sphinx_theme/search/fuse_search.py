@@ -27,10 +27,10 @@ import re
 
 from docutils import nodes
 
-PARAGRAPHS = nodes.paragraph
-TITLE = nodes.title
-LITERAL = nodes.literal
-ALL_NODES = nodes.raw
+PARAGRAPHS = [nodes.paragraph]
+TITLE = [nodes.title]
+LITERAL = [nodes.literal]
+ALL_NODES = [nodes.Text]
 ALL_NODES_WITHOUT_RAW = [  # type: ignore
     nodes.paragraph,
     nodes.title,
@@ -146,8 +146,10 @@ def _title_to_anchor(title: str) -> str:
 
 def group_the_pages_with_pattern(app, all_docs):
     """Group the pages with the pattern in the search index."""
-    options = app.config.html_theme_options.get("static_search", {})
-    patterns = options.get("index_patterns", {})
+    if getattr(app.env.config, "index_patterns"):
+        patterns = app.env.config.index_patterns
+    else:
+        patterns = {}
 
     new_pattern = {}
     if not isinstance(patterns, dict):
@@ -160,6 +162,20 @@ def group_the_pages_with_pattern(app, all_docs):
     other_files = [doc for doc in all_docs if doc not in new_pattern]
     new_pattern["all_except_raw"] = other_files
     return new_pattern
+
+
+def get_pattern_for_each_page(app, doc_name):
+    """Get the pattern for each page in the search index."""
+    if getattr(app.env.config, "index_patterns"):
+        patterns = app.env.config.index_patterns
+    else:
+        patterns = {}
+
+    for filename, pattern in patterns.items():
+        if doc_name.startswith(filename):
+            return pattern
+
+    return ALL_NODES_WITHOUT_RAW
 
 
 def create_search_index(app, exception):
@@ -178,18 +194,21 @@ def create_search_index(app, exception):
 
     search_index_list = []
 
-    get_pattern = group_the_pages_with_pattern(app, app.env.found_docs)
-    for pattern, docs in get_pattern.items():
-        for document in docs:
-            # convert pattern to list
-            search_index = SearchIndex(document, app, pattern)
-            search_index.build_sections()
-            search_index_list.extend(search_index.indices)
+    # get_pattern = group_the_pages_with_pattern(app, app.env.found_docs)
+    # print(get_pattern)
+    # exit(1)
+    # for pattern, docs in get_pattern.items():
+    #     for document in docs:
+    #         # convert pattern to list
+    #         search_index = SearchIndex(document, app, pattern)
+    #         search_index.build_sections()
+    #         search_index_list.extend(search_index.indices)
 
-    # for document in app.env.found_docs:
-    #     search_index = SearchIndex(document, app)
-    #     search_index.build_sections()
-    #     search_index_list.extend(search_index.indices)
+    for document in app.env.found_docs:
+        pattern = get_pattern_for_each_page(app, document)
+        search_index = SearchIndex(document, app, pattern)
+        search_index.build_sections()
+        search_index_list.extend(search_index.indices)
 
     search_index_path = app.builder.outdir / "_static" / "search.json"
     with search_index_path.open("w", encoding="utf-8") as index_file:
