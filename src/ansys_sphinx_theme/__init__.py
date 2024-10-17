@@ -33,10 +33,9 @@ from sphinx import addnodes
 from sphinx.application import Sphinx
 
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
-from ansys_sphinx_theme.latex import generate_404  # noqa: F401
-from ansys_sphinx_theme.search import (  # noqa: F401
+from ansys_sphinx_theme.latex import generate_404
+from ansys_sphinx_theme.search import (
     ALL_NODES,
-    LITERAL,
     PARAGRAPHS,
     TITLE,
     create_search_index,
@@ -585,3 +584,6 @@ def setup(app: Sphinx) -> Dict:
         "parallel_read_safe": True,
         "parallel_write_safe": True,
     }
+
+
+__all__ = ["__version__", "generate_404", "get_version_match", "TITLE", "PARAGRAPHS", "ALL_NODES"]
