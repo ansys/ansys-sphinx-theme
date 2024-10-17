@@ -282,5 +282,3 @@ else:
 
     jinja_contexts["examples"] = {"inputs_examples": file_names}
     jinja_contexts["admonitions"] = {"inputs_admonitions": admonitions_links}
-
-
