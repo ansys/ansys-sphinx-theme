@@ -14,7 +14,38 @@
             - {{ obj.summary }}
           {% endfor %}
 {%- endmacro %}
-{# --------------------------- End macros definition ----------------------- #}
+
+{# ------------------------ End macros definition for tab ------------------- #}
+
+{# ----------------- Start macros definition for autosummary -----------------#}
+
+{% macro add_auto_summary_attribute(heading, id, types) -%}
+
+{{ heading }}
+{{ "-" * heading | length }}
+
+.. autoapisummary::
+
+         {% for type in types %}
+    {{ type.id }}
+        {% endfor %}
+
+{%- endmacro %}
+{# ------------------ End macros definition for autosummary --------------- #}
+
+{# ----------------- Start macros definition for headers -----------------#}
+{% macro render_header_with_attributes(types, title) -%}
+
+{{ title }} detail
+-------{{ "-" * title | length }}
+
+    {% for type in types %}
+{{ type.render() }}
+    {% endfor %}
+
+{%- endmacro %}
+{# ------------------ End macros definition for headers --------------- #}
+
 
     {% if is_own_page %}
 :class:`{{ obj.name }}`
@@ -140,83 +171,42 @@ Import detail
     from {{ joined_parts }} import {{ obj["short_name"] }}
 
     {% if visible_properties %}
-Property detail
----------------
-    {% for property in visible_properties %}
-{{ property.render() }}
-    {% endfor %}
+{{ render_header_with_attributes(visible_properties, "Property") }}
     {% endif %}
 
-
-    {% if visible_attributes  %}
-Attribute detail
-----------------
-    {% for attribute in visible_attributes %}
-{{ attribute.render() }}
-    {% endfor %}
+    {% if visible_attributes %}
+{{ render_header_with_attributes(visible_attributes, "Attribute") }}
     {% endif %}
 
-
-    {% if all_visible_methods  %}
-Method detail
--------------
-    {% for method in all_visible_methods %}
-{{ method.render() }}
-    {% endfor %}
+    {% if all_visible_methods %}
+{{ render_header_with_attributes(all_visible_methods, "Method") }}
     {% endif %}
+
+    {% if visible_methods %}
+{{ render_header_with_attributes(visible_methods, "Method") }}
+    {% endif %}
+
     {% if is_own_page and own_page_children %}
         {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
+
         {% if visible_attributes %}
-Attributes
-----------
+{{ add_auto_summary_attribute("Attributes", "attribute", visible_attributes) }}
+        {% endif %}
+        {% set visible_exceptions = own_page_children|selectattr("type", "equalto", "exception")|list %}
 
-.. autoapisummary::
+        {% if visible_exceptions %}
+{{ add_auto_summary_attribute("Exceptions", "exception", visible_exceptions) }}
+        {% endif %}
+        {% set visible_classes = own_page_children|selectattr("type", "equalto", "class")|list %}
 
-         {% for attribute in visible_attributes %}
-   {{ attribute.id }}
-         {% endfor %}
+        {% if visible_classes %}
+{{ add_auto_summary_attribute("Classes", "class", visible_classes) }}
+        {% endif %}
+        {% set visible_methods = own_page_children|selectattr("type", "equalto", "method")|list %}
 
-
-      {% endif %}
-      {% set visible_exceptions = own_page_children|selectattr("type", "equalto", "exception")|list %}
-      {% if visible_exceptions %}
-Exceptions
-----------
-
-.. autoapisummary::
-
-         {% for exception in visible_exceptions %}
-   {{ exception.id }}
-         {% endfor %}
-
-
-      {% endif %}
-      {% set visible_classes = own_page_children|selectattr("type", "equalto", "class")|list %}
-      {% if visible_classes %}
-Classes
--------
-
-.. autoapisummary::
-
-         {% for klass in visible_classes %}
-   {{ klass.id }}
-         {% endfor %}
-
-
-      {% endif %}
-      {% set visible_methods = own_page_children|selectattr("type", "equalto", "method")|list %}
-      {% if visible_methods %}
-Methods
--------
-
-.. autoapisummary::
-
-            {% for method in visible_methods %}
-   {{ method.id }}
-            {% endfor %}
-
-
-      {% endif %}
+        {% if visible_methods %}
+{{ add_auto_summary_attribute("Methods", "method", visible_methods) }}
+        {% endif %}
     {% endif %}
 
 {# ---------------------- End class details -------------------- #}
