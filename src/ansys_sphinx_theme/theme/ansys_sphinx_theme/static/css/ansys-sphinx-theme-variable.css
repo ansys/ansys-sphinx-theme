@@ -51,7 +51,7 @@
   --ast-global-line-height: 24px;
   --bs-nav-link-font-size: 14px;
   --bs-navbar-color: var(--bs-ast-navbar-color);
-  --ast-font-sidebar-header: var(--pst-font-size-h5);
+  --ast-font-sidebar-header: 16px;
   /**
 * weight
 */
