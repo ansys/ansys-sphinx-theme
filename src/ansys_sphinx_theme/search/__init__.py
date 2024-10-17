@@ -23,7 +23,13 @@
 
 from sphinx.application import Sphinx
 
-from ansys_sphinx_theme.search.fuse_search import create_search_index
+from ansys_sphinx_theme.search.fuse_search import (
+    ALL_NODES,
+    LITERAL,
+    PARAGRAPHS,
+    TITLE,
+    create_search_index,
+)
 
 
 def update_search_config(app: Sphinx) -> None:
@@ -38,6 +44,14 @@ def update_search_config(app: Sphinx) -> None:
     theme_static_options["keys"] = ["title", "text"]
     theme_static_options["threshold"] = theme_static_options.get("threshold", 0.5)
     theme_static_options["limit"] = theme_static_options.get("limit", 10)
+    app.add_config_value("index_patterns", {}, "html")
 
 
-__all__ = ["create_search_index", "update_search_config"]
+__all__ = [
+    "create_search_index",
+    "update_search_config",
+    "LITERAL",
+    "PARAGRAPHS",
+    "TITLE",
+    "ALL_NODES",
+]

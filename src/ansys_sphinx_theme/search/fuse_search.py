@@ -27,11 +27,24 @@ import re
 
 from docutils import nodes
 
+PARAGRAPHS = [nodes.paragraph]
+TITLE = [nodes.title]
+LITERAL = [nodes.literal]
+ALL_NODES = [nodes.Text]
+ALL_NODES_WITHOUT_RAW = [  # type: ignore
+    nodes.paragraph,
+    nodes.title,
+    nodes.list_item,
+    nodes.field_list,
+    nodes.compound,
+    nodes.block_quote,
+]
+
 
 class SearchIndex:
     """Generate a search index for a Sphinx document."""
 
-    def __init__(self, doc_name, app):
+    def __init__(self, doc_name, app, pattern=None):
         """
         Initialize the search index object.
 
@@ -45,19 +58,21 @@ class SearchIndex:
         self.doc_name = doc_name
         self.doc_path = f"{self.doc_name}.html"
         self.env = app.env
+        self.theme_options = app.config.html_theme_options.get("static_search", {})
         self.doc_title = self.env.titles[self.doc_name].astext()
         self.doc_tree = self.env.get_doctree(self.doc_name)
         self.sections = []
+        self.pattern = pattern
 
     def build_sections(self):
         """Build sections from the document tree."""
         for node in self.doc_tree.traverse(nodes.section):
             section_title = node[0].astext()
+
             section_text = "\n".join(
-                n.astext()
-                for node_type in [nodes.paragraph, nodes.literal_block]
-                for n in node.traverse(node_type)
+                n.astext() for node_type in self.pattern for n in node.traverse(node_type)
             )
+
             section_anchor_id = _title_to_anchor(section_title)
             self.sections.append(
                 {
@@ -126,6 +141,17 @@ def _title_to_anchor(title: str) -> str:
     return re.sub(r"[^\w\s-]", "", title.lower().strip().replace(" ", "-"))
 
 
+def get_pattern_for_each_page(app, doc_name):
+    """Get the pattern for each page in the search index."""
+    patterns = app.env.config.index_patterns or {}
+
+    for filename, pattern in patterns.items():
+        if doc_name.startswith(filename):
+            return pattern
+
+    return ALL_NODES_WITHOUT_RAW
+
+
 def create_search_index(app, exception):
     """
     Generate search index at the end of the Sphinx build process.
@@ -143,7 +169,8 @@ def create_search_index(app, exception):
     search_index_list = []
 
     for document in app.env.found_docs:
-        search_index = SearchIndex(document, app)
+        pattern = get_pattern_for_each_page(app, document)
+        search_index = SearchIndex(document, app, pattern)
         search_index.build_sections()
         search_index_list.extend(search_index.indices)
 

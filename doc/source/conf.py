@@ -11,6 +11,9 @@ import requests
 from sphinx.builders.latex import LaTeXBuilder
 
 from ansys_sphinx_theme import (
+    ALL_NODES,
+    PARAGRAPHS,
+    TITLE,
     __version__,
     ansys_favicon,
     ansys_logo_white,
@@ -71,7 +74,13 @@ html_theme_options = {
         "threshold": 0.2,
         "limit": 7,
         "minMatchCharLength": 3,
+        "ignoreLocation": True,
     },
+}
+
+index_patterns = {
+    "examples/api/": ALL_NODES,
+    "examples/sphinx_examples/": TITLE + PARAGRAPHS,
 }
 
 
@@ -196,7 +205,8 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github()
+    token = os.getenv("GITHUB_TOKEN")
+    g = Github(token)
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):
