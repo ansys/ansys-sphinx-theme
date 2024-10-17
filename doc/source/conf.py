@@ -282,4 +282,3 @@ else:
     jinja_contexts["admonitions"] = {"inputs_admonitions": admonitions_links}
 
 
-print(f"JINJA CONTEXTS: {jinja_contexts}")
