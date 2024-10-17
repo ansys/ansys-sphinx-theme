@@ -143,7 +143,7 @@ def _title_to_anchor(title: str) -> str:
 
 def get_pattern_for_each_page(app, doc_name):
     """Get the pattern for each page in the search index."""
-    patterns = app.env.config.get("index_patterns", {})
+    patterns = app.env.config.index_patterns or {}
 
     for filename, pattern in patterns.items():
         if doc_name.startswith(filename):
