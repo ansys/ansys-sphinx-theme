@@ -31,6 +31,8 @@
     var(--pst-font-family-base-system);
   --pst-font-family-monospace: monospace, Courier,
     var(--pst-font-family-monospace-system);
+  --ast-body-family: "Open Sans", sans-serif;
+  --ast-header-family: "Source Sans Pro", sans-serif;
 
   /**
   * Ansys compatible colors
@@ -40,16 +42,23 @@
   --ansysGold: rgb(255, 183, 27); /* #FFB71B */
   --ansysBronze: rgb(200, 146, 17); /* #C89211 */
   --pythonBlue: rgb(57, 114, 161); /* #3972a1 */
-  --pst-font-size-h1: 36px;
-  --pst-font-size-h2: 32px;
-  --pst-font-size-h3: 28px;
-  --pst-font-size-h4: 20px;
-  --pst-font-size-h5: 14px;
-  --pst-font-size-h6: 11px;
+  --pst-font-size-h1: 48px;
+  --pst-font-size-h2: 40px;
+  --pst-font-size-h3: 32px;
+  --pst-font-size-h4: 28px;
+  --pst-font-size-h5: 24px;
+  --pst-font-size-h6: 20px;
   --ast-global-line-height: 24px;
   --bs-nav-link-font-size: 14px;
   --bs-navbar-color: var(--bs-ast-navbar-color);
   --ast-font-sidebar-header: var(--pst-font-size-h5);
+  /**
+* weight
+*/
+  --ast-font-weight-regular: 400;
+  --ast-font-weight-bold: 700;
+  --ast-font-weight-semibold: 600;
+
   /**
   * table font sizes
   */
@@ -393,7 +402,7 @@ html[data-theme="dark"] {
 */
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: var(--ast-body-family);
   line-height: var(--ast-global-line-height);
   font-size: 14px;
   color: var(--ast-color-text);
@@ -402,4 +411,17 @@ body {
 h1,
 h2 {
   color: var(--pst-color-text-base);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--ast-header-family);
+}
+
+h1 {
+  line-height: 56px;
 }
