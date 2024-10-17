@@ -30,7 +30,7 @@
 
 .result-title {
   font-size: 1em;
-  font-weight: bold;
+  font-weight: var(--ast-font-weight-bold);
   font-family: "Open Sans", sans-serif;
   color: var(--ast-catagory-header-text);
 }
