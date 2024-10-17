@@ -16,6 +16,7 @@ are included in the theme to make documentation more appealing and user-friendly
         :link-type: doc
 
         Learn how to install the Ansys Sphinx Theme.
+        :ref:`ref_examples`
 
     .. grid-item-card:: User guide :fa:`book-open-reader`
         :link: user-guide
