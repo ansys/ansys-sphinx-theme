@@ -35,11 +35,14 @@
 
 {# ----------------- Start macros definition for headers -----------------#}
 {% macro render_header_with_attributes(types, title) -%}
+
 {{ title }} detail
 -------{{ "-" * title | length }}
+
     {% for type in types %}
 {{ type.render() }}
     {% endfor %}
+
 {%- endmacro %}
 {# ------------------ End macros definition for headers --------------- #}
 
