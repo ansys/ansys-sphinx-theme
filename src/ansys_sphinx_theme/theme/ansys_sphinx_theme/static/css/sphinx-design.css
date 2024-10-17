@@ -6,7 +6,7 @@
 
 .sd-btn {
   font-size: var(--ast-sphinx-design-font-size);
-  font-weight: 400;
+  font-weight: var(--ast-font-weight-regular);
   font-family: var(--ast-sphinx-design-font-family);
   padding: 8px 16px;
   border-radius: var(--ast-sphinx-design-border-radius);
@@ -14,7 +14,7 @@
 
 .sd-btn-secondary {
   font-size: var(--ast-sphinx-design-font-size);
-  font-weight: 400;
+  font-weight: var(--ast-font-weight-regular);
   font-family: var(--ast-sphinx-design-font-family);
   padding: 8px 16px;
   border-radius: var(--ast-sphinx-design-border-radius);
@@ -168,7 +168,7 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
   border-color: transparent transparent var(--ast-tab-border-color) transparent;
   border-width: 0px 0px 1px 0px;
   text-decoration-line: none;
-  font-weight: normal;
+  font-weight: var(--ast-font-weight-regular);
 }
 
 .bd-content .sd-tab-set > input:not(:checked, :focus-visible) + label:hover {
