@@ -33,6 +33,17 @@
 {%- endmacro %}
 {# ------------------ End macros definition for autosummary --------------- #}
 
+{# ----------------- Start macros definition for headers -----------------#}
+{% macro get_header_for_attributes(types, title) -%}
+{{ title }} detail
+-------{{ "-" * title | length }}
+    {% for type in types %}
+{{ type.render() }}
+    {% endfor %}
+{%- endmacro %}
+{# ------------------ End macros definition for headers --------------- #}
+
+
     {% if is_own_page %}
 :class:`{{ obj.name }}`
 ========={{ "=" * obj.name | length }}
@@ -157,30 +168,21 @@ Import detail
     from {{ joined_parts }} import {{ obj["short_name"] }}
 
     {% if visible_properties %}
-Property detail
----------------
-    {% for property in visible_properties %}
-{{ property.render() }}
-    {% endfor %}
+{{ get_header_for_attributes(visible_properties, "Property") }}
     {% endif %}
 
-
-    {% if visible_attributes  %}
-Attribute detail
-----------------
-    {% for attribute in visible_attributes %}
-{{ attribute.render() }}
-    {% endfor %}
+    {% if visible_attributes %}
+{{ get_header_for_attributes(visible_attributes, "Attribute") }}
     {% endif %}
 
-
-    {% if all_visible_methods  %}
-Method detail
--------------
-    {% for method in all_visible_methods %}
-{{ method.render() }}
-    {% endfor %}
+    {% if all_visible_methods %}
+{{ get_header_for_attributes(all_visible_methods, "Method") }}
     {% endif %}
+
+    {% if visible_methods %}
+{{ get_header_for_attributes(visible_methods, "Method") }}
+    {% endif %}
+
     {% if is_own_page and own_page_children %}
         {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
 
