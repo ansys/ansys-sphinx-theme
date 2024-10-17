@@ -176,6 +176,16 @@ if switcher_version != "dev":
     )
 
 
+# Configure the Jinja contexts
+
+jinja_contexts = {
+    "install_guide": {
+        "version": f"v{version}" if not version.endswith("dev0") else "main",
+    },
+    "pdf_guide": {"version": get_version_match(__version__)},  # noqa: E501
+}
+
+
 def extract_example_links(
     repo_fullname: str, path_relative_to_root: str, exclude_files: List[str] = []
 ) -> List[str]:
@@ -243,26 +253,33 @@ def download_and_process_files(example_links: List[str]) -> List[str]:
     return file_names
 
 
-example_links = extract_example_links(
-    "executablebooks/sphinx-design",
-    "docs/snippets/rst",
-    exclude_files=["article-info.txt"],
-)
-file_names = download_and_process_files(example_links)
+# Skip building examples if desired
+BUILD_EXAMPLES = True if os.environ.get("BUILD_EXAMPLES", "true") == "true" else False
+jinja_contexts["main_toctree"] = {"build_examples": BUILD_EXAMPLES}
 
-admonitions_links = extract_example_links(
-    "pydata/pydata-sphinx-theme",
-    "docs/examples/kitchen-sink/admonitions.rst",
-)
+if not BUILD_EXAMPLES:
+    exclude_patterns.extend(["examples.rst", "examples/**", "examples/api/**"])
 
-admonitions_links = download_and_process_files(admonitions_links)
-todo_include_todos = True  # admonition todo needs this to be True
 
-jinja_contexts = {
-    "examples": {"inputs_examples": file_names},
-    "admonitions": {"inputs_admonitions": admonitions_links},
-    "install_guide": {
-        "version": f"v{version}" if not version.endswith("dev0") else "main",
-    },
-    "pdf_guide": {"version": get_version_match(__version__)},  # noqa: E501
-}
+else:
+    # Third party examples
+    example_links = extract_example_links(
+        "executablebooks/sphinx-design",
+        "docs/snippets/rst",
+        exclude_files=["article-info.txt"],
+    )
+    file_names = download_and_process_files(example_links)
+
+    admonitions_links = extract_example_links(
+        "pydata/pydata-sphinx-theme",
+        "docs/examples/kitchen-sink/admonitions.rst",
+    )
+
+    admonitions_links = download_and_process_files(admonitions_links)
+    todo_include_todos = True  # admonition todo needs this to be True
+
+    jinja_contexts["examples"] = {"inputs_examples": file_names}
+    jinja_contexts["admonitions"] = {"inputs_admonitions": admonitions_links}
+
+
+print(f"JINJA CONTEXTS: {jinja_contexts}")
