@@ -83,7 +83,7 @@ nav.bd-links li > a.current {
 
 .bd-sidebar-primary li.has-children .caption,
 .bd-sidebar-primary li.has-children > .reference {
-  padding: 4px 32px;
+  padding: 4px 24px;
 }
 
 nav.bd-links .current > a {
