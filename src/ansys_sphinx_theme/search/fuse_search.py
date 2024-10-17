@@ -34,8 +34,6 @@ ALL_NODES = [nodes.Text]
 ALL_NODES_WITHOUT_RAW = [  # type: ignore
     nodes.paragraph,
     nodes.title,
-    nodes.literal_block,
-    nodes.literal,
     nodes.list_item,
     nodes.field_list,
     nodes.compound,
@@ -70,7 +68,6 @@ class SearchIndex:
         """Build sections from the document tree."""
         for node in self.doc_tree.traverse(nodes.section):
             section_title = node[0].astext()
-            print(self.pattern)
 
             section_text = "\n".join(
                 n.astext() for node_type in self.pattern for n in node.traverse(node_type)
@@ -144,26 +141,6 @@ def _title_to_anchor(title: str) -> str:
     return re.sub(r"[^\w\s-]", "", title.lower().strip().replace(" ", "-"))
 
 
-def group_the_pages_with_pattern(app, all_docs):
-    """Group the pages with the pattern in the search index."""
-    if getattr(app.env.config, "index_patterns"):
-        patterns = app.env.config.index_patterns
-    else:
-        patterns = {}
-
-    new_pattern = {}
-    if not isinstance(patterns, dict):
-        raise ValueError("index_patterns must be a dictionary")
-
-    for filename, pattern in patterns.items():
-        files = [doc for doc in all_docs if doc.startswith(filename)]
-        new_pattern[pattern] = files
-
-    other_files = [doc for doc in all_docs if doc not in new_pattern]
-    new_pattern["all_except_raw"] = other_files
-    return new_pattern
-
-
 def get_pattern_for_each_page(app, doc_name):
     """Get the pattern for each page in the search index."""
     if getattr(app.env.config, "index_patterns"):
@@ -193,16 +170,6 @@ def create_search_index(app, exception):
         return
 
     search_index_list = []
-
-    # get_pattern = group_the_pages_with_pattern(app, app.env.found_docs)
-    # print(get_pattern)
-    # exit(1)
-    # for pattern, docs in get_pattern.items():
-    #     for document in docs:
-    #         # convert pattern to list
-    #         search_index = SearchIndex(document, app, pattern)
-    #         search_index.build_sections()
-    #         search_index_list.extend(search_index.indices)
 
     for document in app.env.found_docs:
         pattern = get_pattern_for_each_page(app, document)
