@@ -34,7 +34,7 @@
 {# ------------------ End macros definition for autosummary --------------- #}
 
 {# ----------------- Start macros definition for headers -----------------#}
-{% macro get_header_for_attributes(types, title) -%}
+{% macro render_header_with_attributes(types, title) -%}
 {{ title }} detail
 -------{{ "-" * title | length }}
     {% for type in types %}
@@ -168,19 +168,19 @@ Import detail
     from {{ joined_parts }} import {{ obj["short_name"] }}
 
     {% if visible_properties %}
-{{ get_header_for_attributes(visible_properties, "Property") }}
+{{ render_header_with_attributes(visible_properties, "Property") }}
     {% endif %}
 
     {% if visible_attributes %}
-{{ get_header_for_attributes(visible_attributes, "Attribute") }}
+{{ render_header_with_attributes(visible_attributes, "Attribute") }}
     {% endif %}
 
     {% if all_visible_methods %}
-{{ get_header_for_attributes(all_visible_methods, "Method") }}
+{{ render_header_with_attributes(all_visible_methods, "Method") }}
     {% endif %}
 
     {% if visible_methods %}
-{{ get_header_for_attributes(visible_methods, "Method") }}
+{{ render_header_with_attributes(visible_methods, "Method") }}
     {% endif %}
 
     {% if is_own_page and own_page_children %}
