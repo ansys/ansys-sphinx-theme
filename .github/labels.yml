@@ -2,6 +2,10 @@
   description: Something isn't working
   color: d42a34
 
+- name: fix
+  description: Solves a known bug
+  color: d42a34
+
 - name: dependencies
   description: Related with project dependencies
   color: ffc0cb
