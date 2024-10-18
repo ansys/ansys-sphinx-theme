@@ -19,7 +19,7 @@
 
 {# ----------------- Start macros definition for autosummary -----------------#}
 
-{% macro add_auto_summary_attribute(heading, id, types) -%}
+{% macro add_auto_summary_attribute(heading, types) -%}
 
 {{ heading }}
 {{ "-" * heading | length }}
