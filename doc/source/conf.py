@@ -253,10 +253,10 @@ else:
     }
 
     nbsphinx_prolog = """
-    Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb>`.
+Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb>`.
 
-    ----
-    """
+----
+"""
     nbsphinx_execute = "always"
     nbsphinx_thumbnails = {
         "examples/nbsphinx/jupyter-notebook": "_static/pyansys_light_square.png",
