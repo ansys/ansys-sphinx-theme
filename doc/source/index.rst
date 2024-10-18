@@ -1,6 +1,13 @@
 Ansys Sphinx Theme documentation |version|
 ##########################################
 
+**Date**: |today| **Version**: |version|
+
+**Useful links**:
+
+`Source Repository <https://github.com/ansys/ansys_sphinx_theme>`_ |
+`Issues <https://github.com/ansys/ansys_sphinx_theme/issues>`_
+
 The Ansys Sphinx Theme is a custom Ansys-branded theme for use with Sphinx, a documentation
 generator for creating project documentation from reStructuredText source files.
 
@@ -10,8 +17,9 @@ are included in the theme to make documentation more appealing and user-friendly
 
 .. jinja:: main_toctree
 
-    .. grid:: 2
-        :gutter: 2 2 3 4
+    .. grid:: 1 2 3 3
+        :gutter: 1 2 3 3
+        :padding: 1 2 3 3
 
         .. grid-item-card:: Getting started :fa:`person-running`
             :link: getting-started
