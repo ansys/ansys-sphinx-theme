@@ -1,4 +1,4 @@
-# The labels declared in this file are the ones avialables
+# The labels declared in this file are the ones available.
 # https://github.com/ansys/ansys-sphinx-theme/labels
 
 # -- Defects and glitches labels----------------------------------------------
@@ -68,11 +68,11 @@
   color: fabed4
 
 - name: 'dependencies:pyproject'
-  description: Related with project file dependencies
+  description: Related to project file dependencies
   color: fabed4
 
 - name: 'dependencies:ci'
-  description: Related with pipelines dependencies
+  description: Related to pipelines dependencies
   color: fabed4
 
 # -- CI/CD labels ------------------------------------------------------------
