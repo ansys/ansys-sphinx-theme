@@ -191,22 +191,23 @@ Import detail
         {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
 
         {% if visible_attributes %}
-{{ add_auto_summary_attribute("Attributes", visible_attributes) }}
+{{ add_auto_summary_attribute(visible_attributes, "Attributes") }}
         {% endif %}
         {% set visible_exceptions = own_page_children|selectattr("type", "equalto", "exception")|list %}
 
         {% if visible_exceptions %}
-{{ add_auto_summary_attribute("Exceptions", visible_exceptions) }}
+{{ add_auto_summary_attribute(visible_exceptions, "Exceptions") }}
         {% endif %}
         {% set visible_classes = own_page_children|selectattr("type", "equalto", "class")|list %}
 
         {% if visible_classes %}
-{{ add_auto_summary_attribute("Classes", visible_classes) }}
+{{ add_auto_summary_attribute(visible_classes, "Classes") }}
+
         {% endif %}
         {% set visible_methods = own_page_children|selectattr("type", "equalto", "method")|list %}
 
         {% if visible_methods %}
-{{ add_auto_summary_attribute("Methods", visible_methods) }}
+{{ add_auto_summary_attribute(visible_methods, "Methods") }}
         {% endif %}
     {% endif %}
 
