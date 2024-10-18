@@ -44,6 +44,12 @@ are included in the theme to make documentation more appealing and user-friendly
 
         {% endif %}
 
+        .. grid-item-card:: Changelog :fa:`history`
+            :link: changelog
+            :link-type: doc
+
+            View the history of changes made to the theme.
+
 .. jinja:: main_toctree
 
     .. toctree::
