@@ -1,9 +1,73 @@
-documentation:
-- changed-files:
-  - any-glob-to-any-file: ['doc/source/**/*']
-maintenance:
-- changed-files:
-  - any-glob-to-any-file: ['.github/**/*', '.flake8', 'pyproject.toml']
-dependencies:
-- changed-files:
-  - any-glob-to-any-file: ['pyproject.toml']
+# -- Labels based on PR title ------------------------------------------------
+
+'fix':
+  - head-branch: ['fix']
+
+'enhancement':
+  - head-branch: ['feat']
+
+# -- Documentation labels ----------------------------------------------------
+
+'documentation':
+  - all:
+      - changed-files:
+          - any-glob-to-any-file: ['doc/source/**/*.rst', 'README.rst']
+
+# -- HTML, CSS, JS, and web development labels -------------------------------
+
+'ui/ux':
+  - all:
+      - changed-files:
+        - any-glob-to-any-file: ['src/ansys_sphinx_theme/theme/ansys_sphinx_theme/**/*.html']
+
+'css':
+  - all:
+      - changed-files:
+        - any-glob-to-any-file: ['src/ansys_sphinx_theme/theme/ansys_sphinx_theme/**/*.css']
+
+'js':
+  - all:
+      - changed-files:
+        - any-glob-to-any-file: ['src/ansys_sphinx_theme/theme/ansys_sphinx_theme/**/*.js']
+
+# -- Other labels ------------------------------------------------------------
+
+'maintenance':
+  - any:
+      - changed-files:
+          - any-glob-to-any-file: ['.pre-commit-config.yaml', 'doc/.vale.ini']
+
+'ci':
+  - any:
+      - changed-files:
+          - any-glob-to-any-file: ['.github/workflows/**']
+
+# HACK: the following labels are declared with the only purpose of avoiding the
+# GitHub labeler bot to remove those. This is a known issue reported in the
+# official action/labeler repo https://github.com/actions/labeler/issues/763
+
+'ci:skip':
+  - all:
+      - changed-files:
+          - all-globs-to-all-files: ['THIS-NEVER-MATCHES-A-FILE']
+
+'docs:skip':
+  - all:
+      - changed-files:
+          - all-globs-to-all-files: ['THIS-NEVER-MATCHES-A-FILE']
+
+'tests:skip':
+  - all:
+      - changed-files:
+          - all-globs-to-all-files: ['THIS-NEVER-MATCHES-A-FILE']
+
+'hacktoberfest':
+  - all:
+      - changed-files:
+          - all-globs-to-all-files: ['THIS-NEVER-MATCHES-A-FILE']
+
+'hacktoberfest-accepted':
+  - all:
+      - changed-files:
+          - all-globs-to-all-files: ['THIS-NEVER-MATCHES-A-FILE']
+
