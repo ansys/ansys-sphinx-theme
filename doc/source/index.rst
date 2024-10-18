@@ -8,32 +8,42 @@ This theme is specifically tailored for documentation related to Ansys projects
 helping to ensure consistency in its look and feel. Various useful extensions
 are included in the theme to make documentation more appealing and user-friendly.
 
-.. grid:: 2
-    :gutter: 2 2 3 4
+.. jinja:: main_toctree
 
-    .. grid-item-card:: Getting started :fa:`person-running`
-        :link: getting-started
-        :link-type: doc
+    .. grid:: 2
+        :gutter: 2 2 3 4
 
-        Learn how to install the Ansys Sphinx Theme.
+        .. grid-item-card:: Getting started :fa:`person-running`
+            :link: getting-started
+            :link-type: doc
 
-    .. grid-item-card:: User guide :fa:`book-open-reader`
-        :link: user-guide
-        :link-type: doc
+            Learn how to install the Ansys Sphinx Theme.
 
-        Learn how to use the capabilities and features of this theme.
+        .. grid-item-card:: User guide :fa:`book-open-reader`
+            :link: user-guide
+            :link-type: doc
 
-    .. grid-item-card:: Examples :fa:`laptop-code`
-        :link: examples
-        :link-type: doc
+            Learn how to use the capabilities and features of this theme.
 
-        Explore examples that show how to integrate third-party extensions with this theme.
+        {% if build_examples %}
 
-.. toctree::
-   :hidden:
-   :maxdepth: 3
+        .. grid-item-card:: Examples :fa:`laptop-code`
+            :link: examples
+            :link-type: doc
 
-   getting-started.rst
-   user-guide.rst
-   examples.rst
-   changelog
+            Explore examples that show how to integrate third-party extensions with this theme.
+
+        {% endif %}
+
+.. jinja:: main_toctree
+
+    .. toctree::
+       :hidden:
+       :maxdepth: 3
+
+       getting-started.rst
+       user-guide.rst
+       {% if build_examples %}
+       examples.rst
+       {% endif %}
+       changelog
