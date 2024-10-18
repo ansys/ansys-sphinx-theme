@@ -5,8 +5,8 @@ Ansys Sphinx Theme documentation
 
 **Useful links**:
 
-`Source Repository <https://github.com/ansys/ansys_sphinx_theme>`_ |
-`Issues <https://github.com/ansys/ansys_sphinx_theme/issues>`_ |
+`Source Repository <https://github.com/ansys/ansys-sphinx-theme>`_ |
+`Issues <https://github.com/ansys/ansys-sphinx-theme/issues>`_ |
 :ref:`ref-getting-started`
 
 The Ansys Sphinx Theme is a custom Ansys-branded theme for use with Sphinx, a documentation
