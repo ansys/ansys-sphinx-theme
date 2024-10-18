@@ -9,6 +9,14 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.1.6 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.6>`_ - 2024-10-18
+=======================================================================================
+
+Fixed
+^^^^^
+
+- fix: add the default search options in the config env `#557 <https://github.com/ansys/ansys-sphinx-theme/pull/557>`_
+
 `1.1.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.5>`_ - 2024-10-15
 =======================================================================================
 
