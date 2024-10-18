@@ -36,8 +36,9 @@ def update_search_config(app: Sphinx) -> None:
     """
     theme_static_options = app.config.html_theme_options.get("static_search", {})
     theme_static_options["keys"] = ["title", "text"]
-    theme_static_options["threshold"] = theme_static_options.get("threshold", 0.5)
+    theme_static_options["threshold"] = theme_static_options.get("threshold", 0.2)
     theme_static_options["limit"] = theme_static_options.get("limit", 10)
+    app.config.html_theme_options["static_search"] = theme_static_options
 
 
 __all__ = ["create_search_index", "update_search_config"]
