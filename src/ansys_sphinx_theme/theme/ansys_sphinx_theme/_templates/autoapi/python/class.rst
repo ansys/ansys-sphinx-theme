@@ -19,10 +19,10 @@
 
 {# ----------------- Start macros definition for autosummary -----------------#}
 
-{% macro add_auto_summary_attribute(heading, types) -%}
+{% macro add_auto_summary_attribute(title, types) -%}
 
-{{ heading }}
-{{ "-" * heading | length }}
+{{ title }}
+{{ "-" * title | length }}
 
 .. autoapisummary::
 
@@ -34,6 +34,7 @@
 {# ------------------ End macros definition for autosummary --------------- #}
 
 {# ----------------- Start macros definition for headers -----------------#}
+
 {% macro render_header_with_attributes(types, title) -%}
 
 {{ title }} detail
