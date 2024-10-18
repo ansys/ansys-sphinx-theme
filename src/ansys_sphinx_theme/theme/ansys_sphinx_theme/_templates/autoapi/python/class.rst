@@ -35,7 +35,7 @@
 
 {# ----------------- Start macros definition for headers -----------------#}
 
-{% macro render_header_with_attributes(types, title) -%}
+{% macro render_header_with_attributes(title, types) -%}
 
 {{ title }} detail
 -------{{ "-" * title | length }}
@@ -191,22 +191,22 @@ Import detail
         {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
 
         {% if visible_attributes %}
-{{ add_auto_summary_attribute("Attributes", "attribute", visible_attributes) }}
+{{ add_auto_summary_attribute("Attributes", visible_attributes) }}
         {% endif %}
         {% set visible_exceptions = own_page_children|selectattr("type", "equalto", "exception")|list %}
 
         {% if visible_exceptions %}
-{{ add_auto_summary_attribute("Exceptions", "exception", visible_exceptions) }}
+{{ add_auto_summary_attribute("Exceptions", visible_exceptions) }}
         {% endif %}
         {% set visible_classes = own_page_children|selectattr("type", "equalto", "class")|list %}
 
         {% if visible_classes %}
-{{ add_auto_summary_attribute("Classes", "class", visible_classes) }}
+{{ add_auto_summary_attribute("Classes", visible_classes) }}
         {% endif %}
         {% set visible_methods = own_page_children|selectattr("type", "equalto", "method")|list %}
 
         {% if visible_methods %}
-{{ add_auto_summary_attribute("Methods", "method", visible_methods) }}
+{{ add_auto_summary_attribute("Methods", visible_methods) }}
         {% endif %}
     {% endif %}
 
