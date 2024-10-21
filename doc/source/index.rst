@@ -22,13 +22,13 @@ are included in the theme to make documentation more appealing and user-friendly
         :gutter: 1 2 3 3
         :padding: 1 2 3 3
 
-        .. grid-item-card:: Getting started :fa:`person-running`
+        .. grid-item-card:: :material-regular:`power_settings_new;1.25em` Getting started
             :link: getting-started
             :link-type: doc
 
             Learn how to install the Ansys Sphinx Theme.
 
-        .. grid-item-card:: User guide :fa:`book-open-reader`
+        .. grid-item-card:: :material-regular:`description;1.25em` User guide
             :link: user-guide
             :link-type: doc
 
@@ -36,7 +36,7 @@ are included in the theme to make documentation more appealing and user-friendly
 
         {% if build_examples %}
 
-        .. grid-item-card:: Examples :fa:`laptop-code`
+        .. grid-item-card:: :material-regular:`file_copy;1.25em` Examples
             :link: examples
             :link-type: doc
 
@@ -44,11 +44,11 @@ are included in the theme to make documentation more appealing and user-friendly
 
         {% endif %}
 
-        .. grid-item-card:: Changelog :fa:`history`
+        .. grid-item-card:: :material-regular:`update;1.25em` Changelog
             :link: changelog
             :link-type: doc
 
-            View the history of changes made to the theme.
+            View the changelog for the Ansys Sphinx Theme.
 
 .. jinja:: main_toctree
 
