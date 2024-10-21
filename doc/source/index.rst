@@ -40,7 +40,7 @@ are included in the theme to make documentation more appealing and user-friendly
             :link: changelog
             :link-type: doc
 
-            View the changelog for the Ansys Sphinx Theme.
+            View the changelog for this project.
 
 .. jinja:: main_toctree
 
