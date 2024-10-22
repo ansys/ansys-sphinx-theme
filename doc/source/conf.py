@@ -133,7 +133,9 @@ with Path.open(THIS_PATH / "links.rst", "r") as f:
     rst_epilog += f.read()
 
 
-linkcheck_ignore = ["https://sphinxdocs.ansys.com/version/*"]
+linkcheck_ignore = [
+    r"https://sphinxdocs.ansys.com/version/*",
+]
 if switcher_version != "dev":
     linkcheck_ignore.append(
         f"https://github.com/ansys/ansys-sphinx-theme/releases/tag/v{__version__}"
