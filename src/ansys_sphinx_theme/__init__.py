@@ -37,7 +37,7 @@ from ansys_sphinx_theme.latex import generate_404
 from ansys_sphinx_theme.search import (
     ALL_NODES,
     PARAGRAPHS,
-    TITLE,
+    TITLES,
     create_search_index,
     update_search_config,
 )
@@ -586,4 +586,4 @@ def setup(app: Sphinx) -> Dict:
     }
 
 
-__all__ = ["__version__", "generate_404", "get_version_match", "TITLE", "PARAGRAPHS", "ALL_NODES"]
+__all__ = ["__version__", "generate_404", "get_version_match", "TITLEs", "PARAGRAPHS", "ALL_NODES"]

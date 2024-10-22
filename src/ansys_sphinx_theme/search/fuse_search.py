@@ -28,7 +28,7 @@ import re
 from docutils import nodes
 
 PARAGRAPHS = [nodes.paragraph]
-TITLE = [nodes.title]
+TITLES = [nodes.title]
 LITERAL = [nodes.literal]
 ALL_NODES = [nodes.Text]
 ALL_NODES_WITHOUT_RAW = [  # type: ignore

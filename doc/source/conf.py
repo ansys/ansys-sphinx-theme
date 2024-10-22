@@ -13,7 +13,7 @@ from sphinx.builders.latex import LaTeXBuilder
 from ansys_sphinx_theme import (
     ALL_NODES,
     PARAGRAPHS,
-    TITLE,
+    TITLES,
     __version__,
     ansys_favicon,
     ansys_logo_white,
@@ -71,7 +71,7 @@ html_theme_options = {
 
 index_patterns = {
     "examples/api/": ALL_NODES,
-    "examples/sphinx_examples/": TITLE + PARAGRAPHS,
+    "examples/sphinx_examples/": TITLES + PARAGRAPHS,
 }
 
 

@@ -27,7 +27,7 @@ from ansys_sphinx_theme.search.fuse_search import (
     ALL_NODES,
     LITERAL,
     PARAGRAPHS,
-    TITLE,
+    TITLES,
     create_search_index,
 )
 
@@ -53,6 +53,6 @@ __all__ = [
     "update_search_config",
     "LITERAL",
     "PARAGRAPHS",
-    "TITLE",
+    "TITLES",
     "ALL_NODES",
 ]
