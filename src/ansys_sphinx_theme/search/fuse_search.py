@@ -31,14 +31,7 @@ PARAGRAPHS = [nodes.paragraph]
 TITLES = [nodes.title]
 LITERAL = [nodes.literal]
 ALL_NODES = [nodes.Text]
-ALL_NODES_WITHOUT_RAW = [  # type: ignore
-    nodes.paragraph,
-    nodes.title,
-    nodes.list_item,
-    nodes.field_list,
-    nodes.compound,
-    nodes.block_quote,
-]
+DEFAULT_PATTERN = PARAGRAPHS + TITLES + LITERAL
 
 
 class SearchIndex:
@@ -149,7 +142,7 @@ def get_pattern_for_each_page(app, doc_name):
         if doc_name.startswith(filename):
             return pattern
 
-    return ALL_NODES_WITHOUT_RAW
+    return DEFAULT_PATTERN
 
 
 def create_search_index(app, exception):
