@@ -49,6 +49,9 @@ html[data-theme="light"] .highlight {
   color: var(--ast-highlight-color);
 }
 
+.bd-search input.form-control,
+.bd-search input.form-control:focus,
+.bd-search input.form-control:focus-visible,
 .form-control:focus,
 .form-control:focus-visible,
 .form-control {
@@ -100,7 +103,8 @@ html[data-theme="light"] .highlight {
   color: var(--ast-search-bar-enable-text);
 }
 
-.form-control:focus {
+.form-control:focus,
+.bd-search:focus-within {
   box-shadow: none;
 }
 
@@ -118,7 +122,7 @@ html[data-theme="light"] .highlight {
   margin-bottom: 0px;
 }
 
-.bd-search input.expanded {
+.bd-search input.form-control.expanded {
   width: 600px;
 }
 
