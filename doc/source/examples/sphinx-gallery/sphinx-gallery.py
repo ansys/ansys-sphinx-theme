@@ -63,6 +63,42 @@ plotter.title = "3D Sphere Visualization"
 plotter.show()
 
 ###############################################################################
+# Figures with Matplotlib
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# This example shows how to render a figure using Matplotlib.
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+time = np.linspace(0, 2 * np.pi, 100)
+
+fig, ax = plt.subplots()
+ax.plot(time, np.cos(time), color="blue", label=r"$\cos{(t)}$")
+ax.plot(time, np.sin(time), color="red", label=r"$\sin{(t)}$")
+
+ax.set_xlabel("Time [time units]")
+ax.set_ylabel("Amplitude [distance units]")
+ax.set_title("Trigonometric functions")
+
+plt.show()
+
+###############################################################################
+# Figures with Plotly
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# This example shows how to render a figure using Matplotlib.
+
+import plotly
+import plotly.graph_objs as go
+
+time = np.linspace(0, 2 * np.pi, 100)
+
+cos_trace = go.Scatter(x=time, y=np.cos(time), mode="lines", name="cos(t)")
+sin_trace = go.Scatter(x=time, y=np.sin(time), mode="lines", name="sin(t)")
+
+fig = go.Figure(data=[cos_trace, sin_trace])
+plotly.io.show(fig)
+
+###############################################################################
 # Render equations using IPython ``math``
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # This example shows how to render equations using the IPython ``math`` module.
