@@ -19,7 +19,7 @@
 
 {# ----------------- Start macros definition for autosummary -----------------#}
 
-{% macro add_auto_summary_attribute(title, types) -%}
+{% macro add_auto_summary_attribute(types, title) -%}
 
 {{ title }}
 {{ "-" * title | length }}
@@ -35,7 +35,7 @@
 
 {# ----------------- Start macros definition for headers -----------------#}
 
-{% macro render_header_with_attributes(title, types) -%}
+{% macro render_header_with_attributes(types, title) -%}
 
 {{ title }} detail
 -------{{ "-" * title | length }}
