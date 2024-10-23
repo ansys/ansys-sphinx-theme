@@ -184,7 +184,7 @@ Import detail
     {% endif %}
 
     {% if visible_methods %}
-{{ render_members_section("Method detail", visible_methods }}
+{{ render_members_section("Method detail", visible_methods) }}
     {% endif %}
 
     {% if is_own_page and own_page_children %}
