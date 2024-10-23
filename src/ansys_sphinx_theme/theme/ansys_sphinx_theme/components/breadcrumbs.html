@@ -40,7 +40,7 @@
     <li class="breadcrumb-item">{{ doc.title }}</li>
     {% endif %} {%- endfor %} {# Current page title #} {% if title and pagename
     != root_doc %}
-    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">{{ title }}</span></li>
     {% endif %}
   </ul>
 </nav>
