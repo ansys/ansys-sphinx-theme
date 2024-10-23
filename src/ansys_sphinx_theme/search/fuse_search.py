@@ -23,6 +23,7 @@
 """Module for generating search indices."""
 
 import json
+from pathlib import Path
 import re
 
 from docutils import nodes
@@ -167,6 +168,6 @@ def create_search_index(app, exception):
         search_index.build_sections()
         search_index_list.extend(search_index.indices)
 
-    search_index_path = app.builder.outdir / "_static" / "search.json"
+    search_index_path = Path(app.builder.outdir) / "_static" / "search.json"
     with search_index_path.open("w", encoding="utf-8") as index_file:
         json.dump(search_index_list, index_file, ensure_ascii=False, indent=4)
