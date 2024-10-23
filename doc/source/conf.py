@@ -225,8 +225,6 @@ jinja_contexts["main_toctree"] = {"build_examples": BUILD_EXAMPLES}
 
 if not BUILD_EXAMPLES:
     exclude_patterns.extend(["examples.rst", "examples/**", "examples/api/**"])
-
-
 else:
     # Autoapi examples
     extensions.append("ansys_sphinx_theme.extension.autoapi")
@@ -237,6 +235,11 @@ else:
         "own_page_level": "function",
         "package_depth": 1,
     }
+
+    import plotly.io as pio
+    from plotly.io._sg_scraper import plotly_sg_scraper
+
+    pio.renderers.default = "sphinx_gallery"
 
     # Gallery of examples
     extensions.extend(["nbsphinx", "sphinx_gallery.gen_gallery"])
@@ -250,7 +253,7 @@ else:
         # Remove the "Download all examples" button from the top level gallery
         "download_all_examples": False,
         # Modules for which function level galleries are created.  In
-        "image_scrapers": ("pyvista", "matplotlib"),
+        "image_scrapers": ("pyvista", "matplotlib", plotly_sg_scraper),
         "default_thumb_file": "source/_static/pyansys_light_square.png",
     }
 
