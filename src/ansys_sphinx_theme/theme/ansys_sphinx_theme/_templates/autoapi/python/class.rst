@@ -183,10 +183,6 @@ Import detail
 {{ render_members_section("Method detail", all_visible_methods) }}
     {% endif %}
 
-    {% if visible_methods %}
-{{ render_members_section("Method detail", visible_methods) }}
-    {% endif %}
-
     {% if is_own_page and own_page_children %}
         {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
 
