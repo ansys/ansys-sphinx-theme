@@ -221,6 +221,7 @@ details.sd-dropdown summary.sd-card-header + div.sd-summary-content {
   border: none;
   background-color: var(--ast-color-sphinx-design-background);
   font-family: var(--ast-sphinx-design-font-family);
+  line-height: 24px;
 }
 
 .bd-content .sd-card {
