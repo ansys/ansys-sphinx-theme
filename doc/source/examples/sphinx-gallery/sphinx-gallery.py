@@ -64,7 +64,7 @@ plotter.show()
 
 ###############################################################################
 # Figures with Matplotlib
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~~~~~
 # This example shows how to render a figure using Matplotlib.
 
 import matplotlib.pyplot as plt
@@ -84,7 +84,7 @@ plt.show()
 
 ###############################################################################
 # Figures with Plotly
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ~~~~~~~~~~~~~~~~~~~
 # This example shows how to render a figure using Matplotlib.
 
 import plotly
