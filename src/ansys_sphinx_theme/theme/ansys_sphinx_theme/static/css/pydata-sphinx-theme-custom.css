@@ -775,3 +775,10 @@ button.btn.version-switcher__button:hover {
     width: min(100%, 1070px);
   }
 }
+
+/**
+* _math.scss
+*/
+span.math {
+  display: math;
+}
