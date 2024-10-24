@@ -26,6 +26,7 @@ import json
 import re
 
 from docutils import nodes
+from docutils.nodes import Element
 
 PARAGRAPHS = [nodes.paragraph]
 TITLES = [nodes.title]
@@ -60,6 +61,15 @@ class SearchIndex:
     def build_sections(self):
         """Build sections from the document tree."""
         for node in self.doc_tree.traverse(nodes.section):
+            subsections = list(node.traverse(nodes.section))
+            if len(subsections) > 1:
+                # get only the first section
+                main_section = subsections[0]
+                # remove subsections from the main section
+                for n in main_section.traverse(nodes.section):
+                    n.parent.remove(n)
+                node = main_section
+
             section_title = node[0].astext()
 
             section_text = "\n".join(
@@ -74,6 +84,19 @@ class SearchIndex:
                     "anchor_id": section_anchor_id,
                 }
             )
+
+            for n in node.traverse(Element):
+                if n.tagname == "desc":
+                    section_title = n[0].astext()
+                    section_anchor_id = _dec_title_to_anchor(section_title)
+                    section_text = n.astext()
+                    self.sections.append(
+                        {
+                            "title": section_title,
+                            "text": section_text,
+                            "anchor_id": section_anchor_id,
+                        }
+                    )
 
     def generate_breadcrumbs(self, section_title: str) -> str:
         """
@@ -127,6 +150,12 @@ class SearchIndex:
                 "section": section["title"],
                 "text": section["text"],
             }
+
+
+def _dec_title_to_anchor(title: str) -> str:
+    """Convert title to anchor for the description."""
+    # remove () at the end
+    return re.sub(r"\(.*\)$", "", title)
 
 
 def _title_to_anchor(title: str) -> str:
