@@ -60,15 +60,16 @@ class SearchIndex:
         self.pattern = pattern
 
     def build_sections(self):
-        """Build sections from the document tree."""
+        """Build sections from the document tree, handling subsections and descriptions."""
         for node in self.doc_tree.traverse(nodes.section):
             subsections = list(node.traverse(nodes.section))
+
             if len(subsections) > 1:
                 # get only the first section
                 main_section = subsections[0]
                 # remove subsections from the main section
-                for n in main_section.traverse(nodes.section):
-                    n.parent.remove(n)
+                for subsection in main_section.traverse(nodes.section):
+                    subsection.parent.remove(subsection)
                 node = main_section
 
             section_title = node[0].astext()
@@ -86,18 +87,31 @@ class SearchIndex:
                 }
             )
 
-            for n in node.traverse(Element):
-                if n.tagname == "desc":
-                    section_title = n[0].astext()
-                    section_anchor_id = _dec_title_to_anchor(section_title)
-                    section_text = n.astext()
-                    self.sections.append(
-                        {
-                            "title": section_title,
-                            "text": section_text,
-                            "anchor_id": section_anchor_id,
-                        }
-                    )
+            self._process_desc_element(node)
+
+    def _process_desc_element(self, node):
+        """Process `desc` element within a section."""
+        for element in node.traverse(Element):
+            if element.tagname != "desc":
+                continue
+
+            section_title = element[0].astext()
+            # id is the id tag of the desc element
+            section_anchor_id = element.attributes["ids"]
+
+            if element.children:
+                for element_child in element.children:
+                    if element_child.tagname != "desc_signature":
+                        continue
+                    section_anchor_id = element_child.attributes["ids"][0]
+            section_text = element.astext()
+            self.sections.append(
+                {
+                    "title": section_title,
+                    "text": section_text,
+                    "anchor_id": section_anchor_id,
+                }
+            )
 
     def generate_breadcrumbs(self, section_title: str) -> str:
         """
@@ -151,12 +165,6 @@ class SearchIndex:
                 "section": section["title"],
                 "text": section["text"],
             }
-
-
-def _dec_title_to_anchor(title: str) -> str:
-    """Convert title to anchor for the description."""
-    # remove () at the end
-    return re.sub(r"\(.*\)$", "", title)
 
 
 def _title_to_anchor(title: str) -> str:
