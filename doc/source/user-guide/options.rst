@@ -124,6 +124,23 @@ the ``delay`` key in the ``static_search`` dictionary with a value specifying
 the amount of milliseconds to wait before executing the search. A value of
 ``0`` disables the debounce function.
 
+To customise the indexing of your documentation, you can use the ``index_patterns`` dictionary in the ``conf.py`` file.
+This dictionary contains the paths to the directories you want to index and the type of nodes to index.
+The type of nodes can be ``ALL_NODES``, ``TITLES`` or ``PARAGRAPHS``.
+The default value is ``TITLES + PARAGRAPHS``.
+
+Here is an example of how to add the ``index_patterns`` dictionary to the `conf.py`` file:
+
+.. code-block:: python
+
+    index_patterns = {
+        "api/": ALL_NODES,
+        "examples/": TITLES + PARAGRAPHS,
+    }
+
+The above example will index all nodes in the ``api/`` directory and only titles and paragraphs in the ``examples/`` directory.
+
+
 .. note::
 
     All other options are available in the `Fuse.js documentation <https://fusejs.io/api/options.html>`_.
