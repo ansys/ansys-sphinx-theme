@@ -87,24 +87,23 @@ class SearchIndex:
                 }
             )
 
-            self._process_desc_element(node)
+            self._process_desc_element(node, section_title)
 
-    def _process_desc_element(self, node):
+    def _process_desc_element(self, node, title):
         """Process `desc` element within a section."""
         for element in node.traverse(Element):
             if element.tagname != "desc":
                 continue
 
-            section_title = element[0].astext()
             # id is the id tag of the desc element
             section_anchor_id = element.attributes["ids"]
-
             if element.children:
                 for element_child in element.children:
                     if element_child.tagname != "desc_signature":
                         continue
                     section_anchor_id = element_child.attributes["ids"][0]
             section_text = element.astext()
+            section_title = f"{title} > {section_anchor_id}"
             self.sections.append(
                 {
                     "title": section_title,
