@@ -103,7 +103,7 @@ class SearchIndex:
                         continue
                     section_anchor_id = element_child.attributes["ids"][0]
             section_text = element.astext()
-            section_title = f"{title} > {section_anchor_id}"
+            section_title = _desc_anchor_to_title(title, section_anchor_id)
             self.sections.append(
                 {
                     "title": section_title,
@@ -164,6 +164,12 @@ class SearchIndex:
                 "section": section["title"],
                 "text": section["text"],
             }
+
+
+def _desc_anchor_to_title(title, anchor):
+    """Convert a desc anchor to a title."""
+    anchor_title = anchor.split(".")[-1]
+    return f"{title} > {anchor_title}"
 
 
 def _title_to_anchor(title: str) -> str:
