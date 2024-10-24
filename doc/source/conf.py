@@ -11,6 +11,9 @@ import requests
 from sphinx.builders.latex import LaTeXBuilder
 
 from ansys_sphinx_theme import (
+    ALL_NODES,
+    PARAGRAPHS,
+    TITLES,
     __version__,
     ansys_favicon,
     ansys_logo_white,
@@ -62,7 +65,13 @@ html_theme_options = {
         "threshold": 0.2,
         "limit": 7,
         "minMatchCharLength": 3,
+        "ignoreLocation": True,
     },
+}
+
+index_patterns = {
+    "examples/api/": ALL_NODES,
+    "examples/sphinx_examples/": TITLES + PARAGRAPHS,
 }
 
 
@@ -132,6 +141,8 @@ rst_epilog = ""
 with Path.open(THIS_PATH / "links.rst", "r") as f:
     rst_epilog += f.read()
 
+
+linkcheck_exclude_documents = ["changelog"]
 
 linkcheck_ignore = [
     r"https://sphinxdocs.ansys.com/version/*",
