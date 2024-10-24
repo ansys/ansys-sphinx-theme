@@ -26,4 +26,3 @@ include public PyPI, Ansys PyPI, and GitHub.
             .. code-block::
 
                 python -m pip install git+https://github.com/ansys/ansys-sphinx-theme.git@{{ version }}
-
