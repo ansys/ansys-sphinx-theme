@@ -116,18 +116,29 @@ from IPython.display import Latex
 Latex(r"This is a \LaTeX{} equation: $a^2 + b^2 = c^2$")
 
 ###############################################################################
-# Render a table in markdown
+# Render a table
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~
-# This is an example to render a table inside the markdown with Sphinx-Gallery.
+# This is an example to render a table with Sphinx-Gallery.
 #
-# ====== ====== =======
-# A      B      A and B
-# ====== ====== =======
-# False  False  False
-# True   False  False
-# False  True   False
-# True   True   True
-# ====== ====== =======
+# .. list-table:: Title of the table
+#     :widths: auto
+#    :header-rows: 1
+#
+#    * - A
+#      - B
+#      - A and B
+#    * - False
+#      - False
+#      - False
+#    * - True
+#      - False
+#      - False
+#    * - False
+#      - True
+#      - False
+#    * - True
+#      - True
+#      - True
 
 ###############################################################################
 # Render a table using pandas
