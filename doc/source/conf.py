@@ -65,7 +65,6 @@ html_theme_options = {
         "threshold": 0.2,
         "limit": 7,
         "minMatchCharLength": 3,
-        "ignoreLocation": True,
     },
 }
 
@@ -141,8 +140,6 @@ rst_epilog = ""
 with Path.open(THIS_PATH / "links.rst", "r") as f:
     rst_epilog += f.read()
 
-
-# linkcheck_exclude_documents = ["changelog"]
 
 linkcheck_ignore = [
     r"https://sphinxdocs.ansys.com/version/*",
