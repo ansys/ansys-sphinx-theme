@@ -142,7 +142,7 @@ with Path.open(THIS_PATH / "links.rst", "r") as f:
     rst_epilog += f.read()
 
 
-linkcheck_exclude_documents = ["changelog"]
+# linkcheck_exclude_documents = ["changelog"]
 
 linkcheck_ignore = [
     r"https://sphinxdocs.ansys.com/version/*",
