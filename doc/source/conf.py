@@ -125,7 +125,6 @@ notfound_no_urls_prefix = True
 exclude_patterns = [
     "links.rst",
     "examples/sphinx-gallery/README.rst",
-    # "examples/gallery-examples/*.ipynb",
     "sg_execution_times.rst",
 ]
 rst_epilog = ""
