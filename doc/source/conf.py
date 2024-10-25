@@ -11,6 +11,9 @@ import requests
 from sphinx.builders.latex import LaTeXBuilder
 
 from ansys_sphinx_theme import (
+    ALL_NODES,
+    PARAGRAPHS,
+    TITLES,
     __version__,
     ansys_favicon,
     ansys_logo_white,
@@ -63,6 +66,11 @@ html_theme_options = {
         "limit": 7,
         "minMatchCharLength": 3,
     },
+}
+
+index_patterns = {
+    "examples/api/": ALL_NODES,
+    "examples/sphinx_examples/": TITLES + PARAGRAPHS,
 }
 
 

@@ -1,5 +1,5 @@
 const SEARCH_BAR = document.getElementById("search-bar");
-const SEARCH_INPUT = SEARCH_BAR.querySelector(".bd-search input");
+const SEARCH_INPUT = SEARCH_BAR.querySelector(".bd-search input.form-control");
 const RESULTS = document.getElementById("search-results");
 const MAIN_PAGE_CONTENT = document.querySelector(".bd-main");
 let CURRENT_INDEX = -1;
