@@ -125,7 +125,7 @@ notfound_no_urls_prefix = True
 exclude_patterns = [
     "links.rst",
     "examples/sphinx-gallery/README.rst",
-    "examples/gallery-examples/*.ipynb",
+    # "examples/gallery-examples/*.ipynb",
     "sg_execution_times.rst",
 ]
 rst_epilog = ""
@@ -262,7 +262,6 @@ Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb
 
 ----
 """
-    nbsphinx_execute = "always"
     nbsphinx_thumbnails = {
         "examples/nbsphinx/jupyter-notebook": "_static/pyansys_light_square.png",
     }
