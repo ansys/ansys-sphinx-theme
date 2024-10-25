@@ -138,7 +138,7 @@ Here is an example of how to add the ``index_patterns`` dictionary to the `conf.
         "examples/": TITLES + PARAGRAPHS,
     }
 
-The above example will index all nodes in the ``api/`` directory and only titles and paragraphs in the ``examples/`` directory.
+The above example indexes all nodes in the ``api/`` directory and only titles and paragraphs in the ``examples/`` directory.
 
 
 .. note::
