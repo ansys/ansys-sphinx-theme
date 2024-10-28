@@ -3,11 +3,12 @@
 from datetime import datetime
 import os
 from pathlib import Path
-from typing import List
+from typing import Dict, List
 
 from github import Github
 import pyvista
 import requests
+from sphinx.application import Sphinx
 from sphinx.builders.latex import LaTeXBuilder
 
 from ansys_sphinx_theme import (
@@ -134,7 +135,7 @@ exclude_patterns = [
     "links.rst",
     "examples/sphinx-gallery/README.rst",
     "sg_execution_times.rst",
-    "examples/gallery-examples/*.rst",
+    "examples/gallery-examples/*.ipynb",
 ]
 rst_epilog = ""
 with Path.open(THIS_PATH / "links.rst", "r") as f:
@@ -294,3 +295,15 @@ Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb
 
     jinja_contexts["examples"] = {"inputs_examples": file_names}
     jinja_contexts["admonitions"] = {"inputs_admonitions": admonitions_links}
+
+
+def revert_gallery_patterns(app, builder):
+    """Revert the gallery excluded patterns."""
+    excluded_gallery_pattern = app.config.exclude_patterns
+    excluded_gallery_pattern.remove("examples/gallery-examples/*.ipynb")
+    app.config.exclude_patterns = excluded_gallery_pattern
+
+
+def setup(app: Sphinx) -> Dict:
+    """Sphinx hooks to add to the setup."""
+    app.connect("write-started", revert_gallery_patterns)
