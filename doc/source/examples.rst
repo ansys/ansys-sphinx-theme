@@ -25,7 +25,7 @@ These examples show how the Ansys Sphinx Theme renders different Sphinx extensio
       Examples of how notebooks are rendered.
 
    .. grid-item-card:: :octicon:`link-external` Sphinx gallery
-      :link: examples/gallery-examples/index
+      :link: examples/gallery-examples/sphinx-gallery
       :link-type: doc
 
       Examples of how the Sphinx gallery is rendered.

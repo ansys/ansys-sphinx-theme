@@ -134,6 +134,7 @@ exclude_patterns = [
     "links.rst",
     "examples/sphinx-gallery/README.rst",
     "sg_execution_times.rst",
+    "examples/gallery-examples/*.rst",
 ]
 rst_epilog = ""
 with Path.open(THIS_PATH / "links.rst", "r") as f:
@@ -252,7 +253,7 @@ else:
     extensions.extend(["nbsphinx", "sphinx_gallery.gen_gallery"])
     sphinx_gallery_conf = {
         # path to your examples scripts
-        "examples_dirs": ["examples/sphinx-gallery"],
+        "examples_dirs": ["examples/sphinx-gallery/"],
         # path where to save gallery generated examples
         "gallery_dirs": ["examples/gallery-examples"],
         # Pattern to search for example files
