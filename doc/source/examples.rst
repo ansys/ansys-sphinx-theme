@@ -67,7 +67,7 @@ These examples show how the Ansys Sphinx Theme renders different documentation c
 
    examples/sphinx-design
    examples/nbsphinx
-   examples/gallery-examples/index
+   examples/gallery-examples/sphinx-gallery
    examples/sphinx-autoapi
 
 
