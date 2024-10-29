@@ -540,7 +540,7 @@ def extract_whatsnew(app, doctree, docname):
     whats_new_options = config_options.get("whatsnew")
     if not whats_new_options:
         return
-
+    no_of_contents = whats_new_options.get("no_of_headers", 3)
     document_name = whats_new_options.get("file", "whatsnew")
     get_doctree = app.env.get_doctree(document_name)
     whats_new_content = []
@@ -562,6 +562,10 @@ def extract_whatsnew(app, doctree, docname):
             "url": f"{document_name}.html#{docs_content['ids'][0]}",
         }
         whats_new_content.append(contents)
+
+    if len(whats_new_content) > no_of_contents:
+        whats_new_content = whats_new_content[:no_of_contents]
+
     app.env.whatsnew_content = whats_new_content
 
 

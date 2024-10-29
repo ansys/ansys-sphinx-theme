@@ -7,12 +7,11 @@
         {% set children = whatsnew.get('children') %}
         <li>
           <strong>{{ title }}</strong>  <!-- Display version title -->
-          <ul>
             <!-- child element is list with one url-->
              {% for child in children %}
+             <!-------------inner child in another class-->
              <li><a href="{{ url }}">{{ child }}</a></li> <!-- Display child element as a link -->
              {% endfor %}
-          </ul>
         </li>
       {% endfor %}
     </ul>
