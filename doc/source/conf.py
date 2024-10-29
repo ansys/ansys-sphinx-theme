@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Dict, List
 
 from github import Github
+import plotly.io as pio
 import pyvista
 import requests
 from sphinx.application import Sphinx
@@ -24,6 +25,8 @@ from ansys_sphinx_theme import (
     latex,
     watermark,
 )
+
+pio.renderers.default = "sphinx_gallery"
 
 THIS_PATH = Path(__file__).parent.resolve()
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
@@ -181,7 +184,8 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github()
+    token = os.getenv("GITHUB_TOKEN")
+    g = Github(token)
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):
@@ -264,8 +268,11 @@ else:
         # Modules for which function level galleries are created.  In
         "image_scrapers": ("pyvista", "matplotlib", plotly_sg_scraper),
         "default_thumb_file": "source/_static/pyansys_light_square.png",
+        "capture_repr": ("_repr_html_", "__repr__"),
     }
     pyvista.BUILDING_GALLERY = True
+    pyvista.OFF_SCREEN = True
+
     nbsphinx_prolog = """
 Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb>`.
 
