@@ -204,7 +204,11 @@ def create_search_index(app, exception):
 
     search_index_list = []
 
-    for document in app.env.found_docs:
+    static_search_options = app.config.html_theme_options.get("static_search", {})
+    excluded_docs = static_search_options.get("files_to_exclude", [])
+    included_docs = [doc for doc in app.env.found_docs if doc not in excluded_docs]
+
+    for document in included_docs:
         pattern = get_pattern_for_each_page(app, document)
         search_index = SearchIndex(document, app, pattern)
         search_index.build_sections()
