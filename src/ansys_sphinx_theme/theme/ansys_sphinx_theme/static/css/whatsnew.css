@@ -18,10 +18,12 @@
 .whatsnew-sidebar ul {
   list-style: none;
   padding-left: 0; /* Remove default padding */
+  line-height: 30px;
 }
 
 .whatsnew-sidebar li {
   margin-bottom: 10px; /* Space between versions */
+  padding: 4px 24px 4px 32px;
 }
 
 .whatsnew-sidebar li:hover {

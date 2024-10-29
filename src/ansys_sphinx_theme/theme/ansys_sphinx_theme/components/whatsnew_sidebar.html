@@ -5,14 +5,13 @@
         {% set title = whatsnew.get('title') %}
         {% set url = whatsnew.get('url') %}
         {% set children = whatsnew.get('children') %}
-        <li>
-          <strong>{{ title }}</strong>  <!-- Display version title -->
+        <ui>
+            <strong>{{ title }}</strong>  <!-- Display version title -->
             <!-- child element is list with one url-->
-             {% for child in children %}
-             <!-------------inner child in another class-->
-             <li><a href="{{ url }}">{{ child }}</a></li> <!-- Display child element as a link -->
-             {% endfor %}
-        </li>
+            {% for child in children %}
+            <li><a href="{{ url }}">{{ child }}</a></li> <!-- Display child element as a link -->
+            {% endfor %}
+        </ui>
       {% endfor %}
     </ul>
   </div>
