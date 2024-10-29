@@ -258,14 +258,14 @@ else:
         # path where to save gallery generated examples
         "gallery_dirs": ["examples/gallery-examples"],
         # Pattern to search for example files
-        "filename_pattern": r"sphinx_gallery\.py",
+        "filename_pattern": r"\.py",
         # Remove the "Download all examples" button from the top level gallery
         "download_all_examples": False,
         # Modules for which function level galleries are created.  In
         "image_scrapers": ("pyvista", "matplotlib", plotly_sg_scraper),
         "default_thumb_file": "source/_static/pyansys_light_square.png",
     }
-
+    pyvista.BUILDING_GALLERY = True
     nbsphinx_prolog = """
 Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb>`.
 
@@ -274,8 +274,6 @@ Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb
     nbsphinx_thumbnails = {
         "examples/nbsphinx/jupyter-notebook": "_static/pyansys_light_square.png",
     }
-
-    pyvista.BUILDING_GALLERY = True
 
     # Third party examples
     example_links = extract_example_links(
@@ -297,13 +295,13 @@ Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb
     jinja_contexts["admonitions"] = {"inputs_admonitions": admonitions_links}
 
 
-def revert_gallery_patterns(app, builder):
-    """Revert the gallery excluded patterns."""
-    excluded_gallery_pattern = app.config.exclude_patterns
-    excluded_gallery_pattern.remove("examples/gallery-examples/*.ipynb")
-    app.config.exclude_patterns = excluded_gallery_pattern
+def revert_exclude_patterns(app, env):
+    """Revert the exclude patterns."""
+    excluded_pattern = env.config.exclude_patterns
+    excluded_pattern.remove("examples/gallery-examples/*.ipynb")
+    env.config.exclude_patterns = excluded_pattern
 
 
 def setup(app: Sphinx) -> Dict:
     """Sphinx hooks to add to the setup."""
-    app.connect("write-started", revert_gallery_patterns)
+    app.connect("env-updated", revert_exclude_patterns)
