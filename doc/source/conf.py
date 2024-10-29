@@ -303,7 +303,22 @@ Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb
 
 
 def revert_exclude_patterns(app, env):
-    """Revert the exclude patterns."""
+    """Revert the exclude patterns.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application instance.
+    env : BuildEnvironment
+        The build environment.
+
+    Notes
+    -----
+    Remove the examples/gallery-examples/*.ipynb pattern from the exclude patterns.
+    When the nbsphinx extension is enabled, the exclude patterns are modified
+    to exclude the examples/gallery-examples/*.ipynb pattern. This function reverts
+    the exclude patterns to their original state.
+    """
     excluded_pattern = env.config.exclude_patterns
     excluded_pattern.remove("examples/gallery-examples/*.ipynb")
     env.config.exclude_patterns = excluded_pattern
