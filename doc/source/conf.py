@@ -6,7 +6,6 @@ from pathlib import Path
 from typing import Dict, List
 
 from github import Github
-import plotly.io as pio
 import pyvista
 import requests
 from sphinx.application import Sphinx
@@ -25,8 +24,6 @@ from ansys_sphinx_theme import (
     latex,
     watermark,
 )
-
-pio.renderers.default = "sphinx_gallery"
 
 THIS_PATH = Path(__file__).parent.resolve()
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
