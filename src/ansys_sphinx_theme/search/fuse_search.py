@@ -209,9 +209,14 @@ def create_search_index(app, exception):
 
     for exclude_doc in excluded_docs:
         is_folder = exclude_doc.endswith("/")
+
+        # Remove trailing slash for consistency in folder exclusion
         if is_folder:
-            # remove the trailing slash
-            exclude_doc = exclude_doc[:-1]
+            exclude_doc = exclude_doc.rstrip("/")
+
+        # Filter out documents based on whether exclude_doc is a folder or a file:
+        # - If a folder, exclude all documents starting with the folder name.
+        # - If a file, exclude only the exact file name.
         included_docs = [
             doc
             for doc in app.env.found_docs
