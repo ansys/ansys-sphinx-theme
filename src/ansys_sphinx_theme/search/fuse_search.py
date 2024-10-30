@@ -208,10 +208,16 @@ def create_search_index(app, exception):
     excluded_docs = static_search_options.get("files_to_exclude", [])
 
     for docs in excluded_docs:
+        is_folder = docs.endswith("/")
+
+        # if excluded entry is a folder, exclude all files in that folder by
+        # checking if the doc starts with the folder name
+        # if excluded entry is a file, exclude that file by checking if the doc
+        # is the same as the file name
         included_docs = [
             doc
             for doc in app.env.found_docs
-            if not (doc.startswith(docs) if docs.endswith("/") else doc == docs)
+            if not (doc.startswith(docs) if is_folder else doc == docs)
         ]
 
     for document in included_docs:
