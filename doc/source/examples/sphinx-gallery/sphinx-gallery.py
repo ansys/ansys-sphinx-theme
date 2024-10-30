@@ -87,8 +87,9 @@ plt.show()
 # ~~~~~~~~~~~~~~~~~~~
 # This example shows how to render a figure using Plotly.
 
-import plotly
 import plotly.graph_objs as go
+
+# More info: https://plotly.com/python/renderers/
 
 time = np.linspace(0, 2 * np.pi, 100)
 
@@ -96,7 +97,8 @@ cos_trace = go.Scatter(x=time, y=np.cos(time), mode="lines", name="cos(t)")
 sin_trace = go.Scatter(x=time, y=np.sin(time), mode="lines", name="sin(t)")
 
 fig = go.Figure(data=[cos_trace, sin_trace])
-plotly.io.show(fig)
+
+fig
 
 ###############################################################################
 # Render equations using IPython ``math``
