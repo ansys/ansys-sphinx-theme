@@ -65,7 +65,6 @@ html_theme_options = {
         "threshold": 0.2,
         "limit": 7,
         "minMatchCharLength": 3,
-        "files_to_exclude": ["user-guide/404-page"],
     },
 }
 
