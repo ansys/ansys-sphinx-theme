@@ -85,7 +85,7 @@ plt.show()
 ###############################################################################
 # Figures with Plotly
 # ~~~~~~~~~~~~~~~~~~~
-# This example shows how to render a figure using Matplotlib.
+# This example shows how to render a figure using Plotly.
 
 import plotly
 import plotly.graph_objs as go
