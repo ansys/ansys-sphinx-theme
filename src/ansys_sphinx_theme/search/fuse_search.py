@@ -210,19 +210,17 @@ def create_search_index(app, exception):
     output_dir = Path(app.builder.outdir)
 
     for exclude_doc in excluded_docs:
-        path_output = output_dir / exclude_doc
+        exclude_doc = Path(exclude_doc)
+        exclude_path = output_dir / exclude_doc
+        is_folder = exclude_path.is_dir()
 
-        is_folder = Path(path_output).is_dir()
-
-        # Filter out documents based on whether exclude_doc is a folder or a file:
-        # - If a folder, exclude all documents starting with the folder name.
-        # - If a file, exclude only the exact file name.
-
+        # Exclude documents based on whether exclude_doc is a folder or a file:
+        # - For folders, exclude all documents within the folder.
+        # - For files, exclude only the exact file match.
         included_docs = [
             doc
-            for doc in app.env.found_docs
-            if not (is_folder and Path(doc).parent == Path(exclude_doc))
-            and Path(doc) != Path(exclude_doc)
+            for doc in included_docs
+            if not (is_folder and Path(doc).parent == exclude_doc) and Path(doc) != exclude_doc
         ]
 
     for document in included_docs:
