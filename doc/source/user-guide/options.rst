@@ -127,7 +127,7 @@ the amount of milliseconds to wait before executing the search. A value of
 Additionally, you can decide the limit of the search results by setting the
 ``limit`` key in the ``static_search`` dictionary. The default value is ``10``.
 
-To exclude some directories from the search index, you can use the
+To exclude files or directories from the search index, you can use the
 ``files_to_exclude`` key in the ``static_search`` dictionary. This key is a list
 of strings representing the directories or files to exclude from the search
 index.
