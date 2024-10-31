@@ -9,6 +9,30 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.1.7 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.7>`_ - 2024-10-23
+=======================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: ensure app.builder.outdir is a Path object `#565 <https://github.com/ansys/ansys-sphinx-theme/pull/565>`_
+
+`1.1.6 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.6>`_ - 2024-10-18
+=======================================================================================
+
+Fixed
+^^^^^
+
+- fix: add the default search options in the config env `#557 <https://github.com/ansys/ansys-sphinx-theme/pull/557>`_
+
+`1.1.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.5>`_ - 2024-10-15
+=======================================================================================
+
+Fixed
+^^^^^
+
+- use ansys-sphinx-theme variables in CSS files `#537 <https://github.com/ansys/ansys-sphinx-theme/pull/537>`_
+
 `1.1.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.4>`_ - 2024-10-14
 =======================================================================================
 

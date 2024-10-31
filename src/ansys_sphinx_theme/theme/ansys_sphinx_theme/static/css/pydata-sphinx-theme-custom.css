@@ -74,7 +74,7 @@ nav.bd-links li > a.current {
   text-decoration: none;
   box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
   border-radius: var(--ast-sphinx-design-border-radius);
-  font-weight: bold;
+  font-weight: var(--ast-font-weight-bold);
 }
 
 /**
@@ -83,7 +83,7 @@ nav.bd-links li > a.current {
 
 .bd-sidebar-primary li.has-children .caption,
 .bd-sidebar-primary li.has-children > .reference {
-  padding: 4px 32px;
+  padding: 4px 24px;
 }
 
 nav.bd-links .current > a {
@@ -92,7 +92,7 @@ nav.bd-links .current > a {
   text-decoration: none;
   box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
   border-radius: var(--ast-sphinx-design-border-radius);
-  font-weight: bold;
+  font-weight: var(--ast-font-weight-bold);
 }
 /**
 * secondary sidebar
@@ -115,7 +115,7 @@ nav.bd-links .current > a {
   color: var(--ast-color-link-hover);
   text-decoration: none;
   box-shadow: none;
-  font-weight: bold;
+  font-weight: var(--ast-font-weight-bold);
 }
 
 .toc-h2 {
@@ -153,7 +153,7 @@ nav.bd-links .current > a {
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link {
   color: var(--ast-navbar-color);
-  font-weight: 600;
+  font-weight: var(--ast-font-weight-semibold);
 }
 
 .bd-header ul.navbar-nav > li.nav-item > .nav-link:hover::before {
@@ -200,20 +200,20 @@ html .pst-navbar-icon:hover {
 
 a.nav-link.pst-navbar-icon {
   color: var(--ast-navbar-color);
-  font-weight: bold;
+  font-weight: var(--ast-font-weight-bold);
 }
 
 a.nav-link.pst-navbar-icon:hover {
   color: var(--ast-navbar-hover-color);
   border-color: var(--ast-navbar-hover-color);
   filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.08));
-  font-weight: bold;
+  font-weight: var(--ast-font-weight-bold);
 }
 
 a.nav-link.pst-navbar-icon:active {
   color: var(--ast-navbar-active-color);
   border-color: var(--ast-navbar-active-border-color);
-  font-weight: bold;
+  font-weight: var(--ast-font-weight-bold);
 }
 
 ul.navbar-icon-links {
@@ -234,7 +234,7 @@ ul.navbar-icon-links {
 */
 
 .dropdown-item:hover {
-  font-weight: bold;
+  font-weight: var(--ast-font-weight-bold);
   background-color: transparent;
 }
 
@@ -253,7 +253,7 @@ ul.navbar-icon-links {
 .search-button-field:hover {
   border-color: var(--ast-navbar-active-border-color);
   color: var(--ast-navbar-hover-color);
-  font-weight: bold;
+  font-weight: var(--ast-font-weight-bold);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
@@ -672,7 +672,7 @@ nav.contents p {
 */
 .bd-header ul.navbar-nav > li.nav-item.dropdown > .dropdown-toggle {
   color: var(--ast-navbar-color);
-  font-weight: 600;
+  font-weight: var(--ast-font-weight-semibold);
   font-size: var(--bs-nav-link-font-size);
   border-radius: var(--ast-sphinx-design-border-radius);
   border-color: var(--ast-dropdown-header-border);
@@ -687,7 +687,7 @@ nav.contents p {
 .bd-header ul.navbar-nav .dropdown .dropdown-menu .dropdown-item {
   color: var(--ast-navbar-color);
   font-size: var(--bs-nav-link-font-size);
-  font-weight: 600;
+  font-weight: var(--ast-font-weight-semibold);
   border-radius: var(--ast-sphinx-design-border-radius);
   border-color: var(--ast-dropdown-header-border);
 }
@@ -774,4 +774,11 @@ button.btn.version-switcher__button:hover {
   .bd-main .bd-content .bd-article-container {
     width: min(100%, 1070px);
   }
+}
+
+/**
+* _math.scss
+*/
+span.math {
+  display: math;
 }

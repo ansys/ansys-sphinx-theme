@@ -8,9 +8,9 @@ Sphinx extensions
 
 These examples show how the Ansys Sphinx Theme renders different Sphinx extensions.
 
-.. grid:: 2
-   :gutter: 2 2 3 4
-   :padding: 2 2 3 4
+.. grid:: 1 2 3 3
+   :gutter: 1 2 3 3
+   :padding: 1 2 3 3
 
    .. grid-item-card:: :octicon:`note` Sphinx design
       :link: sphinx-design

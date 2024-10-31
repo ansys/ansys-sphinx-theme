@@ -65,7 +65,7 @@ ul.bd-breadcrumbs li.breadcrumb-item a:active {
 }
 
 #announcement_msg p {
-  font-weight: bold;
+  font-weight: var(--ast-font-weight-bold);
   margin: auto;
   color: black;
 }
