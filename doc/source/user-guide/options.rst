@@ -124,6 +124,29 @@ the ``delay`` key in the ``static_search`` dictionary with a value specifying
 the amount of milliseconds to wait before executing the search. A value of
 ``0`` disables the debounce function.
 
+Additionally, you can decide the limit of the search results by setting the
+``limit`` key in the ``static_search`` dictionary. The default value is ``10``.
+
+To exclude files or directories from the search index, you can use the
+``files_to_exclude`` key in the ``static_search`` dictionary. This key is a list
+of strings representing the directories or files to exclude from the search
+index.
+
+Here is an example of how to add the ``static_search`` dictionary to the
+``html_theme_options`` dictionary:
+
+.. code-block:: python
+
+    html_theme_options = {
+        "static_search": {
+            "threshold": 0.5,
+            "limit": 10,
+            "minMatchCharLength": 1,
+            "delay": 300,
+            "files_to_exclude": ["_build", "api/", "examples/sphinx_demo"],
+        },
+    }
+
 To customise the indexing of your documentation, you can use the ``index_patterns`` dictionary in the ``conf.py`` file.
 This dictionary contains the paths to the directories you want to index and the type of nodes to index.
 The type of nodes can be ``ALL_NODES``, ``TITLES`` or ``PARAGRAPHS``.
