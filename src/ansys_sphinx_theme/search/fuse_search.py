@@ -204,7 +204,21 @@ def create_search_index(app, exception):
 
     search_index_list = []
 
-    for document in app.env.found_docs:
+    static_search_options = app.config.html_theme_options.get("static_search", {})
+    excluded_docs = static_search_options.get("files_to_exclude", [])
+    included_docs = app.env.found_docs
+
+    for exclude_doc in excluded_docs:
+        exclude_doc = Path(exclude_doc).resolve()
+
+        # Exclude documents based on whether exclude_doc is a folder or a file:
+        # - For folders, exclude all documents within the folder.
+        # - For files, exclude only the exact file match.
+        included_docs = [
+            doc for doc in included_docs if not Path(doc).resolve().is_relative_to(exclude_doc)
+        ]
+
+    for document in included_docs:
         pattern = get_pattern_for_each_page(app, document)
         search_index = SearchIndex(document, app, pattern)
         search_index.build_sections()
