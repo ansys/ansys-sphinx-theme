@@ -9,6 +9,61 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.2.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.0>`_ - 2024-10-31
+=======================================================================================
+
+Fixed
+^^^^^
+
+- fix: contributors file `#529 <https://github.com/ansys/ansys-sphinx-theme/pull/529>`_
+- fix: padding for toctree entry in sidebar `#554 <https://github.com/ansys/ansys-sphinx-theme/pull/554>`_
+- fix: revisit header size `#555 <https://github.com/ansys/ansys-sphinx-theme/pull/555>`_
+
+
+Dependencies
+^^^^^^^^^^^^
+
+- chore: bump version 1.2.dev0 `#518 <https://github.com/ansys/ansys-sphinx-theme/pull/518>`_
+- chore(deps): bump sphinx-gallery from 0.17.1 to 0.18.0 `#538 <https://github.com/ansys/ansys-sphinx-theme/pull/538>`_
+- chore(deps): bump sphinx from 8.0.2 to 8.1.3 `#546 <https://github.com/ansys/ansys-sphinx-theme/pull/546>`_
+- chore(deps): update pydata-sphinx-theme requirement from <0.16,>=0.15.4 to >=0.15.4,<0.17 `#562 <https://github.com/ansys/ansys-sphinx-theme/pull/562>`_
+- chore(deps): bump sphinx-autoapi from 3.3.2 to 3.3.3 `#569 <https://github.com/ansys/ansys-sphinx-theme/pull/569>`_
+
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: cleanup autoapi templates using macros `#556 <https://github.com/ansys/ansys-sphinx-theme/pull/556>`_
+- fix: typos `#560 <https://github.com/ansys/ansys-sphinx-theme/pull/560>`_
+- fix: change the display of math rendering `#568 <https://github.com/ansys/ansys-sphinx-theme/pull/568>`_
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- chore: update CHANGELOG for v1.1.0 `#516 <https://github.com/ansys/ansys-sphinx-theme/pull/516>`_
+- chore: update CHANGELOG for v1.1.1 `#520 <https://github.com/ansys/ansys-sphinx-theme/pull/520>`_
+- chore: update CHANGELOG for v1.1.2 `#522 <https://github.com/ansys/ansys-sphinx-theme/pull/522>`_
+- docs: adding ``title`` in example section `#524 <https://github.com/ansys/ansys-sphinx-theme/pull/524>`_
+- fix: add more components to the search indexing `#541 <https://github.com/ansys/ansys-sphinx-theme/pull/541>`_
+- chore: update CHANGELOG for v1.1.3 `#545 <https://github.com/ansys/ansys-sphinx-theme/pull/545>`_
+- chore: update CHANGELOG for v1.1.4 `#547 <https://github.com/ansys/ansys-sphinx-theme/pull/547>`_
+- chore: update CHANGELOG for v1.1.5 `#550 <https://github.com/ansys/ansys-sphinx-theme/pull/550>`_
+- doc: allow developer to skip examples build `#553 <https://github.com/ansys/ansys-sphinx-theme/pull/553>`_
+- chore: update CHANGELOG for v1.1.6 `#559 <https://github.com/ansys/ansys-sphinx-theme/pull/559>`_
+- docs: update the landing page `#561 <https://github.com/ansys/ansys-sphinx-theme/pull/561>`_
+- chore: update CHANGELOG for v1.1.7 `#566 <https://github.com/ansys/ansys-sphinx-theme/pull/566>`_
+- fix: exclude search files `#572 <https://github.com/ansys/ansys-sphinx-theme/pull/572>`_
+
+
+Maintenance
+^^^^^^^^^^^
+
+- ci: bump ansys/actions from 7 to 8 `#530 <https://github.com/ansys/ansys-sphinx-theme/pull/530>`_
+- chore: add hacktoberfest labels `#535 <https://github.com/ansys/ansys-sphinx-theme/pull/535>`_
+- ci: add new labels `#549 <https://github.com/ansys/ansys-sphinx-theme/pull/549>`_
+- ci: update labeling strategy `#558 <https://github.com/ansys/ansys-sphinx-theme/pull/558>`_
+
 `1.1.7 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.7>`_ - 2024-10-23
 =======================================================================================
 
