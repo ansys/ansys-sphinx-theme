@@ -163,3 +163,12 @@ showcontent = true
 directory = "test"
 name = "Test"
 showcontent = true
+
+[[tool.towncrier.type]]
+directory = "whatsnew"
+name = "Whatsnew"
+showcontent = true
+
+[[tool.towncrier.section]]
+name = "Whatsnew"
+path = "whatsnew"

@@ -1,3 +1,14 @@
+{% for category, val in sections["Whatsnew"].items() %}
+{{ category }}
+{% set underline = '^' * category|length %}
+{{ underline }}
+
+{% for text, values in val.items() %}
+- {{ text }}
+{% endfor %}
+
+{% endfor %}
+
 {% if sections[""] %}
 {% for category, val in definitions.items() if category in sections[""] %}
 
