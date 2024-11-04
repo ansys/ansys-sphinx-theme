@@ -3,10 +3,19 @@
 {% set underline = '^' * category|length %}
 {{ underline }}
 
-{% for text, values in val.items() %}
-- {{ text }}
-{% endfor %}
+{%- for text, values in val.items() -%}
+{# get first line of text #}
+{% set heading = text.split('\n')[0] -%}
+{# get remaining text #}
+{% set remaining_text = text.split('\n')[1:] %}
+{# join remaining text #}
+{% set remaining_text = remaining_text|join('\n') %}
 
+**{{ heading }}**
+
+{{ remaining_text }}
+
+{% endfor %}
 {% endfor %}
 
 {% if sections[""] %}
