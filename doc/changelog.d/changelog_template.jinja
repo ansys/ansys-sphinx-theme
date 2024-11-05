@@ -15,11 +15,30 @@
 
 {{ remaining_text }}
 
+  .. tab-item:: {{ heading}}
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+            {{ remaining_text|indent(9) }}
+
 {% endfor %}
 {% endfor %}
 
 {% if sections[""] %}
 {% for category, val in definitions.items() if category in sections[""] %}
+
+  .. tab-item:: {{ category }}
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+            {%- for text, values in sections[""][category].items() %}
+            * - {{ text }}
+              - {{ values|join(', ') }}
+            {%- endfor %}
 
 {{ definitions[category]['name'] }}
 {% set underline = '^' * definitions[category]['name']|length %}
