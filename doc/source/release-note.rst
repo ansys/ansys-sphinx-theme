@@ -38,9 +38,9 @@ Opens up the specified project file.
   launch_gui("path/to/project.mechdb")
 
 
-Prints Mechanical project tree
+Prints mechanical project tree
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-This feature let you see the heirachial Mechanical project tree.
+This feature let you see the hierarchy of the mechanical project.
 It also shows whether an object is suppressed or not.
 
 .. code:: python
