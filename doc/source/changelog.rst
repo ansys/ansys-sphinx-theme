@@ -1,7 +1,18 @@
+:orphan:
+
 .. _ref_release_notes:
 
 Release notes
 #############
+
+
+.. button-ref:: release-note
+    :ref-type: doc
+    :color: primary
+    :shadow:
+    :expand:
+
+    Go to latest release notes
 
 This document contains the release notes for the project.
 
