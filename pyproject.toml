@@ -126,7 +126,7 @@ issue_format = "`#{issue} <https://github.com/ansys/ansys-sphinx-theme/pull/{iss
 
 [[tool.towncrier.type]]
 directory = "added"
-name = "Added"
+name = "Features"
 showcontent = true
 
 [[tool.towncrier.type]]
@@ -136,7 +136,7 @@ showcontent = true
 
 [[tool.towncrier.type]]
 directory = "fixed"
-name = "Fixed"
+name = "Bug Fixes"
 showcontent = true
 
 [[tool.towncrier.type]]
@@ -168,6 +168,10 @@ showcontent = true
 directory = "whatsnew"
 name = "Whatsnew"
 showcontent = true
+
+[[tool.towncrier.section]]
+name = ""
+path = ""
 
 [[tool.towncrier.section]]
 name = "Whatsnew"

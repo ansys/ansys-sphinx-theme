@@ -1,56 +1,36 @@
-{% for category, val in sections["Whatsnew"].items() %}
-{{ category }}
-{% set underline = '^' * category|length %}
-{{ underline }}
+{% if sections["Whatsnew"] %}
+  {%+ for category, val in sections["Whatsnew"].items() +%}
+    {%+ if definitions.get(category) and definitions[category].get('name') +%}
+{{ definitions[category]['name'] }}
+{{ "~" * definitions[category]['name']|length }}
+    {% endif %}
+    {%- for text, values in sections["Whatsnew"][category].items() %}
 
-{%- for text, values in val.items() -%}
-{# get first line of text #}
-{% set heading = text.split('\n')[0] -%}
-{# get remaining text #}
-{% set remaining_text = text.split('\n')[1:] %}
-{# join remaining text #}
-{% set remaining_text = remaining_text|join('\n') %}
+{{ text }}
 
-**{{ heading }}**
-
-{{ remaining_text }}
-
-  .. tab-item:: {{ heading}}
-
-      .. list-table::
-          :header-rows: 0
-          :widths: auto
-
-            {{ remaining_text|indent(9) }}
-
-{% endfor %}
-{% endfor %}
+    {% endfor -%}
+  {% endfor %}
+{% endif %}
 
 {% if sections[""] %}
-{% for category, val in definitions.items() if category in sections[""] %}
 
-  .. tab-item:: {{ category }}
+Changelog
+---------
 
-      .. list-table::
-          :header-rows: 0
-          :widths: auto
+.. tab-set::
+  {%+ for category, val in definitions.items() if category in sections[""] +%}
+  .. tab-item:: {{ definitions[category]['name'] }}
 
-            {%- for text, values in sections[""][category].items() %}
-            * - {{ text }}
-              - {{ values|join(', ') }}
-            {%- endfor %}
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
 
-{{ definitions[category]['name'] }}
-{% set underline = '^' * definitions[category]['name']|length %}
-{{ underline }}
+    {%+ for text, values in sections[""][category].items() +%}
+        * - {{ text }}
+          - {{ values|join(', ') }}
+    {% endfor %}
+  {% endfor %}
 
-{% for text, values in sections[""][category].items() %}
-- {{ text }} {{ values|join(', ') }}
-{% endfor %}
-
-{% endfor %}
 {% else %}
 No significant changes.
-
-
 {% endif %}
