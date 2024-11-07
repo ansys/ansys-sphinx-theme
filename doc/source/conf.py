@@ -66,6 +66,10 @@ html_theme_options = {
         "limit": 7,
         "minMatchCharLength": 3,
     },
+    "whatsnew": {
+        "file": "release-note",
+        "pages": ["index", "release-note"],
+    },
 }
 
 index_patterns = {
