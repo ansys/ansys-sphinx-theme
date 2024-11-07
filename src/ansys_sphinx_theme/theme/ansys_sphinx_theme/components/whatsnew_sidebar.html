@@ -1,0 +1,20 @@
+<div class="whatsnew-sidebar">
+    <h2><strong>What's New</strong></h2>
+    <ul>
+        {% for whatsnew in whatsnew %}
+        {% set title = whatsnew.get('title') %}
+        {% set url = whatsnew.get('url') %}
+        {% set children = whatsnew.get('children') %}
+        <ui>
+            <strong>{{ title }}</strong>  <!-- Display version title -->
+            <!-- child element is list with one url-->
+            {% for child in children %}
+            <li><a href="{{ url }}">{{ child }}</a></li> <!-- Display child element as a link -->
+            {% endfor %}
+        </ui>
+      {% endfor %}
+    </ul>
+  </div>
+  <!-- add style file -->
+  <link rel="stylesheet" href="{{ pathto('_static/css/whatsnew.css', 1) }}">
+
