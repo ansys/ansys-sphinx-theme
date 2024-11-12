@@ -117,7 +117,7 @@ require(["fuse"], function (Fuse) {
     const warningBanner = document.createElement("div");
     warningBanner.className = "warning-banner";
     warningBanner.textContent =
-      "No results found. Press Enter for page search.";
+      "No results found. Press Enter for extended search.";
     warningBanner.style.display = "block";
     warningBanner.style.fontStyle = "italic";
     RESULTS.appendChild(warningBanner);
