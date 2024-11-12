@@ -8,15 +8,15 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
-Version `v0.12.0 <https://github.com/ansys/pymechanical/releases/tag/vv0.12.0>`_ (2024-11-07)
-=============================================================================================
+Version `0.12.0 <https://github.com/ansys/pymechanical/releases/tag/v0.12.0>`_ (November 12, 2024)
+==================================================================================================
 
 
 Whatsnew
-~~~~~~~~
+--------
 
 Launch GUI
-----------
+^^^^^^^^^^
 Open the current project with Mechanical GUI.
 
 .. code:: python
@@ -96,6 +96,9 @@ Changelog
 
         * - Enable 'show_prev_next' in the documented defaults
           - `#580 <https://github.com/ansys/ansys-sphinx-theme/pull/580>`_
+
+        * - docs: whatsnew jinja template testing
+          - `#583 <https://github.com/ansys/ansys-sphinx-theme/pull/583>`_
 
 .. vale on
 
