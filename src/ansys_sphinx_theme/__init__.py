@@ -571,6 +571,8 @@ def extract_whatsnew(app, doctree, docname):
 
                 headers = [child[0].astext() for child in children]
 
+                # header_anchors = [child.get("ids")[0] for child in children]
+
                 if len(children) > 1:
                     children = headers[1:]
 
@@ -579,6 +581,7 @@ def extract_whatsnew(app, doctree, docname):
 
                 contents = {
                     "title": title,
+                    "title_url": f"{document_name}.html#{version_node.get('ids')[0]}",
                     "children": children,
                     "url": f"{document_name}.html#{whats_new_nodes[0]['ids'][0]}",
                 }

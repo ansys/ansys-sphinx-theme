@@ -4,10 +4,12 @@
         {% for whatsnew in whatsnew %}
         {% set title = whatsnew.get('title') %}
         {% set url = whatsnew.get('url') %}
+        {% set title_url = whatsnew.get('title_url') %}
         {% set children = whatsnew.get('children') %}
+        <h3><strong><a href="{{ title_url }}">{{ title }}</a></strong></h3>
+        <!-- current link -->
         <ui>
-            <strong>{{ title }}</strong>  <!-- Display version title -->
-            <!-- child element is list with one url-->
+            <!-- child element is dictionary -->
             {% for child in children %}
             <li><a href="{{ url }}">{{ child }}</a></li> <!-- Display child element as a link -->
             {% endfor %}
@@ -17,4 +19,18 @@
   </div>
   <!-- add style file -->
   <link rel="stylesheet" href="{{ pathto('_static/css/whatsnew.css', 1) }}">
+
+  <script>
+    // Add a current, if the url is the anchor
+
+    // Get the current page URL
+    var currentAnchor = window.location.hash;
+    whats_new_links = document.querySelectorAll('.whatsnew-sidebar a');
+    whats_new_links.forEach(function(link) {
+        if (link.href === currentAnchor) {
+            link.classList.add('current');
+        }
+    });
+  </script>
+
 
