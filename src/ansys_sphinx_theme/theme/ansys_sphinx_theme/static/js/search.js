@@ -1,6 +1,6 @@
 const SEARCH_BAR = document.getElementById("search-bar");
 const SEARCH_INPUT = SEARCH_BAR.querySelector(".bd-search input.form-control");
-const RESULTS = document.getElementById("search-results");
+const RESULTS = document.getElementById("static-search-results");
 const MAIN_PAGE_CONTENT = document.querySelector(".bd-main");
 let CURRENT_INDEX = -1;
 
@@ -28,12 +28,13 @@ require(["fuse"], function (Fuse) {
   // Initialize Fuse when the data is fetched
   function initializeFuse(data, options) {
     fuse = new Fuse(data, options);
+    // add env variable "FUSE_ACTIVE" to indicate that the search is ready
+    document.documentElement.setAttribute("data-fuse_active", "true");
   }
 
   // Expand the search bar input
   function expandSearchInput() {
     RESULTS.style.display = "flex";
-    searchingForResultsBanner();
     SEARCH_INPUT.classList.add("expanded");
     MAIN_PAGE_CONTENT.classList.add("blurred");
     SEARCH_INPUT.focus();
@@ -115,7 +116,8 @@ require(["fuse"], function (Fuse) {
     RESULTS.style.display = "flex";
     const warningBanner = document.createElement("div");
     warningBanner.className = "warning-banner";
-    warningBanner.textContent = "No results found.";
+    warningBanner.textContent =
+      "No results found. Press Enter for extended search.";
     warningBanner.style.display = "block";
     warningBanner.style.fontStyle = "italic";
     RESULTS.appendChild(warningBanner);
@@ -187,6 +189,12 @@ require(["fuse"], function (Fuse) {
           const href = resultItems[CURRENT_INDEX].dataset.href;
           navigateToHref(href);
         }
+        if (resultItems.length > 0) {
+          event.preventDefault(); // Prevent default enter action
+          const href = resultItems[0].dataset.href;
+          navigateToHref(href);
+        }
+
         break;
 
       case "ArrowDown":
@@ -205,7 +213,15 @@ require(["fuse"], function (Fuse) {
         break;
 
       default:
-        searchingForResultsBanner();
+        // if environment variable "FUSE_ACTIVE" is set to true
+        if (
+          document.documentElement.getAttribute("data-fuse_active") === "true"
+        ) {
+          searchingForResultsBanner();
+        } else {
+          console.error("[AST]: Fuse is not active yet.");
+          RESULTS.style.display = "none";
+        }
         handleSearchInput();
     }
   }
