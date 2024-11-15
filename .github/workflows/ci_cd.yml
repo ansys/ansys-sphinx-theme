@@ -50,6 +50,9 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
+      - name: "Checkout repo"
+        uses: actions/checkout@v4
+
       - name: "Install dependencies"
         run: |
           python -m pip install --upgrade pip
