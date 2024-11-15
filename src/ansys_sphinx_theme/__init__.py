@@ -550,6 +550,8 @@ def extract_whatsnew(app, doctree, docname):
     get_doctree = app.env.get_doctree(document_name)
     whats_new_content = []
     docs_content = get_doctree.traverse(nodes.section)
+    app.env.whatsnew_content = []
+
     if not docs_content:
         return
 
@@ -558,35 +560,38 @@ def extract_whatsnew(app, doctree, docname):
     # get the version nodes upto the specified number of headers
     versions_nodes = versions_nodes[:no_of_contents]
 
-    if versions_nodes:
-        for version_node in versions_nodes:
-            title = version_node[0].astext()
+    if not versions_nodes:
+        return
 
-            sections = list(version_node.traverse(nodes.section))
+    for version_node in versions_nodes:
+        title = version_node[0].astext()
+        sections = list(version_node.traverse(nodes.section))
 
-            whats_new_nodes = [node for node in sections if node.get("ids")[0] == "whatsnew"]
+        whats_new_nodes = [node for node in sections if node[0].astext().lower() == "whatsnew"]
 
-            if whats_new_nodes:
-                children = [node for node in whats_new_nodes[0].traverse(nodes.section)]
+        if not whats_new_nodes:
+            continue
 
-                headers = [child[0].astext() for child in children]
+        children = [node for node in whats_new_nodes[0].traverse(nodes.section)]
 
-                # header_anchors = [child.get("ids")[0] for child in children]
+        headers = [child[0].astext() for child in children]
 
-                if len(children) > 1:
-                    children = headers[1:]
+        # header_anchors = [child.get("ids")[0] for child in children]
 
-                else:
-                    children = [whats_new_nodes[0].traverse(nodes.paragraph)[0].astext()]
+        if len(children) > 1:
+            children = headers[1:]
 
-                contents = {
-                    "title": title,
-                    "title_url": f"{document_name}.html#{version_node.get('ids')[0]}",
-                    "children": children,
-                    "url": f"{document_name}.html#{whats_new_nodes[0]['ids'][0]}",
-                }
+        else:
+            children = [whats_new_nodes[0].traverse(nodes.paragraph)[0].astext()]
 
-                whats_new_content.append(contents)
+        contents = {
+            "title": title,
+            "title_url": f"{document_name}.html#{version_node.get('ids')[0]}",
+            "children": children,
+            "url": f"{document_name}.html#{whats_new_nodes[0]['ids'][0]}",
+        }
+
+        whats_new_content.append(contents)
 
     app.env.whatsnew_content = whats_new_content
 

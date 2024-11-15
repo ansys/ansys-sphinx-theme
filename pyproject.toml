@@ -54,6 +54,9 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.0.4",
 ]
+changelog = [
+    "sphinx-design==0.6.1",
+]
 
 [project.entry-points."sphinx.html_themes"]
 ansys_sphinx_theme = "ansys_sphinx_theme"
@@ -119,7 +122,7 @@ show_missing = true
 [tool.towncrier]
 directory = "doc/changelog.d"
 filename = "doc/source/release-note.rst"
-template = "doc/changelog.d/changelog_template.jinja"
+template = "ansys_sphinx_theme:changelog_template.jinja"
 start_string = ".. towncrier release notes start\n"
 title_format = "Version `{version} <https://github.com/ansys/pymechanical/releases/tag/v{version}>`_ ({project_date})"
 issue_format = "`#{issue} <https://github.com/ansys/ansys-sphinx-theme/pull/{issue}>`_"
