@@ -548,9 +548,9 @@ def extract_whatsnew(app, doctree, docname):
     no_of_contents = whats_new_options.get("no_of_headers", 3)
     document_name = whats_new_options.get("file", "release-note")
     doctree = app.env.get_doctree(document_name)
-    whats_new_content = []
+    whatsnew = []
     docs_content = doctree.traverse(nodes.section)
-    app.env.whatsnew_content = []
+    app.env.whatsnew = []
 
     if not docs_content:
         return
@@ -567,31 +567,30 @@ def extract_whatsnew(app, doctree, docname):
         title = version_node[0].astext()
         sections = list(version_node.traverse(nodes.section))
 
-        whats_new_nodes = [node for node in sections if node[0].astext().lower() == "whatsnew"]
+        whatsnew_nodes = [node for node in sections if node[0].astext().lower() == "whatsnew"]
 
-        if not whats_new_nodes:
+        if not whatsnew_nodes:
             continue
 
-        children = [node for node in whats_new_nodes[0].traverse(nodes.section)]
+        children = [node for node in whatsnew_nodes[0].traverse(nodes.section)]
 
         headers = [child[0].astext() for child in children]
-
 
         if len(children) > 1:
             children = headers[1:]
         else:
-            children = [whats_new_nodes[0].traverse(nodes.paragraph)[0].astext()]
+            children = [whatsnew_nodes[0].traverse(nodes.paragraph)[0].astext()]
 
         contents = {
             "title": title,
             "title_url": f"{document_name}.html#{version_node.get('ids')[0]}",
             "children": children,
-            "url": f"{document_name}.html#{whats_new_nodes[0]['ids'][0]}",
+            "url": f"{document_name}.html#{whatsnew_nodes[0]['ids'][0]}",
         }
 
-        whats_new_content.append(contents)
+        whatsnew.append(contents)
 
-    app.env.whatsnew_content = whats_new_content
+    app.env.whatsnew = whatsnew
 
 
 def add_whatsnew(app, pagename, templatename, context, doctree):
@@ -606,7 +605,7 @@ def add_whatsnew(app, pagename, templatename, context, doctree):
         return
 
     whatsnew = context.get("whatsnew", [])
-    whatsnew.extend(app.env.whatsnew_content)
+    whatsnew.extend(app.env.whatsnew)
     context["whatsnew"] = whatsnew
     sidebar = context.get("sidebars", [])
     sidebar.append("whatsnew_sidebar.html")
