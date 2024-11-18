@@ -9,6 +9,20 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.2.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.1>`_ - 2024-11-13
+=======================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: enable local page `Search` and default to PyData search on 'Enter' `#584 <https://github.com/ansys/ansys-sphinx-theme/pull/584>`_
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- Enable 'show_prev_next' in the documented defaults `#580 <https://github.com/ansys/ansys-sphinx-theme/pull/580>`_
+
 `1.2.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.0>`_ - 2024-10-31
 =======================================================================================
 
