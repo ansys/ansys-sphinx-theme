@@ -547,9 +547,9 @@ def extract_whatsnew(app, doctree, docname):
         return
     no_of_contents = whats_new_options.get("no_of_headers", 3)
     document_name = whats_new_options.get("file", "release-note")
-    get_doctree = app.env.get_doctree(document_name)
+    doctree = app.env.get_doctree(document_name)
     whats_new_content = []
-    docs_content = get_doctree.traverse(nodes.section)
+    docs_content = doctree.traverse(nodes.section)
     app.env.whatsnew_content = []
 
     if not docs_content:
@@ -576,11 +576,9 @@ def extract_whatsnew(app, doctree, docname):
 
         headers = [child[0].astext() for child in children]
 
-        # header_anchors = [child.get("ids")[0] for child in children]
 
         if len(children) > 1:
             children = headers[1:]
-
         else:
             children = [whats_new_nodes[0].traverse(nodes.paragraph)[0].astext()]
 
