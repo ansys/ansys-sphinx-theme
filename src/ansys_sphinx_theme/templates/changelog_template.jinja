@@ -2,7 +2,7 @@
   {%+ for category, val in sections["Whatsnew"].items() +%}
     {%+ if definitions.get(category) and definitions[category].get('name') +%}
 {{ definitions[category]['name'] }}
-{{ "-" * definitions[category]['name']|length }}
+{% set underline =  underlines[0] if underlines else '^' %}{{ underline * definitions[category]['name']|length }}
     {% endif %}
     {%- for text, values in sections["Whatsnew"][category].items() %}
 
@@ -15,7 +15,7 @@
 {% if sections[""] %}
 
 Changelog
----------
+{% set underline =  underlines[0] if underlines else '^' %}{{ underline * 8 }}
 
 .. tab-set::
   {%+ for category, val in definitions.items() if category in sections[""] +%}

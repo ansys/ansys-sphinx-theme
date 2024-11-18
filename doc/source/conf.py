@@ -67,8 +67,8 @@ html_theme_options = {
         "minMatchCharLength": 3,
     },
     "whatsnew": {
-        "file": "release-note",
-        "pages": ["index", "release-note"],
+        "file": "changelog",
+        "pages": ["index", "changelog"],
     },
 }
 

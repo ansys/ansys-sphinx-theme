@@ -37,7 +37,7 @@ are included in the theme to make documentation more appealing and user-friendly
         {% endif %}
 
         .. grid-item-card:: :material-regular:`update;1.25em` Changelog
-            :link: release-note
+            :link: changelog
             :link-type: doc
 
             View the changelog for this project.
@@ -53,4 +53,4 @@ are included in the theme to make documentation more appealing and user-friendly
        {% if build_examples %}
        examples.rst
        {% endif %}
-       release-note.rst
+       changelog
