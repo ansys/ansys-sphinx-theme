@@ -21,7 +21,7 @@ for the documentation landing page for the Ansys repository:
 
    html_theme_options = {
        "github_url": "https://github.com/ansys/ansys-sphinx-theme",
-       "show_prev_next": False,
+       "show_prev_next": True,
        "show_breadcrumbs": True,
        "additional_breadcrumbs": [
            ("PyAnsys", "https://docs.pyansys.com/"),
