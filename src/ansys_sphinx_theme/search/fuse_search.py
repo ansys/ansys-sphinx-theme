@@ -101,7 +101,11 @@ class SearchIndex:
                 for element_child in element.children:
                     if element_child.tagname != "desc_signature":
                         continue
-                    section_anchor_id = element_child.attributes["ids"][0]
+                    section_anchor_id = (
+                        element_child.attributes["ids"][0]
+                        if element_child.attributes["ids"]
+                        else section_anchor_id
+                    )
             section_text = element.astext()
             section_title = _desc_anchor_to_title(title, section_anchor_id)
             self.sections.append(
