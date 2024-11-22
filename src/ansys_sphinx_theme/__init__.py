@@ -585,7 +585,9 @@ def setup(app: Sphinx) -> Dict:
     # Add default HTML configuration
     setup_default_html_theme_options(app)
 
-    update_search_config(app)
+    use_pyansys_search = app.config.html_theme_options.get("use_ansys_search", False)
+    if use_pyansys_search:
+        update_search_config(app)
 
     # Verify that the main CSS file exists
     if not CSS_PATH.exists():
@@ -604,7 +606,8 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", add_cheat_sheet)
     app.connect("html-page-context", add_search_option)
     app.connect("build-finished", replace_html_tag)
-    app.connect("build-finished", create_search_index)
+    if use_pyansys_search:
+        app.connect("build-finished", create_search_index)
     return {
         "version": __version__,
         "parallel_read_safe": True,
