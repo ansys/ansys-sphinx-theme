@@ -27,6 +27,7 @@ import os
 import pathlib
 import subprocess
 from typing import Any, Dict
+import warnings
 
 from docutils import nodes
 from sphinx import addnodes
@@ -433,6 +434,28 @@ def add_cheat_sheet(
         context["sidebars"] = sidebar
 
 
+def add_search_option(
+    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document
+) -> None:
+    """Control the type of searching used.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    pagename : str
+        Name of the current page.
+    templatename : str
+        Name of the template being used.
+    context : dict
+        Context dictionary for the page.
+    doctree : ~docutils.nodes.document
+        The doctree.
+    """
+    use_pyansys_search = app.config.html_theme_options.get("use_ansys_search", False)
+    context["use_ansys_search"] = use_pyansys_search
+
+
 def build_quarto_cheatsheet(app: Sphinx):
     """
     Build the Quarto cheatsheet.
@@ -533,8 +556,10 @@ def check_for_depreciated_theme_options(app: Sphinx):
     """
     theme_options = app.config.html_theme_options
     if "use_meilisearch" in theme_options:
-        raise DeprecationWarning(
-            "The 'use_meilisearch' option is deprecated. Remove the option from your configuration file."  # noqa: E501
+        warnings.warn(
+            "The 'use_meilisearch' option is deprecated. Remove the option "
+            "from your configuration file.",
+            DeprecationWarning,
         )
 
 
@@ -577,6 +602,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
+    app.connect("html-page-context", add_search_option)
     app.connect("build-finished", replace_html_tag)
     app.connect("build-finished", create_search_index)
     return {
