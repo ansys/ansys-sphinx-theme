@@ -1,7 +1,5 @@
 /* Provided by the Sphinx base theme template at build time */
 
-@import "../basic.css";
-@import "ansys-sphinx-theme-variable.css";
 @import "pydata-sphinx-theme-custom.css";
 @import "breadcrumbs.css";
 @import "ast-search.css";
