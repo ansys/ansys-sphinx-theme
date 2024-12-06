@@ -538,6 +538,80 @@ def check_for_depreciated_theme_options(app: Sphinx):
         )
 
 
+def extract_whatsnew(app, doctree, docname):
+    """Extract the what's new content from the document."""
+    config_options = app.config.html_theme_options
+
+    whats_new_options = config_options.get("whatsnew")
+    if not whats_new_options:
+        return
+    no_of_contents = whats_new_options.get("no_of_headers", 3)
+    document_name = whats_new_options.get("file", "release-note")
+    doctree = app.env.get_doctree(document_name)
+    whatsnew = []
+    docs_content = doctree.traverse(nodes.section)
+    app.env.whatsnew = []
+
+    if not docs_content:
+        return
+
+    versions_nodes = [node for node in docs_content if node.get("ids")[0].startswith("version")]
+
+    # get the version nodes upto the specified number of headers
+    versions_nodes = versions_nodes[:no_of_contents]
+
+    if not versions_nodes:
+        return
+
+    for version_node in versions_nodes:
+        title = version_node[0].astext()
+        sections = list(version_node.traverse(nodes.section))
+
+        whatsnew_nodes = [node for node in sections if node[0].astext().lower() == "whatsnew"]
+
+        if not whatsnew_nodes:
+            continue
+
+        children = [node for node in whatsnew_nodes[0].traverse(nodes.section)]
+
+        headers = [child[0].astext() for child in children]
+
+        if len(children) > 1:
+            children = headers[1:]
+        else:
+            children = [whatsnew_nodes[0].traverse(nodes.paragraph)[0].astext()]
+
+        contents = {
+            "title": title,
+            "title_url": f"{document_name}.html#{version_node.get('ids')[0]}",
+            "children": children,
+            "url": f"{document_name}.html#{whatsnew_nodes[0]['ids'][0]}",
+        }
+
+        whatsnew.append(contents)
+
+    app.env.whatsnew = whatsnew
+
+
+def add_whatsnew(app, pagename, templatename, context, doctree):
+    """Add what's new section to the context."""
+    config_options = app.config.html_theme_options
+    whats_new_options = config_options.get("whatsnew")
+    if not whats_new_options:
+        return
+
+    pages = whats_new_options.get("pages", ["index"])
+    if pagename not in pages:
+        return
+
+    whatsnew = context.get("whatsnew", [])
+    whatsnew.extend(app.env.whatsnew)
+    context["whatsnew"] = whatsnew
+    sidebar = context.get("sidebars", [])
+    sidebar.append("whatsnew_sidebar.html")
+    context["sidebars"] = sidebar
+
+
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -574,6 +648,8 @@ def setup(app: Sphinx) -> Dict:
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("builder-inited", check_for_depreciated_theme_options)
+    app.connect("doctree-resolved", extract_whatsnew)
+    app.connect("html-page-context", add_whatsnew)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
