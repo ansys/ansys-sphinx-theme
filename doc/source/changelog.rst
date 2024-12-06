@@ -8,6 +8,14 @@ Release notes
 
 .. towncrier release notes start
 
+`1.2.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.2>`_ - 2024-11-21
+=======================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: section ids with search `#586 <https://github.com/ansys/ansys-sphinx-theme/pull/586>`_
+
 `1.2.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.1>`_ - 2024-11-13
 =======================================================================================
 
