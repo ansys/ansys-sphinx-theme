@@ -566,60 +566,37 @@ def add_whatsnew_changelog(app, doctree, docname):
     """Add what's new content from whatsnew.yml into the changelog.rst file."""
     no_of_contents, whatsnew_file, changelog_file = retrieve_whatsnew_input(app)
 
-    # Add what's new content to changelog.rst file
-    # print("Adding what's new content to changelog.rst file")
-
     if changelog_file in docname:
         # Read changelog.rst file
         # Extract the what's new content from the changelog file
-        doctree = app.env.get_doctree(changelog_file)
-        whatsnew = []
-        docs_content = doctree.traverse(nodes.section)
-        app.env.whatsnew = []
-
         doctree = app.env.get_doctree(docname)
-        print(f"HELLOOO\n{docname}\n")
-        # print(docname)
-        # print(doctree)
-
         docs_content = doctree.traverse(nodes.section)
         # print("DOCS CONTENT")
         # print(docs_content)
 
         if not docs_content:
-            # print(f"NO CONTENTS\n")
             return
 
-        for section in doctree.traverse(nodes.section):
-            title = section.next_node(nodes.Titular)
-            if title:
-                print(title.astext())
-        # minor_versions = []
-        minor_versions = {}
+        minor_versions = []
         for node in docs_content:
+            # remove one node and add another node - not doctree
             section_name = node.get("names")
             if section_name:
                 patch_version = re.search(SEMVER_REGEX, section_name[0])
                 if patch_version:
                     minor_version = ".".join(patch_version.groups()[:2])
                     if minor_version not in minor_versions:
-                        # create section for minor version
+                        minor_versions.append(minor_version)
                         minor_version_section = nodes.section(
                             ids=[f"version-{minor_version}"], names=[f"Version {minor_version}"]
                         )
                         minor_version_section += nodes.title("", f"Version {minor_version}")
-                        # minor_version_section.setup_child(node)
-                        minor_versions[minor_version] = [
-                            minor_version_section,
-                            node.parent,
-                            node.children,
-                        ]
-                        doctree.insert(0, minor_version_section)
+                        # print(f"node: {node}")
+                        node.extend(minor_version_section)
+                        print("")
 
-        # print(f"MINOR VERSIONS\n{minor_versions}\n")
-        print(doctree)
-
-        app.env.whatsnew = doctree
+        # print(app.env)
+        # doctree = app.env.get_doctree(docname)
 
 
 def extract_whatsnew(app, doctree, docname):
@@ -728,6 +705,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("builder-inited", check_for_depreciated_theme_options)
+    # env-updated or doctree-resolved (after doctree-read and before html-page-context)
     app.connect("doctree-resolved", add_whatsnew_changelog)
     app.connect("doctree-resolved", extract_whatsnew)
     app.connect("html-page-context", add_whatsnew_sidebar)
