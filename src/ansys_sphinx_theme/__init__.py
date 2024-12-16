@@ -25,6 +25,7 @@
 import logging
 import os
 import pathlib
+import re
 import subprocess
 from typing import Any, Dict
 
@@ -64,6 +65,15 @@ LOGOS_PATH = STATIC_PATH / "logos"
 
 ANSYS_LOGO_LINK = "https://www.ansys.com/"
 PYANSYS_LOGO_LINK = "https://docs.pyansys.com/"
+
+"""Semantic version regex as found on semver.org:
+https://semver.org/#is-there-a-suggested-regular-expression-regex-to-check-a-semver-string"""
+SEMVER_REGEX = (
+    r"(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)"
+    r"(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)"
+    r"(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?"
+    r"(?:\+(>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?"
+)
 
 # make logo paths available
 ansys_favicon = str((LOGOS_PATH / "ansys-favicon.png").absolute())
@@ -538,16 +548,86 @@ def check_for_depreciated_theme_options(app: Sphinx):
         )
 
 
-def extract_whatsnew(app, doctree, docname):
-    """Extract the what's new content from the document."""
+def retrieve_whatsnew_input(app: Sphinx):
     config_options = app.config.html_theme_options
 
     whats_new_options = config_options.get("whatsnew")
     if not whats_new_options:
         return
+
     no_of_contents = whats_new_options.get("no_of_headers", 3)
-    document_name = whats_new_options.get("file", "release-note")
-    doctree = app.env.get_doctree(document_name)
+    whatsnew_file = whats_new_options.get("whatsnew_file", "whatsnew")  # .yml
+    changelog_file = whats_new_options.get("changelog_file", "changelog")  # .rst
+
+    return no_of_contents, whatsnew_file, changelog_file
+
+
+def add_whatsnew_changelog(app, doctree, docname):
+    """Add what's new content from whatsnew.yml into the changelog.rst file."""
+    no_of_contents, whatsnew_file, changelog_file = retrieve_whatsnew_input(app)
+
+    # Add what's new content to changelog.rst file
+    # print("Adding what's new content to changelog.rst file")
+
+    if changelog_file in docname:
+        # Read changelog.rst file
+        # Extract the what's new content from the changelog file
+        doctree = app.env.get_doctree(changelog_file)
+        whatsnew = []
+        docs_content = doctree.traverse(nodes.section)
+        app.env.whatsnew = []
+
+        doctree = app.env.get_doctree(docname)
+        print(f"HELLOOO\n{docname}\n")
+        # print(docname)
+        # print(doctree)
+
+        docs_content = doctree.traverse(nodes.section)
+        # print("DOCS CONTENT")
+        # print(docs_content)
+
+        if not docs_content:
+            # print(f"NO CONTENTS\n")
+            return
+
+        for section in doctree.traverse(nodes.section):
+            title = section.next_node(nodes.Titular)
+            if title:
+                print(title.astext())
+        # minor_versions = []
+        minor_versions = {}
+        for node in docs_content:
+            section_name = node.get("names")
+            if section_name:
+                patch_version = re.search(SEMVER_REGEX, section_name[0])
+                if patch_version:
+                    minor_version = ".".join(patch_version.groups()[:2])
+                    if minor_version not in minor_versions:
+                        # create section for minor version
+                        minor_version_section = nodes.section(
+                            ids=[f"version-{minor_version}"], names=[f"Version {minor_version}"]
+                        )
+                        minor_version_section += nodes.title("", f"Version {minor_version}")
+                        # minor_version_section.setup_child(node)
+                        minor_versions[minor_version] = [
+                            minor_version_section,
+                            node.parent,
+                            node.children,
+                        ]
+                        doctree.insert(0, minor_version_section)
+
+        # print(f"MINOR VERSIONS\n{minor_versions}\n")
+        print(doctree)
+
+        app.env.whatsnew = doctree
+
+
+def extract_whatsnew(app, doctree, docname):
+    """Extract the what's new content from the document."""
+    no_of_contents, whatsnew_file, changelog_file = retrieve_whatsnew_input(app)
+
+    # Extract the what's new content from the changelog file
+    doctree = app.env.get_doctree(changelog_file)
     whatsnew = []
     docs_content = doctree.traverse(nodes.section)
     app.env.whatsnew = []
@@ -583,9 +663,9 @@ def extract_whatsnew(app, doctree, docname):
 
         contents = {
             "title": title,
-            "title_url": f"{document_name}.html#{version_node.get('ids')[0]}",
+            "title_url": f"{changelog_file}.html#{version_node.get('ids')[0]}",
             "children": children,
-            "url": f"{document_name}.html#{whatsnew_nodes[0]['ids'][0]}",
+            "url": f"{changelog_file}.html#{whatsnew_nodes[0]['ids'][0]}",
         }
 
         whatsnew.append(contents)
@@ -593,7 +673,7 @@ def extract_whatsnew(app, doctree, docname):
     app.env.whatsnew = whatsnew
 
 
-def add_whatsnew(app, pagename, templatename, context, doctree):
+def add_whatsnew_sidebar(app, pagename, templatename, context, doctree):
     """Add what's new section to the context."""
     config_options = app.config.html_theme_options
     whats_new_options = config_options.get("whatsnew")
@@ -648,8 +728,9 @@ def setup(app: Sphinx) -> Dict:
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("builder-inited", check_for_depreciated_theme_options)
+    app.connect("doctree-resolved", add_whatsnew_changelog)
     app.connect("doctree-resolved", extract_whatsnew)
-    app.connect("html-page-context", add_whatsnew)
+    app.connect("html-page-context", add_whatsnew_sidebar)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)

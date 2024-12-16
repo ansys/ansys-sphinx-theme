@@ -1,43 +1,4 @@
-{% set minor_version = ".".join(versiondata["version"].split(".")[0:2]) %}
-{% set title_format = "Version "+ minor_version %}
-{% if render_title %}
-{% if versiondata.name %}
-`{{ title_format }} <{{ versiondata.name }}/release/v{{ versiondata.version }}>`- ({{ versiondata.date }})
-{{ top_underline * ((versiondata.name + versiondata.version + versiondata.version + versiondata.date)|length + 40)}}
-{% else %}
-{{ title_format }} ({{ versiondata.date }})
-{{ top_underline * ((versiondata.version + versiondata.date)|length + 40)}}
-{% endif %}
-{% endif %}
-
-{% if sections["Whatsnew"] %}
-  {%+ for category, val in sections["Whatsnew"].items() +%}
-    {%+ if definitions.get(category) and definitions[category].get('name') +%}
-{{ definitions[category]['name'] }}
-{% set underline =  underlines[0] if underlines else '^' %}{{ underline * definitions[category]['name']|length }}
-    {% endif %}
-    {%- for text, values in sections["Whatsnew"][category].items() %}
-
-    {{ text }}
-
-    {% endfor -%}
-  {% endfor %}
-{% endif %}
-
-{% if render_title %}
-{% if versiondata.name %}
-`{{versiondata.version}} <{{ versiondata.name }}/release/v{{ versiondata.version }}>`- ({{ versiondata.date }})
-{{ top_underline * ((versiondata.name + versiondata.version + versiondata.version + versiondata.date)|length + 20)}}
-{% else %}
-{{versiondata.version}} ({{ versiondata.date }})
-{{ top_underline * ((versiondata.version + versiondata.date)|length + 3)}}
-{% endif %}
-{% endif %}
-
 {% if sections[""] %}
-
-Changelog
-{% set underline =  underlines[0] if underlines else '^' %}{{ underline * 9 }}
 
 .. tab-set::
   {%+ for category, val in definitions.items() if category in sections[""] +%}
