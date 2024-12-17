@@ -562,44 +562,65 @@ def retrieve_whatsnew_input(app: Sphinx):
     return no_of_contents, whatsnew_file, changelog_file
 
 
-def add_whatsnew_changelog(app, doctree, docname):
-    """Add what's new content from whatsnew.yml into the changelog.rst file."""
-    no_of_contents, whatsnew_file, changelog_file = retrieve_whatsnew_input(app)
-    
-    if not changelog_file in docname:
+def add_whatsnew_changelog(app, doctree):
+    """Create doctree with minor version and what's new content."""
+    # Read the file and get the sections from the file as a list. For example,
+    # sections = [<document: <target...><section "getting started; ref-getting-starte ...>]
+    sections = doctree.traverse(nodes.document)
+    if not sections:
         return
 
+    # The source directory of the documentation: {repository_root}/doc/source
+    src_files = app.env.srcdir
+    changelog_file = pathlib.Path(src_files) / "changelog.rst"
 
-    if changelog_file in docname:
-        # Read changelog.rst file
-        # Extract the what's new content from the changelog file
-        doctree = app.env.get_doctree(docname)
-        docs_content = doctree.traverse(nodes.section)
-        # print("DOCS CONTENT")
+    # Get the file name of the section using section.get("source") and return the section
+    # if section.get("source") is equal to the changelog_file
+    changelog_doctree_sections = [
+        section for section in sections if section.get("source") == str(changelog_file)
+    ]
 
-        if not docs_content:
-            return
+    # Return if the changelog file sections are not found
+    if not changelog_doctree_sections:
+        return
 
-        minor_versions = []
-        for node in docs_content:
-            # remove one node and add another node - not doctree
-            section_name = node.get("names")
-            if section_name:
-                patch_version = re.search(SEMVER_REGEX, section_name[0])
-                if patch_version:
-                    minor_version = ".".join(patch_version.groups()[:2])
-                    if minor_version not in minor_versions:
-                        minor_versions.append(minor_version)
-                        minor_version_section = nodes.section(
-                            ids=[f"version-{minor_version}"], names=[f"Version {minor_version}"]
-                        )
-                        minor_version_section += nodes.title("", f"Version {minor_version}")
-                        # print(f"node: {node}")
-                        node.extend(minor_version_section)
-                        print("")
+    # to do: get the version from the config, also get patch and minor version
+    minor_version = get_version_match(app.env.config.version)
+    patch_version = app.env.config.version.split(".")[2]
 
-        # print(app.env)
-        # doctree = app.env.get_doctree(docname)
+    docs_content = doctree.traverse(nodes.section)
+    minor_versions = []
+    # minor_versions = {}
+    for node in docs_content:
+        # Get the content of the next node
+        next_node = node.next_node(nodes.reference)
+        # Get the name of the next node
+        section_name = next_node.get("name")
+        if section_name:
+            # Get the patch version from the section name
+            patch_version = re.search(SEMVER_REGEX, section_name)
+            if patch_version:
+                # Create the minor version from the patch version
+                minor_version = ".".join(patch_version.groups()[:2])
+                if minor_version not in minor_versions:
+                    minor_versions.append(minor_version)
+                    # Create a section for the minor version
+                    minor_version_section = nodes.section(
+                        ids=[f"version-{minor_version}"], names=[f"Version {minor_version}"]
+                    )
+                    # Add the title to the section for the minor version
+                    minor_version_section += nodes.title("", f"Version {minor_version}")
+
+                    if "release notes" in node[0].astext().lower():
+                        # Add the title with the minor version after "Release Notes"
+                        node.insert(1, minor_version_section)
+                    else:
+                        # Add the title at the beginning of a section with a patch version
+                        node.insert(0, minor_version_section)
+
+                    # minor_versions[minor_version] = minor_version_section
+                    # print(node)
+                    # print("\n\n")
 
 
 def extract_whatsnew(app, doctree, docname):
@@ -670,58 +691,61 @@ def add_whatsnew_sidebar(app, pagename, templatename, context, doctree):
     sidebar = context.get("sidebars", [])
     sidebar.append("whatsnew_sidebar.html")
     context["sidebars"] = sidebar
-    
+
+
 def get_whatsnew_doctree(app, doctree):
-    
     sections = doctree.traverse(nodes.document)
     if not sections:
         return
-    
+
     src_files = app.env.srcdir
     changelog_file = pathlib.Path(src_files) / "changelog.rst"
-    changelog_doctree_sections = [section for section in sections if section.get("source") == str(changelog_file)]
+    changelog_doctree_sections = [
+        section for section in sections if section.get("source") == str(changelog_file)
+    ]
     print(changelog_doctree_sections)
-    
+
     # check minor and patch version
-    complete_version = "1.2.3"
-    # TODO : get the version from the config, alo get patch and minor version
-    minor_version  = get_version_match(app.env.config.version)
+    # complete_version = "1.2.3"
+    # to do: get the version from the config, also get patch and minor version
+    minor_version = get_version_match(app.env.config.version)
     patch_version = app.env.config.version.split(".")[2]
-    
+
     if patch_version == "0":
         # create a title for the all the minor versions
         # add another title of whatsnew
         return
-    
+
     elif patch_version == "dev0":
         return
         # check if the minor version exists
-        # add whatnew of patch to the whatsnew of minor 
-        
+        # add whatnew of patch to the whatsnew of minor
+
         # get the doctree
-    
+
     # get the doctree
     no_of_contents, whatsnew_file, changelog_file = retrieve_whatsnew_input(app)
-    
-        
-        # get the sections of patch
-        
+
+    # get the sections of patch
+
     # no need of patch version nodes
-        
-        # create a new node with title of minor version and sub title whatsnew
-        # add the node to the doctree before patch version node
-        
-    minor_version_node = nodes.section(ids=[f"version-{minor_version}"], names=[f"Version {minor_version}"])
+
+    # create a new node with title of minor version and sub title whatsnew
+    # add the node to the doctree before patch version node
+
+    minor_version_node = nodes.section(
+        ids=[f"version-{minor_version}"], names=[f"Version {minor_version}"]
+    )
     minor_version_node += nodes.title("", f"Version {minor_version}")
-    minor_version_node += nodes.title("", "Whats New")
+    minor_version_node += nodes.title("", "What's New")
     minor_version_node += nodes.paragraph("", "Add the whatsnew content here")
-    
+
     # add the node to the doctree
     for node in changelog_doctree_sections:
         node.next_node(minor_version_node)
-        
+
     doctree.extend(minor_version_node)
-    
+
 
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
@@ -760,8 +784,8 @@ def setup(app: Sphinx) -> Dict:
     app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("builder-inited", check_for_depreciated_theme_options)
     # env-updated or doctree-resolved (after doctree-read and before html-page-context)
-    app.connect("doctree-read", get_whatsnew_doctree)
-    app.connect("doctree-resolved", add_whatsnew_changelog)
+    # app.connect("doctree-read", get_whatsnew_doctree)
+    app.connect("doctree-read", add_whatsnew_changelog)
     app.connect("doctree-resolved", extract_whatsnew)
     app.connect("html-page-context", add_whatsnew_sidebar)
     app.connect("html-page-context", update_footer_theme)
