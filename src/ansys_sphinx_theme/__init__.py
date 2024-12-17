@@ -565,6 +565,10 @@ def retrieve_whatsnew_input(app: Sphinx):
 def add_whatsnew_changelog(app, doctree, docname):
     """Add what's new content from whatsnew.yml into the changelog.rst file."""
     no_of_contents, whatsnew_file, changelog_file = retrieve_whatsnew_input(app)
+    
+    if not changelog_file in docname:
+        return
+
 
     if changelog_file in docname:
         # Read changelog.rst file
@@ -572,7 +576,6 @@ def add_whatsnew_changelog(app, doctree, docname):
         doctree = app.env.get_doctree(docname)
         docs_content = doctree.traverse(nodes.section)
         # print("DOCS CONTENT")
-        # print(docs_content)
 
         if not docs_content:
             return
@@ -667,7 +670,58 @@ def add_whatsnew_sidebar(app, pagename, templatename, context, doctree):
     sidebar = context.get("sidebars", [])
     sidebar.append("whatsnew_sidebar.html")
     context["sidebars"] = sidebar
-
+    
+def get_whatsnew_doctree(app, doctree):
+    
+    sections = doctree.traverse(nodes.document)
+    if not sections:
+        return
+    
+    src_files = app.env.srcdir
+    changelog_file = pathlib.Path(src_files) / "changelog.rst"
+    changelog_doctree_sections = [section for section in sections if section.get("source") == str(changelog_file)]
+    print(changelog_doctree_sections)
+    
+    # check minor and patch version
+    complete_version = "1.2.3"
+    # TODO : get the version from the config, alo get patch and minor version
+    minor_version  = get_version_match(app.env.config.version)
+    patch_version = app.env.config.version.split(".")[2]
+    
+    if patch_version == "0":
+        # create a title for the all the minor versions
+        # add another title of whatsnew
+        return
+    
+    elif patch_version == "dev0":
+        return
+        # check if the minor version exists
+        # add whatnew of patch to the whatsnew of minor 
+        
+        # get the doctree
+    
+    # get the doctree
+    no_of_contents, whatsnew_file, changelog_file = retrieve_whatsnew_input(app)
+    
+        
+        # get the sections of patch
+        
+    # no need of patch version nodes
+        
+        # create a new node with title of minor version and sub title whatsnew
+        # add the node to the doctree before patch version node
+        
+    minor_version_node = nodes.section(ids=[f"version-{minor_version}"], names=[f"Version {minor_version}"])
+    minor_version_node += nodes.title("", f"Version {minor_version}")
+    minor_version_node += nodes.title("", "Whats New")
+    minor_version_node += nodes.paragraph("", "Add the whatsnew content here")
+    
+    # add the node to the doctree
+    for node in changelog_doctree_sections:
+        node.next_node(minor_version_node)
+        
+    doctree.extend(minor_version_node)
+    
 
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
@@ -706,6 +760,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("builder-inited", check_for_depreciated_theme_options)
     # env-updated or doctree-resolved (after doctree-read and before html-page-context)
+    app.connect("doctree-read", get_whatsnew_doctree)
     app.connect("doctree-resolved", add_whatsnew_changelog)
     app.connect("doctree-resolved", extract_whatsnew)
     app.connect("html-page-context", add_whatsnew_sidebar)
