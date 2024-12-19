@@ -186,6 +186,50 @@ def setup_default_html_theme_options(app):
         theme_options["pygments_dark_style"] = "monokai"
 
 
+def fix_toctree(app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document):
+    """Add the what's new content to the html page."""
+    from bs4 import BeautifulSoup
+
+    if "changelog" in pagename:
+        body = context.get("body", "")
+        toc = context.get("toc", "")
+        
+        print(toc)
+        
+        # add minor versions and what's new sections to toctree
+
+        # body = BeautifulSoup(body, 'html.parser')
+        # # print(soup.prettify())
+        # for section in body.find_all('section'):
+        #     # release_notes_title = section.find('h1')
+        #     # print(release_notes_title)
+        #     for h2 in section.find_all('h2'):
+        #         patch_version = re.search(SEMVER_REGEX, h2.text)
+        #         if patch_version:
+        #             # Create the minor version from the patch version
+        #             minor_version = ".".join(patch_version.groups()[:2])
+        #             if minor_version not in minor_versions:
+        #                 minor_versions.append(minor_version)
+        #                 minor_version = ".".join(patch_version.groups()[:2])
+                        
+        #                 h2.name = "h3"
+
+        #                 minor_version_title = body.new_tag("h2", id=f"version-{minor_version}")
+        #                 minor_version_title.string = f"Version {minor_version}"
+                        
+        #                 # if release_notes_title != None:
+        #                 #     release_notes_title.append(minor_version_title)
+        #                 # else:
+        #                 h2.parent.append(minor_version_title)
+        #                 # print(h2.parent)
+        #                 # print(h2)
+        #                 # print("")
+        #             else:
+        #                 h2.name = "h3"
+
+        # context["body"] = body
+
+
 def fix_edit_html_page_context(
     app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
 ) -> None:
@@ -584,7 +628,7 @@ def add_whatsnew_changelog(app, doctree):
 
     # Return if the changelog file sections are not found
     if not changelog_doctree_sections:
-        return
+        return    
 
     # Open what's new yaml file, load the data, and get the minor versions
     whatsnew_file = pathlib.Path(src_files) / f"{whatsnew_file}.yml"
@@ -631,7 +675,7 @@ def add_whatsnew_changelog(app, doctree):
                         minor_version_whatsnew = add_whatsnew_to_minor_version(
                             minor_version, whatsnew_data
                         )
-                        minor_version_section.extend(minor_version_whatsnew)
+                        minor_version_section.append(minor_version_whatsnew)
 
                     # Insert the minor_version_section into the node
                     if "release notes" in node[0].astext().lower():
@@ -644,7 +688,7 @@ def add_whatsnew_changelog(app, doctree):
 
 def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
     """Add the what's new title and content under the minor version."""
-    # Add the what's new section and title
+    # Add the what's new section and title    
     minor_version_whatsnew = nodes.section(
         ids=[f"version-{minor_version}-whatsnew"], names=["What's New"]
     )
@@ -653,7 +697,13 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
     # For each fragment in the what's new yaml file, add the content as a paragraph
     for fragment in whatsnew_data["fragments"]:
         if minor_version in fragment["patch"]:
-            minor_version_whatsnew += nodes.paragraph("", fragment["content"])
+            whatsnew_dropdown = nodes.container(body_classes=[""], chevron=True, container_classes=["sd-mb-3 sd-fade-in-slide-down"], design_component="dropdown", has_title=True, icon="", is_div=True, opened=False, title_classes=[""], type="dropdown")
+            whatsnew_dropdown += nodes.rubric("span", fragment["title"])
+            whatsnew_dropdown += nodes.paragraph("xml:space='preserve'", fragment["content"])
+            # lines = fragment["content"].split("\n")
+            # for line in lines:
+            #     minor_version_whatsnew += nodes.literal_block("", line)
+            minor_version_whatsnew.append(whatsnew_dropdown)
 
     return minor_version_whatsnew
 
@@ -728,60 +778,6 @@ def add_whatsnew_sidebar(app, pagename, templatename, context, doctree):
     context["sidebars"] = sidebar
 
 
-def get_whatsnew_doctree(app, doctree):
-    sections = doctree.traverse(nodes.document)
-    if not sections:
-        return
-
-    src_files = app.env.srcdir
-    changelog_file = pathlib.Path(src_files) / "changelog.rst"
-    changelog_doctree_sections = [
-        section for section in sections if section.get("source") == str(changelog_file)
-    ]
-    print(changelog_doctree_sections)
-
-    # check minor and patch version
-    # complete_version = "1.2.3"
-    # to do: get the version from the config, also get patch and minor version
-    minor_version = get_version_match(app.env.config.version)
-    patch_version = app.env.config.version.split(".")[2]
-
-    if patch_version == "0":
-        # create a title for the all the minor versions
-        # add another title of whatsnew
-        return
-
-    elif patch_version == "dev0":
-        return
-        # check if the minor version exists
-        # add whatnew of patch to the whatsnew of minor
-
-        # get the doctree
-
-    # get the doctree
-    no_of_contents, whatsnew_file, changelog_file = retrieve_whatsnew_input(app)
-
-    # get the sections of patch
-
-    # no need of patch version nodes
-
-    # create a new node with title of minor version and sub title whatsnew
-    # add the node to the doctree before patch version node
-
-    minor_version_node = nodes.section(
-        ids=[f"version-{minor_version}"], names=[f"Version {minor_version}"]
-    )
-    minor_version_node += nodes.title("", f"Version {minor_version}")
-    minor_version_node += nodes.title("", "What's New")
-    minor_version_node += nodes.paragraph("", "Add the whatsnew content here")
-
-    # add the node to the doctree
-    for node in changelog_doctree_sections:
-        node.next_node(minor_version_node)
-
-    doctree.extend(minor_version_node)
-
-
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -818,13 +814,12 @@ def setup(app: Sphinx) -> Dict:
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("builder-inited", check_for_depreciated_theme_options)
-    # env-updated or doctree-resolved (after doctree-read and before html-page-context)
-    # app.connect("doctree-read", get_whatsnew_doctree)
     app.connect("doctree-read", add_whatsnew_changelog)
     app.connect("doctree-resolved", extract_whatsnew)
     app.connect("html-page-context", add_whatsnew_sidebar)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
+    # app.connect("html-page-context", fix_toctree)
     app.connect("html-page-context", add_cheat_sheet)
     app.connect("build-finished", replace_html_tag)
     app.connect("build-finished", create_search_index)
