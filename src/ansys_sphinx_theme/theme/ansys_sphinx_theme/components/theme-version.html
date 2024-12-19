@@ -9,6 +9,6 @@
 <script>
   var options = { day: "numeric", month: "long", year: "numeric" };
   var ast_lastModifiedDate = new Date(document.lastModified);
-  var ast_build_date = lastModifiedDate.toLocaleDateString("en-US", options);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
   document.getElementById("ast_build_date").innerHTML = ast_build_date;
 </script>
