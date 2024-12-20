@@ -186,17 +186,18 @@ def setup_default_html_theme_options(app):
         theme_options["pygments_dark_style"] = "monokai"
 
 
-def fix_toctree(app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document):
+def fix_toctree(
+    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document
+):
     """Add the what's new content to the html page."""
     from bs4 import BeautifulSoup
 
     if "changelog" in pagename:
         body = context.get("body", "")
         toc = context.get("toc", "")
-        
+
+        # Update toctree with minor & what's new sections
         print(toc)
-        
-        # add minor versions and what's new sections to toctree
 
         # body = BeautifulSoup(body, 'html.parser')
         # # print(soup.prettify())
@@ -211,12 +212,12 @@ def fix_toctree(app: Sphinx, pagename: str, templatename: str, context: Dict[str
         #             if minor_version not in minor_versions:
         #                 minor_versions.append(minor_version)
         #                 minor_version = ".".join(patch_version.groups()[:2])
-                        
+
         #                 h2.name = "h3"
 
         #                 minor_version_title = body.new_tag("h2", id=f"version-{minor_version}")
         #                 minor_version_title.string = f"Version {minor_version}"
-                        
+
         #                 # if release_notes_title != None:
         #                 #     release_notes_title.append(minor_version_title)
         #                 # else:
@@ -628,7 +629,7 @@ def add_whatsnew_changelog(app, doctree):
 
     # Return if the changelog file sections are not found
     if not changelog_doctree_sections:
-        return    
+        return
 
     # Open what's new yaml file, load the data, and get the minor versions
     whatsnew_file = pathlib.Path(src_files) / f"{whatsnew_file}.yml"
@@ -685,25 +686,58 @@ def add_whatsnew_changelog(app, doctree):
                         # Add the title at the beginning of a section with a patch version
                         node.insert(0, minor_version_section)
 
+    # print(doctree)
+
 
 def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
     """Add the what's new title and content under the minor version."""
-    # Add the what's new section and title    
+    # Add the what's new section and title
     minor_version_whatsnew = nodes.section(
         ids=[f"version-{minor_version}-whatsnew"], names=["What's New"]
     )
     minor_version_whatsnew += nodes.title("", "What's New")
 
+    # <container body_classes="" chevron="True" container_classes="sd-mb-3 sd-fade-in-slide-down" design_component="dropdown" has_title="True" icon="True" is_div="True" opened="False" title_classes="" type="dropdown">
+    # <rubric>How do you report issues?</rubric>
+    # <paragraph>Visualize imported geometry in 3D. This feature is available only from 24R1 or later.</paragraph>
+    # <literal_block force="False" highlight_args="{}" language="python" xml:space="preserve">
+    # import ansys.mechanical.core as mech
+    # app = mech.App(version=242)
+    # app.update_globals(globals())
+    # # Import the geometry
+    # # visualize
+    # app.plot()</literal_block></container>
+
     # For each fragment in the what's new yaml file, add the content as a paragraph
     for fragment in whatsnew_data["fragments"]:
         if minor_version in fragment["patch"]:
-            whatsnew_dropdown = nodes.container(body_classes=[""], chevron=True, container_classes=["sd-mb-3 sd-fade-in-slide-down"], design_component="dropdown", has_title=True, icon="", is_div=True, opened=False, title_classes=[""], type="dropdown")
-            whatsnew_dropdown += nodes.rubric("span", fragment["title"])
-            whatsnew_dropdown += nodes.paragraph("xml:space='preserve'", fragment["content"])
+            whatsnew_dropdown = nodes.container(
+                body_classes=[""],
+                chevron=True,
+                container_classes=["sd-mb-3 sd-fade-in-slide-down"],
+                design_component="dropdown",
+                has_title=True,
+                icon="",
+                is_div=True,
+                opened=False,
+                title_classes=[""],
+                type="dropdown",
+            )
+            whatsnew_dropdown += nodes.rubric("", fragment["title"])
+
             # lines = fragment["content"].split("\n")
-            # for line in lines:
-            #     minor_version_whatsnew += nodes.literal_block("", line)
+
+            whatsnew_dropdown += nodes.literal_block(
+                force="False",
+                highlight_args={"highlight-python notranslate"},
+                language="python",
+                xml_space="preserve",
+                text="print('hello world')",
+            )
+
             minor_version_whatsnew.append(whatsnew_dropdown)
+
+    # print(minor_version_whatsnew)
 
     return minor_version_whatsnew
 
