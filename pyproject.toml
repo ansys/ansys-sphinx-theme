@@ -24,7 +24,7 @@ classifiers = [
 ]
 dependencies = [
     "Sphinx>=4.2.0",
-    "pydata-sphinx-theme>=0.15.4,<0.17",
+    "pydata-sphinx-theme>=0.15.4,<0.16",
     "Jinja2>=3.1.2",
     "importlib-metadata>=4.0",
     "pdf2image>=1.17.0",
