@@ -39,7 +39,7 @@ autoapi = [
 doc = [
     "jupytext==1.16.6",
     "notebook==7.3.2",
-    "nbsphinx==0.9.5",
+    "nbsphinx==0.9.6",
     "numpydoc==1.8.0",
     "pandas==2.2.3",
     "Pillow>=9.0",
