@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2021 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -22,6 +22,7 @@
 
 """Module for the Ansys Sphinx theme."""
 
+from itertools import tee
 import logging
 import os
 import pathlib
@@ -193,7 +194,7 @@ def fix_toctree(
     from bs4 import BeautifulSoup
 
     if "changelog" in pagename:
-        body = context.get("body", "")
+        # body = context.get("body", "")
         toc = context.get("toc", "")
 
         # Update toctree with minor & what's new sections
@@ -697,17 +698,6 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
     )
     minor_version_whatsnew += nodes.title("", "What's New")
 
-    # <container body_classes="" chevron="True" container_classes="sd-mb-3 sd-fade-in-slide-down" design_component="dropdown" has_title="True" icon="True" is_div="True" opened="False" title_classes="" type="dropdown">
-    # <rubric>How do you report issues?</rubric>
-    # <paragraph>Visualize imported geometry in 3D. This feature is available only from 24R1 or later.</paragraph>
-    # <literal_block force="False" highlight_args="{}" language="python" xml:space="preserve">
-    # import ansys.mechanical.core as mech
-    # app = mech.App(version=242)
-    # app.update_globals(globals())
-    # # Import the geometry
-    # # visualize
-    # app.plot()</literal_block></container>
-
     # For each fragment in the what's new yaml file, add the content as a paragraph
     for fragment in whatsnew_data["fragments"]:
         if minor_version in fragment["patch"]:
@@ -727,19 +717,76 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
 
             # lines = fragment["content"].split("\n")
 
-            whatsnew_dropdown += nodes.literal_block(
-                force="False",
-                highlight_args={"highlight-python notranslate"},
-                language="python",
-                xml_space="preserve",
-                text="print('hello world')",
-            )
+            # whatsnew_dropdown += nodes.paragraph("sd-card-text", "test paragraph")
+
+            # source_code = [block.astext() for block in doctree.traverse(nodes.literal_block)
+            #    if 'code' in block.attributes['classes']]
+
+            content_lines = fragment["content"].split("\n")
+
+            content_iterator = iter(enumerate(content_lines))
+            iterator_copy, content_iterator = tee(iter(enumerate(content_lines)))
+
+            for line_index, line in content_iterator:
+                if ".. code" in line:
+                    code_block = nodes.container(classes=["highlight-python notranslate"])
+                    highlight_container = nodes.container(classes=["highlight"])
+
+                    # Create literal block with copy button
+                    literal_block = nodes.literal_block(
+                        classes=[
+                            "sd-button sd-button--icon sd-button--icon-only sd-button--icon-small"
+                        ],
+                        icon="copy",
+                        label="Copy",
+                        title="Copy",
+                    )
+
+                    next_line = next(content_iterator, None)
+                    next(iterator_copy, None)
+                    if next_line is not None:
+                        while (next_line[1].startswith(" ")) or (next_line[1] == ""):
+                            formatted_line = next_line[1].lstrip() + "\n"
+                            literal_block += nodes.inline(text=formatted_line)
+                            next_line = next(content_iterator, None)
+                            next(iterator_copy, None)
+                            if next_line is None:
+                                break
+
+                        highlight_container += literal_block
+
+                    code_block += highlight_container
+                    whatsnew_dropdown += code_block
+
+                    if next_line is not None:
+                        # formatted_line = next_line[1].replace("\n", "")
+                        whatsnew_dropdown += nodes.line("sd-card-text", next_line[1])
+                else:
+                    whatsnew_dropdown += nodes.line("sd-card-text", line)
+                    # check = next(iterator_copy, None)
+                    # if (check is not None) and (".. code" in check[1]):
+                    #     print(check[1])
+                    #     if line != "":
+                    #         whatsnew_dropdown += nodes.paragraph("sd-card-text", line)
+                    # else:
+                    #     whatsnew_dropdown += nodes.line("sd-card-text", line)
 
             minor_version_whatsnew.append(whatsnew_dropdown)
 
     # print(minor_version_whatsnew)
 
     return minor_version_whatsnew
+
+
+# def has_next(iterator):
+#     # Create a copy of the iterator
+#     iterator_copy, iterator = tee(iterator)
+#     try:
+#         # Try to get the next item from the copy
+#         next(iterator_copy)
+#         return True
+#     except StopIteration:
+#         return False
 
 
 def extract_whatsnew(app, doctree, docname):
