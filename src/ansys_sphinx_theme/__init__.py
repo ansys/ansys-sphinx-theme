@@ -640,7 +640,7 @@ def add_whatsnew_changelog(app, doctree):
 
         whatsnew_minor_versions = set()
         for fragment in whatsnew_data["fragments"]:
-            yaml_minor_version = ".".join(fragment["patch"].split(".")[:2])
+            yaml_minor_version = ".".join(fragment["version"].split(".")[:2])
             whatsnew_minor_versions.add(yaml_minor_version)
 
     # to do: get the version from the config, also get patch and minor version
@@ -700,7 +700,7 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
 
     # For each fragment in the what's new yaml file, add the content as a paragraph
     for fragment in whatsnew_data["fragments"]:
-        if minor_version in fragment["patch"]:
+        if minor_version in fragment["version"]:
             whatsnew_dropdown = nodes.container(
                 body_classes=[""],
                 chevron=True,
@@ -715,67 +715,60 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
             )
             whatsnew_dropdown += nodes.rubric("", fragment["title"])
 
-            # lines = fragment["content"].split("\n")
-
-            # whatsnew_dropdown += nodes.paragraph("sd-card-text", "test paragraph")
-
-            # source_code = [block.astext() for block in doctree.traverse(nodes.literal_block)
-            #    if 'code' in block.attributes['classes']]
-
+            # Split content from YAML file into list
             content_lines = fragment["content"].split("\n")
 
+            # Create iterator for the content_lines
             content_iterator = iter(enumerate(content_lines))
             iterator_copy, content_iterator = tee(iter(enumerate(content_lines)))
 
             for line_index, line in content_iterator:
+                next(iterator_copy, None)
                 if ".. code" in line:
-                    code_block = nodes.container(classes=["highlight-python notranslate"])
-                    highlight_container = nodes.container(classes=["highlight"])
-
-                    # Create literal block with copy button
-                    literal_block = nodes.literal_block(
-                        classes=[
-                            "sd-button sd-button--icon sd-button--icon-only sd-button--icon-small"
-                        ],
-                        icon="copy",
-                        label="Copy",
-                        title="Copy",
-                    )
-
-                    next_line = next(content_iterator, None)
-                    next(iterator_copy, None)
-                    if next_line is not None:
-                        while (next_line[1].startswith(" ")) or (next_line[1] == ""):
-                            formatted_line = next_line[1].lstrip() + "\n"
-                            literal_block += nodes.inline(text=formatted_line)
-                            next_line = next(content_iterator, None)
-                            next(iterator_copy, None)
-                            if next_line is None:
-                                break
-
-                        highlight_container += literal_block
-
-                    code_block += highlight_container
+                    code_block = create_code_block(content_iterator, iterator_copy)
                     whatsnew_dropdown += code_block
-
-                    if next_line is not None:
-                        # formatted_line = next_line[1].replace("\n", "")
-                        whatsnew_dropdown += nodes.line("sd-card-text", next_line[1])
                 else:
                     whatsnew_dropdown += nodes.line("sd-card-text", line)
-                    # check = next(iterator_copy, None)
-                    # if (check is not None) and (".. code" in check[1]):
-                    #     print(check[1])
-                    #     if line != "":
-                    #         whatsnew_dropdown += nodes.paragraph("sd-card-text", line)
-                    # else:
-                    #     whatsnew_dropdown += nodes.line("sd-card-text", line)
 
             minor_version_whatsnew.append(whatsnew_dropdown)
 
-    # print(minor_version_whatsnew)
-
     return minor_version_whatsnew
+
+
+def create_code_block(content_iterator, iterator_copy):
+    code_block = nodes.container(classes=["highlight-python notranslate"])
+    highlight_container = nodes.container(classes=["highlight"])
+
+    # Create literal block with copy button
+    literal_block = nodes.literal_block(
+        classes=["sd-button sd-button--icon sd-button--icon-only sd-button--icon-small"],
+        icon="copy",
+        label="Copy",
+        title="Copy",
+    )
+
+    next_line = next(content_iterator, None)
+    next_line_copy = next(iterator_copy, None)
+
+    if next_line is not None:
+        while next_line[1].startswith(" ") or (next_line[1] == ""):
+            formatted_line = next_line[1].lstrip() + "\n"
+            literal_block += nodes.inline(text=formatted_line)
+
+            next_line_copy = next(iterator_copy, None)
+            if next_line_copy is not None:
+                if next_line_copy[1].startswith(" ") or next_line_copy[1] == "":
+                    next_line = next(content_iterator, None)
+                else:
+                    break
+            else:
+                break
+
+        highlight_container += literal_block
+
+    code_block += highlight_container
+
+    return code_block
 
 
 # def has_next(iterator):
