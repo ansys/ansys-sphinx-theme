@@ -452,8 +452,8 @@ def add_search_option(
     doctree : ~docutils.nodes.document
         The doctree.
     """
-    use_pyansys_search = app.config.html_theme_options.get("use_ansys_search", False)
-    context["use_ansys_search"] = use_pyansys_search
+    use_ansys_search = app.config.html_theme_options.get("use_ansys_search", False)
+    context["use_ansys_search"] = use_ansys_search
 
 
 def build_quarto_cheatsheet(app: Sphinx):
@@ -585,7 +585,7 @@ def setup(app: Sphinx) -> Dict:
     # Add default HTML configuration
     setup_default_html_theme_options(app)
 
-    use_pyansys_search = app.config.html_theme_options.get("use_ansys_search", False)
+    use_ansys_search = app.config.html_theme_options.get("use_ansys_search", True)
     if use_pyansys_search:
         update_search_config(app)
 
@@ -606,7 +606,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", add_cheat_sheet)
     app.connect("html-page-context", add_search_option)
     app.connect("build-finished", replace_html_tag)
-    if use_pyansys_search:
+    if use_ansys_search:
         app.connect("build-finished", create_search_index)
     return {
         "version": __version__,
