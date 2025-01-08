@@ -48,7 +48,7 @@ html_context = {
     "github_version": "main",
     "doc_path": "doc/source",
     "page_assets": {
-        "table": {
+        "examples/table": {
             "needs_datatables": True,
         },
     },
