@@ -60,7 +60,6 @@ JS_PATH = STATIC_PATH / "js"
 CSS_PATH = STYLE_PATH / "ansys_sphinx_theme.css"
 TEMPLATES_PATH = THEME_PATH / "_templates"
 AUTOAPI_TEMPLATES_PATH = TEMPLATES_PATH / "autoapi"
-JS_FILE = JS_PATH / "table.js"
 LOGOS_PATH = STATIC_PATH / "logos"
 
 ANSYS_LOGO_LINK = "https://www.ansys.com/"
@@ -571,7 +570,6 @@ def setup(app: Sphinx) -> Dict:
     if not CSS_PATH.exists():
         raise FileNotFoundError(f"Unable to locate ansys-sphinx theme at {CSS_PATH.absolute()}")
     app.add_css_file(str(CSS_PATH.relative_to(STATIC_PATH)))
-    app.add_js_file(str(JS_FILE.relative_to(STATIC_PATH)))
     app.config.templates_path.append(str(TEMPLATES_PATH))
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")

@@ -35,6 +35,7 @@
   {{ super() }}
 
   <!-- Include desired assets -->
+  {% set assets = page_assets.get(pagename, {}) %}
   {% if assets.get("needs_datatables") %}
   <script>
     $(document).ready(function () {
