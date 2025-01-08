@@ -586,7 +586,7 @@ def setup(app: Sphinx) -> Dict:
     setup_default_html_theme_options(app)
 
     use_ansys_search = app.config.html_theme_options.get("use_ansys_search", True)
-    if use_pyansys_search:
+    if use_ansys_search:
         update_search_config(app)
 
     # Verify that the main CSS file exists
