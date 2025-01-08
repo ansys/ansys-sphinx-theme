@@ -30,3 +30,17 @@
     {%- include "components/ast-search-button.html" %}
   {%  endif %}
 {%- endblock %}
+
+{%- block scripts_end %}
+  {{ super() }}
+
+  <!-- Include desired assets -->
+  {% if assets.get("needs_datatables") %}
+  <script>
+    $(document).ready(function () {
+      $("table.datatable").DataTable();
+    });
+  </script>
+  {% endif %}
+
+{%- endblock %}
