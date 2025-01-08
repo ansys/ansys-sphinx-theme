@@ -17,7 +17,7 @@
 
 {%- block content %}
   {{ super() }}
-  {% if use_ansys_search %}
+  {% if theme_use_ansys_search %}
     {%- include "components/ast-search-button.html" %}
   {%  endif %}
 {%- endblock %}

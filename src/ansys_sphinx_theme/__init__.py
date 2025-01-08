@@ -434,28 +434,6 @@ def add_cheat_sheet(
         context["sidebars"] = sidebar
 
 
-def add_search_option(
-    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document
-) -> None:
-    """Control the type of searching used.
-
-    Parameters
-    ----------
-    app : ~sphinx.application.Sphinx
-        Application instance for rendering the documentation.
-    pagename : str
-        Name of the current page.
-    templatename : str
-        Name of the template being used.
-    context : dict
-        Context dictionary for the page.
-    doctree : ~docutils.nodes.document
-        The doctree.
-    """
-    use_ansys_search = app.config.html_theme_options.get("use_ansys_search", False)
-    context["use_ansys_search"] = use_ansys_search
-
-
 def build_quarto_cheatsheet(app: Sphinx):
     """
     Build the Quarto cheatsheet.
@@ -604,7 +582,6 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", add_cheat_sheet)
-    app.connect("html-page-context", add_search_option)
     app.connect("build-finished", replace_html_tag)
     if use_ansys_search:
         app.connect("build-finished", create_search_index)
