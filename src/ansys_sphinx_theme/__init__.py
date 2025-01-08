@@ -615,4 +615,4 @@ def setup(app: Sphinx) -> Dict:
     }
 
 
-__all__ = ["__version__", "generate_404", "get_version_match", "TITLEs", "PARAGRAPHS", "ALL_NODES"]
+__all__ = ["__version__", "generate_404", "get_version_match", "TITLES", "PARAGRAPHS", "ALL_NODES"]
