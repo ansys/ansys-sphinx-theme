@@ -9,6 +9,22 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.2.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.4>`_ - 2024-12-20
+=======================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: impose upper version for the pydata-sphinx-theme `#603 <https://github.com/ansys/ansys-sphinx-theme/pull/603>`_
+
+`1.2.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.3>`_ - 2024-12-05
+=======================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: rename the ``date`` to ``ast_build_date`` in js `#594 <https://github.com/ansys/ansys-sphinx-theme/pull/594>`_
+
 `1.2.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.2>`_ - 2024-11-21
 =======================================================================================
 

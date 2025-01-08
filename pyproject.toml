@@ -24,7 +24,7 @@ classifiers = [
 ]
 dependencies = [
     "Sphinx>=4.2.0",
-    "pydata-sphinx-theme>=0.15.4,<0.17",
+    "pydata-sphinx-theme>=0.15.4,<0.16",
     "Jinja2>=3.1.2",
     "importlib-metadata>=4.0",
     "pdf2image>=1.17.0",
@@ -32,22 +32,22 @@ dependencies = [
 
 [project.optional-dependencies]
 autoapi = [
-    "sphinx-autoapi==3.3.3",
+    "sphinx-autoapi==3.4.0",
     "sphinx-design==0.6.1",
     "sphinx-jinja==2.0.2",
 ]
 doc = [
-    "jupytext==1.16.4",
-    "notebook==7.2.2",
-    "nbsphinx==0.9.5",
+    "jupytext==1.16.6",
+    "notebook==7.3.2",
+    "nbsphinx==0.9.6",
     "numpydoc==1.8.0",
     "pandas==2.2.3",
     "Pillow>=9.0",
     "PyGitHub==2.5.0",
-    "pyvista[jupyter]==0.44.1",
+    "pyvista[jupyter]==0.44.2",
     "requests==2.32.3",
     "Sphinx==8.1.3",
-    "sphinx-autoapi==3.3.3",
+    "sphinx-autoapi==3.4.0",
     "sphinx-copybutton==0.5.2",
     "sphinx-design==0.6.1",
     "sphinx-gallery==0.18.0",
