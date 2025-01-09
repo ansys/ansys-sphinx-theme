@@ -1,7 +1,7 @@
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.6.2
+  rev: v0.8.6
   hooks:
     - id: ruff
       args: [--fix]
@@ -19,7 +19,7 @@ repos:
     types_or: [css, javascript]
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.6.0
+  rev: v5.0.0
   hooks:
   - id: check-merge-conflict
   - id: debug-statements
@@ -28,12 +28,12 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.29.2
+  rev: 0.31.0
   hooks:
     - id: check-github-workflows
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.4.3
+  rev: v0.4.4
   hooks:
   - id: add-license-headers
     files: '(src|doc/source/examples)/.*\.(py)'
