@@ -4,7 +4,7 @@ fragments:
   content: |
     Open the current project with Mechanical GUI.
 
-    .. code:: python
+    .. code-block:: python
 
         from ansys.mechanical.core import App
 
@@ -12,13 +12,13 @@ fragments:
         app.save()
         app.launch_gui()
 
-    Above code opens up the temporarily saved ``.mechdb`` or ``.mechdat`` files.
+    **Above** code opens up the *temporarily* saved ``.mechdb`` or `.mechdat` files.
     The files are deleted when GUI is closed . For more info check
-    `launch_gui() <../api/ansys/mechanical/core/embedding/launch_gui/index.html>`_ function
+    content ``before`` `launch_gui() <./user-guide/autoapi.html>`_ function `another link <https://google.com>`_ more `words`.
 
     Opens up the specified project file.
 
-    .. code:: python
+    .. sourcecode:: python
 
       launch_gui("path/to/project.mechdb")
 
@@ -28,7 +28,7 @@ fragments:
     This feature let you see the heirachial Mechanical project tree.
     It also shows whether an object is suppressed or not.
 
-    .. code:: python
+    .. code::
 
       import ansys.mechanical.core as mech
 

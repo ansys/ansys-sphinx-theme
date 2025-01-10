@@ -22,7 +22,7 @@
 
 """Module for the Ansys Sphinx theme."""
 
-from itertools import tee
+from itertools import islice, tee
 import logging
 import os
 import pathlib
@@ -719,27 +719,36 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
             content_lines = fragment["content"].split("\n")
 
             # Create iterator for the content_lines
-            content_iterator = iter(enumerate(content_lines))
-            iterator_copy, content_iterator = tee(iter(enumerate(content_lines)))
+            content_iterator = iter(content_lines)
+            line = next(content_iterator, None)
 
-            for line_index, line in content_iterator:
-                next(iterator_copy, None)
-                if ".. code" in line:
-                    code_block = create_code_block(content_iterator, iterator_copy)
+            while line is not None:
+                if ".. code" in line or ".. sourcecode" in line:
+                    code_block, line = create_code_block(content_iterator, line)
                     whatsnew_dropdown += code_block
                 else:
-                    whatsnew_dropdown += nodes.line("sd-card-text", line)
+                    paragraph, line = create_paragraph(content_iterator, line)
+                    whatsnew_dropdown += paragraph
 
             minor_version_whatsnew.append(whatsnew_dropdown)
 
     return minor_version_whatsnew
 
 
-def create_code_block(content_iterator, iterator_copy):
-    code_block = nodes.container(classes=["highlight-python notranslate"])
+def create_code_block(content_iterator, line):
+    # Get language after "code::"
+    language = line.split("::")[1].strip()
+    if language:
+        # maybe not this: nodes.container(classes=["code-block"])
+        code_block = nodes.container(classes=[f"highlight-{language} notranslate"])
+    else:
+        code_block = nodes.container()
+
+    # classes=["highlight"] is required for the copy button to show up in the literal_block
     highlight_container = nodes.container(classes=["highlight"])
 
     # Create literal block with copy button
+    # nodes.literal_block(classes=[f"language-{language}"])
     literal_block = nodes.literal_block(
         classes=["sd-button sd-button--icon sd-button--icon-only sd-button--icon-small"],
         icon="copy",
@@ -748,38 +757,94 @@ def create_code_block(content_iterator, iterator_copy):
     )
 
     next_line = next(content_iterator, None)
-    next_line_copy = next(iterator_copy, None)
 
-    if next_line is not None:
-        while next_line[1].startswith(" ") or (next_line[1] == ""):
-            formatted_line = next_line[1].lstrip() + "\n"
-            literal_block += nodes.inline(text=formatted_line)
+    while next_line is not None and (next_line.startswith(" ") or (next_line == "")):
+        formatted_line = next_line.lstrip() + "\n"
+        literal_block += nodes.inline(text=formatted_line)
 
-            next_line_copy = next(iterator_copy, None)
-            if next_line_copy is not None:
-                if next_line_copy[1].startswith(" ") or next_line_copy[1] == "":
-                    next_line = next(content_iterator, None)
-                else:
-                    break
-            else:
-                break
+        if next_line is not None:
+            next_line = next(content_iterator, None)
+        else:
+            break
 
-        highlight_container += literal_block
+    highlight_container += literal_block
 
     code_block += highlight_container
 
-    return code_block
+    return code_block, next_line
 
 
-# def has_next(iterator):
-#     # Create a copy of the iterator
-#     iterator_copy, iterator = tee(iterator)
-#     try:
-#         # Try to get the next item from the copy
-#         next(iterator_copy)
-#         return True
-#     except StopIteration:
-#         return False
+def create_paragraph(content_iterator, current_line):
+    paragraph = nodes.paragraph("sd-card-text")
+    paragraph.append(nodes.inline(text=current_line))
+
+    next_line = next(content_iterator, None)
+
+    while next_line is not None and not next_line.startswith(".. "):
+        # Regular expressions to find rst links, single backticks, and double backticks
+        rst_link_regex = r"(`([^<`]+?) <([^>`]+?)>`_)"
+        single_backtick_regex = r"(`([^`]+?)`)"
+        double_backtick_regex = r"(``(.*?)``)"
+
+        # Check if there are single or double backticks, or an RST link in the line
+        link_backtick_regex = rf"{rst_link_regex}|{single_backtick_regex}|{double_backtick_regex}"
+
+        # Get all matches for backticks and rst links in the line
+        matches = re.findall(link_backtick_regex, next_line)
+
+        if matches:
+            link_backtick_dict = {}
+            regex_matches = []
+            for match in matches:
+                if match[0] != "":
+                    regex_matches.append(match[0])
+                    link_backtick_dict[match[0]] = {"name": match[1], "url": match[2]}
+                if match[3] != "":
+                    regex_matches.append(match[3])
+                    link_backtick_dict[match[3]] = {"content": match[4]}
+                if match[5] != "":
+                    regex_matches.append(match[5])
+                    link_backtick_dict[match[5]] = {"content": match[6]}
+
+            # Create a regular expression pattern that matches any URL
+            pattern = "|".join(map(re.escape, regex_matches))
+
+            # Split the line using the pattern
+            split_lines = re.split(f"({pattern})", next_line)
+
+            for line in split_lines:
+                if line in regex_matches:
+                    # If it matches rst_link_regex, append a reference node
+                    if re.search(rst_link_regex, line):
+                        url = link_backtick_dict[line]["url"]
+                        if url.startswith("http") or url.startswith("www"):
+                            ref_type = "external"
+                        else:
+                            ref_type = "internal"
+                        paragraph.append(
+                            nodes.reference(
+                                classes=[f"reference-{ref_type}"],
+                                refuri=url,
+                                href=url,
+                                text=link_backtick_dict[line]["name"],
+                            )
+                        )
+                    elif re.search(single_backtick_regex, line) or re.search(
+                        double_backtick_regex, line
+                    ):
+                        paragraph.append(nodes.literal(text=link_backtick_dict[line]["content"]))
+                else:
+                    paragraph.append(nodes.inline(text=line))
+        else:
+            paragraph.append(nodes.inline(text=next_line))
+
+        if next_line is not None:
+            # Check if there are backticks in the line
+            next_line = next(content_iterator, None)
+        else:
+            break
+
+    return paragraph, next_line
 
 
 def extract_whatsnew(app, doctree, docname):
