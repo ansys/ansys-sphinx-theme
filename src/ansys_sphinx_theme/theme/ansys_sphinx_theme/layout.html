@@ -3,6 +3,15 @@
 {# Append our custom CSS after the bootstrap stylesheet so we can override where necessary #}
 {%- block css %}
   {{ super() }}
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  {% set assets = page_assets.get(pagename, {}) %}
+  {% if assets.get("needs_datatables") %}
+  <link href="https://cdn.datatables.net/v/dt/dt-2.2.0/datatables.min.css" rel="stylesheet">
+  <script src="https://cdn.datatables.net/v/dt/dt-2.2.0/datatables.min.js"></script>
+  {% endif %}
+
   {% if theme_show_breadcrumbs %}
     <link href="{{ pathto('_static/css/breadcrumbs.css', 1) }}" rel="stylesheet" />
   {% endif %}
@@ -17,5 +26,22 @@
 
 {%- block content %}
   {{ super() }}
-  {%- include "components/ast-search-button.html" %}
+  {% if theme_use_ansys_search %}
+    {%- include "components/ast-search-button.html" %}
+  {%  endif %}
+{%- endblock %}
+
+{%- block scripts_end %}
+  {{ super() }}
+
+  <!-- Include desired assets -->
+  {% set assets = page_assets.get(pagename, {}) %}
+  {% if assets.get("needs_datatables") %}
+  <script>
+    $(document).ready(function () {
+      $("table.datatable").DataTable();
+    });
+  </script>
+  {% endif %}
+
 {%- endblock %}
