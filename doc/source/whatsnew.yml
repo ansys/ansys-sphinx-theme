@@ -13,7 +13,7 @@ fragments:
         app.launch_gui()
 
     The above code opens up the *temporarily* saved ``.mechdb`` or `.mechdat` files.
-    The files are **deleted** when the GUI is closed. For more information, check the
+    The files are **deleted** when the ``GUI`` is closed. For more information, check the
     content ``before`` `launch_gui() <./user-guide/autoapi.html>`_ function `another link <https://google.com>`_ more `words`.
 
     Opens up the specified project file.

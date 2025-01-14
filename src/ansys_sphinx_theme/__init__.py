@@ -827,11 +827,11 @@ def fill_paragraph(
     # While the next_line is not None and is not a code block, add it to the paragraph
     while next_line is not None and not next_line.startswith(".. "):
         # Regular expressions to find rst links, and single & double backticks/asterisks
-        rst_link_regex = r"(`([^<`]+?) <([^>`]+?)>`_)"  # indices 0, 1, & 2
-        single_backtick_regex = r"(`([^`]+?)`)"  # indices 3 & 4
-        double_backtick_regex = r"(``(.*?)``)"  # indices 5 & 6
-        bold_text_regex = r"(\*\*(.*?)\*\*)"  # indices 7 & 8
-        italic_text_regex = r"(\*([^\*]+?)\*)"  # indices 9 & 10
+        rst_link_regex = r"(`[^<`]+? <[^>`]+?>`_)"
+        single_backtick_regex = r"(`[^`]+?`)"
+        double_backtick_regex = r"(``.*?``)"
+        bold_text_regex = r"(\*\*.*?\*\*)"
+        italic_text_regex = r"(\*[^\*]+?\*)"
 
         # Check if there are rst links, single & double backticks/asterisks in the line
         link_backtick_regex = (
@@ -841,35 +841,31 @@ def fill_paragraph(
         )
 
         # Get all matches for rst links, single & double backticks/asterisks in the line
+        # Sample: next_line = "The files are **deleted** when the ``GUI`` is closed. For more info"
+        # For example, matches = [('', '', '', '**deleted**', ''), ('', '', '``GUI``', '', '')]
         matches = re.findall(link_backtick_regex, next_line)
 
         if matches:
-            # Create a dictionary to store the matches and their replacements
-            link_backtick_dict = {}
-            regex_matches = []
-            for match in matches:
-                for i in range(len(match)):
-                    if i == 0 or i == 3 or i == 5 or i == 7 or i == 9:
-                        regex_matches.append(match[i])
-                        if i == 0:
-                            link_backtick_dict[match[i]] = {
-                                "name": match[i + 1],
-                                "url": match[i + 2],
-                            }
-                        else:
-                            link_backtick_dict[match[i]] = {"content": match[i + 1]}
+            # Get all of the matches from the matches list
+            # For example, regex_matches = ['**deleted**', '``GUI``']
+            regex_matches = [
+                element for match in matches for i, element in enumerate(match) if element
+            ]
 
             # Create a regular expression pattern that matches any URL
+            # For example, pattern = r"\*\*deleted\*\*|``GUI``"
             pattern = "|".join(map(re.escape, regex_matches))
 
             # Split the line using the pattern
+            # For example, split_lines = ['The files are ', '**deleted**', ' when the ', '``GUI``',
+            # ' is closed. For more info']
             split_lines = re.split(f"({pattern})", next_line)
 
             for line in split_lines:
                 if line in regex_matches:
                     # If it matches RST link regex, append a reference node
                     if re.search(rst_link_regex, line):
-                        url = link_backtick_dict[line]["url"]
+                        text, url = re.findall(r"`([^<`]+?) <([^>`]+?)>`_", line)[0]
                         if url.startswith("http") or url.startswith("www"):
                             ref_type = "external"
                         else:
@@ -879,20 +875,24 @@ def fill_paragraph(
                                 classes=[f"reference-{ref_type}"],
                                 refuri=url,
                                 href=url,
-                                text=link_backtick_dict[line]["name"],
+                                text=text,
                             )
                         )
                     # If it matches single or double backticks, append a literal node
-                    elif re.search(single_backtick_regex, line) or re.search(
-                        double_backtick_regex, line
-                    ):
-                        paragraph.append(nodes.literal(text=link_backtick_dict[line]["content"]))
+                    elif re.search(single_backtick_regex, line):
+                        text = re.findall(r"`([^`]+?)`", line)[0]
+                        paragraph.append(nodes.literal(text=text))
+                    elif re.search(double_backtick_regex, line):
+                        text = re.findall(r"``(.*?)``", line)[0]
+                        paragraph.append(nodes.literal(text=text))
                     # If it matches bold text, append a strong node
                     elif re.search(bold_text_regex, line):
-                        paragraph.append(nodes.strong(text=link_backtick_dict[line]["content"]))
+                        text = re.findall(r"\*\*(.*?)\*\*", line)[0]
+                        paragraph.append(nodes.strong(text=text))
                     # If it matches italic text, append an emphasis node
                     elif re.search(italic_text_regex, line):
-                        paragraph.append(nodes.emphasis(text=link_backtick_dict[line]["content"]))
+                        text = re.findall(r"\*([^\*]+?)\*", line)[0]
+                        paragraph.append(nodes.emphasis(text=text))
                 else:
                     paragraph.append(nodes.inline(text=line))
         else:
