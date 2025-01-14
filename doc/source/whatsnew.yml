@@ -25,7 +25,7 @@ fragments:
 - title: Print Mechanical tree
   version: 0.16.6
   content: |
-    This feature let you see the heirachial Mechanical project tree.
+    This feature lets you see the hierarchical Mechanical project tree.
     It also shows whether an object is suppressed or not.
 
     .. code::

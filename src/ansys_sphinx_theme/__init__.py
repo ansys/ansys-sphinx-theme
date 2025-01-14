@@ -726,21 +726,24 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
                 if ".. code" in line or ".. sourcecode" in line:
                     # Get language after "code::"
                     language = line.split("::")[1].strip()
-                    # Create the code block container node
+                    # Create the code block container node with the language if it exists
                     code_block = (
                         nodes.container(classes=[f"highlight-{language} notranslate"])
                         if language
                         else nodes.container()
                     )
 
+                    # Fill the code block with the following lines until it reaches the end or an
+                    # unindented line
                     code_block, line = fill_code_block(content_iterator, code_block)
                     whatsnew_dropdown += code_block
                 else:
-                    # Create the paragraph node and add the first line to it
+                    # Create the paragraph node
                     paragraph = nodes.paragraph("sd-card-text")
-                    paragraph.append(nodes.inline(text=f"{line} "))
 
-                    paragraph, line = fill_paragraph(content_iterator, paragraph)
+                    # Fill the paragraph node with the following lines until it reaches
+                    # the end or a code block
+                    paragraph, line = fill_paragraph(content_iterator, paragraph, line)
                     whatsnew_dropdown += paragraph
 
             minor_version_whatsnew.append(whatsnew_dropdown)
@@ -779,9 +782,7 @@ def fill_code_block(content_iterator, code_block):
     return code_block, next_line
 
 
-def fill_paragraph(content_iterator, paragraph):
-    next_line = next(content_iterator, None)
-
+def fill_paragraph(content_iterator, paragraph, next_line):
     while next_line is not None and not next_line.startswith(".. "):
         # Regular expressions to find rst links, single backticks, and double backticks
         rst_link_regex = r"(`([^<`]+?) <([^>`]+?)>`_)"
@@ -839,6 +840,8 @@ def fill_paragraph(content_iterator, paragraph):
                 else:
                     paragraph.append(nodes.inline(text=line))
         else:
+            # Append the next_line as an inline element, unless it is an empty string. If it's an
+            # empty string, append a line break
             paragraph.append(nodes.inline(text=next_line)) if next_line != "" else paragraph.append(
                 nodes.line(text="\n")
             )
