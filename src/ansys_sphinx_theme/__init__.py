@@ -28,7 +28,7 @@ import os
 import pathlib
 import re
 import subprocess
-from typing import Any, Dict
+from typing import Any, Dict, Iterable
 
 from docutils import nodes
 from sphinx import addnodes
@@ -698,7 +698,7 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
     )
     minor_version_whatsnew += nodes.title("", "What's New")
 
-    # For each fragment in the what's new yaml file, add the content as a paragraph
+    # Add a dropdown under the "What's New" section for each fragment in the whatsnew.yml file
     for fragment in whatsnew_data["fragments"]:
         if minor_version in fragment["version"]:
             whatsnew_dropdown = nodes.container(
@@ -720,6 +720,8 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
 
             # Create iterator for the content_lines
             content_iterator = iter(content_lines)
+
+            # Navigate to first line in the iterator
             line = next(content_iterator, None)
 
             while line is not None:
@@ -746,17 +748,31 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
                     paragraph, line = fill_paragraph(content_iterator, paragraph, line)
                     whatsnew_dropdown += paragraph
 
+            # Append the fragment dropdown to the minor_version_whatsnew section
             minor_version_whatsnew.append(whatsnew_dropdown)
 
     return minor_version_whatsnew
 
 
-def fill_code_block(content_iterator, code_block):
+def fill_code_block(content_iterator: Iterable, code_block: nodes.container) -> nodes.container:
+    """Fill the code block.
+
+    Parameters
+    ----------
+    content_iterator : Iterable
+        Iterator for the content lines from the fragments in the whatsnew.yml file.
+    code_block : nodes.container
+        Container node for the code block.
+
+    Returns
+    -------
+    nodes.container, str
+        Container node for the code block and the next line in the content iterator.
+    """
     # classes=["highlight"] is required for the copy button to show up in the literal_block
     highlight_container = nodes.container(classes=["highlight"])
 
     # Create literal block with copy button
-    # nodes.literal_block(classes=[f"language-{language}"])
     literal_block = nodes.literal_block(
         classes=["sd-button sd-button--icon sd-button--icon-only sd-button--icon-small"],
         icon="copy",
@@ -764,50 +780,84 @@ def fill_code_block(content_iterator, code_block):
         title="Copy",
     )
 
+    # Move to the first line in the code block (the line after ".. code::")
     next_line = next(content_iterator, None)
 
+    # While the next_line is indented or blank, add it to the code block
     while next_line is not None and (next_line.startswith(" ") or (next_line == "")):
         formatted_line = next_line.lstrip() + "\n"
+        # Add the formatted line to the literal block
         literal_block += nodes.inline(text=formatted_line)
 
+        # Break the loop if the end of the content is reached
         if next_line is not None:
+            # Move to the next line in the content
             next_line = next(content_iterator, None)
         else:
             break
 
+    # Add the literal block to the highlight container
     highlight_container += literal_block
 
+    # Add the highlight container to the code block
     code_block += highlight_container
 
     return code_block, next_line
 
 
-def fill_paragraph(content_iterator, paragraph, next_line):
+def fill_paragraph(
+    content_iterator: Iterable, paragraph: nodes.paragraph, next_line: str
+) -> nodes.paragraph:
+    """Fill the paragraph node.
+
+    Parameters
+    ----------
+    content_iterator : Iterable
+        Iterator for the content lines from the fragments in the whatsnew.yml file.
+    paragraph : nodes.paragraph
+        Paragraph node.
+    next_line : str
+        Next line in the content iterator.
+
+    Returns
+    -------
+    nodes.paragraph, str
+        Paragraph node and the next line in the content iterator.
+    """
+    # While the next_line is not None and is not a code block, add it to the paragraph
     while next_line is not None and not next_line.startswith(".. "):
-        # Regular expressions to find rst links, single backticks, and double backticks
-        rst_link_regex = r"(`([^<`]+?) <([^>`]+?)>`_)"
-        single_backtick_regex = r"(`([^`]+?)`)"
-        double_backtick_regex = r"(``(.*?)``)"
+        # Regular expressions to find rst links, and single & double backticks/asterisks
+        rst_link_regex = r"(`([^<`]+?) <([^>`]+?)>`_)"  # indices 0, 1, & 2
+        single_backtick_regex = r"(`([^`]+?)`)"  # indices 3 & 4
+        double_backtick_regex = r"(``(.*?)``)"  # indices 5 & 6
+        bold_text_regex = r"(\*\*(.*?)\*\*)"  # indices 7 & 8
+        italic_text_regex = r"(\*([^\*]+?)\*)"  # indices 9 & 10
 
-        # Check if there are single or double backticks, or an RST link in the line
-        link_backtick_regex = rf"{rst_link_regex}|{single_backtick_regex}|{double_backtick_regex}"
+        # Check if there are rst links, single & double backticks/asterisks in the line
+        link_backtick_regex = (
+            rf"{rst_link_regex}|"
+            rf"{single_backtick_regex}|{double_backtick_regex}|"
+            rf"{bold_text_regex}|{italic_text_regex}"
+        )
 
-        # Get all matches for backticks and rst links in the line
+        # Get all matches for rst links, single & double backticks/asterisks in the line
         matches = re.findall(link_backtick_regex, next_line)
 
         if matches:
+            # Create a dictionary to store the matches and their replacements
             link_backtick_dict = {}
             regex_matches = []
             for match in matches:
-                if match[0] != "":
-                    regex_matches.append(match[0])
-                    link_backtick_dict[match[0]] = {"name": match[1], "url": match[2]}
-                if match[3] != "":
-                    regex_matches.append(match[3])
-                    link_backtick_dict[match[3]] = {"content": match[4]}
-                if match[5] != "":
-                    regex_matches.append(match[5])
-                    link_backtick_dict[match[5]] = {"content": match[6]}
+                for i in range(len(match)):
+                    if i == 0 or i == 3 or i == 5 or i == 7 or i == 9:
+                        regex_matches.append(match[i])
+                        if i == 0:
+                            link_backtick_dict[match[i]] = {
+                                "name": match[i + 1],
+                                "url": match[i + 2],
+                            }
+                        else:
+                            link_backtick_dict[match[i]] = {"content": match[i + 1]}
 
             # Create a regular expression pattern that matches any URL
             pattern = "|".join(map(re.escape, regex_matches))
@@ -837,6 +887,12 @@ def fill_paragraph(content_iterator, paragraph, next_line):
                         double_backtick_regex, line
                     ):
                         paragraph.append(nodes.literal(text=link_backtick_dict[line]["content"]))
+                    # If it matches bold text, append a strong node
+                    elif re.search(bold_text_regex, line):
+                        paragraph.append(nodes.strong(text=link_backtick_dict[line]["content"]))
+                    # If it matches italic text, append an emphasis node
+                    elif re.search(italic_text_regex, line):
+                        paragraph.append(nodes.emphasis(text=link_backtick_dict[line]["content"]))
                 else:
                     paragraph.append(nodes.inline(text=line))
         else:
@@ -849,8 +905,9 @@ def fill_paragraph(content_iterator, paragraph, next_line):
         # Add a space at the end of each line
         paragraph.append(nodes.inline(text=" "))
 
+        # Break the loop if the end of the content is reached
         if next_line is not None:
-            # Check if there are backticks in the line
+            # Move to the next line in the content
             next_line = next(content_iterator, None)
         else:
             break
