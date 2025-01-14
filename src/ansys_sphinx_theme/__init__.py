@@ -715,6 +715,13 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
             )
             whatsnew_dropdown += nodes.rubric("", fragment["title"])
 
+            # Add a line specifying which version the fragment is available in
+            version_paragraph = nodes.paragraph("sd-card-text")
+            version_paragraph.append(
+                nodes.emphasis("", f"Available in v{fragment['version']} and later")
+            )
+            whatsnew_dropdown += version_paragraph
+
             # Split content from YAML file into list
             content_lines = fragment["content"].split("\n")
 
