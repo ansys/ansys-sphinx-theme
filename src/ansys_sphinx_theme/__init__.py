@@ -724,10 +724,23 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
 
             while line is not None:
                 if ".. code" in line or ".. sourcecode" in line:
-                    code_block, line = create_code_block(content_iterator, line)
+                    # Get language after "code::"
+                    language = line.split("::")[1].strip()
+                    # Create the code block container node
+                    code_block = (
+                        nodes.container(classes=[f"highlight-{language} notranslate"])
+                        if language
+                        else nodes.container()
+                    )
+
+                    code_block, line = fill_code_block(content_iterator, code_block)
                     whatsnew_dropdown += code_block
                 else:
-                    paragraph, line = create_paragraph(content_iterator, line)
+                    # Create the paragraph node and add the first line to it
+                    paragraph = nodes.paragraph("sd-card-text")
+                    paragraph.append(nodes.inline(text=f"{line} "))
+
+                    paragraph, line = fill_paragraph(content_iterator, paragraph)
                     whatsnew_dropdown += paragraph
 
             minor_version_whatsnew.append(whatsnew_dropdown)
@@ -735,15 +748,7 @@ def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
     return minor_version_whatsnew
 
 
-def create_code_block(content_iterator, line):
-    # Get language after "code::"
-    language = line.split("::")[1].strip()
-    if language:
-        # maybe not this: nodes.container(classes=["code-block"])
-        code_block = nodes.container(classes=[f"highlight-{language} notranslate"])
-    else:
-        code_block = nodes.container()
-
+def fill_code_block(content_iterator, code_block):
     # classes=["highlight"] is required for the copy button to show up in the literal_block
     highlight_container = nodes.container(classes=["highlight"])
 
@@ -774,10 +779,7 @@ def create_code_block(content_iterator, line):
     return code_block, next_line
 
 
-def create_paragraph(content_iterator, current_line):
-    paragraph = nodes.paragraph("sd-card-text")
-    paragraph.append(nodes.inline(text=current_line))
-
+def fill_paragraph(content_iterator, paragraph):
     next_line = next(content_iterator, None)
 
     while next_line is not None and not next_line.startswith(".. "):
@@ -814,7 +816,7 @@ def create_paragraph(content_iterator, current_line):
 
             for line in split_lines:
                 if line in regex_matches:
-                    # If it matches rst_link_regex, append a reference node
+                    # If it matches RST link regex, append a reference node
                     if re.search(rst_link_regex, line):
                         url = link_backtick_dict[line]["url"]
                         if url.startswith("http") or url.startswith("www"):
@@ -829,6 +831,7 @@ def create_paragraph(content_iterator, current_line):
                                 text=link_backtick_dict[line]["name"],
                             )
                         )
+                    # If it matches single or double backticks, append a literal node
                     elif re.search(single_backtick_regex, line) or re.search(
                         double_backtick_regex, line
                     ):
@@ -836,7 +839,12 @@ def create_paragraph(content_iterator, current_line):
                 else:
                     paragraph.append(nodes.inline(text=line))
         else:
-            paragraph.append(nodes.inline(text=next_line))
+            paragraph.append(nodes.inline(text=next_line)) if next_line != "" else paragraph.append(
+                nodes.line(text="\n")
+            )
+
+        # Add a space at the end of each line
+        paragraph.append(nodes.inline(text=" "))
 
         if next_line is not None:
             # Check if there are backticks in the line
