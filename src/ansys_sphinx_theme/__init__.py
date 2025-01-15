@@ -29,6 +29,7 @@ import pathlib
 import re
 import subprocess
 from typing import Any, Dict, Iterable
+import warnings
 
 from docutils import nodes
 from sphinx import addnodes
@@ -62,7 +63,6 @@ JS_PATH = STATIC_PATH / "js"
 CSS_PATH = STYLE_PATH / "ansys_sphinx_theme.css"
 TEMPLATES_PATH = THEME_PATH / "_templates"
 AUTOAPI_TEMPLATES_PATH = TEMPLATES_PATH / "autoapi"
-JS_FILE = JS_PATH / "table.js"
 LOGOS_PATH = STATIC_PATH / "logos"
 
 ANSYS_LOGO_LINK = "https://www.ansys.com/"
@@ -590,8 +590,10 @@ def check_for_depreciated_theme_options(app: Sphinx):
     """
     theme_options = app.config.html_theme_options
     if "use_meilisearch" in theme_options:
-        raise DeprecationWarning(
-            "The 'use_meilisearch' option is deprecated. Remove the option from your configuration file."  # noqa: E501
+        warnings.warn(
+            "The 'use_meilisearch' option is deprecated. Remove the option "
+            "from your configuration file.",
+            DeprecationWarning,
         )
 
 
@@ -1014,13 +1016,14 @@ def setup(app: Sphinx) -> Dict:
     # Add default HTML configuration
     setup_default_html_theme_options(app)
 
-    update_search_config(app)
+    use_ansys_search = app.config.html_theme_options.get("use_ansys_search", True)
+    if use_ansys_search:
+        update_search_config(app)
 
     # Verify that the main CSS file exists
     if not CSS_PATH.exists():
         raise FileNotFoundError(f"Unable to locate ansys-sphinx theme at {CSS_PATH.absolute()}")
     app.add_css_file(str(CSS_PATH.relative_to(STATIC_PATH)))
-    app.add_js_file(str(JS_FILE.relative_to(STATIC_PATH)))
     app.config.templates_path.append(str(TEMPLATES_PATH))
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
@@ -1036,7 +1039,8 @@ def setup(app: Sphinx) -> Dict:
     # app.connect("html-page-context", fix_toctree)
     app.connect("html-page-context", add_cheat_sheet)
     app.connect("build-finished", replace_html_tag)
-    app.connect("build-finished", create_search_index)
+    if use_ansys_search:
+        app.connect("build-finished", create_search_index)
     return {
         "version": __version__,
         "parallel_read_safe": True,
@@ -1044,4 +1048,4 @@ def setup(app: Sphinx) -> Dict:
     }
 
 
-__all__ = ["__version__", "generate_404", "get_version_match", "TITLEs", "PARAGRAPHS", "ALL_NODES"]
+__all__ = ["__version__", "generate_404", "get_version_match", "TITLES", "PARAGRAPHS", "ALL_NODES"]
