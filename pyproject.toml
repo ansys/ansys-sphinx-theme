@@ -45,6 +45,7 @@ doc = [
     "Pillow>=9.0",
     "PyGitHub==2.5.0",
     "pyvista[jupyter]==0.44.2",
+    "PyYAML==6.0.2",
     "requests==2.32.3",
     "Sphinx==8.1.3",
     "sphinx-autoapi==3.4.0",
@@ -55,6 +56,7 @@ doc = [
     "sphinx-notfound-page==1.0.4",
 ]
 changelog = [
+    "PyYAML==6.0.2",
     "sphinx-design==0.6.1",
 ]
 
