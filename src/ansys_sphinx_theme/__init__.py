@@ -187,51 +187,6 @@ def setup_default_html_theme_options(app):
         theme_options["pygments_dark_style"] = "monokai"
 
 
-def fix_toctree(
-    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document
-):
-    """Add the what's new content to the html page."""
-    from bs4 import BeautifulSoup
-
-    if "changelog" in pagename:
-        # body = context.get("body", "")
-        toc = context.get("toc", "")
-
-        # Update toctree with minor & what's new sections
-        print(toc)
-
-        # body = BeautifulSoup(body, 'html.parser')
-        # # print(soup.prettify())
-        # for section in body.find_all('section'):
-        #     # release_notes_title = section.find('h1')
-        #     # print(release_notes_title)
-        #     for h2 in section.find_all('h2'):
-        #         patch_version = re.search(SEMVER_REGEX, h2.text)
-        #         if patch_version:
-        #             # Create the minor version from the patch version
-        #             minor_version = ".".join(patch_version.groups()[:2])
-        #             if minor_version not in minor_versions:
-        #                 minor_versions.append(minor_version)
-        #                 minor_version = ".".join(patch_version.groups()[:2])
-
-        #                 h2.name = "h3"
-
-        #                 minor_version_title = body.new_tag("h2", id=f"version-{minor_version}")
-        #                 minor_version_title.string = f"Version {minor_version}"
-
-        #                 # if release_notes_title != None:
-        #                 #     release_notes_title.append(minor_version_title)
-        #                 # else:
-        #                 h2.parent.append(minor_version_title)
-        #                 # print(h2.parent)
-        #                 # print(h2)
-        #                 # print("")
-        #             else:
-        #                 h2.name = "h3"
-
-        # context["body"] = body
-
-
 def fix_edit_html_page_context(
     app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
 ) -> None:
@@ -597,23 +552,50 @@ def check_for_depreciated_theme_options(app: Sphinx):
         )
 
 
-def retrieve_whatsnew_input(app: Sphinx):
+def retrieve_whatsnew_input(app: Sphinx) -> tuple:
+    # Get the html_theme_options from conf.py
     config_options = app.config.html_theme_options
 
-    whats_new_options = config_options.get("whatsnew")
-    if not whats_new_options:
+    # Get the whatsnew key from the html_theme_options
+    whatsnew_options = config_options.get("whatsnew")
+    if not whatsnew_options:
         return
 
-    no_of_contents = whats_new_options.get("no_of_headers", 3)
-    whatsnew_file = whats_new_options.get("whatsnew_file", "whatsnew")  # .yml
-    changelog_file = whats_new_options.get("changelog_file", "changelog")  # .rst
+    # The source directory of the documentation: {repository_root}/doc/source
+    doc_src_dir = app.env.srcdir
 
-    return no_of_contents, whatsnew_file, changelog_file
+    # Get the number of headers to display in the what's new section in the sidebar
+    # By default, it's 3
+    no_of_headers = whatsnew_options.get("no_of_headers", 3)
+    # Get the number of what's new content to display under each minor version in the sidebar.
+    # By default, it's 3
+    no_of_contents = whatsnew_options.get("no_of_contents", 3)
+
+    # Get the name of the whatsnew.yml file in doc/source. By default, it's "whatsnew"
+    whatsnew_file = whatsnew_options.get("whatsnew_file", "whatsnew")
+    whatsnew_file = pathlib.Path(doc_src_dir) / f"{whatsnew_file}.yml"
+
+    # Get the name of the changelog file in doc/source. By default, it's "changelog"
+    changelog_file = whatsnew_options.get("changelog_file", "changelog")
+    changelog_file = pathlib.Path(doc_src_dir) / f"{changelog_file}.rst"
+
+    # Get the pages the whatsnew section should be displayed on. By default, it's changelog
+    pages = whatsnew_options.get("pages", ["changelog"])
+
+    whatsnew_config = {
+        "no_of_headers": no_of_headers,
+        "no_of_contents": no_of_contents,
+        "whatsnew_file": whatsnew_file,
+        "changelog_file": changelog_file,
+        "pages": pages,
+    }
+
+    return whatsnew_config
 
 
 def add_whatsnew_changelog(app, doctree):
     """Create doctree with minor version and what's new content."""
-    no_of_contents, whatsnew_file, changelog_file = retrieve_whatsnew_input(app)
+    whatsnew_config = retrieve_whatsnew_input(app)
     # Read the file and get the sections from the file as a list. For example,
     # sections = [<document: <target...><section "getting started; ref-getting-starte ...>]
     sections = doctree.traverse(nodes.document)
@@ -621,29 +603,24 @@ def add_whatsnew_changelog(app, doctree):
         return
 
     # The source directory of the documentation: {repository_root}/doc/source
-    src_files = app.env.srcdir
-    changelog_file = pathlib.Path(src_files) / f"{changelog_file}.rst"
+    # doc_src_dir = app.env.srcdir
+    # changelog_file = pathlib.Path(doc_src_dir) / f"{changelog_file}.rst"
+    # whatsnew_file = pathlib.Path(doc_src_dir) / f"{whatsnew_file}.yml"
 
     # Get the file name of the section using section.get("source") and return the section
     # if section.get("source") is equal to the changelog_file
     changelog_doctree_sections = [
-        section for section in sections if section.get("source") == str(changelog_file)
+        section
+        for section in sections
+        if section.get("source") == str(whatsnew_config["changelog_file"])
     ]
 
     # Return if the changelog file sections are not found
     if not changelog_doctree_sections:
         return
 
-    # Open what's new yaml file, load the data, and get the minor versions
-    whatsnew_file = pathlib.Path(src_files) / f"{whatsnew_file}.yml"
-    if whatsnew_file.exists():
-        with pathlib.Path.open(whatsnew_file, "r", encoding="utf-8") as file:
-            whatsnew_data = yaml.safe_load(file)
-
-        whatsnew_minor_versions = set()
-        for fragment in whatsnew_data["fragments"]:
-            yaml_minor_version = ".".join(fragment["version"].split(".")[:2])
-            whatsnew_minor_versions.add(yaml_minor_version)
+    whatsnew_file = whatsnew_config["whatsnew_file"]
+    whatsnew_data = get_whatsnew_data(whatsnew_file)
 
     # to do: get the version from the config, also get patch and minor version
     minor_version = get_version_match(app.env.config.version)
@@ -675,10 +652,8 @@ def add_whatsnew_changelog(app, doctree):
 
                     # Add "What's New" section under the minor version if the minor version is in
                     # the what's new data
-                    if whatsnew_file.exists() and (minor_version in whatsnew_minor_versions):
-                        minor_version_whatsnew = add_whatsnew_to_minor_version(
-                            minor_version, whatsnew_data
-                        )
+                    if whatsnew_file.exists() and (minor_version in list(whatsnew_data.keys())):
+                        minor_version_whatsnew = add_whatsnew_section(minor_version, whatsnew_data)
                         minor_version_section.append(minor_version_whatsnew)
 
                     # Insert the minor_version_section into the node
@@ -689,76 +664,96 @@ def add_whatsnew_changelog(app, doctree):
                         # Add the title at the beginning of a section with a patch version
                         node.insert(0, minor_version_section)
 
-    # print(doctree)
+
+def get_whatsnew_data(whatsnew_file):
+    if whatsnew_file.exists():
+        with pathlib.Path.open(whatsnew_file, "r", encoding="utf-8") as file:
+            whatsnew_data = yaml.safe_load(file)
+
+        minor_version_whatsnew_data = {}
+        for fragment in whatsnew_data["fragments"]:
+            # Get the minor version from the fragment version
+            whatsnew_minor_version = ".".join(fragment["version"].split(".")[:2])
+
+            # Create an empty list for the minor version if it does not exist
+            if whatsnew_minor_version not in minor_version_whatsnew_data:
+                minor_version_whatsnew_data[whatsnew_minor_version] = []
+            # Append the fragment to the minor version in the whatsnew_data
+            minor_version_whatsnew_data[whatsnew_minor_version].append(fragment)
+
+        return minor_version_whatsnew_data
 
 
-def add_whatsnew_to_minor_version(minor_version, whatsnew_data):
+def add_whatsnew_section(minor_version, whatsnew_data):
     """Add the what's new title and content under the minor version."""
     # Add the what's new section and title
-    minor_version_whatsnew = nodes.section(
-        ids=[f"version-{minor_version}-whatsnew"], names=["What's New"]
-    )
+    minor_version_whatsnew = nodes.section(ids=[f"version-{minor_version}-whatsnew"])
     minor_version_whatsnew += nodes.title("", "What's New")
 
     # Add a dropdown under the "What's New" section for each fragment in the whatsnew.yml file
-    for fragment in whatsnew_data["fragments"]:
-        if minor_version in fragment["version"]:
-            whatsnew_dropdown = nodes.container(
-                body_classes=[""],
-                chevron=True,
-                container_classes=["sd-mb-3 sd-fade-in-slide-down"],
-                design_component="dropdown",
-                has_title=True,
-                icon="",
-                is_div=True,
-                opened=False,
-                title_classes=[""],
-                type="dropdown",
-            )
-            whatsnew_dropdown += nodes.rubric("", fragment["title"])
+    for fragment in whatsnew_data[minor_version]:
+        # Create a dropdown for the fragment
+        whatsnew_dropdown = nodes.container(
+            body_classes=[""],
+            chevron=True,
+            container_classes=["sd-mb-3 sd-fade-in-slide-down"],
+            design_component="dropdown",
+            has_title=True,
+            icon="",
+            is_div=True,
+            opened=False,
+            title_classes=[""],
+            type="dropdown",
+        )
 
-            # Add a line specifying which version the fragment is available in
-            version_paragraph = nodes.paragraph("sd-card-text")
-            version_paragraph.append(
-                nodes.emphasis("", f"Available in v{fragment['version']} and later")
-            )
-            whatsnew_dropdown += version_paragraph
+        # Set the title_id for the dropdown
+        title_id = fragment["title"].replace(" ", "-").lower()
 
-            # Split content from YAML file into list
-            content_lines = fragment["content"].split("\n")
+        # Add the title of the fragment to the dropdown
+        whatsnew_dropdown += nodes.rubric(ids=[title_id], text=fragment["title"])
 
-            # Create iterator for the content_lines
-            content_iterator = iter(content_lines)
+        # Add a line specifying which version the fragment is available in
+        version_paragraph = nodes.paragraph("sd-card-text")
+        version_paragraph.append(
+            nodes.emphasis("", f"Available in v{fragment['version']} and later")
+        )
+        whatsnew_dropdown += version_paragraph
 
-            # Navigate to first line in the iterator
-            line = next(content_iterator, None)
+        # Split content from YAML file into list
+        content_lines = fragment["content"].split("\n")
 
-            while line is not None:
-                if ".. code" in line or ".. sourcecode" in line:
-                    # Get language after "code::"
-                    language = line.split("::")[1].strip()
-                    # Create the code block container node with the language if it exists
-                    code_block = (
-                        nodes.container(classes=[f"highlight-{language} notranslate"])
-                        if language
-                        else nodes.container()
-                    )
+        # Create iterator for the content_lines
+        content_iterator = iter(content_lines)
 
-                    # Fill the code block with the following lines until it reaches the end or an
-                    # unindented line
-                    code_block, line = fill_code_block(content_iterator, code_block)
-                    whatsnew_dropdown += code_block
-                else:
-                    # Create the paragraph node
-                    paragraph = nodes.paragraph("sd-card-text")
+        # Navigate to first line in the iterator
+        line = next(content_iterator, None)
 
-                    # Fill the paragraph node with the following lines until it reaches
-                    # the end or a code block
-                    paragraph, line = fill_paragraph(content_iterator, paragraph, line)
-                    whatsnew_dropdown += paragraph
+        while line is not None:
+            if ".. code" in line or ".. sourcecode" in line:
+                # Get language after "code::"
+                language = line.split("::")[1].strip()
+                # Create the code block container node with the language if it exists
+                code_block = (
+                    nodes.container(classes=[f"highlight-{language} notranslate"])
+                    if language
+                    else nodes.container()
+                )
 
-            # Append the fragment dropdown to the minor_version_whatsnew section
-            minor_version_whatsnew.append(whatsnew_dropdown)
+                # Fill the code block with the following lines until it reaches the end or an
+                # unindented line
+                code_block, line = fill_code_block(content_iterator, code_block)
+                whatsnew_dropdown += code_block
+            else:
+                # Create the paragraph node
+                paragraph = nodes.paragraph("sd-card-text")
+
+                # Fill the paragraph node with the following lines until it reaches
+                # the end or a code block
+                paragraph, line = fill_paragraph(content_iterator, paragraph, line)
+                whatsnew_dropdown += paragraph
+
+        # Append the fragment dropdown to the minor_version_whatsnew section
+        minor_version_whatsnew.append(whatsnew_dropdown)
 
     return minor_version_whatsnew
 
@@ -926,45 +921,69 @@ def fill_paragraph(
 
 def extract_whatsnew(app, doctree, docname):
     """Extract the what's new content from the document."""
-    no_of_contents, whatsnew_file, changelog_file = retrieve_whatsnew_input(app)
+    whatsnew_config = retrieve_whatsnew_input(app)
 
-    # Extract the what's new content from the changelog file
+    if docname not in whatsnew_config["pages"]:
+        return
+
+    # Get the doctree for the file
+    changelog_file = whatsnew_config["changelog_file"].stem
     doctree = app.env.get_doctree(changelog_file)
-    whatsnew = []
     docs_content = doctree.traverse(nodes.section)
-    app.env.whatsnew = []
 
     if not docs_content:
         return
 
-    versions_nodes = [node for node in docs_content if node.get("ids")[0].startswith("version")]
+    whatsnew = []
+    app.env.whatsnew = []
 
-    # get the version nodes upto the specified number of headers
-    versions_nodes = versions_nodes[:no_of_contents]
+    # Get a list of nodes whose ids start with "version" that contain "What's new" sections
+    versions_nodes = []
 
-    if not versions_nodes:
-        return
+    # Find nodes that contain the minor versions and a "What's New" section
+    for node in docs_content:
+        node_id = node.get("ids")[0]
+        # Get the nodes that contain the minor versions: "Version x.y"
+        if node_id.startswith("version") and "whatsnew" not in node_id:
+            sections = list(node.traverse(nodes.section))
+            # If the section contains a "What's New" section, add it to the list of versions
+            whatsnew_nodes = [
+                section_node
+                for section_node in sections
+                if section_node.get("ids")[0] == f"{node_id}-whatsnew"
+            ]
+            if whatsnew_nodes:
+                versions_nodes.append(node)
+
+    # Get the version nodes up to the specified number of headers
+    versions_nodes = versions_nodes[: whatsnew_config["no_of_headers"]]
 
     for version_node in versions_nodes:
-        title = version_node[0].astext()
+        # Get the version title (e.g., "Version 0.1")
+        version_title = version_node[0].astext()
+        # Get the sections under the version node
         sections = list(version_node.traverse(nodes.section))
 
-        whatsnew_nodes = [node for node in sections if node[0].astext().lower() == "whatsnew"]
+        # Sections with text that contains "what's new"
+        whatsnew_nodes = [node for node in sections if node[0].astext().lower() == "what's new"]
 
         if not whatsnew_nodes:
             continue
 
-        children = [node for node in whatsnew_nodes[0].traverse(nodes.section)]
+        # Get the children of the "What's New" section
+        children = [node for node in whatsnew_nodes[0].traverse(nodes.rubric)]
 
-        headers = [child[0].astext() for child in children]
+        # List of ids for each dropdown -> figure out how to match each child in children
+        # with its corresponding url
+        # ids = [child.get("ids")[0] for child in children]
+        # print("ids: ", ids)
 
-        if len(children) > 1:
-            children = headers[1:]
-        else:
-            children = [whatsnew_nodes[0].traverse(nodes.paragraph)[0].astext()]
+        # Filter the displayed children based on the number of content specified in the config
+        if len(children) > whatsnew_config["no_of_contents"]:
+            children = children[: whatsnew_config["no_of_contents"]]
 
         contents = {
-            "title": title,
+            "title": version_title,
             "title_url": f"{changelog_file}.html#{version_node.get('ids')[0]}",
             "children": children,
             "url": f"{changelog_file}.html#{whatsnew_nodes[0]['ids'][0]}",

@@ -72,8 +72,11 @@ html_theme_options = {
         "minMatchCharLength": 3,
     },
     "whatsnew": {
-        "file": "changelog",
-        "pages": ["index", "changelog"],
+        "no_of_headers": 2,
+        "no_of_contents": 1,
+        "whatsnew_file": "whatsnew",
+        "changelog_file": "changelog",
+        "pages": ["changelog"],  # "index"
     },
 }
 

@@ -23,9 +23,9 @@ fragments:
       launch_gui("path/to/project.mechdb")
 
 - title: Print Mechanical tree
-  version: 0.16.6
+  version: 1.2.0
   content: |
-    This feature lets you see the hierarchical Mechanical project tree.
+    This feature allows you to see the hierarchical Mechanical project tree.
     It also shows whether an object is suppressed or not.
 
     .. code::
@@ -49,7 +49,7 @@ fragments:
       ... |  |  ├── Mesh
 
 - title: Visualize geometry in 3D
-  version: 0.16.3
+  version: 1.2.3
   content: |
     Visualize imported geometry in 3D. This feature is available only from 24R1 or later.
 
@@ -64,3 +64,41 @@ fragments:
 
       # visualize
       app.plot()
+
+- title: title 1
+  version: 1.0.7
+  content: |
+    Title 1 content.
+
+    .. code-block:: python
+
+        print("title 1")
+        print("content")
+
+    Paragraph paragraph
+
+    .. sourcecode:: python
+
+      launch_gui("path/to/project.mechdb")
+
+- title: title 2
+  version: 1.0.4
+  content: |
+    Title 2 sample content.
+
+    .. code::
+
+      print("hello")
+
+    .. code:: shell
+
+      echo world
+
+- title: title 3
+  version: 0.16.5
+  content: |
+    Print hello world.
+
+    .. code:: python
+
+      print("hello world")
