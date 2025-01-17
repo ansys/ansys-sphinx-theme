@@ -8,6 +8,14 @@ Release notes
 
 .. towncrier release notes start
 
+`1.2.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.5>`_ - 2025-01-13
+=======================================================================================
+
+Dependencies
+^^^^^^^^^^^^
+
+- chore(deps): update pydata-sphinx-theme requirement from <0.16,>=0.15.4 to >=0.15.4,<0.17 `#605 <https://github.com/ansys/ansys-sphinx-theme/pull/605>`_
+
 `1.2.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.4>`_ - 2024-12-20
 =======================================================================================
 
