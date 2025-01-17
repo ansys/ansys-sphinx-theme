@@ -73,7 +73,7 @@ html_theme_options = {
     },
     "whatsnew": {
         "no_of_headers": 2,
-        "no_of_contents": 1,
+        "no_of_contents": 3,
         "whatsnew_file": "whatsnew",
         "changelog_file": "changelog",
         "pages": ["changelog"],  # "index"
