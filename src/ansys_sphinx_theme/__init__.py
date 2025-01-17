@@ -602,11 +602,6 @@ def add_whatsnew_changelog(app, doctree):
     if not sections:
         return
 
-    # The source directory of the documentation: {repository_root}/doc/source
-    # doc_src_dir = app.env.srcdir
-    # changelog_file = pathlib.Path(doc_src_dir) / f"{changelog_file}.rst"
-    # whatsnew_file = pathlib.Path(doc_src_dir) / f"{whatsnew_file}.yml"
-
     # Get the file name of the section using section.get("source") and return the section
     # if section.get("source") is equal to the changelog_file
     changelog_doctree_sections = [
@@ -622,47 +617,41 @@ def add_whatsnew_changelog(app, doctree):
     whatsnew_file = whatsnew_config["whatsnew_file"]
     whatsnew_data = get_whatsnew_data(whatsnew_file)
 
-    # to do: get the version from the config, also get patch and minor version
-    minor_version = get_version_match(app.env.config.version)
-    patch_version = app.env.config.version.split(".")[2]
-
     existing_minor_versions = []
     docs_content = doctree.traverse(nodes.section)
-    for node in docs_content:
-        # Get the content of the next node
+
+    # Get each section that contains a semantic version number
+    version_sections = [node for node in docs_content if re.search(SEMVER_REGEX, node[0].astext())]
+
+    for node in version_sections:
+        # Get the semantic version number from the section title link
         next_node = node.next_node(nodes.reference)
-        # Get the name of the next node
-        section_name = next_node.get("name")
-        if section_name:
-            # Get the patch version from the section name
-            patch_version = re.search(SEMVER_REGEX, section_name)
-            if patch_version:
-                # Create the minor version from the patch version
-                minor_version = ".".join(patch_version.groups()[:2])
-                if minor_version not in existing_minor_versions:
-                    # Add minor version to list of existing minor versions
-                    existing_minor_versions.append(minor_version)
+        # Get the name of the section title link
+        version = next_node.get("name", None)
 
-                    # Create a section for the minor version
-                    minor_version_section = nodes.section(
-                        ids=[f"version-{minor_version}"], names=[f"Version {minor_version}"]
-                    )
-                    # Add the title to the section for the minor version
-                    minor_version_section += nodes.title("", f"Version {minor_version}")
+        if version:
+            # Create the minor version from the patch version
+            minor_version = ".".join(version.split(".")[:-1])
 
-                    # Add "What's New" section under the minor version if the minor version is in
-                    # the what's new data
-                    if whatsnew_file.exists() and (minor_version in list(whatsnew_data.keys())):
-                        minor_version_whatsnew = add_whatsnew_section(minor_version, whatsnew_data)
-                        minor_version_section.append(minor_version_whatsnew)
+            if minor_version not in existing_minor_versions:
+                # Add minor version to list of existing minor versions
+                existing_minor_versions.append(minor_version)
 
-                    # Insert the minor_version_section into the node
-                    if "release notes" in node[0].astext().lower():
-                        # Add the title with the minor version after "Release Notes"
-                        node.insert(1, minor_version_section)
-                    else:
-                        # Add the title at the beginning of a section with a patch version
-                        node.insert(0, minor_version_section)
+                # Create a section for the minor version
+                minor_version_section = nodes.section(
+                    ids=[f"version-{minor_version}"], names=[f"Version {minor_version}"]
+                )
+                # Add the title to the section for the minor version
+                minor_version_section += nodes.title("", f"Version {minor_version}")
+
+                # Add "What's New" section under the minor version if the minor version is in
+                # the what's new data
+                if whatsnew_file.exists() and (minor_version in list(whatsnew_data.keys())):
+                    minor_version_whatsnew = add_whatsnew_section(minor_version, whatsnew_data)
+                    minor_version_section.append(minor_version_whatsnew)
+
+                # Add the title at the beginning of a section with a patch version
+                node.insert(0, minor_version_section)
 
 
 def get_whatsnew_data(whatsnew_file):
