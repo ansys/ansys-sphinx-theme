@@ -336,10 +336,10 @@ The following images show a sample "What's new" section and sidebar in the chang
 
     .. tab-item:: What's new section
 
-        .. image:: ../examples/images/whatsnew_section.png
-        :alt: What's new section
+        .. image:: ../_static/whatsnew_section.png
+           :alt: What's new section
 
     .. tab-item:: What's new sidebar
 
-        .. image:: ../examples/images/whatsnew_sidebar.png
-        :alt: What's new sidebar
+        .. image:: ../_static/whatsnew_sidebar.png
+           :alt: What's new sidebar
