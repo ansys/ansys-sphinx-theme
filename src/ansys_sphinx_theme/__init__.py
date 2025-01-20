@@ -596,6 +596,11 @@ def retrieve_whatsnew_input(app: Sphinx) -> tuple:
 def add_whatsnew_changelog(app, doctree):
     """Create doctree with minor version and what's new content."""
     whatsnew_config = retrieve_whatsnew_input(app)
+
+    # Skip this function if the whatsnew config is not found
+    if not whatsnew_config:
+        return
+
     # Read the file and get the sections from the file as a list. For example,
     # sections = [<document: <target...><section "getting started; ref-getting-starte ...>]
     sections = doctree.traverse(nodes.document)
@@ -911,6 +916,10 @@ def fill_paragraph(
 def extract_whatsnew(app, doctree, docname):
     """Extract the what's new content from the document."""
     whatsnew_config = retrieve_whatsnew_input(app)
+
+    # Skip this function if the whatsnew config is not found
+    if not whatsnew_config:
+        return
 
     if docname not in whatsnew_config["pages"]:
         return
