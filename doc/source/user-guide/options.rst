@@ -256,3 +256,90 @@ main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" s
     To use this feature, you must have the `quarto <https://quarto.org/>` package installed. To create thumbnails of generated PDF files,
     the theme is using `pdf2image`. So you should have the ``poppler`` package installed in your system.
     For more information, see the `pdf2image documentation <https://pypi.org/project/pdf2image/>`_.
+
+What's new section
+------------------
+
+The "What's new" section is an option that allows you to highlight new features in your library
+for each minor version within the changelog file.
+
+To get started, create a YAML file named ``whatsnew.yml`` in the ``doc/source`` directory. The
+YAML file should contain the following structure:
+
+.. code-block:: yaml
+
+    fragments:
+    - title: Feature title
+      version: 0.2.0  # The version the feature is introduced
+      content: |
+        Feature description in RST format.
+
+    - title: Another feature title
+      version: 0.1.2
+      content: |
+        Feature description in RST format.
+
+The dropdown generation only supports the following RST formats in the "content" field:
+
+- Bold: Use double asterisks to wrap the text.
+- Italics: Use single asterisks to wrap the text.
+- Code samples: Use single or double backticks to wrap the text.
+- Links: Use the following format to include links:
+
+  .. code-block:: rst
+
+     `link text <https://www.example.com>`_
+
+- Code blocks: Use the following format to include code blocks:
+
+  .. code-block:: rst
+
+        .. code:: python
+
+           print("hello world")
+
+If a format is used in the "content" field that does not fall into the category above, it will not
+be rendered correctly.
+
+To enable the "What's new" sections and sidebar in the changelog file, add the following dictionary
+to the ``html_theme_options`` dictionary:
+
+.. code-block:: python
+
+    html_theme_options = (
+        {
+            "whatsnew": {
+                "no_of_headers": 3,
+                "no_of_contents": 3,
+                "whatsnew_file": "whatsnew", # Name of yaml file containing what's new content
+                "changelog_file": "changelog", # Name of changelog file (rst)
+                "pages": ["changelog", ...],
+            },
+        },
+    )
+
+The dictionary contains the following keys:
+
+- ``no_of_headers``: Number of minor version sections to display in the what's new sidebar.
+   By default, it is set to 3.
+- ``no_of_contents``: Number of what's new content to display under each minor version in the
+   what's new sidebar. By default, it is set to 3.
+- ``whatsnew_file``: Name of the YAML file containing what's new content. The YAML file should be
+   in the ``doc/source`` directory.
+- ``changelog_file``: Name of the changelog file (RST) located in the ``doc/source`` directory.
+- ``pages``: List of names for the pages to include the what's new sidebar on. If no value is
+   provided, the what's new sidebar is only displayed in the changelog file.
+
+The following images show a sample "What's new" section and sidebar in the changelog file:
+
+.. tab-set::
+
+    .. tab-item:: What's new section
+
+        .. image:: ../examples/images/whatsnew_section.png
+        :alt: What's new section
+
+    .. tab-item:: What's new sidebar
+
+        .. image:: ../examples/images/whatsnew_sidebar.png
+        :alt: What's new sidebar
