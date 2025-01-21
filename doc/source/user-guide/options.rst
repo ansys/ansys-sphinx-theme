@@ -309,8 +309,8 @@ to the ``html_theme_options`` dictionary:
     html_theme_options = (
         {
             "whatsnew": {
-                "whatsnew_file_name": "whatsnew",
-                "changelog_file_name": "changelog",
+                "whatsnew_file_path": "changelog.d/whatsnew.yml",
+                "changelog_file_path": "changelog.rst",
                 "sidebar_pages": ["changelog"],
                 "sidebar_no_of_headers": 3,  # Optional
                 "sidebar_no_of_contents": 3,  # Optional
@@ -320,10 +320,10 @@ to the ``html_theme_options`` dictionary:
 
 The dictionary contains the following keys:
 
-- ``whatsnew_file_name``: Name of the YAML file containing what's new content. The YAML file should be
-   in the ``doc/source`` directory. If not provided, the what's new section will not be generated.
-- ``changelog_file_name``: Name of the changelog file (RST) located in the ``doc/source`` directory.
-    If not provided, the what's new section will not be generated.
+- ``whatsnew_file_path``: The path to the YAML file containing what's new content local to the
+  ``doc/source`` directory. If not provided, the what's new section will not be generated.
+- ``changelog_file_path``: The path to the changelog.rst file local to the ``doc/source``
+  directory. If not provided, the what's new section will not be generated.
 - ``sidebar_pages``: List of names for the pages to include the what's new sidebar on. If not
   provided, the what's new sidebar is not displayed.
 - ``sidebar_no_of_headers``: Number of minor version sections to display in the what's new sidebar.

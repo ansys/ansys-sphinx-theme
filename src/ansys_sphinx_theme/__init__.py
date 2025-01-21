@@ -566,11 +566,11 @@ def retrieve_whatsnew_input(app: Sphinx) -> tuple:
 
     # Get the name of the whatsnew.yml file in doc/source
     whatsnew_file = whatsnew_options.get("whatsnew_file_name", None)
-    whatsnew_file = pathlib.Path(doc_src_dir) / f"{whatsnew_file}.yml"
+    whatsnew_file = pathlib.Path(doc_src_dir) / whatsnew_file
 
     # Get the name of the changelog file in doc/source
     changelog_file = whatsnew_options.get("changelog_file_name", None)
-    changelog_file = pathlib.Path(doc_src_dir) / f"{changelog_file}.rst"
+    changelog_file = pathlib.Path(doc_src_dir) / changelog_file
 
     # Get the pages the whatsnew section should be displayed on
     pages = whatsnew_options.get("sidebar_pages", None)
