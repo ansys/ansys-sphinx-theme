@@ -309,26 +309,27 @@ to the ``html_theme_options`` dictionary:
     html_theme_options = (
         {
             "whatsnew": {
-                "no_of_headers": 3,
-                "no_of_contents": 3,
-                "whatsnew_file": "whatsnew", # Name of yaml file containing what's new content
-                "changelog_file": "changelog", # Name of changelog file (rst)
-                "pages": ["changelog", ...],
+                "whatsnew_file_name": "whatsnew",
+                "changelog_file_name": "changelog",
+                "sidebar_pages": ["changelog"],
+                "sidebar_no_of_headers": 3,  # Optional
+                "sidebar_no_of_contents": 3,  # Optional
             },
         },
     )
 
 The dictionary contains the following keys:
 
-- ``no_of_headers``: Number of minor version sections to display in the what's new sidebar.
-   By default, it is set to 3.
-- ``no_of_contents``: Number of what's new content to display under each minor version in the
-   what's new sidebar. By default, it displays all dropdowns.
-- ``whatsnew_file``: Name of the YAML file containing what's new content. The YAML file should be
-   in the ``doc/source`` directory.
-- ``changelog_file``: Name of the changelog file (RST) located in the ``doc/source`` directory.
-- ``pages``: List of names for the pages to include the what's new sidebar on. If no value is
-   provided, the what's new sidebar is only displayed in the changelog file.
+- ``whatsnew_file_name``: Name of the YAML file containing what's new content. The YAML file should be
+   in the ``doc/source`` directory. If not provided, the what's new section will not be generated.
+- ``changelog_file_name``: Name of the changelog file (RST) located in the ``doc/source`` directory.
+    If not provided, the what's new section will not be generated.
+- ``sidebar_pages``: List of names for the pages to include the what's new sidebar on. If not
+  provided, the what's new sidebar is not displayed.
+- ``sidebar_no_of_headers``: Number of minor version sections to display in the what's new sidebar.
+   By default, it displays three version sections in the sidebar.
+- ``sidebar_no_of_contents``: Number of what's new content to display under each minor version in the
+   what's new sidebar. If not provided, it displays all dropdowns by default.
 
 The following images show a sample "What's new" section and sidebar in the changelog file:
 

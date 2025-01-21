@@ -564,30 +564,30 @@ def retrieve_whatsnew_input(app: Sphinx) -> tuple:
     # The source directory of the documentation: {repository_root}/doc/source
     doc_src_dir = app.env.srcdir
 
-    # Get the number of headers to display in the what's new section in the sidebar
-    # By default, it's 3
-    no_of_headers = whatsnew_options.get("no_of_headers", 3)
-    # Get the number of what's new content to display under each minor version in the sidebar.
-    # By default, it's 3
-    no_of_contents = whatsnew_options.get("no_of_contents", None)
-
-    # Get the name of the whatsnew.yml file in doc/source. By default, it's "whatsnew"
-    whatsnew_file = whatsnew_options.get("whatsnew_file", "whatsnew")
+    # Get the name of the whatsnew.yml file in doc/source
+    whatsnew_file = whatsnew_options.get("whatsnew_file_name", None)
     whatsnew_file = pathlib.Path(doc_src_dir) / f"{whatsnew_file}.yml"
 
-    # Get the name of the changelog file in doc/source. By default, it's "changelog"
-    changelog_file = whatsnew_options.get("changelog_file", "changelog")
+    # Get the name of the changelog file in doc/source
+    changelog_file = whatsnew_options.get("changelog_file_name", None)
     changelog_file = pathlib.Path(doc_src_dir) / f"{changelog_file}.rst"
 
-    # Get the pages the whatsnew section should be displayed on. By default, it's changelog
-    pages = whatsnew_options.get("pages", ["changelog"])
+    # Get the pages the whatsnew section should be displayed on
+    pages = whatsnew_options.get("sidebar_pages", None)
+
+    # Get the number of headers to display in the what's new section in the sidebar
+    # By default, it displays the first three minor versions
+    no_of_headers = whatsnew_options.get("sidebar_no_of_headers", 3)
+    # Get the number of what's new content to display under each minor version in the sidebar.
+    # By default, it displays all what's new dropdown titles
+    no_of_contents = whatsnew_options.get("sidebar_no_of_contents", None)
 
     whatsnew_config = {
-        "no_of_headers": no_of_headers,
-        "no_of_contents": no_of_contents,
         "whatsnew_file": whatsnew_file,
         "changelog_file": changelog_file,
         "pages": pages,
+        "no_of_headers": no_of_headers,
+        "no_of_contents": no_of_contents,
     }
 
     return whatsnew_config
@@ -599,6 +599,10 @@ def add_whatsnew_changelog(app, doctree):
 
     # Skip this function if the whatsnew config is not found
     if not whatsnew_config:
+        return
+
+    # Skip this function if the what's new file or changelog file were not provided
+    if not whatsnew_config["whatsnew_file"] or not whatsnew_config["changelog_file"]:
         return
 
     # Read the file and get the sections from the file as a list. For example,
@@ -934,6 +938,15 @@ def extract_whatsnew(app, doctree, docname):
     if not whatsnew_config:
         return
 
+    # Skip this function if the what's new file or changelog file were not provided
+    if not whatsnew_config["whatsnew_file"] or not whatsnew_config["changelog_file"]:
+        return
+
+    # Skip this function if the "sidebar_pages" list is not provided in the whatsnew config
+    if not whatsnew_config["pages"]:
+        return
+
+    # Skip this function if the docname is not in the "sidebar_pages" list
     if docname not in whatsnew_config["pages"]:
         return
 
