@@ -781,9 +781,22 @@ def fill_code_block(content_iterator: Iterable, code_block: nodes.container) -> 
     # Move to the first line in the code block (the line after ".. code::")
     next_line = next(content_iterator, None)
 
+    # Boolean to check if the line in code block is within a dictionary
+    in_dictionary = False
+
     # While the next_line is indented or blank, add it to the code block
     while next_line is not None and (next_line.startswith(" ") or (next_line == "")):
-        formatted_line = next_line.lstrip() + "\n"
+        if in_dictionary:
+            if next_line.lstrip().startswith("}"):
+                in_dictionary = False
+                formatted_line = next_line.lstrip() + "\n"
+            else:
+                formatted_line = next_line + "\n"
+        else:
+            if next_line.lstrip().startswith("{"):
+                in_dictionary = True
+            formatted_line = next_line.lstrip() + "\n"
+
         # Add the formatted line to the literal block
         literal_block += nodes.inline(text=formatted_line)
 
