@@ -569,7 +569,7 @@ def retrieve_whatsnew_input(app: Sphinx) -> tuple:
     no_of_headers = whatsnew_options.get("no_of_headers", 3)
     # Get the number of what's new content to display under each minor version in the sidebar.
     # By default, it's 3
-    no_of_contents = whatsnew_options.get("no_of_contents", 3)
+    no_of_contents = whatsnew_options.get("no_of_contents", None)
 
     # Get the name of the whatsnew.yml file in doc/source. By default, it's "whatsnew"
     whatsnew_file = whatsnew_options.get("whatsnew_file", "whatsnew")
@@ -978,8 +978,9 @@ def extract_whatsnew(app, doctree, docname):
         # print("ids: ", ids)
 
         # Filter the displayed children based on the number of content specified in the config
-        if len(children) > whatsnew_config["no_of_contents"]:
-            children = children[: whatsnew_config["no_of_contents"]]
+        if whatsnew_config["no_of_contents"]:
+            if len(children) > whatsnew_config["no_of_contents"]:
+                children = children[: whatsnew_config["no_of_contents"]]
 
         contents = {
             "title": f"{html_title} {version_title}",

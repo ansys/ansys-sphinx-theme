@@ -323,7 +323,7 @@ The dictionary contains the following keys:
 - ``no_of_headers``: Number of minor version sections to display in the what's new sidebar.
    By default, it is set to 3.
 - ``no_of_contents``: Number of what's new content to display under each minor version in the
-   what's new sidebar. By default, it is set to 3.
+   what's new sidebar. By default, it displays all dropdowns.
 - ``whatsnew_file``: Name of the YAML file containing what's new content. The YAML file should be
    in the ``doc/source`` directory.
 - ``changelog_file``: Name of the changelog file (RST) located in the ``doc/source`` directory.
