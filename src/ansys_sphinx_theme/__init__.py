@@ -1027,7 +1027,11 @@ def add_whatsnew_sidebar(app, pagename, templatename, context, doctree):
     if not whats_new_options:
         return
 
-    pages = whats_new_options.get("pages", ["index"])
+    pages = whats_new_options.get("sidebar_pages", None)
+
+    if not pages:
+        return
+
     if pagename not in pages:
         return
 
