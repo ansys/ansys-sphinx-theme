@@ -552,58 +552,48 @@ def check_for_depreciated_theme_options(app: Sphinx):
         )
 
 
-def retrieve_whatsnew_input(app: Sphinx) -> tuple:
+def get_whatsnew_options(app: Sphinx) -> tuple:
+    # Get the html_theme_options from conf.py
+    config_options = app.config.html_theme_options
+
+    # Get the whatsnew key from the html_theme_options
+    whatsnew_options = config_options.get("whatsnew", None)
+
+    if whatsnew_options is None:
+        return None, None, None
+
+    # Get the names of the whatsnew.yml and changelog.rst files
+    whatsnew_file = whatsnew_options.get("whatsnew_file_name", None)
+    changelog_file = whatsnew_options.get("changelog_file_name", None)
+
+    # The source directory of the documentation: {repository_root}/doc/source
+    doc_src_dir = app.env.srcdir
+
+    if whatsnew_file is not None:
+        whatsnew_file = pathlib.Path(doc_src_dir) / whatsnew_file
+    if changelog_file is not None:
+        changelog_file = pathlib.Path(doc_src_dir) / changelog_file
+
+    # Get the pages the whatsnew sidebar should be displayed on
+    sidebar_pages = whatsnew_options.get("sidebar_pages", None)
+
+    return whatsnew_file, changelog_file, sidebar_pages
+
+
+def add_whatsnew_changelog(app, doctree):
+    """Create doctree with minor version and what's new content."""
     # Get the html_theme_options from conf.py
     config_options = app.config.html_theme_options
 
     # Get the whatsnew key from the html_theme_options
     whatsnew_options = config_options.get("whatsnew")
-    if not whatsnew_options:
-        return
 
     # The source directory of the documentation: {repository_root}/doc/source
-    doc_src_dir = app.env.srcdir
+    doc_src_dir = pathlib.Path(app.env.srcdir)
 
-    # Get the name of the whatsnew.yml file in doc/source
-    whatsnew_file = whatsnew_options.get("whatsnew_file_name", None)
-    whatsnew_file = pathlib.Path(doc_src_dir) / whatsnew_file
-
-    # Get the name of the changelog file in doc/source
-    changelog_file = whatsnew_options.get("changelog_file_name", None)
-    changelog_file = pathlib.Path(doc_src_dir) / changelog_file
-
-    # Get the pages the whatsnew section should be displayed on
-    pages = whatsnew_options.get("sidebar_pages", None)
-
-    # Get the number of headers to display in the what's new section in the sidebar
-    # By default, it displays the first three minor versions
-    no_of_headers = whatsnew_options.get("sidebar_no_of_headers", 3)
-    # Get the number of what's new content to display under each minor version in the sidebar.
-    # By default, it displays all what's new dropdown titles
-    no_of_contents = whatsnew_options.get("sidebar_no_of_contents", None)
-
-    whatsnew_config = {
-        "whatsnew_file": whatsnew_file,
-        "changelog_file": changelog_file,
-        "pages": pages,
-        "no_of_headers": no_of_headers,
-        "no_of_contents": no_of_contents,
-    }
-
-    return whatsnew_config
-
-
-def add_whatsnew_changelog(app, doctree):
-    """Create doctree with minor version and what's new content."""
-    whatsnew_config = retrieve_whatsnew_input(app)
-
-    # Skip this function if the whatsnew config is not found
-    if not whatsnew_config:
-        return
-
-    # Skip this function if the what's new file or changelog file were not provided
-    if not whatsnew_config["whatsnew_file"] or not whatsnew_config["changelog_file"]:
-        return
+    # Full paths to the whatsnew.yml and changelog.rst files from the doc/source directory
+    whatsnew_file = doc_src_dir / whatsnew_options.get("whatsnew_file_name")
+    changelog_file = doc_src_dir / whatsnew_options.get("changelog_file_name")
 
     # Read the file and get the sections from the file as a list. For example,
     # sections = [<document: <target...><section "getting started; ref-getting-starte ...>]
@@ -614,16 +604,13 @@ def add_whatsnew_changelog(app, doctree):
     # Get the file name of the section using section.get("source") and return the section
     # if section.get("source") is equal to the changelog_file
     changelog_doctree_sections = [
-        section
-        for section in sections
-        if section.get("source") == str(whatsnew_config["changelog_file"])
+        section for section in sections if section.get("source") == str(changelog_file)
     ]
 
     # Return if the changelog file sections are not found
     if not changelog_doctree_sections:
         return
 
-    whatsnew_file = whatsnew_config["whatsnew_file"]
     whatsnew_data = get_whatsnew_data(whatsnew_file)
 
     existing_minor_versions = []
@@ -932,26 +919,27 @@ def fill_paragraph(
 
 def extract_whatsnew(app, doctree, docname):
     """Extract the what's new content from the document."""
-    whatsnew_config = retrieve_whatsnew_input(app)
+    # Get the html_theme_options from conf.py
+    config_options = app.config.html_theme_options
 
-    # Skip this function if the whatsnew config is not found
-    if not whatsnew_config:
-        return
+    # Get the whatsnew key from the html_theme_options
+    whatsnew_options = config_options.get("whatsnew")
 
-    # Skip this function if the what's new file or changelog file were not provided
-    if not whatsnew_config["whatsnew_file"] or not whatsnew_config["changelog_file"]:
-        return
+    # The source directory of the documentation: {repository_root}/doc/source
+    doc_src_dir = pathlib.Path(app.env.srcdir)
 
-    # Skip this function if the "sidebar_pages" list is not provided in the whatsnew config
-    if not whatsnew_config["pages"]:
-        return
+    # Full path to the changelog.rst file starting from the doc/source directory
+    changelog_file = doc_src_dir / whatsnew_options.get("changelog_file_name")
 
-    # Skip this function if the docname is not in the "sidebar_pages" list
-    if docname not in whatsnew_config["pages"]:
-        return
+    # Get the number of headers to display in the what's new section in the sidebar
+    # By default, it displays the first three minor versions
+    sidebar_no_of_headers = whatsnew_options.get("sidebar_no_of_headers", 3)
+    # Get the number of what's new content to display under each minor version in the sidebar.
+    # By default, it displays all what's new dropdown titles
+    sidebar_no_of_contents = whatsnew_options.get("sidebar_no_of_contents", None)
 
     # Get the doctree for the file
-    changelog_file = whatsnew_config["changelog_file"].stem
+    changelog_file = changelog_file.stem
     doctree = app.env.get_doctree(changelog_file)
     docs_content = doctree.traverse(nodes.section)
     html_title = app.config.html_title or app.config.html_short_title or app.config.project
@@ -981,7 +969,7 @@ def extract_whatsnew(app, doctree, docname):
                 versions_nodes.append(node)
 
     # Get the version nodes up to the specified number of headers
-    versions_nodes = versions_nodes[: whatsnew_config["no_of_headers"]]
+    versions_nodes = versions_nodes[:sidebar_no_of_headers]
 
     for version_node in versions_nodes:
         # Get the version title (e.g., "Version 0.1")
@@ -998,15 +986,10 @@ def extract_whatsnew(app, doctree, docname):
         # Get the children of the "What's New" section
         children = [node for node in whatsnew_nodes[0].traverse(nodes.rubric)]
 
-        # List of ids for each dropdown -> figure out how to match each child in children
-        # with its corresponding url
-        # ids = [child.get("ids")[0] for child in children]
-        # print("ids: ", ids)
-
         # Filter the displayed children based on the number of content specified in the config
-        if whatsnew_config["no_of_contents"]:
-            if len(children) > whatsnew_config["no_of_contents"]:
-                children = children[: whatsnew_config["no_of_contents"]]
+        if sidebar_no_of_contents is not None:
+            if len(children) > sidebar_no_of_contents:
+                children = children[:sidebar_no_of_contents]
 
         contents = {
             "title": f"{html_title} {version_title}",
@@ -1022,17 +1005,16 @@ def extract_whatsnew(app, doctree, docname):
 
 def add_whatsnew_sidebar(app, pagename, templatename, context, doctree):
     """Add what's new section to the context."""
+    # Get the html_theme_options from conf.py
     config_options = app.config.html_theme_options
-    whats_new_options = config_options.get("whatsnew")
-    if not whats_new_options:
-        return
 
-    pages = whats_new_options.get("sidebar_pages", None)
+    # Get the whatsnew key from the html_theme_options
+    whatsnew_options = config_options.get("whatsnew")
 
-    if not pages:
-        return
+    # Get the pages the whatsnew section should be displayed on
+    sidebar_pages = whatsnew_options.get("sidebar_pages")
 
-    if pagename not in pages:
+    if pagename not in sidebar_pages:
         return
 
     whatsnew = context.get("whatsnew", [])
@@ -1080,12 +1062,19 @@ def setup(app: Sphinx) -> Dict:
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
     app.connect("builder-inited", check_for_depreciated_theme_options)
-    app.connect("doctree-read", add_whatsnew_changelog)
-    app.connect("doctree-resolved", extract_whatsnew)
-    app.connect("html-page-context", add_whatsnew_sidebar)
+
+    # Check for what's new options in the theme configuration
+    whatsnew_file, changelog_file, sidebar_pages = get_whatsnew_options(app)
+
+    if whatsnew_file is not None and changelog_file is not None:
+        app.connect("doctree-read", add_whatsnew_changelog)
+        app.connect("doctree-resolved", extract_whatsnew)
+
+        if sidebar_pages is not None:
+            app.connect("html-page-context", add_whatsnew_sidebar)
+
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
-    # app.connect("html-page-context", fix_toctree)
     app.connect("html-page-context", add_cheat_sheet)
     app.connect("build-finished", replace_html_tag)
     if use_ansys_search:
