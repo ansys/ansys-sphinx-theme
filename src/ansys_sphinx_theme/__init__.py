@@ -553,6 +553,19 @@ def check_for_depreciated_theme_options(app: Sphinx):
 
 
 def get_whatsnew_options(app: Sphinx) -> tuple:
+    """Get the whatsnew options from the configuration file.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+
+    Returns
+    -------
+    tuple
+        Tuple containing the paths to the whatsnew file, changelog file, and the sidebar pages.
+        If the whatsnew options are not found, return None for each of those fields.
+    """
     # Get the html_theme_options from conf.py
     config_options = app.config.html_theme_options
 
@@ -580,8 +593,16 @@ def get_whatsnew_options(app: Sphinx) -> tuple:
     return whatsnew_file, changelog_file, sidebar_pages
 
 
-def add_whatsnew_changelog(app, doctree):
-    """Create doctree with minor version and what's new content."""
+def add_whatsnew_changelog(app: Sphinx, doctree: nodes.document) -> None:
+    """Add the what's new section to each minor version if applicable.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    doctree : docutils.nodes.document
+        Document tree for the page.
+    """
     # Get the html_theme_options from conf.py
     config_options = app.config.html_theme_options
 
@@ -611,6 +632,7 @@ def add_whatsnew_changelog(app, doctree):
     if not changelog_doctree_sections:
         return
 
+    # Get the what's new data from the whatsnew.yml file
     whatsnew_data = get_whatsnew_data(whatsnew_file)
 
     existing_minor_versions = []
@@ -650,11 +672,26 @@ def add_whatsnew_changelog(app, doctree):
                 node.insert(0, minor_version_section)
 
 
-def get_whatsnew_data(whatsnew_file):
+def get_whatsnew_data(whatsnew_file: pathlib.Path) -> dict:
+    """Get the what's new data from the whatsnew.yml file.
+
+    Parameters
+    ----------
+    whatsnew_file : pathlib.Path
+        Path to the whatsnew.yml file.
+
+    Returns
+    -------
+    dict
+        Dictionary containing the what's new data from the whatsnew.yml file.
+    """
     if whatsnew_file.exists():
+        # Open and read the whatsnew.yml file
         with pathlib.Path.open(whatsnew_file, "r", encoding="utf-8") as file:
             whatsnew_data = yaml.safe_load(file)
 
+        # Create a dictionary containing the what's new data for each minor version
+        # For example: { minor_version: [fragment1_dict, fragment2_dict, ...] }
         minor_version_whatsnew_data = {}
         for fragment in whatsnew_data["fragments"]:
             # Get the minor version from the fragment version
@@ -669,8 +706,22 @@ def get_whatsnew_data(whatsnew_file):
         return minor_version_whatsnew_data
 
 
-def add_whatsnew_section(minor_version, whatsnew_data):
-    """Add the what's new title and content under the minor version."""
+def add_whatsnew_section(minor_version: str, whatsnew_data: dict) -> nodes.section:
+    """Add the what's new section and dropdowns for each fragment in the whatsnew.yml file.
+
+    Parameters
+    ----------
+    minor_version : str
+        Minor version number.
+    whatsnew_data : dict
+        Dictionary containing the what's new data from the whatsnew.yml file.
+
+    Returns
+    -------
+    nodes.section
+        Section containing the what's new title and dropdowns for each fragment in the
+        whatsnew.yml file.
+    """
     # Add the what's new section and title
     minor_version_whatsnew = nodes.section(ids=[f"version-{minor_version}-whatsnew"])
     minor_version_whatsnew += nodes.title("", "What's New")
@@ -917,8 +968,18 @@ def fill_paragraph(
     return paragraph, next_line
 
 
-def extract_whatsnew(app, doctree, docname):
-    """Extract the what's new content from the document."""
+def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None:
+    """Extract the what's new content from the changelog document.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    doctree : docutils.nodes.document
+        Document tree for the page.
+    docname : str
+        Name of the document being processed.
+    """
     # Get the html_theme_options from conf.py
     config_options = app.config.html_theme_options
 
@@ -1003,8 +1064,24 @@ def extract_whatsnew(app, doctree, docname):
     app.env.whatsnew = whatsnew
 
 
-def add_whatsnew_sidebar(app, pagename, templatename, context, doctree):
-    """Add what's new section to the context."""
+def add_whatsnew_sidebar(
+    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
+) -> None:
+    """Add the what's new sidebar to the desired pages.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    pagename : str
+        Name of the current page.
+    templatename : str
+        Name of the template being used.
+    context : dict
+        Context dictionary for the page.
+    doctree : docutils.nodes.document
+        Document tree for the page.
+    """
     # Get the html_theme_options from conf.py
     config_options = app.config.html_theme_options
 
