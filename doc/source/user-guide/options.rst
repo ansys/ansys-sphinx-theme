@@ -298,7 +298,7 @@ The dropdown generation only supports the following RST formats in the "content"
 
            print("hello world")
 
-If a format is used in the "content" field that does not fall into the category above, it will not
+If a format is used in the "content" field that does not fall into the categories above, it will not
 be rendered correctly.
 
 To enable the "What's new" sections and sidebar in the changelog file, add the following dictionary
