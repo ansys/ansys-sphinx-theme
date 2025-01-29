@@ -52,7 +52,7 @@ doc = [
     "sphinx-design==0.6.1",
     "sphinx-gallery==0.18.0",
     "sphinx-jinja==2.0.2",
-    "sphinx-notfound-page==1.0.4",
+    "sphinx-notfound-page==1.1.0",
 ]
 
 [project.entry-points."sphinx.html_themes"]
