@@ -9,6 +9,14 @@ This document contains the release notes for the project.
 
 .. towncrier release notes start
 
+`1.2.7 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.7>`_ - 2025-02-04
+=======================================================================================
+
+Maintenance
+^^^^^^^^^^^
+
+- fix: astroid version `#612 <https://github.com/ansys/ansys-sphinx-theme/pull/612>`_
+
 `1.2.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.5>`_ - 2025-01-13
 =======================================================================================
 
