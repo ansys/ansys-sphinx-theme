@@ -11,6 +11,7 @@ repos:
   rev: v2.3.0
   hooks:
   - id: codespell
+    args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt", "-w"]
 
 - repo: https://github.com/pre-commit/mirrors-prettier
   rev: 'v4.0.0-alpha.8'
