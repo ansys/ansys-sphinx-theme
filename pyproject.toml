@@ -35,7 +35,7 @@ autoapi = [
     "sphinx-autoapi==3.4.0",
     "sphinx-design==0.6.1",
     "sphinx-jinja==2.0.2",
-    "astroid>=3.3.8,<4.0",
+    "astroid>=3.0,<4.0",
 ]
 doc = [
     "jupytext==1.16.6",
