@@ -570,14 +570,14 @@ def get_whatsnew_options(app: Sphinx) -> tuple:
     config_options = app.config.html_theme_options
 
     # Get the whatsnew key from the html_theme_options
-    whatsnew_options = config_options.get("whatsnew", None)
+    whatsnew_options = config_options.get("whatsnew")
 
-    if whatsnew_options is None:
+    if not whatsnew_options:
         return None, None, None
 
     # Get the names of the whatsnew.yml and changelog.rst files
-    whatsnew_file = whatsnew_options.get("whatsnew_file_name", None)
-    changelog_file = whatsnew_options.get("changelog_file_name", None)
+    whatsnew_file = whatsnew_options.get("whatsnew_file_name")
+    changelog_file = whatsnew_options.get("changelog_file_name")
 
     # The source directory of the documentation: {repository_root}/doc/source
     doc_src_dir = app.env.srcdir
@@ -588,7 +588,7 @@ def get_whatsnew_options(app: Sphinx) -> tuple:
         changelog_file = pathlib.Path(doc_src_dir) / changelog_file
 
     # Get the pages the whatsnew sidebar should be displayed on
-    sidebar_pages = whatsnew_options.get("sidebar_pages", None)
+    sidebar_pages = whatsnew_options.get("sidebar_pages")
 
     return whatsnew_file, changelog_file, sidebar_pages
 
@@ -997,7 +997,7 @@ def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None
     sidebar_no_of_headers = whatsnew_options.get("sidebar_no_of_headers", 3)
     # Get the number of what's new content to display under each minor version in the sidebar.
     # By default, it displays all what's new dropdown titles
-    sidebar_no_of_contents = whatsnew_options.get("sidebar_no_of_contents", None)
+    sidebar_no_of_contents = whatsnew_options.get("sidebar_no_of_contents")
 
     # Get the doctree for the file
     changelog_file = changelog_file.stem
