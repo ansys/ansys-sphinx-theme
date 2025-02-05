@@ -645,7 +645,7 @@ def add_whatsnew_changelog(app: Sphinx, doctree: nodes.document) -> None:
         # Get the semantic version number from the section title link
         next_node = node.next_node(nodes.reference)
         # Get the name of the section title link
-        version = next_node.get("name", None)
+        version = next_node.get("name")
 
         if version:
             # Create the minor version from the patch version
