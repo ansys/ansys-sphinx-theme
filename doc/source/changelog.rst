@@ -8,6 +8,50 @@ Release notes
 
 .. towncrier release notes start
 
+`1.3.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.0>`_ (2025-02-05)
+=======================================================================================
+
+Dependencies
+^^^^^^^^^^^^
+
+- chore(deps): bump pygithub from 2.4.0 to 2.5.0 `#582 <https://github.com/ansys/ansys-sphinx-theme/pull/582>`_
+- chore(deps): bump pyvista[jupyter] from 0.44.1 to 0.44.2 `#589 <https://github.com/ansys/ansys-sphinx-theme/pull/589>`_
+- chore(deps): bump sphinx-autoapi from 3.3.3 to 3.4.0 `#592 <https://github.com/ansys/ansys-sphinx-theme/pull/592>`_
+- chore(deps): bump notebook from 7.2.2 to 7.3.1 `#596 <https://github.com/ansys/ansys-sphinx-theme/pull/596>`_
+- chore(deps): bump jupytext from 1.16.4 to 1.16.5 `#598 <https://github.com/ansys/ansys-sphinx-theme/pull/598>`_
+- chore(deps): bump jupytext from 1.16.5 to 1.16.6 `#600 <https://github.com/ansys/ansys-sphinx-theme/pull/600>`_
+- chore(deps): bump notebook from 7.3.1 to 7.3.2 `#606 <https://github.com/ansys/ansys-sphinx-theme/pull/606>`_
+- chore(deps): bump nbsphinx from 0.9.5 to 0.9.6 `#607 <https://github.com/ansys/ansys-sphinx-theme/pull/607>`_
+- chore(deps): bump sphinx-notfound-page from 1.0.4 to 1.1.0 `#611 <https://github.com/ansys/ansys-sphinx-theme/pull/611>`_
+
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- chore: bump version 1.3.dev0 `#577 <https://github.com/ansys/ansys-sphinx-theme/pull/577>`_
+- fix: CONTRIBUTORS.md `#578 <https://github.com/ansys/ansys-sphinx-theme/pull/578>`_
+- fix: errors and warnings caused by CSS imports `#588 <https://github.com/ansys/ansys-sphinx-theme/pull/588>`_
+- fix:  typo in date variable for last modified `#602 <https://github.com/ansys/ansys-sphinx-theme/pull/602>`_
+- chore: update CHANGELOG for v1.2.5 `#609 <https://github.com/ansys/ansys-sphinx-theme/pull/609>`_
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- chore: update CHANGELOG for v1.2.0 `#576 <https://github.com/ansys/ansys-sphinx-theme/pull/576>`_
+- feat: add whatsnew options `#583 <https://github.com/ansys/ansys-sphinx-theme/pull/583>`_
+- chore: update CHANGELOG for v1.2.1 `#585 <https://github.com/ansys/ansys-sphinx-theme/pull/585>`_
+- chore: update CHANGELOG for v1.2.2 `#587 <https://github.com/ansys/ansys-sphinx-theme/pull/587>`_
+- chore: update CHANGELOG for v1.2.3 `#595 <https://github.com/ansys/ansys-sphinx-theme/pull/595>`_
+- chore: update CHANGELOG for v1.2.4 `#604 <https://github.com/ansys/ansys-sphinx-theme/pull/604>`_
+- chore: update CHANGELOG for v1.2.7 `#613 <https://github.com/ansys/ansys-sphinx-theme/pull/613>`_
+
+
+Maintenance
+^^^^^^^^^^^
+
+- fix: style and license headers `#608 <https://github.com/ansys/ansys-sphinx-theme/pull/608>`_
+
 `1.2.7 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.7>`_ - 2025-02-04
 =======================================================================================
 
