@@ -1154,7 +1154,7 @@ def setup(app: Sphinx) -> Dict:
         app.connect("doctree-read", add_whatsnew_changelog)
         app.connect("doctree-resolved", extract_whatsnew)
 
-        if sidebar_pages is not None:
+        if sidebar_pages:
             app.connect("html-page-context", add_whatsnew_sidebar)
 
     app.connect("html-page-context", update_footer_theme)
