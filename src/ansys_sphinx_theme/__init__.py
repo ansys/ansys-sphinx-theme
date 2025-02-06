@@ -691,7 +691,7 @@ def get_whatsnew_data(whatsnew_file: pathlib.Path) -> dict:
             import yaml
         except ImportError as e:
             raise ImportError(
-                f"Failed to import `pyyaml`: {e}. Install the package using `pip install pyyaml`"
+                f"Failed to import `pyyaml`: {e}. Install the package using `pip install ansys-sphinx-theme[change-log]`"  # noqa: E501
             )
 
         with pathlib.Path.open(whatsnew_file, "r", encoding="utf-8") as file:
