@@ -686,14 +686,14 @@ def get_whatsnew_data(whatsnew_file: pathlib.Path) -> dict:
     """
     if whatsnew_file.exists():
         # Open and read the whatsnew.yml file
-        
+
         try:
             import yaml
         except ImportError as e:
             raise ImportError(
                 f"Failed to import `pyyaml`: {e}. Install the package using `pip install pyyaml`"
             )
-        
+
         with pathlib.Path.open(whatsnew_file, "r", encoding="utf-8") as file:
             whatsnew_data = yaml.safe_load(file)
 
