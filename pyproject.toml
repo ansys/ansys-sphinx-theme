@@ -171,7 +171,3 @@ showcontent = true
 directory = "test"
 name = "Test"
 showcontent = true
-
-[[tool.towncrier.section]]
-name = ""
-path = ""
