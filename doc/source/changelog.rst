@@ -8,6 +8,14 @@ Release notes
 
 .. towncrier release notes start
 
+`1.3.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.1>`_ (2025-02-06)
+=======================================================================================
+
+Documentation
+^^^^^^^^^^^^^
+
+- Fix: optimize imports for whatsnew `#617 <https://github.com/ansys/ansys-sphinx-theme/pull/617>`_
+
 `1.3.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.0>`_ (2025-02-05)
 =======================================================================================
 
