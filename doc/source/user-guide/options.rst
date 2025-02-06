@@ -269,7 +269,7 @@ To install the "What's new" dependencies from ansys-sphinx-theme, run the follow
 
     pip install ansys-sphinx-theme[changelog]
 
-To get started, create a YAML file named ``whatsnew.yml`` in the ``doc/source`` directory. The
+To get started, create a YAML file named ``whatsnew.yml`` in the ``doc/source/changelog.d`` directory. The
 YAML file should contain the following structure:
 
 .. code-block:: yaml
@@ -315,7 +315,7 @@ to the ``html_theme_options`` dictionary:
     html_theme_options = (
         {
             "whatsnew": {
-                "whatsnew_file_path": "changelog.d/whatsnew.yml",
+                "whatsnew_file_path": "../changelog.d/whatsnew.yml",
                 "changelog_file_path": "changelog.rst",
                 "sidebar_pages": ["changelog"],
                 "sidebar_no_of_headers": 3,  # Optional
