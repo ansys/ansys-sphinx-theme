@@ -269,7 +269,7 @@ To install the "What's new" dependencies from ansys-sphinx-theme, run the follow
 
     pip install ansys-sphinx-theme[changelog]
 
-To get started, create a YAML file named ``whatsnew.yml`` in the ``doc/source/changelog.d`` directory. The
+To get started, create a YAML file named ``whatsnew.yml`` in the ``doc/changelog.d`` directory. The
 YAML file should contain the following structure:
 
 .. code-block:: yaml
