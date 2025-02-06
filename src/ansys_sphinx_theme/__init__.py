@@ -34,7 +34,6 @@ import warnings
 from docutils import nodes
 from sphinx import addnodes
 from sphinx.application import Sphinx
-import yaml
 
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
@@ -687,6 +686,14 @@ def get_whatsnew_data(whatsnew_file: pathlib.Path) -> dict:
     """
     if whatsnew_file.exists():
         # Open and read the whatsnew.yml file
+        
+        try:
+            import yaml
+        except ImportError as e:
+            raise ImportError(
+                f"Failed to import `pyyaml`: {e}. Install the package using `pip install pyyaml`"
+            )
+        
         with pathlib.Path.open(whatsnew_file, "r", encoding="utf-8") as file:
             whatsnew_data = yaml.safe_load(file)
 
@@ -1143,7 +1150,7 @@ def setup(app: Sphinx) -> Dict:
     # Check for what's new options in the theme configuration
     whatsnew_file, changelog_file, sidebar_pages = get_whatsnew_options(app)
 
-    if whatsnew_file is not None and changelog_file is not None:
+    if whatsnew_file and changelog_file:
         app.connect("doctree-read", add_whatsnew_changelog)
         app.connect("doctree-resolved", extract_whatsnew)
 

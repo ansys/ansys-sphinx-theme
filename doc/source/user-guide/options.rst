@@ -263,6 +263,12 @@ What's new section
 The "What's new" section is an option that allows you to highlight new features in your library
 for each minor version within the changelog file.
 
+To install the whatsnew dependencies from ansys-sphinx-theme, run the following command:
+
+.. code-block:: bash
+
+    pip install ansys-sphinx-theme[changelog]
+
 To get started, create a YAML file named ``whatsnew.yml`` in the ``doc/source`` directory. The
 YAML file should contain the following structure:
 
