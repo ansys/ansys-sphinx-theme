@@ -7,7 +7,7 @@
 }
 
 .whatsnew-sidebar h2 {
-  font-size: 1em;
+  font-size: 14px;
   font-family: var(--ast-font-family-base);
   margin-bottom: 10px;
   margin-top: 10px;
@@ -15,7 +15,7 @@
 }
 
 .whatsnew-sidebar h3 {
-  font-size: 1em;
+  font-size: 12px;
   font-family: var(--ast-font-family-base);
   margin: 8px 4px;
   padding: 4px 8px;

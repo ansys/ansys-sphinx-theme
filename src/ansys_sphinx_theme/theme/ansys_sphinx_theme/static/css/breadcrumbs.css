@@ -80,7 +80,7 @@ html[data-theme="dark"] #announcement_msg :after {
 }
 
 .sidebar-cheatsheets {
-  text-align: center;
+  text-align: flex-start;
 }
 
 .sidebar-cheatsheets h4 {
