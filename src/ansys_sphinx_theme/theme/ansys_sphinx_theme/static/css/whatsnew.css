@@ -1,6 +1,5 @@
 .whatsnew-sidebar {
   /* border: 1px solid var(--ast-color-table-inner-border); */
-  padding: 8px;
   background-color: var(--pst-color-background);
   /* border-radius: 10px; */
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
@@ -48,7 +47,7 @@
 }
 
 .whatsnew-sidebar li {
-  padding: 4px 24px 4px 32px;
+  padding: 4px 8px 4px 8px;
 }
 
 .whatsnew-sidebar li:hover {
