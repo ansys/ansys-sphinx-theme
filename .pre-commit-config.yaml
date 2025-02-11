@@ -27,6 +27,13 @@ repos:
   - id: check-yaml
   - id: trailing-whitespace
 
+- repo: "https://github.com/Riverside-Healthcare/djLint"
+  rev: v1.36.4
+  hooks:
+    - id: djlint-jinja
+      types_or: ["html"]
+      ignore: "T003"
+
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
   rev: 0.31.1

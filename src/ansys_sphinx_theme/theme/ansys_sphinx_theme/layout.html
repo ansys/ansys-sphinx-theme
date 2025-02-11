@@ -22,7 +22,7 @@
 {% block docs_navbar %}
   {{ super() }}
   {% if theme_switcher %}
-    {% include 'components/announcement_version.html' %}
+    {% include "components/announcement_version.html" %}
   {% endif %}
 {% endblock %}
 
@@ -30,7 +30,7 @@
   {{ super() }}
   {% if theme_use_ansys_search %}
     {%- include "components/ast-search-button.html" %}
-  {%  endif %}
+  {% endif %}
 {%- endblock %}
 
 {%- block scripts_end %}

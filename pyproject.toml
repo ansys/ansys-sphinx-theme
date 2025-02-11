@@ -116,6 +116,16 @@ convention = "numpy"
 combine-as-imports = true
 force-sort-within-sections = true
 
+[tool.djlint]
+profile = "jinja"
+extension = "html"
+indent = 2
+max_line_length = 120
+use_gitignore = true
+format_js = true
+format_css = true
+ignore = "H006,J018,T003,H025,H021"
+
 [tool.coverage.run]
 source = ["src"]
 
