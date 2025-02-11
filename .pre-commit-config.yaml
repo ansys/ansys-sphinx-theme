@@ -32,7 +32,6 @@ repos:
   hooks:
     - id: djlint-jinja
       types_or: ["html"]
-      ignore: "T003"
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
