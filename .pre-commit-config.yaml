@@ -1,14 +1,14 @@
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.8.6
+  rev: v0.9.6
   hooks:
     - id: ruff
       args: [--fix]
     - id: ruff-format
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.3.0
+  rev: v2.4.1
   hooks:
   - id: codespell
     args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt", "-w"]
@@ -29,7 +29,7 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.31.0
+  rev: 0.31.1
   hooks:
     - id: check-github-workflows
 
