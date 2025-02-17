@@ -13,7 +13,7 @@ repos:
   - id: codespell
     args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt", "-w"]
 
-- repo: "https://github.com/pycontribs/mirrors-prettier"
+- repo: https://github.com/pycontribs/mirrors-prettier
   rev: v3.4.2
   hooks:
   - id: prettier
