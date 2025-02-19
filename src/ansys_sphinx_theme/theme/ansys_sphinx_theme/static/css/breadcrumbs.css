@@ -80,19 +80,20 @@ html[data-theme="dark"] #announcement_msg :after {
 }
 
 .sidebar-cheatsheets {
-  text-align: flex-start;
+  text-align: left;
 }
 
 .sidebar-cheatsheets h4 {
-  font-weight: var(--pst-sidebar-header-font-weight) !important;
-  font-size: var(--pst-sidebar-header-font-size) !important;
-  margin-bottom: 0.5rem;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  font-family: var(--ast-font-family-base);
+  color: var(--ast-color-text);
 }
 
 .sidebar-cheatsheets a {
   display: inline-flex;
   border: 0.5px solid var(--pst-color-border);
-  padding: 0.25rem;
+  padding: 4px 8px 4px 12px;
   max-width: 80%;
 }
 

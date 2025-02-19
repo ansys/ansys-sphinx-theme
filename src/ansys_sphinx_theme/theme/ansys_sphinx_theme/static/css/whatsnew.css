@@ -7,7 +7,7 @@
 }
 
 .whatsnew-sidebar h2 {
-  font-size: 14px;
+  font-size: 1rem;
   font-family: var(--ast-font-family-base);
   margin-bottom: 10px;
   margin-top: 10px;
@@ -15,7 +15,7 @@
 }
 
 .whatsnew-sidebar h3 {
-  font-size: 12px;
+  font-size: 0.75rem;
   font-family: var(--ast-font-family-base);
   margin: 8px 4px;
   padding: 4px 8px;
@@ -42,12 +42,12 @@
 
 .whatsnew-sidebar ul {
   list-style: none;
-  padding-left: 12px; /* Remove default padding */
   line-height: 30px;
+  padding-inline-start: 0rem;
 }
 
 .whatsnew-sidebar li {
-  padding: 4px 8px 4px 8px;
+  padding: 4px 8px 4px 12px;
 }
 
 .whatsnew-sidebar li:hover {
