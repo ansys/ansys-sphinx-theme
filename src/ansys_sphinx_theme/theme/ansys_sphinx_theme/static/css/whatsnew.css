@@ -1,6 +1,5 @@
 .whatsnew-sidebar {
   /* border: 1px solid var(--ast-color-table-inner-border); */
-  padding: 8px;
   background-color: var(--pst-color-background);
   /* border-radius: 10px; */
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  */
@@ -8,7 +7,7 @@
 }
 
 .whatsnew-sidebar h2 {
-  font-size: 1em;
+  font-size: 1rem;
   font-family: var(--ast-font-family-base);
   margin-bottom: 10px;
   margin-top: 10px;
@@ -16,7 +15,7 @@
 }
 
 .whatsnew-sidebar h3 {
-  font-size: 1em;
+  font-size: 0.75rem;
   font-family: var(--ast-font-family-base);
   margin: 8px 4px;
   padding: 4px 8px;
@@ -43,12 +42,12 @@
 
 .whatsnew-sidebar ul {
   list-style: none;
-  padding-left: 12px; /* Remove default padding */
   line-height: 30px;
+  padding-inline-start: 0rem;
 }
 
 .whatsnew-sidebar li {
-  padding: 4px 24px 4px 32px;
+  padding: 4px 8px 4px 12px;
 }
 
 .whatsnew-sidebar li:hover {
