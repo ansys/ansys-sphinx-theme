@@ -19,16 +19,16 @@
 
 {# ----------------- Start macros definition for autosummary -----------------#}
 
-{% macro render_autosummary_section(title, members) -%}
+{% macro autosummary_section(title, members, member_name) -%}
 
 {{ title }}
 {{ "-" * title | length }}
 
 .. autoapisummary::
 
-         {% for member in members %}
-    {{ member.id }}
-        {% endfor %}
+    {% for member_name in members %}
+    {{ member_name.id }}
+    {% endfor %}
 
 {%- endmacro %}
 {# ------------------ End macros definition for autosummary --------------- #}
@@ -187,23 +187,23 @@ Import detail
         {% set visible_attributes = own_page_children|selectattr("type", "equalto", "attribute")|list %}
 
         {% if visible_attributes %}
-{{ autosummary_section("Attributes", visible_attributes) }}
+{{ autosummary_section("Attributes", visible_attributes, "attribute") }}
         {% endif %}
         {% set visible_exceptions = own_page_children|selectattr("type", "equalto", "exception")|list %}
 
         {% if visible_exceptions %}
-{{ autosummary_section("Exceptions", visible_exceptions) }}
+{{ autosummary_section("Exceptions", visible_exceptions, "exception") }}
         {% endif %}
         {% set visible_classes = own_page_children|selectattr("type", "equalto", "class")|list %}
 
         {% if visible_classes %}
-{{ autosummary_section("Classes", visible_classes) }}
+{{ autosummary_section("Classes", visible_classes, "klass") }}
 
         {% endif %}
         {% set visible_methods = own_page_children|selectattr("type", "equalto", "method")|list %}
 
         {% if visible_methods %}
-{{ autosummary_section("Methods", visible_methods) }}
+{{ autosummary_section("Methods", visible_methods, "method") }}
         {% endif %}
     {% endif %}
 
