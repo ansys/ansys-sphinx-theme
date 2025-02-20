@@ -48,7 +48,7 @@ doc = [
     "pyvista[jupyter]==0.44.2",
     "PyYAML==6.0.2",
     "requests==2.32.3",
-    "Sphinx==8.2.0",
+    #"Sphinx==8.2.0",
     "sphinx-autoapi==3.5.0",
     "sphinx-copybutton==0.5.2",
     "sphinx-design==0.6.1",
