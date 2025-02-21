@@ -8,6 +8,27 @@ Release notes
 
 .. towncrier release notes start
 
+`1.3.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.2>`_ (2025-02-21)
+=======================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: alignment and styles for primary sidebar `#621 <https://github.com/ansys/ansys-sphinx-theme/pull/621>`_
+- fix: typo in autoapi template `#630 <https://github.com/ansys/ansys-sphinx-theme/pull/630>`_
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- Fix: whatsnew config instructions `#619 <https://github.com/ansys/ansys-sphinx-theme/pull/619>`_
+
+
+Maintenance
+^^^^^^^^^^^
+
+- fix: prettier pre-commit hook `#627 <https://github.com/ansys/ansys-sphinx-theme/pull/627>`_
+
 `1.3.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.1>`_ (2025-02-06)
 =======================================================================================
 
