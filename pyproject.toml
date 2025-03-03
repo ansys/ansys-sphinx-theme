@@ -44,7 +44,7 @@ doc = [
     "numpydoc==1.8.0",
     "pandas==2.2.3",
     "Pillow>=9.0",
-    "PyGitHub==2.6.0",
+    "PyGitHub==2.6.1",
     "pyvista[jupyter]==0.44.2",
     "PyYAML==6.0.2",
     "requests==2.32.3",
