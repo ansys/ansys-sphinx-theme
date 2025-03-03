@@ -214,7 +214,7 @@ This way, it's not possible for you to push code that fails the style checks::
 
 
 Build the documentation
-----------------------
+-----------------------
 
 To build documentation locally, you can either use tox as mentioned above or
 run the following commands:
