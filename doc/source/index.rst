@@ -54,3 +54,4 @@ are included in the theme to make documentation more appealing and user-friendly
        examples.rst
        {% endif %}
        changelog
+       contribute.rst

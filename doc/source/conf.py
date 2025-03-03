@@ -3,6 +3,7 @@
 from datetime import datetime
 import os
 from pathlib import Path
+import subprocess
 from typing import List
 
 from github import Github
@@ -162,6 +163,11 @@ jinja_contexts = {
         "version": f"v{version}" if not version.endswith("dev0") else "main",
     },
     "pdf_guide": {"version": get_version_match(__version__)},  # noqa: E501
+    "toxenvs": {
+        "envs": subprocess.run(
+            ["tox", "list", "-d", "-q"], capture_output=True, text=True
+        ).stdout.splitlines()[1:],
+    },
 }
 
 
@@ -297,3 +303,8 @@ Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb
 
     jinja_contexts["examples"] = {"inputs_examples": file_names}
     jinja_contexts["admonitions"] = {"inputs_admonitions": admonitions_links}
+
+
+jinja_globals = {
+    "ANSYS_SPHINX_THEME_VERSION": version,
+}
