@@ -136,8 +136,8 @@ Verify the installation by checking the version of the library:
 
        >>> Ansys sphinx theme version is {{ ANSYS_SPHINX_THEME_VERSION }}
 
-Install Tox
------------
+Install ``Tox``
+---------------
 
 Once the project is installed, you can install `Tox`_. This is a cross-platform
 automation tool. The main advantage of Tox is that it allows you to test your
