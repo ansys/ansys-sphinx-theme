@@ -11,7 +11,7 @@ updates:
       - "pyansys-ci-bot"
     commit-message:
       prefix: "build"
-    group:
+    groups:
       dependencies:
         patterns:
           - "*"
