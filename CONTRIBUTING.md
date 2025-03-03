@@ -13,4 +13,4 @@ For contributing to this project, please refer to the [PyAnsys Developer's Guide
 Further information about contributing to Ansys sphinx theme can be found in [Contributing].
 
 [PyAnsys Developer's Guide]: https://dev.docs.pyansys.com/index.html
-[Contributing]: https://sphinxdocs.ansys.com/version/dev/contributing.html
+[Contributing]: https://sphinxdocs.ansys.com/version/dev/contribute.html
