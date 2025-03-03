@@ -167,10 +167,12 @@ Finally, verify the installation by listing all the different environments
 
             * - Environment
               - Description
+              - usage
             {% for environment in envs %}
             {% set name, description  = environment.split("->") %}
             * - {{ name }}
               - {{ description }}
+              - python -m tox -e {{ name }}
             {% endfor %}
 
 
