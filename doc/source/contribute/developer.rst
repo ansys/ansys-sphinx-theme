@@ -74,14 +74,14 @@ Virtual environment
 
 Start by navigating to the project's root directory by running:
 
-.. code-block::
+.. code-block:: bash
 
     cd ansys-sphinx-theme
 
 Then, create a new virtual environment named ``.venv`` to isolate your system's
 Python environment by running:
 
-.. code-block:: text
+.. code-block:: bash
 
     python -m venv .venv
 
@@ -95,19 +95,19 @@ Finally, activate this environment by running:
 
             .. tab-item:: CMD
 
-                .. code-block:: text
+                .. code-block:: bash
 
                     .venv\Scripts\activate.bat
 
             .. tab-item:: PowerShell
 
-                .. code-block:: text
+                .. code-block:: bash
 
                     .venv\Scripts\Activate.ps1
 
     .. tab-item:: macOS/Linux/UNIX
 
-        .. code-block:: text
+        .. code-block:: bash
 
             source .venv/bin/activate
 
@@ -116,7 +116,7 @@ Development mode
 
 Now, install Ansys sphinx theme in editable mode by running:
 
-.. code-block:: text
+.. code-block:: bash
 
     python -m pip install --editable .
 
@@ -126,13 +126,11 @@ Verify the installation by checking the version of the library:
 .. code-block:: python
 
     from ansys_sphinx_theme import __version__
-
-
     print(f"Ansys sphinx thenme version is {__version__}")
 
 .. jinja::
 
-    .. code-block:: text
+    .. code-block:: bash
 
        >>> Ansys sphinx theme version is {{ ANSYS_SPHINX_THEME_VERSION }}
 
@@ -144,14 +142,14 @@ automation tool. The main advantage of Tox is that it allows you to test your
 project in different environments and configurations in a temporary and
 isolated Python virtual environment. To install Tox, run:
 
-.. code-block:: text
+.. code-block:: bash
 
     python -m pip install tox
 
 Finally, verify the installation by listing all the different environments
 (automation rules) for Ansys Sphinx theme:
 
-.. code-block:: text
+.. code-block:: bash
 
     python -m tox list
 
