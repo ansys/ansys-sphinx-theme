@@ -1,13 +1,139 @@
+
 .. _ref_release_notes:
 
 Release notes
 #############
 
-This document contains the release notes for the project.
-
 .. vale off
 
 .. towncrier release notes start
+
+`1.3.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.2>`_ (2025-02-21)
+=======================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: alignment and styles for primary sidebar `#621 <https://github.com/ansys/ansys-sphinx-theme/pull/621>`_
+- fix: typo in autoapi template `#630 <https://github.com/ansys/ansys-sphinx-theme/pull/630>`_
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- Fix: whatsnew config instructions `#619 <https://github.com/ansys/ansys-sphinx-theme/pull/619>`_
+
+
+Maintenance
+^^^^^^^^^^^
+
+- fix: prettier pre-commit hook `#627 <https://github.com/ansys/ansys-sphinx-theme/pull/627>`_
+
+`1.3.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.1>`_ (2025-02-06)
+=======================================================================================
+
+Documentation
+^^^^^^^^^^^^^
+
+- Fix: optimize imports for whatsnew `#617 <https://github.com/ansys/ansys-sphinx-theme/pull/617>`_
+
+`1.3.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.0>`_ (2025-02-05)
+=======================================================================================
+
+Dependencies
+^^^^^^^^^^^^
+
+- chore(deps): bump pygithub from 2.4.0 to 2.5.0 `#582 <https://github.com/ansys/ansys-sphinx-theme/pull/582>`_
+- chore(deps): bump pyvista[jupyter] from 0.44.1 to 0.44.2 `#589 <https://github.com/ansys/ansys-sphinx-theme/pull/589>`_
+- chore(deps): bump sphinx-autoapi from 3.3.3 to 3.4.0 `#592 <https://github.com/ansys/ansys-sphinx-theme/pull/592>`_
+- chore(deps): bump notebook from 7.2.2 to 7.3.1 `#596 <https://github.com/ansys/ansys-sphinx-theme/pull/596>`_
+- chore(deps): bump jupytext from 1.16.4 to 1.16.5 `#598 <https://github.com/ansys/ansys-sphinx-theme/pull/598>`_
+- chore(deps): bump jupytext from 1.16.5 to 1.16.6 `#600 <https://github.com/ansys/ansys-sphinx-theme/pull/600>`_
+- chore(deps): bump notebook from 7.3.1 to 7.3.2 `#606 <https://github.com/ansys/ansys-sphinx-theme/pull/606>`_
+- chore(deps): bump nbsphinx from 0.9.5 to 0.9.6 `#607 <https://github.com/ansys/ansys-sphinx-theme/pull/607>`_
+- chore(deps): bump sphinx-notfound-page from 1.0.4 to 1.1.0 `#611 <https://github.com/ansys/ansys-sphinx-theme/pull/611>`_
+
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- chore: bump version 1.3.dev0 `#577 <https://github.com/ansys/ansys-sphinx-theme/pull/577>`_
+- fix: CONTRIBUTORS.md `#578 <https://github.com/ansys/ansys-sphinx-theme/pull/578>`_
+- fix: errors and warnings caused by CSS imports `#588 <https://github.com/ansys/ansys-sphinx-theme/pull/588>`_
+- fix:  typo in date variable for last modified `#602 <https://github.com/ansys/ansys-sphinx-theme/pull/602>`_
+- chore: update CHANGELOG for v1.2.5 `#609 <https://github.com/ansys/ansys-sphinx-theme/pull/609>`_
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- chore: update CHANGELOG for v1.2.0 `#576 <https://github.com/ansys/ansys-sphinx-theme/pull/576>`_
+- feat: add whatsnew options `#583 <https://github.com/ansys/ansys-sphinx-theme/pull/583>`_
+- chore: update CHANGELOG for v1.2.1 `#585 <https://github.com/ansys/ansys-sphinx-theme/pull/585>`_
+- chore: update CHANGELOG for v1.2.2 `#587 <https://github.com/ansys/ansys-sphinx-theme/pull/587>`_
+- chore: update CHANGELOG for v1.2.3 `#595 <https://github.com/ansys/ansys-sphinx-theme/pull/595>`_
+- chore: update CHANGELOG for v1.2.4 `#604 <https://github.com/ansys/ansys-sphinx-theme/pull/604>`_
+- chore: update CHANGELOG for v1.2.7 `#613 <https://github.com/ansys/ansys-sphinx-theme/pull/613>`_
+
+
+Maintenance
+^^^^^^^^^^^
+
+- fix: style and license headers `#608 <https://github.com/ansys/ansys-sphinx-theme/pull/608>`_
+
+`1.2.7 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.7>`_ - 2025-02-04
+=======================================================================================
+
+Maintenance
+^^^^^^^^^^^
+
+- fix: astroid version `#612 <https://github.com/ansys/ansys-sphinx-theme/pull/612>`_
+
+`1.2.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.5>`_ - 2025-01-13
+=======================================================================================
+
+Dependencies
+^^^^^^^^^^^^
+
+- chore(deps): update pydata-sphinx-theme requirement from <0.16,>=0.15.4 to >=0.15.4,<0.17 `#605 <https://github.com/ansys/ansys-sphinx-theme/pull/605>`_
+
+`1.2.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.4>`_ - 2024-12-20
+=======================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: impose upper version for the pydata-sphinx-theme `#603 <https://github.com/ansys/ansys-sphinx-theme/pull/603>`_
+
+`1.2.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.3>`_ - 2024-12-05
+=======================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: rename the ``date`` to ``ast_build_date`` in js `#594 <https://github.com/ansys/ansys-sphinx-theme/pull/594>`_
+
+`1.2.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.2>`_ - 2024-11-21
+=======================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: section ids with search `#586 <https://github.com/ansys/ansys-sphinx-theme/pull/586>`_
+
+`1.2.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.1>`_ - 2024-11-13
+=======================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: enable local page `Search` and default to PyData search on 'Enter' `#584 <https://github.com/ansys/ansys-sphinx-theme/pull/584>`_
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- Enable 'show_prev_next' in the documented defaults `#580 <https://github.com/ansys/ansys-sphinx-theme/pull/580>`_
 
 `1.2.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.0>`_ - 2024-10-31
 =======================================================================================

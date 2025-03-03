@@ -48,6 +48,11 @@ html_context = {
     "github_repo": "ansys-sphinx-theme",
     "github_version": "main",
     "doc_path": "doc/source",
+    "page_assets": {
+        "examples/table": {
+            "needs_datatables": True,
+        },
+    },
 }
 
 html_theme_options = {

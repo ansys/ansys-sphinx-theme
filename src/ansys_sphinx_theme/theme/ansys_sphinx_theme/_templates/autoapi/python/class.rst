@@ -19,16 +19,16 @@
 
 {# ----------------- Start macros definition for autosummary -----------------#}
 
-{% macro render_autosummary_section(title, members) -%}
+{% macro autosummary_section(title, members) -%}
 
 {{ title }}
 {{ "-" * title | length }}
 
 .. autoapisummary::
 
-         {% for member in members %}
+    {% for member in members %}
     {{ member.id }}
-        {% endfor %}
+    {% endfor %}
 
 {%- endmacro %}
 {# ------------------ End macros definition for autosummary --------------- #}

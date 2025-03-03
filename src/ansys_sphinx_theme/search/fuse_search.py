@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2024 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2021 - 2025 ANSYS, Inc. and/or its affiliates.
 # SPDX-License-Identifier: MIT
 #
 #
@@ -101,9 +101,15 @@ class SearchIndex:
                 for element_child in element.children:
                     if element_child.tagname != "desc_signature":
                         continue
-                    section_anchor_id = element_child.attributes["ids"][0]
+                    if element_child.attributes.get("ids"):
+                        section_anchor_id = element_child.attributes["ids"][0]
             section_text = element.astext()
-            section_title = _desc_anchor_to_title(title, section_anchor_id)
+            if isinstance(section_anchor_id, list) and len(section_anchor_id) > 0:
+                section_anchor_id = section_anchor_id[0]
+            if section_anchor_id:
+                section_title = _desc_anchor_to_title(title, section_anchor_id)
+            else:
+                section_title = title
             self.sections.append(
                 {
                     "title": section_title,
