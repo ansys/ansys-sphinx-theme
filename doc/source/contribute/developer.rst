@@ -209,3 +209,33 @@ This way, it's not possible for you to push code that fails the style checks::
   trim trailing whitespace.................................................Passed
   Validate GitHub Workflows................................................Passed
   Add License Headers......................................................Passed
+
+
+Build the documentation
+----------------------
+
+To build documentation locally, you can either use tox as mentioned above or
+run the following commands:
+
+1. Install the required dependencies by running::
+
+    pip install -e .[doc]
+
+2. Build the documentation by running::
+
+    # On Linux or macOS
+    make -C doc/ html
+
+    # On Windows
+    doc\make.bat html
+
+3. The documentation is built in the ``doc/_build/html`` directory. Open the
+   ``index.html`` file in your browser to view the documentation.
+
+You can clean the build directory by running::
+
+    # On Linux or macOS
+    make -C doc/ clean
+
+    # On Windows
+    doc\make.bat clean
