@@ -24,7 +24,7 @@
 .. ansys_sphinx_theme links
 
 .. _static_files: https://github.com/ansys/ansys-sphinx-theme/blob/main/src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/logos/
-.. _Ansys sphinx theme issue: https://github.com/ansys/ansys-sphinx-theme/issues/
+.. _Ansys Sphinx theme issues: https://github.com/ansys/ansys-sphinx-theme/issues/
 
 
 .. other links

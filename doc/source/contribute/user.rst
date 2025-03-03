@@ -55,7 +55,7 @@ Report bugs
 If you encounter a bug or an issue while using the project, please report it.
 Your feedback helps to identify problems.
 
-- Search the `Ansys sphinx theme issue`_ to see if the issue has already been reported.
+- Search the `Ansys Sphinx theme issues`_ to see if the issue has already been reported.
 
 - Create a new issue if it hasn’t been reported.
 
@@ -97,6 +97,6 @@ Share your work
 ===============
 
 If you have used Ansys Sphinx theme to create something interesting, share it with the rest
-of the community. You can share your work in the `Ansys sphinx theme issue`_. Include
+of the community. You can share your work in the `Ansys Sphinx theme issues`_. Include
 a brief description of your work and any relevant links that others may find
 useful.
