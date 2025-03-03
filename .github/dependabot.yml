@@ -2,6 +2,7 @@ version: 2
 updates:
   - package-ecosystem: "pip"
     directory: "/"
+    insecure-external-code-execution: allow
     schedule:
       interval: "daily"
     labels:
@@ -11,10 +12,6 @@ updates:
       - "pyansys-ci-bot"
     commit-message:
       prefix: "build"
-    groups:
-      dependencies:
-        patterns:
-          - "*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
