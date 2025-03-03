@@ -12,6 +12,7 @@
 .. _PyData_PyPI: https://pypi.org/project/pydata-sphinx-theme/
 .. _Jinja2_PyPI: https://pypi.org/project/Jinja2/
 .. _pip: https://pypi.org/project/pip/
+.. _Tox: https://tox.wiki/en/stable/
 
 .. dependency docs links
 .. _sphinx_design_examples: https://github.com/executablebooks/sphinx-design/tree/furo-theme/docs/snippets/rst
@@ -23,3 +24,9 @@
 .. ansys_sphinx_theme links
 
 .. _static_files: https://github.com/ansys/ansys-sphinx-theme/blob/main/src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/logos/
+.. _Ansys Sphinx theme issues: https://github.com/ansys/ansys-sphinx-theme/issues/
+
+
+.. other links
+.. _git: https://git-scm.com/
+.. _configure SSH: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
