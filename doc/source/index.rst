@@ -36,6 +36,12 @@ are included in the theme to make documentation more appealing and user-friendly
 
         {% endif %}
 
+        .. grid-item-card:: :material-regular:`people;1.25em` Contribute
+            :link: contribute
+            :link-type: doc
+
+            Learn how to contribute to the Ansys Sphinx Theme.
+
         .. grid-item-card:: :material-regular:`update;1.25em` Changelog
             :link: changelog
             :link-type: doc
