@@ -4,9 +4,9 @@ requires = [
 ]
 build-backend = "sphinx_theme_builder"
 
-#[tool.sphinx-theme-builder]
-#node_version = "22.9.0"
-#theme = "ansys_sphinx_theme"
+[tool.sphinx-theme-builder]
+node-version = "22.9.0"
+theme-name = "ansys_sphinx_theme"
 
 [project]
 # Check https://flit.readthedocs.io/en/latest/pyproject_toml.html for all available sections
@@ -69,7 +69,7 @@ changelog = [
 ]
 
 [project.entry-points."sphinx.html_themes"]
-ansys_sphinx_theme = "ansys_sphinx_theme"
+"ansys_sphinx_theme" = "ansys_sphinx_theme"
 
 
 #[tool.flit.sdist]
