@@ -1,6 +1,12 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"
+requires = [
+  "sphinx-theme-builder @ https://github.com/pradyunsg/sphinx-theme-builder/archive/87214d0671c943992c05e3db01dca997e156e8d6.zip",
+]
+build-backend = "sphinx_theme_builder"
+
+#[tool.sphinx-theme-builder]
+#node_version = "22.9.0"
+#theme = "ansys_sphinx_theme"
 
 [project]
 # Check https://flit.readthedocs.io/en/latest/pyproject_toml.html for all available sections
@@ -65,17 +71,15 @@ changelog = [
 [project.entry-points."sphinx.html_themes"]
 ansys_sphinx_theme = "ansys_sphinx_theme"
 
-[tool.flit.module]
-name = "ansys_sphinx_theme"
 
-[tool.flit.sdist]
-include = [
-    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/layout.html",
-    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/components/breadcrumbs.html",
-    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/theme.conf",
-    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/_templates/",
-    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/",
-]
+#[tool.flit.sdist]
+#include = [
+#    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/layout.html",
+#    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/components/breadcrumbs.html",
+#    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/theme.conf",
+#    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/_templates/",
+#    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/",
+#]
 
 [project.urls]
 Home = "https://sphinxdocs.ansys.com/"
