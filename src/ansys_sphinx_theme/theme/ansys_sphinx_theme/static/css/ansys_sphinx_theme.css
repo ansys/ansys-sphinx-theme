@@ -6,6 +6,9 @@
 @import "sphinx-design.css";
 @import "table-custom.css";
 @import "sphinx-gallery.css";
+@import "whatsnew.css";
+@import "nbsphinx.css";
+@import "ansys-sphinx-theme-variable.css";
 
 /*
 * Code cell
