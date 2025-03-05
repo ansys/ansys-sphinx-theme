@@ -71,16 +71,6 @@ changelog = [
 [project.entry-points."sphinx.html_themes"]
 "ansys_sphinx_theme" = "ansys_sphinx_theme"
 
-
-#[tool.flit.sdist]
-#include = [
-#    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/layout.html",
-#    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/components/breadcrumbs.html",
-#    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/theme.conf",
-#    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/_templates/",
-#    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/",
-#]
-
 [project.urls]
 Home = "https://sphinxdocs.ansys.com/"
 Source = "https://github.com/ansys/ansys-sphinx-theme"
