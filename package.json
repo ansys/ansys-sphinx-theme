@@ -1,0 +1,8 @@
+{
+    "scripts": {
+        "build": "sass src/ansys_sphinx_theme/assets/styles/ansys-sphinx-theme.css src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css"
+      },
+    "dependencies": {
+        "sass": "^1.43.4"
+      }
+}
