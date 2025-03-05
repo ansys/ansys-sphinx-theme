@@ -167,3 +167,4 @@ doc/source/examples/api/
 # node modules and env
 node_modules/
 .nodeenv/
+package-lock.json
