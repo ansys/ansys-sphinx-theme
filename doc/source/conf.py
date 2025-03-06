@@ -26,6 +26,7 @@ from ansys_sphinx_theme import (
 )
 
 THIS_PATH = Path(__file__).parent.resolve()
+PYANSYS_LIGHT_SQUARE = (THIS_PATH / "_static" / "pyansys_light_square.png").resolve()
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 
 # Project information
@@ -191,7 +192,8 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github()
+    token = os.getenv("GITHUB_TOKEN")
+    g = Github(token)
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):
@@ -270,7 +272,7 @@ else:
         "download_all_examples": False,
         # Modules for which function level galleries are created.  In
         "image_scrapers": ("pyvista", "matplotlib"),
-        "default_thumb_file": "source/_static/pyansys_light_square.png",
+        "default_thumb_file": str(PYANSYS_LIGHT_SQUARE),
     }
 
     nbsphinx_prolog = """
