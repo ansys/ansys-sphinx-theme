@@ -1,6 +1,12 @@
 [build-system]
-requires = ["flit_core >=3.2,<4"]
-build-backend = "flit_core.buildapi"
+requires = [
+  "sphinx-theme-builder >= 0.2.0b2,<1",
+]
+build-backend = "sphinx_theme_builder"
+
+[tool.sphinx-theme-builder]
+node-version = "22.14.0"
+theme-name = "ansys_sphinx_theme"
 
 [project]
 # Check https://flit.readthedocs.io/en/latest/pyproject_toml.html for all available sections
@@ -63,19 +69,7 @@ changelog = [
 ]
 
 [project.entry-points."sphinx.html_themes"]
-ansys_sphinx_theme = "ansys_sphinx_theme"
-
-[tool.flit.module]
-name = "ansys_sphinx_theme"
-
-[tool.flit.sdist]
-include = [
-    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/layout.html",
-    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/components/breadcrumbs.html",
-    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/theme.conf",
-    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/_templates/",
-    "src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/",
-]
+"ansys_sphinx_theme" = "ansys_sphinx_theme"
 
 [project.urls]
 Home = "https://sphinxdocs.ansys.com/"
@@ -147,18 +141,18 @@ name = "Fixed"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory = "dependencies"
-name = "Dependencies"
-showcontent = true
-
-[[tool.towncrier.type]]
-directory = "miscellaneous"
-name = "Miscellaneous"
-showcontent = true
-
-[[tool.towncrier.type]]
 directory = "documentation"
 name = "Documentation"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "test"
+name = "Test"
+showcontent = true
+
+[[tool.towncrier.type]]
+directory = "dependencies"
+name = "Dependencies"
 showcontent = true
 
 [[tool.towncrier.type]]
@@ -167,6 +161,6 @@ name = "Maintenance"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory = "test"
-name = "Test"
+directory = "miscellaneous"
+name = "Miscellaneous"
 showcontent = true

@@ -35,7 +35,6 @@ MANIFEST
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
-
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
@@ -163,3 +162,9 @@ doc/source/examples/gallery-examples/
 doc/source/sg_execution_times.rst
 # rendering of sphinx autoapi examples
 doc/source/examples/api/
+
+
+# node modules and env
+node_modules/
+.nodeenv/
+package-lock.json
