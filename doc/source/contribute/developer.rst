@@ -242,6 +242,6 @@ You can clean the build directory by running::
 
 .. Note::
 
-    Use ``tox -e doc-preview`` to build the documentation and open it in your
+    Use ``tox -e doc-serve`` to build the documentation and open it in your
     default browser. This command will also watch for changes in the source
     files and rebuild the documentation automatically.
