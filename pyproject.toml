@@ -1,6 +1,6 @@
 [build-system]
 requires = [
-  "sphinx-theme-builder >= 0.2.0b2,<1",
+  "sphinx-theme-builder>=0.2.0b2,<1",
 ]
 build-backend = "sphinx_theme_builder"
 
@@ -62,6 +62,7 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "tox==4.24.1",
+    "sphinx-theme-builder[cli]==0.2.0b2",
 ]
 changelog = [
     "PyYAML==6.0.2",
