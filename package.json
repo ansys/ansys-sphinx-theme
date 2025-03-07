@@ -1,11 +1,17 @@
 {
     "name": "ansys_sphinx_theme",
     "repository": "https://github.com/ansys/ansys-sphinx-theme",
-
     "scripts": {
-    "build":  "sass src/ansys_sphinx_theme/assets/styles/ansys-sphinx-theme.scss  src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css"
-},
-   "dependencies": {
-    "sass": "^1.43.4"
-  }
+        "build": "sass src/ansys_sphinx_theme/assets/styles/ansys-sphinx-theme.scss  src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css",
+        "build-css": "postcss src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css -o src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css"
+    },
+
+    "devDependencies": {
+        "autoprefixer": "^10.4.20",
+        "postcss": "^8.5.3",
+        "postcss-cli": "^11.0.0",
+        "postcss-import": "^16.1.0",
+        "postcss-nested": "^7.0.2",
+        "sass": "^1.85.1"
+    }
 }
