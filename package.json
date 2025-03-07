@@ -3,7 +3,8 @@
     "repository": "https://github.com/ansys/ansys-sphinx-theme",
     "scripts": {
         "build": "sass src/ansys_sphinx_theme/assets/styles/ansys-sphinx-theme.scss  src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css",
-        "build-css": "postcss src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css -o src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css"
+        "build-css": "postcss src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css -o src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css",
+        "postcss:watch": "postcss src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css--use postcss-import --dir public --watch"
     },
 
     "devDependencies": {
