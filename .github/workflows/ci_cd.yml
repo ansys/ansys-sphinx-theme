@@ -39,31 +39,19 @@ jobs:
 
   changelog-fragment:
     name: "Create changelog fragment"
-    needs: "labeler"
+    needs: [labeler]
     permissions:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - name: "Setup python"
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-
-      - name: "Checkout repo"
-        uses: actions/checkout@v4
-
-      - name: "Install dependencies"
-        run: |
-          python -m pip install --upgrade pip
-          pip install -e .[changelog]
-
-      - uses: ansys/actions/doc-changelog@v8
-        if: ${{ github.event_name == 'pull_request' }}
-        with:
-          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
-          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
-          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+    - uses: ansys/actions/doc-changelog@v8
+      with:
+        token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+        use-conventional-commits: true
+        use-default-towncrier-config: true
+        bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+        bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
   code-style:
     name: Code style
