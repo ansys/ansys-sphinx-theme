@@ -13,5 +13,8 @@
         "postcss-import": "^16.1.0",
         "postcss-nested": "^7.0.2",
         "sass": "^1.85.1"
+    },
+    "dependencies": {
+        "postcss-scss": "^4.0.9"
     }
 }
