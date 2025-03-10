@@ -2,13 +2,12 @@
     "name": "ansys_sphinx_theme",
     "repository": "https://github.com/ansys/ansys-sphinx-theme",
     "scripts": {
-        "build": "sass src/ansys_sphinx_theme/assets/styles/ansys-sphinx-theme.scss  src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css",
-        "build-css": "postcss src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css -o src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css",
-        "postcss:watch": "postcss src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css--use postcss-import --dir public --watch"
+        "build:scss": "sass src/ansys_sphinx_theme/assets/styles/ansys-sphinx-theme.scss  src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css",
+        "build:postcss": "postcss src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css -o src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme-final.css",
+        "build": "npm run build:scss && npm run build:postcss"
     },
-
     "devDependencies": {
-        "autoprefixer": "^10.4.20",
+        "autoprefixer": "^10.4.21",
         "postcss": "^8.5.3",
         "postcss-cli": "^11.0.0",
         "postcss-import": "^16.1.0",
