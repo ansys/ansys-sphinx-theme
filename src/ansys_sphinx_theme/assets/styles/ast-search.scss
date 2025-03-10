@@ -1,3 +1,4 @@
+/* Static Search Results Container */
 .static-search-results {
   display: flex;
   flex-direction: column;
@@ -13,19 +14,25 @@
   max-height: 500px;
 }
 
+/* Individual Result Item */
 .result-item {
   cursor: pointer;
   transition: box-shadow 0.3s ease;
   border-bottom: thin solid var(--ast-search-bar-enable-border);
   padding-bottom: 0.5em;
   margin-bottom: 0.5em;
+
+  &:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+  }
+
+  &.selected {
+    box-shadow: var(--ast-ring-shadow-focused);
+  }
 }
 
-.result-item:last-child {
-  border-bottom: 0;
-  margin-bottom: 0;
-}
-
+/* Result Title */
 .result-title {
   font-size: 1em;
   font-weight: var(--ast-font-weight-bold);
@@ -33,20 +40,19 @@
   color: var(--ast-catagory-header-text);
 }
 
+/* Result Text */
 .result-text {
   font-size: 12px;
   font-family: "Open Sans", sans-serif;
   color: var(--ast-search-bar-enable-text);
 }
 
-.result-item.selected {
-  box-shadow: var(--ast-ring-shadow-focused);
-}
-
+/* Highlighted Text */
 html[data-theme="light"] .highlight {
   color: var(--ast-highlight-color);
 }
 
+/* Search Input Styles */
 .bd-search input.form-control,
 .bd-search input.form-control:focus,
 .bd-search input.form-control:focus-visible,
@@ -57,18 +63,20 @@ html[data-theme="light"] .highlight {
   color: var(--ast-search-bar-enable-text);
   font-size: 14px;
   outline-color: var(--ast-search-bar-enable-border);
-  border: 0px solid var(--ast-search-bar-enable-border);
+  border: 0;
   width: 300px;
   transition: max-width 0.3s ease;
   max-width: 200%;
   height: 40px;
 }
 
+/* Search Button Wrapper */
 .search-button__wrapper.show input,
 .search-button__wrapper.show svg {
   font-size: 14px;
 }
 
+/* Search Button Keyboard Shortcut */
 .bd-search .search-button__kbd-shortcut {
   background-color: var(--ast-search-bar-enable-background) !important;
   box-shadow: none !important;
@@ -78,6 +86,7 @@ html[data-theme="light"] .highlight {
   align-content: center;
 }
 
+/* Index Select Dropdown */
 .index-select {
   color: var(--ast-search-bar-enable-text);
   background: var(--ast-search-bar-enable-background);
@@ -87,13 +96,16 @@ html[data-theme="light"] .highlight {
   border: 0.5px solid var(--ast-search-bar-enable-border);
   border-radius: 4px;
   box-shadow: none;
-  padding: 0px 8px;
+  padding: 0 8px;
   margin-left: 2px;
 }
+
+/* Focus Visible Outline */
 :focus-visible {
   outline: none;
 }
 
+/* Search Icon */
 #search-icon {
   font-size: 24px;
   width: 24px;
@@ -101,12 +113,13 @@ html[data-theme="light"] .highlight {
   color: var(--ast-search-bar-enable-text);
 }
 
+/* Form Control Focus Styles */
 .form-control:focus,
 .bd-search:focus-within {
   box-shadow: none;
 }
 
-/* Button Styling */
+/* Search Button Styling */
 .search-button__button {
   transition: width 0.3s ease;
   width: 50px; /* Initial width */
@@ -116,23 +129,26 @@ html[data-theme="light"] .highlight {
 .bd-search {
   gap: 8px;
   background-color: var(--ast-search-bar-enable-background);
-  border: 0px solid var(--ast-search-bar-enable-border);
-  margin-bottom: 0px;
+  border: 0 solid var(--ast-search-bar-enable-border);
+  margin-bottom: 0;
+
+  input.form-control.expanded {
+    width: 600px;
+  }
 }
 
-.bd-search input.form-control.expanded {
-  width: 600px;
-}
-
+/* Search Icon Styling */
 .search-icon {
   cursor: pointer;
 }
 
+/* Blurred Main Content */
 .bd-main.blurred {
   opacity: 0.5;
   transition: opacity 0.3s ease;
 }
 
+/* Responsive Styles */
 @media (max-width: 768px) {
   .bd-search input.expanded {
     width: 100px;
