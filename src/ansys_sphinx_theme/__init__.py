@@ -459,22 +459,23 @@ def build_quarto_cheatsheet(app: Sphinx):
         return
 
     cheatsheet_file = cheatsheet_options.get("file", "")
-    output_dir = "_static"
-    version = cheatsheet_options.get("version", "main")
-
     if not cheatsheet_file:
         return
 
+    output_dir = "_static"
+    version = cheatsheet_options.get("version", "main")
+
     cheatsheet_file = pathlib.Path(app.srcdir) / cheatsheet_file
+    output_dir_path = pathlib.Path(app.outdir) / output_dir
     file_name = str(cheatsheet_file.name)
     file_path = cheatsheet_file.parent
-    output_dir_path = pathlib.Path(app.outdir) / output_dir
-    # logg all the errors properly
 
     try:
-        subprocess.run(["quarto", "--version"], capture_output=True, text=True)
+        subprocess.run(["quarto", "--version"], check=True, capture_output=True, text=True)
     except FileNotFoundError:
-        raise RuntimeError("Quarto is not installed. Install Quarto using `pip install quarto`")
+        raise RuntimeError("Quarto is not installed. Install Quarto using `pip install quarto`.")
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Error checking Quarto installation: {e}")
 
     try:
         # Add the cheatsheet to the Quarto project
