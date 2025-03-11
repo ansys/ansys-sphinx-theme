@@ -8,6 +8,33 @@ Release notes
 
 .. towncrier release notes start
 
+`1.3.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.3>`_ (March 11, 2025)
+===========================================================================================
+
+Dependencies
+^^^^^^^^^^^^
+
+- chore(deps): bump pygithub from 2.6.0 to 2.6.1 `#632 <https://github.com/ansys/ansys-sphinx-theme/pull/632>`_
+
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: alignment and styles for primary sidebar `#621 <https://github.com/ansys/ansys-sphinx-theme/pull/621>`_
+- fix: typo in autoapi template `#630 <https://github.com/ansys/ansys-sphinx-theme/pull/630>`_
+
+
+Documentation
+^^^^^^^^^^^^^
+
+- Fix: whatsnew config instructions `#619 <https://github.com/ansys/ansys-sphinx-theme/pull/619>`_
+
+
+Maintenance
+^^^^^^^^^^^
+
+- fix: prettier pre-commit hook `#627 <https://github.com/ansys/ansys-sphinx-theme/pull/627>`_
+
 `1.3.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.1>`_ (2025-02-06)
 =======================================================================================
 
