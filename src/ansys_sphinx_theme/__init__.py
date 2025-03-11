@@ -413,7 +413,7 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
         images[0].save(output_dir / output_png, "PNG")
     except Exception as e:
         raise RuntimeError(
-            f"Failed to convert PDF to PNG: {e}, ensure `poppler` is installed. See https://pypi.org/project/pdf2image/"  # noqa: E501
+            f"Failed to convert PDF to PNG: {e}. Ensure the PDF file is valid and poppler is installed."  # noqa: E501
         )
 
 
@@ -469,6 +469,13 @@ def build_quarto_cheatsheet(app: Sphinx):
     file_name = str(cheatsheet_file.name)
     file_path = cheatsheet_file.parent
     output_dir_path = pathlib.Path(app.outdir) / output_dir
+    # logg all the errors properly
+
+    try:
+        subprocess.run(["quarto", "--version"], capture_output=True, text=True)
+    except FileNotFoundError:
+        raise RuntimeError("Quarto is not installed. Install Quarto using `pip install quarto`")
+
     try:
         # Add the cheatsheet to the Quarto project
         subprocess.run(
@@ -483,6 +490,10 @@ def build_quarto_cheatsheet(app: Sphinx):
             text=True,
         )
 
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Failed to add the cheatsheet to the Quarto project: {e}")
+
+    try:
         # Render the cheatsheet
         subprocess.run(
             [
@@ -500,7 +511,10 @@ def build_quarto_cheatsheet(app: Sphinx):
             capture_output=True,
             text=True,
         )
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Failed to render the cheatsheet: {e}")
 
+    try:
         # Remove the cheatsheet from the Quarto project
         subprocess.run(
             ["quarto", "remove", "ansys/cheat_sheet", "--no-prompt"],
@@ -508,28 +522,33 @@ def build_quarto_cheatsheet(app: Sphinx):
             capture_output=True,
             text=True,
         )
-
-        # Remove all supplementary files
-        supplementary_files = [
-            "_static/slash.png",
-            "_static/bground.png",
-            "_static/ansys.png",
-        ]
-        for file in supplementary_files:
-            file_path = cheatsheet_file.parent / file
-            if file_path.exists():
-                file_path.unlink()
-
-        # If static folder is clean, delete it
-        if not list(cheatsheet_file.parent.glob("_static/*")):
-            cheatsheet_file.parent.joinpath("_static").rmdir()
-
     except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Failed to build Quarto cheatsheet: {e}. Ensure Quarto is installed.")
+        raise RuntimeError(
+            f"Failed to remove the cheatsheet extension from the Quarto project: {e}"
+        )
+
+    # Remove all supplementary files
+    supplementary_files = [
+        "_static/slash.png",
+        "_static/bground.png",
+        "_static/ansys.png",
+    ]
+    for file in supplementary_files:
+        file_path = cheatsheet_file.parent / file
+        if file_path.exists():
+            file_path.unlink()
+
+    # If static folder is clean, delete it
+    if not list(cheatsheet_file.parent.glob("_static/*")):
+        cheatsheet_file.parent.joinpath("_static").rmdir()
 
     output_file = output_dir_path / file_name.replace(".qmd", ".pdf")
     app.config.html_theme_options["cheatsheet"]["output_dir"] = f"{output_dir}/{output_file.name}"
     output_png = file_name.replace(".qmd", ".png")
+    # Check output file exists
+    if not output_file.exists():
+        raise FileNotFoundError(f"Failed to build Quarto cheatsheet: {output_file} does not exist.")
+
     convert_pdf_to_png(output_file, output_dir_path, output_png)
     app.config.html_theme_options["cheatsheet"]["thumbnail"] = f"{output_dir}/{output_png}"
 
