@@ -8,6 +8,14 @@ Release notes
 
 .. towncrier release notes start
 
+`1.3.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.3>`_ (March 11, 2025)
+===========================================================================================
+
+Miscellaneous
+^^^^^^^^^^^^^
+
+- fix: improve Logging in Quarto cheatsheet build process `#646 <https://github.com/ansys/ansys-sphinx-theme/pull/646>`_
+
 `1.3.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.2>`_ (2025-02-21)
 =======================================================================================
 
