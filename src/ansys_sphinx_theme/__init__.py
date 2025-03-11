@@ -23,7 +23,6 @@
 """Module for the Ansys Sphinx theme."""
 
 from itertools import islice, tee
-import logging
 import os
 import pathlib
 import re
@@ -34,6 +33,7 @@ import warnings
 from docutils import nodes
 from sphinx import addnodes
 from sphinx.application import Sphinx
+from sphinx.util import logging
 
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
@@ -51,6 +51,7 @@ except ModuleNotFoundError:  # pragma: no cover
     import importlib_metadata
 
 __version__ = importlib_metadata.version(__name__.replace(".", "-"))
+logger = logging.getLogger(__name__)
 
 
 # Declare the fundamental paths of the theme
@@ -258,7 +259,7 @@ def fix_edit_html_page_context(
                             edit=True,
                         )
                 except ValueError as e:
-                    logging.debug(f"An error occurred: {e}")  # Log the exception as debug info
+                    logger.error(f"An error occurred: {e}")  # Log the exception as debug info
                     return link
 
         elif "api" in pagename:
@@ -411,8 +412,23 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
         images[0].save(output_dir / output_png, "PNG")
     except Exception as e:
         raise RuntimeError(
-            f"Failed to convert PDF to PNG: {e}, ensure `poppler` is installed. See https://pypi.org/project/pdf2image/"  # noqa: E501
+            f"Failed to convert PDF to PNG: {e}. Ensure the PDF file is valid and poppler is installed."  # noqa: E501
         )
+
+
+def run_quarto_command(command, cwd):
+    """Run quarto command and logs its output."""
+    command = ["quarto"] + command
+    try:
+        result = subprocess.run(command, cwd=cwd, check=True, capture_output=True, text=True)
+        if result.stdout:
+            logger.info(result.stdout)
+
+        if result.stderr:
+            logger.info(result.stderr)
+
+    except subprocess.CalledProcessError as e:
+        raise RuntimeError(f"Failed to run the command: {e}")
 
 
 def add_cheat_sheet(
@@ -457,78 +473,69 @@ def build_quarto_cheatsheet(app: Sphinx):
         return
 
     cheatsheet_file = cheatsheet_options.get("file", "")
-    output_dir = "_static"
-    version = cheatsheet_options.get("version", "main")
-
     if not cheatsheet_file:
         return
 
+    output_dir = "_static"
+    version = cheatsheet_options.get("version", "main")
+
     cheatsheet_file = pathlib.Path(app.srcdir) / cheatsheet_file
+    output_dir_path = pathlib.Path(app.outdir) / output_dir
     file_name = str(cheatsheet_file.name)
     file_path = cheatsheet_file.parent
-    output_dir_path = pathlib.Path(app.outdir) / output_dir
-    try:
-        # Add the cheatsheet to the Quarto project
-        subprocess.run(
-            [
-                "quarto",
-                "add",
-                f"ansys/pyansys-quarto-cheatsheet@{CHEAT_SHEET_QUARTO_EXTENTION_VERSION}",
-                "--no-prompt",
-            ],
-            cwd=file_path,
-            capture_output=True,
-            text=True,
-        )
 
-        # Render the cheatsheet
-        subprocess.run(
-            [
-                "quarto",
-                "render",
-                file_name,
-                "--to",
-                "cheat_sheet-pdf",
-                "--output-dir",
-                output_dir_path,
-                "-V",
-                f"version={version}",
-            ],
-            cwd=file_path,
-            capture_output=True,
-            text=True,
-        )
+    logger.info(f"Building Quarto cheatsheet: {file_name}")
 
-        # Remove the cheatsheet from the Quarto project
-        subprocess.run(
-            ["quarto", "remove", "ansys/cheat_sheet", "--no-prompt"],
-            cwd=file_path,
-            capture_output=True,
-            text=True,
-        )
+    # Adapt with new
+    run_quarto_command(["--version"], file_path)
+    run_quarto_command(
+        [
+            "add",
+            f"ansys/pyansys-quarto-cheatsheet@{CHEAT_SHEET_QUARTO_EXTENTION_VERSION}",
+            "--no-prompt",
+        ],
+        file_path,
+    )
+    run_quarto_command(
+        [
+            "render",
+            file_name,
+            "--to",
+            "cheat_sheet-pdf",
+            "--output-dir",
+            output_dir_path,
+            "-V",
+            f"version={version}",
+        ],
+        file_path,
+    )
+    run_quarto_command(
+        ["remove", "ansys/pyansys-quarto-cheatsheet", "--no-prompt"],
+        file_path,
+    )
+    supplementary_files = [
+        "_static/slash.png",
+        "_static/bground.png",
+        "_static/ansys.png",
+    ]
+    for file in supplementary_files:
+        file_path = cheatsheet_file.parent / file
+        if file_path.exists():
+            file_path.unlink()
 
-        # Remove all supplementary files
-        supplementary_files = [
-            "_static/slash.png",
-            "_static/bground.png",
-            "_static/ansys.png",
-        ]
-        for file in supplementary_files:
-            file_path = cheatsheet_file.parent / file
-            if file_path.exists():
-                file_path.unlink()
-
-        # If static folder is clean, delete it
-        if not list(cheatsheet_file.parent.glob("_static/*")):
-            cheatsheet_file.parent.joinpath("_static").rmdir()
-
-    except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Failed to build Quarto cheatsheet: {e}. Ensure Quarto is installed.")
+    # If static folder is clean, delete it
+    if not list(cheatsheet_file.parent.glob("_static/*")):
+        cheatsheet_file.parent.joinpath("_static").rmdir()
 
     output_file = output_dir_path / file_name.replace(".qmd", ".pdf")
     app.config.html_theme_options["cheatsheet"]["output_dir"] = f"{output_dir}/{output_file.name}"
     output_png = file_name.replace(".qmd", ".png")
+    # Check output file exists
+    if not output_file.exists():
+        raise FileNotFoundError(f"Failed to build Quarto cheatsheet: {output_file} does not exist.")
+
     convert_pdf_to_png(output_file, output_dir_path, output_png)
+    logger.info(f"Cheat sheet build finished successfully: {output_file}")
     app.config.html_theme_options["cheatsheet"]["thumbnail"] = f"{output_dir}/{output_png}"
 
 
