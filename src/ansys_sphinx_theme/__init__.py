@@ -422,12 +422,11 @@ def run_quarto_command(command, cwd):
     """Run quartoi command and logs its output."""
     try:
         result = subprocess.run(command, cwd=cwd, check=True, capture_output=True, text=True)
-        logger.info(f"Ran the command: {command}")
         if result.stdout:
-            logger.info(f"Command output: {result.stdout}")
+            logger.info(result.stdout)
 
         if result.stderr:
-            logger.error(f"Command error: {result.stderr}")
+            logger.warning(result.stderr)
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to run the command: {e}")
@@ -516,65 +515,6 @@ def build_quarto_cheatsheet(app: Sphinx):
         ["quarto", "remove", "ansys/cheat_sheet", "--no-prompt"],
         file_path,
     )
-    # try:
-    #     subprocess.run(["quarto", "--version"], check=True, capture_output=True, text=True)
-    # except FileNotFoundError:
-    #     raise RuntimeError("Quarto is not installed. Install Quarto using `pip install quarto`.")
-    # except subprocess.CalledProcessError as e:
-    #     raise RuntimeError(f"Error checking Quarto installation: {e}")
-
-    # try:
-    #     # Add the cheatsheet to the Quarto project
-    #     subprocess.run(
-    #         [
-    #             "quarto",
-    #             "add",
-    #             f"ansys/pyansys-quarto-cheatsheet@{CHEAT_SHEET_QUARTO_EXTENTION_VERSION}",
-    #             "--no-prompt",
-    #         ],
-    #         cwd=file_path,
-    #         capture_output=True,
-    #         text=True,
-    #     )
-
-    # except subprocess.CalledProcessError as e:
-    #     raise RuntimeError(f"Failed to add the cheatsheet to the Quarto project: {e}")
-
-    # try:
-    #     # Render the cheatsheet
-    #     subprocess.run(
-    #         [
-    #             "quarto",
-    #             "render",
-    #             file_name,
-    #             "--to",
-    #             "cheat_sheet-pdf",
-    #             "--output-dir",
-    #             output_dir_path,
-    #             "-V",
-    #             f"version={version}",
-    #         ],
-    #         cwd=file_path,
-    #         capture_output=True,
-    #         text=True,
-    #     )
-    # except subprocess.CalledProcessError as e:
-    #     raise RuntimeError(f"Failed to render the cheatsheet: {e}")
-
-    # try:
-    #     # Remove the cheatsheet from the Quarto project
-    #     subprocess.run(
-    #         ["quarto", "remove", "ansys/cheat_sheet", "--no-prompt"],
-    #         cwd=file_path,
-    #         capture_output=True,
-    #         text=True,
-    #     )
-    # except subprocess.CalledProcessError as e:
-    #     raise RuntimeError(
-    #         f"Failed to remove the cheatsheet extension from the Quarto project: {e}"
-    #     )
-
-    # Remove all supplementary files
     supplementary_files = [
         "_static/slash.png",
         "_static/bground.png",
@@ -595,8 +535,6 @@ def build_quarto_cheatsheet(app: Sphinx):
     # Check output file exists
     if not output_file.exists():
         raise FileNotFoundError(f"Failed to build Quarto cheatsheet: {output_file} does not exist.")
-    logger.info(f"Cheat sheet built: {output_file}")
-    logger.info(f"Converting PDF to PNG: {output_file}")
 
     convert_pdf_to_png(output_file, output_dir_path, output_png)
     logger.info(f"Cheat sheet build finished successfully: {output_file}")
