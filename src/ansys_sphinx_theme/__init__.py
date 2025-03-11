@@ -23,7 +23,6 @@
 """Module for the Ansys Sphinx theme."""
 
 from itertools import islice, tee
-import logging
 import os
 import pathlib
 import re
@@ -34,6 +33,7 @@ import warnings
 from docutils import nodes
 from sphinx import addnodes
 from sphinx.application import Sphinx
+from sphinx.util import logging
 
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
@@ -261,7 +261,7 @@ def fix_edit_html_page_context(
                             edit=True,
                         )
                 except ValueError as e:
-                    logging.debug(f"An error occurred: {e}")  # Log the exception as debug info
+                    logger.error(f"An error occurred: {e}")  # Log the exception as debug info
                     return link
 
         elif "api" in pagename:
@@ -485,7 +485,7 @@ def build_quarto_cheatsheet(app: Sphinx):
     file_name = str(cheatsheet_file.name)
     file_path = cheatsheet_file.parent
 
-    logging.info(f"Building Quarto cheatsheet: {file_name}")
+    logger.info(f"Building Quarto cheatsheet: {file_name}")
 
     run_quarto_command(["quarto", "--version"], file_path)
     run_quarto_command(
