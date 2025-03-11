@@ -420,6 +420,7 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
 
 def run_quarto_command(command, cwd):
     """Run quartoi command and logs its output."""
+    command = ["quarto"].extend(command)
     try:
         result = subprocess.run(command, cwd=cwd, check=True, capture_output=True, text=True)
         if result.stdout:
