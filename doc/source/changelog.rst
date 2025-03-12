@@ -8,8 +8,14 @@ Release notes
 
 .. towncrier release notes start
 
-`1.3.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.2>`_ (2025-02-21)
-=======================================================================================
+`1.3.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.3>`_ (March 11, 2025)
+===========================================================================================
+
+Dependencies
+^^^^^^^^^^^^
+
+- chore(deps): bump pygithub from 2.6.0 to 2.6.1 `#632 <https://github.com/ansys/ansys-sphinx-theme/pull/632>`_
+
 
 Miscellaneous
 ^^^^^^^^^^^^^
