@@ -1,0 +1,11 @@
+{
+    "name": "ansys_sphinx_theme",
+    "repository": "https://github.com/ansys/ansys-sphinx-theme",
+    "description": "",
+    "main": "",
+    "scripts": {
+        "build": "echo 'No build step needed' "
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}

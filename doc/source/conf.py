@@ -28,6 +28,7 @@ from ansys_sphinx_theme import (
 )
 
 THIS_PATH = Path(__file__).parent.resolve()
+PYANSYS_LIGHT_SQUARE = (THIS_PATH / "_static" / "pyansys_light_square.png").resolve()
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 
 # Project information
@@ -275,7 +276,8 @@ else:
         # Remove the "Download all examples" button from the top level gallery
         "download_all_examples": False,
         # Modules for which function level galleries are created.  In
-        "image_scrapers": ("matplotlib", "pyvista"),
+        "image_scrapers": ("pyvista", "matplotlib"),
+        "default_thumb_file": str(PYANSYS_LIGHT_SQUARE),
     }
     pyvista.BUILDING_GALLERY = True
     pyvista.OFF_SCREEN = True
