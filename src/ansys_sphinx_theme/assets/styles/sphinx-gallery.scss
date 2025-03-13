@@ -2,7 +2,7 @@
  * Sphinx gallery output cell
  */
 
- .highlight {
+.highlight {
   pre {
     font-size: 0.9em;
   }
@@ -31,9 +31,9 @@ div.sphx-glr-download {
     color: var(--ast-sphinx-gallery-download-text);
     background-image: none;
     text-decoration: none;
-    border-radius: 4px;
-    height: 36px;
-    padding: 0px 16px;
+    border-radius: 0.25rem; // 4px
+    height: 2.25rem; // 36px
+    padding: 0rem 1rem; // 0px 16px
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -54,7 +54,7 @@ div.sphx-glr-download {
 div.sphx-glr-footer {
   text-align: center;
   display: flex;
-  gap: 10px;
+  gap: 0.625rem; // 10px
   align-content: center;
   justify-content: center;
   flex-wrap: wrap;
@@ -62,5 +62,5 @@ div.sphx-glr-footer {
 }
 
 div.sphx-glr-download {
-  margin: 0px;
+  margin: 0rem; // 0px
 }
