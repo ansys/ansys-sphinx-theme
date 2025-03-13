@@ -6,7 +6,6 @@ from pathlib import Path
 import subprocess
 from typing import Dict, List
 
-
 from github import Github
 import pyvista
 import requests
@@ -310,10 +309,11 @@ Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb
     jinja_contexts["examples"] = {"inputs_examples": file_names}
     jinja_contexts["admonitions"] = {"inputs_admonitions": admonitions_links}
 
-    
+
 jinja_globals = {
     "ANSYS_SPHINX_THEME_VERSION": version,
 }
+
 
 def revert_exclude_patterns(app, env):
     """Revert the exclude patterns.
@@ -340,5 +340,3 @@ def revert_exclude_patterns(app, env):
 def setup(app: Sphinx) -> Dict:
     """Sphinx hooks to add to the setup."""
     app.connect("env-updated", revert_exclude_patterns)
-
-
