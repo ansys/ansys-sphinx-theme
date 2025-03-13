@@ -58,7 +58,9 @@ logger = logging.getLogger(__name__)
 THIS_PATH = pathlib.Path(__file__).parent.resolve()
 THEME_PATH = THIS_PATH / "theme" / "ansys_sphinx_theme"
 STATIC_PATH = THEME_PATH / "static"
+STYLE_PATH = STATIC_PATH / "styles"
 JS_PATH = STATIC_PATH / "js"
+CSS_PATH = STYLE_PATH / "ansys-sphinx-theme.css"
 TEMPLATES_PATH = THEME_PATH / "_templates"
 AUTOAPI_TEMPLATES_PATH = TEMPLATES_PATH / "autoapi"
 LOGOS_PATH = STATIC_PATH / "logos"
@@ -1139,6 +1141,9 @@ def setup(app: Sphinx) -> Dict:
     use_ansys_search = app.config.html_theme_options.get("use_ansys_search", True)
     if use_ansys_search:
         update_search_config(app)
+    if not CSS_PATH.exists():
+        raise FileNotFoundError(f"Unable to locate ansys-sphinx theme at {CSS_PATH.absolute()}")
+    app.add_css_file(str(CSS_PATH.relative_to(STATIC_PATH)))
     app.config.templates_path.append(str(TEMPLATES_PATH))
     app.add_js_file("https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js")
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")

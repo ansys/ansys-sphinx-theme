@@ -1,5 +1,5 @@
 /* Provided by the Sphinx base theme template at build time */
-
+@import "ansys-sphinx-theme-variable";
 @import "pydata-sphinx-theme-custom";
 @import "breadcrumbs";
 @import "ast-search";
@@ -8,7 +8,6 @@
 @import "sphinx-gallery";
 @import "whatsnew";
 @import "nbsphinx";
-@import "ansys-sphinx-theme-variable";
 
 /*
 * Code cell
