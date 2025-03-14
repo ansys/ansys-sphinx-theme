@@ -4,11 +4,13 @@ from datetime import datetime
 import os
 from pathlib import Path
 import subprocess
-from typing import List
+from typing import Dict, List
 
 from github import Github
+import plotly.io as pio
 import pyvista
 import requests
+from sphinx.application import Sphinx
 from sphinx.builders.latex import LaTeXBuilder
 
 from ansys_sphinx_theme import (
@@ -25,6 +27,7 @@ from ansys_sphinx_theme import (
     watermark,
 )
 
+pio.renderers.default = "sphinx_gallery"
 THIS_PATH = Path(__file__).parent.resolve()
 PYANSYS_LIGHT_SQUARE = (THIS_PATH / "_static" / "pyansys_light_square.png").resolve()
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
@@ -140,8 +143,8 @@ notfound_no_urls_prefix = True
 exclude_patterns = [
     "links.rst",
     "examples/sphinx-gallery/README.rst",
-    "examples/gallery-examples/*.ipynb",
     "sg_execution_times.rst",
+    "examples/gallery-examples/*.ipynb",
 ]
 rst_epilog = ""
 with Path.open(THIS_PATH / "links.rst", "r") as f:
@@ -192,7 +195,8 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github()
+    token = os.getenv("GITHUB_TOKEN")
+    g = Github(token)
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):
@@ -245,8 +249,6 @@ jinja_contexts["main_toctree"] = {"build_examples": BUILD_EXAMPLES}
 
 if not BUILD_EXAMPLES:
     exclude_patterns.extend(["examples.rst", "examples/**", "examples/api/**"])
-
-
 else:
     # Autoapi examples
     extensions.append("ansys_sphinx_theme.extension.autoapi")
@@ -262,29 +264,28 @@ else:
     extensions.extend(["nbsphinx", "sphinx_gallery.gen_gallery"])
     sphinx_gallery_conf = {
         # path to your examples scripts
-        "examples_dirs": ["examples/sphinx-gallery"],
+        "examples_dirs": ["examples/sphinx-gallery/"],
         # path where to save gallery generated examples
-        "gallery_dirs": ["examples/gallery-examples"],
+        "gallery_dirs": ["examples/gallery-examples/"],
         # Pattern to search for example files
-        "filename_pattern": r"sphinx_gallery\.py",
+        "filename_pattern": r"\.py",
         # Remove the "Download all examples" button from the top level gallery
         "download_all_examples": False,
         # Modules for which function level galleries are created.  In
-        "image_scrapers": ("pyvista", "matplotlib"),
+        "image_scrapers": ("pyvista", "matplotlib", "plotly.io._sg_scraper.plotly_sg_scraper"),
         "default_thumb_file": str(PYANSYS_LIGHT_SQUARE),
     }
+    pyvista.BUILDING_GALLERY = True
+    pyvista.OFF_SCREEN = True
 
     nbsphinx_prolog = """
 Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb>`.
 
 ----
 """
-    nbsphinx_execute = "always"
     nbsphinx_thumbnails = {
         "examples/nbsphinx/jupyter-notebook": "_static/pyansys_light_square.png",
     }
-
-    pyvista.BUILDING_GALLERY = True
 
     # Third party examples
     example_links = extract_example_links(
@@ -309,3 +310,34 @@ Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb
 jinja_globals = {
     "ANSYS_SPHINX_THEME_VERSION": version,
 }
+
+
+def revert_exclude_patterns(app, env):
+    """Revert the exclude patterns.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application instance.
+    env : BuildEnvironment
+        The build environment.
+
+    Notes
+    -----
+    Remove the examples/gallery-examples/*.ipynb pattern from the exclude patterns.
+    When the nbsphinx extension is enabled, the exclude patterns are modified
+    to exclude the examples/gallery-examples/*.ipynb pattern. This function reverts
+    the exclude patterns to their original state.
+    """
+    excluded_pattern = env.config.exclude_patterns
+    # HACK: Remove the examples/gallery-examples/*.ipynb pattern from the exclude patterns
+    # for nbshpinx to build the gallery examples
+    # If examples/gallery-examples/*.ipynb is not removed, the nbsphinx will
+    # try to build the gallery examples and fail.
+    excluded_pattern.remove("examples/gallery-examples/*.ipynb")
+    env.config.exclude_patterns = excluded_pattern
+
+
+def setup(app: Sphinx) -> Dict:
+    """Sphinx hooks to add to the setup."""
+    app.connect("env-updated", revert_exclude_patterns)
