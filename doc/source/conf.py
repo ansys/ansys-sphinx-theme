@@ -7,6 +7,7 @@ import subprocess
 from typing import Dict, List
 
 from github import Github
+import plotly.io as pio
 import pyvista
 import requests
 from sphinx.application import Sphinx
@@ -26,6 +27,7 @@ from ansys_sphinx_theme import (
     watermark,
 )
 
+pio.renderers.default = "sphinx_gallery"
 THIS_PATH = Path(__file__).parent.resolve()
 PYANSYS_LIGHT_SQUARE = (THIS_PATH / "_static" / "pyansys_light_square.png").resolve()
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
@@ -257,11 +259,6 @@ else:
         "own_page_level": "function",
         "package_depth": 1,
     }
-    try:
-        import plotly
-        import plotly.io
-    except ImportError:
-        plotly = None
 
     # Gallery of examples
     extensions.extend(["nbsphinx", "sphinx_gallery.gen_gallery"])
@@ -275,7 +272,7 @@ else:
         # Remove the "Download all examples" button from the top level gallery
         "download_all_examples": False,
         # Modules for which function level galleries are created.  In
-        "image_scrapers": ("pyvista", "matplotlib"),
+        "image_scrapers": ("pyvista", "matplotlib", "plotly.io._sg_scraper.plotly_sg_scraper"),
         "default_thumb_file": str(PYANSYS_LIGHT_SQUARE),
     }
     pyvista.BUILDING_GALLERY = True
@@ -333,6 +330,10 @@ def revert_exclude_patterns(app, env):
     the exclude patterns to their original state.
     """
     excluded_pattern = env.config.exclude_patterns
+    # HACK: Remove the examples/gallery-examples/*.ipynb pattern from the exclude patterns
+    # for nbshpinx to build the gallery examples
+    # If examples/gallery-examples/*.ipynb is not removed, the nbsphinx will
+    # try to build the gallery examples and fail.
     excluded_pattern.remove("examples/gallery-examples/*.ipynb")
     env.config.exclude_patterns = excluded_pattern
 

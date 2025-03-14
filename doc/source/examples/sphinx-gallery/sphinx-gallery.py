@@ -99,6 +99,23 @@ sin_trace = go.Scatter(x=time, y=np.sin(time), mode="lines", name="sin(t)")
 fig = go.Figure(data=[cos_trace, sin_trace])
 
 fig
+###############################################################################
+
+import numpy as np
+import plotly.express as px
+
+df = px.data.tips()
+fig = px.bar(
+    df,
+    x="sex",
+    y="total_bill",
+    facet_col="day",
+    color="smoker",
+    barmode="group",
+    template="presentation+plotly",
+)
+fig.update_layout(height=400)
+fig
 
 ###############################################################################
 # Render equations using IPython ``math``
