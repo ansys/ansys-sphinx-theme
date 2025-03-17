@@ -1,0 +1,251 @@
+/**
+* Sphinx design button styles
+*/
+
+$font-size: var(--ast-sphinx-design-font-size);
+$font-weight: var(--ast-font-weight-regular);
+$font-family: var(--ast-sphinx-design-font-family);
+$border-radius: var(--ast-sphinx-design-border-radius);
+
+.sd-btn,
+.sd-btn-secondary {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  font-family: $font-family;
+  padding: 0.5rem 1rem; // 8px 16px
+  border-radius: $border-radius;
+}
+
+.sd-btn-secondary {
+  color: var(--sd-color-secondary-text);
+  background-color: var(--sd-color-secondary);
+  border-color: var(--sd-color-secondary);
+}
+
+/**
+ * Blockquote styles
+ */
+blockquote {
+  background-color: var(--pst-color-background);
+}
+
+/* Media queries */
+@mixin media-query($size) {
+  @media screen and (max-width: $size) {
+    @content;
+  }
+}
+
+/**
+ * Media query for medium-sized screens
+ */
+@include media-query(768px) {
+  .sd-card .sd-card-header {
+    font-size: var(--pst-font-size-h6);
+  }
+}
+
+/**
+ * Media query for small-sized screens
+ */
+@include media-query(576px) {
+  .sd-card .sd-card-header {
+    font-size: var(--pst-font-size-h5);
+  }
+  .sd-card {
+    padding: 0.25rem; // 4px
+  }
+}
+
+ /**
+  * Sphinx-design dropdown styles
+  */
+
+.bd-content {
+  details.sd-dropdown {
+    color: var(--ast-dropdown-text-color);
+    width: fit-content;
+    min-width: 25rem; // 400px
+
+    &.sd-dropdown:not([open]) > .sd-card-header {
+     border-radius: $border-radius;
+    }
+
+    summary.sd-summary-title {
+      font-family: $font-family;
+      font-size: $font-size;
+      background: var(--ast-color-sphinx-design-background) !important;
+      border: 1px solid var(--ast-dropdown-border-color) !important;
+      border-radius: $border-radius;
+      padding: 0.5rem 0.75rem; // 8px 12px
+      text-align: left;
+
+      &:hover {
+        background-color: var(--ast-color-hover-card-background) !important;
+        border: 1px solid var(--ast-dropdown-border-color-hover) !important;
+      }
+    }
+
+    summary.sd-card-header + div.sd-summary-content {
+      background-color: var(--ast-color-sphinx-design-background);
+      border-left: none !important;
+    }
+
+    .sd-summary-title:active + div.sd-summary-content:active {
+      background-color: var(--ast-color-enable-card-background);
+      border-color: var(--ast-color-enable-border);
+    }
+
+    .sd-summary-title:hover + div.sd-summary-content:hover {
+      background-color: var(--ast-color-hover-card-background);
+      border-color: var(--ast-color-hover-border);
+      border-left: none;
+    }
+
+    summary.sd-summary-title:focus + div.sd-summary-content:focus {
+      background-color: var(--ast-color-sphinx-design-background);
+      border-radius: $border-radius;
+      border-color: var(--pst-color-border);
+      border-left: none;
+    }
+
+    summary.sd-card-header + div.sd-summary-content {
+      color: var(--ast-color-sphinx-design-primary);
+      font-family: $font-family;
+      font-size: $font-size;
+    }
+  }
+}
+
+/**
+* Sphinx-design tab styles
+*/
+
+.bd-content {
+  .sd-tab-set {
+    > label {
+      font-family: var(--ast-sphinx-design-font-family);
+      padding: 12px 0px;
+      border-style: none none solid none;
+      color: var(--ast-color-sphinx-design-primary);
+      font-size: var(--ast-sphinx-design-font-size);
+      margin-inline-end: 16px;
+      transform: none;
+      margin-bottom: 1px;
+    }
+
+    > input {
+      &:checked + label {
+        background-color: transparent;
+        border-color: transparent transparent var(--ast-tab-border-color-active) transparent;
+        border-width: 0px 0px 2px 0px;
+        border-style: none none solid none;
+        transform: none;
+
+        &:hover {
+          background-color: var(--ast-background-tab-hover);
+          border-color: transparent transparent var(--ast-tab-border-color-hover) transparent;
+          border-width: 0px 0px 2px 0px;
+        }
+      }
+
+      &:not(:checked, :focus-visible) + label {
+        background-color: transparent;
+        border-color: transparent transparent var(--ast-tab-border-color) transparent;
+        border-width: 0px 0px 1px 0px;
+        text-decoration-line: none;
+        font-weight: var(--ast-font-weight-regular);
+
+        &:hover {
+          background-color: var(--ast-background-tab-hover);
+          border-color: transparent transparent var(--ast-tab-border-color-hover) transparent;
+          border-width: 0px 0px 2px 0px;
+          border-style: none none solid none;
+          text-decoration: none;
+        }
+      }
+
+      &:checked + label:hover,
+      &:not(:checked, :focus-visible) + label:hover {
+        color: var(--ast-color-sphinx-design-primary);
+        font-family: var(--ast-sphinx-design-font-family);
+      }
+
+      + label:focus-visible,
+      &:not(:checked, :focus-visible) + label:focus-visible {
+        background-color: var(--ast-background-tab-focus);
+        border-color: transparent transparent var(--ast-tab-border-color-hover) transparent;
+        border-width: 0px 0px 2px 0px;
+        text-decoration-line: none;
+      }
+    }
+
+    .sd-tab-content {
+      border: none;
+      font-family: var(--ast-sphinx-design-font-family);
+      font-size: var(--ast-sphinx-design-font-size);
+      color: var(--ast-color-sphinx-design-primary);
+    }
+  }
+}
+
+.bd-content .sd-tab-set .sd-tab-content {
+  border: none;
+  font-family: $font-family;
+  font-size: $font-size;
+  color: var(--ast-color-sphinx-design-primary);
+}
+
+ @include media-query(768px) {
+   .sd-tab-set > input:not(.focus-visible) + label {
+     font-size: 0.875rem; // 14px
+   }
+ }
+
+ @include media-query(576px) {
+   .sd-tab-set > input:not(.focus-visible) + label {
+     font-size: 0.75rem; // 12px
+   }
+ }
+
+ /**
+  * Sphinx-design card styles
+  */
+
+ .bd-content .sd-card {
+   border: none;
+   border-radius: 0.5rem; // 8px
+   box-shadow: var(--ast-box-shadow-hover) !important;
+   background-color: var(--ast-color-sphinx-design-background);
+   color: var(--ast-color-sphinx-design-primary);
+
+   .sd-card-body,
+   .sd-card-footer,
+   .sd-card-title,
+   .sd-card-header {
+     font-size: $font-size;
+     font-family: $font-family;
+     border: none;
+     background-color: var(--ast-color-sphinx-design-background);
+   }
+
+   .sd-card-title,
+   .sd-card-header {
+     font-size: 1rem; // 16px
+     line-height: 1.5rem; // 24px
+   }
+ }
+
+.bd-content .sd-card:hover {
+  box-shadow: var(--ast-box-shadow-hover) !important;
+}
+
+ .sd-hide-link-text:focus {
+   outline: none;
+   box-shadow: none;
+ }
+
+ .bd-content .sd-card .sd-stretched-link:focus-visible:after {
+   outline: none;
+   box-shadow: var(--ast-ring-shadow-focused);
+ }

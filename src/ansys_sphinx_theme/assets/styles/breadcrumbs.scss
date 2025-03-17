@@ -1,0 +1,112 @@
+/* Provided by the Sphinx base theme template at build time,
+styles exclusively for the ansys-sphinx-theme classes. */
+/**
+* Breadcrumbs
+*/
+
+ul.bd-breadcrumbs {
+  li.breadcrumb-item {
+    padding: 0;
+    font-size: 0.75rem; // 12px to rem
+    display: flex;
+
+    &:hover {
+      text-decoration: underline;
+      font-size: 0.75rem; // 12px to rem
+    }
+
+    a {
+      color: var(--ast-navbar-color);
+      font-size: 0.75rem; // 12px to rem
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:active {
+        color: var(--ast-color-text);
+      }
+    }
+
+    &.active {
+      color: var(--ast-color-text);
+    }
+  }
+}
+
+/**
+* Version warning announcement
+*/
+
+#announcement_msg {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  padding: 0.5rem 12.5%;
+  text-align: center;
+
+  &:after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgb(223, 95, 114);
+    opacity: 0.2;
+    content: "";
+    z-index: -1;
+  }
+
+  &:empty {
+    display: none;
+  }
+
+  p {
+    font-weight: var(--ast-font-weight-bold);
+    margin: auto;
+    color: black;
+  }
+
+  html[data-theme="dark"] & {
+    &:after {
+      background-color: lightpink;
+      opacity: 0.5;
+    }
+  }
+
+  a {
+    color: var(--ast-color-link);
+  }
+}
+
+.sidebar-cheatsheets {
+  text-align: left;
+
+  h4 {
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    font-family: var(--ast-font-family-base);
+    color: var(--ast-color-text);
+  }
+
+  a {
+    display: inline-flex;
+    border: 0.03125rem solid var(--pst-color-border); // 0.5px to rem
+    padding: 0.25rem 0.5rem 0.25rem 0.75rem; // 4px 8px 4px 12px to rem
+    max-width: 80%;
+
+    &:hover {
+      background-color: var(--pst-color-border);
+      color: var(--pst-color-text-base);
+    }
+  }
+
+  img {
+    padding: 0;
+  }
+}
+
+.bd-sidebar-primary {
+  padding: 0.5rem;
+}
