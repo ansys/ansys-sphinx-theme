@@ -780,6 +780,7 @@ span.math {
   display: math;
 }
 
-.highlight .nf{
-  font-family: var(--ast-body-family)!important;
+div.highlight .nf{
+  font-family: var(--ast-body-family);
+  -webkit-font-smoothing: auto;
 }
