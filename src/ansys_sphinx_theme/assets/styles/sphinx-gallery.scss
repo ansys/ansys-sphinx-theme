@@ -1,0 +1,66 @@
+/**
+ * Sphinx gallery output cell
+ */
+
+.highlight {
+  pre {
+    font-size: 0.9em;
+  }
+}
+
+/**
+ * Sphinx gallery download button text
+ */
+
+a {
+  > code.download {
+    font-family: var(--pst-font-family-base);
+    color: var(--pst-color-link);
+    text-decoration: none;
+    font-weight: var(--ast-font-weight-regular);
+  }
+
+  &.reference.download:before {
+    color: var(--ast-color-text);
+  }
+}
+
+div.sphx-glr-download {
+  a {
+    background-color: var(--ast-sphinx-gallery-download-background);
+    color: var(--ast-sphinx-gallery-download-text);
+    background-image: none;
+    text-decoration: none;
+    border-radius: 0.25rem; // 4px
+    height: 2.25rem; // 36px
+    padding: 0rem 1rem; // 0px 16px
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    &:hover {
+      background-color: var(--ast-sphinx-gallery-download-background-hover);
+    }
+  }
+
+  code.download,
+  a.reference.download:before {
+    color: var(--ast-sphinx-gallery-download-text);
+  }
+}
+
+div.sphx-glr-footer {
+  text-align: center;
+  display: flex;
+  gap: 0.625rem; // 10px
+  align-content: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+div.sphx-glr-download {
+  margin: 0rem; // 0px
+}
