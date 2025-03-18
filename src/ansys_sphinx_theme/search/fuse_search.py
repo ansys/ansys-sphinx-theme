@@ -51,6 +51,7 @@ class SearchIndex:
             Sphinx application instance.
         """
         self.doc_name = doc_name
+        self.main_doc_name = doc_name.split("/")[0]
         self.doc_path = f"{self.doc_name}.html"
         self.env = app.env
         self.theme_options = app.config.html_theme_options.get("static_search", {})
@@ -169,6 +170,7 @@ class SearchIndex:
                 "title": breadcrumbs,
                 "section": section["title"],
                 "text": section["text"],
+                "main_doc": self.main_doc_name,
             }
 
 
