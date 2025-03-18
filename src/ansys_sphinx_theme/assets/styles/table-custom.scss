@@ -1,0 +1,110 @@
+/**
+ * Table
+ *
+ * The table variables.
+ */
+
+.table {
+  --bs-table-bg: var(--ast-color-table-background);
+  border-spacing: 0;
+  border-collapse: separate;
+  overflow: hidden;
+  vertical-align: middle;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  border-color: var(--ast-table-outer-border);
+  background-color: var(--ast-color-table-background);
+
+  > :not(caption) > * > * {
+    padding: 0rem 1rem; // 0px 16px
+  }
+
+  &:hover {
+    background-color: var(--ast-color-table-row-hover-bg);
+  }
+
+  &:active {
+    background-color: var(--ast-color-table-active-bg);
+  }
+
+  td ~ td,
+  td ~ th,
+  th ~ td,
+  th ~ th,
+  .bd-content .nboutput .output_area.rendered_html table.dataframe th ~ td {
+    border-left: 1px solid var(--ast-color-table-inner-border);
+  }
+}
+
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-bottom: 1px solid var(--ast-color-table-inner-border);
+  background-color: var(--ast-color-table-background);
+  font-family: var(--ast-font-family-base);
+  font-size: var(--ast-table-font-size);
+}
+
+/**
+ * Table header
+ */
+th {
+  line-height: 2.5rem; // 40px
+  color: var(--ast-color-table-header-text) !important;
+  font-size: var(--ast-table-header-font-size) !important;
+}
+
+/**
+ * Table body
+ */
+tr {
+  line-height: var(--ast-global-line-height);
+  height: 3.5rem; // 56px
+  color: var(--ast-color-table-cell-text);
+}
+
+/**
+ * Table hover
+ */
+tbody:hover,
+td:hover,
+tfoot:hover,
+th:hover,
+thead:hover,
+tr:hover {
+  background-color: var(--ast-color-table-row-hover-bg);
+  font-family: var(--ast-font-family-base);
+}
+
+/**
+ * Table dataframes
+ */
+table.dataframe {
+  background-color: var(--ast-color-table-background);
+
+  tr {
+    font-size: var(--ast-table-font-size);
+    line-height: 3.5rem; // 56px
+    color: var(--ast-color-table-cell-text);
+  }
+
+  th {
+    font-size: var(--ast-table-font-size);
+    line-height: 2.5rem; // 40px;
+    color: var(--ast-color-table-header-text) !important;
+  }
+
+  &:hover {
+    background-color: var(--ast-color-table-row-hover-bg);
+    font-family: var(--ast-font-family-base);
+  }
+
+  &:active {
+    background-color: var(--ast-color-table-active-bg);
+    font-family: var(--ast-font-family-base);
+  }
+}

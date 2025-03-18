@@ -1,0 +1,76 @@
+.whatsnew-sidebar {
+  /* Sidebar background color */
+  background-color: var(--pst-color-background);
+  margin-bottom: 1.25rem; // 20px to rem
+
+  h2 {
+    font-size: 1rem;
+    font-family: var(--ast-font-family-base);
+    margin-bottom: 0.625rem; // 10px to rem
+    margin-top: 0.625rem; // 10px to rem
+    padding: 0.25rem; // 4px to rem
+  }
+
+  h3 {
+    font-size: 0.75rem;
+    font-family: var(--ast-font-family-base);
+    margin: 0.5rem 0.25rem; // 8px 4px to rem
+    padding: 0.25rem 0.5rem; // 4px 8px to rem
+
+    &:hover {
+      color: var(--ast-color-text);
+      background: var(--ast-sidebar-active-background);
+      text-decoration: none;
+      box-shadow: 0.0625rem 0.0625rem 0.125rem 0 var(--ast-sidebar-active-background); // 1px 1px 2px 0px to rem
+      border-radius: var(--ast-sphinx-design-border-radius);
+      font-weight: bold;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--ast-color-text);
+
+    &.current {
+      background: var(--ast-sidebar-active-background);
+      text-decoration: none;
+      box-shadow: 0.0625rem 0.0625rem 0.125rem 0 var(--ast-sidebar-active-background); // 1px 1px 2px 0px to rem
+      border-radius: var(--ast-sphinx-design-border-radius);
+      font-weight: bold;
+      padding: 0.25rem 1.5rem 0.25rem 2rem; // 4px 24px 4px 32px to rem
+    }
+
+    &:hover {
+      text-decoration: underline;
+      color: var(--ast-color-text);
+    }
+  }
+
+  ul {
+    list-style: none;
+    line-height: 1.875rem; // 30px to rem
+    padding-inline-start: 0rem;
+  }
+
+  li {
+    padding: 0.25rem 0.5rem 0.25rem 0.75rem; // 4px 8px 4px 12px to rem
+
+    &:hover {
+      color: var(--ast-color-text);
+      background: var(--ast-sidebar-active-background);
+      text-decoration: none;
+      box-shadow: 0.0625rem 0.0625rem 0.125rem 0 var(--ast-sidebar-active-background); // 1px 1px 2px 0px to rem
+      border-radius: var(--ast-sphinx-design-border-radius);
+      font-weight: bold;
+    }
+
+    ul {
+      margin-left: 0.9375rem; // 15px to rem
+
+      li {
+        list-style-type: disc; /* Bullet points */
+        margin-left: 1.25rem; // 20px to rem
+      }
+    }
+  }
+}
