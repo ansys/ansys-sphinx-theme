@@ -1,0 +1,101 @@
+{%- extends "page.html" %}
+
+{% block docs_body %}
+<title>Advanced Search</title>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .filter-container { margin-bottom: 10px; }
+    .results-container { margin-top: 10px; }
+    .result-item { border: 1px solid #ddd; padding: 10px; margin-bottom: 5px; cursor: pointer; padding: 10px; }
+</style>
+
+<h2>Advanced Search</h2>
+
+<div class="filter-container">
+    <input type="text" id="search-input" placeholder="Search...">
+    <select id="filter-doc">
+        <option value="">All Documents</option>
+    </select>
+    <!-- <button onclick="performSearch()">Search</button> -->
+</div>
+
+<div class="results-container" id="search-results"></div>
+
+<script>
+    let fuse;
+    let searchData = [];
+    const SEARCH_FILE = "{{ pathto('_static/search.json', 1) }}";
+
+    async function initializeSearch() {
+        try {
+            const response = await fetch(SEARCH_FILE);
+            searchData = await response.json();
+
+            fuse = new Fuse(searchData, { keys: ["title", "text", "main_doc"], includeScore: true, threshold: 0.3 });
+
+            // Extract unique `main_doc` values
+            const uniqueDocs = [...new Set(searchData.map(item => item.main_doc))].filter(Boolean);
+
+            // Populate filter dropdown
+            const filterDocSelect = document.getElementById("filter-doc");
+            uniqueDocs.forEach(doc => {
+                const option = document.createElement("option");
+                option.value = doc;
+                option.textContent = doc;
+                filterDocSelect.appendChild(option);
+            });
+
+        } catch (error) {
+            console.error("Error fetching search data:", error);
+        }
+    }
+
+    function performSearch() {
+        const query = document.getElementById("search-input").value.trim();
+        const selectedDoc = document.getElementById("filter-doc").value;
+
+        let results = fuse.search(query).map(result => result.item);
+        if (selectedDoc) {
+            results = results.filter(item => item.main_doc === selectedDoc);
+        }
+
+        displayResults(results);
+    }
+
+    function displayResults(results) {
+        const resultsContainer = document.getElementById("search-results");
+        resultsContainer.innerHTML = results.length === 0 ? "<p>No results found</p>" : "";
+        let resultCount = results.length;
+        const resultCountElement = document.createElement("p");
+        resultCountElement.textContent = `Found ${resultCount} result${resultCount === 1 ? "" : "s"}`;
+        resultsContainer.appendChild(resultCountElement);
+
+        results.forEach(item => {
+            const resultItem = document.createElement("div");
+            resultItem.className = "result-item";
+            resultItem.textContent = item.title;
+            resultItem.addEventListener("click", () => window.location.href = item.href);
+            resultsContainer.appendChild(resultItem);
+        });
+    }
+    document.getElementById("search-input").addEventListener("input", performSearch);
+    document.getElementById("filter-doc").addEventListener("change", performSearch);
+
+    initializeSearch();
+</script>
+
+{% endblock %}
+
+{# Below sections just re-create the behavior of Sphinx default search #}
+{# Page metadata #}
+{%- block htmltitle -%}
+  <title>{{ _("Search") }} - {{ title or docstitle }}</title>
+{%- endblock htmltitle -%}
+{# Manually include the search JS that Sphinx includes #}
+{% block scripts -%}
+  {{ super() }}
+  <script src="{{ pathto('_static/searchtools.js', 1) }}"></script>
+  <script src="{{ pathto('_static/language_data.js', 1) }}"></script>
+  <script src="{{ pathto('searchindex.js', 1) }}"></script>
+{%- endblock scripts %}
