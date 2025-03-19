@@ -332,10 +332,6 @@ def revert_exclude_patterns(app, env):
     the exclude patterns to their original state.
     """
     excluded_pattern = env.config.exclude_patterns
-    # HACK: Remove the examples/gallery-examples/*.ipynb pattern from the exclude patterns
-    # for nbshpinx to build the gallery examples
-    # If examples/gallery-examples/*.ipynb is not removed, the nbsphinx will
-    # try to build the gallery examples and fail.
     excluded_pattern.remove("examples/gallery-examples/*.ipynb")
     env.config.exclude_patterns = excluded_pattern
 
