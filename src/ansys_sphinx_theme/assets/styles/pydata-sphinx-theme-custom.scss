@@ -779,3 +779,12 @@ button.btn.version-switcher__button:hover {
 span.math {
   display: math;
 }
+
+/**
+* code block name function
+*/
+
+div.highlight .nf{
+  font-family: var(--ast-body-family);
+  -webkit-font-smoothing: auto;
+}
