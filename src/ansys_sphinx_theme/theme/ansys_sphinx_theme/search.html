@@ -32,10 +32,10 @@
             const response = await fetch(SEARCH_FILE);
             searchData = await response.json();
 
-            fuse = new Fuse(searchData, { keys: ["title", "text", "main_doc"], includeScore: true, threshold: 0.3 });
+            fuse = new Fuse(searchData, { keys: ["title", "text", "objectID"], includeScore: true, threshold: 0.3 });
 
             // Extract unique `main_doc` values
-            const uniqueDocs = [...new Set(searchData.map(item => item.main_doc))].filter(Boolean);
+            const uniqueDocs = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
 
             // Populate filter dropdown
             const filterDocSelect = document.getElementById("filter-doc");
@@ -57,7 +57,7 @@
 
         let results = fuse.search(query).map(result => result.item);
         if (selectedDoc) {
-            results = results.filter(item => item.main_doc === selectedDoc);
+            results = results.filter(item => item.objectID === selectedDoc);
         }
 
         displayResults(results);

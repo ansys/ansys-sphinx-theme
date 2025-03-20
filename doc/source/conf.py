@@ -72,6 +72,13 @@ html_theme_options = {
         "threshold": 0.2,
         "limit": 7,
         "minMatchCharLength": 3,
+        "filters": {
+            # Filter name - directory
+            "User Guide": ["user-guide/", "getting-started/", "index/"],
+            "Release Notes": ["changelog"],
+            "Examples": ["examples/"],
+            "contributing": ["contribe/"],
+        },
     },
 }
 

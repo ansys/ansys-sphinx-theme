@@ -39,7 +39,7 @@ DEFAULT_PATTERN = PARAGRAPHS + TITLES + LITERAL
 class SearchIndex:
     """Generate a search index for a Sphinx document."""
 
-    def __init__(self, doc_name, app, pattern=None):
+    def __init__(self, doc_name, app, pattern=None, filter_options=None):
         """
         Initialize the search index object.
 
@@ -51,7 +51,6 @@ class SearchIndex:
             Sphinx application instance.
         """
         self.doc_name = doc_name
-        self.main_doc_name = doc_name.split("/")[0]
         self.doc_path = f"{self.doc_name}.html"
         self.env = app.env
         self.theme_options = app.config.html_theme_options.get("static_search", {})
@@ -59,6 +58,7 @@ class SearchIndex:
         self.doc_tree = self.env.get_doctree(self.doc_name)
         self.sections = []
         self.pattern = pattern
+        self.filter_options = filter_options
 
     def build_sections(self):
         """Build sections from the document tree, handling subsections and descriptions."""
@@ -119,6 +119,28 @@ class SearchIndex:
                 }
             )
 
+    def _process_obj_id_with_filter(self):
+        """Process object ID based on filter options."""
+        # Example filter options:
+        # self.filter_options = {
+        #     "User Guide": ["user-guide/", "getting-started/", "index/"],
+        #     "Release Notes": ["changelog"]
+        # }
+
+        # Extract the section name from the document path
+        section_name = self.doc_name.split("/")[0]
+
+        # Determine the object ID based on filter options
+        for key, values in self.filter_options.items():
+            if section_name in values or any(
+                section_name.startswith(v.rstrip("/")) for v in values
+            ):
+                self.object_id = key
+                return
+
+        # Default to the document name if no match is found
+        self.object_id = self.doc_name
+
     def generate_breadcrumbs(self, section_title: str) -> str:
         """
         Generate title breadcrumbs from the document structure.
@@ -164,13 +186,12 @@ class SearchIndex:
         """Generate indices for each section."""
         for section in self.sections:
             breadcrumbs = self.generate_breadcrumbs(section["title"])
+            self._process_obj_id_with_filter()
             yield {
-                "objectID": self.doc_name,
+                "objectID": self.object_id,
                 "href": f"{self.doc_path}#{section['anchor_id']}",
                 "title": breadcrumbs,
-                "section": section["title"],
                 "text": section["text"],
-                "main_doc": self.main_doc_name,
             }
 
 
@@ -215,6 +236,7 @@ def create_search_index(app, exception):
     static_search_options = app.config.html_theme_options.get("static_search", {})
     excluded_docs = static_search_options.get("files_to_exclude", [])
     included_docs = app.env.found_docs
+    filter_options = static_search_options.get("filters", {})
 
     for exclude_doc in excluded_docs:
         exclude_doc = Path(exclude_doc).resolve()
@@ -228,7 +250,7 @@ def create_search_index(app, exception):
 
     for document in included_docs:
         pattern = get_pattern_for_each_page(app, document)
-        search_index = SearchIndex(document, app, pattern)
+        search_index = SearchIndex(document, app, pattern, filter_options)
         search_index.build_sections()
         search_index_list.extend(search_index.indices)
 
