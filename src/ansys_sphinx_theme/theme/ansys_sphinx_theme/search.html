@@ -8,24 +8,48 @@
     .filter-container { margin-bottom: 10px; }
     .results-container { margin-top: 10px; }
     .result-item { border: 1px solid #ddd; padding: 10px; margin-bottom: 5px; cursor: pointer; padding: 10px; }
+    .checkbox-group { margin-top: 10px; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center; }
+    .modal-content { background: white; padding: 20px; border-radius: 5px; max-width: 400px; width: 100%; }
+    .modal button { margin-top: 10px; }
+
+    /* Update for longer search bar */
+    #search-input {
+        width: 100%;
+        max-width: 600px; /* You can adjust this as needed */
+        padding: 10px;
+        margin-bottom: 10px;
+    }
 </style>
 
 <h2>Advanced Search</h2>
 
 <div class="filter-container">
-    <input type="text" id="search-input" placeholder="Search...">
-    <select id="filter-doc">
-        <option value="">All Documents</option>
-    </select>
-    <!-- <button onclick="performSearch()">Search</button> -->
+    <input type="text" id="search-input" placeholder="Search..." oninput="performSearch()">
+    <button id="filter-btn">Filter</button>
+
+    <div class="checkbox-group" id="filter-options">
+        <!-- Checkboxes will be dynamically added here -->
+    </div>
 </div>
 
 <div class="results-container" id="search-results"></div>
+
+<!-- Modal for filter options -->
+<div class="modal" id="filter-modal">
+    <div class="modal-content">
+        <h3>Select Filters</h3>
+        <div id="modal-filter-options" class="checkbox-group"></div>
+        <button onclick="applyFilters()">Apply Filters</button>
+        <button onclick="closeModal()">Close</button>
+    </div>
+</div>
 
 <script>
     let fuse;
     let searchData = [];
     const SEARCH_FILE = "{{ pathto('_static/search.json', 1) }}";
+    let selectedSections = [];
 
     async function initializeSearch() {
         try {
@@ -34,30 +58,41 @@
 
             fuse = new Fuse(searchData, { keys: ["title", "text", "objectID"], includeScore: true, threshold: 0.3 });
 
-            // Extract unique `main_doc` values
-            const uniqueDocs = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
+            // Extract unique sections
+            const uniqueSections = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
 
-            // Populate filter dropdown
-            const filterDocSelect = document.getElementById("filter-doc");
-            uniqueDocs.forEach(doc => {
-                const option = document.createElement("option");
-                option.value = doc;
-                option.textContent = doc;
-                filterDocSelect.appendChild(option);
+            // Populate checkboxes for modal
+            const filterOptions = document.getElementById("modal-filter-options");
+            uniqueSections.forEach(section => {
+                const label = document.createElement("label");
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                checkbox.value = section;
+                checkbox.className = "filter-checkbox";
+                checkbox.addEventListener('change', () => updateSelectedSections());
+
+                label.appendChild(checkbox);
+                label.appendChild(document.createTextNode(" " + section));
+                filterOptions.appendChild(label);
+                filterOptions.appendChild(document.createElement("br"));
             });
-
         } catch (error) {
             console.error("Error fetching search data:", error);
         }
     }
 
+    function updateSelectedSections() {
+        selectedSections = Array.from(document.querySelectorAll(".filter-checkbox:checked"))
+                                 .map(checkbox => checkbox.value);
+        performSearch(); // Trigger search when filters are updated
+    }
+
     function performSearch() {
         const query = document.getElementById("search-input").value.trim();
-        const selectedDoc = document.getElementById("filter-doc").value;
-
         let results = fuse.search(query).map(result => result.item);
-        if (selectedDoc) {
-            results = results.filter(item => item.objectID === selectedDoc);
+
+        if (selectedSections.length > 0) {
+            results = results.filter(item => selectedSections.includes(item.objectID));
         }
 
         displayResults(results);
@@ -79,20 +114,31 @@
             resultsContainer.appendChild(resultItem);
         });
     }
-    document.getElementById("search-input").addEventListener("input", performSearch);
-    document.getElementById("filter-doc").addEventListener("change", performSearch);
+
+    function openModal() {
+        document.getElementById("filter-modal").style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById("filter-modal").style.display = 'none';
+    }
+
+    function applyFilters() {
+        closeModal();
+        performSearch(); // Trigger search after applying filters
+    }
+
+    document.getElementById("filter-btn").addEventListener('click', openModal);
 
     initializeSearch();
 </script>
 
 {% endblock %}
 
-{# Below sections just re-create the behavior of Sphinx default search #}
-{# Page metadata #}
 {%- block htmltitle -%}
   <title>{{ _("Search") }} - {{ title or docstitle }}</title>
 {%- endblock htmltitle -%}
-{# Manually include the search JS that Sphinx includes #}
+
 {% block scripts -%}
   {{ super() }}
   <script src="{{ pathto('_static/searchtools.js', 1) }}"></script>
