@@ -50,6 +50,7 @@
 /* Highlighted Text */
 html[data-theme="light"] .highlight {
   color: var(--ast-highlight-color);
+  font-family: var(--ast-code-family);
 }
 
 /* Search Input Styles */
