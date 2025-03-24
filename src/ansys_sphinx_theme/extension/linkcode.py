@@ -107,11 +107,14 @@ def sphinx_linkcode_resolve(
     if domain != "py":
         return None
 
-    modname = info["module"]
-    fullname = info["fullname"]
+    modname = info.get("module")
+    fullname = info.get("fullname")
 
-    # Little clean up to avoid library.library
-    if fullname.startswith(modname):
+    if not modname or not fullname:
+        return None
+
+    # Cleanup to avoid redundant prefixes like library.library
+    if fullname.startswith(modname + "."):
         fullname = fullname[len(modname) + 1 :]
 
     submod = sys.modules.get(modname)
@@ -122,49 +125,64 @@ def sphinx_linkcode_resolve(
     for part in fullname.split("."):
         try:
             obj = getattr(obj, part)
-        except Exception:
+        except AttributeError:
             return None
 
-    # Deal with our decorators properly
+    # Handle property decorators properly
     while hasattr(obj, "fget"):
         obj = obj.fget
 
+    # Get the source file path
     try:
         fn = inspect.getsourcefile(obj)
-    except Exception:  # pragma: no cover
+    except Exception:
         fn = None
 
-    if not fn:  # pragma: no cover
+    if not fn:
         try:
             fn = inspect.getsourcefile(sys.modules[obj.__module__])
         except Exception:
             return None
-        return None
 
-    fn = Path(fn).resolve().relative_to(Path(__file__).resolve().parent)
-    fn_components = fn.parts
+    fn = Path(fn).resolve()
+
+    # Ensure fn is within the expected repository directory
+    base_path = Path(__file__).resolve().parent
+    if not fn.is_relative_to(base_path):
+        return None  # Avoid errors due to files outside the expected path
+
+    try:
+        fn = fn.relative_to(base_path)
+    except ValueError:
+        return None  # Avoid errors when the file is not within the base path
+
+    fn_components = list(fn.parts)
 
     if not source_path:
         module = modname.split(".")[0]
-        repo_index = fn_components.index(module)
+        if module in fn_components:
+            repo_index = fn_components.index(module)
+        else:
+            return None  # Module name should be in the path
     else:
         if source_path in fn_components:
             repo_index = fn_components.index(source_path)
         else:
             module = modname.split(".")[0]
-            repo_index = fn_components.index(module)
-            fn_components.insert(repo_index, source_path)
+            if module in fn_components:
+                repo_index = fn_components.index(module)
+                fn_components.insert(repo_index, source_path)
+            else:
+                return None  # Ensure we don't insert at an invalid index
+
     fn = "/".join(fn_components[repo_index:])
 
     try:
         source, lineno = inspect.getsourcelines(obj)
-    except Exception:  # pragma: no cover
+    except Exception:
         lineno = None
 
-    if lineno and not edit:
-        linespec = f"#L{lineno}-L{lineno + len(source) - 1}"
-    else:
-        linespec = ""
+    linespec = f"#L{lineno}-L{lineno + len(source) - 1}" if lineno and not edit else ""
 
     blob_or_edit = "edit" if edit else "blob"
     return f"http://github.com/{library}/{blob_or_edit}/{github_version}/{fn}{linespec}"
