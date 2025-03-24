@@ -14,12 +14,19 @@
     .dropdown-item:hover { background: #f0f0f0; }
     .chip { display: inline-block; background: #ddd; padding: 5px 10px; border-radius: 15px; margin: 5px; }
     .chip .close { cursor: pointer; margin-left: 5px; }
-
+    .chip .dropdown-item { padding: 5px 10px; cursor: pointer; }
+    .sub-dropdown-menu { display: none; position: absolute; background: white; border: 1px solid #ddd; max-height: 150px; overflow-y: auto; width: 180px; top: 30px; left: 0; }
+    .sub-dropdown-menu.show { display: block; }
     #search-input {
         width: 100%;
         max-width: 600px; /* You can adjust this as needed */
         padding: 10px;
         margin-bottom: 10px;
+    }
+    .checkmark {
+        margin-left: 5px;
+        color: green;
+        font-weight: bold;
     }
 </style>
 
@@ -29,6 +36,7 @@
     <input type="text" id="search-input" placeholder="Search...">
     <button id="filter-btn">Add Filter</button>
     <div id="filter-dropdown" class="dropdown-menu"></div>
+    <div id="primary-filter-chip"></div>
     <div id="filter-chips"></div>
 </div>
 
@@ -38,7 +46,7 @@
     let fuse;
     let searchData = [];
     const SEARCH_FILE = "{{ pathto('_static/search.json', 1) }}";
-    let selectedFilters = [];
+    let selectedFilters = {};
 
     async function initializeSearch() {
         try {
@@ -50,43 +58,108 @@
             console.error("Error fetching search data:", error);
         }
     }
-
     function populateFilterDropdown() {
         const dropdown = document.getElementById("filter-dropdown");
         if (!dropdown) return;
         dropdown.innerHTML = "";
-        const uniqueFilters = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
-        uniqueFilters.forEach(filter => {
+        const firstFilters = ["Documents", "Library"];
+        firstFilters.forEach(filter => {
             const div = document.createElement("div");
             div.className = "dropdown-item";
             div.textContent = filter;
-            div.onclick = () => selectFilter(filter);
+
+            if (selectedFilters[filter]) {
+            div.innerHTML += ' <span class="checkmark">✔</span>';
+        }
+
+            div.onclick = () => selectPrimaryFilter(filter);
             dropdown.appendChild(div);
         });
     }
 
-    function selectFilter(filter) {
+    function selectPrimaryFilter(filter) {
         document.getElementById("filter-dropdown").classList.remove("show");
-        if (!selectedFilters.includes(filter)) {
-            selectedFilters.push(filter);
-            updateChips();
-        }
+        console.log("Selected filter:", filter);
+        updatePrimaryChip(filter);
     }
+
+    function updatePrimaryChip(filter) {
+        const chipContainer = document.getElementById("primary-filter-chip");
+        chipContainer.innerHTML = "";
+        const primaryChip = document.createElement("div");
+        primaryChip.className = "primary-chip";
+        primaryChip.innerHTML = `${filter} <span class="close" onclick="removePrimaryFilter('${filter}')">&times;</span> <span class="dropdown-icon">▼ onclick="showDocumentDropdown()"></span>`;
+        chipContainer.appendChild(primaryChip);
+        performSearch();
+        primaryChip.onclick = (e) => {
+            e.stopPropagation();
+            if (filter === "Documents") {
+                showDocumentDropdown();
+            }
+        };
+    }
+
+    function showDocumentDropdown() {
+        const dropdown = document.createElement("div");
+        dropdown.className = "dropdown-menu show";
+        const uniqueFilters = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
+        uniqueFilters.forEach(doc => {
+            const div = document.createElement("div");
+            div.className = "dropdown-item";
+            div.textContent = doc;
+            div.onclick = () => selectDocumentFilter(doc);
+            dropdown.appendChild(div);
+        });
+        document.body.appendChild(dropdown);
+    }
+
+    function selectDocumentFilter(document) {
+            if (!selectedFilters[document]) {
+                selectedFilters[document] = [];
+                updateChips();
+            }
+        }
 
     function updateChips() {
         const chipContainer = document.getElementById("filter-chips");
-        if (!chipContainer) return;
         chipContainer.innerHTML = "";
-        selectedFilters.forEach(filter => {
+        Object.keys(selectedFilters).forEach(doc => {
             const chip = document.createElement("div");
             chip.className = "chip";
-            chip.innerHTML = `${filter} <span class="close" onclick="removeFilter('${filter}')">&times;</span>`;
+            chip.innerHTML = `${doc} <span class="close" onclick="removeDocumentFilter('${doc}')">&times;</span>`;
+            chip.onclick = (e) => {
+                e.stopPropagation();
+                toggleObjectDropdown(doc, chip);
+            };
             chipContainer.appendChild(chip);
         });
         performSearch();
     }
 
-    function removeFilter(filter) {
+    function toggleObjectDropdown(document, chip) {
+        const dropdown = document.createElement("div");
+        dropdown.className = "sub-dropdown-menu show";
+        searchData.filter(item => item.document === document).map(item => item.objectID).forEach(objectID => {
+            const itemDiv = document.createElement("div");
+            itemDiv.className = "dropdown-item";
+            itemDiv.textContent = objectID;
+            itemDiv.onclick = (e) => {
+                e.stopPropagation();
+                selectObjectFilter(document, objectID);
+            };
+            dropdown.appendChild(itemDiv);
+        });
+        chip.appendChild(dropdown);
+    }
+
+    function selectObjectFilter(document, objectID) {
+        if (!selectedFilters[document].includes(objectID)) {
+            selectedFilters[document].push(objectID);
+            updateChips();
+        }
+    }
+
+    function removeDocumentFilter(filter) {
         selectedFilters = selectedFilters.filter(f => f !== filter);
         updateChips();
     }
@@ -95,9 +168,12 @@
         const query = document.getElementById("search-input").value.trim();
         if (!fuse) return;
         let results = fuse.search(query).map(result => result.item);
-        if (selectedFilters.length > 0) {
-            results = results.filter(item => selectedFilters.includes(item.objectID));
-        }
+        Object.keys(selectedFilters).forEach(doc => {
+                results = results.filter(item => item.document === doc);
+                if (selectedFilters[doc].length > 0) {
+                    results = results.filter(item => selectedFilters[doc].includes(item.objectID));
+                }
+            });
         displayResults(results);
     }
 
