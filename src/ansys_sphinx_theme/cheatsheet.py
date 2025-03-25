@@ -28,9 +28,9 @@ and add the cheatsheet to the left navigation sidebar.
 
 import pathlib
 import subprocess
-from typing import Any, Dict
+from typing import Any, Dict, List, Optional
 
-from docutils import nodes
+from docutils.nodes import document
 from sphinx.application import Sphinx
 from sphinx.util import logging
 
@@ -40,7 +40,7 @@ logger = logging.getLogger(__name__)
 CHEAT_SHEET_QUARTO_EXTENTION_VERSION = "v1"
 
 
-def cheatsheet_sidebar_pages(app: Sphinx) -> list:
+def cheatsheet_sidebar_pages(app: Sphinx) -> Optional[List[str]]:
     """
     Get the pages to display the cheat sheet sidebar.
 
@@ -51,20 +51,19 @@ def cheatsheet_sidebar_pages(app: Sphinx) -> list:
 
     Returns
     -------
-    list
-        List of pages to display the cheat sheet sidebar.
-
+    Optional[List[str]]
+        List of pages to display the cheat sheet sidebar, or None if not configured.
     """
     html_theme_options = app.config.html_theme_options
     cheatsheet_options = html_theme_options.get("cheatsheet")
     if not cheatsheet_options:
-        return
+        return None
     pages = cheatsheet_options.get("pages", ["index"])
     cheatsheet_pages = [pages] if isinstance(pages, str) else pages
     return cheatsheet_pages
 
 
-def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_png: str):
+def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_png: str) -> None:
     """
     Convert PDF to PNG images.
 
@@ -81,23 +80,24 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
         from pdf2image import convert_from_path
     except ImportError as e:
         raise ImportError(
-            f"Failed to import `pdf2image`: {e}. Install the package using `pip install pdf2image`"  # noqa: E501
+            f"Failed to import `pdf2image`: {e}. Install the package using `pip install pdf2image`"
         )
     try:
         images = convert_from_path(pdf_path, 500)
         images[0].save(output_dir / output_png, "PNG")
     except Exception as e:
         raise RuntimeError(
-            f"Failed to convert PDF to PNG: {e}. Ensure the PDF file is valid and poppler is installed."  # noqa: E501
+            f"Failed to convert PDF to PNG: {e}. Ensure the PDF file is valid and poppler is installed."  # noqa:E501
         )
 
 
-def run_quarto_command(command, cwd):
-    """Run quarto command and logs its output.
+def run_quarto_command(command: List[str], cwd: str) -> None:
+    """
+    Run a Quarto command and log its output.
 
     Parameters
     ----------
-    command : list
+    command : List[str]
         List of command arguments.
     cwd : str
         Current working directory.
@@ -116,21 +116,26 @@ def run_quarto_command(command, cwd):
 
 
 def add_cheat_sheet(
-    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document
+    app: Sphinx,
+    pagename: str,
+    templatename: str,
+    context: Dict[str, Any],
+    doctree: Optional[document],
 ) -> None:
-    """Add a cheat sheet to the left navigation sidebar.
+    """
+    Add a cheat sheet to the left navigation sidebar.
 
     Parameters
     ----------
-    app : ~sphinx.application.Sphinx
+    app : sphinx.application.Sphinx
         Application instance for rendering the documentation.
     pagename : str
         Name of the current page.
     templatename : str
         Name of the template being used.
-    context : dict
+    context : Dict[str, Any]
         Context dictionary for the page.
-    doctree : ~docutils.nodes.document
+    doctree : Optional[docutils.nodes.document]
         The doctree.
     """
     cheatsheet_options = app.config.html_theme_options.get("cheatsheet", {})
@@ -142,7 +147,7 @@ def add_cheat_sheet(
         context["sidebars"] = sidebar
 
 
-def build_quarto_cheatsheet(app: Sphinx):
+def build_quarto_cheatsheet(app: Sphinx) -> None:
     """
     Build the Quarto cheatsheet.
 
