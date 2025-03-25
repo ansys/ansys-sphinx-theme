@@ -419,7 +419,15 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
 
 
 def run_quarto_command(command, cwd):
-    """Run quarto command and logs its output."""
+    """Run quarto command and logs its output.
+
+    Parameters
+    ----------
+    command : list
+        List of command arguments.
+    cwd : str
+        Current working directory.
+    """
     command = ["quarto"] + command
     try:
         result = subprocess.run(command, cwd=cwd, check=True, capture_output=True, text=True)
@@ -427,7 +435,7 @@ def run_quarto_command(command, cwd):
             logger.info(result.stdout)
 
         if result.stderr:
-            logger.info(result.stderr)
+            logger.error(result.stderr)
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to run the command: {e}")
