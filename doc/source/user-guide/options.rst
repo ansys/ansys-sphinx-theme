@@ -257,8 +257,6 @@ main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" s
     the theme is using `pdf2image`. So you should have the ``poppler`` package installed in your system.
     For more information, see the `pdf2image documentation <https://pypi.org/project/pdf2image/>`_.
 
-To arrange the order of the cheat sheet sections in the sidebar, you can use the ``sidebar_order`` feature.
-For more information, see the `Sidebar order` section.
 
 What's new section
 ------------------
@@ -354,30 +352,3 @@ The following images show a sample "What's new" section and sidebar in the chang
         .. image:: ../_static/whatsnew_sidebar.png
            :alt: What's new sidebar
 
-To arrange the order of the what's new sections in the sidebar, you can use the ``sidebar_order`` feature.
-For more information, see the `Sidebar order` section.
-
-
-Sidebar order
--------------
-
-The `sidebar order` feature allows you to customize the order of the sidebar items in the
-documentation. This feature is indented to help you organise the cheatsheet and what's new
-sections in the sidebar.
-
-To enable this feature, add the following dictionary to the ``html_theme_options``
-dictionary:
-
-.. code-block:: python
-
-    html_theme_options = (
-        {
-            "sidebar_order": [
-                "cheatsheet",
-                "whatsnew",
-            ],
-        },
-    )
-
-The above example will display the cheatsheet and what's new sections in the sidebar in the
-order specified.

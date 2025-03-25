@@ -423,8 +423,6 @@ def add_sidebar_context(
     if not whatsnew_pages and not cheatsheet_pages:
         return
 
-    sidebar_order = app.config.html_theme_options.get("sidebar_order", ["cheatsheet", "whatsnew"])
-
     sidebar = context.get("sidebars", [])
 
     sidebar_mapping = {"whatsnew": "whatsnew_sidebar.html", "cheatsheet": "cheatsheet_sidebar.html"}
@@ -440,17 +438,8 @@ def add_sidebar_context(
     if cheatsheet_pages and pagename in cheatsheet_pages:
         sidebars_to_add.append("cheatsheet")
 
-    # Append sidebars based on the given order
-    if sidebar_order:
-        for item in sidebar_order:
-            if item in sidebars_to_add:
-                sidebar.append(sidebar_mapping[item])
-    else:
-        # Default order if no sidebar_order is given
-        for item in sidebars_to_add:
-            sidebar.append(sidebar_mapping[item])
+    # Append sidebars
 
-    # add remaining sidebars to end of sidebar
     for item in sidebars_to_add:
         if sidebar_mapping[item] not in sidebar:
             sidebar.append(sidebar_mapping[item])
