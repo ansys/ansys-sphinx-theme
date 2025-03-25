@@ -22,12 +22,9 @@
 
 """Module for the Ansys Sphinx theme."""
 
-from itertools import islice, tee
 import os
 import pathlib
-import re
-import subprocess
-from typing import Any, Dict, Iterable
+from typing import Any, Dict
 import warnings
 
 from docutils import nodes
