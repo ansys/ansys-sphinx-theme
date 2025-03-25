@@ -423,7 +423,7 @@ def add_sidebar_context(
     if not whatsnew_pages and not cheatsheet_pages:
         return
 
-    sidebar_order = app.config.html_theme_options.get("sidebar_order", [])
+    sidebar_order = app.config.html_theme_options.get("sidebar_order", ["cheatsheet", "whatsnew"])
 
     sidebar = context.get("sidebars", [])
 
