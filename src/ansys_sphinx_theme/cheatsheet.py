@@ -107,7 +107,7 @@ def run_quarto_command(command: List[str], cwd: str) -> None:
         if result.stdout:
             logger.info(result.stdout)
 
-        if result.stderr:
+        if result.stderr and "Error" in result.stderr:
             logger.error(result.stderr)
 
     except subprocess.CalledProcessError as e:
