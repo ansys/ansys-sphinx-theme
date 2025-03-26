@@ -257,6 +257,7 @@ main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" s
     the theme is using `pdf2image`. So you should have the ``poppler`` package installed in your system.
     For more information, see the `pdf2image documentation <https://pypi.org/project/pdf2image/>`_.
 
+
 What's new section
 ------------------
 
@@ -350,3 +351,10 @@ The following images show a sample "What's new" section and sidebar in the chang
 
         .. image:: ../_static/whatsnew_sidebar.png
            :alt: What's new sidebar
+
+
+.. note::
+
+    If you are using both the "whatsnew" and "cheatsheet" options, the "cheatsheet" option will be
+    displayed first in the left navigation pane, followed by the "What's new" section to maintain
+    sidebar consistency.
