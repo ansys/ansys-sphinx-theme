@@ -24,3 +24,4 @@ Sewell
 (?i)Sphinx-Gallery
 (?i)favicon
 astroid
+(?i)whatsnew
