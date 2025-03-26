@@ -352,3 +352,9 @@ The following images show a sample "What's new" section and sidebar in the chang
         .. image:: ../_static/whatsnew_sidebar.png
            :alt: What's new sidebar
 
+
+.. note::
+
+    If you are using both the "whatsnew" and "cheatsheet" options, the "cheatsheet" option will be
+    displayed first in the left navigation pane, followed by the "What's new" section to maintain
+    sidebar consistency.
