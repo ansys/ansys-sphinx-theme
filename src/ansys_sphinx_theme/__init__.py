@@ -425,18 +425,18 @@ def add_sidebar_context(
 
     sidebar = context.get("sidebars", [])
 
-    sidebar_mapping = {"whatsnew": "whatsnew_sidebar.html", "cheatsheet": "cheatsheet_sidebar.html"}
+    sidebar_mapping = {"cheatsheet": "cheatsheet_sidebar.html", "whatsnew": "whatsnew_sidebar.html"}
 
     sidebars_to_add = []
+
+    if cheatsheet_pages and pagename in cheatsheet_pages:
+        sidebars_to_add.append("cheatsheet")
 
     if whatsnew_pages and pagename in whatsnew_pages:
         whatsnew = context.get("whatsnew", [])
         whatsnew.extend(app.env.whatsnew)
         context["whatsnew"] = whatsnew
         sidebars_to_add.append("whatsnew")
-
-    if cheatsheet_pages and pagename in cheatsheet_pages:
-        sidebars_to_add.append("cheatsheet")
 
     # Append sidebars
 
