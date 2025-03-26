@@ -402,7 +402,12 @@ def check_for_depreciated_theme_options(app: Sphinx):
 def add_sidebar_context(
     app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
 ) -> None:
-    """Add the sidebar context to the desired pages.
+    """Add the sidebar context to the page.
+
+    This function adds the sidebar context to the page. The sidebar context
+    includes the sidebar pages for the cheatsheet and what's new sections.
+    `whatsnew_sidebar_pages` and `cheatsheet_sidebar_pages` are used to determine
+    the pages to display the sidebar.
 
     Parameters
     ----------

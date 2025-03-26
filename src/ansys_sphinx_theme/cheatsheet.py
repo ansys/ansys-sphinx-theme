@@ -28,9 +28,8 @@ and add the cheatsheet to the left navigation sidebar.
 
 import pathlib
 import subprocess
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
-from docutils.nodes import document
 from sphinx.application import Sphinx
 from sphinx.util import logging
 
@@ -42,7 +41,7 @@ CHEAT_SHEET_QUARTO_EXTENTION_VERSION = "v1"
 
 def cheatsheet_sidebar_pages(app: Sphinx) -> Optional[List[str]]:
     """
-    Get the pages to display the cheat sheet sidebar.
+    Get the pages to display the cheat sheet sidebar and return the list of pages.
 
     Parameters
     ----------
@@ -113,38 +112,6 @@ def run_quarto_command(command: List[str], cwd: str) -> None:
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to run the command: {e}")
-
-
-def add_cheat_sheet(
-    app: Sphinx,
-    pagename: str,
-    templatename: str,
-    context: Dict[str, Any],
-    doctree: Optional[document],
-) -> None:
-    """
-    Add a cheat sheet to the left navigation sidebar.
-
-    Parameters
-    ----------
-    app : sphinx.application.Sphinx
-        Application instance for rendering the documentation.
-    pagename : str
-        Name of the current page.
-    templatename : str
-        Name of the template being used.
-    context : Dict[str, Any]
-        Context dictionary for the page.
-    doctree : Optional[docutils.nodes.document]
-        The doctree.
-    """
-    cheatsheet_options = app.config.html_theme_options.get("cheatsheet", {})
-    pages = cheatsheet_options.get("pages", ["index"])
-    pages = [pages] if isinstance(pages, str) else pages
-    if cheatsheet_options and any(pagename == page for page in pages):
-        sidebar = context.get("sidebars", [])
-        sidebar.append("cheatsheet_sidebar.html")
-        context["sidebars"] = sidebar
 
 
 def build_quarto_cheatsheet(app: Sphinx) -> None:

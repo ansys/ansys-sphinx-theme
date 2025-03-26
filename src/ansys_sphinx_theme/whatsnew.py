@@ -561,7 +561,7 @@ def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None
 
 
 def whatsnew_sidebar_pages(app: Sphinx) -> list:
-    """Get the pages the what's new section should be displayed on.
+    """Get the pages the what's new section should be displayed on and return the list of pages.
 
     Parameters
     ----------
