@@ -187,4 +187,6 @@ jobs:
       - name: "Release to GitHub"
         uses: ansys/actions/release-github@v8
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           library-name: ${{ env.PACKAGE_NAME }}
+          changelog-release-notes: true
