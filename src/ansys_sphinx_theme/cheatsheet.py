@@ -108,12 +108,9 @@ def run_quarto_command(command: List[str], cwd: str) -> None:
             logger.info(result.stdout)
 
         if result.stderr:
-            if "error" or "failed" in result.stderr.lower():
-                logger.error(result.stderr)
-            else:
-                # HACK: Quarto writes both stdout and stderr to stderr
-                # so we need to log it as info if it's not an error
-                logger.info(result.stderr)
+            # HACK: Quarto writes both stdout and stderr to stderr
+            # so we need to log it as info if it's not an error
+            logger.info(result.stderr)
 
     except subprocess.CalledProcessError as e:
         raise RuntimeError(f"Failed to run the command: {e}")
