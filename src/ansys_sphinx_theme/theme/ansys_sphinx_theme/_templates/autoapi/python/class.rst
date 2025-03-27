@@ -60,10 +60,11 @@
    :hidden:
 
         {% for child in own_page_children %}
-    {{ child.include_path }}
+    {{ child.short_name }}<{{ child.include_path }}>
         {% endfor %}
 
     {% endif %}
+
 .. py:{{ obj.type }}:: {% if is_own_page %}{{ obj.id }}{% else %}{{ obj.short_name }}{% endif %}{% if obj.args %}({{ obj.args }}){% endif %}
 
     {% for (args, return_annotation) in obj.overloads %}
