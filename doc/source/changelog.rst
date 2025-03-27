@@ -8,6 +8,22 @@ Release notes
 
 .. towncrier release notes start
 
+`1.4.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.1>`_ (March 27, 2025)
+===========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - quarto std logging
+          - `#664 <https://github.com/ansys/ansys-sphinx-theme/pull/664>`_
+
+
 `1.4.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.0>`_ (March 27, 2025)
 ===========================================================================================
 
