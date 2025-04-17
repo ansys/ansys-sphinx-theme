@@ -1,6 +1,8 @@
 /* Contains variables for colors and fonts used in the theme */
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&display=swap");
 
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
+
 @font-face {
   font-family: "Source Sans Pro Light";
   src: url(../fonts/SourceSansPro-Light.ttf);
@@ -33,25 +35,23 @@
     var(--pst-font-family-monospace-system);
   --ast-body-family: "Open Sans", sans-serif;
   --ast-header-family: "Source Sans Pro", sans-serif;
+  --ast-code-family: "Source Code Pro", monospace;
 
   /**
   * Ansys compatible colors
   *
   * Colors are defined in rgb string way, "red, green, blue"
   */
-  --ansysGold: rgb(255, 183, 27); /* #FFB71B */
-  --ansysBronze: rgb(200, 146, 17); /* #C89211 */
-  --pythonBlue: rgb(57, 114, 161); /* #3972a1 */
-  --pst-font-size-h1: 48px;
-  --pst-font-size-h2: 40px;
-  --pst-font-size-h3: 32px;
-  --pst-font-size-h4: 28px;
-  --pst-font-size-h5: 24px;
-  --pst-font-size-h6: 20px;
-  --ast-global-line-height: 24px;
-  --bs-nav-link-font-size: 14px;
+  --pst-font-size-h1: 3rem; /* 48px */
+  --pst-font-size-h2: 2.5rem; /* 40px */
+  --pst-font-size-h3: 2rem; /* 32px */
+  --pst-font-size-h4: 1.75rem; /* 28px */
+  --pst-font-size-h5: 1.5rem; /* 24px */
+  --pst-font-size-h6: 1.25rem; /* 20px */
+  --ast-global-line-height: 1.5rem; /* 24px */
+  --bs-nav-link-font-size: 0.875rem; /* 14px */
   --bs-navbar-color: var(--bs-ast-navbar-color);
-  --ast-font-sidebar-header: 16px;
+  --ast-font-sidebar-header: 1rem; /* 16px */
   /**
 * weight
 */
@@ -62,30 +62,29 @@
   /**
   * table font sizes
   */
-  --pst-table-font-size: 14px;
-  --pst-table-header-font-size: 12px;
-
-  --pst-sidebar-font-size-mobile: 12px;
-  --ast-nav-link-font-size: 14px;
+  --pst-table-font-size: 0.875rem; /* 14px */
+  --pst-table-header-font-size: 0.75rem; /* 12px */
+  --pst-sidebar-font-size-mobile: 0.75rem; /* 12px */
+  --ast-nav-link-font-size: 0.875rem; /* 14px */
 
   /**
   * sphinx design font sizes
   */
 
-  --ast-sphinx-design-font-size: 14px;
+  --ast-sphinx-design-font-size: 0.875rem; /* 14px */
   --ast-sphinx-design-font-family: "Open Sans", sans-serif;
-  --ast-sphinx-design-border-radius: 4px;
+  --ast-sphinx-design-border-radius: 0.25rem; /* 4px */
 
   /**
 * admonitions
 */
-  --ast-admonitions-font-size: 14px;
-  --ast-admonitions-padding: 8px 16px;
-  --ast-admonitions-border-radius: 8px;
-  --ast-admonitions-icon-size: 15px;
-  --ast-admonition-icon-height: 24px;
-  --ast-admonition-icon-width: 24px;
-  --ast-admonition-icon-margin-left: 8px;
+  --ast-admonitions-font-size: 0.875rem; /* 14px */
+  --ast-admonitions-padding: 0.5rem 1rem; /* 8px 16px */
+  --ast-admonitions-border-radius: 0.5rem; /* 8px */
+  --ast-admonitions-icon-size: 0.9375rem; /* 15px */
+  --ast-admonition-icon-height: 1.5rem; /* 24px */
+  --ast-admonition-icon-width: 1.5rem; /* 24px */
+  --ast-admonition-icon-margin-left: 0.5rem; /* 8px */
 }
 
 html[data-theme="light"] {
@@ -116,7 +115,7 @@ html[data-theme="light"] {
   --ast-navbar-hover-color: var(--ast-color-hover-text);
   --ast-navbar-active-color: var(--ast-color-active-text);
   --ast-navbar-active-border-color: #000000;
-  --ast-ring-shadow-focused: 0px 0px 0px 2px #ffffff, 0px 0px 0px 4px #1a78c2;
+  --ast-ring-shadow-focused: 0px 0px 0px 0.125rem #ffffff, 0px 0px 0px 0.25rem #1a78c2; /* 2px, 4px */
 
   /**
   * sidebar colors
@@ -198,10 +197,8 @@ html[data-theme="light"] {
   --ast-tab-border-color-hover: #8e8e8e;
   --ast-tab-border-color-active: #000000;
   --ast-dropdown-text-color: #686868;
-  --ast-box-shadow-active: 0px 1px 2px 0px rgba(0, 0, 0, 0.08),
-    0px 2px 4px 0px rgba(0, 0, 0, 0.12);
-  --ast-box-shadow-hover: 0px 1px 2px 0px rgba(0, 0, 0, 0.08),
-    0px 4px 8px 2px rgba(0, 0, 0, 0.12);
+  --ast-box-shadow-active: 0px 0.0625rem 0.125rem 0px rgba(0, 0, 0, 0.08), 0px 0.25rem 0.5rem 0px rgba(0, 0, 0, 0.12); /* 1px, 2px, 4px, 8px */
+  --ast-box-shadow-hover: 0px 0.0625rem 0.125rem 0px rgba(0, 0, 0, 0.08), 0px 0.25rem 0.5rem 0px rgba(0, 0, 0, 0.12); /* 1px, 2px, 4px, 8px */
   /**
   * search hide match
   */

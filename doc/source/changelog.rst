@@ -8,6 +8,173 @@ Release notes
 
 .. towncrier release notes start
 
+`1.4.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.2>`_ (March 27, 2025)
+===========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - autoapi child class template
+          - `#666 <https://github.com/ansys/ansys-sphinx-theme/pull/666>`_
+
+
+`1.4.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.1>`_ (March 27, 2025)
+===========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - quarto std logging
+          - `#664 <https://github.com/ansys/ansys-sphinx-theme/pull/664>`_
+
+
+`1.4.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.0>`_ (March 27, 2025)
+===========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - enable matplotlib and plotly in examples
+          - `#567 <https://github.com/ansys/ansys-sphinx-theme/pull/567>`_
+
+        * - feat: add python 3.13 support
+          - `#635 <https://github.com/ansys/ansys-sphinx-theme/pull/635>`_
+
+        * - feat: Add Tox environment for documentation preview
+          - `#642 <https://github.com/ansys/ansys-sphinx-theme/pull/642>`_
+
+        * - migrate css to scss
+          - `#644 <https://github.com/ansys/ansys-sphinx-theme/pull/644>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - update the style for highlight name function
+          - `#652 <https://github.com/ansys/ansys-sphinx-theme/pull/652>`_
+
+        * - update the changelog action only for PR
+          - `#654 <https://github.com/ansys/ansys-sphinx-theme/pull/654>`_
+
+        * - change logging info to error in quarto build
+          - `#655 <https://github.com/ansys/ansys-sphinx-theme/pull/655>`_
+
+        * - quarto error logging
+          - `#658 <https://github.com/ansys/ansys-sphinx-theme/pull/658>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore: update CHANGELOG for v1.3.0
+          - `#614 <https://github.com/ansys/ansys-sphinx-theme/pull/614>`_
+
+        * - chore: update CHANGELOG for v1.3.1
+          - `#618 <https://github.com/ansys/ansys-sphinx-theme/pull/618>`_
+
+        * - chore: update CHANGELOG for v1.3.2
+          - `#631 <https://github.com/ansys/ansys-sphinx-theme/pull/631>`_
+
+        * - docs: add contribute section
+          - `#636 <https://github.com/ansys/ansys-sphinx-theme/pull/636>`_
+
+        * - docs: add contribute page in toctree
+          - `#638 <https://github.com/ansys/ansys-sphinx-theme/pull/638>`_
+
+        * - chore: update CHANGELOG for v1.3.3
+          - `#648 <https://github.com/ansys/ansys-sphinx-theme/pull/648>`_
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore(deps): bump jupytext from 1.16.6 to 1.16.7
+          - `#622 <https://github.com/ansys/ansys-sphinx-theme/pull/622>`_
+
+        * - chore(deps): bump sphinx-autoapi from 3.4.0 to 3.5.0
+          - `#623 <https://github.com/ansys/ansys-sphinx-theme/pull/623>`_
+
+        * - chore(deps): bump sphinx-gallery from 0.18.0 to 0.19.0
+          - `#625 <https://github.com/ansys/ansys-sphinx-theme/pull/625>`_
+
+        * - chore(deps): bump pygithub from 2.5.0 to 2.6.0
+          - `#626 <https://github.com/ansys/ansys-sphinx-theme/pull/626>`_
+
+        * - chore(deps): bump sphinx from 8.1.3 to 8.2.0
+          - `#628 <https://github.com/ansys/ansys-sphinx-theme/pull/628>`_
+
+        * - chore(deps): bump sphinx-autoapi from 3.5.0 to 3.6.0
+          - `#629 <https://github.com/ansys/ansys-sphinx-theme/pull/629>`_
+
+        * - build: bump nbsphinx from 0.9.6 to 0.9.7
+          - `#637 <https://github.com/ansys/ansys-sphinx-theme/pull/637>`_
+
+        * - build: bump tox from 4.24.1 to 4.24.2
+          - `#645 <https://github.com/ansys/ansys-sphinx-theme/pull/645>`_
+
+        * - build: bump notebook from 7.3.2 to 7.3.3
+          - `#651 <https://github.com/ansys/ansys-sphinx-theme/pull/651>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - feat: migrate the builds system to stb
+          - `#639 <https://github.com/ansys/ansys-sphinx-theme/pull/639>`_
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - chore: bump version 1.4.dev0
+          - `#615 <https://github.com/ansys/ansys-sphinx-theme/pull/615>`_
+
+        * - fix: remove flake8 configuration file
+          - `#641 <https://github.com/ansys/ansys-sphinx-theme/pull/641>`_
+
+        * - fix: improve Logging in Quarto cheatsheet build process
+          - `#646 <https://github.com/ansys/ansys-sphinx-theme/pull/646>`_
+
+        * - cheatsheet and whatsnew functions into separate modules and implement sidebar ordering
+          - `#656 <https://github.com/ansys/ansys-sphinx-theme/pull/656>`_
+
+        * - ansys sphinx theme variables
+          - `#657 <https://github.com/ansys/ansys-sphinx-theme/pull/657>`_
+
+
 `1.3.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.3>`_ (March 11, 2025)
 ===========================================================================================
 
