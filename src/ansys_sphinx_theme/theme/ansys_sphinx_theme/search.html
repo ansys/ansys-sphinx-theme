@@ -31,156 +31,203 @@
 </style>
 
 <h2>Advanced Search</h2>
+<style>
+    .dropdown-menu {
+      border: 1px solid #ccc;
+      padding: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      background: white;
+      position: absolute;
+      z-index: 10;
+    }
+    .dropdown-toggle {
+      margin-bottom: 10px;
+    }
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+    }
+  </style>
 
-<div class="filter-container">
-    <input type="text" id="search-input" placeholder="Search...">
-    <button id="filter-btn">Add Filter</button>
-    <div id="filter-dropdown" class="dropdown-menu"></div>
-    <div id="primary-filter-chip"></div>
-    <div id="filter-chips"></div>
-</div>
+<style>
+    .chip {
+      background-color: #e0e0e0;
+      border-radius: 16px;
+      padding: 5px 10px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
 
-<div class="results-container" id="search-results"></div>
-<script>
+    .chip .remove-btn {
+      margin-left: 8px;
+      background: none;
+      border: none;
+      color: #555;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .chip .remove-btn:hover {
+      color: red;
+    }
+  </style>
+
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Type to search..." />
+    <button id="filter-btn" class="dropdown-toggle">Select Filter</button>
+  </div>
+  <div id="selected-chips" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;"></div>
+
+  <div id="filter-dropdown" class="dropdown-menu" style="display: none;"></div>
+  <div id="objectid-dropdown" class="dropdown-menu" style="display: none;"></div>
+
+  <div class="results" id="search-results"></div>
+
+  <script>
     let fuse;
     let searchData = [];
-    let selectedPrimary = null;
-    let selectedObjectID = null;
+    let selectedFilter = null;
+    let selectedObjectIDs = [];
 
     const SEARCH_FILE = "{{ pathto('_static/search.json', 1) }}";
 
     async function initializeSearch() {
-        try {
-            const response = await fetch(SEARCH_FILE);
-            searchData = await response.json();
-            fuse = new Fuse(searchData, { keys: ["title", "text", "objectID"], includeScore: true, threshold: 0.3 });
-            setupFilterDropdown();
-        } catch (err) {
-            console.error("Failed to load search data:", err);
-        }
-    }
-
-    function setupFilterDropdown() {
-        const dropdown = document.getElementById("filter-dropdown");
-        dropdown.innerHTML = "";
-
-        const filters = ["Documents", "Library"];
-        filters.forEach(filter => {
-            const div = document.createElement("div");
-            div.className = "dropdown-item";
-            div.textContent = filter;
-            div.onclick = () => {
-                selectedPrimary = filter;
-                selectedObjectID = null;
-                updatePrimaryChip();
-                dropdown.classList.remove("show");
-                if (filter === "Documents") {
-                    showObjectIdDropdown();
-                } else {
-                    performSearch();
-                }
-            };
-            dropdown.appendChild(div);
+      try {
+        const response = await fetch(SEARCH_FILE);
+        searchData = await response.json();
+        fuse = new Fuse(searchData, {
+          keys: ["title", "text", "objectID"],
+          includeScore: true,
+          threshold: 0.3,
         });
+        setupPrimaryDropdown();
+      } catch (err) {
+        console.error("Search init failed", err);
+      }
     }
 
-    function updatePrimaryChip() {
-        const chipContainer = document.getElementById("primary-filter-chip");
-        chipContainer.innerHTML = "";
-        const chip = document.createElement("div");
-        chip.className = "chip";
-        chip.innerHTML = `${selectedPrimary} <span class="close" onclick="clearPrimaryFilter()">&times;</span>`;
-        chipContainer.appendChild(chip);
-    }
+    function setupPrimaryDropdown() {
+      const dropdown = document.getElementById("filter-dropdown");
+      dropdown.innerHTML = "";
 
-    function clearPrimaryFilter() {
-        selectedPrimary = null;
-        selectedObjectID = null;
-        updatePrimaryChip();
-        updateObjectIDChip();
-        performSearch();
+      ["Documents", "Library"].forEach(filter => {
+        const div = document.createElement("div");
+        div.className = "dropdown-item";
+        div.textContent = filter;
+        div.onclick = () => {
+          selectedFilter = filter;
+          dropdown.style.display = "none";
+
+          if (filter === "Documents") {
+            showObjectIdDropdown();
+          } else {
+            selectedObjectIDs = [];
+            document.getElementById("objectid-dropdown").style.display = "none";
+            performSearch();
+          }
+        };
+        dropdown.appendChild(div);
+      });
     }
 
     function showObjectIdDropdown() {
-        const existing = document.getElementById("object-id-dropdown");
-        if (existing) existing.remove();
+      const dropdown = document.getElementById("objectid-dropdown");
+      dropdown.innerHTML = "";
 
-        const dropdown = document.createElement("div");
-        dropdown.id = "object-id-dropdown";
-        dropdown.className = "dropdown-menu show";
+      const objectIDs = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
 
-        const objectIDs = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
+      objectIDs.forEach(id => {
+        const div = document.createElement("div");
+        div.className = "checkbox-item";
 
-        objectIDs.forEach(id => {
-            const div = document.createElement("div");
-            div.className = "dropdown-item";
-            div.textContent = id;
-            div.onclick = () => {
-                selectedObjectID = id;
-                updateObjectIDChip();
-                dropdown.remove();
-                performSearch();
-            };
-            dropdown.appendChild(div);
-        });
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = id;
+        checkbox.checked = selectedObjectIDs.includes(id);
+        checkbox.onchange = (e) => {
+          if (e.target.checked) {
+            selectedObjectIDs.push(id);
+          } else {
+            selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
+          }
+          renderSelectedChips();
+          performSearch();
+        };
 
-        document.getElementById("filter-chips").appendChild(dropdown);
+        const label = document.createElement("label");
+        label.textContent = id;
+        label.style.marginLeft = "8px";
+
+        div.appendChild(checkbox);
+        div.appendChild(label);
+        dropdown.appendChild(div);
+      });
+
+      dropdown.style.display = "block";
+      renderSelectedChips();
     }
+    function renderSelectedChips() {
+  const chipContainer = document.getElementById("selected-chips");
+  chipContainer.innerHTML = "";
 
-    function updateObjectIDChip() {
-        const container = document.getElementById("filter-chips");
-        container.innerHTML = "";
-        if (selectedObjectID) {
-            const chip = document.createElement("div");
-            chip.className = "chip";
-            chip.innerHTML = `${selectedObjectID} <span class="close" onclick="clearObjectIDFilter()">&times;</span>`;
-            container.appendChild(chip);
-        }
-    }
+  selectedObjectIDs.forEach(id => {
+    const chip = document.createElement("div");
+    chip.className = "chip";
+    chip.textContent = id;
 
-    function clearObjectIDFilter() {
-        selectedObjectID = null;
-        updateObjectIDChip();
-        performSearch();
-    }
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "remove-btn";
+    removeBtn.innerHTML = "&times;";
+    removeBtn.onclick = () => {
+      selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
+      renderSelectedChips();
+      showObjectIdDropdown(); // To uncheck
+      performSearch();
+    };
+
+    chip.appendChild(removeBtn);
+    chipContainer.appendChild(chip);
+  });
+}
 
     function performSearch() {
-        const query = document.getElementById("search-input").value.trim();
-        if (!fuse) return;
+      const query = document.getElementById("search-input").value.trim();
+      if (!fuse) return;
 
-        let results = fuse.search(query).map(r => r.item);
+      let results = fuse.search(query).map(r => r.item);
 
-        if (selectedPrimary === "Documents" && selectedObjectID) {
-            results = results.filter(item => item.objectID === selectedObjectID);
-        } else if (selectedPrimary === "Library") {
-            // Apply "Library" specific logic if needed
-        }
+      if (selectedFilter === "Documents" && selectedObjectIDs.length > 0) {
+        results = results.filter(item => selectedObjectIDs.includes(item.objectID));
+      }
 
-        displayResults(results);
+      displayResults(results);
     }
 
     function displayResults(results) {
-        const resultsContainer = document.getElementById("search-results");
-        resultsContainer.innerHTML = results.length ? "" : "<p>No results found</p>";
+      const container = document.getElementById("search-results");
+      container.innerHTML = results.length ? "" : "<p>No results found</p>";
 
-        results.forEach(item => {
-            const div = document.createElement("div");
-            div.className = "result-item";
-            div.textContent = item.title;
-            div.onclick = () => window.location.href = item.href;
-            resultsContainer.appendChild(div);
-        });
+      results.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "result-item";
+        div.textContent = item.title;
+        container.appendChild(div);
+      });
     }
 
     document.getElementById("filter-btn").addEventListener("click", () => {
-        const dropdown = document.getElementById("filter-dropdown");
-        dropdown.classList.toggle("show");
+      const dropdown = document.getElementById("filter-dropdown");
+      dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
     });
 
     document.getElementById("search-input").addEventListener("input", performSearch);
 
     initializeSearch();
-</script>
+  </script>
+
 {% endblock %}
 
 {%- block htmltitle -%}
