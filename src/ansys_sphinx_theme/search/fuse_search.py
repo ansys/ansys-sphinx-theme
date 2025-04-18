@@ -128,18 +128,18 @@ class SearchIndex:
         # }
 
         # Extract the section name from the document path
-        section_name = self.doc_name.split("/")[0]
+        # section_name = self.doc_name.split("/")[0]
 
         # Determine the object ID based on filter options
-        for key, values in self.filter_options.items():
-            if section_name in values or any(
-                section_name.startswith(v.rstrip("/")) for v in values
-            ):
-                self.object_id = key
-                return
+        # for key, values in self.filter_options.items():
+        #     if section_name in values or any(
+        #         section_name.startswith(v.rstrip("/")) for v in values
+        #     ):
+        #         self.object_id = key
+        #         return
 
         # Default to the document name if no match is found
-        self.object_id = self.doc_name
+        self.object_id = self.doc_name.split("/")[0].upper()
 
     def generate_breadcrumbs(self, section_title: str) -> str:
         """
