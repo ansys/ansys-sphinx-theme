@@ -73,17 +73,43 @@
     .chip .remove-btn:hover {
       color: red;
     }
+    .filter-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#objectid-dropdown {
+  position: absolute;
+  top: 100%; /* Places it directly below the button */
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 250px;
+  z-index: 1000;
+  display: none; /* Hidden by default */
+}
+
   </style>
 
-  <div class="search-bar">
+<div class="search-bar">
     <input type="text" id="search-input" placeholder="Type to search..." />
-    <button id="filter-btn" class="dropdown-toggle">Select Filter</button>
+
+    <!-- Wrap filter button and dropdown together -->
+    <div class="filter-wrapper">
+      <button id="filter-btn" class="dropdown-toggle">Select Filter</button>
+      <div id="filter-dropdown" class="dropdown-menu" style="display: none;"></div>
+    </div>
+    <div class="filter-wrapper" style="margin-top: 10px;">
+        <div id="objectid-dropdown" class="dropdown-menu" style="display: none;"></div>
+      </div>
   </div>
+
+  <!-- Chips under the search bar -->
   <div id="selected-chips" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;"></div>
 
-  <div id="filter-dropdown" class="dropdown-menu" style="display: none;"></div>
-  <div id="objectid-dropdown" class="dropdown-menu" style="display: none;"></div>
-
+  <!-- Search results -->
   <div class="results" id="search-results"></div>
 
   <script>
