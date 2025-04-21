@@ -53,7 +53,7 @@ doc = [
     "Pillow>=9.0",
     "plotly==6.0.1",
     "PyGitHub==2.6.1",
-    "pyvista[jupyter]==0.44.2",
+    "pyvista[jupyter]==0.45.0",
     "PyYAML==6.0.2",
     "requests==2.32.3",
     "sphinx-autoapi==3.6.0",
