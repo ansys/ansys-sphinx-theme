@@ -49,9 +49,6 @@
       align-items: center;
       margin: 5px 0;
     }
-  </style>
-
-<style>
     .chip {
       background-color: #e0e0e0;
       border-radius: 16px;
@@ -113,6 +110,10 @@
   <div class="results" id="search-results"></div>
 
   <script>
+    const extra_sources = {
+      "PyDPF Core": "https:/dpf.docs.pyansys.com/version/stable/_static/search.json",
+      "PyDPF Post": "https://actions.docs.ansys.com/version/stable/_static/search.json",
+    };
     let fuse;
     let searchData = [];
     let selectedFilter = null;
@@ -136,6 +137,8 @@
       }
     }
 
+
+
     function setupPrimaryDropdown() {
       const dropdown = document.getElementById("filter-dropdown");
       dropdown.innerHTML = "";
@@ -150,14 +153,38 @@
 
           if (filter === "Documents") {
             showObjectIdDropdown();
-          } else {
+          }
+          if (filter === "Library") {
+            const libraryDropdown = document.getElementById("objectid-dropdown");
+            for (const lib in extra_sources) {
+      const option = document.createElement("div");
+      option.innerHTML = `<input type="checkbox" id="${lib}" name="lib" value="${lib}" /> <label for="${lib}">${lib}</label>`;
+      option.querySelector("input").addEventListener("change", (e) => {
+        handleLibrarySelection(lib, e.target.checked);
+      });
+      dropdown.appendChild(option);
+    }
+          }
+          if (filter === "None") {
             selectedObjectIDs = [];
             document.getElementById("objectid-dropdown").style.display = "none";
             performSearch();
           }
+
         };
         dropdown.appendChild(div);
       });
+    }
+
+    function handleLibrarySelection(lib, isSelected) {
+      if (isSelected && !selectedLibraries.includes(lib)) {
+        selectedLibraries.push(lib);
+      } else if (!isSelected) {
+        const index = selectedLibraries.indexOf(lib);
+        if (index > -1) selectedLibraries.splice(index, 1);
+      }
+      renderSelectedChips();
+      performSearch();
     }
 
     function showObjectIdDropdown() {
@@ -177,8 +204,10 @@
         checkbox.onchange = (e) => {
           if (e.target.checked) {
             selectedObjectIDs.push(id);
+            selectedLibraries.push(id);
           } else {
             selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
+            selectedLibraries = selectedLibraries.filter(val => val !== id);
           }
           renderSelectedChips();
           performSearch();
@@ -252,6 +281,7 @@
     removeBtn.innerHTML = "&times;";
     removeBtn.onclick = () => {
       selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
+      selectedLibraries = selectedLibraries.filter(val => val !== id);
       renderSelectedChips();
       showObjectIdDropdown(); // To uncheck
       performSearch();
@@ -262,21 +292,49 @@
   });
 }
 
-    function performSearch() {
+  async function performSearch() {
       const query = document.getElementById("search-input").value.trim();
       if (!fuse) return;
 
-      let results = fuse.search(query).map(r => r.item);
-
       if (selectedFilter === "Documents" && selectedObjectIDs.length > 0) {
+        let results = fuse.search(query).map(r => r.item);
         results = results.filter(item => selectedObjectIDs.includes(item.objectID));
       }
 
       if (selectedFilter === "Library" && selectedLibraries.length > 0) {
-      results = results.filter(item => selectedLibraries.includes(item.library));
+      let allEntries = [];
+      for (const lib of selectedLibraries) {
+      const url = extra_sources[lib];
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        // The data is already an array
+        const enrichedEntries = data.map(entry => ({
+          title: entry.title,
+          text: entry.text,
+          link: entry.href,
+          source: lib
+        }));
+
+        allEntries.push(...enrichedEntries);
+      } catch (err) {
+        console.error(`Error fetching ${lib}:`, err);
+      }
+  }
+  if (allEntries.length > 0) {
+    const fuse = new Fuse(allEntries, {
+    keys: ["title", "text", "section"],
+    threshold: 0.3,
+    includeScore: true
+  });
+
+  let results = fuse.search(query);
+    console.log("Results:", results);
+    displayResults(results);
+  }
     }
 
-      displayResults(results);
     }
 
     function displayResults(results) {
