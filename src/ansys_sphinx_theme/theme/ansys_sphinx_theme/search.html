@@ -42,8 +42,10 @@
       z-index: 10;
     }
     .dropdown-toggle {
-      margin-bottom: 10px;
-    }
+    margin-bottom: 1px;
+    width: fit-content;
+    height: 50px;
+}
     .checkbox-item {
       display: flex;
       align-items: center;
@@ -76,7 +78,7 @@
 }
 
 #objectid-dropdown {
-  position: absolute;
+  position: relative;
   top: 100%; /* Places it directly below the button */
   left: 0;
   background: white;
@@ -89,7 +91,7 @@
 }
 
 #library-dropdown {
-  position: absolute;
+  position: relative;
   top: 100%; /* Places it directly below the button */
   left: 0;
   background: white;
@@ -111,8 +113,10 @@
       <button id="filter-btn" class="dropdown-toggle">Select Filter</button>
       <div id="filter-dropdown" class="dropdown-menu" style="display: none;"></div>
     </div>
-    <div class="filter-wrapper" style="margin-top: 10px;">
+    <div class="secondary-dropdown">
         <div id="objectid-dropdown" class="dropdown-menu" style="display: none;"></div>
+      </div>
+    <div class="secondary-dropdown">
         <div id="library-dropdown" class="dropdown-menu" style="display: none;"></div>
       </div>
   </div>
