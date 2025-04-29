@@ -88,6 +88,19 @@
   display: none; /* Hidden by default */
 }
 
+#library-dropdown {
+  position: absolute;
+  top: 100%; /* Places it directly below the button */
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 250px;
+  z-index: 1000;
+  display: none; /* Hidden by default */
+}
+
   </style>
 
 <div class="search-bar">
@@ -100,6 +113,7 @@
     </div>
     <div class="filter-wrapper" style="margin-top: 10px;">
         <div id="objectid-dropdown" class="dropdown-menu" style="display: none;"></div>
+        <div id="library-dropdown" class="dropdown-menu" style="display: none;"></div>
       </div>
   </div>
 
@@ -118,7 +132,7 @@
     let searchData = [];
     let selectedFilter = null;
     let selectedObjectIDs = [];
-    const selectedLibraries = [];
+    let selectedLibraries = [];
 
     const SEARCH_FILE_1 = "{{ pathto('_static/search.json', 1) }}";
 
@@ -137,8 +151,6 @@
       }
     }
 
-
-
     function setupPrimaryDropdown() {
       const dropdown = document.getElementById("filter-dropdown");
       dropdown.innerHTML = "";
@@ -155,15 +167,7 @@
             showObjectIdDropdown();
           }
           if (filter === "Library") {
-            const libraryDropdown = document.getElementById("objectid-dropdown");
-            for (const lib in extra_sources) {
-      const option = document.createElement("div");
-      option.innerHTML = `<input type="checkbox" id="${lib}" name="lib" value="${lib}" /> <label for="${lib}">${lib}</label>`;
-      option.querySelector("input").addEventListener("change", (e) => {
-        handleLibrarySelection(lib, e.target.checked);
-      });
-      dropdown.appendChild(option);
-    }
+            ShowLibraryDropDown();
           }
           if (filter === "None") {
             selectedObjectIDs = [];
@@ -204,45 +208,6 @@
         checkbox.onchange = (e) => {
           if (e.target.checked) {
             selectedObjectIDs.push(id);
-            selectedLibraries.push(id);
-          } else {
-            selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
-            selectedLibraries = selectedLibraries.filter(val => val !== id);
-          }
-          renderSelectedChips();
-          performSearch();
-        };
-
-        const label = document.createElement("label");
-        label.textContent = id;
-        label.style.marginLeft = "8px";
-
-        div.appendChild(checkbox);
-        div.appendChild(label);
-        dropdown.appendChild(div);
-      });
-
-      dropdown.style.display = "block";
-      renderSelectedChips();
-    }
-    // Function to render selected chips
-    function ShowLibraryDropDown() {
-      const dropdown = document.getElementById("objectid-dropdown");
-      dropdown.innerHTML = "";
-
-      const objectIDs = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
-
-      objectIDs.forEach(id => {
-        const div = document.createElement("div");
-        div.className = "checkbox-item";
-
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.value = id;
-        checkbox.checked = selectedObjectIDs.includes(id);
-        checkbox.onchange = (e) => {
-          if (e.target.checked) {
-            selectedObjectIDs.push(id);
           } else {
             selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
           }
@@ -262,9 +227,72 @@
       dropdown.style.display = "block";
       renderSelectedChips();
     }
+
+  function ShowLibraryDropDown() {
+    const libraryDropdown = document.getElementById("library-dropdown");
+    libraryDropdown.innerHTML = "";
+    libraryDropdown.style.display = "none";
+
+    for (const lib in extra_sources) {
+      const div = document.createElement("div");
+      div.className = "checkbox-item";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.value = lib;
+      console.log("Checkbox value:", lib);
+      checkbox.checked = selectedLibraries.includes(lib);
+
+      checkbox.onchange = (e) => {
+        if (e.target.checked) {
+          selectedLibraries.push(lib);
+        } else {
+          selectedLibraries = selectedLibraries.filter(val => val !== lib);
+        }
+        renderSelectedLibrariesChips();
+        performSearch();
+      };
+      const label = document.createElement("label");
+      label.textContent = lib;
+      label.style.marginLeft = "8px";
+
+      div.appendChild(checkbox);
+      div.appendChild(label);
+      libraryDropdown.appendChild(div);
+    }
+    libraryDropdown.style.display = "block";
+
+    renderSelectedLibrariesChips();
+  }
+
+
     function hideLibraryDropDown() {
       const dropdown = document.getElementById("objectid-dropdown");
       dropdown.style.display = "none";
+    }
+
+    function renderSelectedLibrariesChips() {
+      const chipContainer = document.getElementById("selected-chips");
+      chipContainer.innerHTML = "";
+      console.log("Selected Libraries:", selectedLibraries);
+
+      selectedLibraries.forEach(id => {
+        const chip = document.createElement("div");
+        chip.className = "chip";
+        chip.textContent = id;
+
+        const removeBtn = document.createElement("button");
+        removeBtn.className = "remove-btn";
+        removeBtn.innerHTML = "&times;";
+        removeBtn.onclick = () => {
+          selectedLibraries = selectedLibraries.filter(val => val !== id);
+          renderSelectedLibrariesChips
+          ShowLibraryDropDown();
+          performSearch();
+        };
+
+        chip.appendChild(removeBtn);
+        chipContainer.appendChild(chip);
+      });
     }
 
   function renderSelectedChips() {
@@ -281,7 +309,6 @@
     removeBtn.innerHTML = "&times;";
     removeBtn.onclick = () => {
       selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
-      selectedLibraries = selectedLibraries.filter(val => val !== id);
       renderSelectedChips();
       showObjectIdDropdown(); // To uncheck
       performSearch();
