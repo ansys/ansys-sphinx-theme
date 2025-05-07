@@ -83,7 +83,12 @@ html_theme_options = {
             "contributing": ["contribe/"],
         },
     },
+    "search_extra_sources": {
+        "PyDPF Core": "https:/dpf.docs.pyansys.com/version/stable/_static/search.json",
+        "Actions": "https://actions.docs.ansys.com/version/stable/_static/search.json",
+    },
 }
+
 
 html_js_files = ["https://cdn.plot.ly/plotly-3.0.1.min.js"]
 
