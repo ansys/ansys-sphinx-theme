@@ -14,6 +14,7 @@
 * [Dominik Gresch](https://github.com/greschd)
 * [German](https://github.com/germa89)
 * [Guillem Barroso](https://github.com/GuillemBarroso)
+* [jleonatti](https://github.com/jleonatti)
 * [Jorge Martínez](https://github.com/jorgepiloto)
 * [Kathy Pippert](https://github.com/PipKat)
 * [Kerry McAdams](https://github.com/klmcadams)
@@ -21,4 +22,3 @@
 * [Paul Profizi](https://github.com/PProfizi)
 * [Roberto Pastor Muela](https://github.com/RobPasMue)
 * [Sébastien Morais](https://github.com/SMoraisAnsys)
-* [jleonatti](https://github.com/jleonatti)
