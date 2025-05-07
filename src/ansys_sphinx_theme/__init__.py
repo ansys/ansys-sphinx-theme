@@ -507,7 +507,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", add_sidebar_context)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
-
+    app.connect("html-page-context", append_og_site_name)
     app.connect("build-finished", replace_html_tag)
     if use_ansys_search:
         app.connect("build-finished", create_search_index)
