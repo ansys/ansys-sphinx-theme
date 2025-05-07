@@ -1,0 +1,449 @@
+{%- extends "page.html" %}
+
+{% block docs_body %}
+<title>Advanced Search</title>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .filter-container { margin-bottom: 10px; position: relative; }
+    .results-container { margin-top: 10px; }
+    .result-item { border: 1px solid #ddd; padding: 10px; margin-bottom: 5px; cursor: pointer; }
+    .dropdown-menu { display: none; position: absolute; background: white; border: 1px solid #ddd; max-height: 200px; overflow-y: auto; width: 200px; }
+    .dropdown-menu.show { display: block; }
+    .dropdown-item { padding: 10px; cursor: pointer; }
+    .dropdown-item:hover { background: #f0f0f0; }
+    .chip { display: inline-block; background: #ddd; padding: 5px 10px; border-radius: 15px; margin: 5px; }
+    .chip .close { cursor: pointer; margin-left: 5px; }
+    .chip .dropdown-item { padding: 5px 10px; cursor: pointer; }
+    .sub-dropdown-menu { display: none; position: absolute; background: white; border: 1px solid #ddd; max-height: 150px; overflow-y: auto; width: 180px; top: 30px; left: 0; }
+    .sub-dropdown-menu.show { display: block; }
+    #search-input {
+        width: 100%;
+        max-width: 600px; /* You can adjust this as needed */
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    .checkmark {
+        margin-left: 5px;
+        color: green;
+        font-weight: bold;
+    }
+</style>
+
+<h2>Advanced Search</h2>
+<style>
+    .dropdown-menu {
+      border: 1px solid #ccc;
+      padding: 10px;
+      max-height: 200px;
+      overflow-y: auto;
+      background: white;
+      position: absolute;
+      z-index: 10;
+    }
+    .dropdown-toggle {
+    margin-bottom: 1px;
+    width: fit-content;
+    height: 50px;
+}
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      margin: 5px 0;
+    }
+    .chip {
+      background-color: #e0e0e0;
+      border-radius: 16px;
+      padding: 5px 10px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .chip .remove-btn {
+      margin-left: 8px;
+      background: none;
+      border: none;
+      color: #555;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .chip .remove-btn:hover {
+      color: red;
+    }
+    .filter-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#objectid-dropdown {
+  position: relative;
+  top: 100%; /* Places it directly below the button */
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 250px;
+  z-index: 1000;
+  display: none; /* Hidden by default */
+}
+
+#library-dropdown {
+  position: relative;
+  top: 100%; /* Places it directly below the button */
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 250px;
+  z-index: 1000;
+  display: none; /* Hidden by default */
+}
+
+  </style>
+
+<div class="search-bar">
+    <input type="text" id="search-input" placeholder="Type to search..." />
+
+    <!-- Wrap filter button and dropdown together -->
+    <div class="filter-wrapper">
+      <button id="filter-btn" class="dropdown-toggle">Select Filter</button>
+      <div id="filter-dropdown" class="dropdown-menu" style="display: none;"></div>
+    </div>
+    <div class="secondary-dropdown">
+        <div id="objectid-dropdown" class="dropdown-menu" style="display: none;"></div>
+      </div>
+    <div class="secondary-dropdown">
+        <div id="library-dropdown" class="dropdown-menu" style="display: none;"></div>
+      </div>
+  </div>
+
+  <!-- Chips under the search bar -->
+  <div id="selected-chips" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;"></div>
+
+  <!-- Search results -->
+  <div class="results" id="search-results"></div>
+
+  <script>
+    let fuse;
+    let searchData = [];
+    let selectedFilter = new Set();
+    let selectedObjectIDs = [];
+    let selectedLibraries = [];
+
+    const SEARCH_FILE_1 = "{{ pathto('_static/search.json', 1) }}";
+
+    async function initializeSearch() {
+      try {
+        const response = await fetch(SEARCH_FILE_1);
+        searchData = await response.json();
+        fuse = new Fuse(searchData, {
+          keys: ["title", "text", "objectID"],
+          includeScore: true,
+          threshold: 0.3,
+        });
+        setupPrimaryDropdown();
+      } catch (err) {
+        console.error("Search init failed", err);
+      }
+    }
+
+    function setupPrimaryDropdown() {
+      const dropdown = document.getElementById("filter-dropdown");
+      dropdown.innerHTML = "";
+
+      ["Documents", "Library"].forEach(filter => {
+        const div = document.createElement("div");
+        div.className = "dropdown-item";
+        div.textContent = filter;
+
+        div.onclick = () => {
+          if (selectedFilter.has(filter)) {
+            selectedFilter.delete(filter);
+            div.classList.remove("active");
+          } else {
+            selectedFilter.add(filter);
+            div.classList.add("active");
+          }
+
+          if (selectedFilter.has("Documents")) {
+            showObjectIdDropdown();
+          }
+          if (selectedFilter.has("Library")) {
+            ShowLibraryDropDown();
+          }
+          if (filter === "None") {
+            selectedObjectIDs = [];
+            document.getElementById("objectid-dropdown").style.display = "none";
+            performSearch();
+          }
+
+        };
+        dropdown.appendChild(div);
+      });
+    }
+
+    function handleLibrarySelection(lib, isSelected) {
+      if (isSelected && !selectedLibraries.includes(lib)) {
+        selectedLibraries.push(lib);
+      } else if (!isSelected) {
+        const index = selectedLibraries.indexOf(lib);
+        if (index > -1) selectedLibraries.splice(index, 1);
+      }
+      renderSelectedChips();
+      performSearch();
+    }
+
+    function showObjectIdDropdown() {
+      const dropdown = document.getElementById("objectid-dropdown");
+      dropdown.innerHTML = "";
+
+      const objectIDs = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
+
+      objectIDs.forEach(id => {
+        const div = document.createElement("div");
+        div.className = "checkbox-item";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = id;
+        checkbox.checked = selectedObjectIDs.includes(id);
+        checkbox.onchange = (e) => {
+          if (e.target.checked) {
+            selectedObjectIDs.push(id);
+          } else {
+            selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
+          }
+          renderSelectedChips();
+          performSearch();
+        };
+
+        const label = document.createElement("label");
+        label.textContent = id;
+        label.style.marginLeft = "8px";
+
+        div.appendChild(checkbox);
+        div.appendChild(label);
+        dropdown.appendChild(div);
+      });
+
+      dropdown.style.display = "block";
+      renderSelectedChips();
+    }
+
+  function ShowLibraryDropDown() {
+    const libraryDropdown = document.getElementById("library-dropdown");
+    libraryDropdown.innerHTML = "";
+    libraryDropdown.style.display = "none";
+
+    for (const lib in extra_sources) {
+      const div = document.createElement("div");
+      div.className = "checkbox-item";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.value = lib;
+      console.log("Checkbox value:", lib);
+      checkbox.checked = selectedLibraries.includes(lib);
+
+      checkbox.onchange = (e) => {
+        if (e.target.checked) {
+          selectedLibraries.push(lib);
+        } else {
+          selectedLibraries = selectedLibraries.filter(val => val !== lib);
+        }
+        renderSelectedLibrariesChips();
+        performSearch();
+      };
+      const label = document.createElement("label");
+      label.textContent = lib;
+      label.style.marginLeft = "8px";
+
+      div.appendChild(checkbox);
+      div.appendChild(label);
+      libraryDropdown.appendChild(div);
+    }
+    libraryDropdown.style.display = "block";
+
+    renderSelectedLibrariesChips();
+  }
+
+
+    function hideLibraryDropDown() {
+      const dropdown = document.getElementById("objectid-dropdown");
+      dropdown.style.display = "none";
+    }
+
+    function renderSelectedLibrariesChips() {
+      const chipContainer = document.getElementById("selected-chips");
+      chipContainer.innerHTML = "";
+      console.log("Selected Libraries:", selectedLibraries);
+
+      selectedLibraries.forEach(id => {
+        const chip = document.createElement("div");
+        chip.className = "chip";
+        chip.textContent = id;
+
+        const removeBtn = document.createElement("button");
+        removeBtn.className = "remove-btn";
+        removeBtn.innerHTML = "&times;";
+        removeBtn.onclick = () => {
+          selectedLibraries = selectedLibraries.filter(val => val !== id);
+          renderSelectedLibrariesChips
+          ShowLibraryDropDown();
+          performSearch();
+        };
+
+        chip.appendChild(removeBtn);
+        chipContainer.appendChild(chip);
+      });
+    }
+
+  function renderSelectedChips() {
+  const chipContainer = document.getElementById("selected-chips");
+  chipContainer.innerHTML = "";
+
+  selectedObjectIDs.forEach(id => {
+    const chip = document.createElement("div");
+    chip.className = "chip";
+    chip.textContent = id;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "remove-btn";
+    removeBtn.innerHTML = "&times;";
+    removeBtn.onclick = () => {
+      selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
+      renderSelectedChips();
+      showObjectIdDropdown(); // To uncheck
+      performSearch();
+    };
+
+    chip.appendChild(removeBtn);
+    chipContainer.appendChild(chip);
+  });
+}
+
+async function performSearch() {
+  const query = document.getElementById("search-input").value.trim();
+  if (!fuse) return;
+
+  const resultsContainer = document.getElementById("search-results");
+  resultsContainer.innerHTML = "Searching...";
+
+  let docResults = [];
+  let libResults = [];
+
+  // Search in documents
+  if (selectedFilter.has("Documents")) {
+    docResults = fuse.search(query).map(r => r.item);
+    if (selectedObjectIDs.length > 0) {
+      docResults = docResults.filter(item => selectedObjectIDs.includes(item.objectID));
+    }
+  }
+
+  // Search in external libraries
+  if (selectedFilter.has("Documents")) {
+    let allEntries = [];
+
+    for (const lib of selectedLibraries) {
+      const url = extra_sources[lib];
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const enrichedEntries = data.map(entry => ({
+          title: entry.title,
+          text: entry.text,
+          link: entry.href,
+          source: lib
+        }));
+
+        allEntries.push(...enrichedEntries);
+      } catch (err) {
+        console.error(`Error fetching ${lib}:`, err);
+      }
+    }
+
+    if (allEntries.length > 0) {
+      const libFuse = new Fuse(allEntries, {
+        keys: ["title", "text", "section"],
+        threshold: 0.3,
+        includeScore: true
+      });
+
+      libResults = libFuse.search(query).map(r => r.item);
+    }
+  }
+
+  const mergedResults = [...docResults, ...libResults];
+
+  if (mergedResults.length === 0) {
+    resultsContainer.innerHTML = "<p>No results found.</p>";
+    return;
+  }
+
+  displayResults(mergedResults);
+}
+
+
+function displayResults(results) {
+  const container = document.getElementById("search-results");
+  container.innerHTML = results.length ? "" : "<p>No results found.</p>";
+
+  results.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "result-item";
+
+    // Title as a clickable link
+    const title = document.createElement("a");
+    title.href = item.link || "#";
+    title.target = "_blank";
+    title.textContent = item.title || "Untitled";
+    title.className = "result-title";
+    div.appendChild(title);
+
+    // Optional text/description
+    if (item.text) {
+      const text = document.createElement("p");
+      text.textContent = item.text;
+      text.className = "result-text";
+      div.appendChild(text);
+    }
+
+    // Optional source
+    if (item.source) {
+      const source = document.createElement("p");
+      source.className = "checkmark";
+      source.textContent = `Source: ${item.source}`;
+      div.appendChild(source);
+    }
+
+    container.appendChild(div);
+  });
+}
+
+
+    document.getElementById("filter-btn").addEventListener("click", () => {
+      const dropdown = document.getElementById("filter-dropdown");
+      dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+    });
+
+    document.getElementById("search-input").addEventListener("input", performSearch);
+
+    initializeSearch();
+  </script>
+
+{% endblock %}
+
+{%- block htmltitle -%}
+  <title>{{ _("Search") }} - {{ title or docstitle }}</title>
+{%- endblock htmltitle -%}
+
+{% block scripts -%}
+  {{ super() }}
+  <script src="{{ pathto('_static/searchtools.js', 1) }}"></script>
+  <script src="{{ pathto('_static/language_data.js', 1) }}"></script>
+  <script src="{{ pathto('searchindex.js', 1) }}"></script>
+{%- endblock scripts %}
