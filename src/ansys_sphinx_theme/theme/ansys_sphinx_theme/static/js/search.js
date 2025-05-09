@@ -1,6 +1,30 @@
-const SEARCH_BAR = document.getElementById("search-bar");
-const SEARCH_INPUT = SEARCH_BAR.querySelector(".bd-search input.form-control");
-const RESULTS = document.getElementById("static-search-results");
+// Determine which search bar to use (mobile or desktop)
+let SEARCH_BAR;
+
+if (window.innerWidth < 960) {
+  SEARCH_BAR = document.querySelector(".navbar-persistent--mobile #search-bar");
+} else {
+  SEARCH_BAR = document.getElementById("search-bar");
+}
+
+// Fallback if nothing is found
+if (!SEARCH_BAR) {
+  console.warn("SEARCH_BAR not found for current view.");
+}
+
+// Get input and results area
+
+const SEARCH_INPUT = SEARCH_BAR?.querySelector(".bd-search input.form-control");
+
+let RESULTS;
+if (window.innerWidth < 960) {
+  RESULTS = document.querySelector(
+    ".navbar-persistent--mobile .static-search-results",
+  );
+} else {
+  RESULTS = document.querySelector(".static-search-results");
+}
+
 const MAIN_PAGE_CONTENT = document.querySelector(".bd-main");
 let CURRENT_INDEX = -1;
 
@@ -144,7 +168,6 @@ require(["fuse"], function (Fuse) {
     searchingBanner.className = "searching-banner";
     searchingBanner.textContent = "Searching...";
     searchingBanner.style.display = "block";
-    console.log("Searching...");
     searchingBanner.style.fontStyle = "italic";
     RESULTS.appendChild(searchingBanner);
   }
@@ -248,7 +271,6 @@ require(["fuse"], function (Fuse) {
     }
   }
 
-  // Add event listeners
   SEARCH_INPUT.addEventListener("click", expandSearchInput);
   SEARCH_INPUT.addEventListener("keydown", handleKeyDownSearchInput);
   document.addEventListener("keydown", handleGlobalKeyDown);
