@@ -35,7 +35,6 @@ dependencies = [
     "Jinja2>=3.1.2",
     "importlib-metadata>=4.0",
     "pdf2image>=1.17.0",
-    "snowballstemmer<4", # TODO: to be removed once Sphinx solves the issue with snowballstemmer>=3.0.0
 ]
 
 [project.optional-dependencies]
