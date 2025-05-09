@@ -174,12 +174,8 @@ html[data-theme="light"] .highlight {
     display: none !important;
   }
 
-  /* Adjust top bar container if needed */
-  .navbar,
-  .topbar {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    gap: 1rem;
+  .static-search-results {
+    width: 16rem; /* 256px */
   }
 }
 
@@ -199,8 +195,21 @@ html[data-theme="light"] .highlight {
     width: 8rem; /* 128px */
   }
 
+  .static-search-results {
+    width: 14rem; /* 160px */
+  }
+
   .bd-search .search-button__kbd-shortcut {
     display: none !important;
   }
 }
 /* Search Icon */
+
+@media (max-width: 600px) {
+  .bd-search input.form-control {
+    width: 100%;
+  }
+  #static-search-results {
+    max-width: 100%;
+  }
+}
