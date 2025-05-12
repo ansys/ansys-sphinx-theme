@@ -156,8 +156,11 @@ def setup_default_html_theme_options(app):
     # Place all switchers and icons at the end of the navigation bar
     if theme_options.get("switcher"):
         theme_options.setdefault(
-            "navbar_end", ["version-switcher", "theme-switcher", "navbar-icon-links"]
+            "navbar_end",
+            ["search-field", "version-switcher", "theme-switcher", "navbar-icon-links"],
         )
+
+    theme_options.setdefault("navbar_persistent", [])
     theme_options.setdefault("collapse_navigation", True)
     theme_options.setdefault("navigation_with_keys", True)
 
