@@ -157,7 +157,7 @@ def setup_default_html_theme_options(app):
     if theme_options.get("switcher"):
         theme_options.setdefault(
             "navbar_end",
-            ["search-field", "version-switcher", "theme-switcher", "navbar-icon-links"],
+            ["search-button-field", "version-switcher", "theme-switcher", "navbar-icon-links"],
         )
 
     theme_options.setdefault("navbar_persistent", [])
