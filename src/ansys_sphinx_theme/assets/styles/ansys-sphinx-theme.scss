@@ -54,3 +54,9 @@ p.rubric {
 .bd-main .bd-content {
     justify-content: center;
 }
+
+/* Back to top button */
+#pst-back-to-top {
+    background: var(--ast-color-text);
+    color: var(--pst-color-on-surface);
+}
