@@ -85,10 +85,6 @@ html[data-theme="light"] .highlight {
 .bd-search .search-button__kbd-shortcut {
   background-color: var(--ast-search-bar-enable-background) !important;
   box-shadow: none !important;
-  height: 2.25rem; /* 36px */
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
 }
 
 /* Index Select Dropdown */
@@ -203,9 +199,5 @@ html[data-theme="light"] .highlight {
 
   .static-search-results {
     width: 37rem; /* 600px */
-  }
-
-  .bd-search .search-button__kbd-shortcut {
-    display: none !important;
   }
 }
