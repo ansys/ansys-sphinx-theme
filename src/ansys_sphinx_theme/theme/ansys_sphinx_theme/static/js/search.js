@@ -1,8 +1,10 @@
 // Determine which search bar to use (mobile or desktop)
 let SEARCH_BAR;
-
+let RESULTS;
 if (window.innerWidth < 960) {
-  SEARCH_BAR = document.querySelector(".navbar-persistent--mobile #search-bar");
+  SEARCH_BAR = document.querySelector(
+    "div.sidebar-header-items__end #search-bar",
+  );
 } else {
   SEARCH_BAR = document.getElementById("search-bar");
 }
@@ -16,10 +18,9 @@ if (!SEARCH_BAR) {
 
 const SEARCH_INPUT = SEARCH_BAR?.querySelector(".bd-search input.form-control");
 
-let RESULTS;
 if (window.innerWidth < 960) {
   RESULTS = document.querySelector(
-    ".navbar-persistent--mobile .static-search-results",
+    ".sidebar-header-items__end .static-search-results",
   );
 } else {
   RESULTS = document.querySelector(".static-search-results");
