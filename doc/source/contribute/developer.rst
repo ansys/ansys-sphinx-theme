@@ -211,6 +211,53 @@ This way, it's not possible for you to push code that fails the style checks::
   Add License Headers......................................................Passed
 
 
+Customize the theme
+-------------------
+The configuration of theme is done across multiple files.
+
+
+Customize the SCSS files
+************************
+
+Many styles are defined in the SCSS files located in the directory
+`src/ansys_sphinx_theme/assets/styles/`.
+The main SCSS files are:
+
+- `ansys-sphinx-theme.scss`: Our main theme configuration.
+- `pydata-sphinx-theme-custom.scss`: Our own modifications of the PyData theme.
+
+To edit the SCSS files, navigate to the `src/ansys_sphinx_theme/assets/styles/`
+directory and make your changes.
+Once you have made your changes, you can build the SCSS files by running:
+
+.. code-block:: bash
+
+    npm run build
+
+
+.. warning::
+
+    You need to have NodeJS (`npm`) installed in your machine to build the SCSS files.
+    If you don't have it installed, you can download it from the official
+    website: https://nodejs.org/en/download/
+
+
+The built SCSS files will be located in the
+`src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles` directory.
+The files there are overwritten every time you run the build command, hence
+you should refrain from editing them directly.
+
+Once the SCSS files are built, you can run the documentation build using:
+
+.. code-block:: bash
+
+    make -C doc html
+
+
+You can see the changes reflected in your documentation by opening the `index.html` file in
+`doc/_build/html` on your browser.
+
+
 Build the documentation
 -----------------------
 
