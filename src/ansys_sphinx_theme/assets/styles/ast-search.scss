@@ -190,13 +190,22 @@ html[data-theme="light"] .highlight {
     display: none !important;
   }
 }
-/* Search Icon */
 
-// @media (max-width: 600px) {
-//   .bd-search input.form-control {
-//     width: 100%;
-//   }
-//   #static-search-results {
-//     max-width: 100%;
-//   }
-// }
+// laptop
+@media (min-width: 85.375rem)  and (max-width: 128rem) {
+  .bd-search input.form-control.expanded {
+    width: 35rem; /* 560px */
+  }
+
+  .bd-search input.form-control {
+    width: 100%; /* 240px */
+  }
+
+  .static-search-results {
+    width: 37rem; /* 600px */
+  }
+
+  .bd-search .search-button__kbd-shortcut {
+    display: none !important;
+  }
+}
