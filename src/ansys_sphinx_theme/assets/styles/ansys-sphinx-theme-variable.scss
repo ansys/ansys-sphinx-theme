@@ -103,19 +103,19 @@ html[data-theme="light"] {
   /**
   * main colors
   */
-  --ast-color-text: #353535;
-  --ast-color-active-text: #353535;
-  --ast-color-hover-text: #353535;
-  --pst-color-background: #f7f7f7;
-  --pst-color-primary: #353535;
-  --pst-color-secondary: #f2f2f2;
-  --pst-color-success: rgb(40, 167, 69);
-  --pst-color-text-base: rgb(0, 0, 0);
-  --pst-color-text-muted: #353535;
-  --pst-color-border: #686868;
-  --pst-color-shadow: rgb(216, 216, 216);
+  --ast-color-text: $dark-grey;
+  --ast-color-active-text: $dark-grey;
+  --ast-color-hover-text: $dark-grey;
+  --pst-color-background: $white-smoke;
+  --pst-color-primary: $dark-grey;
+  --pst-color-secondary: $white-smoke-3;
+  --pst-color-success: $medium-green;
+  --pst-color-text-base: $black;
+  --pst-color-text-muted: $dark-grey;
+  --pst-color-border: $dim-gray;
+  --pst-color-shadow: $light-grey;
   --pst-color-info: var(--pst-color-link);
-  --pst-color-link-hover: #686868;
+  --pst-color-link-hover: $dim-gray;
 
   /**
   * Navigation colors
@@ -123,36 +123,36 @@ html[data-theme="light"] {
   --pst-color-on-background: var(
     --pst-color-background
   ); /* important tag from pydata-sphinx-theme */
-  --ast-navbar-color: #686868;
+  --ast-navbar-color: $dim-gray;
   --ast-navbar-hover-color: var(--ast-color-hover-text);
   --ast-navbar-active-color: var(--ast-color-active-text);
-  --ast-navbar-active-border-color: #000000;
-  --ast-ring-shadow-focused: 0px 0px 0px 0.125rem #ffffff, 0px 0px 0px 0.25rem #1a78c2; /* 2px, 4px */
+  --ast-navbar-active-border-color: $black;
+  --ast-ring-shadow-focused: 0px 0px 0px 0.125rem $white, 0px 0px 0px 0.25rem $blue; /* 2px, 4px */
 
   /**
   * sidebar colors
   */
   --ast-sidebar-primary-text: var(--ast-color-text);
-  --ast-sidebar-hover-background: #ececec;
-  --ast-sidebar-active-background: #d9d9d9;
+  --ast-sidebar-hover-background: $white-smoke-2;
+  --ast-sidebar-active-background: $light-grey-lighten;
 
   /**
   * depth colors
   */
   /* --pst-color-on-background: rgb(0, 0, 0); */
-  --pst-color-on-surface: #f2f2f2;
+  --pst-color-on-surface: $white-smoke-3;
 
   /**
   * table
   */
-  --ast-color-table-background: #ffffff;
+  --ast-color-table-background: $white;
   --ast-color-enabled-table-text: var(--ast-color-text);
-  --ast-color-table-row-hover-bg: #ececec;
-  --ast-color-table-active-bg: #e9f4fe;
-  --ast-color-table-header-text: #686868;
+  --ast-color-table-row-hover-bg: $white-smoke-2;
+  --ast-color-table-active-bg: $alice-blue;
+  --ast-color-table-header-text: $dim-gray;
   --ast-color-table-cell-text: var(--ast-color-text);
-  --ast-table-outer-border: #ececec;
-  --ast-color-table-inner-border: #ececec;
+  --ast-table-outer-border: $white-smoke-2;
+  --ast-color-table-inner-border: $white-smoke-2;
 
   --pst-color-panel-background: var(--pst-color-on-background);
 
@@ -160,114 +160,114 @@ html[data-theme="light"] {
   * layout
   */
 
-  --ast-color-link: #1e6ddc;
-  --ast-color-link-hover: #1856af;
-  --ast-color-link-active: #104188;
-  --ast-color-link-visited: #9a33cb;
-  --ast-color-link-visited-hover: #7f29a2;
+  --ast-color-link: $blue-2;
+  --ast-color-link-hover: $mid-blue;
+  --ast-color-link-active: $twilight-blue;
+  --ast-color-link-visited: $dark-orchid;
+  --ast-color-link-visited-hover: $purple;
   --ast-color-inline-code: var(
     --pst-color-text-muted
   ); /* inline code color for docutils (_base.scss)*/
-  --pst-color-target: rgb(255, 255, 255);
+  --pst-color-target: $white;
 
   /**
   * color for sphinx-gallery-code output
   */
-  --pst-color-codecell: #fafae2;
+  --pst-color-codecell: $old-lace;
   --pst-color-codeout: var(--pst-color-inline-code);
-  --pst-color-sig: #0965c8;
-  --pst-color-code-s1: #b35000;
-  --pst-color-code-c1: #095d0a;
+  --pst-color-sig: $nice-blue;
+  --pst-color-code-s1: $burnt-siena;
+  --pst-color-code-c1: $forest;
 
-  --ast-sphinx-gallery-download-background: #1a1a1a;
-  --ast-sphinx-gallery-download-background-hover: #353535;
-  --ast-sphinx-gallery-download-text: #fdfdfd;
+  --ast-sphinx-gallery-download-background: $dark;
+  --ast-sphinx-gallery-download-background-hover: $dark-grey;
+  --ast-sphinx-gallery-download-text: $pale-grey;
 
   /**
   * sphinx design
   */
   --sd-color-primary: var(--pst-color-text-base);
-  --ast-color-enable-card-background: #ffffff;
-  --ast-color-enable-border: #d9d9d9;
-  --ast-color-hover-card-background: #ececec;
-  --ast-dropdown-border-color: #d9d9d9;
-  --ast-dropdown-border-color-hover: #8e8e8e;
+  --ast-color-enable-card-background: $white;
+  --ast-color-enable-border: $light-grey-lighten;
+  --ast-color-hover-card-background: $white-smoke-2;
+  --ast-dropdown-border-color: $light-grey-lighten;
+  --ast-dropdown-border-color-hover: $grey;
 
-  --ast-color-sphinx-design-primary: #353535;
-  --ast-color-sphinx-design-background: #ffffff;
-  --sd-color-primary: #141414;
+  --ast-color-sphinx-design-primary: $dark-grey;
+  --ast-color-sphinx-design-background: $white;
+  --sd-color-primary: $almost-black;
   --sd-color-primary-highlight: var(--ast-color-sphinx-design-primary);
   --sd-color-primary-text: var(--ast-color-sphinx-design-background);
   --sd-color-secondary: var(--ast-color-sphinx-design-background);
-  --sd-color-secondary-text: #141414;
+  --sd-color-secondary-text: $almost-black;
   --sd-color-secondary-highlight: var(--ast-color-hover-card-background);
   --sd-color-secondary-bg: var(--ast-color-sphinx-design-background);
   --ast-sd-bg-secondary-hover: var(--ast-color-hover-card-background);
-  --ast-background-tab-focus: #d9d9d9;
-  --ast-background-tab-hover: #ececec;
-  --ast-tab-border-color: #d9d9d9;
-  --ast-tab-border-color-hover: #8e8e8e;
-  --ast-tab-border-color-active: #000000;
-  --ast-dropdown-text-color: #686868;
-  --ast-box-shadow-active: 0px 0.0625rem 0.125rem 0px rgba(0, 0, 0, 0.08), 0px 0.25rem 0.5rem 0px rgba(0, 0, 0, 0.12); /* 1px, 2px, 4px, 8px */
-  --ast-box-shadow-hover: 0px 0.0625rem 0.125rem 0px rgba(0, 0, 0, 0.08), 0px 0.25rem 0.5rem 0px rgba(0, 0, 0, 0.12); /* 1px, 2px, 4px, 8px */
+  --ast-background-tab-focus: $light-grey-lighten;
+  --ast-background-tab-hover: $white-smoke-2;
+  --ast-tab-border-color: $light-grey-lighten;
+  --ast-tab-border-color-hover: $grey;
+  --ast-tab-border-color-active: $black;
+  --ast-dropdown-text-color: $dim-gray;
+  --ast-box-shadow-active: 0px 0.0625rem 0.125rem 0px $shadow-black-008, 0px 0.25rem 0.5rem 0px $shadow-black-012; /* 1px, 2px, 4px, 8px */
+  --ast-box-shadow-hover: 0px 0.0625rem 0.125rem 0px $shadow-black-008, 0px 0.25rem 0.5rem 0px $shadow-black-012; /* 1px, 2px, 4px, 8px */
   /**
   * search hide match
   */
-  --pst-color-search-match: #91969b;
+  --pst-color-search-match: $grey-2;
 
   /**
   * admonitions
   */
-  --ast-admonition-neutral-icon: #353535;
-  --ast-admonition-neutral-border: #686868;
-  --ast-admonition-info-icon: #1a78c2;
-  --ast-admonition-info-border: #1a78c2;
-  --ast-admonition-success-icon: #006600;
-  --ast-admonition-success-border: #008000;
-  --ast-admonition-warning-icon: #caad2a;
-  --ast-admonition-warning-border: #fdd835;
-  --ast-admonition-danger-icon: #b72e2a;
-  --ast-admonition-danger-border: #e53935;
+  --ast-admonition-neutral-icon: $dark-grey;
+  --ast-admonition-neutral-border: $dim-gray;
+  --ast-admonition-info-icon: $blue;
+  --ast-admonition-info-border: $blue;
+  --ast-admonition-success-icon: $dark-green;
+  --ast-admonition-success-border: $green;
+  --ast-admonition-warning-icon: $golden-rod;
+  --ast-admonition-warning-border: $sun-yellow:;
+  --ast-admonition-danger-icon: $fire-brick;
+  --ast-admonition-danger-border: $tomato;
   --ast-admonitions-color: var(--ast-color-text);
 
   /**
   * search bars
   */
-  --ast-search-bar-enable-background: #ffffff;
-  --ast-search-bar-enable-border: #d9d9d9;
-  --ast-search-bar-enable-text: #686868;
-  --ast-suggestion-header-background: #d9d9d9;
-  --ast-catagory-header-text: #353535;
-  --ast-catagory-suggestion-text: #8e8e8e;
-  --ast-suggestion-text-color: #000000;
-  --ast-hover-suggestion-text-background: #ececec;
+  --ast-search-bar-enable-background: $white;
+  --ast-search-bar-enable-border: $light-grey-lighten;
+  --ast-search-bar-enable-text: $dim-gray;
+  --ast-suggestion-header-background: $light-grey-lighten;
+  --ast-catagory-header-text: $dark-grey;
+  --ast-catagory-suggestion-text: $grey;
+  --ast-suggestion-text-color: $black;
+  --ast-hover-suggestion-text-background: $white-smoke-2;
 
   /**
   * dropdown header
   */
-  --ast-dropdown-header-border: #d9d9d9;
+  --ast-dropdown-header-border: $light-grey-lighten;
 }
 
 html[data-theme="dark"] {
   /**
   * main colors
   */
-  --ast-color-text: #ececec;
-  --ast-color-active-text: #d5d5d5;
-  --ast-color-hover-text: #d5d5d5;
-  --pst-color-primary: #ececec;
-  --pst-color-secondary: #353535;
-  --pst-color-success: rgb(72, 135, 87);
-  --pst-color-text-base: rgb(201, 209, 217);
-  --pst-color-text-muted: rgb(192, 192, 192);
-  --pst-color-border: rgb(192, 192, 192);
-  --pst-color-shadow: rgb(104, 102, 102);
-  --pst-color-background: #1a1a1a;
-  --pst-color-surface: rgb(41, 41, 41);
-  --pst-color-on-surface: rgb(55, 55, 55);
+  --ast-color-text: $white-smoke-2;
+  --ast-color-active-text: $light-gray;
+  --ast-color-hover-text: $light-gray;
+  --pst-color-primary: $white-smoke-2;
+  --pst-color-secondary: $dark-grey;
+  --pst-color-success: $light-forest-green;
+  --pst-color-text-base: $light-gray-3;
+  --pst-color-text-muted: $silver;
+  --pst-color-border: $silver;
+  --pst-color-shadow: $dim-gray-2;
+  --pst-color-background: $dark;
+  --pst-color-surface: $dark-3;
+  --pst-color-on-surface: $dark-grey-3;
   --pst-color-info: var(--pst-color-secondary);
-  --pst-color-link-hover: #b3b3b3;
+  --pst-color-link-hover: $dark-grey-2;
 
   /**
   * extensions
@@ -282,19 +282,19 @@ html[data-theme="dark"] {
   --pst-color-on-background: var(
     --pst-color-background
   ); /* important tag from pydata-sphinx-theme */
-  --ast-navbar-color: #8e8e8e;
+  --ast-navbar-color: $grey;
   --ast-navbar-hover-color: var(--ast-color-hover-text);
   --ast-navbar-active-color: var(--ast-color-active-text);
-  --ast-navbar-active-border-color: #ffffff;
+  --ast-navbar-active-border-color: $white;
   --ast-nav-link-color: var(--ast-navbar-color);
-  --ast-ring-shadow-focused: 0px 0px 0px 2px #282828, 0px 0px 0px 4px #4dabf5;
+  --ast-ring-shadow-focused: 0px 0px 0px 2px $dark-2, 0px 0px 0px 4px $corn-flower-blue;
 
   /**
   * sidebar colors
   */
   --ast-sidebar-primary-text: var(--ast-color-text);
-  --ast-sidebar-hover-background: #3d3d3d;
-  --ast-sidebar-active-background: #2d2d2d;
+  --ast-sidebar-hover-background: $charcoal-grey;
+  --ast-sidebar-active-background: $charcoal;
   --ast-color-inline-code: var(
     --pst-color-text-muted
   ); /* inline code color for docutils (_base.scss)*/
@@ -303,37 +303,37 @@ html[data-theme="dark"] {
   * layout
   */
 
-  --ast-color-link: #1e6ddc;
-  --ast-color-link-hover: #1856af;
-  --ast-color-link-active: #579ce5;
-  --ast-color-link-visited: #c58ac5;
-  --ast-color-link-visited-hover: #a96ba9;
+  --ast-color-link: $blue-2;
+  --ast-color-link-hover: $mid-blue;
+  --ast-color-link-active: $corn-flower-blue-2;
+  --ast-color-link-visited: $orchid;
+  --ast-color-link-visited-hover: $soft-purple;
   --pst-color-target: rgb(71, 39, 0);
 
   /**
   * color for sphinx-gallery-code output
     */
-  --pst-color-codecell: #353535;
-  --pst-color-codeout: #f2f4f6;
-  --pst-color-sig: #d6ab1e;
-  --pst-color-code-s1: #d79a60;
-  --pst-color-code-c1: #8fb842;
+  --pst-color-codecell: $dark-grey;
+  --pst-color-codeout: $white-smoke-4;
+  --pst-color-sig: $golden-rod-2;
+  --pst-color-code-s1: $sand-brown;
+  --pst-color-code-c1: $booger;
 
-  --ast-sphinx-gallery-download-background: #ffffff;
-  --ast-sphinx-gallery-download-background-hover: #ececec;
-  --ast-sphinx-gallery-download-text: #1a1a1a;
+  --ast-sphinx-gallery-download-background: $white;
+  --ast-sphinx-gallery-download-background-hover: $white-smoke-2;
+  --ast-sphinx-gallery-download-text: $dark;
 
   /**
   * table hovering
   */
-  --ast-color-table-background: #353535;
-  --ast-color-enabled-table-text: #ececec;
-  --ast-color-table-row-hover-bg: #3d3d3d;
-  --ast-color-table-header-text: #d3d3d3;
-  --ast-color-table-cell-text: #ececec;
-  --ast-color-table-active-bg: #3d3d3d;
-  --ast-table-outer-border: #d3d3d3;
-  --ast-color-table-inner-border: #d3d3d3;
+  --ast-color-table-background: $dark-grey;
+  --ast-color-enabled-table-text: $white-smoke-2;
+  --ast-color-table-row-hover-bg: $charcoal-grey;
+  --ast-color-table-header-text: $light-gray-2;
+  --ast-color-table-cell-text: $white-smoke-2;
+  --ast-color-table-active-bg: $charcoal-grey;
+  --ast-table-outer-border: $light-gray-2;
+  --ast-color-table-inner-border: $light-gray-2;
 
   /**
   * search hide match
@@ -345,64 +345,64 @@ html[data-theme="dark"] {
   */
 
   --sd-color-primary: var(--pst-color-text-base);
-  --ast-color-enable-card-background: #282828;
-  --ast-color-enable-border: #e5e5e5;
-  --ast-color-hover-card-background: #3d3d3d;
-  --ast-dropdown-border-color: #3d3d3d;
-  --ast-dropdown-border-color-hover: #8e8e8e;
+  --ast-color-enable-card-background: $dark-2;
+  --ast-color-enable-border: $gainsboro;
+  --ast-color-hover-card-background: $charcoal-grey;
+  --ast-dropdown-border-color: $charcoal-grey;
+  --ast-dropdown-border-color-hover: $grey;
 
-  --ast-color-sphinx-design-primary: #ececec;
-  --ast-color-sphinx-design-background: #282828;
-  --sd-color-primary: #d5d5d5;
+  --ast-color-sphinx-design-primary: $white-smoke-2;
+  --ast-color-sphinx-design-background: $dark-2;
+  --sd-color-primary: $light-gray;
   --sd-color-primary-highlight: var(--ast-color-sphinx-design-primary);
   --sd-color-primary-text: var(--ast-color-sphinx-design-background);
   --sd-color-secondary: var(--ast-color-sphinx-design-background);
-  --sd-color-secondary-text: #d5d5d5;
+  --sd-color-secondary-text: $light-gray;
   --sd-color-secondary-highlight: var(--ast-color-hover-card-background);
   --sd-color-secondary-bg: var(--ast-color-sphinx-design-background);
   --ast-sd-bg-secondary-hover: var(--ast-color-hover-card-background);
-  --ast-background-tab-focus: #2d2d2d;
-  --ast-background-tab-hover: #3d3d3d;
-  --ast-tab-border-color: #e5e5e5;
-  --ast-tab-border-color-hover: #8e8e8e;
-  --ast-tab-border-color-active: #ffffff;
-  --ast-dropdown-text-color: #e5e5e5;
-  --ast-box-shadow-active: 0px 1px 2px 0px rgba(0, 0, 0, 0.4),
-    0px 2px 4px 0px rgba(0, 0, 0, 0.48);
-  --ast-box-shadow-hover: 0px 1px 2px 0px rgba(0, 0, 0, 0.4),
-    0px 4px 8px 2px rgba(0, 0, 0, 0.48);
+  --ast-background-tab-focus: $charcoal;
+  --ast-background-tab-hover: $charcoal-grey;
+  --ast-tab-border-color: $gainsboro;
+  --ast-tab-border-color-hover: $grey;
+  --ast-tab-border-color-active: $white;
+  --ast-dropdown-text-color: $gainsboro;
+  --ast-box-shadow-active: 0px 1px 2px 0px $shadow-black-040,
+    0px 2px 4px 0px $shadow-black-048;
+  --ast-box-shadow-hover: 0px 1px 2px 0px $shadow-black-040,
+    0px 4px 8px 2px $shadow-black-048;
 
   /**
 * admonitions
 */
-  --ast-admonition-neutral-icon: #ececec;
-  --ast-admonition-neutral-border: #8e8e8e;
-  --ast-admonition-info-icon: #1a78c2;
-  --ast-admonition-info-border: #1856af;
-  --ast-admonition-success-icon: #006600;
-  --ast-admonition-success-border: #147914;
-  --ast-admonition-warning-icon: #caad2a;
-  --ast-admonition-warning-border: #bba12e;
-  --ast-admonition-danger-icon: #b72e2a;
-  --ast-admonition-danger-border: #b12422;
+  --ast-admonition-neutral-icon: $white-smoke-2;
+  --ast-admonition-neutral-border: $grey;
+  --ast-admonition-info-icon: $blue;
+  --ast-admonition-info-border: $mid-blue;
+  --ast-admonition-success-icon: $dark-green;
+  --ast-admonition-success-border: $tree-green;
+  --ast-admonition-warning-icon: $golden-rod;
+  --ast-admonition-warning-border: $olive;
+  --ast-admonition-danger-icon: $fire-brick;
+  --ast-admonition-danger-border: $fire-brick-2;
   --ast-admonitions-color: var(--ast-color-text);
 
   /**
   * search bars
   */
-  --ast-search-bar-enable-background: #2d2d2d;
-  --ast-search-bar-enable-border: #3d3d3d;
-  --ast-search-bar-enable-text: #d3d3d3;
-  --ast-suggestion-header-background: #3d3d3d;
-  --ast-catagory-header-text: #ececec;
-  --ast-catagory-suggestion-text: #686868;
-  --ast-suggestion-text-color: #ffffff;
-  --ast-hover-suggestion-text-background: #3d3d3d;
+  --ast-search-bar-enable-background: $charcoal;
+  --ast-search-bar-enable-border: $charcoal-grey;
+  --ast-search-bar-enable-text: $light-gray-2;
+  --ast-suggestion-header-background: $charcoal-grey;
+  --ast-catagory-header-text: $white-smoke-2;
+  --ast-catagory-suggestion-text: $dim-gray;
+  --ast-suggestion-text-color: $white;
+  --ast-hover-suggestion-text-background: $charcoal-grey;
 
   /**
   * dropdown header
   */
-  --ast-dropdown-header-border: #3d3d3d;
+  --ast-dropdown-header-border: $charcoal-grey;
 }
 
 /**
