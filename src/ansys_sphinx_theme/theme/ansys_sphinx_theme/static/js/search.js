@@ -1,7 +1,7 @@
 // Determine which search bar to use (mobile or desktop)
 let SEARCH_BAR;
 let RESULTS;
-if (window.innerWidth < 1040) {
+if (window.innerWidth < 1200) {
   SEARCH_BAR = document.querySelector(
     "div.sidebar-header-items__end #search-bar",
   );
@@ -18,7 +18,7 @@ if (!SEARCH_BAR) {
 
 const SEARCH_INPUT = SEARCH_BAR?.querySelector(".bd-search input.form-control");
 
-if (window.innerWidth < 1040) {
+if (window.innerWidth < 1200) {
   RESULTS = document.querySelector(
     "div.sidebar-header-items__end .static-search-results",
   );
