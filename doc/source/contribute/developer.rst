@@ -211,6 +211,52 @@ This way, it's not possible for you to push code that fails the style checks::
   Add License Headers......................................................Passed
 
 
+Customize the theme
+-------------------
+Theme configuration is distributed across multiple files for flexibility and modularity.
+
+
+Customize the SCSS files
+************************
+
+Many styles are defined in SCSS files located in the ``src/ansys_sphinx_theme/assets/styles/`` directory.
+The primary SCSS files include:
+
+- ``ansys-sphinx-theme.scss``: Contains the main theme configuration.
+- ``pydata-sphinx-theme-custom.scss``: Contains custom modifications for the PyData theme.
+
+To modify the SCSS files, follow these steps:
+
+1. Navigate to the ``src/ansys_sphinx_theme/assets/styles/`` directory.
+2. Edit the relevant SCSS files as needed.
+3. Build the SCSS files using the following command:
+
+   .. code-block:: bash
+
+      python -m pip install -e '.[doc]'
+      stb serve doc/source
+
+   After the build completes, the documentation is served on ``localhost`` and automatically opens
+   in the default web browser. SCSS file changes are monitored, and the documentation rebuilds automatically.
+
+.. note::
+
+   To use **Tox** for building and serving documentation, run the following command:
+
+   .. code-block:: bash
+
+      python -m tox -e doc-serve
+
+   This command builds the documentation, opens it in the default browser, and monitors the source files for changes to
+   trigger automatic rebuilds.
+
+.. important::
+
+   The built SCSS files are stored in the
+   ``src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/`` directory.
+   These files are regenerated during each build process, so avoid editing them directly.
+
+
 Build the documentation
 -----------------------
 

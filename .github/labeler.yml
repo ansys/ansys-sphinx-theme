@@ -8,7 +8,7 @@
 
 # -- Documentation labels ----------------------------------------------------
 
-'documentation':
+'docs':
   - all:
       - changed-files:
           - any-glob-to-any-file: ['doc/source/**/*.rst', 'README.rst']
