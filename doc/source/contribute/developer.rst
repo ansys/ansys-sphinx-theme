@@ -232,30 +232,32 @@ Once you have made your changes, you can build the SCSS files by running:
 
 .. code-block:: bash
 
-    npm run build
+    python -m pip install -e .
+	stb serve doc/source
 
 
-.. warning::
+Once the documentation is built, the documentation will be served on
+localhost and automatically open in your default browser.
+you can watch for changes in the SCSS files and rebuild the documentation
+automatically.
 
-    You need to have NodeJS (`npm`) installed in your machine to build the SCSS files.
-    If you don't have it installed, you can download it from the official
-    website: https://nodejs.org/en/download/
+.. note::
 
+    You can also use Tox to build the documentation and watch for changes by
+    running:
+
+    .. code-block:: bash
+
+        python -m tox -e doc-serve
+
+    This command will build the documentation and open it in your default
+    browser. It will also watch for changes in the source files and rebuild
+    the documentation automatically.
 
 The built SCSS files will be located in the
 `src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles` directory.
 The files there are overwritten every time you run the build command, hence
 you should refrain from editing them directly.
-
-Once the SCSS files are built, you can run the documentation build using:
-
-.. code-block:: bash
-
-    make -C doc html
-
-
-You can see the changes reflected in your documentation by opening the `index.html` file in
-`doc/_build/html` on your browser.
 
 
 Build the documentation
