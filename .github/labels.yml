@@ -87,25 +87,25 @@
 
 # -- HTML, CSS, JS, and web development labels -------------------------------
 
-- name: css
+- name: 'css'
   description: Requires or modifies cascading style sheets
   color: d4c5f9
 
-- name: js
+- name: 'js'
   description: Requires or modifies JavaScript code
   color: fef2c0
 
-- name: ui/ux
+- name: 'ui/ux'
   description: Related with UI/UX design
   color: ffffff
 
 # -- Hacktoberfest labels ----------------------------------------------------
 
-- name: hacktoberfest
+- name: 'hacktoberfest'
   description: Hacktoberfest related
   color: 62ca50
 
-- name: hacktoberfest-accepted
+- name: 'hacktoberfest-accepted'
   description: Hacktoberfest accepted contribution
   color: 62ca50
 
