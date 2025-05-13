@@ -540,6 +540,21 @@ button.primary-toggle {
     button.primary-toggle {
       display: flex !important;
     }
+    #pst-collapse-sidebar-button {
+      display: none !important;
+    }
+    nav.bd-links {
+      display: block !important;
+    }
+    .nav-link .hide-on-wide {
+      display: none !important;
+    }
+    .bd-sidebar-primary.hide-on-wide {
+      display: flex !important;
+    }
+    .bd-sidebar-primary .sidebar-header-items {
+      display: flex !important;
+    }
   }
 
   button.primary-toggle {
