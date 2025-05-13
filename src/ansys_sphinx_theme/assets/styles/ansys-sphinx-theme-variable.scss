@@ -16,6 +16,14 @@
 :root {
   /** Ansys specific changes to the theme */
 
+
+  --bs-breakpoint-lg: 1040px !important;
+  --bs-breakpoint-md: 720px;
+  --bs-breakpoint-sm: 540px;
+  --bs-breakpoint-xs: 0px;
+  --bs-breakpoint-xl: 1200px;
+   --breakpoint-sidebar-primary: 1040px;
+
   /**
   * Ansys Font family
   *
@@ -52,6 +60,7 @@
   --bs-nav-link-font-size: 0.875rem; /* 14px */
   --bs-navbar-color: var(--bs-ast-navbar-color);
   --ast-font-sidebar-header: 1rem; /* 16px */
+
   /**
 * weight
 */
@@ -422,3 +431,125 @@ h6 {
 h1 {
   line-height: 56px;
 }
+
+
+
+.navbar-header-items{
+  @media(min-width: 1040px) {
+    display: inherit;
+    flex-grow: 1;
+    padding: 0 0 0 0.5rem;
+  }
+}
+
+ul.navbar-nav {
+  @media(min-width: 1040px) {
+    align-items: baseline;
+    }
+  }
+button.primary-toggle {
+    margin-right: 1rem;
+
+    @media(min-width: 1040px) {
+      display: none;
+    }
+  }
+
+  @media(min-width: 1040px) {
+    .navbar-center-items .navbar-item {
+      display: inline-block;
+    }
+  }
+
+  .navbar-persistent--mobile {
+    margin-left: auto;
+
+    @media(min-width: 1040px) {
+      display: none;
+    }
+  }
+
+  // The navbar-persistent content should only show on wide screens
+  .navbar-persistent--container {
+    display: none;
+
+    @media(min-width: 1040px) {
+      display: flex;
+    }
+  }
+
+@media (min-width: 1040px) {
+    .bd-sidebar-primary {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      height: 100%;
+      width: 250px; /* or your desired width */
+      transition: left 0.3s ease;
+      visibility: hidden;
+      background-color: #fff; /* optional */
+      z-index: 1030; /* adjust as needed */
+    }
+
+    .bd-sidebar-primary[open] {
+      left: 0;
+      visibility: visible;
+    }
+  }
+
+  @media (max-width: 1040px) {
+    .navbar-header-items {
+      display: none !important;;
+      flex-grow: 1 !important;;
+      padding: 0 0 0 0.5rem !important;;
+    }
+
+    ul.navbar-nav {
+      align-items: baseline;
+    }
+
+    .navbar-center-items .navbar-item {
+      display: inline-block;
+    }
+
+    .navbar-persistent--mobile {
+      display: none;
+    }
+
+    .navbar-persistent--container {
+      display: flex;
+    }
+
+    .bd-sidebar-primary {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      height: 100%;
+      width: 250px; /* Customize as needed */
+      transition: left 0.3s ease;
+      visibility: hidden;
+      background-color: #fff;
+      z-index: 1030; /* Ensure it's above other elements */
+    }
+
+    .bd-sidebar-primary[open] {
+      left: 0;
+      visibility: visible !important;
+    }
+
+    button.primary-toggle {
+      display: flex !important;
+    }
+  }
+
+  button.primary-toggle {
+    margin-right: 1rem;
+  }
+
+  .navbar-persistent--mobile {
+    margin-left: auto;
+  }
+
+  .navbar-persistent--container {
+    display: none;
+  }
