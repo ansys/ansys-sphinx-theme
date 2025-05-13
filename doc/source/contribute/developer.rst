@@ -233,7 +233,7 @@ To modify the SCSS files, follow these steps:
 
    .. code-block:: bash
 
-      python -m pip install -e .
+      python -m pip install -e '.[doc]'
       stb serve doc/source
 
    After the build completes, the documentation is served on ``localhost`` and automatically opens
