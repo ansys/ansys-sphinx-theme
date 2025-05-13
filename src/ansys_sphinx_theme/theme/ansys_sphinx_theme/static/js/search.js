@@ -1,30 +1,25 @@
 // Determine which search bar to use (mobile or desktop)
 let SEARCH_BAR;
 let RESULTS;
+let SEARCH_INPUT;
+
 if (window.innerWidth < 1200) {
   SEARCH_BAR = document.querySelector(
     "div.sidebar-header-items__end #search-bar",
   );
-} else {
-  SEARCH_BAR = document.getElementById("search-bar");
-}
-
-// Fallback if nothing is found
-if (!SEARCH_BAR) {
-  console.warn("SEARCH_BAR not found for current view.");
-}
-
-// Get input and results area
-
-const SEARCH_INPUT = SEARCH_BAR?.querySelector(".bd-search input.form-control");
-
-if (window.innerWidth < 1200) {
   RESULTS = document.querySelector(
     "div.sidebar-header-items__end .static-search-results",
   );
 } else {
+  SEARCH_BAR = document.getElementById("search-bar");
   RESULTS = document.querySelector(".static-search-results");
 }
+
+if (!SEARCH_BAR) {
+  console.warn("SEARCH_BAR not found for current view.");
+}
+
+SEARCH_INPUT = SEARCH_BAR?.querySelector(".bd-search input.form-control");
 
 const MAIN_PAGE_CONTENT = document.querySelector(".bd-main");
 let CURRENT_INDEX = -1;
