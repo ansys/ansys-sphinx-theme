@@ -150,7 +150,7 @@ html[data-theme="light"] .highlight {
 }
 
 /* Responsive Styles */
-@media (min-width: 64rem) and (max-width: 85.375rem) {
+@media (min-width: 1040px) and (max-width: 85.375rem) {
   .bd-search input.form-control.expanded {
     width: 100%; /* 320px */
   }
@@ -168,7 +168,7 @@ html[data-theme="light"] .highlight {
   }
 }
 
-@media (max-width: 64rem) {
+@media (max-width: 1040px) {
 
   .bd-search input.form-control.expanded {
     width: 100%; /* 320px */

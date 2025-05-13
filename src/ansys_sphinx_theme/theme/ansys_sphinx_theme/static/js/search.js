@@ -1,7 +1,7 @@
 // Determine which search bar to use (mobile or desktop)
 let SEARCH_BAR;
 let RESULTS;
-if (window.innerWidth < 960) {
+if (window.innerWidth < 1040) {
   SEARCH_BAR = document.querySelector(
     "div.sidebar-header-items__end #search-bar",
   );
@@ -9,6 +9,7 @@ if (window.innerWidth < 960) {
   SEARCH_BAR = document.getElementById("search-bar");
 }
 
+console.log("SEARCH_BAR", SEARCH_BAR);
 // Fallback if nothing is found
 if (!SEARCH_BAR) {
   console.warn("SEARCH_BAR not found for current view.");
@@ -18,9 +19,9 @@ if (!SEARCH_BAR) {
 
 const SEARCH_INPUT = SEARCH_BAR?.querySelector(".bd-search input.form-control");
 
-if (window.innerWidth < 960) {
+if (window.innerWidth < 1040) {
   RESULTS = document.querySelector(
-    ".sidebar-header-items__end .static-search-results",
+    "div.sidebar-header-items__end .static-search-results",
   );
 } else {
   RESULTS = document.querySelector(".static-search-results");
@@ -267,6 +268,9 @@ require(["fuse"], function (Fuse) {
 
   // Handle click event globally
   function handleGlobalClick(event) {
+    console.log("event.target", event.target);
+    console.log("SEARCH_INPUT", SEARCH_INPUT);
+    console.log("RESULTS", RESULTS);
     if (!RESULTS.contains(event.target) && event.target !== SEARCH_INPUT) {
       collapseSearchInput();
     }
