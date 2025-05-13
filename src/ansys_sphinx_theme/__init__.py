@@ -156,8 +156,11 @@ def setup_default_html_theme_options(app):
     # Place all switchers and icons at the end of the navigation bar
     if theme_options.get("switcher"):
         theme_options.setdefault(
-            "navbar_end", ["version-switcher", "theme-switcher", "navbar-icon-links"]
+            "navbar_end",
+            ["search-button-field", "version-switcher", "theme-switcher", "navbar-icon-links"],
         )
+
+    theme_options.setdefault("navbar_persistent", [])
     theme_options.setdefault("collapse_navigation", True)
     theme_options.setdefault("navigation_with_keys", True)
 
@@ -453,6 +456,14 @@ def add_sidebar_context(
     context["sidebars"] = sidebar
 
 
+def append_og_site_name(app, pagename, templatename, context, doctree):
+    # Make sure the context already has metatags
+    context["metatags"] = context.get("metatags", "")
+
+    # Append your custom tag
+    context["metatags"] += '\n    <meta property="og:site_name" content="PyAnsys" />'
+
+
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -499,6 +510,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", add_sidebar_context)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
+    app.connect("html-page-context", append_og_site_name)
     app.connect("build-finished", replace_html_tag)
     if use_ansys_search:
         app.connect("build-finished", create_search_index)
