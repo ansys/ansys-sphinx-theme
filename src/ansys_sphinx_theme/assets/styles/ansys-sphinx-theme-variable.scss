@@ -13,16 +13,19 @@
   src: url(../fonts/SourceSansPro-Regular.ttf);
 }
 
+// Import SCSS variables
+
+@import 'variables';
+
+
 :root {
   /** Ansys specific changes to the theme */
-
-
-  --bs-breakpoint-lg: 1040px !important;
-  --bs-breakpoint-md: 720px;
-  --bs-breakpoint-sm: 540px;
-  --bs-breakpoint-xs: 0px;
-  --bs-breakpoint-xl: 1200px;
-   --breakpoint-sidebar-primary: 1040px;
+  --bs-breakpoint-lg: $bs-breakpoint-lg !important;
+  --bs-breakpoint-md: $bs-breakpoint-md;
+  --bs-breakpoint-sm: $bs-breakpoint-sm;
+  --bs-breakpoint-xs: $bs-breakpoint-xs;
+  --bs-breakpoint-xl: $bs-breakpoint-xl;
+   --breakpoint-sidebar-primary: $bs-breakpoint-lg;
 
   /**
   * Ansys Font family
@@ -434,7 +437,7 @@ h1 {
 
 
 /* Mobile-specific overrides (≤ 1040px) */
-@media (max-width: 1040px) {
+@media (max-width: $bs-breakpoint-lg) {
   .navbar-header-items {
     display: none !important;
     flex-grow: 1 !important;
@@ -463,12 +466,12 @@ h1 {
     left: 0;
     margin-left: -75%;
     max-height: 100vh !important;
-    max-width: 350px !important;
+    max-width: $sidebar-primary-max-width !important;
     position: fixed;
     top: 0;
     transition: visibility 0.2s ease-out,margin 0.2s ease-out;
     visibility: hidden;
-    width: 75%;
+    width: $sidebar-primary-width;
     z-index: 1050;
     display: flex !important;
   }
@@ -503,7 +506,7 @@ h1 {
 }
 
 /* Desktop-specific overrides (> 1040px) */
-@media (min-width: 1040px) {
+@media (min-width: $bs-breakpoint-lg) {
   .navbar-header-items {
     display: inherit;
     flex-grow: 1;

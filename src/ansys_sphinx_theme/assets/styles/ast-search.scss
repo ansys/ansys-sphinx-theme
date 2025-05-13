@@ -1,4 +1,5 @@
 /* Static Search Results Container */
+@import 'variables';
 
 .bd-search{
   display: flex;
@@ -150,7 +151,7 @@ html[data-theme="light"] .highlight {
 }
 
 /* Responsive Styles */
-@media (min-width: 1040px) and (max-width: 85.375rem) {
+@media (min-width: $bs-breakpoint-lg) and (max-width: 85.375rem) {
   .bd-search input.form-control.expanded {
     width: 100%; /* 320px */
   }
@@ -168,7 +169,7 @@ html[data-theme="light"] .highlight {
   }
 }
 
-@media (max-width: 1040px) {
+@media (max-width: $bs-breakpoint-lg) {
 
   .bd-search input.form-control.expanded {
     width: 5rem; /* 320px */
