@@ -213,51 +213,48 @@ This way, it's not possible for you to push code that fails the style checks::
 
 Customize the theme
 -------------------
-The configuration of theme is done across multiple files.
+Theme configuration is distributed across multiple files for flexibility and modularity.
 
 
 Customize the SCSS files
 ************************
 
-Many styles are defined in the SCSS files located in the directory
-`src/ansys_sphinx_theme/assets/styles/`.
-The main SCSS files are:
+Many styles are defined in SCSS files located in the ``src/ansys_sphinx_theme/assets/styles/`` directory.
+The primary SCSS files include:
 
-- `ansys-sphinx-theme.scss`: Our main theme configuration.
-- `pydata-sphinx-theme-custom.scss`: Our own modifications of the PyData theme.
+- ``ansys-sphinx-theme.scss``: Contains the main theme configuration.
+- ``pydata-sphinx-theme-custom.scss``: Contains custom modifications for the PyData theme.
 
-To edit the SCSS files, navigate to the `src/ansys_sphinx_theme/assets/styles/`
-directory and make your changes.
-Once you have made your changes, you can build the SCSS files by running:
+To modify the SCSS files, follow these steps:
 
-.. code-block:: bash
+1. Navigate to the ``src/ansys_sphinx_theme/assets/styles/`` directory.
+2. Edit the relevant SCSS files as needed.
+3. Build the SCSS files using the following command:
 
-    python -m pip install -e .
-	stb serve doc/source
+   .. code-block:: bash
 
+      python -m pip install -e .
+      stb serve doc/source
 
-Once the documentation is built, the documentation will be served on
-localhost and automatically open in your default browser.
-you can watch for changes in the SCSS files and rebuild the documentation
-automatically.
+   After the build completes, the documentation is served on ``localhost`` and automatically opens
+   in the default web browser. SCSS file changes are monitored, and the documentation rebuilds automatically.
 
 .. note::
 
-    You can also use Tox to build the documentation and watch for changes by
-    running:
+   To use **Tox** for building and serving documentation, run the following command:
 
-    .. code-block:: bash
+   .. code-block:: bash
 
-        python -m tox -e doc-serve
+      python -m tox -e doc-serve
 
-    This command will build the documentation and open it in your default
-    browser. It will also watch for changes in the source files and rebuild
-    the documentation automatically.
+   This command builds the documentation, opens it in the default browser, and monitors the source files for changes to
+   trigger automatic rebuilds.
 
-The built SCSS files will be located in the
-`src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles` directory.
-The files there are overwritten every time you run the build command, hence
-you should refrain from editing them directly.
+.. important::
+
+   The built SCSS files are stored in the
+   ``src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/`` directory.
+   These files are regenerated during each build process, so avoid editing them directly.
 
 
 Build the documentation
