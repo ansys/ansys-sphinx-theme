@@ -9,7 +9,6 @@ if (window.innerWidth < 1040) {
   SEARCH_BAR = document.getElementById("search-bar");
 }
 
-console.log("SEARCH_BAR", SEARCH_BAR);
 // Fallback if nothing is found
 if (!SEARCH_BAR) {
   console.warn("SEARCH_BAR not found for current view.");
@@ -268,9 +267,6 @@ require(["fuse"], function (Fuse) {
 
   // Handle click event globally
   function handleGlobalClick(event) {
-    console.log("event.target", event.target);
-    console.log("SEARCH_INPUT", SEARCH_INPUT);
-    console.log("RESULTS", RESULTS);
     if (!RESULTS.contains(event.target) && event.target !== SEARCH_INPUT) {
       collapseSearchInput();
     }
