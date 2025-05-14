@@ -6,6 +6,9 @@
 * _sidebar-primary.scss
 *
 */
+
+@import "variables";
+
 .bd-sidebar-primary,
 .bd-sidebar-secondary {
   max-height: calc(100vh - var(--pst-header-height) - 1vh);
@@ -269,23 +272,23 @@ a.headerlink {
   color: #222;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: $bs-breakpoint-xl) {
   .container,
   .container-lg,
   .container-md,
   .container-sm,
   .container-xl {
-    max-width: 1200px;
+    max-width: $bs-breakpoint-xl;
   }
 }
 
-@media (min-width: 1600px) {
+@media (min-width: $bs-breakpoint-xxl) {
   .container,
   .container-lg,
   .container-md,
   .container-sm,
   .container-xl {
-    max-width: 1600px;
+    max-width: $bs-breakpoint-xxl;
   }
 }
 
@@ -740,31 +743,31 @@ button.btn.version-switcher__button:hover {
 
 .bd-main .bd-content .bd-article-container {
   padding: 8px;
-  width: 1000px;
+  width: $article-width;
   max-width: 100%;
 }
 
-@media (min-width: 960px) {
+@media (min-width: $bs-breakpoint-lg) {
   .bd-sidebar-primary {
     width: 20%;
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: $bs-breakpoint-lg) {
   .col-lg-3 {
     width: fit-content;
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: $bs-breakpoint-lg) {
   .bd-page-width {
-    max-width: min(100%, 1700px) !important;
+    max-width: min(100%, $bs-breakpoint-lg + 30px) !important;
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: $bs-breakpoint-lg) {
   .bd-main .bd-content .bd-article-container {
-    width: min(100%, 1070px);
+    width: min(100%, $bs-breakpoint-lg + 30px);
   }
 }
 
