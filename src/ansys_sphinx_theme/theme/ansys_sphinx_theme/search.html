@@ -4,10 +4,8 @@
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
 <style>
     .result-item { border: 1px solid #ddd; padding: 10px; margin-bottom: 5px; cursor: pointer; }
-    .dropdown-menu { display: none; position: relative; background: white; border: 1px solid #ddd; max-height: 200px; overflow-y: auto; width: 200px; }
     .dropdown-menu.show { display: block; }
     .dropdown-item { padding: 10px; cursor: pointer; }
-    .dropdown-item:hover { background: #f0f0f0; }
     .chip { display: inline-block; background: #ddd; padding: 5px 10px; border-radius: 15px; margin: 5px; }
     .chip .close { cursor: pointer; margin-left: 5px; }
     .chip .dropdown-item { padding: 5px 10px; cursor: pointer; }
@@ -17,16 +15,6 @@
         padding: 10px;
         margin-bottom: 10px;
     }
-    .checkmark {
-        margin-left: 5px;
-        color: green;
-        font-weight: bold;
-    }
-    .dropdown-toggle {
-    margin-bottom: 1px;
-    width: fit-content;
-    height: 50px;
-}
     .checkbox-item {
       display: flex;
       align-items: center;
@@ -54,46 +42,34 @@
       color: red;
     }
     .filter-wrapper {
-  position: relative;
-  display: inline-block;
-}
+      position: relative;
+      display: inline-block;
+    }
 
-.filter-dropdown {
-  position: relative;
-  top: 100%; /* Places it directly below the button */
-  left: 0;
-  background: white;
-  border: 1px solid #ddd;
-  max-height: 200px;
-  overflow-y: auto;
-  width: 250px;
-  z-index: 1000;
-  display: none; /* Hidden by default */
-}
+    .filter-wrapper .dropdown-toggle {
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+
 
 #objectid-dropdown {
   position: relative;
   top: 100%; /* Places it directly below the button */
-  left: 0;
-  background: white;
-  border: 1px solid #ddd;
-  max-height: 200px;
-  overflow-y: auto;
-  width: 250px;
-  z-index: 1000;
+  left: 10px;
+  background-color: transparent;
+  border: none;
   display: none; /* Hidden by default */
 }
 
 #library-dropdown {
   position: relative;
   top: 100%; /* Places it directly below the button */
-  left: 0;
-  background: white;
-  border: 1px solid #ddd;
-  max-height: 200px;
-  overflow-y: auto;
-  width: 250px;
-  z-index: 1000;
+  left: 10px;
+  background-color: transparent;
+  border: none;
   display: none; /* Hidden by default */
 }
 
@@ -105,14 +81,9 @@
     <input type="text" id="search-input" placeholder="Type to search..." />
     <div class="filter-wrapper">
       <button id="filter-btn" class="dropdown-toggle">Select Filter</button>
-      <div id="filter-dropdown" class="dropdown-menu"></div>
+
     </div>
-    <div class="secondary-dropdown">
-      <div id="objectid-dropdown" class="dropdown-menu"></div>
-    </div>
-    <div class="secondary-dropdown">
-      <div id="library-dropdown" class="dropdown-menu"></div>
-    </div>
+
   </div>
   <div id="selected-chips" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;"></div>
   <div class="results" id="search-results"></div>
@@ -143,51 +114,65 @@
     }
 
     function setupPrimaryDropdown() {
-      const dropdown = document.getElementById("filter-dropdown");
-      dropdown.innerHTML = "";
 
-      ["Documents", "Library"].forEach(filter => {
-        const div = document.createElement("div");
-        div.className = "dropdown-item";
-        div.textContent = filter;
+      const selectButton = document.getElementById("filter-btn");
+        selectButton.addEventListener("click", () => {
+          const dropdown = document.getElementById("search-sidebar");
+          dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+        });
+      const filters = [
+      { name: "Documents", dropdownId: "objectid-dropdown", callback: showObjectIdDropdown },
+      { name: "Library", dropdownId: "library-dropdown", callback: ShowLibraryDropDown }
+    ];
+    const dropdownContainer = document.getElementById("search-sidebar");
 
-        div.onclick = () => {
-          if (selectedFilter.has(filter)) {
-            selectedFilter.delete(filter);
-            div.classList.remove("active");
-          } else {
-            selectedFilter.add(filter);
-            div.classList.add("active");
-          }
 
-          if (selectedFilter.has("Documents")) {
-            showObjectIdDropdown();
-          }
-          if (selectedFilter.has("Library")) {
-            ShowLibraryDropDown();
-          }
-          if (filter === "None") {
-            selectedObjectIDs = [];
-            document.getElementById("objectid-dropdown").style.display = "none";
-            performSearch();
-          }
+      filters.forEach(({ name, dropdownId, callback }) => {
+      // Create toggle section
+      const toggleDiv = document.createElement("div");
+      toggleDiv.className = "search-page-sidebar toggle-section";
+      toggleDiv.dataset.target = dropdownId;
 
-        };
-        dropdown.appendChild(div);
+      const icon = document.createElement("span");
+      icon.className = "toggle-icon";
+      icon.textContent = "›";
+
+      const label = document.createElement("span");
+      label.className = "toggle-label";
+      label.textContent = name;
+
+      toggleDiv.appendChild(icon);
+      toggleDiv.appendChild(label);
+
+      // Create hidden dropdown
+      const dropdown = document.createElement("div");
+      dropdown.id = dropdownId;
+      dropdown.className = "dropdown-menu show";
+      dropdown.style.display = "none";
+      dropdown.style.marginTop = "10px";
+
+      // Click handler for toggle
+      toggleDiv.addEventListener("click", () => {
+        const isVisible = dropdown.style.display === "block";
+        dropdown.style.display = isVisible ? "none" : "block";
+        icon.textContent = isVisible ? "›" : "⌄";
+
+        if (isVisible) {
+          selectedFilter.delete(name);
+          toggleDiv.classList.remove("active");
+        } else {
+          selectedFilter.add(name);
+          toggleDiv.classList.add("active");
+          callback?.();
+        }
+
+        performSearch?.();
       });
-    }
 
-    function handleLibrarySelection(lib, isSelected) {
-      if (isSelected && !selectedLibraries.includes(lib)) {
-        selectedLibraries.push(lib);
-      } else if (!isSelected) {
-        const index = selectedLibraries.indexOf(lib);
-        if (index > -1) selectedLibraries.splice(index, 1);
-      }
-      renderSelectedChips();
-      performSearch();
-    }
-
+      dropdownContainer.appendChild(toggleDiv);
+      dropdownContainer.appendChild(dropdown);
+    });
+  }
     function showObjectIdDropdown() {
       const dropdown = document.getElementById("objectid-dropdown");
       dropdown.innerHTML = "";
