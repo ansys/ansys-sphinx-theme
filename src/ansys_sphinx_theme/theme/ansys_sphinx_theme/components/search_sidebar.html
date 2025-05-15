@@ -1,27 +1,23 @@
-<div class="search-sidebar">
-
-    <div id="filter-dropdown" class="dropdown-menu show"></div>
-
-    <div class="search-page-sidebar search-documents">
-        <span>Documents</span>
-        <div id="objectid-dropdown" class="dropdown-menu show" style="margin-top: 10px;"></div>
-    </div>
-    <div class="search-page-sidebar" data-target="library-dropdown">
-        <span>Library</span>
-        <div id="library-dropdown" class="dropdown-menu show" style="margin-top: 10px;"></div>
-    </div>
+<div id="search-sidebar" class="search-page-sidebar" style="display: none;">
 
 </div>
-<script>
-    // JavaScript to handle the dropdown functionality
-    document.querySelectorAll('.search-page-sidebar').forEach(header => {
-        header.addEventListener('click', () => {
-            const targetId = header.dataset.target;
-            const target = document.getElementById(targetId);
-            if (target) {
-                const isVisible = target.style.display === 'block';
-                target.style.display = isVisible ? 'none' : 'block';
-            }
-        });
-    });
-</script>
+<style>
+  .search-page-sidebar.toggle-section {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+.search-page-sidebar.toggle-section.active {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+.toggle-icon {
+  font-size: 14px;
+  padding: 8px;
+}
+</style>
