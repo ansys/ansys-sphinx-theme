@@ -229,19 +229,55 @@ To modify the SCSS files, follow these steps:
 
 1. Navigate to the ``src/ansys_sphinx_theme/assets/styles/`` directory.
 2. Edit the relevant SCSS files as needed.
-3. Build the SCSS files using the following command:
+3. Build the library using the following command along with the documentation dependencies:
 
    .. code-block:: bash
 
       python -m pip install -e '.[doc]'
-      make -C doc serve
 
+   This command installs the library in editable mode and builds the SCSS files.
 
-   Or alternatively, you can use **stb**:
+.. important::
 
-   .. code-block:: bash
+   The built SCSS files are stored in the
+   ``src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/`` directory.
+   These files are regenerated during each build process, so avoid editing them directly.
 
-      stb serve doc/source
+1. Build the documentation and serve it locally using any of the following commands:
+
+   .. tab-set::
+
+        .. tab-item:: using Tox (recommended)
+
+            **Linux/macOS/UNIX/Windows**
+
+            .. code-block:: bash
+
+                python -m tox -e doc-serve
+
+        .. tab-item:: using Makefile
+
+            .. tab-set::
+
+                .. tab-item:: Linux or macOS
+
+                    .. code-block:: bash
+
+                        make -C doc serve
+
+                .. tab-item:: Windows
+
+                    .. code-block:: bash
+
+                        doc\make.bat serve
+
+        .. tab-item:: using stb
+
+            **Linux/macOS/UNIX/Windows**
+
+            .. code-block:: bash
+
+                stb serve doc/source
 
    After the build completes, the documentation is served on ``localhost`` and automatically opens
    in the default web browser. SCSS file changes are monitored, and the documentation rebuilds automatically.
@@ -257,11 +293,7 @@ To modify the SCSS files, follow these steps:
    This command builds the documentation, opens it in the default browser, and monitors the source files for changes to
    trigger automatic rebuilds.
 
-.. important::
 
-   The built SCSS files are stored in the
-   ``src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/`` directory.
-   These files are regenerated during each build process, so avoid editing them directly.
 
 
 Build the documentation
