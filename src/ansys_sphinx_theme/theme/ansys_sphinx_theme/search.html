@@ -1,22 +1,16 @@
 {%- extends "page.html" %}
 
 {% block docs_body %}
-<title>Advanced Search</title>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
 <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    .filter-container { margin-bottom: 10px; position: relative; }
-    .results-container { margin-top: 10px; }
     .result-item { border: 1px solid #ddd; padding: 10px; margin-bottom: 5px; cursor: pointer; }
-    .dropdown-menu { display: none; position: absolute; background: white; border: 1px solid #ddd; max-height: 200px; overflow-y: auto; width: 200px; }
+    .dropdown-menu { display: none; position: relative; background: white; border: 1px solid #ddd; max-height: 200px; overflow-y: auto; width: 200px; }
     .dropdown-menu.show { display: block; }
     .dropdown-item { padding: 10px; cursor: pointer; }
     .dropdown-item:hover { background: #f0f0f0; }
     .chip { display: inline-block; background: #ddd; padding: 5px 10px; border-radius: 15px; margin: 5px; }
     .chip .close { cursor: pointer; margin-left: 5px; }
     .chip .dropdown-item { padding: 5px 10px; cursor: pointer; }
-    .sub-dropdown-menu { display: none; position: absolute; background: white; border: 1px solid #ddd; max-height: 150px; overflow-y: auto; width: 180px; top: 30px; left: 0; }
-    .sub-dropdown-menu.show { display: block; }
     #search-input {
         width: 100%;
         max-width: 600px; /* You can adjust this as needed */
@@ -27,19 +21,6 @@
         margin-left: 5px;
         color: green;
         font-weight: bold;
-    }
-</style>
-
-<h2>Advanced Search</h2>
-<style>
-    .dropdown-menu {
-      border: 1px solid #ccc;
-      padding: 10px;
-      max-height: 200px;
-      overflow-y: auto;
-      background: white;
-      position: absolute;
-      z-index: 10;
     }
     .dropdown-toggle {
     margin-bottom: 1px;
@@ -77,6 +58,19 @@
   display: inline-block;
 }
 
+.filter-dropdown {
+  position: relative;
+  top: 100%; /* Places it directly below the button */
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 250px;
+  z-index: 1000;
+  display: none; /* Hidden by default */
+}
+
 #objectid-dropdown {
   position: relative;
   top: 100%; /* Places it directly below the button */
@@ -103,29 +97,26 @@
   display: none; /* Hidden by default */
 }
 
-  </style>
+</style>
 
-<div class="search-bar">
+<div class="bd-search-container">
+  <h1>{{ _("Search") }}</h1>
+  <div class="search-bar">
     <input type="text" id="search-input" placeholder="Type to search..." />
-
-    <!-- Wrap filter button and dropdown together -->
     <div class="filter-wrapper">
       <button id="filter-btn" class="dropdown-toggle">Select Filter</button>
-      <div id="filter-dropdown" class="dropdown-menu" style="display: none;"></div>
+      <div id="filter-dropdown" class="dropdown-menu"></div>
     </div>
     <div class="secondary-dropdown">
-        <div id="objectid-dropdown" class="dropdown-menu" style="display: none;"></div>
-      </div>
+      <div id="objectid-dropdown" class="dropdown-menu"></div>
+    </div>
     <div class="secondary-dropdown">
-        <div id="library-dropdown" class="dropdown-menu" style="display: none;"></div>
-      </div>
+      <div id="library-dropdown" class="dropdown-menu"></div>
+    </div>
   </div>
-
-  <!-- Chips under the search bar -->
   <div id="selected-chips" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;"></div>
-
-  <!-- Search results -->
   <div class="results" id="search-results"></div>
+</div>
 
   <script>
     let fuse;
