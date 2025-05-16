@@ -11,19 +11,20 @@ let SEARCH_BAR,
   CURRENT_INDEX = -1;
 let fuse;
 
-// Configure Fuse.js path
+// Load Fuse.js from CDN
 require.config({
   paths: {
     fuse: `https://cdn.jsdelivr.net/npm/fuse.js@${FUSE_VERSION}/dist/fuse.min`,
   },
 });
 
-// Load Fuse.js and set up the search system
 require(["fuse"], function (Fuse) {
-  // -------------------------------------
-  // Utility Functions
-  // -------------------------------------
-
+  /**
+   * Debounce function to limit how often a function is called.
+   * @param {Function} func - Function to debounce.
+   * @param {number} delay - Delay in milliseconds.
+   * @returns {Function}
+   */
   const debounce = (func, delay) => {
     let timeout;
     return (...args) => {
@@ -32,29 +33,44 @@ require(["fuse"], function (Fuse) {
     };
   };
 
+  /**
+   * Truncate a long text string to a specified length.
+   * @param {string} text - Text to truncate.
+   * @param {number} maxLength - Maximum allowed length.
+   * @returns {string}
+   */
   const truncateTextPreview = (text, maxLength = 200) =>
     text.length <= maxLength ? text : `${text.slice(0, maxLength)}...`;
 
+  /**
+   * Return full path based on Sphinx's data-content_root.
+   * @param {string} targetFile - Path to file.
+   * @returns {string}
+   */
   const getDynamicPath = (targetFile) => {
     const contentRoot =
       document.documentElement.getAttribute("data-content_root");
     return `${contentRoot}${targetFile}`;
   };
 
+  /**
+   * Navigate to a given URL.
+   * @param {string} href - Target href.
+   */
   const navigateToHref = (href) => {
     window.location.href = getDynamicPath(href);
   };
 
-  // -------------------------------------
-  // UI Handlers
-  // -------------------------------------
-
+  /**
+   * Expand the search input UI.
+   */
   function expandSearchInput() {
     RESULTS.style.display = "flex";
     SEARCH_INPUT.classList.add("expanded");
     MAIN_PAGE_CONTENT.classList.add("blurred");
     SEARCH_INPUT.focus();
-    // 🛠️ Fix overlap on mobile: reduce the opacity of the container
+
+    // Fix overlapping on mobile view
     const modalSidebar = document.querySelector(
       "#pst-primary-sidebar-modal > div.sidebar-primary-items__start.sidebar-primary__section",
     );
@@ -63,12 +79,16 @@ require(["fuse"], function (Fuse) {
     }
   }
 
+  /**
+   * Collapse and reset the search UI.
+   */
   function collapseSearchInput() {
     RESULTS.style.display = "none";
     SEARCH_INPUT.classList.remove("expanded");
     SEARCH_INPUT.value = "";
     MAIN_PAGE_CONTENT.classList.remove("blurred");
     CURRENT_INDEX = -1;
+
     const modalSidebar = document.querySelector(
       "#pst-primary-sidebar-modal > div.sidebar-primary-items__start.sidebar-primary__section",
     );
@@ -77,6 +97,9 @@ require(["fuse"], function (Fuse) {
     }
   }
 
+  /**
+   * Show banner when no results found.
+   */
   function noResultsFoundBanner() {
     RESULTS.innerHTML = "";
     RESULTS.style.display = "flex";
@@ -87,6 +110,9 @@ require(["fuse"], function (Fuse) {
     RESULTS.appendChild(banner);
   }
 
+  /**
+   * Show a temporary searching indicator.
+   */
   function searchingForResultsBanner() {
     RESULTS.innerHTML = "";
     RESULTS.style.display = "flex";
@@ -97,16 +123,15 @@ require(["fuse"], function (Fuse) {
     RESULTS.appendChild(banner);
   }
 
+  /**
+   * Display search results from Fuse.
+   * @param {Array} results - Fuse search result objects.
+   */
   function displayResults(results) {
     RESULTS.innerHTML = "";
-
-    if (results.length === 0) {
-      noResultsFoundBanner();
-      return;
-    }
+    if (results.length === 0) return noResultsFoundBanner();
 
     const fragment = document.createDocumentFragment();
-
     results.forEach(({ item: { title, text, href } }) => {
       const resultItem = document.createElement("div");
       resultItem.className = "result-item";
@@ -130,6 +155,10 @@ require(["fuse"], function (Fuse) {
     RESULTS.style.display = "flex";
   }
 
+  /**
+   * Highlight the currently selected item.
+   * @param {NodeList} resultsItems - List of result items.
+   */
   function focusSelected(resultsItems) {
     if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultsItems.length) {
       resultsItems.forEach((item) => item.classList.remove("selected"));
@@ -140,27 +169,26 @@ require(["fuse"], function (Fuse) {
     }
   }
 
-  // -------------------------------------
-  // Search Logic
-  // -------------------------------------
-
+  /**
+   * Handle search query input with debounce.
+   */
   const handleSearchInput = debounce(
     () => {
       const query = SEARCH_INPUT.value.trim();
-      if (!query) {
-        RESULTS.style.display = "none";
-        return;
-      }
+      if (!query) return (RESULTS.style.display = "none");
 
       const searchResults = fuse.search(query, {
         limit: parseInt(SEARCH_OPTIONS.limit),
       });
-
       displayResults(searchResults);
     },
     parseInt(SEARCH_OPTIONS.delay) || 300,
   );
 
+  /**
+   * Handle keyboard navigation inside search input.
+   * @param {KeyboardEvent} event
+   */
   function handleKeyDownSearchInput(event) {
     const resultItems = RESULTS.querySelectorAll(".result-item");
 
@@ -168,11 +196,9 @@ require(["fuse"], function (Fuse) {
       case "Tab":
         event.preventDefault();
         break;
-
       case "Escape":
         collapseSearchInput();
         break;
-
       case "Enter":
         event.preventDefault();
         const indexToNavigate =
@@ -186,14 +212,12 @@ require(["fuse"], function (Fuse) {
           navigateToHref(href);
         }
         break;
-
       case "ArrowDown":
         if (resultItems.length > 0) {
           CURRENT_INDEX = (CURRENT_INDEX + 1) % resultItems.length;
           focusSelected(resultItems);
         }
         break;
-
       case "ArrowUp":
         if (resultItems.length > 0) {
           CURRENT_INDEX =
@@ -201,7 +225,6 @@ require(["fuse"], function (Fuse) {
           focusSelected(resultItems);
         }
         break;
-
       default:
         if (
           document.documentElement.getAttribute("data-fuse_active") === "true"
@@ -215,10 +238,9 @@ require(["fuse"], function (Fuse) {
     }
   }
 
-  // -------------------------------------
-  // Setup and Events
-  // -------------------------------------
-
+  /**
+   * Initialize and bind search elements.
+   */
   function setupSearchElements() {
     if (window.innerWidth < 1200) {
       SEARCH_BAR = document.querySelector(
@@ -238,19 +260,16 @@ require(["fuse"], function (Fuse) {
     }
 
     SEARCH_INPUT = SEARCH_BAR.querySelector(".bd-search input.form-control");
-
     if (SEARCH_INPUT) {
       SEARCH_INPUT.addEventListener("click", expandSearchInput);
       SEARCH_INPUT.addEventListener("keydown", handleKeyDownSearchInput);
     }
   }
 
+  // Global event listeners
   function handleGlobalKeyDown(event) {
-    if (event.key === "Escape") {
-      collapseSearchInput();
-    } else if (event.key === "k" && event.ctrlKey) {
-      expandSearchInput();
-    }
+    if (event.key === "Escape") collapseSearchInput();
+    else if (event.key === "k" && event.ctrlKey) expandSearchInput();
   }
 
   function handleGlobalClick(event) {
@@ -259,34 +278,28 @@ require(["fuse"], function (Fuse) {
     }
   }
 
-  // -------------------------------------
-  // Initialize
-  // -------------------------------------
-
+  // Initialize search system
   setupSearchElements();
-  window.addEventListener(
-    "resize",
-    debounce(() => {
-      setupSearchElements(); // re-detect and re-bind search input
-    }, 250),
-  );
+  window.addEventListener("resize", debounce(setupSearchElements, 250));
   document.addEventListener("keydown", handleGlobalKeyDown);
   document.addEventListener("click", handleGlobalClick);
 
   fetch(SEARCH_FILE)
     .then((response) => {
-      if (!response.ok) {
+      if (!response.ok)
         throw new Error(`[AST]: HTTPS error ${response.statusText}`);
-      }
       return response.json();
     })
-    .then((SEARCH_DATA) => {
-      initializeFuse(SEARCH_DATA, SEARCH_OPTIONS);
-    })
-    .catch((error) => {
-      console.error(`[AST]: Cannot fetch ${SEARCH_FILE}`, error.message);
-    });
+    .then((SEARCH_DATA) => initializeFuse(SEARCH_DATA, SEARCH_OPTIONS))
+    .catch((error) =>
+      console.error(`[AST]: Cannot fetch ${SEARCH_FILE}`, error.message),
+    );
 
+  /**
+   * Initialize Fuse with the given data and options.
+   * @param {Array} data - Search index data.
+   * @param {Object} options - Fuse.js configuration options.
+   */
   function initializeFuse(data, options) {
     fuse = new Fuse(data, options);
     document.documentElement.setAttribute("data-fuse_active", "true");
