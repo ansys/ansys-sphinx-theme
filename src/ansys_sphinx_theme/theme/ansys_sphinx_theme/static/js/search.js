@@ -1,84 +1,113 @@
-// Determine which search bar to use (mobile or desktop)
-let SEARCH_BAR;
-let RESULTS;
-let SEARCH_INPUT;
+// ==============================
+// Fuse.js Search Integration
+// ==============================
 
+// Constants
 const MAIN_PAGE_CONTENT = document.querySelector(".bd-main");
-let CURRENT_INDEX = -1;
-
 const FUSE_VERSION = "6.4.6";
+let SEARCH_BAR,
+  RESULTS,
+  SEARCH_INPUT,
+  CURRENT_INDEX = -1;
+let fuse;
 
+// Configure Fuse.js path
 require.config({
   paths: {
     fuse: `https://cdn.jsdelivr.net/npm/fuse.js@${FUSE_VERSION}/dist/fuse.min`,
   },
 });
 
+// Load Fuse.js and set up the search system
 require(["fuse"], function (Fuse) {
-  // Declare global variables
-  let fuse;
+  // -------------------------------------
+  // Utility Functions
+  // -------------------------------------
 
-  // Debounce function to limit the rate of function calls
-  function debounce(func, delay) {
+  const debounce = (func, delay) => {
     let timeout;
-    return function (...args) {
+    return (...args) => {
       clearTimeout(timeout);
       timeout = setTimeout(() => func.apply(this, args), delay);
     };
-  }
+  };
 
-  // Initialize Fuse when the data is fetched
-  function initializeFuse(data, options) {
-    fuse = new Fuse(data, options);
-    // add env variable "FUSE_ACTIVE" to indicate that the search is ready
-    document.documentElement.setAttribute("data-fuse_active", "true");
-  }
+  const truncateTextPreview = (text, maxLength = 200) =>
+    text.length <= maxLength ? text : `${text.slice(0, maxLength)}...`;
 
-  // Expand the search bar input
+  const getDynamicPath = (targetFile) => {
+    const contentRoot =
+      document.documentElement.getAttribute("data-content_root");
+    return `${contentRoot}${targetFile}`;
+  };
+
+  const navigateToHref = (href) => {
+    window.location.href = getDynamicPath(href);
+  };
+
+  // -------------------------------------
+  // UI Handlers
+  // -------------------------------------
+
   function expandSearchInput() {
     RESULTS.style.display = "flex";
     SEARCH_INPUT.classList.add("expanded");
     MAIN_PAGE_CONTENT.classList.add("blurred");
     SEARCH_INPUT.focus();
+    // 🛠️ Fix overlap on mobile: reduce the opacity of the container
+    const modalSidebar = document.querySelector(
+      "#pst-primary-sidebar-modal > div.sidebar-primary-items__start.sidebar-primary__section",
+    );
+    if (modalSidebar) {
+      modalSidebar.style.opacity = "0.1";
+    }
   }
 
-  // Collapse the search bar input and hide any results
   function collapseSearchInput() {
     RESULTS.style.display = "none";
     SEARCH_INPUT.classList.remove("expanded");
     SEARCH_INPUT.value = "";
     MAIN_PAGE_CONTENT.classList.remove("blurred");
-  }
-
-  // Truncate the preview of the text
-  function truncateTextPreview(text, maxLength = 200) {
-    if (text.length <= maxLength) {
-      return text; // If the text is already within the limit, return as is
+    CURRENT_INDEX = -1;
+    const modalSidebar = document.querySelector(
+      "#pst-primary-sidebar-modal > div.sidebar-primary-items__start.sidebar-primary__section",
+    );
+    if (modalSidebar) {
+      modalSidebar.style.opacity = "1";
     }
-    return text.slice(0, maxLength) + "...";
   }
 
-  // Display search results
+  function noResultsFoundBanner() {
+    RESULTS.innerHTML = "";
+    RESULTS.style.display = "flex";
+    const banner = document.createElement("div");
+    banner.className = "warning-banner";
+    banner.textContent = "No results found. Press Enter for extended search.";
+    banner.style.fontStyle = "italic";
+    RESULTS.appendChild(banner);
+  }
+
+  function searchingForResultsBanner() {
+    RESULTS.innerHTML = "";
+    RESULTS.style.display = "flex";
+    const banner = document.createElement("div");
+    banner.className = "searching-banner";
+    banner.textContent = "Searching...";
+    banner.style.fontStyle = "italic";
+    RESULTS.appendChild(banner);
+  }
+
   function displayResults(results) {
-    if (!RESULTS) {
-      console.error("RESULTS element is not defined.");
-      return;
-    }
+    RESULTS.innerHTML = "";
 
     if (results.length === 0) {
       noResultsFoundBanner();
-      RESULTS.style.display = "none";
       return;
     }
 
-    RESULTS.style.display = "flex";
-    RESULTS.innerHTML = "";
-
     const fragment = document.createDocumentFragment();
 
-    results.forEach((result) => {
-      const { title, text, href } = result.item;
-
+    results.forEach(({ item: { title, text, href } }) => {
       const resultItem = document.createElement("div");
       resultItem.className = "result-item";
       resultItem.dataset.href = href;
@@ -87,21 +116,20 @@ require(["fuse"], function (Fuse) {
       const resultTitle = document.createElement("div");
       resultTitle.className = "result-title";
       resultTitle.textContent = title;
-      resultItem.appendChild(resultTitle);
 
       const resultText = document.createElement("div");
       resultText.className = "result-text";
-      const highlightedText = truncateTextPreview(text);
-      resultText.textContent = highlightedText;
-      resultItem.appendChild(resultText);
+      resultText.textContent = truncateTextPreview(text);
 
+      resultItem.appendChild(resultTitle);
+      resultItem.appendChild(resultText);
       fragment.appendChild(resultItem);
     });
 
     RESULTS.appendChild(fragment);
+    RESULTS.style.display = "flex";
   }
 
-  // Focus the selected result item
   function focusSelected(resultsItems) {
     if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultsItems.length) {
       resultsItems.forEach((item) => item.classList.remove("selected"));
@@ -112,65 +140,27 @@ require(["fuse"], function (Fuse) {
     }
   }
 
-  // Display a banner indicating that the search is running
-  function noResultsFoundBanner() {
-    RESULTS.innerHTML = "";
-    RESULTS.style.display = "flex";
-    const warningBanner = document.createElement("div");
-    warningBanner.className = "warning-banner";
-    warningBanner.textContent =
-      "No results found. Press Enter for extended search.";
-    warningBanner.style.display = "block";
-    warningBanner.style.fontStyle = "italic";
-    RESULTS.appendChild(warningBanner);
-  }
+  // -------------------------------------
+  // Search Logic
+  // -------------------------------------
 
-  // Build the complete hyperlink for the target file
-  function getDynamicPath(targetFile) {
-    const contentRoot =
-      document.documentElement.getAttribute("data-content_root");
-    return `${contentRoot}${targetFile}`;
-  }
-
-  // Navigate to the desired file
-  function navigateToHref(href) {
-    const finalUrl = getDynamicPath(href);
-    window.location.href = finalUrl;
-  }
-
-  // Display a banner indicating that no results were found
-  function searchingForResultsBanner() {
-    RESULTS.innerHTML = "";
-    RESULTS.style.display = "flex";
-    const searchingBanner = document.createElement("div");
-    searchingBanner.className = "searching-banner";
-    searchingBanner.textContent = "Searching...";
-    searchingBanner.style.display = "block";
-    searchingBanner.style.fontStyle = "italic";
-    RESULTS.appendChild(searchingBanner);
-  }
-
-  // Handle search input
   const handleSearchInput = debounce(
     () => {
       const query = SEARCH_INPUT.value.trim();
-      if (query.length > 0) {
-        const searchResults = fuse.search(query, {
-          limit: parseInt(SEARCH_OPTIONS.limit),
-        });
-        if (searchResults.length === 0) {
-          noResultsFoundBanner();
-        } else {
-          displayResults(searchResults);
-        }
-      } else {
+      if (!query) {
         RESULTS.style.display = "none";
+        return;
       }
+
+      const searchResults = fuse.search(query, {
+        limit: parseInt(SEARCH_OPTIONS.limit),
+      });
+
+      displayResults(searchResults);
     },
     parseInt(SEARCH_OPTIONS.delay) || 300,
   );
 
-  // Handle keydown event for the search input
   function handleKeyDownSearchInput(event) {
     const resultItems = RESULTS.querySelectorAll(".result-item");
 
@@ -181,26 +171,25 @@ require(["fuse"], function (Fuse) {
 
       case "Escape":
         collapseSearchInput();
-        break; // Added break to avoid fall-through
+        break;
 
       case "Enter":
-        // Optionally handle Enter key here
-        if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultItems.length) {
-          event.preventDefault(); // Prevent default enter action
-          const href = resultItems[CURRENT_INDEX].dataset.href;
+        event.preventDefault();
+        const indexToNavigate =
+          CURRENT_INDEX >= 0 && CURRENT_INDEX < resultItems.length
+            ? CURRENT_INDEX
+            : resultItems.length > 0
+              ? 0
+              : -1;
+        if (indexToNavigate >= 0) {
+          const href = resultItems[indexToNavigate].dataset.href;
           navigateToHref(href);
         }
-        if (resultItems.length > 0) {
-          event.preventDefault(); // Prevent default enter action
-          const href = resultItems[0].dataset.href;
-          navigateToHref(href);
-        }
-
         break;
 
       case "ArrowDown":
         if (resultItems.length > 0) {
-          CURRENT_INDEX = (CURRENT_INDEX + 1) % resultItems.length; // Move down
+          CURRENT_INDEX = (CURRENT_INDEX + 1) % resultItems.length;
           focusSelected(resultItems);
         }
         break;
@@ -208,13 +197,12 @@ require(["fuse"], function (Fuse) {
       case "ArrowUp":
         if (resultItems.length > 0) {
           CURRENT_INDEX =
-            (CURRENT_INDEX - 1 + resultItems.length) % resultItems.length; // Move up
+            (CURRENT_INDEX - 1 + resultItems.length) % resultItems.length;
           focusSelected(resultItems);
         }
         break;
 
       default:
-        // if environment variable "FUSE_ACTIVE" is set to true
         if (
           document.documentElement.getAttribute("data-fuse_active") === "true"
         ) {
@@ -227,27 +215,9 @@ require(["fuse"], function (Fuse) {
     }
   }
 
-  // Handle keydown event globally
-  function handleGlobalKeyDown(event) {
-    switch (event.key) {
-      case "k":
-        if (event.ctrlKey) {
-          expandSearchInput();
-        }
-        break;
-
-      case "Escape":
-        collapseSearchInput();
-        break;
-    }
-  }
-
-  // Handle click event globally
-  function handleGlobalClick(event) {
-    if (!RESULTS.contains(event.target) && event.target !== SEARCH_INPUT) {
-      collapseSearchInput();
-    }
-  }
+  // -------------------------------------
+  // Setup and Events
+  // -------------------------------------
 
   function setupSearchElements() {
     if (window.innerWidth < 1200) {
@@ -264,9 +234,10 @@ require(["fuse"], function (Fuse) {
 
     if (!SEARCH_BAR) {
       console.warn("SEARCH_BAR not found for current view.");
+      return;
     }
 
-    SEARCH_INPUT = SEARCH_BAR?.querySelector(".bd-search input.form-control");
+    SEARCH_INPUT = SEARCH_BAR.querySelector(".bd-search input.form-control");
 
     if (SEARCH_INPUT) {
       SEARCH_INPUT.addEventListener("click", expandSearchInput);
@@ -274,18 +245,34 @@ require(["fuse"], function (Fuse) {
     }
   }
 
-  // Initial setup
+  function handleGlobalKeyDown(event) {
+    if (event.key === "Escape") {
+      collapseSearchInput();
+    } else if (event.key === "k" && event.ctrlKey) {
+      expandSearchInput();
+    }
+  }
+
+  function handleGlobalClick(event) {
+    if (!RESULTS.contains(event.target) && event.target !== SEARCH_INPUT) {
+      collapseSearchInput();
+    }
+  }
+
+  // -------------------------------------
+  // Initialize
+  // -------------------------------------
+
   setupSearchElements();
-
-  // Re-run on resize
-  window.addEventListener("resize", debounce(setupSearchElements, 250));
-
-  SEARCH_INPUT.addEventListener("click", expandSearchInput);
-  SEARCH_INPUT.addEventListener("keydown", handleKeyDownSearchInput);
+  window.addEventListener(
+    "resize",
+    debounce(() => {
+      setupSearchElements(); // re-detect and re-bind search input
+    }, 250),
+  );
   document.addEventListener("keydown", handleGlobalKeyDown);
   document.addEventListener("click", handleGlobalClick);
 
-  // Fetch search data and initialize Fuse
   fetch(SEARCH_FILE)
     .then((response) => {
       if (!response.ok) {
@@ -293,8 +280,15 @@ require(["fuse"], function (Fuse) {
       }
       return response.json();
     })
-    .then((SEARCH_DATA) => initializeFuse(SEARCH_DATA, SEARCH_OPTIONS))
-    .catch((error) =>
-      console.error(`[AST]: Can not fetch ${SEARCH_FILE}`, error.message),
-    );
+    .then((SEARCH_DATA) => {
+      initializeFuse(SEARCH_DATA, SEARCH_OPTIONS);
+    })
+    .catch((error) => {
+      console.error(`[AST]: Cannot fetch ${SEARCH_FILE}`, error.message);
+    });
+
+  function initializeFuse(data, options) {
+    fuse = new Fuse(data, options);
+    document.documentElement.setAttribute("data-fuse_active", "true");
+  }
 });
