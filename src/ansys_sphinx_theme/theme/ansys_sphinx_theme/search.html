@@ -2,78 +2,6 @@
 
 {% block docs_body %}
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
-<style>
-    .result-item { border: 1px solid #ddd; padding: 10px; margin-bottom: 5px; cursor: pointer; }
-    .dropdown-menu.show { display: block; }
-    .dropdown-item { padding: 10px; cursor: pointer; }
-    .chip { display: inline-block; background: #ddd; padding: 5px 10px; border-radius: 15px; margin: 5px; }
-    .chip .close { cursor: pointer; margin-left: 5px; }
-    .chip .dropdown-item { padding: 5px 10px; cursor: pointer; }
-    #search-input {
-        width: 100%;
-        max-width: 600px; /* You can adjust this as needed */
-        padding: 10px;
-        margin-bottom: 10px;
-    }
-    .checkbox-item {
-      display: flex;
-      align-items: center;
-      margin: 5px 0;
-    }
-    .chip {
-      background-color: #e0e0e0;
-      border-radius: 16px;
-      padding: 5px 10px;
-      display: flex;
-      align-items: center;
-      font-size: 14px;
-    }
-
-    .chip .remove-btn {
-      margin-left: 8px;
-      background: none;
-      border: none;
-      color: #555;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .chip .remove-btn:hover {
-      color: red;
-    }
-    .filter-wrapper {
-      position: relative;
-      display: inline-block;
-    }
-
-    .filter-wrapper .dropdown-toggle {
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-
-
-#objectid-dropdown {
-  position: relative;
-  top: 100%; /* Places it directly below the button */
-  left: 10px;
-  background-color: transparent;
-  border: none;
-  display: none; /* Hidden by default */
-}
-
-#library-dropdown {
-  position: relative;
-  top: 100%; /* Places it directly below the button */
-  left: 10px;
-  background-color: transparent;
-  border: none;
-  display: none; /* Hidden by default */
-}
-
-</style>
 
 <div class="bd-search-container">
   <h1>{{ _("Search") }}</h1>
@@ -89,195 +17,196 @@
   <div class="results" id="search-results"></div>
 </div>
 
-  <script>
-    let fuse;
-    let searchData = [];
-    let selectedFilter = new Set();
-    let selectedObjectIDs = [];
-    let selectedLibraries = [];
+<script>
+  let fuse;
+  let searchData = [];
+  let selectedFilter = new Set();
+  let selectedObjectIDs = [];
+  let selectedLibraries = [];
 
-    const SEARCH_FILE_1 = "{{ pathto('_static/search.json', 1) }}";
+  const SEARCH_FILE_1 = "{{ pathto('_static/search.json', 1) }}";
 
-    async function initializeSearch() {
-      try {
-        const response = await fetch(SEARCH_FILE_1);
-        searchData = await response.json();
-        fuse = new Fuse(searchData, {
-          keys: ["title", "text", "objectID"],
-          includeScore: true,
-          threshold: 0.3,
-        });
-        setupPrimaryDropdown();
-      } catch (err) {
-        console.error("Search init failed", err);
-      }
+  async function initializeSearch() {
+    try {
+      const response = await fetch(SEARCH_FILE_1);
+      searchData = await response.json();
+      fuse = new Fuse(searchData, {
+        keys: ["title", "text", "objectID"],
+        includeScore: true,
+        threshold: 0.3,
+      });
+      setupPrimaryDropdown();
+    } catch (err) {
+      console.error("Search init failed", err);
     }
+  }
 
-    function setupPrimaryDropdown() {
+  function setupPrimaryDropdown() {
 
-      const selectButton = document.getElementById("filter-btn");
-        selectButton.addEventListener("click", () => {
-          const dropdown = document.getElementById("search-sidebar");
-          dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-        });
-      const filters = [
-      { name: "Documents", dropdownId: "objectid-dropdown", callback: showObjectIdDropdown },
-      { name: "Library", dropdownId: "library-dropdown", callback: ShowLibraryDropDown }
+    const selectButton = document.getElementById("filter-btn");
+    selectButton.addEventListener("click", () => {
+      const dropdown = document.getElementById("search-sidebar");
+      dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+    });
+    const filters = [
+    { name: "Documents", dropdownId: "objectid-dropdown", callback: showObjectIdDropdown },
+    { name: "Library", dropdownId: "library-dropdown", callback: ShowLibraryDropDown }
     ];
     const dropdownContainer = document.getElementById("search-sidebar");
 
 
-      filters.forEach(({ name, dropdownId, callback }) => {
-      // Create toggle section
-      const toggleDiv = document.createElement("div");
-      toggleDiv.className = "search-page-sidebar toggle-section";
-      toggleDiv.dataset.target = dropdownId;
+    filters.forEach(({ name, dropdownId, callback }) => {
+    // Create toggle section
+    const toggleDiv = document.createElement("div");
+    toggleDiv.className = "search-page-sidebar toggle-section";
+    toggleDiv.dataset.target = dropdownId;
 
-      const icon = document.createElement("span");
-      icon.className = "toggle-icon";
-      icon.textContent = "›";
+    const icon = document.createElement("span");
+    icon.className = "toggle-icon";
+    icon.textContent = "›";
 
-      const label = document.createElement("span");
-      label.className = "toggle-label";
-      label.textContent = name;
+    const label = document.createElement("span");
+    label.className = "toggle-label";
+    label.textContent = name;
 
-      toggleDiv.appendChild(icon);
-      toggleDiv.appendChild(label);
+    toggleDiv.appendChild(icon);
+    toggleDiv.appendChild(label);
 
-      // Create hidden dropdown
-      const dropdown = document.createElement("div");
-      dropdown.id = dropdownId;
-      dropdown.className = "dropdown-menu show";
-      dropdown.style.display = "none";
-      dropdown.style.marginTop = "10px";
+    // Create hidden dropdown
+    const dropdown = document.createElement("div");
+    dropdown.id = dropdownId;
+    dropdown.className = "dropdown-menu show";
+    dropdown.style.display = "none";
+    dropdown.style.marginTop = "10px";
 
-      // Click handler for toggle
-      toggleDiv.addEventListener("click", () => {
-        const isVisible = dropdown.style.display === "block";
-        dropdown.style.display = isVisible ? "none" : "block";
-        icon.textContent = isVisible ? "›" : "⌄";
+    // Click handler for toggle
+    toggleDiv.addEventListener("click", () => {
+      const isVisible = dropdown.style.display === "block";
+      dropdown.style.display = isVisible ? "none" : "block";
+      icon.textContent = isVisible ? "›" : "⌄";
 
-        if (isVisible) {
-          selectedFilter.delete(name);
-          toggleDiv.classList.remove("active");
-        } else {
-          selectedFilter.add(name);
-          toggleDiv.classList.add("active");
-          callback?.();
-        }
+      if (isVisible) {
+        selectedFilter.delete(name);
+        toggleDiv.classList.remove("active");
+      } else {
+        selectedFilter.add(name);
+        toggleDiv.classList.add("active");
+        callback?.();
+      }
 
-        performSearch?.();
-      });
-
-      dropdownContainer.appendChild(toggleDiv);
-      dropdownContainer.appendChild(dropdown);
+      performSearch?.();
     });
-  }
-    function showObjectIdDropdown() {
-      const dropdown = document.getElementById("objectid-dropdown");
-      dropdown.innerHTML = "";
 
-      const objectIDs = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
+    dropdownContainer.appendChild(toggleDiv);
+    dropdownContainer.appendChild(dropdown);
+  });
+}
 
-      objectIDs.forEach(id => {
-        const div = document.createElement("div");
-        div.className = "checkbox-item";
+function showObjectIdDropdown() {
+  const dropdown = document.getElementById("objectid-dropdown");
+  dropdown.innerHTML = "";
 
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.value = id;
-        checkbox.checked = selectedObjectIDs.includes(id);
-        checkbox.onchange = (e) => {
-          if (e.target.checked) {
-            selectedObjectIDs.push(id);
-          } else {
-            selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
-          }
-          renderSelectedChips();
-          performSearch();
-        };
+  const objectIDs = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
 
-        const label = document.createElement("label");
-        label.textContent = id;
-        label.style.marginLeft = "8px";
+  objectIDs.forEach(id => {
+    const div = document.createElement("div");
+    div.className = "checkbox-item";
 
-        div.appendChild(checkbox);
-        div.appendChild(label);
-        dropdown.appendChild(div);
-      });
-
-      dropdown.style.display = "block";
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = id;
+    checkbox.checked = selectedObjectIDs.includes(id);
+    checkbox.onchange = (e) => {
+      if (e.target.checked) {
+        selectedObjectIDs.push(id);
+      } else {
+        selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
+      }
       renderSelectedChips();
-    }
+      performSearch();
+    };
 
-  function ShowLibraryDropDown() {
-    const libraryDropdown = document.getElementById("library-dropdown");
-    libraryDropdown.innerHTML = "";
-    libraryDropdown.style.display = "none";
+    const label = document.createElement("label");
+    label.textContent = id;
+    label.style.marginLeft = "8px";
 
-    for (const lib in extra_sources) {
-      const div = document.createElement("div");
-      div.className = "checkbox-item";
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.value = lib;
-      console.log("Checkbox value:", lib);
-      checkbox.checked = selectedLibraries.includes(lib);
+    div.appendChild(checkbox);
+    div.appendChild(label);
+    dropdown.appendChild(div);
+  });
 
-      checkbox.onchange = (e) => {
-        if (e.target.checked) {
-          selectedLibraries.push(lib);
-        } else {
-          selectedLibraries = selectedLibraries.filter(val => val !== lib);
-        }
-        renderSelectedLibrariesChips();
-        performSearch();
-      };
-      const label = document.createElement("label");
-      label.textContent = lib;
-      label.style.marginLeft = "8px";
-
-      div.appendChild(checkbox);
-      div.appendChild(label);
-      libraryDropdown.appendChild(div);
-    }
-    libraryDropdown.style.display = "block";
-
-    renderSelectedLibrariesChips();
+  dropdown.style.display = "block";
+  renderSelectedChips();
   }
 
+function ShowLibraryDropDown() {
+  const libraryDropdown = document.getElementById("library-dropdown");
+  libraryDropdown.innerHTML = "";
+  libraryDropdown.style.display = "none";
 
-    function hideLibraryDropDown() {
-      const dropdown = document.getElementById("objectid-dropdown");
-      dropdown.style.display = "none";
-    }
+  for (const lib in extra_sources) {
+    const div = document.createElement("div");
+    div.className = "checkbox-item";
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = lib;
+    console.log("Checkbox value:", lib);
+    checkbox.checked = selectedLibraries.includes(lib);
 
-    function renderSelectedLibrariesChips() {
-      const chipContainer = document.getElementById("selected-chips");
-      chipContainer.innerHTML = "";
-      console.log("Selected Libraries:", selectedLibraries);
+    checkbox.onchange = (e) => {
+      if (e.target.checked) {
+        selectedLibraries.push(lib);
+      } else {
+        selectedLibraries = selectedLibraries.filter(val => val !== lib);
+      }
+      renderSelectedLibrariesChips();
+      performSearch();
+    };
+    const label = document.createElement("label");
+    label.textContent = lib;
+    label.style.marginLeft = "8px";
 
-      selectedLibraries.forEach(id => {
-        const chip = document.createElement("div");
-        chip.className = "chip";
-        chip.textContent = id;
+    div.appendChild(checkbox);
+    div.appendChild(label);
+    libraryDropdown.appendChild(div);
+  }
+  libraryDropdown.style.display = "block";
 
-        const removeBtn = document.createElement("button");
-        removeBtn.className = "remove-btn";
-        removeBtn.innerHTML = "&times;";
-        removeBtn.onclick = () => {
-          selectedLibraries = selectedLibraries.filter(val => val !== id);
-          renderSelectedLibrariesChips
-          ShowLibraryDropDown();
-          performSearch();
-        };
+  renderSelectedLibrariesChips();
+}
 
-        chip.appendChild(removeBtn);
-        chipContainer.appendChild(chip);
-      });
-    }
 
-  function renderSelectedChips() {
+function hideLibraryDropDown() {
+  const dropdown = document.getElementById("objectid-dropdown");
+  dropdown.style.display = "none";
+}
+
+function renderSelectedLibrariesChips() {
+  const chipContainer = document.getElementById("selected-chips");
+  chipContainer.innerHTML = "";
+  console.log("Selected Libraries:", selectedLibraries);
+
+  selectedLibraries.forEach(id => {
+    const chip = document.createElement("div");
+    chip.className = "chip";
+    chip.textContent = id;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "remove-btn";
+    removeBtn.innerHTML = "&times;";
+    removeBtn.onclick = () => {
+      selectedLibraries = selectedLibraries.filter(val => val !== id);
+      renderSelectedLibrariesChips
+      ShowLibraryDropDown();
+      performSearch();
+    };
+
+    chip.appendChild(removeBtn);
+    chipContainer.appendChild(chip);
+  });
+}
+
+function renderSelectedChips() {
   const chipContainer = document.getElementById("selected-chips");
   chipContainer.innerHTML = "";
 
@@ -367,8 +296,13 @@ async function performSearch() {
     return;
   }
 
-  displayResults(mergedResults);
+  // Highlight the keyword in the results
+  const trimmedResults = trimresultsAndHighlight(mergedResults, query);
+
+  displayResults(trimmedResults);
 }
+
+// Adjust the lib results with cname
 
 
 function displayResults(results) {
@@ -381,16 +315,16 @@ function displayResults(results) {
 
     // Title as a clickable link
     const title = document.createElement("a");
-    title.href = item.link || "#";
+    title.href = item.href || item.link || "#";
     title.target = "_blank";
-    title.textContent = item.title || "Untitled";
+    title.innerHTML = item.title || "Untitled";
     title.className = "result-title";
     div.appendChild(title);
 
     // Optional text/description
     if (item.text) {
       const text = document.createElement("p");
-      text.textContent = item.text;
+      text.innerHTML = item.text;
       text.className = "result-text";
       div.appendChild(text);
     }
@@ -408,15 +342,55 @@ function displayResults(results) {
 }
 
 
-    document.getElementById("filter-btn").addEventListener("click", () => {
-      const dropdown = document.getElementById("filter-dropdown");
-      dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-    });
+function trimresultsAndHighlight(results, query) {
+  const highlightRegex = new RegExp(`(${query})`, "gi");
 
-    document.getElementById("search-input").addEventListener("input", performSearch);
+  return results.map(result => {
+    const text = result.text;
+    // also results title
+    const title = result.title;
+    const lowerText = text.toLowerCase();
+    const lowerQuery = query.toLowerCase();
+    const matchIndex = lowerText.indexOf(lowerQuery);
+    const titleMatchIndex = title.toLowerCase().indexOf(lowerQuery);
 
-    initializeSearch();
-  </script>
+    if (matchIndex === -1) {
+      // No match, return none
+      return
+    }
+
+    const contextLength = 100; // half of 200
+    const start = Math.max(matchIndex - contextLength, 0);
+    const end = Math.min(matchIndex + contextLength, text.length);
+
+    let trimmedText = text.slice(start, end);
+
+    // Add ellipsis if text was trimmed from the start or end
+    if (start > 0) trimmedText = "…" + trimmedText;
+    if (end < text.length) trimmedText = trimmedText + "…";
+
+    // Highlight query matches in the title
+    if (titleMatchIndex !== -1) {
+      highlightedTitle = title.replace(highlightRegex, `<span class="highlight">$1</span>`);
+    }
+
+    // Highlight query matches in the trimmed text
+    const highlightedText = trimmedText.replace(highlightRegex, `<span class="highlight">$1</span>`);
+
+    return { ...result, text: highlightedText, title: highlightedTitle };
+  });
+}
+
+
+  document.getElementById("filter-btn").addEventListener("click", () => {
+    const dropdown = document.getElementById("filter-dropdown");
+    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
+  });
+
+  document.getElementById("search-input").addEventListener("input", performSearch);
+
+  initializeSearch();
+</script>
 
 {% endblock %}
 
