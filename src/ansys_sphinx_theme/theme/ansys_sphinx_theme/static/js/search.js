@@ -3,24 +3,6 @@ let SEARCH_BAR;
 let RESULTS;
 let SEARCH_INPUT;
 
-if (window.innerWidth < 1200) {
-  SEARCH_BAR = document.querySelector(
-    "div.sidebar-header-items__end #search-bar",
-  );
-  RESULTS = document.querySelector(
-    "div.sidebar-header-items__end .static-search-results",
-  );
-} else {
-  SEARCH_BAR = document.getElementById("search-bar");
-  RESULTS = document.querySelector(".static-search-results");
-}
-
-if (!SEARCH_BAR) {
-  console.warn("SEARCH_BAR not found for current view.");
-}
-
-SEARCH_INPUT = SEARCH_BAR?.querySelector(".bd-search input.form-control");
-
 const MAIN_PAGE_CONTENT = document.querySelector(".bd-main");
 let CURRENT_INDEX = -1;
 
@@ -266,6 +248,37 @@ require(["fuse"], function (Fuse) {
       collapseSearchInput();
     }
   }
+
+  function setupSearchElements() {
+    if (window.innerWidth < 1200) {
+      SEARCH_BAR = document.querySelector(
+        "div.sidebar-header-items__end #search-bar",
+      );
+      RESULTS = document.querySelector(
+        "div.sidebar-header-items__end .static-search-results",
+      );
+    } else {
+      SEARCH_BAR = document.getElementById("search-bar");
+      RESULTS = document.querySelector(".static-search-results");
+    }
+
+    if (!SEARCH_BAR) {
+      console.warn("SEARCH_BAR not found for current view.");
+    }
+
+    SEARCH_INPUT = SEARCH_BAR?.querySelector(".bd-search input.form-control");
+
+    if (SEARCH_INPUT) {
+      SEARCH_INPUT.addEventListener("click", expandSearchInput);
+      SEARCH_INPUT.addEventListener("keydown", handleKeyDownSearchInput);
+    }
+  }
+
+  // Initial setup
+  setupSearchElements();
+
+  // Re-run on resize
+  window.addEventListener("resize", debounce(setupSearchElements, 250));
 
   SEARCH_INPUT.addEventListener("click", expandSearchInput);
   SEARCH_INPUT.addEventListener("keydown", handleKeyDownSearchInput);
