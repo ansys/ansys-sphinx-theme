@@ -84,8 +84,8 @@ html_theme_options = {
         },
     },
     "search_extra_sources": {
-        "PyDPF Core": "https:/dpf.docs.pyansys.com/version/stable/_static/search.json",
-        "Actions": "https://actions.docs.ansys.com/version/stable/_static/search.json",
+        "PyDPF Core": "https:/dpf.docs.pyansys.com/version/stable/",
+        "Actions": "https://actions.docs.ansys.com/version/stable/",
     },
 }
 

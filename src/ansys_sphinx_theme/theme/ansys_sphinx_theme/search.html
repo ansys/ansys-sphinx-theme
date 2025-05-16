@@ -229,15 +229,16 @@ async function performSearch() {
     let allEntries = [];
 
     for (const lib of selectedLibraries) {
-      const url = extra_sources[lib];
+      const cname = extra_sources[lib];
+      const searchUrl = `${cname}/_static/search.json`;
       try {
-        const res = await fetch(url);
+        const res = await fetch(searchUrl);
         const data = await res.json();
 
         const enrichedEntries = data.map(entry => ({
           title: entry.title,
           text: entry.text,
-          link: entry.href,
+          link: `${cname}${entry.href}`,
           source: lib
         }));
 
