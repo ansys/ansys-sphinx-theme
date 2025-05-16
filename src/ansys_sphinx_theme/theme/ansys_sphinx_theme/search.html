@@ -1,7 +1,7 @@
 {%- extends "page.html" %}
 
 {% block docs_body %}
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 
 <div class="bd-search-container">
   <h1>{{ _("Search") }}</h1>
@@ -18,13 +18,21 @@
 </div>
 
 <script>
-  let fuse;
-  let searchData = [];
-  let selectedObjectIDs = [];
-  let selectedLibraries = [];
+  require.config({
+    paths: {
+      fuse: "https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min"
+    }
+  });
 
-  let selectedFilter = new Set();
-  const SEARCH_FILE_1 = "{{ pathto('_static/search.json', 1) }}";
+  require(['fuse'], function(Fuse) {
+    console.log("Fuse.js loaded successfully");
+     let fuse;
+    let searchData = [];
+    let selectedObjectIDs = [];
+    let selectedLibraries = [];
+
+    let selectedFilter = new Set();
+    const SEARCH_FILE_1 = "{{ pathto('_static/search.json', 1) }}";
 
   /**
   * Initializes the search system by loading the document search index.
@@ -342,6 +350,7 @@ function displayResults(results) {
   document.getElementById("search-input").addEventListener("input", performSearch);
 
   initializeSearch();
+  });
 </script>
 
 {% endblock %}

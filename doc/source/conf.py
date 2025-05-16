@@ -75,17 +75,20 @@ html_theme_options = {
         "threshold": 0.2,
         "limit": 7,
         "minMatchCharLength": 3,
-        "filters": {
-            # Filter name - directory
-            "User Guide": ["user-guide/", "getting-started/", "index/"],
-            "Release Notes": ["changelog"],
-            "Examples": ["examples/"],
-            "contributing": ["contribe/"],
-        },
     },
     "search_extra_sources": {
         "PyDPF Core": "https:/dpf.docs.pyansys.com/version/stable/",
         "Actions": "https://actions.docs.ansys.com/version/stable/",
+    },
+    "search_filters": {
+        "User Guide": [
+            "user-guide/",
+            "getting-started/",
+            "index/",
+        ],
+        "Release Notes": ["changelog"],
+        "Examples": ["examples/"],
+        "contributing": ["contribute/"],
     },
 }
 

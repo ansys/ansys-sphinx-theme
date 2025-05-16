@@ -99,10 +99,7 @@ require(["fuse"], function (Fuse) {
     // Add Advanced Search Option
     const advancedSearchItem = document.createElement("div");
     advancedSearchItem.className = "result-item advanced-search";
-    advancedSearchItem.innerHTML = `
-    <span class="search-icon">🔍</span>
-    <span>Advanced Search</span>
-  `;
+    advancedSearchItem.innerHTML = `<a href="${ADVANCE_SEARCH_PATH}">View all</a>`;
     advancedSearchItem.addEventListener("click", () => {
       window.location.href = ADVANCE_SEARCH_PATH;
     });

@@ -119,28 +119,6 @@ class SearchIndex:
                 }
             )
 
-    def _process_obj_id_with_filter(self):
-        """Process object ID based on filter options."""
-        # Example filter options:
-        # self.filter_options = {
-        #     "User Guide": ["user-guide/", "getting-started/", "index/"],
-        #     "Release Notes": ["changelog"]
-        # }
-
-        # Extract the section name from the document path
-        # section_name = self.doc_name.split("/")[0]
-
-        # Determine the object ID based on filter options
-        # for key, values in self.filter_options.items():
-        #     if section_name in values or any(
-        #         section_name.startswith(v.rstrip("/")) for v in values
-        #     ):
-        #         self.object_id = key
-        #         return
-
-        # Default to the document name if no match is found
-        self.object_id = self.doc_name.split("/")[0].upper()
-
     def generate_breadcrumbs(self, section_title: str) -> str:
         """
         Generate title breadcrumbs from the document structure.
@@ -186,7 +164,7 @@ class SearchIndex:
         """Generate indices for each section."""
         for section in self.sections:
             breadcrumbs = self.generate_breadcrumbs(section["title"])
-            self._process_obj_id_with_filter()
+            self.object_id = filter_search_documents(self.filter_options, self.doc_name)
             yield {
                 "objectID": self.object_id,
                 "href": f"{self.doc_path}#{section['anchor_id']}",
@@ -217,6 +195,17 @@ def get_pattern_for_each_page(app, doc_name):
     return DEFAULT_PATTERN
 
 
+def filter_search_documents(filters, doc_name):
+    """Filter search documents based on the provided filters."""
+    if not filters:
+        return doc_name
+    for key, values in filters.items():
+        for value in values:
+            if doc_name.startswith(value.rstrip("/")):
+                return key
+    return doc_name
+
+
 def create_search_index(app, exception):
     """
     Generate search index at the end of the Sphinx build process.
@@ -236,7 +225,7 @@ def create_search_index(app, exception):
     static_search_options = app.config.html_theme_options.get("static_search", {})
     excluded_docs = static_search_options.get("files_to_exclude", [])
     included_docs = app.env.found_docs
-    filter_options = static_search_options.get("filters", {})
+    filter_options = app.config.html_theme_options.get("search_filters", {})
 
     for exclude_doc in excluded_docs:
         exclude_doc = Path(exclude_doc).resolve()
