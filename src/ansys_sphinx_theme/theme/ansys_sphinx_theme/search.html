@@ -20,12 +20,15 @@
 <script>
   let fuse;
   let searchData = [];
-  let selectedFilter = new Set();
   let selectedObjectIDs = [];
   let selectedLibraries = [];
 
+  let selectedFilter = new Set();
   const SEARCH_FILE_1 = "{{ pathto('_static/search.json', 1) }}";
 
+  /**
+  * Initializes the search system by loading the document search index.
+  */
   async function initializeSearch() {
     try {
       const response = await fetch(SEARCH_FILE_1);
@@ -41,193 +44,159 @@
     }
   }
 
+  /**
+  * Sets up the filter dropdown and its toggle interactions.
+  */
   function setupPrimaryDropdown() {
-
     const selectButton = document.getElementById("filter-btn");
-    selectButton.addEventListener("click", () => {
-      const dropdown = document.getElementById("search-sidebar");
-      dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-    });
-    const filters = [
-    { name: "Documents", dropdownId: "objectid-dropdown", callback: showObjectIdDropdown },
-    { name: "Library", dropdownId: "library-dropdown", callback: ShowLibraryDropDown }
-    ];
     const dropdownContainer = document.getElementById("search-sidebar");
 
-
-    filters.forEach(({ name, dropdownId, callback }) => {
-    // Create toggle section
-    const toggleDiv = document.createElement("div");
-    toggleDiv.className = "search-page-sidebar toggle-section";
-    toggleDiv.dataset.target = dropdownId;
-
-    const icon = document.createElement("span");
-    icon.className = "toggle-icon";
-    icon.textContent = "›";
-
-    const label = document.createElement("span");
-    label.className = "toggle-label";
-    label.textContent = name;
-
-    toggleDiv.appendChild(icon);
-    toggleDiv.appendChild(label);
-
-    // Create hidden dropdown
-    const dropdown = document.createElement("div");
-    dropdown.id = dropdownId;
-    dropdown.className = "dropdown-menu show";
-    dropdown.style.display = "none";
-    dropdown.style.marginTop = "10px";
-
-    // Click handler for toggle
-    toggleDiv.addEventListener("click", () => {
-      const isVisible = dropdown.style.display === "block";
-      dropdown.style.display = isVisible ? "none" : "block";
-      icon.textContent = isVisible ? "›" : "⌄";
-
-      if (isVisible) {
-        selectedFilter.delete(name);
-        toggleDiv.classList.remove("active");
-      } else {
-        selectedFilter.add(name);
-        toggleDiv.classList.add("active");
-        callback?.();
-      }
-
-      performSearch?.();
+    selectButton.addEventListener("click", () => {
+      dropdownContainer.style.display = dropdownContainer.style.display === "none" ? "block" : "none";
     });
 
-    dropdownContainer.appendChild(toggleDiv);
-    dropdownContainer.appendChild(dropdown);
-  });
-}
+    const filters = [
+      { name: "Documents", dropdownId: "objectid-dropdown", callback: showObjectIdDropdown },
+      { name: "Library", dropdownId: "library-dropdown", callback: showLibraryDropdown },
+    ];
 
-function showObjectIdDropdown() {
-  const dropdown = document.getElementById("objectid-dropdown");
-  dropdown.innerHTML = "";
+    filters.forEach(({ name, dropdownId, callback }) => {
+      const toggleDiv = document.createElement("div");
+      toggleDiv.className = "search-page-sidebar toggle-section";
+      toggleDiv.dataset.target = dropdownId;
 
-  const objectIDs = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
+      const icon = document.createElement("span");
+      icon.className = "toggle-icon";
+      icon.textContent = "›";
 
-  objectIDs.forEach(id => {
+      const label = document.createElement("span");
+      label.className = "toggle-label";
+      label.textContent = name;
+
+      toggleDiv.append(icon, label);
+
+      const dropdown = document.createElement("div");
+      dropdown.id = dropdownId;
+      dropdown.className = "dropdown-menu show";
+      dropdown.style.display = "none";
+      dropdown.style.marginTop = "10px";
+
+      toggleDiv.addEventListener("click", () => {
+        const isVisible = dropdown.style.display === "block";
+        dropdown.style.display = isVisible ? "none" : "block";
+        icon.textContent = isVisible ? "›" : "⌄";
+
+        if (isVisible) {
+          selectedFilter.delete(name);
+          toggleDiv.classList.remove("active");
+        } else {
+          selectedFilter.add(name);
+          toggleDiv.classList.add("active");
+          callback?.();
+        }
+
+        performSearch();
+      });
+
+      dropdownContainer.append(toggleDiv, dropdown);
+    });
+  }
+
+  function showObjectIdDropdown() {
+    const dropdown = document.getElementById("objectid-dropdown");
+    dropdown.innerHTML = "";
+
+    const objectIDs = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
+
+    objectIDs.forEach(id => {
+      const checkbox = createCheckboxItem(id, selectedObjectIDs, () => {
+        renderSelectedChips();
+        performSearch();
+      });
+      dropdown.appendChild(checkbox);
+    });
+
+    dropdown.style.display = "block";
+    // render the chips along with selected libraries
+    renderSelectedChips();
+  }
+
+  function showLibraryDropdown() {
+    const dropdown = document.getElementById("library-dropdown");
+    dropdown.innerHTML = "";
+
+    for (const lib in extra_sources) {
+      const checkbox = createCheckboxItem(lib, selectedLibraries, () => {
+        renderSelectedChips();
+        performSearch();
+      });
+      dropdown.appendChild(checkbox);
+    }
+
+    dropdown.style.display = "block";
+    renderSelectedChips();
+  }
+
+  function createCheckboxItem(value, selectedArray, onchnage){
     const div = document.createElement("div");
     div.className = "checkbox-item";
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.value = id;
-    checkbox.checked = selectedObjectIDs.includes(id);
+    checkbox.value = value;
+    checkbox.style.margin = "8px"
+    checkbox.checked = selectedArray.includes(value);
     checkbox.onchange = (e) => {
       if (e.target.checked) {
-        selectedObjectIDs.push(id);
+        selectedArray.push(value);
       } else {
-        selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
+        const index = selectedArray.indexOf(value);
+        if (index > -1) {
+          selectedArray.splice(index, 1);
+        }
       }
-      renderSelectedChips();
-      performSearch();
+      onchnage();
     };
 
     const label = document.createElement("label");
-    label.textContent = id;
-    label.style.marginLeft = "8px";
+    label.textContent = value;
 
     div.appendChild(checkbox);
     div.appendChild(label);
-    dropdown.appendChild(div);
-  });
-
-  dropdown.style.display = "block";
-  renderSelectedChips();
+    return div;
   }
 
-function ShowLibraryDropDown() {
-  const libraryDropdown = document.getElementById("library-dropdown");
-  libraryDropdown.innerHTML = "";
-  libraryDropdown.style.display = "none";
 
-  for (const lib in extra_sources) {
-    const div = document.createElement("div");
-    div.className = "checkbox-item";
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.value = lib;
-    console.log("Checkbox value:", lib);
-    checkbox.checked = selectedLibraries.includes(lib);
+  /**
+   * Renders chips for selected filters and binds remove logic.
+   */
+  function renderSelectedChips() {
+  const container = document.getElementById("selected-chips");
+  container.innerHTML = "";
 
-    checkbox.onchange = (e) => {
-      if (e.target.checked) {
-        selectedLibraries.push(lib);
-      } else {
-        selectedLibraries = selectedLibraries.filter(val => val !== lib);
-      }
-      renderSelectedLibrariesChips();
-      performSearch();
-    };
-    const label = document.createElement("label");
-    label.textContent = lib;
-    label.style.marginLeft = "8px";
-
-    div.appendChild(checkbox);
-    div.appendChild(label);
-    libraryDropdown.appendChild(div);
-  }
-  libraryDropdown.style.display = "block";
-
-  renderSelectedLibrariesChips();
-}
-
-
-function hideLibraryDropDown() {
-  const dropdown = document.getElementById("objectid-dropdown");
-  dropdown.style.display = "none";
-}
-
-function renderSelectedLibrariesChips() {
-  const chipContainer = document.getElementById("selected-chips");
-  chipContainer.innerHTML = "";
-  console.log("Selected Libraries:", selectedLibraries);
-
-  selectedLibraries.forEach(id => {
+  const renderChip = (value, type, selectedArray) => {
     const chip = document.createElement("div");
     chip.className = "chip";
-    chip.textContent = id;
+    chip.textContent = `${value} (${type})`;
 
     const removeBtn = document.createElement("button");
     removeBtn.className = "remove-btn";
     removeBtn.innerHTML = "&times;";
     removeBtn.onclick = () => {
-      selectedLibraries = selectedLibraries.filter(val => val !== id);
-      renderSelectedLibrariesChips
-      ShowLibraryDropDown();
-      performSearch();
-    };
-
-    chip.appendChild(removeBtn);
-    chipContainer.appendChild(chip);
-  });
-}
-
-function renderSelectedChips() {
-  const chipContainer = document.getElementById("selected-chips");
-  chipContainer.innerHTML = "";
-
-  selectedObjectIDs.forEach(id => {
-    const chip = document.createElement("div");
-    chip.className = "chip";
-    chip.textContent = id;
-
-    const removeBtn = document.createElement("button");
-    removeBtn.className = "remove-btn";
-    removeBtn.innerHTML = "&times;";
-    removeBtn.onclick = () => {
-      selectedObjectIDs = selectedObjectIDs.filter(val => val !== id);
+      const index = selectedArray.indexOf(value);
+      if (index !== -1) selectedArray.splice(index, 1);
       renderSelectedChips();
-      showObjectIdDropdown(); // To uncheck
+      if (type === "Documents") showObjectIdDropdown();
+      if (type === "Library") showLibraryDropdown();
       performSearch();
     };
 
     chip.appendChild(removeBtn);
-    chipContainer.appendChild(chip);
-  });
+    container.appendChild(chip);
+  };
+
+  selectedObjectIDs.forEach(id => renderChip(id, "Documents", selectedObjectIDs));
+  selectedLibraries.forEach(lib => renderChip(lib, "Library", selectedLibraries));
 }
 
 async function performSearch() {
@@ -297,31 +266,59 @@ async function performSearch() {
   }
 
   // Highlight the keyword in the results
-  const trimmedResults = trimresultsAndHighlight(mergedResults, query);
+  const highlightedResults = highlightResults(mergedResults, query);
 
-  displayResults(trimmedResults);
+  displayResults(highlightedResults);
 }
 
 // Adjust the lib results with cname
 
 
+/**
+ * Highlights matching query terms in the title and text.
+ */
+function highlightResults(results, query) {
+  const regex = new RegExp(`(${query})`, "gi");
+
+  return results.map(result => {
+    const matchIndex = result.text.toLowerCase().indexOf(query.toLowerCase());
+    if (matchIndex === -1) return null;
+
+    const contextLength = 100;
+    const start = Math.max(0, matchIndex - contextLength);
+    const end = Math.min(result.text.length, matchIndex + contextLength);
+    let snippet = result.text.slice(start, end);
+
+    if (start > 0) snippet = "…" + snippet;
+    if (end < result.text.length) snippet += "…";
+
+    return {
+      ...result,
+      title: result.title.replace(regex, `<span class="highlight">$1</span>`),
+      text: snippet.replace(regex, `<span class="highlight">$1</span>`),
+    };
+  }).filter(Boolean);
+}
+
+/**
+ * Displays the final search results on the UI.
+ */
 function displayResults(results) {
   const container = document.getElementById("search-results");
-  container.innerHTML = results.length ? "" : "<p>No results found.</p>";
+  container.innerHTML = "";
 
   results.forEach(item => {
     const div = document.createElement("div");
     div.className = "result-item";
 
-    // Title as a clickable link
     const title = document.createElement("a");
     title.href = item.href || item.link || "#";
     title.target = "_blank";
     title.innerHTML = item.title || "Untitled";
     title.className = "result-title";
+
     div.appendChild(title);
 
-    // Optional text/description
     if (item.text) {
       const text = document.createElement("p");
       text.innerHTML = item.text;
@@ -329,7 +326,6 @@ function displayResults(results) {
       div.appendChild(text);
     }
 
-    // Optional source
     if (item.source) {
       const source = document.createElement("p");
       source.className = "checkmark";
@@ -340,52 +336,6 @@ function displayResults(results) {
     container.appendChild(div);
   });
 }
-
-
-function trimresultsAndHighlight(results, query) {
-  const highlightRegex = new RegExp(`(${query})`, "gi");
-
-  return results.map(result => {
-    const text = result.text;
-    // also results title
-    const title = result.title;
-    const lowerText = text.toLowerCase();
-    const lowerQuery = query.toLowerCase();
-    const matchIndex = lowerText.indexOf(lowerQuery);
-    const titleMatchIndex = title.toLowerCase().indexOf(lowerQuery);
-
-    if (matchIndex === -1) {
-      // No match, return none
-      return
-    }
-
-    const contextLength = 100; // half of 200
-    const start = Math.max(matchIndex - contextLength, 0);
-    const end = Math.min(matchIndex + contextLength, text.length);
-
-    let trimmedText = text.slice(start, end);
-
-    // Add ellipsis if text was trimmed from the start or end
-    if (start > 0) trimmedText = "…" + trimmedText;
-    if (end < text.length) trimmedText = trimmedText + "…";
-
-    // Highlight query matches in the title
-    if (titleMatchIndex !== -1) {
-      highlightedTitle = title.replace(highlightRegex, `<span class="highlight">$1</span>`);
-    }
-
-    // Highlight query matches in the trimmed text
-    const highlightedText = trimmedText.replace(highlightRegex, `<span class="highlight">$1</span>`);
-
-    return { ...result, text: highlightedText, title: highlightedTitle };
-  });
-}
-
-
-  document.getElementById("filter-btn").addEventListener("click", () => {
-    const dropdown = document.getElementById("filter-dropdown");
-    dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-  });
 
   document.getElementById("search-input").addEventListener("input", performSearch);
 
