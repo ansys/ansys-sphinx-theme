@@ -96,9 +96,17 @@ require(["fuse"], function (Fuse) {
       fragment.appendChild(resultItem);
     });
 
+    // Add Advanced Search Option
+    const advancedSearchItem = document.createElement("div");
+    advancedSearchItem.className = "result-item advanced-search";
+    advancedSearchItem.innerHTML = `<a href="${ADVANCE_SEARCH_PATH}">View all</a>`;
+    advancedSearchItem.addEventListener("click", () => {
+      window.location.href = ADVANCE_SEARCH_PATH;
+    });
+
+    fragment.appendChild(advancedSearchItem);
     RESULTS.appendChild(fragment);
   }
-
   // Focus the selected result item
   function focusSelected(resultsItems) {
     if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultsItems.length) {

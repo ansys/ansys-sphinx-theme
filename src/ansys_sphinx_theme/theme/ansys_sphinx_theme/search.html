@@ -1,0 +1,367 @@
+{%- extends "page.html" %}
+
+{% block docs_body %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+<div class="bd-search-container">
+  <h1>{{ _("Search") }}</h1>
+  <div class="search-bar">
+    <input type="text" id="search-input" placeholder="Type to search..." />
+    <div class="filter-wrapper">
+      <button id="filter-btn" class="dropdown-toggle">Select Filter</button>
+
+    </div>
+
+  </div>
+  <div id="selected-chips" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;"></div>
+  <div class="results" id="search-results"></div>
+</div>
+
+<script>
+  require.config({
+    paths: {
+      fuse: "https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min"
+    }
+  });
+
+  require(['fuse'], function(Fuse) {
+    console.log("Fuse.js loaded successfully");
+     let fuse;
+    let searchData = [];
+    let selectedObjectIDs = [];
+    let selectedLibraries = [];
+
+    let selectedFilter = new Set();
+    const SEARCH_FILE_1 = "{{ pathto('_static/search.json', 1) }}";
+
+  /**
+  * Initializes the search system by loading the document search index.
+  */
+  async function initializeSearch() {
+    try {
+      const response = await fetch(SEARCH_FILE_1);
+      searchData = await response.json();
+      fuse = new Fuse(searchData, {
+        keys: ["title", "text", "objectID"],
+        includeScore: true,
+        threshold: 0.3,
+      });
+      setupPrimaryDropdown();
+    } catch (err) {
+      console.error("Search init failed", err);
+    }
+  }
+
+  /**
+  * Sets up the filter dropdown and its toggle interactions.
+  */
+  function setupPrimaryDropdown() {
+    const selectButton = document.getElementById("filter-btn");
+    const dropdownContainer = document.getElementById("search-sidebar");
+
+    selectButton.addEventListener("click", () => {
+      dropdownContainer.style.display = dropdownContainer.style.display === "none" ? "block" : "none";
+    });
+
+    const filters = [
+      { name: "Documents", dropdownId: "objectid-dropdown", callback: showObjectIdDropdown },
+      { name: "Library", dropdownId: "library-dropdown", callback: showLibraryDropdown },
+    ];
+
+    filters.forEach(({ name, dropdownId, callback }) => {
+      const toggleDiv = document.createElement("div");
+      toggleDiv.className = "search-page-sidebar toggle-section";
+      toggleDiv.dataset.target = dropdownId;
+
+      const icon = document.createElement("span");
+      icon.className = "toggle-icon";
+      icon.textContent = "▶";
+      icon.style.fontSize = "12px";
+
+      const label = document.createElement("span");
+      label.className = "toggle-label";
+      label.textContent = name;
+
+      toggleDiv.append(icon, label);
+
+      const dropdown = document.createElement("div");
+      dropdown.id = dropdownId;
+      dropdown.className = "dropdown-menu show";
+      dropdown.style.display = "none";
+      dropdown.style.marginTop = "10px";
+
+      toggleDiv.addEventListener("click", () => {
+        const isVisible = dropdown.style.display === "block";
+        dropdown.style.display = isVisible ? "none" : "block";
+        icon.textContent = isVisible ? "▶" : "▼";
+
+        if (isVisible) {
+          selectedFilter.delete(name);
+          toggleDiv.classList.remove("active");
+        } else {
+          selectedFilter.add(name);
+          toggleDiv.classList.add("active");
+          callback?.();
+        }
+
+        performSearch();
+      });
+
+      dropdownContainer.append(toggleDiv, dropdown);
+    });
+  }
+
+  function showObjectIdDropdown() {
+    const dropdown = document.getElementById("objectid-dropdown");
+    dropdown.innerHTML = "";
+
+    const objectIDs = [...new Set(searchData.map(item => item.objectID))].filter(Boolean);
+
+    objectIDs.forEach(id => {
+      const checkbox = createCheckboxItem(id, selectedObjectIDs, () => {
+        renderSelectedChips();
+        performSearch();
+      });
+      dropdown.appendChild(checkbox);
+    });
+
+    dropdown.style.display = "block";
+    // render the chips along with selected libraries
+    renderSelectedChips();
+  }
+
+  function showLibraryDropdown() {
+    const dropdown = document.getElementById("library-dropdown");
+    dropdown.innerHTML = "";
+
+    for (const lib in extra_sources) {
+      const checkbox = createCheckboxItem(lib, selectedLibraries, () => {
+        renderSelectedChips();
+        performSearch();
+      });
+      dropdown.appendChild(checkbox);
+    }
+
+    dropdown.style.display = "block";
+    renderSelectedChips();
+  }
+
+  function createCheckboxItem(value, selectedArray, onchnage){
+    const div = document.createElement("div");
+    div.className = "checkbox-item";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = value;
+    checkbox.style.margin = "8px"
+    checkbox.checked = selectedArray.includes(value);
+    checkbox.onchange = (e) => {
+      if (e.target.checked) {
+        selectedArray.push(value);
+      } else {
+        const index = selectedArray.indexOf(value);
+        if (index > -1) {
+          selectedArray.splice(index, 1);
+        }
+      }
+      onchnage();
+    };
+
+    const label = document.createElement("label");
+    label.textContent = value;
+
+    div.appendChild(checkbox);
+    div.appendChild(label);
+    return div;
+  }
+
+
+  /**
+   * Renders chips for selected filters and binds remove logic.
+   */
+  function renderSelectedChips() {
+  const container = document.getElementById("selected-chips");
+  container.innerHTML = "";
+
+  const renderChip = (value, type, selectedArray) => {
+    const chip = document.createElement("div");
+    chip.className = "chip";
+    chip.textContent = `${value} (${type})`;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.className = "remove-btn";
+    removeBtn.innerHTML = "&times;";
+    removeBtn.onclick = () => {
+      const index = selectedArray.indexOf(value);
+      if (index !== -1) selectedArray.splice(index, 1);
+      renderSelectedChips();
+      if (type === "Documents") showObjectIdDropdown();
+      if (type === "Library") showLibraryDropdown();
+      performSearch();
+    };
+
+    chip.appendChild(removeBtn);
+    container.appendChild(chip);
+  };
+
+  selectedObjectIDs.forEach(id => renderChip(id, "Documents", selectedObjectIDs));
+  selectedLibraries.forEach(lib => renderChip(lib, "Library", selectedLibraries));
+}
+
+async function performSearch() {
+  const query = document.getElementById("search-input").value.trim();
+  if (!fuse) return;
+
+  const resultsContainer = document.getElementById("search-results");
+  resultsContainer.innerHTML = "Searching...";
+
+  let docResults = [];
+  let libResults = [];
+
+  // Search in documents
+  // if selected filter is empty, search in all documents
+
+
+  if (selectedFilter.size === 0) {
+    docResults = fuse.search(query).map(r => r.item);
+  }
+
+  if (selectedFilter.has("Documents")) {
+    docResults = fuse.search(query).map(r => r.item);
+    if (selectedObjectIDs.length > 0) {
+      docResults = docResults.filter(item => selectedObjectIDs.includes(item.objectID));
+    }
+  }
+
+  // Search in external libraries
+  if (selectedFilter.has("Library")) {
+    let allEntries = [];
+
+    for (const lib of selectedLibraries) {
+      const cname = extra_sources[lib];
+      const searchUrl = `${cname}/_static/search.json`;
+      try {
+        const res = await fetch(searchUrl);
+        const data = await res.json();
+
+        const enrichedEntries = data.map(entry => ({
+          title: entry.title,
+          text: entry.text,
+          link: `${cname}${entry.href}`,
+          source: lib
+        }));
+
+        allEntries.push(...enrichedEntries);
+      } catch (err) {
+        console.error(`Error fetching ${lib}:`, err);
+      }
+    }
+
+    if (allEntries.length > 0) {
+      const libFuse = new Fuse(allEntries, {
+        keys: ["title", "text", "section"],
+        threshold: 0.3,
+        includeScore: true
+      });
+
+      libResults = libFuse.search(query).map(r => r.item);
+    }
+  }
+
+  const mergedResults = [...docResults, ...libResults];
+
+  if (mergedResults.length === 0) {
+    resultsContainer.innerHTML = "<p>No results found.</p>";
+    return;
+  }
+
+  // Highlight the keyword in the results
+  const highlightedResults = highlightResults(mergedResults, query);
+
+  displayResults(highlightedResults);
+}
+
+// Adjust the lib results with cname
+
+
+/**
+ * Highlights matching query terms in the title and text.
+ */
+function highlightResults(results, query) {
+  const regex = new RegExp(`(${query})`, "gi");
+
+  return results.map(result => {
+    const matchIndex = result.text.toLowerCase().indexOf(query.toLowerCase());
+    if (matchIndex === -1) return null;
+
+    const contextLength = 100;
+    const start = Math.max(0, matchIndex - contextLength);
+    const end = Math.min(result.text.length, matchIndex + contextLength);
+    let snippet = result.text.slice(start, end);
+
+    if (start > 0) snippet = "…" + snippet;
+    if (end < result.text.length) snippet += "…";
+
+    return {
+      ...result,
+      title: result.title.replace(regex, `<span class="highlight">$1</span>`),
+      text: snippet.replace(regex, `<span class="highlight">$1</span>`),
+    };
+  }).filter(Boolean);
+}
+
+/**
+ * Displays the final search results on the UI.
+ */
+function displayResults(results) {
+  const container = document.getElementById("search-results");
+  container.innerHTML = "";
+
+  results.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "result-item";
+
+    const title = document.createElement("a");
+    title.href = item.href || item.link || "#";
+    title.target = "_blank";
+    title.innerHTML = item.title || "Untitled";
+    title.className = "result-title";
+
+    div.appendChild(title);
+
+    if (item.text) {
+      const text = document.createElement("p");
+      text.innerHTML = item.text;
+      text.className = "result-text";
+      div.appendChild(text);
+    }
+
+    if (item.source) {
+      const source = document.createElement("p");
+      source.className = "checkmark";
+      source.textContent = `Source: ${item.source}`;
+      div.appendChild(source);
+    }
+
+    container.appendChild(div);
+  });
+}
+
+  document.getElementById("search-input").addEventListener("input", performSearch);
+
+  initializeSearch();
+  });
+</script>
+
+{% endblock %}
+
+{%- block htmltitle -%}
+  <title>{{ _("Search") }} - {{ title or docstitle }}</title>
+{%- endblock htmltitle -%}
+
+{% block scripts -%}
+  {{ super() }}
+  <script src="{{ pathto('_static/searchtools.js', 1) }}"></script>
+  <script src="{{ pathto('_static/language_data.js', 1) }}"></script>
+  <script src="{{ pathto('searchindex.js', 1) }}"></script>
+{%- endblock scripts %}
