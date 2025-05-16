@@ -67,7 +67,8 @@
 
       const icon = document.createElement("span");
       icon.className = "toggle-icon";
-      icon.textContent = "›";
+      icon.textContent = "▶";
+      icon.style.fontSize = "12px";
 
       const label = document.createElement("span");
       label.className = "toggle-label";
@@ -84,7 +85,7 @@
       toggleDiv.addEventListener("click", () => {
         const isVisible = dropdown.style.display === "block";
         dropdown.style.display = isVisible ? "none" : "block";
-        icon.textContent = isVisible ? "›" : "⌄";
+        icon.textContent = isVisible ? "▶" : "▼";
 
         if (isVisible) {
           selectedFilter.delete(name);
