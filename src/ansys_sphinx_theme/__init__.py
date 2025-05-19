@@ -36,9 +36,6 @@ from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_si
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
 from ansys_sphinx_theme.search import (
-    ALL_NODES,
-    PARAGRAPHS,
-    TITLES,
     create_search_index,
     update_search_config,
 )
@@ -553,4 +550,8 @@ def setup(app: Sphinx) -> Dict:
     }
 
 
-__all__ = ["__version__", "generate_404", "get_version_match", "TITLES", "PARAGRAPHS", "ALL_NODES"]
+__all__ = [
+    "__version__",
+    "generate_404",
+    "get_version_match",
+]

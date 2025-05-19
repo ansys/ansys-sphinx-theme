@@ -43,8 +43,6 @@
       searchData = await response.json();
       fuse = new Fuse(searchData, {
         keys: ["title", "text", "objectID"],
-        includeScore: true,
-        threshold: 0.3,
       });
       setupPrimaryDropdown();
     } catch (err) {

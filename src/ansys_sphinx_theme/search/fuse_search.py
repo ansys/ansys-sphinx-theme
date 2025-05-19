@@ -27,19 +27,12 @@ from pathlib import Path
 import re
 
 from docutils import nodes
-from docutils.nodes import Element
-
-PARAGRAPHS = [nodes.paragraph]
-TITLES = [nodes.title]
-LITERAL = [nodes.literal]
-ALL_NODES = [nodes.Text]
-DEFAULT_PATTERN = PARAGRAPHS + TITLES + LITERAL
 
 
 class SearchIndex:
     """Generate a search index for a Sphinx document."""
 
-    def __init__(self, doc_name, app, pattern=None, filter_options=None):
+    def __init__(self, doc_name, app, filter_options=None):
         """
         Initialize the search index object.
 
@@ -57,7 +50,6 @@ class SearchIndex:
         self.doc_title = self.env.titles[self.doc_name].astext()
         self.doc_tree = self.env.get_doctree(self.doc_name)
         self.sections = []
-        self.pattern = pattern
         self.filter_options = filter_options
 
     def build_sections(self):
@@ -74,47 +66,13 @@ class SearchIndex:
                 node = main_section
 
             section_title = node[0].astext()
-
-            section_text = "\n".join(
-                n.astext() for node_type in self.pattern for n in node.traverse(node_type)
-            )
+            full_section_text = node.astext()
 
             section_anchor_id = _title_to_anchor(section_title)
             self.sections.append(
                 {
                     "title": section_title,
-                    "text": section_text,
-                    "anchor_id": section_anchor_id,
-                }
-            )
-
-            self._process_desc_element(node, section_title)
-
-    def _process_desc_element(self, node, title):
-        """Process `desc` element within a section."""
-        for element in node.traverse(Element):
-            if element.tagname != "desc":
-                continue
-
-            # id is the id tag of the desc element
-            section_anchor_id = element.attributes["ids"]
-            if element.children:
-                for element_child in element.children:
-                    if element_child.tagname != "desc_signature":
-                        continue
-                    if element_child.attributes.get("ids"):
-                        section_anchor_id = element_child.attributes["ids"][0]
-            section_text = element.astext()
-            if isinstance(section_anchor_id, list) and len(section_anchor_id) > 0:
-                section_anchor_id = section_anchor_id[0]
-            if section_anchor_id:
-                section_title = _desc_anchor_to_title(title, section_anchor_id)
-            else:
-                section_title = title
-            self.sections.append(
-                {
-                    "title": section_title,
-                    "text": section_text,
+                    "text": full_section_text,
                     "anchor_id": section_anchor_id,
                 }
             )
@@ -173,26 +131,9 @@ class SearchIndex:
             }
 
 
-def _desc_anchor_to_title(title, anchor):
-    """Convert a desc anchor to a title."""
-    anchor_title = anchor.split(".")[-1]
-    return f"{title} > {anchor_title}"
-
-
 def _title_to_anchor(title: str) -> str:
     """Convert a title to a URL-friendly anchor identifier."""
     return re.sub(r"[^\w\s-]", "", title.lower().strip().replace(" ", "-"))
-
-
-def get_pattern_for_each_page(app, doc_name):
-    """Get the pattern for each page in the search index."""
-    patterns = app.env.config.index_patterns or {}
-
-    for filename, pattern in patterns.items():
-        if doc_name.startswith(filename):
-            return pattern
-
-    return DEFAULT_PATTERN
 
 
 def filter_search_documents(filters, doc_name):
@@ -238,8 +179,7 @@ def create_search_index(app, exception):
         ]
 
     for document in included_docs:
-        pattern = get_pattern_for_each_page(app, document)
-        search_index = SearchIndex(document, app, pattern, filter_options)
+        search_index = SearchIndex(document, app, filter_options=filter_options)
         search_index.build_sections()
         search_index_list.extend(search_index.indices)
 
