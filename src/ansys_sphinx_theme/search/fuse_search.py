@@ -66,13 +66,30 @@ class SearchIndex:
                 node = main_section
 
             section_title = node[0].astext()
-            full_section_text = node.astext()
+
+            unwanted_types = (
+                nodes.math,
+                nodes.raw,
+                nodes.image,
+                nodes.figure,
+                nodes.comment,
+                nodes.literal_block,
+            )
+
+            # Collect all unwanted nodes first
+            unwanted_nodes = [n for n in node.traverse() if isinstance(n, unwanted_types)]
+
+            # Safely remove them
+            for n in unwanted_nodes:
+                if n.parent:
+                    n.parent.remove(n)
+            clean_text = node.astext()
 
             section_anchor_id = _title_to_anchor(section_title)
             self.sections.append(
                 {
                     "title": section_title,
-                    "text": full_section_text,
+                    "text": clean_text,
                     "anchor_id": section_anchor_id,
                 }
             )
@@ -185,4 +202,4 @@ def create_search_index(app, exception):
 
     search_index_path = Path(app.builder.outdir) / "_static" / "search.json"
     with search_index_path.open("w", encoding="utf-8") as index_file:
-        json.dump(search_index_list, index_file, ensure_ascii=False, indent=4)
+        json.dump(search_index_list, index_file, ensure_ascii=False, separators=(",", ":"))
