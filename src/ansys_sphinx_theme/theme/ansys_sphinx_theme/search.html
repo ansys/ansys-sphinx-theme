@@ -34,6 +34,15 @@
     let selectedFilter = new Set();
     const SEARCH_FILE_1 = "{{ pathto('_static/search.json', 1) }}";
 
+
+    function debounce(func, delay) {
+      let timeout;
+      return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+    }
+
   /**
   * Initializes the search system by loading the document search index.
   */
@@ -345,7 +354,15 @@ function displayResults(results) {
   });
 }
 
-  document.getElementById("search-input").addEventListener("input", performSearch);
+  document.getElementById("search-input").addEventListener("input", debounce((e) => {
+    const query = e.target.value.trim();
+    if (query.length < 3) {
+      document.getElementById("search-results").innerHTML = "";
+      return;
+    }
+    performSearch();
+  }, 300));
+
 
   initializeSearch();
   });
