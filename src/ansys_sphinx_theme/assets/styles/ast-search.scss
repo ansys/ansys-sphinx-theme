@@ -283,3 +283,19 @@ html[data-theme="light"] .highlight {
   color: var(--ast-search-bar-enable-text);
   font-weight: 400;
 }
+
+.result-limit-wrapper {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+  font-size: 0.875rem; /* 14px */
+  color: var(--ast-search-bar-enable-text);
+}
+ select {
+  background-color: var(--ast-search-bar-enable-background);
+  color: var(--ast-search-bar-enable-text);
+  border: 0.03125rem solid var(--ast-search-bar-enable-border); /* 0.5px */
+  border-radius: 0.25rem; /* 4px */
+  padding: 0.5rem;
+  font-size: 0.875rem; /* 14px */
+}

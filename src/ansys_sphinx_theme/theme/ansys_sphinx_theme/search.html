@@ -11,12 +11,14 @@
       <button id="filter-btn" class="dropdown-toggle">Select Filter</button>
 
     </div>
-    <label for="result-limit">Show results:</label>
-    <select id="result-limit">
-      <option value="10">10</option>
-      <option value="20">20</option>
-      <option value="50">50</option>
-    </select>
+    <div class="result-limit-wrapper">
+      <label for="result-limit">Show results:</label>
+      <select id="result-limit">
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+      </select>
+    </div>
 
   </div>
   <div id="selected-chips" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;"></div>

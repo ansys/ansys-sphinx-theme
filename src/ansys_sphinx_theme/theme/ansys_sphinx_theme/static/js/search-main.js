@@ -56,7 +56,7 @@ require(["fuse"], function (Fuse) {
   const libSearchData = {};
 
   let selectedFilter = new Set();
-  const SEARCH_FILE_1 = "{{ pathto('_static/search.json', 1) }}";
+  //   const SEARCH_FILE_1 = "/_static/search.json";
 
   function debounce(func, delay) {
     let timeout;
@@ -75,7 +75,7 @@ require(["fuse"], function (Fuse) {
       let data = await getFromIDB(cacheKey);
 
       if (!data) {
-        const response = await fetch(SEARCH_FILE_1);
+        const response = await fetch(SEARCH_FILE);
         data = await response.json();
         await saveToIDB(cacheKey, data);
       }
@@ -83,6 +83,8 @@ require(["fuse"], function (Fuse) {
       searchData = data;
       fuse = new Fuse(searchData, {
         keys: ["title", "text", "objectID"],
+        ignoreLocation: true,
+        threshold: 0.3,
       });
 
       const allLibs = Object.keys(extra_sources);
@@ -299,48 +301,38 @@ require(["fuse"], function (Fuse) {
       }
     }
 
-    // === Search in external libraries ===
-    if (selectedFilter.size === 0 || selectedFilter.has("Library")) {
-      let allEntries = [];
+    for (const lib of selectedLibraries) {
+      const libBaseUrl = extra_sources[lib];
+      const cacheKey = `lib-search-${lib}`;
 
-      for (const lib of selectedLibraries) {
-        const libBaseUrl = extra_sources[lib];
+      try {
+        const data = await getFromIDB(cacheKey); // Use cached data
 
-        const cacheKey = `lib-search-${lib}`;
-        console.log("Cache key", cacheKey);
-        console.log("Lib base URL", libBaseUrl);
-        console.log("getting from IDB", cacheKey);
+        if (data) {
+          const enrichedEntries = data.map((entry) => ({
+            title: entry.title,
+            text: entry.text,
+            section: entry.section, // if used in keys
+            link: `${libBaseUrl}${entry.href}`,
+            source: lib,
+          }));
 
-        try {
-          const data = await getFromIDB(cacheKey); // Use cached data
-          console.log("Cache data", data);
-          console.log("Cache data length", data?.length || 0);
+          // Create a separate Fuse instance for this library
+          const libFuse = new Fuse(enrichedEntries, {
+            keys: ["title", "text", "section"],
+            threshold: 0.3,
+            includeScore: false,
+          });
 
-          if (data) {
-            const enrichedEntries = data.map((entry) => ({
-              title: entry.title,
-              text: entry.text,
-              link: `${libBaseUrl}${entry.href}`,
-              source: lib,
-            }));
+          // Search and add to results (append instead of overwrite)
+          const results = libFuse
+            .search(query, { limit: resultLimit })
+            .map((r) => r.item);
 
-            allEntries.push(...enrichedEntries);
-          }
-        } catch (err) {
-          console.error(`Error accessing cache for ${lib}:`, err);
+          libResults.push(...results);
         }
-      }
-
-      // add limit to the search results
-      if (allEntries.length > 0) {
-        const libFuse = new Fuse(allEntries, {
-          keys: ["title", "text", "section"],
-          threshold: 0.3,
-          includeScore: false,
-        });
-        libResults = libFuse
-          .search(query, { limit: resultLimit })
-          .map((r) => r.item);
+      } catch (err) {
+        console.error(`Error accessing cache for ${lib}:`, err);
       }
     }
 

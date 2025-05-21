@@ -94,8 +94,8 @@ require(["fuse"], function (Fuse) {
       resultItem.appendChild(resultText);
 
       fragment.appendChild(resultItem);
+      console.log("Adding search result item");
     });
-
     // Add Advanced Search Option
     const advancedSearchItem = document.createElement("div");
     advancedSearchItem.className = "result-item advanced-search";

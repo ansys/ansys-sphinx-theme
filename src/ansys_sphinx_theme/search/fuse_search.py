@@ -156,12 +156,17 @@ def _title_to_anchor(title: str) -> str:
 def filter_search_documents(filters, doc_name):
     """Filter search documents based on the provided filters."""
     if not filters:
+        # get the first part of the document name and sentence case it
+        doc_name = doc_name.split("/")[0]
+        doc_name = doc_name.split(".")[0].replace("-", " ").title()
+        if doc_name == "index":
+            return "Home"
         return doc_name
     for key, values in filters.items():
         for value in values:
             if doc_name.startswith(value.rstrip("/")):
                 return key
-    return doc_name
+    return doc_name.split("/")[-1].split(".")[0].replace("-", " ").title()
 
 
 def create_search_index(app, exception):
