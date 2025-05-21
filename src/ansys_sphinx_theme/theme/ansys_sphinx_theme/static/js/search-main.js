@@ -284,9 +284,13 @@ require(["fuse"], function (Fuse) {
     let docResults = [];
     let libResults = [];
 
+    const resultLimit = getSelectedResultLimit();
+
     // === Search in internal documents ===
     if (selectedFilter.size === 0 || selectedFilter.has("Documents")) {
-      docResults = fuse.search(query).map((r) => r.item);
+      docResults = fuse
+        .search(query, { limit: resultLimit })
+        .map((r) => r.item);
 
       if (selectedObjectIDs.length > 0) {
         docResults = docResults.filter((item) =>
@@ -320,24 +324,23 @@ require(["fuse"], function (Fuse) {
               source: lib,
             }));
 
-            console.log("Enriched entries:", enrichedEntries.length);
-
             allEntries.push(...enrichedEntries);
           }
         } catch (err) {
           console.error(`Error accessing cache for ${lib}:`, err);
         }
       }
-      console.log("All entries length", allEntries.length);
 
+      // add limit to the search results
       if (allEntries.length > 0) {
         const libFuse = new Fuse(allEntries, {
           keys: ["title", "text", "section"],
           threshold: 0.3,
           includeScore: false,
         });
-
-        libResults = libFuse.search(query).map((r) => r.item);
+        libResults = libFuse
+          .search(query, { limit: resultLimit })
+          .map((r) => r.item);
       }
     }
 
@@ -420,17 +423,28 @@ require(["fuse"], function (Fuse) {
     });
   }
 
-  document.getElementById("search-input").addEventListener(
-    "input",
-    debounce((e) => {
-      const query = e.target.value.trim();
-      if (query.length < 3) {
-        document.getElementById("search-results").innerHTML = "";
-        return;
+  function getSelectedResultLimit() {
+    const select = document.getElementById("result-limit");
+    return parseInt(select.value, 10) || 10; // default to 10 if not set
+  }
+
+  const handleSearchInput = debounce(
+    () => {
+      const query = document.getElementById("search-input").value.trim();
+      console.log("Search query:", query);
+      if (query.length > 0) {
+        performSearch();
       }
-      performSearch();
-    }, 300),
+    },
+    parseInt(SEARCH_OPTIONS.delay) || 300,
   );
+
+  document
+    .getElementById("search-input")
+    .addEventListener("input", handleSearchInput);
+  document
+    .getElementById("result-limit")
+    .addEventListener("change", performSearch);
 
   initializeSearch();
 });
