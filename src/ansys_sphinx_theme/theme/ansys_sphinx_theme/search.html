@@ -24,12 +24,53 @@
     }
   });
 
+  function openDB(name = 'search-cache', version = 1) {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(name, version);
+    request.onerror = () => reject(request.error);
+    request.onsuccess = () => resolve(request.result);
+    request.onupgradeneeded = (event) => {
+      const db = event.target.result;
+      if (!db.objectStoreNames.contains('indexes')) {
+        db.createObjectStore('indexes');
+      }
+    };
+  });
+}
+
+async function getFromIDB(key) {
+  console.log("Getting from IDB", key);
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('indexes', 'readonly');
+    const store = tx.objectStore('indexes');
+    const request = store.get(key);
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+async function saveToIDB(key, value) {
+  console.log("Saving to IDB", key, value);
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('indexes', 'readwrite');
+    const store = tx.objectStore('indexes');
+    const request = store.put(value, key);
+    request.onsuccess = () => resolve(true);
+    request.onerror = () => reject(request.error);
+  });
+}
+
+
+
   require(['fuse'], function(Fuse) {
     console.log("Fuse.js loaded successfully");
-     let fuse;
+    let fuse;
     let searchData = [];
     let selectedObjectIDs = [];
     let selectedLibraries = [];
+    const libSearchData = {}; // Store all external data globally
 
     let selectedFilter = new Set();
     const SEARCH_FILE_1 = "{{ pathto('_static/search.json', 1) }}";
@@ -47,12 +88,38 @@
   * Initializes the search system by loading the document search index.
   */
   async function initializeSearch() {
+    console.log("Initializing search...");
     try {
-      const response = await fetch(SEARCH_FILE_1);
-      searchData = await response.json();
+      const cacheKey = "main-search-index";
+      let data = await getFromIDB(cacheKey);
+
+      if (!data) {
+        const response = await fetch(SEARCH_FILE_1);
+        data = await response.json();
+        await saveToIDB(cacheKey, data);
+      }
+
+      searchData = data;
       fuse = new Fuse(searchData, {
         keys: ["title", "text", "objectID"],
       });
+
+      const allLibs = Object.keys(extra_sources);
+      for (const lib of allLibs) {
+        const cacheKey = `lib-search-${lib}`;
+        let libData = await getFromIDB(cacheKey);
+
+        if (!libData) {
+          const libPath = extra_sources[lib];
+          const libJsonPath = `${libPath}/_static/search.json`;
+          const res = await fetch(libJsonPath);
+          libData = await res.json();
+          await saveToIDB(cacheKey, libData);
+        }
+
+        libSearchData[lib] = libData; // Save in memory
+      }
+
       setupPrimaryDropdown();
     } catch (err) {
       console.error("Search init failed", err);
@@ -215,6 +282,87 @@
   selectedLibraries.forEach(lib => renderChip(lib, "Library", selectedLibraries));
 }
 
+// async function performSearch() {
+//   const query = document.getElementById("search-input").value.trim();
+//   if (!fuse) return;
+
+//   const resultsContainer = document.getElementById("search-results");
+//   resultsContainer.innerHTML = "Searching...";
+
+//   let docResults = [];
+//   let libResults = [];
+
+//   // Search in documents
+//   // if selected filter is empty, search in all documents
+
+
+//   if (selectedFilter.size === 0) {
+//     docResults = fuse.search(query).map(r => r.item);
+//   }
+
+//   if (selectedFilter.has("Documents")) {
+//     docResults = fuse.search(query).map(r => r.item);
+//     if (selectedObjectIDs.length > 0) {
+//       docResults = docResults.filter(item => selectedObjectIDs.includes(item.objectID));
+//     }
+//   }
+
+//   // Search in external libraries
+//   if (selectedFilter.has("Library")) {
+//     let allEntries = [];
+
+//     for (const lib of selectedLibraries) {
+//       const cname = extra_sources[lib];
+//       const searchUrl = `${cname}/_static/search.json`;
+//       const cacheKey = `lib-search-${lib}`;
+
+//       try {
+//         let data = await getFromIDB(cacheKey);
+
+//         if (!data) {
+//           const res = await fetch(searchUrl);
+//           data = await res.json();
+//           await saveToIDB(cacheKey, data);
+//         }
+
+//         const enrichedEntries = data.map(entry => ({
+//           title: entry.title,
+//           text: entry.text,
+//           link: `${cname}${entry.href}`,
+//           source: lib
+//         }));
+
+//         allEntries.push(...enrichedEntries);
+//       } catch (err) {
+//         console.error(`Error fetching or caching ${lib}:`, err);
+//       }
+//     }
+
+//     if (allEntries.length > 0) {
+//       const libFuse = new Fuse(allEntries, {
+//         keys: ["title", "text", "section"],
+//         threshold: 0.3,
+//         includeScore: true
+//       });
+
+//       libResults = libFuse.search(query).map(r => r.item);
+//     }
+//   }
+
+//   const mergedResults = [...docResults, ...libResults];
+
+//   if (mergedResults.length === 0) {
+//     resultsContainer.innerHTML = "<p>No results found.</p>";
+//     return;
+//   }
+
+//   // Highlight the keyword in the results
+//   const highlightedResults = highlightResults(mergedResults, query);
+
+//   displayResults(highlightedResults);
+// }
+
+
 async function performSearch() {
   const query = document.getElementById("search-input").value.trim();
   if (!fuse) return;
@@ -225,56 +373,62 @@ async function performSearch() {
   let docResults = [];
   let libResults = [];
 
-  // Search in documents
-  // if selected filter is empty, search in all documents
-
-
-  if (selectedFilter.size === 0) {
+  // === Search in internal documents ===
+  if (selectedFilter.size === 0 || selectedFilter.has("Documents")) {
     docResults = fuse.search(query).map(r => r.item);
-  }
 
-  if (selectedFilter.has("Documents")) {
-    docResults = fuse.search(query).map(r => r.item);
     if (selectedObjectIDs.length > 0) {
       docResults = docResults.filter(item => selectedObjectIDs.includes(item.objectID));
     }
   }
 
-  // Search in external libraries
-  if (selectedFilter.has("Library")) {
+  // === Search in external libraries ===
+  if (selectedFilter.size === 0 || selectedFilter.has("Library")) {
     let allEntries = [];
 
     for (const lib of selectedLibraries) {
-      const cname = extra_sources[lib];
-      const searchUrl = `${cname}/_static/search.json`;
+      const libBaseUrl = extra_sources[lib];
+
+      const cacheKey = `lib-search-${lib}`;
+      console.log("Cache key", cacheKey);
+      console.log("Lib base URL", libBaseUrl);
+      console.log("getting from IDB", cacheKey);
+
       try {
-        const res = await fetch(searchUrl);
-        const data = await res.json();
+        const data = await getFromIDB(cacheKey);  // Use cached data
+        console.log("Cache data", data);
+        console.log("Cache data length", data?.length || 0);
 
-        const enrichedEntries = data.map(entry => ({
-          title: entry.title,
-          text: entry.text,
-          link: `${cname}${entry.href}`,
-          source: lib
-        }));
+        if (data) {
+          const enrichedEntries = data.map(entry => ({
+            title: entry.title,
+            text: entry.text,
+            link: `${libBaseUrl}${entry.href}`,
+            source: lib
+          }));
 
-        allEntries.push(...enrichedEntries);
+          console.log("Enriched entries:", enrichedEntries.length);
+
+          allEntries.push(...enrichedEntries);
+        }
       } catch (err) {
-        console.error(`Error fetching ${lib}:`, err);
+        console.error(`Error accessing cache for ${lib}:`, err);
       }
     }
+    console.log("All entries length", allEntries.length);
 
     if (allEntries.length > 0) {
       const libFuse = new Fuse(allEntries, {
         keys: ["title", "text", "section"],
         threshold: 0.3,
-        includeScore: true
+        includeScore: false,
       });
 
       libResults = libFuse.search(query).map(r => r.item);
     }
   }
 
+  // === Merge and show results ===
   const mergedResults = [...docResults, ...libResults];
 
   if (mergedResults.length === 0) {
@@ -282,9 +436,7 @@ async function performSearch() {
     return;
   }
 
-  // Highlight the keyword in the results
   const highlightedResults = highlightResults(mergedResults, query);
-
   displayResults(highlightedResults);
 }
 
