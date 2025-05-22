@@ -434,29 +434,41 @@ require(["fuse"], function (Fuse) {
     parseInt(SEARCH_OPTIONS.delay) || 300,
   );
 
-  document
-    .getElementById("search-input")
-    .addEventListener("input", handleSearchInput);
-  document
-    .getElementById("result-limit")
-    .addEventListener("change", performSearch);
+  // Utility to get element by ID
+  const $ = (id) => document.getElementById(id);
 
-  initializeSearch();
+  // Elements
+  const searchInput = $("search-input");
+  const resultLimit = $("result-limit");
 
-  // change in SEARCH_INPUT take the value and update the document.getElementById("search-input"); value and call performSearch
-  SEARCH_INPUT.addEventListener("input", (event) => {
-    const query = event.target.value;
-    document.getElementById("search-input").value = query;
-    handleSearchInput();
+  // Initialize search input if query param is present
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialQuery = urlParams.get("q");
+  if (initialQuery) {
+    searchInput.value = initialQuery;
+  }
+
+  // Unified search trigger
+  const triggerSearch = () => {
+    const query = searchInput.value.trim();
+    if (query) {
+      handleSearchInput();
+    }
+  };
+
+  // Set up event listeners
+  searchInput.addEventListener("input", triggerSearch);
+  resultLimit?.addEventListener("change", performSearch);
+  SEARCH_BAR.addEventListener("input", (e) => {
+    searchInput.value = e.target.value;
+    triggerSearch();
   });
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const query = urlParams.get("q");
+  // Initialize search engine/data
+  initializeSearch();
 
-  if (query) {
-    const inputElement = document.getElementById("search-input");
-    inputElement.value = query;
-
-    handleSearchInput();
+  // Optional: trigger on page load if query param was present
+  if (initialQuery) {
+    triggerSearch();
   }
 });
