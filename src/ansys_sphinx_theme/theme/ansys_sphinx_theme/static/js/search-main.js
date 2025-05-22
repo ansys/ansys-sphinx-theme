@@ -84,11 +84,7 @@ require(["fuse"], function (Fuse) {
       }
 
       searchData = data;
-      fuse = new Fuse(searchData, {
-        keys: ["title", "text", "objectID"],
-        ignoreLocation: true,
-        threshold: 0.3,
-      });
+      fuse = new Fuse(searchData, SEARCH_OPTIONS);
 
       const allLibs = Object.keys(extra_sources);
       for (const lib of allLibs) {
@@ -135,6 +131,11 @@ require(["fuse"], function (Fuse) {
         callback: showLibraryDropdown,
       },
     ];
+
+    // remove the library filter if no libraries
+    if (Object.keys(extra_sources).length === 0) {
+      filters.splice(1, 1);
+    }
 
     filters.forEach(({ name, dropdownId, callback }) => {
       const toggleDiv = document.createElement("div");
@@ -321,11 +322,7 @@ require(["fuse"], function (Fuse) {
           }));
 
           // Create a separate Fuse instance for this library
-          const libFuse = new Fuse(enrichedEntries, {
-            keys: ["title", "text", "section"],
-            threshold: 0.3,
-            includeScore: false,
-          });
+          const libFuse = new Fuse(enrichedEntries, SEARCH_OPTIONS);
 
           // Search and add to results (append instead of overwrite)
           const results = libFuse
