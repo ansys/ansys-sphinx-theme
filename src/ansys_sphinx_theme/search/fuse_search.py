@@ -49,11 +49,13 @@ class SearchIndex:
         self.theme_options = app.config.html_theme_options.get("static_search", {})
         self.doc_title = self.env.titles[self.doc_name].astext()
         self.doc_tree = self.env.get_doctree(self.doc_name)
-        self.parent_title = (
-            self.env.titles.get(self.doc_name.split("/")[0], "").astext()
-            if doc_name != "index"
-            else "Home"
-        )
+        first_part = self.doc_name.split("/")[0]
+        try:
+            self.parent_title = (
+                self.env.titles.get(first_part).astext() if doc_name != "index" else "Home"
+            )
+        except:  # noqa: E722
+            self.parent_title = "Home"
         self.sections = []
         self.filter_options = filter_options
 
