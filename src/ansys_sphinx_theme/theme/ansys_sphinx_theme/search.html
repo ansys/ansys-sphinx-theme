@@ -34,9 +34,3 @@
   <title>{{ _("Search") }} - {{ title or docstitle }}</title>
 {%- endblock htmltitle -%}
 
-{% block scripts -%}
-  {{ super() }}
-  <script src="{{ pathto('_static/searchtools.js', 1) }}"></script>
-  <script src="{{ pathto('_static/language_data.js', 1) }}"></script>
-  <script src="{{ pathto('searchindex.js', 1) }}"></script>
-{%- endblock scripts %}

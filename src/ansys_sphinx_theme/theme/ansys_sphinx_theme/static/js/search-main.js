@@ -1,3 +1,6 @@
+const SEARCH_BAR = document.getElementById("search-bar");
+const SEARCH_INPUT = SEARCH_BAR.querySelector(".bd-search input.form-control");
+
 require.config({
   paths: {
     fuse: "https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min",
@@ -440,7 +443,13 @@ require(["fuse"], function (Fuse) {
 
   initializeSearch();
 
-  // cut the query from the URL of the page ?q=
+  // change in SEARCH_INPUT take the value and update the document.getElementById("search-input"); value and call performSearch
+  SEARCH_INPUT.addEventListener("input", (event) => {
+    const query = event.target.value;
+    document.getElementById("search-input").value = query;
+    handleSearchInput();
+  });
+
   const urlParams = new URLSearchParams(window.location.search);
   const query = urlParams.get("q");
 

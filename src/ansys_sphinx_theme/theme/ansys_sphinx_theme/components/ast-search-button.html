@@ -8,5 +8,6 @@ const ADVANCE_SEARCH_PATH = "{{ pathto('search.html', 1) }}";
 const extra_sources = JSON.parse('{{ theme_search_extra_sources | tojson | safe }}');
 </script>
 
-
+{% if pagename != "search" %}
 <script src="{{ pathto('_static/js/search.js', 1) }}"></script>
+{% endif %}
