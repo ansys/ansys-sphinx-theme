@@ -72,16 +72,16 @@ html_theme_options = {
         "PyDPF Core": "https:/dpf.docs.pyansys.com/version/stable/",
         "Actions": "https://actions.docs.ansys.com/version/stable/",
     },
-    # "search_filters": {
-    #     "User Guide": [
-    #         "user-guide/",
-    #         "getting-started/",
-    #         "index/",
-    #     ],
-    #     "Release Notes": ["changelog"],
-    #     "Examples": ["examples/"],
-    #     "Contributing": ["contribute/"],
-    # },
+    "search_filters": {
+        "User Guide": [
+            "user-guide/",
+            "getting-started/",
+            "index/",
+        ],
+        "Release Notes": ["changelog"],
+        "Examples": ["examples/"],
+        "Contributing": ["contribute/"],
+    },
 }
 
 
