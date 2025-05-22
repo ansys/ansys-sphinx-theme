@@ -439,4 +439,15 @@ require(["fuse"], function (Fuse) {
     .addEventListener("change", performSearch);
 
   initializeSearch();
+
+  // cut the query from the URL of the page ?q=
+  const urlParams = new URLSearchParams(window.location.search);
+  const query = urlParams.get("q");
+
+  if (query) {
+    const inputElement = document.getElementById("search-input");
+    inputElement.value = query;
+
+    handleSearchInput();
+  }
 });
