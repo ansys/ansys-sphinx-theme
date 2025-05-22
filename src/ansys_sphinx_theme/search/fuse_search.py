@@ -49,6 +49,11 @@ class SearchIndex:
         self.theme_options = app.config.html_theme_options.get("static_search", {})
         self.doc_title = self.env.titles[self.doc_name].astext()
         self.doc_tree = self.env.get_doctree(self.doc_name)
+        self.parent_title = (
+            self.env.titles.get(self.doc_name.split("/")[0], "").astext()
+            if doc_name != "index"
+            else "Home"
+        )
         self.sections = []
         self.filter_options = filter_options
 
@@ -139,7 +144,9 @@ class SearchIndex:
         """Generate indices for each section."""
         for section in self.sections:
             breadcrumbs = self.generate_breadcrumbs(section["title"])
-            self.object_id = filter_search_documents(self.filter_options, self.doc_name)
+            self.object_id = filter_search_documents(
+                self.filter_options, self.doc_name, self.parent_title
+            )
             yield {
                 "objectID": self.object_id,
                 "href": f"{self.doc_path}#{section['anchor_id']}",
@@ -153,20 +160,16 @@ def _title_to_anchor(title: str) -> str:
     return re.sub(r"[^\w\s-]", "", title.lower().strip().replace(" ", "-"))
 
 
-def filter_search_documents(filters, doc_name):
+def filter_search_documents(filters, doc_name, doc_title):
     """Filter search documents based on the provided filters."""
     if not filters:
         # get the first part of the document name and sentence case it
-        doc_name = doc_name.split("/")[0]
-        doc_name = doc_name.split(".")[0].replace("-", " ").title()
-        if doc_name == "index":
-            return "Home"
-        return doc_name
+        return doc_title
     for key, values in filters.items():
         for value in values:
             if doc_name.startswith(value.rstrip("/")):
                 return key
-    return doc_name.split("/")[-1].split(".")[0].replace("-", " ").title()
+    return doc_title
 
 
 def create_search_index(app, exception):
