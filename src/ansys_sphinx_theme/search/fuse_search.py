@@ -84,7 +84,6 @@ class SearchIndex:
             # Collect all unwanted nodes first
             unwanted_nodes = [n for n in node.traverse() if isinstance(n, unwanted_types)]
 
-            # Safely remove them
             for n in unwanted_nodes:
                 if n.parent:
                     n.parent.remove(n)

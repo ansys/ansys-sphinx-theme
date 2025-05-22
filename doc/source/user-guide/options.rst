@@ -234,7 +234,7 @@ This key should be a dictionary where each key represents a filter label and the
         },
     }
 
-The filters will appear as clickable options in the search interface, allowing users to refine their results by content type.
+The filters appears as clickable options in the search interface, allowing users to refine their results by content type.
 
 The search filters are displayed as below:
 
