@@ -206,6 +206,12 @@ require(["fuse"], function (Fuse) {
           const href = resultItems[0].dataset.href;
           navigateToHref(href);
         }
+        // if cntrl + enter is pressed, navigate to the advanced search page
+        if (event.ctrlKey) {
+          event.preventDefault(); // Prevent default enter action
+          const query = SEARCH_INPUT.value.trim();
+          window.location.href = ADVANCE_SEARCH_PATH + "?q=" + query;
+        }
         break;
 
       case "ArrowDown":
@@ -249,12 +255,6 @@ require(["fuse"], function (Fuse) {
       case "Escape":
         collapseSearchInput();
         break;
-
-      // case "Enter":
-      //   if (event.ctrlKey) {
-      //     advancedSearch();
-      //   }
-      //   break;
     }
   }
 
