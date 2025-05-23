@@ -237,13 +237,13 @@ To modify the SCSS files, follow these steps:
 
    This command installs the library in editable mode and builds the SCSS files.
 
-.. important::
+  .. important::
 
-   The built SCSS files are stored in the
-   ``src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/`` directory.
-   These files are regenerated during each build process, so avoid editing them directly.
+     The built SCSS files are stored in the
+     ``src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/`` directory.
+     These files are regenerated during each build process, so avoid editing them directly.
 
-1. Build the documentation and serve it locally using any of the following commands:
+4. Build the documentation and serve it locally using any of the following commands:
 
    .. tab-set::
 
