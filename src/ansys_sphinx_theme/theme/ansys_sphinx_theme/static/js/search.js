@@ -94,11 +94,24 @@ require(["fuse"], function (Fuse) {
       resultItem.appendChild(resultText);
 
       fragment.appendChild(resultItem);
+      console.log("Adding search result item");
     });
-
+    // Add Advanced Search Option
+    const advancedSearchItem = document.createElement("div");
+    advancedSearchItem.className = "result-item advanced-search";
+    advancedSearchItem.style.display = "flex";
+    advancedSearchItem.style.justifyContent = "space-between";
+    advancedSearchItem.style.alignItems = "center";
+    const query = SEARCH_INPUT.value.trim();
+    advancedSearchItem.dataset.href = ADVANCE_SEARCH_PATH + "?q=" + query;
+    advancedSearchItem.innerHTML = `<a href="${ADVANCE_SEARCH_PATH}?q=${query}">Show all results</a> <span style="font-size: 0.8em; color: gray;">Ctrl + Enter</span>`;
+    advancedSearchItem.addEventListener("click", () => {
+      window.location.href =
+        ADVANCE_SEARCH_PATH + "?q=" + SEARCH_INPUT.value.trim();
+    });
+    fragment.appendChild(advancedSearchItem);
     RESULTS.appendChild(fragment);
   }
-
   // Focus the selected result item
   function focusSelected(resultsItems) {
     if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultsItems.length) {
@@ -188,13 +201,17 @@ require(["fuse"], function (Fuse) {
           event.preventDefault(); // Prevent default enter action
           const href = resultItems[CURRENT_INDEX].dataset.href;
           navigateToHref(href);
-        }
-        if (resultItems.length > 0) {
+        } else if (resultItems.length > 0) {
           event.preventDefault(); // Prevent default enter action
           const href = resultItems[0].dataset.href;
           navigateToHref(href);
         }
-
+        // if cntrl + enter is pressed, navigate to the advanced search page
+        if (event.ctrlKey) {
+          event.preventDefault(); // Prevent default enter action
+          const query = SEARCH_INPUT.value.trim();
+          window.location.href = ADVANCE_SEARCH_PATH + "?q=" + query;
+        }
         break;
 
       case "ArrowDown":

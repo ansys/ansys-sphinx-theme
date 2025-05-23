@@ -147,23 +147,6 @@ Here is an example of how to add the ``static_search`` dictionary to the
         },
     }
 
-To customise the indexing of your documentation, you can use the ``index_patterns`` dictionary in the ``conf.py`` file.
-This dictionary contains the paths to the directories you want to index and the type of nodes to index.
-The type of nodes can be ``ALL_NODES``, ``TITLES`` or ``PARAGRAPHS``.
-The default value is ``TITLES + PARAGRAPHS``.
-
-Here is an example of how to add the ``index_patterns`` dictionary to the `conf.py`` file:
-
-.. code-block:: python
-
-    index_patterns = {
-        "api/": ALL_NODES,
-        "examples/": TITLES + PARAGRAPHS,
-    }
-
-The above example indexes all nodes in the ``api/`` directory and only titles and paragraphs in the ``examples/`` directory.
-
-
 .. note::
 
     All other options are available in the `Fuse.js documentation <https://fusejs.io/api/options.html>`_.
@@ -201,6 +184,63 @@ Here is an example of how to add the ``static_search`` dictionary to the
         python -m http.server
 
     Then, open the browser and go to ``http://localhost:8000``.
+
+
+Advanced search options
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The Ansys Sphinx theme supports advanced search capabilities to enhance the user experience.
+
+These options can be configured through the ``html_theme_options`` dictionary in your ``conf.py`` file.
+
+Multi-index search
+^^^^^^^^^^^^^^^^^^
+
+To enable search across multiple documentation sources, use the ``search_extra_sources`` key.
+This key should be assigned a list of dictionaries, where each dictionary represents an external index.
+Each entry must contain a display name and the URL of the documentation to be included.
+
+**Example:**
+
+.. code-block:: python
+
+    html_theme_options = {
+        "search_extra_sources": [
+            {"name": "PyMAPDL", "url": "https://mapdl.docs.pyansys.com/version/stable/"},
+            {"name": "PyAnsys", "url": "https://docs.pyansys.com/version/stable/"},
+        ],
+    }
+
+Search filters
+^^^^^^^^^^^^^^
+
+To organize and group search results, you can define custom filters using the ``search_filters`` key.
+This key should be a dictionary where each key represents a filter label and the corresponding value is a list of directories or file paths that belong to that filter.
+
+**Example:**
+
+.. code-block:: python
+
+    html_theme_options = {
+        "search_filters": {
+            "User Guide": [
+                "user-guide/",
+                "getting-started/",
+                "index/",
+            ],
+            "Release Notes": ["changelog"],
+            "Examples": ["examples/"],
+            "Contributing": ["contribute/"],
+        },
+    }
+
+The filters appears as clickable options in the search interface, allowing users to refine their results by content type.
+
+The search filters are displayed as below:
+
+.. image:: ../_static/search_filter.png
+   :alt: Search filters
+
 
 
 Cheat sheets
