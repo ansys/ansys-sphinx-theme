@@ -1,0 +1,41 @@
+- file: getting-started
+  title: "Get Started"
+- file: user-guide
+  title: "Use Cases"
+# - file: examples
+#   title: "Example Gallery"
+- file: contribute
+  title: "Library"
+  sections:
+    - file: contribute/developer
+      title: Ray Core
+      caption: Scale general Python applications
+    - file: contribute/user
+      title: Ray Data
+      caption: Scale data ingest and preprocessing
+- file: index
+  title: "Docs"
+- link: https://discuss.ray.io
+  title: "Resources"
+  sections:
+    - link: https://discuss.ray.io
+      title: "Discussion Forum"
+      caption: Get your Ray questions answered
+    - link: https://github.com/ray-project/ray-educational-materials
+      title: "Training"
+      caption: Hands-on learning
+    - link: https://www.anyscale.com/blog
+      title: "Blog"
+      caption: Updates, best practices, user-stories
+    - link: https://www.anyscale.com/events
+      title: "Events"
+      caption: Webinars, meetups, office hours
+    - link: https://www.anyscale.com/blog/how-ray-and-anyscale-make-it-easy-to-do-massive-scale-machine-learning-on
+      title: "Success Stories"
+      caption: Real-world workload examples
+    - file: ray-overview/ray-libraries
+      title: "Ecosystem"
+      caption: Libraries integrated with Ray
+    - link: https://www.ray.io/community
+      title: "Community"
+      caption: Connect with us
