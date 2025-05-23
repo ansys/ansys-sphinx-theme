@@ -4,6 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
+DOCSDIR       = doc
 SOURCEDIR     = source
 BUILDDIR      = _build
 AUTOAPI_OUTDIR = source/examples/api
@@ -32,3 +33,8 @@ pdf:
 	@$(SPHINXBUILD) -M latex "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 	cd $(BUILDDIR)/latex && latexmk -r latexmkrc -pdf *.tex -interaction=nonstopmode || true
 	(test -f $(BUILDDIR)/latex/ansys_sphinx*.pdf && echo pdf exists) || exit 1
+
+# Serve docs
+serve:
+	@echo "Serving docs..."
+	@cd ../ && stb serve $(DOCSDIR)/$(SOURCEDIR)
