@@ -6,6 +6,7 @@
 <div class="bd-search-container">
   <h1>{{ _("Search") }}</h1>
   <div class="search-bar">
+    <div class="search-bar-filter">
     <input type="text" id="search-input" placeholder="Type to search..." />
     <div class="result-limit-wrapper">
       <label for="result-limit">Show results:</label>
@@ -16,6 +17,7 @@
       </select>
     </div>
 
+  </div>
   </div>
   <div id="selected-chips" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;"></div>
   <div class="results" id="search-results"></div>
