@@ -202,19 +202,7 @@ html[data-theme="light"] .highlight {
   margin: 5px 10px;
 }
 
-/* ========== Filter Dropdown Wrappers ========== */
 
-.filter-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.filter-wrapper .dropdown-toggle {
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 4px;
-}
 
 /* ========== Chips (Selected Filter Tags) ========== */
 
@@ -225,6 +213,12 @@ html[data-theme="light"] .highlight {
   border-radius: 16px;
   padding: 5px 10px;
   margin: 5px;
+}
+
+.search-bar{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .chip .remove-btn {
@@ -255,7 +249,7 @@ html[data-theme="light"] .highlight {
   left: 10px;
   background-color: transparent;
   border: none;
-  display: none; /* Hidden by default */
+  display: block;
 }
 
 .search-page-sidebar.toggle-section {

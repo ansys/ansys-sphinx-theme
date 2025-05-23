@@ -24,7 +24,6 @@ function openDB(name = "search-cache", version = 1) {
 }
 
 async function getFromIDB(key) {
-  console.log("Getting from IDB", key);
   const db = await openDB();
   return new Promise((resolve, reject) => {
     const tx = db.transaction("indexes", "readonly");
@@ -36,7 +35,6 @@ async function getFromIDB(key) {
 }
 
 async function saveToIDB(key, value) {
-  console.log("Saving to IDB", key, value);
   const db = await openDB();
   return new Promise((resolve, reject) => {
     const tx = db.transaction("indexes", "readwrite");
@@ -59,8 +57,6 @@ require(["fuse"], function (Fuse) {
   const libSearchData = {};
 
   let selectedFilter = new Set();
-  //   const SEARCH_FILE_1 = "/_static/search.json";
-
   function debounce(func, delay) {
     let timeout;
     return function (...args) {
@@ -103,6 +99,8 @@ require(["fuse"], function (Fuse) {
       }
 
       setupFilterDropdown();
+      showObjectIdDropdown();
+      showLibraryDropdown();
     } catch (err) {
       console.error("Search init failed", err);
     }
@@ -112,12 +110,7 @@ require(["fuse"], function (Fuse) {
    * Sets up the filter dropdown and its toggle interactions.
    */
   function setupFilterDropdown() {
-    const selectButton = document.getElementById("filter-btn");
     const dropdownContainer = document.getElementById("search-sidebar");
-    selectButton.addEventListener("click", () => {
-      dropdownContainer.style.display =
-        dropdownContainer.style.display === "none" ? "block" : "none";
-    });
 
     const filters = [
       {
@@ -144,7 +137,7 @@ require(["fuse"], function (Fuse) {
 
       const icon = document.createElement("span");
       icon.className = "toggle-icon";
-      icon.textContent = "▶";
+      icon.textContent = "▼";
       icon.style.fontSize = "12px";
 
       const label = document.createElement("span");
@@ -156,9 +149,10 @@ require(["fuse"], function (Fuse) {
       const dropdown = document.createElement("div");
       dropdown.id = dropdownId;
       dropdown.className = "dropdown-menu show";
-      dropdown.style.display = "none";
+      dropdown.style.display = "block";
       dropdown.style.marginTop = "10px";
 
+      // Add event listener to toggle the dropdown
       toggleDiv.addEventListener("click", () => {
         const isVisible = dropdown.style.display === "block";
         dropdown.style.display = isVisible ? "none" : "block";
