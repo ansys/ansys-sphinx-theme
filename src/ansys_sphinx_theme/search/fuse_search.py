@@ -27,7 +27,6 @@ from pathlib import Path
 import re
 
 from docutils import nodes
-
 from sphinx.util import logging
 
 logger = logging.getLogger(__name__)
