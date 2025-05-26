@@ -35,8 +35,6 @@ TITLES = [nodes.title]
 LITERAL = [nodes.literal]
 ALL_NODES = [nodes.Text]
 DEFAULT_PATTERN = PARAGRAPHS + TITLES + LITERAL
-
-
 logger = logging.getLogger(__name__)
 
 
@@ -223,7 +221,7 @@ def create_search_index(app, exception):
         # Raise warning that this feature will deprecate in the future
         logger.warning(
             "The 'index_patterns' configuration option is deprecated and will be removed"
-            "in v1.5.0 onwards. "
+            " in v1.5.0 onwards. "
             "It will index all paragraphs, titles, and literals by default. "
             "More information can be found in the documentation at https://sphinxdocs.ansys.com."
         )
