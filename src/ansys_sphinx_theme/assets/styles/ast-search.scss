@@ -199,7 +199,7 @@ html[data-theme="light"] .highlight {
 .checkbox-item {
   display: flex;
   align-items: center;
-  margin: 5px 10px;
+  margin: 0.3125rem 0.625rem; // 5px 10px
 }
 
 
@@ -210,19 +210,13 @@ html[data-theme="light"] .highlight {
   display: inline-flex;
   align-items: center;
   background-color: var(--ast-hover-suggestion-text-background);
-  border-radius: 16px;
-  padding: 5px 10px;
-  margin: 5px;
-}
-
-.search-bar-filter{
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  border-radius: 1rem; // 16px
+  padding: 0.3125rem 0.625rem; // 5px 10px
+  margin: 0.3125rem; // 5px
 }
 
 .chip .remove-btn {
-  margin-left: 8px;
+  margin-left: 0.5rem; // 8px
   background: none;
   border: none;
   color:var(--ast-search-bar-enable-text);
@@ -236,7 +230,7 @@ html[data-theme="light"] .highlight {
 
 /* Dropdown items inside chips if needed */
 .chip .dropdown-item {
-  padding: 5px 10px;
+  padding: 0.3125rem 0.625rem; // 5px 10px
   cursor: pointer;
 }
 
@@ -246,7 +240,7 @@ html[data-theme="light"] .highlight {
 #library-dropdown {
   position: relative;
   top: 100%; /* Directly below parent */
-  left: 10px;
+  left: 0.625rem; // 10px
   background-color: transparent;
   border: none;
   display: block;
@@ -256,9 +250,9 @@ html[data-theme="light"] .highlight {
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 5px;
-  margin-top: 5px;
+  padding: 0.3125rem 0.625rem; // 5px 10px
+  border-radius: 0.3125rem; // 5px
+  margin-top: 0.3125rem; // 5px
 }
 
 .search-page-sidebar.toggle-section.active {
@@ -267,12 +261,11 @@ html[data-theme="light"] .highlight {
 }
 
 .toggle-icon {
-  padding: 8px;
+  padding: 0.5rem; // 8px
 }
 
-
 .checkmark {
-  margin-right: 5px;
+  margin-right: 0.3125rem; // 5px
   color: var(--ast-search-bar-enable-text);
   font-weight: 400;
 }
@@ -280,11 +273,12 @@ html[data-theme="light"] .highlight {
 .result-limit-wrapper {
   display: flex;
   align-items: center;
-  margin: 0 10px;
+  margin: 0 0.625rem; // 0 10px
   font-size: 0.875rem; /* 14px */
   color: var(--ast-search-bar-enable-text);
 }
- select {
+
+select {
   background-color: var(--ast-search-bar-enable-background);
   color: var(--ast-search-bar-enable-text);
   border: 0.03125rem solid var(--ast-search-bar-enable-border); /* 0.5px */
