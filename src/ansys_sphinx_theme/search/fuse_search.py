@@ -162,12 +162,11 @@ def _title_to_anchor(title: str) -> str:
 def filter_search_documents(filters, doc_name, doc_title):
     """Filter search documents based on the provided filters."""
     if not filters:
-        # get the first part of the document name and sentence case it
         return doc_title
-    for key, values in filters.items():
-        for value in values:
+    for display_doc_name, doc_names in filters.items():
+        for value in doc_names:
             if doc_name.startswith(value.rstrip("/")):
-                return key
+                return display_doc_name
     return doc_title
 
 
