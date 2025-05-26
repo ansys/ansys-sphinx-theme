@@ -16,7 +16,6 @@
         "sass": "^1.85.1"
     },
     "dependencies": {
-        "idb": "^8.0.3",
         "postcss-scss": "^4.0.9"
     }
 }

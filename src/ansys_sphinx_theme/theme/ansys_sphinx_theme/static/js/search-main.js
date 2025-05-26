@@ -7,44 +7,91 @@ require.config({
   },
 });
 
-/* IndexDD functions */
-
+/* IndexDB functions */
+/**
+ * Open or create an IndexedDB database.
+ * @param {string} name - Name of the database.
+ * @param {number} version - Version of the database.
+ * @returns {Promise<IDBDatabase>} - A promise that resolves with the database instance.
+ */
 function openDB(name = "search-cache", version = 1) {
   return new Promise((resolve, reject) => {
+    console.log(`Opening IndexedDB: ${name}, version: ${version}`);
+
     const request = indexedDB.open(name, version);
-    request.onerror = () => reject(request.error);
-    request.onsuccess = () => resolve(request.result);
+
+    request.onerror = () => {
+      console.error("IndexedDB open error:", request.error);
+      reject(request.error);
+    };
+
+    request.onsuccess = () => {
+      console.log("IndexedDB opened successfully");
+      resolve(request.result);
+    };
+
     request.onupgradeneeded = (event) => {
       const db = event.target.result;
       if (!db.objectStoreNames.contains("indexes")) {
         db.createObjectStore("indexes");
+        console.log("Created object store: indexes");
       }
     };
   });
 }
 
+/**
+ * Retrieve a value from IndexedDB by key.
+ * @param {string} key - The key to look up in the object store.
+ * @returns {Promise<any>} - A promise that resolves with the retrieved value.
+ */
 async function getFromIDB(key) {
   const db = await openDB();
+  console.log(`Retrieving from IndexedDB with key: ${key}`);
+
   return new Promise((resolve, reject) => {
-    const tx = db.transaction("indexes", "readonly");
-    const store = tx.objectStore("indexes");
+    const transaction = db.transaction("indexes", "readonly");
+    const store = transaction.objectStore("indexes");
     const request = store.get(key);
-    request.onsuccess = () => resolve(request.result);
-    request.onerror = () => reject(request.error);
+
+    request.onsuccess = () => {
+      console.log("Retrieved from IndexedDB:", request.result);
+      resolve(request.result);
+    };
+
+    request.onerror = () => {
+      console.error("Failed to retrieve from IndexedDB:", request.error);
+      reject(request.error);
+    };
   });
 }
 
+/**
+ * Save a key-value pair to IndexedDB.
+ * @param {string} key - The key to store the value under.
+ * @param {any} value - The value to store.
+ * @returns {Promise<boolean>} - A promise that resolves when saving is complete.
+ */
 async function saveToIDB(key, value) {
   const db = await openDB();
+  console.log(`Saving to IndexedDB with key: ${key}`, value);
+
   return new Promise((resolve, reject) => {
-    const tx = db.transaction("indexes", "readwrite");
-    const store = tx.objectStore("indexes");
+    const transaction = db.transaction("indexes", "readwrite");
+    const store = transaction.objectStore("indexes");
     const request = store.put(value, key);
-    request.onsuccess = () => resolve(true);
-    request.onerror = () => reject(request.error);
+
+    request.onsuccess = () => {
+      console.log("Saved to IndexedDB successfully");
+      resolve(true);
+    };
+
+    request.onerror = () => {
+      console.error("Failed to save to IndexedDB:", request.error);
+      reject(request.error);
+    };
   });
 }
-
 /**
  * Initializes the search system by loading the document search index.
  */
