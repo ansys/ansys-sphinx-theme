@@ -475,9 +475,8 @@ def update_search_sidebar_context(
         Document tree for the page.
     """
     sidebar = context.get("sidebars", [])
-    if pagename == "search":
-        if "search_sidebar.html" not in sidebar:
-            sidebar.append("search_sidebar.html")
+    if pagename == "search" and "search_sidebar.html" not in sidebar:
+        sidebar.append("search_sidebar.html")
 
     # Update the sidebar context
     context["sidebars"] = sidebar

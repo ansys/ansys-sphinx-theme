@@ -206,7 +206,7 @@ require(["fuse"], function (Fuse) {
           const href = resultItems[0].dataset.href;
           navigateToHref(href);
         }
-        // if cntrl + enter is pressed, navigate to the advanced search page
+        // If ctrl + enter is pressed, navigate to the advanced search page
         if (event.ctrlKey) {
           event.preventDefault(); // Prevent default enter action
           const query = SEARCH_INPUT.value.trim();

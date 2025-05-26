@@ -86,9 +86,7 @@ class SearchIndex:
             # Collect all unwanted nodes first
             unwanted_nodes = [n for n in node.traverse() if isinstance(n, unwanted_types)]
 
-            for n in unwanted_nodes:
-                if n.parent:
-                    n.parent.remove(n)
+            [n.parent.remove(n) for n in unwanted_nodes if n.parent]
             clean_text = node.astext()
 
             section_anchor_id = _title_to_anchor(section_title)
