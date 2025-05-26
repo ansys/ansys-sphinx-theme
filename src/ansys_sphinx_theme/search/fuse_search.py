@@ -28,12 +28,16 @@ import re
 
 from docutils import nodes
 from docutils.nodes import Element
+from sphinx.util import logging
 
 PARAGRAPHS = [nodes.paragraph]
 TITLES = [nodes.title]
 LITERAL = [nodes.literal]
 ALL_NODES = [nodes.Text]
 DEFAULT_PATTERN = PARAGRAPHS + TITLES + LITERAL
+
+
+logger = logging.getLogger(__name__)
 
 
 class SearchIndex:
@@ -213,6 +217,16 @@ def create_search_index(app, exception):
     static_search_options = app.config.html_theme_options.get("static_search", {})
     excluded_docs = static_search_options.get("files_to_exclude", [])
     included_docs = app.env.found_docs
+
+    patterns = app.env.config.index_patterns or {}
+    if patterns:
+        # Raise warning that this feature will deprecate in the future
+        logger.warning(
+            "The 'index_patterns' configuration option is deprecated and will be removed"
+            "in v1.5.0 onwards. "
+            "It will index all paragraphs, titles, and literals by default. "
+            "More information can be found in the documentation at https://sphinxdocs.ansys.com."
+        )
 
     for exclude_doc in excluded_docs:
         exclude_doc = Path(exclude_doc).resolve()
