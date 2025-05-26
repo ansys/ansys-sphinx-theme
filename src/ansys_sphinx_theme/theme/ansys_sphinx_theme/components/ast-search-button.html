@@ -5,7 +5,7 @@
 const SEARCH_OPTIONS = JSON.parse('{{ theme_static_search | tojson | safe }}');
 const SEARCH_FILE = "{{ pathto('_static/search.json', 1) }}";
 const ADVANCE_SEARCH_PATH = "{{ pathto('search.html', 1) }}";
-const extra_sources = JSON.parse('{{ theme_search_extra_sources | tojson | safe }}');
+const EXTRA_SOURCE = JSON.parse('{{ theme_search_extra_sources | tojson | safe }}');
 </script>
 
 {% if pagename != "search" %}

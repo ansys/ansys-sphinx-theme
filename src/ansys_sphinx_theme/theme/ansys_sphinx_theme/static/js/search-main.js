@@ -82,13 +82,13 @@ require(["fuse"], function (Fuse) {
       searchData = data;
       fuse = new Fuse(searchData, SEARCH_OPTIONS);
 
-      const allLibs = Object.keys(extra_sources);
+      const allLibs = Object.keys(EXTRA_SOURCES);
       for (const lib of allLibs) {
         const cacheKey = `lib-search-${lib}`;
         let libData = await getFromIDB(cacheKey);
 
         if (!libData) {
-          const libPath = extra_sources[lib];
+          const libPath = EXTRA_SOURCES[lib];
           const libJsonPath = `${libPath}/_static/search.json`;
           const res = await fetch(libJsonPath);
           libData = await res.json();
@@ -126,7 +126,7 @@ require(["fuse"], function (Fuse) {
     ];
 
     // remove the library filter if no libraries
-    if (Object.keys(extra_sources).length === 0) {
+    if (Object.keys(EXTRA_SOURCES).length === 0) {
       filters.splice(1, 1);
     }
 
@@ -198,7 +198,7 @@ require(["fuse"], function (Fuse) {
     const dropdown = document.getElementById("library-dropdown");
     dropdown.innerHTML = "";
 
-    for (const lib in extra_sources) {
+    for (const lib in EXTRA_SOURCES) {
       const checkbox = createCheckboxItem(lib, selectedLibraries, () => {
         renderSelectedChips();
         performSearch();
@@ -300,7 +300,7 @@ require(["fuse"], function (Fuse) {
     }
 
     for (const lib of selectedLibraries) {
-      const libBaseUrl = extra_sources[lib];
+      const libBaseUrl = EXTRA_SOURCES[lib];
       const cacheKey = `lib-search-${lib}`;
 
       try {
