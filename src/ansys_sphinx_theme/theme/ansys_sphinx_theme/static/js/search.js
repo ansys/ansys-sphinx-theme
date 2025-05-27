@@ -193,30 +193,25 @@ require(["fuse"], function (Fuse) {
 
       case "Escape":
         collapseSearchInput();
-        break; // Added break to avoid fall-through
+        break;
 
       case "Enter":
-        // Optionally handle Enter key here
-        if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultItems.length) {
-          event.preventDefault(); // Prevent default enter action
+        event.preventDefault(); // Always prevent default on Enter
+        if (event.ctrlKey || event.metaKey) {
+          const query = SEARCH_INPUT.value.trim();
+          window.location.href = ADVANCE_SEARCH_PATH + "?q=" + query;
+        } else if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultItems.length) {
           const href = resultItems[CURRENT_INDEX].dataset.href;
           navigateToHref(href);
         } else if (resultItems.length > 0) {
-          event.preventDefault(); // Prevent default enter action
           const href = resultItems[0].dataset.href;
           navigateToHref(href);
-        }
-        // If ctrl + enter is pressed, navigate to the advanced search page
-        if (event.ctrlKey) {
-          event.preventDefault(); // Prevent default enter action
-          const query = SEARCH_INPUT.value.trim();
-          window.location.href = ADVANCE_SEARCH_PATH + "?q=" + query;
         }
         break;
 
       case "ArrowDown":
         if (resultItems.length > 0) {
-          CURRENT_INDEX = (CURRENT_INDEX + 1) % resultItems.length; // Move down
+          CURRENT_INDEX = (CURRENT_INDEX + 1) % resultItems.length;
           focusSelected(resultItems);
         }
         break;
@@ -224,13 +219,23 @@ require(["fuse"], function (Fuse) {
       case "ArrowUp":
         if (resultItems.length > 0) {
           CURRENT_INDEX =
-            (CURRENT_INDEX - 1 + resultItems.length) % resultItems.length; // Move up
+            (CURRENT_INDEX - 1 + resultItems.length) % resultItems.length;
           focusSelected(resultItems);
         }
         break;
 
       default:
-        // if environment variable "FUSE_ACTIVE" is set to true
+        // Ignore keys like Ctrl, Alt, Shift (don't trigger search)
+        if (
+          event.ctrlKey ||
+          event.altKey ||
+          event.metaKey ||
+          event.key === "Control" ||
+          event.key === "Alt"
+        ) {
+          return;
+        }
+
         if (
           document.documentElement.getAttribute("data-fuse_active") === "true"
         ) {
@@ -239,6 +244,7 @@ require(["fuse"], function (Fuse) {
           console.error("[AST]: Fuse is not active yet.");
           RESULTS.style.display = "none";
         }
+
         handleSearchInput();
     }
   }
