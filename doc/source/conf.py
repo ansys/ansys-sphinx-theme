@@ -68,12 +68,22 @@ html_theme_options = {
         "version_match": get_version_match(__version__),
     },
     "logo": "ansys",
-    "static_search": {
-        "threshold": 0.2,
-        "limit": 7,
-        "minMatchCharLength": 3,
+    "search_extra_sources": {
+        "PyDPF Core": "https:/dpf.docs.pyansys.com/version/stable/",
+        "Actions": "https://actions.docs.ansys.com/version/stable/",
+    },
+    "search_filters": {
+        "User Guide": [
+            "user-guide/",
+            "getting-started/",
+            "index/",
+        ],
+        "Release Notes": ["changelog"],
+        "Examples": ["examples/"],
+        "Contributing": ["contribute/"],
     },
 }
+
 
 html_js_files = ["https://cdn.plot.ly/plotly-3.0.1.min.js"]
 
