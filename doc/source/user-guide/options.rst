@@ -197,19 +197,18 @@ Multi-index search
 ^^^^^^^^^^^^^^^^^^
 
 To enable search across multiple documentation sources, use the ``search_extra_sources`` key.
-This key should be assigned a list of dictionaries, where each dictionary represents an external index.
-Each entry must contain a display name and the URL of the documentation to be included.
+This key should be a dictionary where each key is the name of the source and the value is the URL to that source.
 
 **Example:**
 
 .. code-block:: python
 
     html_theme_options = {
-        "search_extra_sources": [
-            {"name": "PyMAPDL", "url": "https://mapdl.docs.pyansys.com/version/stable/"},
-            {"name": "PyAnsys", "url": "https://docs.pyansys.com/version/stable/"},
-        ],
-    }
+        "search_extra_sources":
+        {
+            "PyMAPDL": "https://mapdl.docs.pyansys.com/version/stable/",
+            "PyAnsys": "https://docs.pyansys.com/version/stable/",
+        }
 
 Search filters
 ^^^^^^^^^^^^^^
