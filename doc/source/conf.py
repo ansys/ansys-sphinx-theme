@@ -14,9 +14,6 @@ from sphinx.application import Sphinx
 from sphinx.builders.latex import LaTeXBuilder
 
 from ansys_sphinx_theme import (
-    ALL_NODES,
-    PARAGRAPHS,
-    TITLES,
     __version__,
     ansys_favicon,
     ansys_logo_white,
@@ -79,12 +76,6 @@ html_theme_options = {
 }
 
 html_js_files = ["https://cdn.plot.ly/plotly-3.0.1.min.js"]
-
-
-index_patterns = {
-    "examples/api/": ALL_NODES,
-    "examples/sphinx_examples/": TITLES + PARAGRAPHS,
-}
 
 
 # Sphinx extensions
