@@ -69,7 +69,7 @@ html_theme_options = {
     },
     "logo": "ansys",
     "search_extra_sources": {
-        "PyDPF Core": "https:/dpf.docs.pyansys.com/version/stable/",
+        "PyAnsys": "https://docs.pyansys.com/version/stable/",
         "Actions": "https://actions.docs.ansys.com/version/stable/",
     },
     "search_filters": {
