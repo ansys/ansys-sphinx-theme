@@ -47,7 +47,6 @@ function openDB(name = "search-cache", version = 1) {
  */
 async function getFromIDB(key) {
   const db = await openDB();
-  console.log(`Retrieving from IndexedDB with key: ${key}`);
 
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("indexes", "readonly");
@@ -55,12 +54,10 @@ async function getFromIDB(key) {
     const request = store.get(key);
 
     request.onsuccess = () => {
-      console.log("Retrieved from IndexedDB:", request.result);
       resolve(request.result);
     };
 
     request.onerror = () => {
-      console.error("Failed to retrieve from IndexedDB:", request.error);
       reject(request.error);
     };
   });
@@ -74,7 +71,6 @@ async function getFromIDB(key) {
  */
 async function saveToIDB(key, value) {
   const db = await openDB();
-  console.log(`Saving to IndexedDB with key: ${key}`, value);
 
   return new Promise((resolve, reject) => {
     const transaction = db.transaction("indexes", "readwrite");
@@ -82,7 +78,6 @@ async function saveToIDB(key, value) {
     const request = store.put(value, key);
 
     request.onsuccess = () => {
-      console.log("Saved to IndexedDB successfully");
       resolve(true);
     };
 
@@ -137,7 +132,6 @@ require(["fuse"], function (Fuse) {
         if (!libData) {
           const libPath = EXTRA_SOURCES[lib];
           const url = `${libPath}/_static/search.json`;
-          console.log(`Fetching library search data from: ${url}`);
           const res = await fetch(url);
           libData = await res.json();
           await saveToIDB(cacheKey, libData);
@@ -465,7 +459,6 @@ require(["fuse"], function (Fuse) {
   const handleSearchInput = debounce(
     () => {
       const query = document.getElementById("search-input").value.trim();
-      console.log("Search query:", query);
       if (query.length > 0) {
         performSearch();
       }
