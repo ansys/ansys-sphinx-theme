@@ -136,8 +136,9 @@ require(["fuse"], function (Fuse) {
 
         if (!libData) {
           const libPath = EXTRA_SOURCES[lib];
-          const libJsonPath = `${libPath}/_static/search.json`;
-          const res = await fetch(libJsonPath);
+          const url = `${libPath}/_static/search.json`;
+          console.log(`Fetching library search data from: ${url}`);
+          const res = await fetch(url);
           libData = await res.json();
           await saveToIDB(cacheKey, libData);
         }
