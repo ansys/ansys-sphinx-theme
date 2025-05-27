@@ -27,21 +27,15 @@ from pathlib import Path
 import re
 
 from docutils import nodes
-from docutils.nodes import Element
 from sphinx.util import logging
 
-PARAGRAPHS = [nodes.paragraph]
-TITLES = [nodes.title]
-LITERAL = [nodes.literal]
-ALL_NODES = [nodes.Text]
-DEFAULT_PATTERN = PARAGRAPHS + TITLES + LITERAL
 logger = logging.getLogger(__name__)
 
 
 class SearchIndex:
     """Generate a search index for a Sphinx document."""
 
-    def __init__(self, doc_name, app, pattern=None):
+    def __init__(self, doc_name, app, filter_options=None):
         """
         Initialize the search index object.
 
@@ -58,8 +52,15 @@ class SearchIndex:
         self.theme_options = app.config.html_theme_options.get("static_search", {})
         self.doc_title = self.env.titles[self.doc_name].astext()
         self.doc_tree = self.env.get_doctree(self.doc_name)
+        first_part = self.doc_name.split("/")[0]
+        try:
+            self.parent_title = (
+                self.env.titles.get(first_part).astext() if doc_name != "index" else "Home"
+            )
+        except:  # noqa: E722
+            self.parent_title = "Home"
         self.sections = []
-        self.pattern = pattern
+        self.filter_options = filter_options
 
     def build_sections(self):
         """Build sections from the document tree, handling subsections and descriptions."""
@@ -76,46 +77,26 @@ class SearchIndex:
 
             section_title = node[0].astext()
 
-            section_text = "\n".join(
-                n.astext() for node_type in self.pattern for n in node.traverse(node_type)
+            unwanted_types = (
+                nodes.math,
+                nodes.raw,
+                nodes.image,
+                nodes.figure,
+                nodes.comment,
+                nodes.literal_block,
             )
+
+            # Collect all unwanted nodes first
+            unwanted_nodes = [n for n in node.traverse() if isinstance(n, unwanted_types)]
+
+            [n.parent.remove(n) for n in unwanted_nodes if n.parent]
+            clean_text = node.astext()
 
             section_anchor_id = _title_to_anchor(section_title)
             self.sections.append(
                 {
                     "title": section_title,
-                    "text": section_text,
-                    "anchor_id": section_anchor_id,
-                }
-            )
-
-            self._process_desc_element(node, section_title)
-
-    def _process_desc_element(self, node, title):
-        """Process `desc` element within a section."""
-        for element in node.traverse(Element):
-            if element.tagname != "desc":
-                continue
-
-            # id is the id tag of the desc element
-            section_anchor_id = element.attributes["ids"]
-            if element.children:
-                for element_child in element.children:
-                    if element_child.tagname != "desc_signature":
-                        continue
-                    if element_child.attributes.get("ids"):
-                        section_anchor_id = element_child.attributes["ids"][0]
-            section_text = element.astext()
-            if isinstance(section_anchor_id, list) and len(section_anchor_id) > 0:
-                section_anchor_id = section_anchor_id[0]
-            if section_anchor_id:
-                section_title = _desc_anchor_to_title(title, section_anchor_id)
-            else:
-                section_title = title
-            self.sections.append(
-                {
-                    "title": section_title,
-                    "text": section_text,
+                    "text": clean_text,
                     "anchor_id": section_anchor_id,
                 }
             )
@@ -165,19 +146,15 @@ class SearchIndex:
         """Generate indices for each section."""
         for section in self.sections:
             breadcrumbs = self.generate_breadcrumbs(section["title"])
+            self.object_id = filter_search_documents(
+                self.filter_options, self.doc_name, self.parent_title
+            )
             yield {
-                "objectID": self.doc_name,
+                "objectID": self.object_id,
                 "href": f"{self.doc_path}#{section['anchor_id']}",
                 "title": breadcrumbs,
-                "section": section["title"],
                 "text": section["text"],
             }
-
-
-def _desc_anchor_to_title(title, anchor):
-    """Convert a desc anchor to a title."""
-    anchor_title = anchor.split(".")[-1]
-    return f"{title} > {anchor_title}"
 
 
 def _title_to_anchor(title: str) -> str:
@@ -185,15 +162,15 @@ def _title_to_anchor(title: str) -> str:
     return re.sub(r"[^\w\s-]", "", title.lower().strip().replace(" ", "-"))
 
 
-def get_pattern_for_each_page(app, doc_name):
-    """Get the pattern for each page in the search index."""
-    patterns = app.env.config.index_patterns or {}
-
-    for filename, pattern in patterns.items():
-        if doc_name.startswith(filename):
-            return pattern
-
-    return DEFAULT_PATTERN
+def filter_search_documents(filters, doc_name, doc_title):
+    """Filter search documents based on the provided filters."""
+    if not filters:
+        return doc_title
+    for display_doc_name, doc_names in filters.items():
+        for value in doc_names:
+            if doc_name.startswith(value.rstrip("/")):
+                return display_doc_name
+    return doc_title
 
 
 def create_search_index(app, exception):
@@ -215,6 +192,15 @@ def create_search_index(app, exception):
     static_search_options = app.config.html_theme_options.get("static_search", {})
     excluded_docs = static_search_options.get("files_to_exclude", [])
     included_docs = app.env.found_docs
+    filter_options = app.config.html_theme_options.get("search_filters", {})
+
+    patterns = app.env.config.index_patterns or {}
+    if patterns:
+        logger.error(
+            "The 'index_patterns' is depreciated and no longer supported. "
+            "Please see the documentation https://sphinxdocs.ansys.com for the "
+            "new search configuration options."
+        )
 
     patterns = app.env.config.index_patterns or {}
     if patterns:
@@ -237,11 +223,10 @@ def create_search_index(app, exception):
         ]
 
     for document in included_docs:
-        pattern = get_pattern_for_each_page(app, document)
-        search_index = SearchIndex(document, app, pattern)
+        search_index = SearchIndex(document, app, filter_options=filter_options)
         search_index.build_sections()
         search_index_list.extend(search_index.indices)
 
     search_index_path = Path(app.builder.outdir) / "_static" / "search.json"
     with search_index_path.open("w", encoding="utf-8") as index_file:
-        json.dump(search_index_list, index_file, ensure_ascii=False, indent=4)
+        json.dump(search_index_list, index_file, ensure_ascii=False, separators=(",", ":"))

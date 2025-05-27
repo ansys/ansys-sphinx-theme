@@ -36,9 +36,6 @@ from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_si
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
 from ansys_sphinx_theme.search import (
-    ALL_NODES,
-    PARAGRAPHS,
-    TITLES,
     create_search_index,
     update_search_config,
 )
@@ -456,6 +453,35 @@ def add_sidebar_context(
     context["sidebars"] = sidebar
 
 
+def update_search_sidebar_context(
+    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
+) -> None:
+    """Update the search sidebar context.
+
+    This function updates the search sidebar context with the search index
+    and the search options.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    pagename : str
+        Name of the current page.
+    templatename : str
+        Name of the template being used.
+    context : dict
+        Context dictionary for the page.
+    doctree : docutils.nodes.document
+        Document tree for the page.
+    """
+    sidebar = context.get("sidebars", [])
+    if pagename == "search" and "search_sidebar.html" not in sidebar:
+        sidebar.append("search_sidebar.html")
+
+    # Update the sidebar context
+    context["sidebars"] = sidebar
+
+
 def append_og_site_name(app, pagename, templatename, context, doctree):
     # Make sure the context already has metatags
     context["metatags"] = context.get("metatags", "")
@@ -511,6 +537,8 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", append_og_site_name)
+    app.connect("html-page-context", update_search_sidebar_context)
+
     app.connect("build-finished", replace_html_tag)
     if use_ansys_search:
         app.connect("build-finished", create_search_index)
@@ -521,4 +549,8 @@ def setup(app: Sphinx) -> Dict:
     }
 
 
-__all__ = ["__version__", "generate_404", "get_version_match", "TITLES", "PARAGRAPHS", "ALL_NODES"]
+__all__ = [
+    "__version__",
+    "generate_404",
+    "get_version_match",
+]
