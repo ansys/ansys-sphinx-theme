@@ -105,7 +105,8 @@ require(["fuse"], function (Fuse) {
     RESULTS.style.display = "flex";
     const banner = document.createElement("div");
     banner.className = "warning-banner";
-    banner.textContent = "No results found. Press Ctrl+Enter for extended search.";
+    banner.textContent =
+      "No results found. Press Ctrl+Enter for extended search.";
     banner.style.fontStyle = "italic";
     RESULTS.appendChild(banner);
   }
