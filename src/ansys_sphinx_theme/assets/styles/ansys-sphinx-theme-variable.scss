@@ -13,8 +13,19 @@
   src: url(../fonts/SourceSansPro-Regular.ttf);
 }
 
+// Import SCSS variables
+
+@import 'variables';
+
+
 :root {
   /** Ansys specific changes to the theme */
+  --bs-breakpoint-lg: $bs-breakpoint-lg !important;
+  --bs-breakpoint-md: $bs-breakpoint-md;
+  --bs-breakpoint-sm: $bs-breakpoint-sm;
+  --bs-breakpoint-xs: $bs-breakpoint-xs;
+  --bs-breakpoint-xl: $bs-breakpoint-xl;
+   --breakpoint-sidebar-primary: $bs-breakpoint-lg;
 
   /**
   * Ansys Font family
@@ -52,6 +63,7 @@
   --bs-nav-link-font-size: 0.875rem; /* 14px */
   --bs-navbar-color: var(--bs-ast-navbar-color);
   --ast-font-sidebar-header: 1rem; /* 16px */
+
   /**
 * weight
 */
@@ -421,4 +433,107 @@ h6 {
 
 h1 {
   line-height: 56px;
+}
+
+
+/* Mobile-specific overrides (≤ 1040px) */
+@media (max-width: $bs-breakpoint-lg) {
+  .navbar-header-items {
+    display: none !important;
+    flex-grow: 1 !important;
+    padding: 0 0 0 0.5rem !important;
+  }
+
+  ul.navbar-nav {
+    align-items: baseline;
+  }
+
+  .navbar-center-items .navbar-item {
+    display: inline-block;
+  }
+
+  .navbar-persistent--mobile {
+    display: none;
+  }
+
+  .navbar-persistent--container {
+    display: flex;
+  }
+
+  .bd-sidebar-primary {
+    flex-grow: 0.75;
+    height: 100vh;
+    left: 0;
+    margin-left: -75%;
+    max-height: 100vh !important;
+    max-width: $sidebar-primary-max-width !important;
+    position: fixed;
+    top: 0;
+    transition: visibility 0.2s ease-out,margin 0.2s ease-out;
+    visibility: hidden;
+    width: $sidebar-primary-width;
+    z-index: 1050;
+    display: flex !important;
+  }
+
+  .bd-sidebar-primary[open] {
+    visibility: visible !important;
+  }
+
+  button.primary-toggle {
+    display: flex !important;
+  }
+
+  #pst-collapse-sidebar-button {
+    display: none !important;
+  }
+
+  nav.bd-links {
+    display: block !important;
+  }
+
+  .nav-link .hide-on-wide {
+    display: none !important;
+  }
+
+  .bd-sidebar-primary.hide-on-wide {
+    display: flex !important;
+  }
+
+  .bd-sidebar-primary .sidebar-header-items {
+    display: flex !important;
+  }
+}
+
+/* Desktop-specific overrides (> 1040px) */
+@media (min-width: $bs-breakpoint-lg) {
+  .navbar-header-items {
+    display: inherit;
+    flex-grow: 1;
+    padding: 0 0 0 0.5rem;
+  }
+
+  ul.navbar-nav {
+    align-items: baseline;
+  }
+
+  .navbar-center-items .navbar-item {
+    display: inline-block;
+  }
+
+  .navbar-persistent--mobile {
+    display: none;
+  }
+
+  .navbar-persistent--container {
+    display: flex;
+  }
+
+  .bd-sidebar-primary {
+    font-size: var(--pst-sidebar-font-size);
+  }
+
+  button.primary-toggle {
+    display: none;
+  }
 }
