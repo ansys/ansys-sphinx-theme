@@ -1,8 +1,8 @@
-// ==============================
-// Fuse.js Search Integration
-// ==============================
+/**
+ * @file search.js
+ * @description This script provides client-side search functionality using Fuse.js for the Ansys Sphinx Theme.
+ */
 
-// Constants
 const MAIN_PAGE_CONTENT = document.querySelector(".bd-main");
 const FUSE_VERSION = "6.4.6";
 let SEARCH_BAR,
@@ -11,7 +11,10 @@ let SEARCH_BAR,
   CURRENT_INDEX = -1;
 let fuse;
 
-// Load Fuse.js from CDN
+/**
+ * Load fuse.js from CDN and initialize search functionality.
+ */
+
 require.config({
   paths: {
     fuse: `https://cdn.jsdelivr.net/npm/fuse.js@${FUSE_VERSION}/dist/fuse.min`,
@@ -169,10 +172,9 @@ require(["fuse"], function (Fuse) {
     RESULTS.appendChild(fragment);
     RESULTS.style.display = "flex";
   }
-  // Focus the selected result item
 
   /**
-   * Highlight the currently selected item.
+   * Focus the currently selected result item.
    * @param {NodeList} resultsItems - List of result items.
    */
   function focusSelected(resultsItems) {
@@ -296,7 +298,11 @@ require(["fuse"], function (Fuse) {
     }
   }
 
-  // Global event listeners
+  /**
+   * Handle global keydown events for search shortcuts.
+   * @param {KeyboardEvent} event
+   * @returns {void}
+   */
   function handleGlobalKeyDown(event) {
     if (event.key === "Escape") collapseSearchInput();
     else if (event.key === "k" && event.ctrlKey) expandSearchInput();
@@ -308,7 +314,10 @@ require(["fuse"], function (Fuse) {
     }
   }
 
-  // Initialize search system
+  /**
+   * Initialize search functionality on page load.
+   * Sets up event listeners and fetches search data.
+   */
   setupSearchElements();
   window.addEventListener("resize", debounce(setupSearchElements, 250));
   document.addEventListener("keydown", handleGlobalKeyDown);
