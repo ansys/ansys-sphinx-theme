@@ -1,4 +1,8 @@
 /* Static Search Results Container */
+
+.bd-search{
+  display: flex;
+}
 .static-search-results {
   display: flex;
   flex-direction: column;
@@ -80,10 +84,6 @@ html[data-theme="light"] .highlight {
 .bd-search .search-button__kbd-shortcut {
   background-color: var(--ast-search-bar-enable-background) !important;
   box-shadow: none !important;
-  height: 2.25rem; /* 36px */
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
 }
 
 /* Index Select Dropdown */
@@ -149,21 +149,55 @@ html[data-theme="light"] .highlight {
 }
 
 /* Responsive Styles */
-@media (max-width: 48rem) { /* 768px */
-  .bd-search input.expanded {
-    width: 6.25rem; /* 100px */
+@media (min-width: 1200px) and (max-width: 85.375rem) {
+  .bd-search input.form-control.expanded {
+    width: 100%; /* 320px */
   }
 
-  .form-control {
-    width: 3.125rem; /* 50px */
-  }
-
-  .result {
-    width: 6.25rem; /* 100px */
+  .bd-search input.form-control {
+    width: 100%; /* 240px */
   }
 
   .bd-search .search-button__kbd-shortcut {
-    display: none;
+    display: none !important;
+  }
+
+  .static-search-results {
+    width: 50%; /* 480px */
+  }
+}
+
+@media (max-width: 1200px) {
+
+  .bd-search input.form-control.expanded {
+    width: 5rem; /* 320px */
+  }
+
+  .bd-search input.form-control {
+    width: 100%; /* 240px */
+  }
+
+  .static-search-results {
+    width: 50%; /* 480px */
+  }
+
+  .bd-search .search-button__kbd-shortcut {
+    display: none !important;
+  }
+}
+
+// laptop
+@media (min-width: 85.375rem)  and (max-width: 128rem) {
+  .bd-search input.form-control.expanded {
+    width: 35rem; /* 560px */
+  }
+
+  .bd-search input.form-control {
+    width: 100%; /* 240px */
+  }
+
+  .static-search-results {
+    width: 37rem; /* 600px */
   }
 }
 
