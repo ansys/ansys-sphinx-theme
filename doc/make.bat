@@ -9,12 +9,14 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=source
 set BUILDDIR=_build
+set DOCSDIR=doc
 set GALLERY_EXAMPLES=%SOURCEDIR%\examples\gallery-examples
 set AUTOAPI_OUTDIR=%SOURCEDIR%\examples\api\
 
 if "%1" == "" goto help
 if "%1" == "pdf" goto pdf
 if "%1" == "clean" goto clean
+if "%1" == "serve" goto serve
 
 %SPHINXBUILD% >NUL 2>NUL
 if errorlevel 9009 (
@@ -45,6 +47,12 @@ pdflatex "%%f" --interaction=nonstopmode)
 if exist %BUILDDIR% rmdir /S /Q %BUILDDIR%
 if exist %GALLERY_EXAMPLES% rmdir /S /Q %GALLERY_EXAMPLES%
 if exist %AUTOAPI_OUTDIR% rmdir /S /Q %AUTOAPI_OUTDIR%
+
+
+:serve
+cd ../
+stb serve $(DOCSDIR)/$(SOURCEDIR)
+
 
 :end
 popd

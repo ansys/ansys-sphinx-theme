@@ -8,6 +8,22 @@ Release notes
 
 .. towncrier release notes start
 
+`1.4.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.5>`_ (May 27, 2025)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - add deprecated warning for `index_pattern` search option
+          - `#704 <https://github.com/ansys/ansys-sphinx-theme/pull/704>`_
+
+
 `1.4.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.4>`_ (May 08, 2025)
 =========================================================================================
 

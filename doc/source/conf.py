@@ -14,9 +14,6 @@ from sphinx.application import Sphinx
 from sphinx.builders.latex import LaTeXBuilder
 
 from ansys_sphinx_theme import (
-    ALL_NODES,
-    PARAGRAPHS,
-    TITLES,
     __version__,
     ansys_favicon,
     ansys_logo_white,
@@ -71,20 +68,24 @@ html_theme_options = {
         "version_match": get_version_match(__version__),
     },
     "logo": "ansys",
-    "static_search": {
-        "threshold": 0.2,
-        "limit": 7,
-        "minMatchCharLength": 3,
+    "search_extra_sources": {
+        "PyAnsys": "https://docs.pyansys.com/version/stable/",
+        "Actions": "https://actions.docs.ansys.com/version/stable/",
+    },
+    "search_filters": {
+        "User Guide": [
+            "user-guide/",
+            "getting-started/",
+            "index/",
+        ],
+        "Release Notes": ["changelog"],
+        "Examples": ["examples/"],
+        "Contributing": ["contribute/"],
     },
 }
 
+
 html_js_files = ["https://cdn.plot.ly/plotly-3.0.1.min.js"]
-
-
-index_patterns = {
-    "examples/api/": ALL_NODES,
-    "examples/sphinx_examples/": TITLES + PARAGRAPHS,
-}
 
 
 # Sphinx extensions
