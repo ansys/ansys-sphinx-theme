@@ -401,7 +401,7 @@ html[data-theme="dark"] {
 body {
   font-family: var(--ast-body-family);
   line-height: var(--ast-global-line-height);
-  font-size: 14px;
+  font-size: 0.875rem; // 14px
   color: var(--ast-color-text);
 }
 
@@ -420,7 +420,7 @@ h6 {
 }
 
 h1 {
-  line-height: 56px;
+  line-height: 3.5rem; // 56px
 }
 
 
@@ -454,7 +454,7 @@ h1 {
     left: 0;
     margin-left: -75%;
     max-height: 100vh !important;
-    max-width: 350px !important;
+    max-width: 21.875rem !important; // 350px
     position: fixed;
     top: 0;
     transition: visibility 0.2s ease-out,margin 0.2s ease-out;
