@@ -73,12 +73,12 @@ html_theme_options = {
         "Actions": "https://actions.docs.ansys.com/version/stable/",
     },
     "search_filters": {
-        "User Guide": [
+        "User guide": [
             "user-guide/",
             "getting-started/",
             "index/",
         ],
-        "Release Notes": ["changelog"],
+        "Release notes": ["changelog"],
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
