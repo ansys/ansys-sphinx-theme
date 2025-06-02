@@ -1,0 +1,32 @@
+{%- extends "page.html" %}
+
+{% block docs_body %}
+<div class="bd-search-container">
+  <h1>{{ _("Search") }}</h1>
+  <div class="search-bar">
+    <div class="search-bar-filter">
+    <input type="text" id="search-input" placeholder="Type to search..." />
+    <div class="result-limit-wrapper">
+      <label for="result-limit">Show results:</label>
+      <select id="result-limit">
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+      </select>
+    </div>
+
+  </div>
+  </div>
+  <div id="selected-chips" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;"></div>
+  <div class="results" id="search-results"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+<script src="{{ pathto('_static/js/search-main.js', 1) }}"></script>
+
+{% endblock %}
+
+{%- block htmltitle -%}
+  <title>{{ _("Search") }} - {{ title or docstitle }}</title>
+{%- endblock htmltitle -%}
+

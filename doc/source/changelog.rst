@@ -8,6 +8,217 @@ Release notes
 
 .. towncrier release notes start
 
+`1.5.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.5.0>`_ (May 28, 2025)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - add multi index searching and filtering
+          - `#674 <https://github.com/ansys/ansys-sphinx-theme/pull/674>`_
+
+        * - small layout adjustments
+          - `#691 <https://github.com/ansys/ansys-sphinx-theme/pull/691>`_
+
+        * - add customization instructions for SCSS files in developer documentation
+          - `#694 <https://github.com/ansys/ansys-sphinx-theme/pull/694>`_
+
+        * - add 'serve' command to Makefile and make.bat for serving documentation
+          - `#698 <https://github.com/ansys/ansys-sphinx-theme/pull/698>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - smaller screen view and search for mobile views
+          - `#689 <https://github.com/ansys/ansys-sphinx-theme/pull/689>`_
+
+        * - style for back to top button
+          - `#693 <https://github.com/ansys/ansys-sphinx-theme/pull/693>`_
+
+        * - url for fetch extra source file
+          - `#707 <https://github.com/ansys/ansys-sphinx-theme/pull/707>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - update the multi-index docs
+          - `#708 <https://github.com/ansys/ansys-sphinx-theme/pull/708>`_
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - bump notebook from 7.4.1 to 7.4.2
+          - `#684 <https://github.com/ansys/ansys-sphinx-theme/pull/684>`_
+
+        * - update snowballstemmer requirement from <3 to <4
+          - `#688 <https://github.com/ansys/ansys-sphinx-theme/pull/688>`_
+
+        * - bump pyvista[jupyter] from 0.45.0 to 0.45.1
+          - `#690 <https://github.com/ansys/ansys-sphinx-theme/pull/690>`_
+
+        * - bump pyvista[jupyter] from 0.45.1 to 0.45.2
+          - `#699 <https://github.com/ansys/ansys-sphinx-theme/pull/699>`_
+
+        * - bump tox from 4.25.0 to 4.26.0
+          - `#700 <https://github.com/ansys/ansys-sphinx-theme/pull/700>`_
+
+        * - bump plotly from 6.0.1 to 6.1.1
+          - `#701 <https://github.com/ansys/ansys-sphinx-theme/pull/701>`_
+
+        * - bump notebook from 7.4.2 to 7.4.3
+          - `#705 <https://github.com/ansys/ansys-sphinx-theme/pull/705>`_
+
+        * - bump plotly from 6.1.1 to 6.1.2
+          - `#709 <https://github.com/ansys/ansys-sphinx-theme/pull/709>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - update CHANGELOG for v1.4.5
+          - `#706 <https://github.com/ansys/ansys-sphinx-theme/pull/706>`_
+
+
+`1.4.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.5>`_ (May 27, 2025)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - add deprecated warning for `index_pattern` search option
+          - `#704 <https://github.com/ansys/ansys-sphinx-theme/pull/704>`_
+
+
+`1.4.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.4>`_ (May 08, 2025)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - add metatag content
+          - `#680 <https://github.com/ansys/ansys-sphinx-theme/pull/680>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - block snowbalstemmer <3 for now
+          - `#686 <https://github.com/ansys/ansys-sphinx-theme/pull/686>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Update ``CONTRIBUTORS.md`` with the latest contributors
+          - `#669 <https://github.com/ansys/ansys-sphinx-theme/pull/669>`_, `#677 <https://github.com/ansys/ansys-sphinx-theme/pull/677>`_
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - bump tox from 4.24.2 to 4.25.0
+          - `#668 <https://github.com/ansys/ansys-sphinx-theme/pull/668>`_
+
+        * - bump pyvista[jupyter] from 0.44.2 to 0.45.0
+          - `#675 <https://github.com/ansys/ansys-sphinx-theme/pull/675>`_
+
+        * - bump notebook from 7.3.3 to 7.4.1
+          - `#676 <https://github.com/ansys/ansys-sphinx-theme/pull/676>`_
+
+        * - bump jupytext from 1.16.7 to 1.17.1
+          - `#678 <https://github.com/ansys/ansys-sphinx-theme/pull/678>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - add github token
+          - `#661 <https://github.com/ansys/ansys-sphinx-theme/pull/661>`_
+
+        * - update CHANGELOG for v1.4.0
+          - `#662 <https://github.com/ansys/ansys-sphinx-theme/pull/662>`_
+
+        * - bump version 1.5.dev0
+          - `#663 <https://github.com/ansys/ansys-sphinx-theme/pull/663>`_
+
+        * - update CHANGELOG for v1.4.1
+          - `#665 <https://github.com/ansys/ansys-sphinx-theme/pull/665>`_
+
+        * - bump ansys/actions from 8 to 9 in the actions group
+          - `#670 <https://github.com/ansys/ansys-sphinx-theme/pull/670>`_
+
+
+`1.4.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.3>`_ (May 07, 2025)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - add metatag content
+          - `#680 <https://github.com/ansys/ansys-sphinx-theme/pull/680>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - bump ansys/actions from 8 to 9 in the actions group
+          - `#670 <https://github.com/ansys/ansys-sphinx-theme/pull/670>`_
+
+
 `1.4.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.2>`_ (March 27, 2025)
 ===========================================================================================
 
