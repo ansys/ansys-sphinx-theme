@@ -8,6 +8,22 @@ Release notes
 
 .. towncrier release notes start
 
+`1.5.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.5.2>`_ (June 02, 2025)
+==========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - remove font weight on highlight
+          - `#721 <https://github.com/ansys/ansys-sphinx-theme/pull/721>`_
+
+
 `1.5.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.5.1>`_ (June 02, 2025)
 ==========================================================================================
 
