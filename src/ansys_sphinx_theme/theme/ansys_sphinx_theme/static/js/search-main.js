@@ -406,9 +406,12 @@ require(["fuse"], function (Fuse) {
           ...result,
           title: result.title.replace(
             regex,
-            `<span class="highlight">$1</span>`,
+            `<span class="search-highlight">$1</span>`,
           ),
-          text: snippet.replace(regex, `<span class="highlight">$1</span>`),
+          text: snippet.replace(
+            regex,
+            `<span class="search-highlight">$1</span>`,
+          ),
         };
       })
       .filter(Boolean);

@@ -51,9 +51,8 @@
 }
 
 /* Highlighted Text */
-html[data-theme="light"] .highlight {
+html[data-theme="light"] .search-highlight {
   color: var(--pst-color-text-base);
-  font-weight: var(--ast-font-weight-bold);
 }
 
 /* Search Input Styles */
