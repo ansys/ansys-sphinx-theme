@@ -22,3 +22,4 @@
 * [Paul Profizi](https://github.com/PProfizi)
 * [Roberto Pastor Muela](https://github.com/RobPasMue)
 * [Sébastien Morais](https://github.com/SMoraisAnsys)
+* [Tetsuo Koyama](https://github.com/tkoyama010)
