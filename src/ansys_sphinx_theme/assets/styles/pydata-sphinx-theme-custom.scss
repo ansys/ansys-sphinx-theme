@@ -744,25 +744,25 @@ button.btn.version-switcher__button:hover {
   max-width: 100%;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1200px) {
   .bd-sidebar-primary {
     width: 20%;
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1200px) {
   .col-lg-3 {
     width: fit-content;
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1200px) {
   .bd-page-width {
     max-width: min(100%, 1700px) !important;
   }
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1200px) {
   .bd-main .bd-content .bd-article-container {
     width: min(100%, 1070px);
   }

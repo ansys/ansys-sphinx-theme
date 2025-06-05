@@ -1,4 +1,14 @@
-/* Top navbar styling */
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="{{ _('Site Navigation') }}">
+    <!-- {{ _("Site Navigation") }} -->
+  </p>
+  {{ render_header_nav_links() }}
+</nav>
+<style>
+  /* Top navbar styling */
 .navbar-toplevel p {
   margin: 0;
   padding-inline-start: 0;
@@ -62,6 +72,7 @@ nav.navbar-nav {
   color: var(--ast-color-text);
   font-size: var(--ast-font-size);
   font-family: open-sans, sans-serif;
+  align-items: center;
 }
 /* Highlight active nav bar link */
 li.active-link {
@@ -87,3 +98,4 @@ li.active-link {
 .navbar-header-items {
   padding-left: 0;
 }
+</style>

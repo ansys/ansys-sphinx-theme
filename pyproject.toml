@@ -11,7 +11,7 @@ theme-name = "ansys_sphinx_theme"
 [project]
 # Check https://flit.readthedocs.io/en/latest/pyproject_toml.html for all available sections
 name = "ansys-sphinx-theme"
-version = "1.5.dev0"
+version = "1.6.dev0"
 description = "A theme devised by ANSYS, Inc. for Sphinx documentation."
 readme = "README.rst"
 requires-python = ">=3.10,<4"
@@ -45,13 +45,13 @@ autoapi = [
     "astroid>=3.0,<4.0",
 ]
 doc = [
-    "jupytext==1.17.1",
-    "notebook==7.4.2",
+    "jupytext==1.17.2",
+    "notebook==7.4.3",
     "nbsphinx==0.9.7",
     "numpydoc==1.8.0",
     "pandas==2.2.3",
     "Pillow>=9.0",
-    "plotly==6.1.1",
+    "plotly==6.1.2",
     "PyGitHub==2.6.1",
     "pyvista[jupyter]==0.45.2",
     "PyYAML==6.0.2",

@@ -8,6 +8,146 @@ Release notes
 
 .. towncrier release notes start
 
+`1.5.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.5.2>`_ (June 02, 2025)
+==========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - remove font weight on highlight
+          - `#721 <https://github.com/ansys/ansys-sphinx-theme/pull/721>`_
+
+
+`1.5.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.5.1>`_ (June 02, 2025)
+==========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - revert the main content style
+          - `#714 <https://github.com/ansys/ansys-sphinx-theme/pull/714>`_
+
+
+`1.5.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.5.0>`_ (May 28, 2025)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - add multi index searching and filtering
+          - `#674 <https://github.com/ansys/ansys-sphinx-theme/pull/674>`_
+
+        * - small layout adjustments
+          - `#691 <https://github.com/ansys/ansys-sphinx-theme/pull/691>`_
+
+        * - add customization instructions for SCSS files in developer documentation
+          - `#694 <https://github.com/ansys/ansys-sphinx-theme/pull/694>`_
+
+        * - add 'serve' command to Makefile and make.bat for serving documentation
+          - `#698 <https://github.com/ansys/ansys-sphinx-theme/pull/698>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - smaller screen view and search for mobile views
+          - `#689 <https://github.com/ansys/ansys-sphinx-theme/pull/689>`_
+
+        * - style for back to top button
+          - `#693 <https://github.com/ansys/ansys-sphinx-theme/pull/693>`_
+
+        * - url for fetch extra source file
+          - `#707 <https://github.com/ansys/ansys-sphinx-theme/pull/707>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - update the multi-index docs
+          - `#708 <https://github.com/ansys/ansys-sphinx-theme/pull/708>`_
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - bump notebook from 7.4.1 to 7.4.2
+          - `#684 <https://github.com/ansys/ansys-sphinx-theme/pull/684>`_
+
+        * - update snowballstemmer requirement from <3 to <4
+          - `#688 <https://github.com/ansys/ansys-sphinx-theme/pull/688>`_
+
+        * - bump pyvista[jupyter] from 0.45.0 to 0.45.1
+          - `#690 <https://github.com/ansys/ansys-sphinx-theme/pull/690>`_
+
+        * - bump pyvista[jupyter] from 0.45.1 to 0.45.2
+          - `#699 <https://github.com/ansys/ansys-sphinx-theme/pull/699>`_
+
+        * - bump tox from 4.25.0 to 4.26.0
+          - `#700 <https://github.com/ansys/ansys-sphinx-theme/pull/700>`_
+
+        * - bump plotly from 6.0.1 to 6.1.1
+          - `#701 <https://github.com/ansys/ansys-sphinx-theme/pull/701>`_
+
+        * - bump notebook from 7.4.2 to 7.4.3
+          - `#705 <https://github.com/ansys/ansys-sphinx-theme/pull/705>`_
+
+        * - bump plotly from 6.1.1 to 6.1.2
+          - `#709 <https://github.com/ansys/ansys-sphinx-theme/pull/709>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - update CHANGELOG for v1.4.5
+          - `#706 <https://github.com/ansys/ansys-sphinx-theme/pull/706>`_
+
+
+`1.4.5 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.5>`_ (May 27, 2025)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - add deprecated warning for `index_pattern` search option
+          - `#704 <https://github.com/ansys/ansys-sphinx-theme/pull/704>`_
+
+
 `1.4.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.4>`_ (May 08, 2025)
 =========================================================================================
 

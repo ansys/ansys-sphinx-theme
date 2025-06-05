@@ -1,4 +1,26 @@
-"""Custom extension for Sphinx documentation."""
+# Copyright (C) 2021 - 2025 ANSYS, Inc. and/or its affiliates.
+# SPDX-License-Identifier: MIT
+#
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""Navigation Dropdown for navigation bar."""
 
 import copy
 from functools import lru_cache
@@ -11,31 +33,35 @@ from pygments import highlight
 from pygments.formatters import HtmlFormatter
 from pygments.lexers import PythonLexer
 import sphinx
-import sphinx.config
 from sphinx.util.nodes import make_refnode
 import yaml
 
 
-def parse_navbar_config(app: sphinx.application.Sphinx, config: sphinx.config.Config):
-    """Parse the navbar config file into a set of links to show in the navbar.
+def load_navbar_config(app: sphinx.application.Sphinx) -> None:
+    """Load the navbar configuration from a YAML file.
+
+    This function is called when the Sphinx application is initialized to load
+    the navbar configuration from a specified YAML file.
 
     Parameters
     ----------
     app : sphinx.application.Sphinx
         Application instance passed when the `config-inited` event is emitted
-    config : sphinx.config.Config
-        Initialized configuration to be modified
     """
-    if "navbar_content_path" in config:
-        filename = app.config["navbar_content_path"]
-    else:
-        filename = ""
-
-    if filename:
-        with pathlib.Path.open((__file__).parent / filename, "r") as f:
-            config.navbar_content = yaml.safe_load(f)
-    else:
-        config.navbar_content = None
+    config_options = app.config.html_theme_options.get("use_navigation_dropdown", {})
+    if not config_options:
+        return
+    navigation_yaml_file = config_options.get("navigation_yaml_file", None)
+    if navigation_yaml_file:
+        try:
+            with pathlib.Path.open(app.srcdir / navigation_yaml_file, encoding="utf-8") as f:
+                app.config.navbar_contents = yaml.safe_load(f)
+        except FileNotFoundError:
+            raise FileNotFoundError(
+                f"Navbar configuration file '{navigation_yaml_file}' not found in source directory."
+            )
+        except yaml.YAMLError as exc:
+            raise ValueError(f"Error parsing YAML file '{navigation_yaml_file}': {exc}")
 
 
 NavEntry = Dict[str, Union[str, List["NavEntry"]]]
