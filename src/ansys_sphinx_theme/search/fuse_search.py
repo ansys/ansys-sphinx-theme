@@ -193,25 +193,6 @@ def create_search_index(app, exception):
     excluded_docs = static_search_options.get("files_to_exclude", [])
     included_docs = app.env.found_docs
     filter_options = app.config.html_theme_options.get("search_filters", {})
-
-    patterns = app.env.config.index_patterns or {}
-    if patterns:
-        logger.error(
-            "The 'index_patterns' is depreciated and no longer supported. "
-            "Please see the documentation https://sphinxdocs.ansys.com for the "
-            "new search configuration options."
-        )
-
-    patterns = app.env.config.index_patterns or {}
-    if patterns:
-        # Raise warning that this feature will deprecate in the future
-        logger.warning(
-            "The 'index_patterns' configuration option is deprecated and will be removed"
-            " in v1.5.0 onwards. "
-            "It will index all paragraphs, titles, and literals by default. "
-            "More information can be found in the documentation at https://sphinxdocs.ansys.com.",
-        )
-
     for exclude_doc in excluded_docs:
         exclude_doc = Path(exclude_doc).resolve()
 
