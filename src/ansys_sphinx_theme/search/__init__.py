@@ -42,6 +42,10 @@ def update_search_config(app: Sphinx) -> None:
     theme_static_options["limit"] = theme_static_options.get("limit", 10)
     app.config.html_theme_options["static_search"] = theme_static_options
 
+    # TODO (RV): Deprecate this in release 0.16.0
+    # https://github.com/ansys/ansys-sphinx-theme/issues/730
+    app.add_config_value("index_patterns", {}, "html")
+
 
 __all__ = [
     "create_search_index",
