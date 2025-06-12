@@ -198,7 +198,7 @@ def create_search_index(app, exception):
     # https://github.com/ansys/ansys-sphinx-theme/issues/730
     patterns = app.env.config.index_patterns or {}
     if patterns:
-        logger.error(
+        raise RuntimeError(
             "The 'index_patterns' is depreciated and no longer supported. "
             "Please see the documentation https://sphinxdocs.ansys.com for the "
             "new search configuration options."
