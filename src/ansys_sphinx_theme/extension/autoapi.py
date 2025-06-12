@@ -109,7 +109,6 @@ def setup(app: Sphinx) -> Dict[str, Any]:
         if extension not in app.config["extensions"]:
             app.setup_extension(extension)
 
-    # app.connect("builder-inited", add_autoapi_theme_option, priority=400)
     app.connect("config-inited", add_autoapi_theme_option)
     return {
         "version": __version__,
