@@ -4,13 +4,12 @@ from datetime import datetime
 import os
 from pathlib import Path
 import subprocess
-from typing import Dict, List
+from typing import List
 
 from github import Github
 import plotly.io as pio
 import pyvista
 import requests
-from sphinx.application import Sphinx
 from sphinx.builders.latex import LaTeXBuilder
 
 from ansys_sphinx_theme import (
@@ -81,6 +80,9 @@ html_theme_options = {
         "Release notes": ["changelog"],
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
+    },
+    "use_navigation_dropdown": {
+        "navigation_yaml_file": "navbar.yml",
     },
 }
 
@@ -334,8 +336,3 @@ def revert_exclude_patterns(app, env):
     excluded_pattern = env.config.exclude_patterns
     excluded_pattern.remove("examples/gallery-examples/*.ipynb")
     env.config.exclude_patterns = excluded_pattern
-
-
-def setup(app: Sphinx) -> Dict:
-    """Sphinx hooks to add to the setup."""
-    app.connect("env-updated", revert_exclude_patterns)
