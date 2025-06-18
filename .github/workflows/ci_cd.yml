@@ -150,7 +150,7 @@ jobs:
       - name: "Install Git and clone project"
         uses: actions/checkout@v4
       - name: "Build wheelhouse and perform smoke test"
-        uses: ansys/actions/build-wheelhouse@54d45960ae9d009b2a3f26dfa687f611a85c6da3 # v10.0.11
+        uses: ansys/actions/build-wheelhouse@v9
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
