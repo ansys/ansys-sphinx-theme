@@ -5,7 +5,7 @@
      aria-label="{{ _('Site Navigation') }}">
     <!-- {{ _("Site Navigation") }} -->
   </p>
-  {{ render_header_nav_links() }}
+  {{ render_navbar_links_html() }}
 </nav>
 <style>
   /* Top navbar styling */
@@ -54,43 +54,23 @@ ul.navbar-toplevel {
 div.navbar-content a {
   display: flex;
   flex-direction: column;
-  color: var(--ast-color-text);
-  font-size: var(--ast-font-size);
-  align-items: start;
-  white-space: pre;
+  color: var(--ast-navbar-color);
+  align-items: baseline;
   justify-content: center;
-}
-div.navbar-content {
-  height: 100%;
-}
-nav.navbar-nav {
-  height: 100%;
+  font-weight: var(--ast-font-weight-semibold);
 }
 .ref-container {
   display: flex;
   gap: 0.5em;
-  color: var(--ast-color-text);
-  font-size: var(--ast-font-size);
-  font-family: open-sans, sans-serif;
+  font-family: var(--ast-body-family);
+  line-height: var(--ast-global-line-height);
   align-items: center;
 }
 /* Highlight active nav bar link */
 li.active-link {
   font-weight: bold;
 }
-.navbar-header-items__end {
-  /* Prevent the anyscale button from wrapping */
-  flex-flow: nowrap !important;
-}
 /* Set the first .navbar-persistent--mobile element to have auto left margin */
-.navbar-persistent--mobile {
-  margin-left: auto;
-}
-/* Set any .navbar-persistent--mobile proceeded by a .navbar-persistent--mobile to have */
-/* a 1em left margin */
-.navbar-persistent--mobile ~ .navbar-persistent--mobile {
-  margin-left: 1em;
-}
 /* Disable underline for hovered links in the nav bar */
 .navbar-nav li a:hover {
   text-decoration: none;

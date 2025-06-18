@@ -35,7 +35,7 @@ from sphinx.util import logging
 from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_sidebar_pages
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
-from ansys_sphinx_theme.navbar_dropdown import load_navbar_config, setup_context
+from ansys_sphinx_theme.navbar_dropdown import load_navbar_configuration, update_template_context
 from ansys_sphinx_theme.search import (
     create_search_index,
     update_search_config,
@@ -512,7 +512,7 @@ def setup(app: Sphinx) -> Dict:
 
     # Add default HTML configuration
     setup_default_html_theme_options(app)
-    load_navbar_config(app)
+    load_navbar_configuration(app)
 
     # Check for what's new options in the theme configuration
     whatsnew_file, changelog_file = get_whatsnew_options(app)
@@ -540,6 +540,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", append_og_site_name)
     app.connect("html-page-context", update_search_sidebar_context)
+    app.connect("html-page-context", update_template_context)
 
     app.connect("build-finished", replace_html_tag)
     if use_ansys_search:

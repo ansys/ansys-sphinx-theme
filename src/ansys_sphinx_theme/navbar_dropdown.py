@@ -37,21 +37,13 @@ from sphinx.util.nodes import make_refnode
 import yaml
 
 
-def load_navbar_config(app: sphinx.application.Sphinx) -> None:
-    """Load the navbar configuration from a YAML file.
-
-    This function is called when the Sphinx application is initialized to load
-    the navbar configuration from a specified YAML file.
-
-    Parameters
-    ----------
-    app : sphinx.application.Sphinx
-        Application instance passed when the `config-inited` event is emitted
-    """
+def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
+    """Load the navbar configuration from a YAML file for the Sphinx app."""
     config_options = app.config.html_theme_options.get("use_navigation_dropdown", {})
     if not config_options:
         return
     navigation_yaml_file = config_options.get("navigation_yaml_file", None)
+    print(f"Loading navbar configuration from: {navigation_yaml_file}")
     if navigation_yaml_file:
         try:
             with pathlib.Path.open(app.srcdir / navigation_yaml_file, encoding="utf-8") as f:
@@ -67,53 +59,26 @@ def load_navbar_config(app: sphinx.application.Sphinx) -> None:
 NavEntry = Dict[str, Union[str, List["NavEntry"]]]
 
 
-def setup_context(app, pagename, templatename, context, doctree):
-    """Add custom variables to the context for use in templates."""
+def update_template_context(app, pagename, templatename, context, doctree):
+    """Inject custom variables and utilities into the Sphinx template context."""
+    print(f"Updating template context for page: {pagename}")
 
     @lru_cache(maxsize=None)
-    def render_header_nav_links() -> bs4.BeautifulSoup:
-        """Render external header links into the top nav bar.
-
-        The structure rendered here is defined in an external yaml file.
-
-        Returns
-        -------
-        str
-            Raw HTML to be rendered in the top nav bar
-        """
-        if not hasattr(app.config, "navbar_content"):
-            raise ValueError(
-                "A template is attempting to call render_header_nav_links(); a "
-                "navbar configuration must be specified."
-            )
-
+    def render_navbar_links_html() -> bs4.BeautifulSoup:
+        """Render external header links as HTML for the navbar."""
+        if not hasattr(app.config, "navbar_contents"):
+            raise ValueError("Navbar configuration is missing. Please specify a navbar YAML file.")
         node = nodes.container(classes=["navbar-content"])
-        node.append(render_header_nodes(app.config.navbar_content))
+        node.append(build_navbar_nodes(app.config.navbar_contents))
         header_soup = bs4.BeautifulSoup(app.builder.render_partial(node)["fragment"], "html.parser")
-        return add_nav_chevrons(header_soup)
+        return add_navbar_chevrons(header_soup)
 
-    def render_header_nodes(obj: List[NavEntry], is_top_level: bool = True) -> nodes.Node:
-        """Generate a set of header nav links with docutils nodes.
-
-        Parameters
-        ----------
-        is_top_level : bool
-            True if the call to this function is rendering the top level nodes,
-            False otherwise (non-top level nodes are displayed as submenus of the top
-            level nodes)
-        obj : List[NavEntry]
-            List of yaml config entries to render as docutils nodes
-
-        Returns
-        -------
-        nodes.Node
-            Bullet list which will be turned into header nav HTML by the sphinx builder
-        """
+    def build_navbar_nodes(obj: List[NavEntry], is_top_level: bool = True) -> nodes.Node:
+        """Recursively build navbar nodes from configuration entries."""
         bullet_list = nodes.bullet_list(
             bullet="-",
             classes=["navbar-toplevel" if is_top_level else "navbar-sublevel"],
         )
-
         for item in obj:
             if "file" in item:
                 ref_node = make_refnode(
@@ -129,85 +94,50 @@ def setup_context(app, pagename, templatename, context, doctree):
                 ref_node["refuri"] = item.get("link")
                 ref_node["reftitle"] = item.get("title")
                 ref_node.append(nodes.inline(classes=["navbar-link-title"], text=item.get("title")))
-
+            else:
+                continue
             if "caption" in item:
                 caption = nodes.Text(item.get("caption"))
                 ref_node.append(caption)
-
             paragraph = nodes.paragraph()
             paragraph.append(ref_node)
-
             container = nodes.container(classes=["ref-container"])
             container.append(paragraph)
-
             list_item = nodes.list_item(
                 classes=["active-link"] if item.get("file") == pagename else []
             )
             list_item.append(container)
-
             if "sections" in item:
                 wrapper = nodes.container(classes=["navbar-dropdown"])
-                wrapper.append(render_header_nodes(item["sections"], is_top_level=False))
+                wrapper.append(build_navbar_nodes(item["sections"], is_top_level=False))
                 list_item.append(wrapper)
-
             bullet_list.append(list_item)
-
         return bullet_list
 
-    context["render_header_nav_links"] = render_header_nav_links
-    # context["render_library_examples"] = render_library_examples
-
-    # Update the HTML page context with a few extra utilities.
+    context["render_navbar_links_html"] = render_navbar_links_html
     context["pygments_highlight_python"] = lambda code: highlight(
         code, PythonLexer(), HtmlFormatter()
     )
 
 
-def add_nav_chevrons(input_soup: bs4.BeautifulSoup) -> bs4.BeautifulSoup:
-    """Add dropdown chevron icons to the header nav bar.
-
-    Parameters
-    ----------
-    input_soup : bs4.BeautifulSoup
-        Soup containing rendered HTML which will be inserted into the header nav bar
-
-    Returns
-    -------
-    bs4.BeautifulSoup
-        A new BeautifulSoup instance containing chevrons on the list items that
-        are meant to be dropdowns.
-    """
+def add_navbar_chevrons(input_soup: bs4.BeautifulSoup) -> bs4.BeautifulSoup:
+    """Add dropdown chevron icons to navbar items with submenus."""
     soup = copy.copy(input_soup)
-
     for li in soup.find_all("li", recursive=True):
         divs = li.find_all("div", {"class": "navbar-dropdown"}, recursive=False)
         if divs:
             ref = li.find("div", {"class": "ref-container"})
             ref.append(soup.new_tag("i", attrs={"class": "fa-solid fa-chevron-down"}))
-
     return soup
 
 
-def render_example_gallery_dropdown(cls: type) -> bs4.BeautifulSoup:
-    """Render a dropdown menu selector for the example gallery.
-
-    Parameters
-    ----------
-    cls : type
-        ExampleEnum class type to use to populate the dropdown
-
-    Returns
-    -------
-    bs4.BeautifulSoup
-        Soup containing the dropdown element
-    """
+def render_example_gallery_dropdown(example_enum: type) -> bs4.BeautifulSoup:
+    """Render a dropdown menu for filtering example gallery items."""
     soup = bs4.BeautifulSoup()
-
-    dropdown_name = cls.formatted_name().lower().replace(" ", "-")
+    dropdown_name = example_enum.formatted_name().lower().replace(" ", "-")
     dropdown_container = soup.new_tag(
         "div", attrs={"class": "filter-dropdown", "id": f"{dropdown_name}-dropdown"}
     )
-
     dropdown_show_checkbox = soup.new_tag(
         "input",
         attrs={
@@ -217,22 +147,18 @@ def render_example_gallery_dropdown(cls: type) -> bs4.BeautifulSoup:
         },
     )
     dropdown_container.append(dropdown_show_checkbox)
-
     dropdown_label = soup.new_tag(
         "label", attrs={"class": "dropdown-label", "for": f"{dropdown_name}-checkbox"}
     )
-    dropdown_label.append(cls.formatted_name())
+    dropdown_label.append(example_enum.formatted_name())
     chevron = soup.new_tag("i", attrs={"class": "fa-solid fa-chevron-down"})
     dropdown_label.append(chevron)
     dropdown_container.append(dropdown_label)
-
-    if cls.values():
+    if example_enum.values():
         dropdown_options = soup.new_tag("div", attrs={"class": "dropdown-content"})
-
-        for member in list(cls):
+        for member in list(example_enum):
             label = soup.new_tag("label", attrs={"class": "checkbox-container"})
             label.append(member.value)
-
             tag = getattr(member, "tag", member.value)
             checkbox = soup.new_tag(
                 "input",
@@ -243,13 +169,9 @@ def render_example_gallery_dropdown(cls: type) -> bs4.BeautifulSoup:
                 },
             )
             label.append(checkbox)
-
             checkmark = soup.new_tag("span", attrs={"class": "checkmark"})
             label.append(checkmark)
-
             dropdown_options.append(label)
-
         dropdown_container.append(dropdown_options)
-
     soup.append(dropdown_container)
     return soup

@@ -2,16 +2,25 @@
   title: "Get Started"
 - file: user-guide
   title: "Use Cases"
-# - file: examples
-#   title: "Example Gallery"
+- file: api/index
+  title: "API Reference"
+- file: examples
+  title: "Examples"
+  sections:
+    - file: examples/sphinx-design.rst
+      title: "Sphinx Design Examples"
+      caption: Examples of using Sphinx design features
+    - file: examples/nbsphinx
+      title: "Nbsphinx Examples"
+      caption: Examples of using Nbsphinx for Jupyter Notebooks
+- file: changelog
+  title: "New Features"
 - file: contribute
-  title: "Library"
+  title: "Contribute"
   sections:
     - file: contribute/developer
       title: developer contributions
-      caption: Contribute to the library
+      caption: Contribute as a developer
     - file: contribute/user
       title: user contributions
-      caption: Contribute to the library
-- file: index
-  title: "Ansys sphinx theme"
+      caption: Contribute as a user
