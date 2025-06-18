@@ -62,6 +62,7 @@ NavEntry = Dict[str, Union[str, List["NavEntry"]]]
 def update_template_context(app, pagename, templatename, context, doctree):
     """Inject custom variables and utilities into the Sphinx template context."""
     print(f"Updating template context for page: {pagename}")
+    print("navbar_contents:", context.get("generate_header_nav_html", None))
 
     @lru_cache(maxsize=None)
     def render_navbar_links_html() -> bs4.BeautifulSoup:

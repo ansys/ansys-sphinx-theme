@@ -1,3 +1,4 @@
+{% if theme_use_navigation_dropdown %}
 <nav class="navbar-nav">
   <p class="sidebar-header-items__title"
      role="heading"
@@ -79,3 +80,6 @@ li.active-link {
   padding-left: 0;
 }
 </style>
+{% else %}
+{% include "pydata_sphinx_theme/components/navbar-nav.html" %}
+{% endif %}
