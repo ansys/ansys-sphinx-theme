@@ -36,6 +36,15 @@ div.navbar-dropdown {
   height: 100%;
   padding: 0em 1em;
 }
+ul.navbar-toplevel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 100%;
+    padding-left: 0;
+}
 ul.navbar-toplevel li:hover > div.navbar-dropdown {
   display: block;
 }
@@ -45,11 +54,12 @@ ul.navbar-toplevel {
 }
 .navbar-content ul.navbar-sublevel {
   position: absolute;
-  padding: 0em 1em;
+  padding: 1em 1em;
   display: flex;
   flex-direction: column;
   align-items: baseline;
   background-color: white;
+  white-space: pre;
   box-shadow: 0 5px 15px 0 rgb(0 0 0 / 10%);
 }
 div.navbar-content a {
