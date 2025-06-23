@@ -383,23 +383,6 @@ def configure_theme_logo(app: Sphinx):
         theme_options["logo"] = logo_option
 
 
-def check_for_depreciated_theme_options(app: Sphinx):
-    """Check for depreciated theme options.
-
-    Parameters
-    ----------
-    app : sphinx.application.Sphinx
-        Application instance for rendering the documentation.
-    """
-    theme_options = app.config.html_theme_options
-    if "use_meilisearch" in theme_options:
-        warnings.warn(
-            "The 'use_meilisearch' option is deprecated. Remove the option "
-            "from your configuration file.",
-            DeprecationWarning,
-        )
-
-
 def add_sidebar_context(
     app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
 ) -> None:
@@ -529,7 +512,6 @@ def setup(app: Sphinx) -> Dict:
     app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     app.connect("builder-inited", configure_theme_logo)
     app.connect("builder-inited", build_quarto_cheatsheet)
-    app.connect("builder-inited", check_for_depreciated_theme_options)
 
     if whatsnew_file and changelog_file:
         app.connect("doctree-read", add_whatsnew_changelog)
