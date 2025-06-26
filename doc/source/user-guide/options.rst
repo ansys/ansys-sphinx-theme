@@ -397,3 +397,47 @@ The following images show a sample "What's new" section and sidebar in the chang
     If you are using both the "whatsnew" and "cheatsheet" options, the "cheatsheet" option will be
     displayed first in the left navigation pane, followed by the "What's new" section to maintain
     sidebar consistency.
+
+Navigation bar dropdown
+------------------------
+Ansys sphinx theme nozw supports the navigation bar dropdowns for the header links.
+To enable the navigation bar dropdowns, add the following dictionary to the ``html_theme_options`` dictionary:
+
+- ``navigation_yaml_file``: The path to the YAML file containing the navigation structure.
+
+.. code:: python
+
+    html_theme_options = {
+            "use_navigation_dropdown": {
+                 "navigation_yaml_file": "navbar.yml",
+        }
+
+The theme looks for the ``navbar.yml`` file in the ``doc/source`` directory.
+The YAML file should contain the following structure:
+
+.. code:: yaml
+
+    - file: api/index
+      title: "API Reference"
+    - file: examples
+      title: "Examples"
+       sections:
+        - file: examples/sphinx-design.rst
+          title: "Sphinx Design Examples"
+          caption: Examples of using Sphinx design features
+        - file: examples/nbsphinx
+          title: "Nbsphinx Examples"
+          caption: Examples of using Nbsphinx for Jupyter Notebooks
+
+
+- file: The path to the file relative to the ``doc/source`` directory.
+- title: The title of the navigation item.
+- sections: A list of sections under the navigation item. Each section can have its own file
+  and title.
+- caption: An optional caption for the section.
+
+.. warning::
+
+    If you enable the navigation bar dropdowns, you must add the documents you wish to include in the
+    header seactions to the ``navbar.yml`` file. If you do not add the documents, they will not be displayed in the
+    navigation bar dropdowns.
