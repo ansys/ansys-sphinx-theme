@@ -400,7 +400,7 @@ The following images show a sample "What's new" section and sidebar in the chang
 
 Navigation bar dropdown
 ------------------------
-Ansys sphinx theme nozw supports the navigation bar dropdowns for the header links.
+Ansys sphinx theme now supports the navigation bar dropdowns for the header links.
 To enable the navigation bar dropdowns, add the following dictionary to the ``html_theme_options`` dictionary:
 
 - ``navigation_yaml_file``: The path to the YAML file containing the navigation structure.
@@ -439,5 +439,5 @@ The YAML file should contain the following structure:
 .. warning::
 
     If you enable the navigation bar dropdowns, you must add the documents you wish to include in the
-    header seactions to the ``navbar.yml`` file. If you do not add the documents, they will not be displayed in the
+    header sections to the ``navbar.yml`` file. If you do not add the documents, they will not be displayed in the
     navigation bar dropdowns.
