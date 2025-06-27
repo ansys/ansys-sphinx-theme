@@ -14,13 +14,11 @@
   margin: 0;
   padding-inline-start: 0;
 }
-.ref-container > p {
-  height: 100%;
-}
 div.navbar-dropdown {
-  display: none;
-  position: relative;
-  left: -50%;
+    display: none;
+    position: relative;
+    left: -100%;
+    margin-top: 2rem;
 }
 .navbar-sublevel p a.reference {
   text-decoration: none;
@@ -35,25 +33,16 @@ div.navbar-dropdown {
   align-items: center;
   height: 100%;
   padding: 0em 1em;
+
 }
-ul.navbar-toplevel {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    height: 100%;
-    padding-left: 0;
-}
+
 ul.navbar-toplevel li:hover > div.navbar-dropdown {
   display: block;
 }
-ul.navbar-toplevel {
-  height: 100%;
-  padding-left: 0;
-}
+
 .navbar-content ul.navbar-sublevel {
   position: absolute;
+  gap: 1rem;
   padding: 1em 1em;
   display: flex;
   flex-direction: column;
@@ -62,6 +51,7 @@ ul.navbar-toplevel {
   white-space: pre;
   box-shadow: 0 5px 15px 0 rgb(0 0 0 / 10%);
 }
+
 div.navbar-content a {
   display: flex;
   flex-direction: column;
@@ -72,10 +62,13 @@ div.navbar-content a {
 }
 .ref-container {
   display: flex;
+  flex-direction: row;
   gap: 0.5em;
   font-family: var(--ast-body-family);
   line-height: var(--ast-global-line-height);
   align-items: center;
+  justify-content: center;
+  height: 100%;
 }
 /* Highlight active nav bar link */
 li.active-link {
