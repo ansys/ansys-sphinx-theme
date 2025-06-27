@@ -42,20 +42,18 @@ def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
     config_options = app.config.html_theme_options.get("use_navigation_dropdown", {})
     if not config_options:
         return
-        
+
     navigation_yaml_file = config_options.get("navigation_yaml_file", None)
     if not navigation_yaml_file:
         return
-    
-      try:
-          with pathlib.Path.open(app.srcdir / navigation_yaml_file, encoding="utf-8") as config_file:
-              app.config.navbar_contents = yaml.safe_load(config_file)
-      except FileNotFoundError:
-          raise FileNotFoundError(
-              f"Could not find {navigation_yaml_file}."
-          )
-      except yaml.YAMLError as exc:
-          raise ValueError(f"Error parsing '{navigation_yaml_file}': {exc}")
+
+    try:
+        with pathlib.Path.open(app.srcdir / navigation_yaml_file, encoding="utf-8") as config_file:
+            app.config.navbar_contents = yaml.safe_load(config_file)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Could not find {navigation_yaml_file}.")
+    except yaml.YAMLError as exc:
+        raise ValueError(f"Error parsing '{navigation_yaml_file}': {exc}")
 
 
 NavEntry = Dict[str, Union[str, List["NavEntry"]]]

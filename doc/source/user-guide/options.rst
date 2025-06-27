@@ -423,15 +423,15 @@ Each entry in the YAML file may include the following fields:
 
     - file: api/index
       title: "API Reference"
-      
+
     - file: examples
       title: "Examples"
       sections:
-      
+
         - file: examples/sphinx-design.rst
           title: "Sphinx Design Examples"
           caption: Examples of using Sphinx design features
-          
+
         - file: examples/nbsphinx
           title: "Nbsphinx Examples"
           caption: Examples of using Nbsphinx for Jupyter Notebooks
