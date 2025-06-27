@@ -407,9 +407,11 @@ This theme supports dropdown navigation bars. The layout is declared using a YAM
 .. code:: python
 
     html_theme_options = {
-            "use_navigation_dropdown": {
-                 "navigation_yaml_file": "navbar.yml",
-        }
+            ...,
+            "navigation_dropdown": {
+                 "layout_file": "navbar.yml",
+             },
+    }
 
 Each entry in the YAML file may include the following fields:
 
