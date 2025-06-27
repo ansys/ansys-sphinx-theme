@@ -82,6 +82,9 @@ html_theme_options = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
+    "navigation_dropdown": {
+        "layout_file": "navbar.yml",
+    },
 }
 
 
