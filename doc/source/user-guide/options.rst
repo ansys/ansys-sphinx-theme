@@ -400,8 +400,7 @@ The following images show a sample "What's new" section and sidebar in the chang
 
 Navigation bar dropdown
 ------------------------
-Ansys sphinx theme now supports the navigation bar dropdowns for the header links.
-To enable the navigation bar dropdowns, add the following dictionary to the ``html_theme_options`` dictionary:
+This theme supports dropdown navigation bars. The layout is declared using a YAML file contained at any level in the ``doc/source`` directory. This file must be specified in the ``html_theme_options`` so Sphinx can apply the desired navigation structure:
 
 - ``navigation_yaml_file``: The path to the YAML file containing the navigation structure.
 
@@ -412,32 +411,32 @@ To enable the navigation bar dropdowns, add the following dictionary to the ``ht
                  "navigation_yaml_file": "navbar.yml",
         }
 
-The theme looks for the ``navbar.yml`` file in the ``doc/source`` directory.
-The YAML file should contain the following structure:
+Each entry in the YAML file may include the following fields:
+
+- **file.** The relative path to the documentation file, based on the doc/source directory.
+
+- **title.** The text displayed for the link in the dropdown navigation menu.
+
+- **sections.** A list of nested navigation items. Each section can specify its own file, title, and an optional caption to provide a brief description.
 
 .. code:: yaml
 
     - file: api/index
       title: "API Reference"
+      
     - file: examples
       title: "Examples"
-       sections:
+      sections:
+      
         - file: examples/sphinx-design.rst
           title: "Sphinx Design Examples"
           caption: Examples of using Sphinx design features
+          
         - file: examples/nbsphinx
           title: "Nbsphinx Examples"
           caption: Examples of using Nbsphinx for Jupyter Notebooks
 
 
-- file: The path to the file relative to the ``doc/source`` directory.
-- title: The title of the navigation item.
-- sections: A list of sections under the navigation item. Each section can have its own file
-  and title.
-- caption: An optional caption for the section.
-
 .. warning::
 
-    If you enable the navigation bar dropdowns, you must add the documents you wish to include in the
-    header sections to the ``navbar.yml`` file. If you do not add the documents, they will not be displayed in the
-    navigation bar dropdowns.
+    You must declare the complete layout of the dropdown navigation bar in the YAML file. Sphinx does not resolve it automatically.
