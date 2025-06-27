@@ -57,6 +57,12 @@ def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
 
 
 NavEntry = Dict[str, Union[str, List["NavEntry"]]]
+"""Type alias for a navigation entry in the navbar configuration.
+
+Each entry can have a 'file' or 'link' key, and optionally 'title',
+'caption', and 'sections' keys. The 'sections' key contains a list of
+sub-entries, allowing for nested navigation structures.
+"""
 
 
 def update_template_context(app, pagename, templatename, context, doctree):
