@@ -7,7 +7,7 @@
 - file: examples
   title: "Examples"
   sections:
-    - file: examples/sphinx-design.rst
+    - file: examples/sphinx-design
       title: "Sphinx Design Examples"
       caption: Examples of using Sphinx design features
     - file: examples/nbsphinx
