@@ -36,12 +36,10 @@ import yaml
 
 def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
     """Load the navbar configuration from a YAML file for the Sphinx app."""
-    config_options = app.config.html_theme_options.get("navigation_dropdown", {})
-    if not config_options:
-        return
-
-    layout_file = config_options.get("layout_file", None)
-    if not layout_file:
+    if not (
+        "navigation_dropdown" in app.config.html_theme_options and \
+        "layout_file" in app.config.html_theme_options['navigation_dropdown']
+        ):
         return
 
     try:
