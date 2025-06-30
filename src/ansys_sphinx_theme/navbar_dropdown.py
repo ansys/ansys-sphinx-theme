@@ -30,8 +30,11 @@ from typing import Dict, List, Union
 import bs4
 from docutils import nodes
 import sphinx
+from sphinx.util import logging
 from sphinx.util.nodes import make_refnode
 import yaml
+
+logger = logging.getLogger(__name__)
 
 
 def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
@@ -96,6 +99,9 @@ def update_template_context(app, pagename, templatename, context, doctree):
                 ref_node["reftitle"] = item.get("title")
                 ref_node.append(nodes.inline(classes=["navbar-link-title"], text=item.get("title")))
             else:
+                logger.warning(
+                    f"Navbar entry '{item}' is missing 'file' or 'link' key. Skipping this entry."
+                )
                 continue
             if "caption" in item:
                 caption = nodes.Text(item.get("caption"))
