@@ -29,9 +29,6 @@ from typing import Dict, List, Union
 
 import bs4
 from docutils import nodes
-from pygments import highlight
-from pygments.formatters import HtmlFormatter
-from pygments.lexers import PythonLexer
 import sphinx
 from sphinx.util.nodes import make_refnode
 import yaml
@@ -120,9 +117,6 @@ def update_template_context(app, pagename, templatename, context, doctree):
         return bullet_list
 
     context["render_navbar_links_html"] = render_navbar_links_html
-    context["pygments_highlight_python"] = lambda code: highlight(
-        code, PythonLexer(), HtmlFormatter()
-    )
 
 
 def add_navbar_chevrons(input_soup: bs4.BeautifulSoup) -> bs4.BeautifulSoup:
@@ -133,50 +127,4 @@ def add_navbar_chevrons(input_soup: bs4.BeautifulSoup) -> bs4.BeautifulSoup:
         if divs:
             ref = li.find("div", {"class": "ref-container"})
             ref.append(soup.new_tag("i", attrs={"class": "fa-solid fa-chevron-down"}))
-    return soup
-
-
-def render_example_gallery_dropdown(example_enum: type) -> bs4.BeautifulSoup:
-    """Render a dropdown menu for filtering example gallery items."""
-    soup = bs4.BeautifulSoup()
-    dropdown_name = example_enum.formatted_name().lower().replace(" ", "-")
-    dropdown_container = soup.new_tag(
-        "div", attrs={"class": "filter-dropdown", "id": f"{dropdown_name}-dropdown"}
-    )
-    dropdown_show_checkbox = soup.new_tag(
-        "input",
-        attrs={
-            "class": "dropdown-checkbox",
-            "id": f"{dropdown_name}-checkbox",
-            "type": "checkbox",
-        },
-    )
-    dropdown_container.append(dropdown_show_checkbox)
-    dropdown_label = soup.new_tag(
-        "label", attrs={"class": "dropdown-label", "for": f"{dropdown_name}-checkbox"}
-    )
-    dropdown_label.append(example_enum.formatted_name())
-    chevron = soup.new_tag("i", attrs={"class": "fa-solid fa-chevron-down"})
-    dropdown_label.append(chevron)
-    dropdown_container.append(dropdown_label)
-    if example_enum.values():
-        dropdown_options = soup.new_tag("div", attrs={"class": "dropdown-content"})
-        for member in list(example_enum):
-            label = soup.new_tag("label", attrs={"class": "checkbox-container"})
-            label.append(member.value)
-            tag = getattr(member, "tag", member.value)
-            checkbox = soup.new_tag(
-                "input",
-                attrs={
-                    "id": f"{tag}-checkbox",
-                    "class": "filter-checkbox",
-                    "type": "checkbox",
-                },
-            )
-            label.append(checkbox)
-            checkmark = soup.new_tag("span", attrs={"class": "checkmark"})
-            label.append(checkmark)
-            dropdown_options.append(label)
-        dropdown_container.append(dropdown_options)
-    soup.append(dropdown_container)
     return soup
