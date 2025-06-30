@@ -37,11 +37,12 @@ import yaml
 def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
     """Load the navbar configuration from a YAML file for the Sphinx app."""
     if not (
-        "navigation_dropdown" in app.config.html_theme_options and \
-        "layout_file" in app.config.html_theme_options['navigation_dropdown']
-        ):
+        "navigation_dropdown" in app.config.html_theme_options
+        and "layout_file" in app.config.html_theme_options["navigation_dropdown"]
+    ):
         return
 
+    layout_file = app.config.html_theme_options["navigation_dropdown"].get("layout_file", None)
     try:
         with pathlib.Path.open(app.srcdir / layout_file, encoding="utf-8") as config_file:
             app.config.navbar_contents = yaml.safe_load(config_file)
