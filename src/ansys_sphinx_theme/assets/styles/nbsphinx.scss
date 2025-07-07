@@ -20,3 +20,14 @@ div.nboutput.container div.output_area .highlight,
 div.nboutput.container div.output_area .highlight pre{
   background-color: var(--pst-color-background);
 }
+
+/*
+ * Override the default CSS for math blocks in nbsphinx.
+ * This is required to ensure that the math blocks are displayed correctly
+ * in the nbsphinx extension.
+ * otherwise, the math blocks are displayed in a reverse order.
+ */
+
+div.math {
+  flex-direction: row;
+}
