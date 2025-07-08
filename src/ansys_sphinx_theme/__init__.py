@@ -158,6 +158,14 @@ def setup_default_html_theme_options(app):
             ["search-button-field", "version-switcher", "theme-switcher", "navbar-icon-links"],
         )
 
+    # HACK: Add the search button field to the navbar_end and insert it at the beginning of
+    # the list. This is a workaround to ensure the search button field is always present
+    if "navbar_end" in theme_options:
+        if "search-button-field" not in theme_options["navbar_end"]:
+            theme_options["navbar_end"].insert(0, "search-button-field")
+        logging.getLogger(__name__).info(
+            "The 'search-button-field' has been added to the 'navbar_end' in the theme options."
+        )
     theme_options.setdefault("navbar_persistent", [])
     theme_options.setdefault("collapse_navigation", True)
     theme_options.setdefault("navigation_with_keys", True)
