@@ -100,9 +100,9 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.todo",
     "sphinx_copybutton",
-    "sphinx.ext.intersphinx",
     "notfound.extension",
     "sphinx_jinja",
+    "sphinx.ext.mathjax",
 ]
 
 # Intersphinx mapping
