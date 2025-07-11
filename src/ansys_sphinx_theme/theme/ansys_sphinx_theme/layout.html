@@ -2,7 +2,7 @@
 
 {%- block extrahead %}
   {{ super() }}
-  {%- if pyansys_tag is defined -%}
+  {%- if pyansys_tag is defined %}
   <meta property="og:site_name" content="PyAnsys" />
   <meta name="physics" content="{{ pyansys_tag }}" />
   {%- endif %}
