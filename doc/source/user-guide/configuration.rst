@@ -124,7 +124,7 @@ For more information, see `PyAnsys multi-version documentation <dev_guide_multi_
 PyAnsys tag
 ~~~~~~~~~~~~
 The Ansys Sphinx Theme allows you to add a physics tag in your metadata based on the pyansys category.
-This can be useful for categorizing content related to specific physics domains, such as Electromagnetics, Structural, or Fluids.
+This can be useful for categorizing content related to specific physics domains, such as ``Electromagnetics``, ``Structures``, or ``Fluids``.
 You can add a physics tag to your documentation by setting the ``pyansys_tag`` option in your project's Sphinx ``conf.py`` file.
 
 .. code-block:: python
