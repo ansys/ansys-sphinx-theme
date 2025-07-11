@@ -124,7 +124,8 @@ For more information, see `PyAnsys multi-version documentation <dev_guide_multi_
 Physics tag
 ~~~~~~~~~~~~
 The Ansys Sphinx Theme allows you to add a physics tag on your metadata.
-To add a physics tag, add the following code to your project's Sphinx ``conf.py`` file:
+To add a physics tag, add the following code to your project's Sphinx ``conf.py`` file
+
 .. code-block:: python
 
    html_context = {
