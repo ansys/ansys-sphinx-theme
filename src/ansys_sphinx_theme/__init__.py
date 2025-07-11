@@ -474,14 +474,6 @@ def update_search_sidebar_context(
     context["sidebars"] = sidebar
 
 
-def append_og_site_name(app, pagename, templatename, context, doctree):
-    # Make sure the context already has metatags
-    context["metatags"] = context.get("metatags", "")
-
-    # Append your custom tag
-    context["metatags"] += '\n    <meta property="og:site_name" content="PyAnsys" />'
-
-
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -528,7 +520,6 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", add_sidebar_context)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
-    app.connect("html-page-context", append_og_site_name)
     app.connect("html-page-context", update_search_sidebar_context)
     app.connect("html-page-context", update_template_context)
 
