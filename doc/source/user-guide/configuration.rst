@@ -123,13 +123,13 @@ For more information, see `PyAnsys multi-version documentation <dev_guide_multi_
 
 Physics tag
 ~~~~~~~~~~~~
-The Ansys Sphinx Theme allows you to add a physics tag on your metadata.
+The Ansys Sphinx Theme allows you to add a physics tag to your documentation pages.
 To add a physics tag, add the following code to your project's Sphinx ``conf.py`` file
 
 .. code-block:: python
 
    html_context = {
-       "physics_tag": "Electromagnetics",
+       "pyansys_tag": "Electromagnetics",
    }
 
 This will add a physics tag to the metadata of your documentation pages, which can be useful for categorizing content related to specific physics domains.
