@@ -54,6 +54,7 @@ html_context = {
             "needs_datatables": True,
         },
     },
+    "physics_tag": "Meshing",
 }
 
 html_theme_options = {
