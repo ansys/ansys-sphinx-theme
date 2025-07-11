@@ -2,17 +2,14 @@
 
 {%- block extrahead %}
   {{ super() }}
-
-    {% if physics_tag is defined %}
-      {# Set the physics tag for the page if it is defined #}
-      {% set physics_tag = physics_tag %}
-    {% else %}
-      {# Default to an empty string if not defined #}
-      {% set physics_tag = "" %}
-    {% endif %}
+  {%- if physics_tag is defined -%}
+    {%- set physics_tag = physics_tag -%}
+  {%- else -%}
+    {%- set physics_tag = "" -%}
+  {%- endif %}
   <meta property="og:site_name" content="PyAnsys" />
   <meta name="physics" content="{{ physics_tag }}" />
-{% endblock %}
+{%- endblock %}
 
 {# Append our custom CSS after the bootstrap stylesheet so we can override where necessary #}
 {%- block css %}
