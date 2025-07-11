@@ -121,6 +121,18 @@ The switcher requires a ``versions.json`` file that contains the versions of the
 For more information, see `PyAnsys multi-version documentation <dev_guide_multi_version_>`_ in the
 *PyAnsys developer's guide*.
 
+Physics tag
+~~~~~~~~~~~~
+The Ansys Sphinx Theme allows you to add a physics tag on your metadata.
+To add a physics tag, add the following code to your project's Sphinx ``conf.py`` file:
+.. code-block:: python
+
+   html_context = {
+       "physics_tag": "Electromagnetics",
+   }
+
+This will add a physics tag to the metadata of your documentation pages, which can be useful for categorizing content related to specific physics domains.
+
 PDF cover page
 ~~~~~~~~~~~~~~
 
