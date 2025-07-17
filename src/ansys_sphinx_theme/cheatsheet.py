@@ -27,7 +27,7 @@ and add the cheatsheet to the left navigation sidebar.
 """
 
 import pathlib
-import subprocess
+import subprocess  # nosec: B404
 from typing import List, Optional
 
 from sphinx.application import Sphinx
@@ -103,7 +103,7 @@ def run_quarto_command(command: List[str], cwd: str) -> None:
     """
     command = ["quarto"] + command
     try:
-        result = subprocess.run(command, cwd=cwd, check=True, capture_output=True, text=True)
+        result = subprocess.run(command, cwd=cwd, check=True, capture_output=True, text=True)  # nosec: B603
         if result.stdout:
             logger.info(result.stdout)
 
