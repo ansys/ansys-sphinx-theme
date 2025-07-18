@@ -194,16 +194,6 @@ def create_search_index(app, exception):
     included_docs = app.env.found_docs
     filter_options = app.config.html_theme_options.get("search_filters", {})
 
-    # TODO (RV): Deprecate this in release 0.16.0
-    # https://github.com/ansys/ansys-sphinx-theme/issues/730
-    patterns = app.env.config.index_patterns or {}
-    if patterns:
-        raise TypeError(
-            "The 'index_patterns' is deprecated and no longer supported. "
-            "Please see the documentation https://sphinxdocs.ansys.com for the "
-            "new search configuration options."
-        )
-
     for exclude_doc in excluded_docs:
         exclude_doc = Path(exclude_doc).resolve()
 
