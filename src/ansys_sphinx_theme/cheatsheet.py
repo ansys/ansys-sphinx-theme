@@ -27,6 +27,9 @@ and add the cheatsheet to the left navigation sidebar.
 """
 
 import pathlib
+
+# Excudind bandit rule B404 as we are using subprocess to run commands
+# and we are handling the command execution securely.
 import subprocess  # nosec: B404
 from typing import List, Optional
 
@@ -103,6 +106,9 @@ def run_quarto_command(command: List[str], cwd: str) -> None:
     """
     command = ["quarto"] + command
     try:
+        # Excluding bandit rule because subprocess is using quarto command
+        # and we are handling the command execution securely.
+        # The command is run in a controlled environment and not accepting user input.
         result = subprocess.run(command, cwd=cwd, check=True, capture_output=True, text=True)  # nosec: B603
         if result.stdout:
             logger.info(result.stdout)
