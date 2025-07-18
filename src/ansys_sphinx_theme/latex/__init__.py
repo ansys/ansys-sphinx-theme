@@ -64,7 +64,7 @@ def generate_preamble(title, watermark="watermark", date=None):
         line_statement_prefix="%%",
         line_comment_prefix="%#",
         trim_blocks=True,
-        autoescape=False,
+        autoescape=True,
         loader=jinja2.FileSystemLoader(COVER_TEX),
     )
     template = latex_jinja_env.get_template(".")
@@ -100,6 +100,6 @@ def generate_404(
     variables = dict(
         issue_page=issue_page, project_name=project_name, mail_id=mail_id, team_name=team_name
     )
-    html_env = jinja2.Environment(loader=jinja2.FileSystemLoader(PAGE_404))
+    html_env = jinja2.Environment(loader=jinja2.FileSystemLoader(PAGE_404), autoescape=True)
     template = html_env.get_template(".")
     return template.render(variables)
