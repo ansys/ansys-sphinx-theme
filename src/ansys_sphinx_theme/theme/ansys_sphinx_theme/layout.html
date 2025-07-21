@@ -4,7 +4,13 @@
   {{ super() }}
   {%- if pyansys_tag is defined %}
   <meta property="og:site_name" content="PyAnsys" />
+    {%- if pyansys_tag is iterable and not pyansys_tag is string %}
+      {%- for tag in pyansys_tag %}
+  <meta name="physics" content="{{ tag }}" />
+      {%- endfor %}
+    {%- else %}
   <meta name="physics" content="{{ pyansys_tag }}" />
+    {%- endif %}
   {%- endif %}
 {%- endblock %}
 

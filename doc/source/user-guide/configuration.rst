@@ -140,6 +140,23 @@ which result in the following metadata in your HTML pages:
     <meta property="og:site_name" content="PyAnsys" />
     <meta name="physics" content="Electromagnetics" />
 
+If you want to add multiple physics tags, you can do so by providing a list of tags:
+
+.. code-block:: python
+
+   html_context = {
+       "pyansys_tag": ["Electromagnetics", "Structures", "Fluids"],
+   }
+
+This will result in multiple `<meta>` tags in your HTML pages:
+
+.. code-block:: html
+
+    <meta property="og:site_name" content="PyAnsys" />
+    <meta name="physics" content="Electromagnetics" />
+    <meta name="physics" content="Structures" />
+    <meta name="physics" content="Fluids" />
+
 
 PDF cover page
 ~~~~~~~~~~~~~~
