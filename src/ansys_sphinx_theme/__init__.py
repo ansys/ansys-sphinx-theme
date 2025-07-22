@@ -33,6 +33,7 @@ from sphinx.application import Sphinx
 from sphinx.util import logging
 
 from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_sidebar_pages
+from ansys_sphinx_theme.doc_navigator.chat_bot import pyansys_chat_navigator
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
 from ansys_sphinx_theme.search import (
@@ -494,6 +495,7 @@ def setup(app: Sphinx) -> Dict:
 
     # Add default HTML configuration
     setup_default_html_theme_options(app)
+    pyansys_chat_navigator(app)
 
     # Check for what's new options in the theme configuration
     whatsnew_file, changelog_file = get_whatsnew_options(app)
