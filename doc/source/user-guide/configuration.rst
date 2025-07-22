@@ -148,7 +148,7 @@ If you want to add multiple physics tags, you can do so by providing a list of t
        "pyansys_tags": ["Electromagnetics", "Structures", "Fluids"],
    }
 
-This will result in multiple `<meta>` tags in your HTML pages:
+This result in multiple `<meta>` tags in your HTML pages:
 
 .. code-block:: html
 
