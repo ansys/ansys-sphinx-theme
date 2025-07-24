@@ -107,6 +107,8 @@ ul.bd-breadcrumbs {
   }
 }
 
+/* Sidebar primary padding */
+/* This is to match the padding of the primary sidebar top with the breadcrumbs */
 .bd-sidebar-primary {
-  padding: 0.5rem;
+  padding-top: 0.5rem;
 }
