@@ -38,13 +38,14 @@ logger = logging.getLogger(__name__)
 
 def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
     """Load the navbar configuration from a YAML file for the Sphinx app."""
-    if not (
-        "navigation_dropdown" in app.config.html_theme_options
-        and "layout_file" in app.config.html_theme_options["navigation_dropdown"]
-    ):
+    navigation_theme_options = app.config.html_theme_options.get("navigation_dropdown", {})
+    if not navigation_theme_options or "layout_file" not in navigation_theme_options:
+        logger.warning(
+            "No 'layout_file' specified in 'navigation_dropdown' theme options. "
+            "Skipping navbar configuration loading."
+        )
         return
-
-    layout_file = app.config.html_theme_options["navigation_dropdown"]["layout_file"]
+    layout_file = navigation_theme_options["layout_file"]
     try:
         with pathlib.Path.open(app.srcdir / layout_file, encoding="utf-8") as config_file:
             app.config.navbar_contents = yaml.safe_load(config_file)
