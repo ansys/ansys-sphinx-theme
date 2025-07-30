@@ -70,6 +70,16 @@ changelog = [
     "sphinx-design==0.6.1",
 ]
 
+docbot = [
+    "flask==3.0.0",
+    "flask-cors==6.0.1",
+    "flask-socketio==5.3.6",
+    "llama-index-embeddings-azure-openai==0.3.9",
+    "llama-index-llms-azure-openai==0.3.4",
+    "llama-index-readers-github==0.6.1",
+    "llama-index-core==0.12.51",
+]
+
 [project.entry-points."sphinx.html_themes"]
 "ansys_sphinx_theme" = "ansys_sphinx_theme"
 

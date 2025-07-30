@@ -82,6 +82,9 @@ html_theme_options = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
+    "chatbot": {
+        "github_repo": "ansys-sphinx-theme",
+    },
 }
 
 

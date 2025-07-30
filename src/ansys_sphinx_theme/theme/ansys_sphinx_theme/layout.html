@@ -2,30 +2,23 @@
 
 {%- block extrahead %}
   {{ super() }}
-  {%- if pyansys_tags is defined %}
-  <meta property="og:site_name" content="PyAnsys" />
-    {%- if pyansys_tags is iterable and not pyansys_tags is string %}
-      {%- for tag in pyansys_tags %}
-  <meta name="physics" content="{{ tag }}" />
-      {%- endfor %}
-    {%- else %}
-  <meta name="physics" content="{{ pyansys_tags }}" />
-    {%- endif %}
+  {%- if pyansys_tag is defined %}
+    <meta property="og:site_name" content="PyAnsys" />
+    <meta name="physics" content="{{ pyansys_tag }}" />
   {%- endif %}
 {%- endblock %}
 
-{# Append our custom CSS after the bootstrap stylesheet so we can override where necessary #}
 {%- block css %}
   {{ super() }}
 
-  <!-- Include desired assets -->
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <!-- PrismJS Styles for Syntax Highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
   {% if page_assets is defined and page_assets|length > 0 %}
-  {% set assets = page_assets.get(pagename, {}) %}
-  {% if assets.get("needs_datatables") %}
-  <link href="https://cdn.datatables.net/v/dt/dt-2.2.0/datatables.min.css" rel="stylesheet">
-  <script src="https://cdn.datatables.net/v/dt/dt-2.2.0/datatables.min.js"></script>
-  {% endif %}
+    {% set assets = page_assets.get(pagename, {}) %}
+    {% if assets.get("needs_datatables") %}
+      <link href="https://cdn.datatables.net/v/dt/dt-2.2.0/datatables.min.css" rel="stylesheet">
+    {% endif %}
   {% endif %}
 
   {% if theme_show_breadcrumbs %}
@@ -44,22 +37,204 @@
   {{ super() }}
   {% if theme_use_ansys_search %}
     {%- include "components/ast-search-button.html" %}
-  {%  endif %}
+  {% endif %}
 {%- endblock %}
 
 {%- block scripts_end %}
   {{ super() }}
 
-  <!-- Include desired assets -->
-  {% if page_assets is defined and page_assets|length > 0 %}
-  {% set assets = page_assets.get(pagename, {}) %}
-  {% if assets.get("needs_datatables") %}
-  <script>
-    $(document).ready(function () {
-      $("table.datatable").DataTable();
-    });
-  </script>
-  {% endif %}
-  {% endif %}
+  <!-- External JS Libraries -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
 
+  <!-- Floating Chat Button -->
+  <button id="chat-fab" style="position: fixed; bottom: 48px; right: 48px; background: linear-gradient(90deg, #f6bc0e 0%, #000000 100%); color: white; border: none; border-radius: 12px; padding: 12px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); font-size: 1.1rem; font-weight: 500; cursor: pointer; z-index: 1000;">
+    💬 Chat with me
+  </button>
+
+  <!-- Chat UI -->
+  <div id="main-chat-ui" style="display: none; position: fixed; bottom: 100px; right: 32px; max-width: 500px; height: 500px; width: 100%; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(204, 185, 185, 0.2); z-index: 1001;">
+    <div style="background: linear-gradient(135deg, #2b2b2d 0%, #040304 100%); color: white; padding: 16px; border-top-left-radius: 10px; border-top-right-radius: 10px; position: relative;">
+      <button id="close-chat-btn" style="position: absolute; top: 8px; right: 8px; background: #fff; border: 1px solid #ddd; border-radius: 50%; width: 28px; height: 28px; font-size: 1.1rem; cursor: pointer; z-index: 1002;">×</button>
+      <h2 style="margin: 0; font-size: 1.2rem; color:white;">🤖 PyAnsys Chat</h2>
+    </div>
+    <div id="chat-container" style="overflow-y: auto; padding: 12px;"></div>
+      <div id="typing-indicator" style="padding: 12px; color: #666; font-style: italic; display: none;">
+      🤖 PyAnsys bot is typing...
+    </div>
+    <div style="padding: 12px; border-top: 1px solid #eee; display: flex; gap: 8px;">
+      <input type="text" id="message-input" placeholder="Ask me about PyAnsys .." style="flex: 1; padding: 8px; border-radius: 20px; border: 1px solid #ddd;">
+      <button id="send-btn" style="padding: 8px 16px; background: #4c4c4e; color: white; border: none; border-radius: 20px; cursor: pointer;">Send</button>
+    </div>
+  </div>
+
+  <!-- Chatbot Script -->
+  <script>
+  const chatFab = document.getElementById('chat-fab');
+  const mainChatUI = document.getElementById('main-chat-ui');
+  const closeChatBtn = document.getElementById('close-chat-btn');
+  const chatContainer = document.getElementById('chat-container');
+  const messageInput = document.getElementById('message-input');
+  const sendBtn = document.getElementById('send-btn');
+  const typingIndicator = document.getElementById('typing-indicator');
+  const sessionId = 'session_' + Date.now();
+
+  const lib_name = "ansys-sphinx-theme";
+
+    const socket = io('http://localhost:15300', {
+    query: {
+      lib_name: lib_name
+    }
+  });
+
+  chatFab.addEventListener('click', () => {
+    mainChatUI.style.display = 'block';
+    chatFab.style.display = 'none';
+  });
+
+  closeChatBtn.addEventListener('click', () => {
+    mainChatUI.style.display = 'none';
+    chatFab.style.display = 'block';
+  });
+
+  sendBtn.addEventListener('click', sendMessage);
+  messageInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+  function scrollToBottom() {
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+  }
+
+  function addMessage(text, sender, isError = false) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender === 'user' ? 'user-message' : 'bot-message'}${isError ? ' error-message' : ''}`;
+    messageDiv.textContent = text;
+    chatContainer.appendChild(messageDiv);
+    scrollToBottom();
+  }
+
+  function addMarkdownMessage(text, sender, responseTime = '') {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${sender === 'user' ? 'user-message' : 'bot-message'}`;
+
+    let parsedContent = marked.parse(text);
+    parsedContent = parsedContent.replace(
+      /<pre><code class="language-([^"]*)">([\s\S]*?)<\/code><\/pre>/g,
+      '<div class="code-block-container"><pre><code class="language-$1">$2</code></pre></div>'
+    );
+
+    parsedContent = parsedContent.replace(
+      /<pre><code>([\s\S]*?)<\/code><\/pre>/g,
+      '<div class="code-block-container"><pre><code>$1</code></pre></div>'
+    );
+
+    messageDiv.innerHTML = parsedContent;
+
+    if (responseTime) {
+      const timeDiv = document.createElement('div');
+      timeDiv.className = 'response-time';
+      timeDiv.textContent = responseTime;
+      messageDiv.appendChild(timeDiv);
+    }
+
+    chatContainer.appendChild(messageDiv);
+    messageDiv.querySelectorAll('pre code').forEach((block) => {
+      Prism.highlightElement(block);
+    });
+
+    scrollToBottom();
+  }
+
+  function copyCode(button) {
+    const code = button.previousElementSibling.querySelector('code');
+    navigator.clipboard.writeText(code.textContent);
+    button.textContent = 'Copied!';
+    setTimeout(() => button.textContent = 'Copy', 2000);
+  }
+
+  function sendMessage() {
+  const message = messageInput.value.trim();
+  if (!message) return;
+
+  addMessage(message, 'user');
+  messageInput.value = '';
+  scrollToBottom();
+
+  typingIndicator.style.display = 'block';
+
+  socket.emit('send_message', {
+    lib: lib_name,
+    message: message,
+  });
+}
+
+
+    socket.on('bot_response', (data) => {
+  typingIndicator.style.display = 'none';
+  if (data.error) {
+    addMessage(data.error, 'bot', true);
+  } else {
+    addMarkdownMessage(data.message, 'bot', data.response_time);
+  }
+});
+
+socket.on('typing', () => {
+  typingIndicator.style.display = 'block';
+});
+
+</script>
+  <style>
+    #chat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  overflow-y: auto;
+  height: 360px; /* Adjusted for larger box */
+}
+
+  #chat-container .message {
+  margin: 8px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  word-wrap: break-word;
+  line-height: 1.4;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  width: 90%;
+}
+
+#chat-container .user-message {
+  background-color: #e1f3ff; /* Pale blue */
+  align-self: flex-end;
+  text-align: right;
+  margin-left: auto;
+  border-top-right-radius: 0;
+}
+
+#chat-container .bot-message {
+  background-color: #f8f8f8;
+  align-self: flex-start;
+  text-align: left;
+  margin-right: auto;
+  border-top-left-radius: 0;
+}
+
+/* Flex container to support alignment */
+</style>
+
+  {% if page_assets is defined and page_assets|length > 0 %}
+    {% set assets = page_assets.get(pagename, {}) %}
+    {% if assets.get("needs_datatables") %}
+      <script src="https://cdn.datatables.net/v/dt/dt-2.2.0/datatables.min.js"></script>
+      <script>
+        $(document).ready(() => {
+          $("table.datatable").DataTable();
+        });
+      </script>
+    {% endif %}
+  {% endif %}
 {%- endblock %}

@@ -168,3 +168,4 @@ doc/source/examples/api/
 node_modules/
 .nodeenv/
 package-lock.json
+index/

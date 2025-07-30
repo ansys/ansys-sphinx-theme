@@ -45,6 +45,7 @@ from ansys_sphinx_theme.whatsnew import (
     get_whatsnew_options,
     whatsnew_sidebar_pages,
 )
+from ansys_sphinx_theme.doc_bot.indexer import pyansys_chat_navigator
 
 try:
     import importlib.metadata as importlib_metadata
@@ -494,6 +495,7 @@ def setup(app: Sphinx) -> Dict:
 
     # Add default HTML configuration
     setup_default_html_theme_options(app)
+    pyansys_chat_navigator(app)
 
     # Check for what's new options in the theme configuration
     whatsnew_file, changelog_file = get_whatsnew_options(app)
