@@ -19,6 +19,7 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+"""Indexing for the documentation bot."""
 
 import os
 from pathlib import Path
@@ -52,6 +53,7 @@ def initialise_library(sphinx_app):
 
 
 def create_new_index(index_storage, project_name, github_repo):
+    """Create a new index for the documentation bot."""
     index_path = Path(index_storage)
     print(f"Creating new index at {index_storage} for project {project_name}...")
     print(index_path)
@@ -70,8 +72,6 @@ def create_new_index(index_storage, project_name, github_repo):
         for file in json_files:
             print(f"[FOUND] {file}")
 
-    # get the files in the index path
-    is_empty = not any(index_path.iterdir())
     files = [f for f in index_path.iterdir() if f.is_file() and f.suffix == ".json"]
 
     if index_path.exists() and files:

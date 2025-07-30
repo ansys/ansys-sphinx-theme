@@ -33,6 +33,7 @@ from sphinx.application import Sphinx
 from sphinx.util import logging
 
 from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_sidebar_pages
+from ansys_sphinx_theme.doc_bot.indexer import pyansys_chat_navigator
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
 from ansys_sphinx_theme.search import (
@@ -45,7 +46,6 @@ from ansys_sphinx_theme.whatsnew import (
     get_whatsnew_options,
     whatsnew_sidebar_pages,
 )
-from ansys_sphinx_theme.doc_bot.indexer import pyansys_chat_navigator
 
 try:
     import importlib.metadata as importlib_metadata
