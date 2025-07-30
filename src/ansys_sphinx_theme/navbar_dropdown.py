@@ -25,6 +25,7 @@
 import copy
 from functools import lru_cache
 import pathlib
+from typing import TypedDict
 
 import bs4
 from docutils import nodes
@@ -32,12 +33,13 @@ import sphinx
 from sphinx.util import logging
 from sphinx.util.nodes import make_refnode
 import yaml
-from typing import TypedDict
 
 logger = logging.getLogger(__name__)
 
+
 class NavEntry(TypedDict, total=False):
     """Represents an entry in the navbar configuration."""
+
     title: str
     caption: str
     file: str
@@ -68,8 +70,9 @@ def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
         raise ValueError(f"Failed to parse YAML in '{yaml_path.name}': {exc}")
 
 
-def update_template_context(app: sphinx, pagename: str, templatename: str,
-                            context: dict, doctree: nodes.document | None) -> None:
+def update_template_context(
+    app: sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document | None
+) -> None:
     """Inject navbar rendering logic into the Sphinx HTML template context."""
 
     @lru_cache(maxsize=None)
@@ -77,12 +80,11 @@ def update_template_context(app: sphinx, pagename: str, templatename: str,
         """Render the navbar content as HTML using the navbar configuration."""
         if not hasattr(app.config, "navbar_contents"):
             raise ValueError("Navbar configuration not found. Please define a layout YAML file.")
-        
+
         nav_root = nodes.container(classes=["navbar-content"])
         nav_root.append(build_navbar_nodes(app.config.navbar_contents))
         rendered = app.builder.render_partial(nav_root)["fragment"]
         return add_navbar_chevrons(bs4.BeautifulSoup(rendered, "html.parser"))
-    
 
     def build_navbar_nodes(entries: list[NavEntry], is_top_level: bool = True) -> nodes.bullet_list:
         """Recursively construct docutils nodes for the navbar structure."""
