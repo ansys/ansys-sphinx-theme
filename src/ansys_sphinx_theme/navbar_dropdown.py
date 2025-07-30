@@ -40,10 +40,6 @@ def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
     """Load the navbar configuration from a YAML file for the Sphinx app."""
     navigation_theme_options = app.config.html_theme_options.get("navigation_dropdown", {})
     if not navigation_theme_options or "layout_file" not in navigation_theme_options:
-        logger.warning(
-            "No 'layout_file' specified in 'navigation_dropdown' theme options. "
-            "Skipping navbar configuration loading."
-        )
         return
     layout_file = navigation_theme_options["layout_file"]
     try:
