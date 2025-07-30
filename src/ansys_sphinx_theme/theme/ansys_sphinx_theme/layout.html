@@ -21,7 +21,91 @@
   <script src="https://cdn.datatables.net/v/dt/dt-2.2.0/datatables.min.js"></script>
   {% endif %}
   {% endif %}
+<!-- Floating Chat Icon -->
+<button id="chat-fab" style="
+    position: fixed;
+    bottom: 48px;
+    right: 48px;
+    background: linear-gradient(90deg, #f6bc0e 0%, #000000 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    z-index: 1000;
+    display: block;
+    transition: box-shadow 0.2s;
+">
+    💬 Chat with me
+    </button>
 
+
+<!-- Chat Popup Container (hidden by default) -->
+<div id="main-chat-ui" style="display: none; position: fixed; bottom: 100px; right: 32px; max-width: 400px; width: 100%; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(204, 185, 185, 0.2); z-index: 1001;">
+    <div style="background: linear-gradient(135deg, #2b2b2d 0%, #040304 100%); color: white; padding: 16px; border-top-left-radius: 10px; border-top-right-radius: 10px; position: relative;">
+        <button id="close-chat-btn" style="position: absolute; top: 8px; right: 8px; background: #fff; border: 1px solid #ddd; border-radius: 50%; width: 28px; height: 28px; font-size: 1.1rem; cursor: pointer; z-index: 1002;">×</button>
+        <h2 style="margin: 0; font-size: 1.2rem; color:white;">🤖 PyAnsys Chat</h2>
+    </div>
+    <div id="chat-container" style="height: 300px; overflow-y: auto; padding: 12px;"></div>
+    <div style="padding: 12px; border-top: 1px solid #eee; display: flex; gap: 8px;">
+        <input type="text" id="message-input" placeholder="Ask me about PyAnsys .." style="flex: 1; padding: 8px; border-radius: 20px; border: 1px solid #ddd;">
+        <button id="send-btn" style="padding: 8px 16px; background: #4c4c4e; color: white; border: none; border-radius: 20px; cursor: pointer;">Send</button>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+<script>
+const chatFab = document.getElementById('chat-fab');
+const mainChatUI = document.getElementById('main-chat-ui');
+const closeChatBtn = document.getElementById('close-chat-btn');
+const chatContainer = document.getElementById('chat-container');
+const messageInput = document.getElementById('message-input');
+const sendBtn = document.getElementById('send-btn');
+
+chatFab.addEventListener('click', function() {
+    mainChatUI.style.display = 'block';
+    chatFab.style.display = 'none';
+});
+closeChatBtn.addEventListener('click', function() {
+    mainChatUI.style.display = 'none';
+    chatFab.style.display = 'flex';
+});
+
+// Example: Connect to your Flask SocketIO server
+const socket = io('http://localhost:8000'); // Change to your server address
+
+sendBtn.addEventListener('click', sendMessage);
+messageInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') sendMessage();
+});
+
+function sendMessage() {
+    const message = messageInput.value.trim();
+    if (message) {
+        addMessage(message, 'user');
+        socket.emit('send_message', {message: message});
+        messageInput.value = '';
+    }
+}
+
+function addMessage(text, sender) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    div.style.margin = '8px 0';
+    div.style.padding = '8px 12px';
+    div.style.borderRadius = '8px';
+    div.style.background = sender === 'user' ? '#e3f2fd' : '#f8f9fa';
+    div.style.textAlign = sender === 'user' ? 'right' : 'left';
+    chatContainer.appendChild(div);
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+}
+
+socket.on('bot_response', function(data) {
+    addMessage(data.message, 'bot');
+});
+</script>
   {% if theme_show_breadcrumbs %}
     <link href="{{ pathto('_static/css/breadcrumbs.css', 1) }}" rel="stylesheet" />
   {% endif %}
