@@ -32,8 +32,17 @@ import sphinx
 from sphinx.util import logging
 from sphinx.util.nodes import make_refnode
 import yaml
+from typing import TypedDict
 
 logger = logging.getLogger(__name__)
+
+class NavEntry(TypedDict, total=False):
+    """Represents an entry in the navbar configuration."""
+    title: str
+    caption: str
+    file: str
+    link: str
+    sections: list["NavEntry"]
 
 
 def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
@@ -59,81 +68,86 @@ def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
         raise ValueError(f"Failed to parse YAML in '{yaml_path.name}': {exc}")
 
 
-NavEntry = dict[str, str | list["NavEntry"]]
-"""Type alias for a navigation entry in the navbar configuration.
-
-Each entry can have a 'file' or 'link' key, and optionally 'title',
-'caption', and 'sections' keys. The 'sections' key contains a list of
-sub-entries, allowing for nested navigation structures.
-"""
-
-
-def update_template_context(app, pagename, templatename, context, doctree):
-    """Inject custom variables and utilities into the Sphinx template context."""
+def update_template_context(app: sphinx, pagename: str, templatename: str,
+                            context: dict, doctree: nodes.document | None) -> None:
+    """Inject navbar rendering logic into the Sphinx HTML template context."""
 
     @lru_cache(maxsize=None)
     def render_navbar_links_html() -> bs4.BeautifulSoup:
-        """Render external header links as HTML for the navbar."""
+        """Render the navbar content as HTML using the navbar configuration."""
         if not hasattr(app.config, "navbar_contents"):
-            raise ValueError("Navbar configuration is missing. Please specify a navbar YAML file.")
-        node = nodes.container(classes=["navbar-content"])
-        node.append(build_navbar_nodes(app.config.navbar_contents))
-        header_soup = bs4.BeautifulSoup(app.builder.render_partial(node)["fragment"], "html.parser")
-        return add_navbar_chevrons(header_soup)
+            raise ValueError("Navbar configuration not found. Please define a layout YAML file.")
+        
+        nav_root = nodes.container(classes=["navbar-content"])
+        nav_root.append(build_navbar_nodes(app.config.navbar_contents))
+        rendered = app.builder.render_partial(nav_root)["fragment"]
+        return add_navbar_chevrons(bs4.BeautifulSoup(rendered, "html.parser"))
+    
 
-    def build_navbar_nodes(obj: list[NavEntry], is_top_level: bool = True) -> nodes.Node:
-        """Recursively build navbar nodes from configuration entries."""
-        bullet_list = nodes.bullet_list(
-            bullet="-",
-            classes=["navbar-toplevel" if is_top_level else "navbar-sublevel"],
-        )
-        for item in obj:
-            if "file" in item:
+    def build_navbar_nodes(entries: list[NavEntry], is_top_level: bool = True) -> nodes.bullet_list:
+        """Recursively construct docutils nodes for the navbar structure."""
+        classes = ["navbar-toplevel"] if is_top_level else ["navbar-sublevel"]
+        nav_list = nodes.bullet_list(bullet="-", classes=classes)
+
+        for entry in entries:
+            title = entry.get("title", "")
+            file = entry.get("file")
+            link = entry.get("link")
+
+            if file:
                 ref_node = make_refnode(
                     app.builder,
                     context["current_page_name"],
-                    item["file"],
+                    file,
                     None,
-                    nodes.inline(classes=["navbar-link-title"], text=item.get("title")),
-                    item.get("title"),
+                    nodes.inline(classes=["navbar-link-title"], text=title),
+                    title,
                 )
-            elif "link" in item:
+            elif link:
                 ref_node = nodes.reference("", "", internal=False)
-                ref_node["refuri"] = item.get("link")
-                ref_node["reftitle"] = item.get("title")
-                ref_node.append(nodes.inline(classes=["navbar-link-title"], text=item.get("title")))
+                ref_node["refuri"] = link
+                ref_node["reftitle"] = title
+                ref_node.append(nodes.inline(classes=["navbar-link-title"], text=title))
             else:
                 logger.warning(
-                    f"Navbar entry '{item}' is missing 'file' or 'link' key. Skipping this entry."
+                    f"Invalid navbar entry: {entry}. Expected 'file' or 'link'. Skipping."
                 )
                 continue
-            if "caption" in item:
-                caption = nodes.Text(item.get("caption"))
-                ref_node.append(caption)
+
+            if "caption" in entry:
+                ref_node.append(nodes.Text(entry["caption"]))
+
             paragraph = nodes.paragraph()
             paragraph.append(ref_node)
+
             container = nodes.container(classes=["ref-container"])
             container.append(paragraph)
-            list_item = nodes.list_item(
-                classes=["active-link"] if item.get("file") == pagename else []
-            )
+
+            list_item_classes = ["active-link"] if file == pagename else []
+            list_item = nodes.list_item(classes=list_item_classes)
             list_item.append(container)
-            if "sections" in item:
-                wrapper = nodes.container(classes=["navbar-dropdown"])
-                wrapper.append(build_navbar_nodes(item["sections"], is_top_level=False))
-                list_item.append(wrapper)
-            bullet_list.append(list_item)
-        return bullet_list
+
+            if "sections" in entry:
+                dropdown = nodes.container(classes=["navbar-dropdown"])
+                dropdown.append(build_navbar_nodes(entry["sections"], is_top_level=False))
+                list_item.append(dropdown)
+
+            nav_list.append(list_item)
+
+        return nav_list
 
     context["render_navbar_links_html"] = render_navbar_links_html
 
 
-def add_navbar_chevrons(input_soup: bs4.BeautifulSoup) -> bs4.BeautifulSoup:
-    """Add dropdown chevron icons to navbar items with submenus."""
-    soup = copy.copy(input_soup)
-    for li in soup.find_all("li", recursive=True):
-        divs = li.find_all("div", {"class": "navbar-dropdown"}, recursive=False)
-        if divs:
-            ref = li.find("div", {"class": "ref-container"})
-            ref.append(soup.new_tag("i", attrs={"class": "fa-solid fa-chevron-down"}))
-    return soup
+def add_navbar_chevrons(soup: bs4.BeautifulSoup) -> bs4.BeautifulSoup:
+    """Add chevron icons to navbar items that have dropdown menus."""
+    soup_copy = copy.copy(soup)
+
+    for li in soup_copy.find_all("li", recursive=True):
+        if li.find("div", class_="navbar-dropdown", recursive=False):
+            ref_container = li.find("div", class_="ref-container")
+            if ref_container:
+                chevron = soup_copy.new_tag("i", attrs={"class": "fa-solid fa-chevron-down"})
+                ref_container.append(chevron)
+
+    return soup_copy
