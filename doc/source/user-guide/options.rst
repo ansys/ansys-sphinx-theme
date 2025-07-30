@@ -400,17 +400,18 @@ The following images show a sample "What's new" section and sidebar in the chang
 
 Navigation bar dropdown
 ------------------------
-This theme supports dropdown navigation bars. The layout is declared using a YAML file contained at any level in the ``doc/source`` directory. This file must be specified in the ``html_theme_options`` so Sphinx can apply the desired navigation structure:
+This theme supports dropdown navigation bars. The layout is declared using a YAML file contained at any level in the ``doc/source`` directory. 
+The file path is relative to the ``doc/source`` directory,and must be specified in the ``html_theme_options`` dictionary.
 
 - ``navigation_yaml_file``: The path to the YAML file containing the navigation structure.
 
 .. code:: python
 
     html_theme_options = {
-            ...,
-            "navigation_dropdown": {
-                 "layout_file": "navbar.yml",
-             },
+        ...,
+        "navigation_dropdown": {
+            "layout_file": "navbar.yml", # Relative path to the YAML file 
+        },
     }
 
 Each entry in the YAML file may include the following fields:
