@@ -25,7 +25,6 @@
 import copy
 from functools import lru_cache
 import pathlib
-from typing import Dict, List, Union
 
 import bs4
 from docutils import nodes
@@ -55,7 +54,7 @@ def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
         raise ValueError(f"Error parsing '{layout_file}': {exc}")
 
 
-NavEntry = Dict[str, Union[str, List["NavEntry"]]]
+NavEntry = dict[str, str | list["NavEntry"]]
 """Type alias for a navigation entry in the navbar configuration.
 
 Each entry can have a 'file' or 'link' key, and optionally 'title',
@@ -77,7 +76,7 @@ def update_template_context(app, pagename, templatename, context, doctree):
         header_soup = bs4.BeautifulSoup(app.builder.render_partial(node)["fragment"], "html.parser")
         return add_navbar_chevrons(header_soup)
 
-    def build_navbar_nodes(obj: List[NavEntry], is_top_level: bool = True) -> nodes.Node:
+    def build_navbar_nodes(obj: list[NavEntry], is_top_level: bool = True) -> nodes.Node:
         """Recursively build navbar nodes from configuration entries."""
         bullet_list = nodes.bullet_list(
             bullet="-",
