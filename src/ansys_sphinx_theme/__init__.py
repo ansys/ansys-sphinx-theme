@@ -36,6 +36,7 @@ from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_si
 from ansys_sphinx_theme.doc_bot.indexer import pyansys_chat_navigator
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
+from ansys_sphinx_theme.navbar_dropdown import load_navbar_configuration, update_template_context
 from ansys_sphinx_theme.search import (
     create_search_index,
     update_search_config,
@@ -495,6 +496,7 @@ def setup(app: Sphinx) -> Dict:
 
     # Add default HTML configuration
     setup_default_html_theme_options(app)
+    load_navbar_configuration(app)
     pyansys_chat_navigator(app)
 
     # Check for what's new options in the theme configuration
@@ -521,10 +523,12 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", update_search_sidebar_context)
+    app.connect("html-page-context", update_template_context)
 
     app.connect("build-finished", replace_html_tag)
     if use_ansys_search:
         app.connect("build-finished", create_search_index)
+
     return {
         "version": __version__,
         "parallel_read_safe": True,

@@ -397,3 +397,49 @@ The following images show a sample "What's new" section and sidebar in the chang
     If you are using both the "whatsnew" and "cheatsheet" options, the "cheatsheet" option will be
     displayed first in the left navigation pane, followed by the "What's new" section to maintain
     sidebar consistency.
+
+Navigation bar dropdown
+------------------------
+This theme supports dropdown navigation bars. The layout is declared using a YAML file contained at any level in the ``doc/source`` directory.
+The file path is relative to the ``doc/source`` directory,and must be specified in the ``html_theme_options`` dictionary.
+
+- ``navigation_yaml_file``: The path to the YAML file containing the navigation structure.
+
+.. code:: python
+
+    html_theme_options = {
+        ...,
+        "navigation_dropdown": {
+            "layout_file": "navbar.yml", # Relative path to the YAML file
+        },
+    }
+
+Each entry in the YAML file may include the following fields:
+
+- **file.** The relative path to the documentation file, based on the doc/source directory.
+
+- **title.** The text displayed for the link in the dropdown navigation menu.
+
+- **sections.** A list of nested navigation items. Each section can specify its own file, title, and an optional caption to provide a brief description.
+
+.. code:: yaml
+
+    - file: api/index
+      title: "API Reference"
+
+    - file: examples
+      title: "Examples"
+      sections:
+
+        - file: examples/sphinx-design.rst
+          title: "Sphinx Design Examples"
+          caption: Examples of using Sphinx design features
+
+        - file: examples/nbsphinx
+          title: "Nbsphinx Examples"
+          caption: Examples of using Nbsphinx for Jupyter Notebooks
+
+
+.. warning::
+
+    You must declare the complete layout of the dropdown navigation bar in the YAML file. Sphinx does not resolve it automatically.
