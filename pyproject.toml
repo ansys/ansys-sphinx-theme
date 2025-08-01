@@ -63,7 +63,7 @@ doc = [
     "sphinx-gallery==0.19.0",
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
-    "tox==4.28.3",
+    "tox==4.28.4",
     "sphinx-theme-builder[cli]==0.2.0b2",
 ]
 changelog = [
