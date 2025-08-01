@@ -472,6 +472,63 @@ def update_search_sidebar_context(
 
     # Update the sidebar context
     context["sidebars"] = sidebar
+    
+    
+# get the toctree and add Home <self> to the beginning
+def add_home_to_toc(
+    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
+) -> None:
+    """Add 'Home' to the beginning of the table of contents.
+
+    This function adds a 'Home' link to the beginning of the table of contents
+    for the documentation. It ensures that the 'Home' link is always present
+    at the top of the table of contents.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    pagename : str
+        Name of the current page.
+    templatename : str
+        Name of the template being used.
+    context : dict
+        Context dictionary for the page.
+    doctree : docutils.nodes.document
+        Document tree for the page.
+    """
+    
+    # if not pagename == "index":
+    #     # Only add 'Home' to the TOC if the current page is not the index page
+    #     return
+    orig_toctree_fn = context.get("toctree")
+    original_generate = context.get("generate_toctree_html", None)
+    if not original_generate:
+        warnings.warn(
+            "The 'generate_toctree_html' function is not available in the context. "
+            "This may cause issues with the 'Home' link in the table of contents.",
+            UserWarning,
+        )
+    print(f"original_generate: {original_generate}")
+    exit(1)
+    if callable(original_generate):
+        def new_generate_toctree_html(kind="sidebar", **kwargs):
+            html = original_generate(kind=kind, **kwargs)
+
+            if kind != "sidebar":
+                return html  # only modify the sidebar TOC
+
+            home_url = app.builder.get_relative_uri(pagename, app.config.master_doc)
+            home_html = f'''
+<ul class="bd-sidenav">
+  <li class="toctree-l1">
+    <a class="reference internal" href="{home_url}">Home</a>
+  </li>
+</ul>
+            '''
+            return home_html + html
+
+        context["generate_toctree_html"] = new_generate_toctree_html
 
 
 def setup(app: Sphinx) -> Dict:
@@ -522,6 +579,7 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", update_search_sidebar_context)
     app.connect("html-page-context", update_template_context)
+    app.connect("html-page-context", add_home_to_toc)
 
     app.connect("build-finished", replace_html_tag)
     if use_ansys_search:
