@@ -9,7 +9,7 @@ on:
     branches:
       - main
 env:
-  MAIN_PYTHON_VERSION : '3.10'
+  MAIN_PYTHON_VERSION : '3.13'
   PACKAGE_NAME: 'ansys_sphinx_theme'
   DOCUMENTATION_CNAME: 'sphinxdocs.ansys.com'
 
@@ -47,7 +47,7 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-    - uses: ansys/actions/doc-changelog@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+    - uses: ansys/actions/doc-changelog@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
       if: ${{ github.event_name == 'pull_request' }}
       with:
         token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -62,7 +62,7 @@ jobs:
     needs: "changelog-fragment"
     steps:
       - name: "Run Ansys code style checks"
-        uses: ansys/actions/code-style@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+        uses: ansys/actions/code-style@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -72,9 +72,20 @@ jobs:
     needs: "changelog-fragment"
     steps:
       - name: "Run Ansys documentation style checks"
-        uses: ansys/actions/doc-style@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+        uses: ansys/actions/doc-style@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+  vulnerabilities:
+    name: Vulnerabilities
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ansys/actions/check-vulnerabilities@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
+        with:
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          python-package-name: ${{ env.PACKAGE_NAME }}
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          dev-mode: ${{ github.ref != 'refs/heads/main' }}
 
   update-changelog:
     name: "Update CHANGELOG (on release)"
@@ -84,7 +95,7 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: ansys/actions/doc-deploy-changelog@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+      - uses: ansys/actions/doc-deploy-changelog@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
@@ -96,7 +107,7 @@ jobs:
     needs: doc-style
     steps:
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+        uses: ansys/actions/doc-build@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           add-pdf-html-docs-as-assets: true
@@ -110,7 +121,7 @@ jobs:
     needs: build-library
     steps:
       - name: "Deploy developers documentation"
-        uses: ansys/actions/doc-deploy-dev@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+        uses: ansys/actions/doc-deploy-dev@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
         with:
             cname: ${{ env.DOCUMENTATION_CNAME }}
             token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -124,7 +135,7 @@ jobs:
     needs: release
     steps:
       - name: "Deploy stable documentation"
-        uses: ansys/actions/doc-deploy-stable@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+        uses: ansys/actions/doc-deploy-stable@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -148,7 +159,7 @@ jobs:
             os: macos-latest
     steps:
       - name: "Build wheelhouse and perform smoke test"
-        uses: ansys/actions/build-wheelhouse@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+        uses: ansys/actions/build-wheelhouse@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
@@ -161,7 +172,7 @@ jobs:
     needs: [doc-build, smoke-tests]
     steps:
       - name: "Build library source and wheel artifacts"
-        uses: ansys/actions/build-library@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+        uses: ansys/actions/build-library@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
         with:
           library-name: ${{ env.PACKAGE_NAME }}
 
@@ -173,21 +184,21 @@ jobs:
     steps:
 
       - name: "Release to the private PyPI repository"
-        uses: ansys/actions/release-pypi-private@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+        uses: ansys/actions/release-pypi-private@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
 
       - name: "Release to the public PyPI repository"
-        uses: ansys/actions/release-pypi-public@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+        uses: ansys/actions/release-pypi-public@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYPI_TOKEN }}
 
       - name: "Release to GitHub"
-        uses: ansys/actions/release-github@495ca3d79c1627f5b96c469cfbe799718e9dc35f # v9.0.13
+        uses: ansys/actions/release-github@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           library-name: ${{ env.PACKAGE_NAME }}

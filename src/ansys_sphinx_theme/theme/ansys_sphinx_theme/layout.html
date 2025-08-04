@@ -1,5 +1,19 @@
 {%- extends "pydata_sphinx_theme/layout.html" -%}
 
+{%- block extrahead %}
+  {{ super() }}
+  {%- if pyansys_tags is defined %}
+  <meta property="og:site_name" content="PyAnsys" />
+    {%- if pyansys_tags is iterable and not pyansys_tags is string %}
+      {%- for tag in pyansys_tags %}
+  <meta name="physics" content="{{ tag }}" />
+      {%- endfor %}
+    {%- else %}
+  <meta name="physics" content="{{ pyansys_tags }}" />
+    {%- endif %}
+  {%- endif %}
+{%- endblock %}
+
 {# Append our custom CSS after the bootstrap stylesheet so we can override where necessary #}
 {%- block css %}
   {{ super() }}

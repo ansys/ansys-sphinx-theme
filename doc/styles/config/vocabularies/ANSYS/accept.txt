@@ -19,7 +19,6 @@ html_context
 link_code_branch
 link_code_library
 link_code_source
-MeiliSearch
 multi-version
 namespaces
 PDF
