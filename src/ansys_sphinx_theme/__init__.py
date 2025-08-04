@@ -35,6 +35,7 @@ from sphinx.util import logging
 from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_sidebar_pages
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
+from ansys_sphinx_theme.navbar_dropdown import load_navbar_configuration, update_template_context
 from ansys_sphinx_theme.search import (
     create_search_index,
     update_search_config,
@@ -157,6 +158,14 @@ def setup_default_html_theme_options(app):
             ["search-button-field", "version-switcher", "theme-switcher", "navbar-icon-links"],
         )
 
+    # HACK: Add the search button field to the navbar_end and insert it at the beginning of
+    # the list. This is a workaround to ensure the search button field is always present
+    if "navbar_end" in theme_options:
+        if "search-button-field" not in theme_options["navbar_end"]:
+            theme_options["navbar_end"].insert(0, "search-button-field")
+        logging.getLogger(__name__).info(
+            "The 'search-button-field' has been added to the 'navbar_end' in the theme options."
+        )
     theme_options.setdefault("navbar_persistent", [])
     theme_options.setdefault("collapse_navigation", True)
     theme_options.setdefault("navigation_with_keys", True)
@@ -465,14 +474,6 @@ def update_search_sidebar_context(
     context["sidebars"] = sidebar
 
 
-def append_og_site_name(app, pagename, templatename, context, doctree):
-    # Make sure the context already has metatags
-    context["metatags"] = context.get("metatags", "")
-
-    # Append your custom tag
-    context["metatags"] += '\n    <meta property="og:site_name" content="PyAnsys" />'
-
-
 def setup(app: Sphinx) -> Dict:
     """Connect to the Sphinx theme app.
 
@@ -494,6 +495,7 @@ def setup(app: Sphinx) -> Dict:
 
     # Add default HTML configuration
     setup_default_html_theme_options(app)
+    load_navbar_configuration(app)
 
     # Check for what's new options in the theme configuration
     whatsnew_file, changelog_file = get_whatsnew_options(app)
@@ -518,12 +520,13 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", add_sidebar_context)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
-    app.connect("html-page-context", append_og_site_name)
     app.connect("html-page-context", update_search_sidebar_context)
+    app.connect("html-page-context", update_template_context)
 
     app.connect("build-finished", replace_html_tag)
     if use_ansys_search:
         app.connect("build-finished", create_search_index)
+
     return {
         "version": __version__,
         "parallel_read_safe": True,

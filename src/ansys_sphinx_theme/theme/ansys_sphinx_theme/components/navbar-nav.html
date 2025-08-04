@@ -1,0 +1,88 @@
+{% if theme_navigation_dropdown %}
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="{{ _('Site Navigation') }}">
+    <!-- {{ _("Site Navigation") }} -->
+  </p>
+  {{ render_navbar_links_html() }}
+</nav>
+<style>
+  /* Top navbar styling */
+.navbar-toplevel p {
+  margin: 0;
+  padding-inline-start: 0;
+}
+div.navbar-dropdown {
+    display: none;
+    position: relative;
+    left: -100%;
+    margin-top: 2rem;
+}
+.navbar-sublevel p a.reference {
+  text-decoration: none;
+}
+.navbar-sublevel p a.reference:hover > span.navbar-link-title {
+  text-decoration: underline;
+  color: var(--pst-color-link-hover);
+}
+.navbar-toplevel li {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0em 1em;
+
+}
+
+ul.navbar-toplevel li:hover > div.navbar-dropdown {
+  display: block;
+}
+
+.navbar-content ul.navbar-sublevel {
+  position: absolute;
+  gap: 1rem;
+  padding: 1em 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  background-color: white;
+  white-space: pre;
+  box-shadow: 0 5px 15px 0 rgb(0 0 0 / 10%);
+}
+
+div.navbar-content a {
+  display: flex;
+  flex-direction: column;
+  color: var(--ast-navbar-color);
+  align-items: baseline;
+  justify-content: center;
+  font-weight: var(--ast-font-weight-semibold);
+}
+.ref-container {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  font-family: var(--ast-body-family);
+  line-height: var(--ast-global-line-height);
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+/* Highlight active nav bar link */
+li.active-link {
+  font-weight: bold;
+}
+/* Set the first .navbar-persistent--mobile element to have auto left margin */
+/* Disable underline for hovered links in the nav bar */
+.navbar-nav li a:hover {
+  text-decoration: none;
+}
+.navbar-header-items {
+  padding-left: 0;
+}
+</style>
+{% else %}
+{% include "pydata_sphinx_theme/components/navbar-nav.html" %}
+{% endif %}
