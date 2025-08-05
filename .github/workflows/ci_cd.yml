@@ -180,6 +180,10 @@ jobs:
     name: "Release project to private PyPI, public PyPI and GitHub"
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
     needs: [build-library, update-changelog]
+    environment: release
+    permissions:
+      id-token: write
+      contents: write
     runs-on: ubuntu-latest
     steps:
 
@@ -190,12 +194,19 @@ jobs:
           twine-username: "__token__"
           twine-token: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
 
-      - name: "Release to the public PyPI repository"
-        uses: ansys/actions/release-pypi-public@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
+      - name: "Download the library artifacts from build-library step"
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
-          library-name: ${{ env.PACKAGE_NAME }}
-          twine-username: "__token__"
-          twine-token: ${{ secrets.PYPI_TOKEN }}
+          name: ${{ env.PACKAGE_NAME }}-artifacts
+          path: ${{ env.PACKAGE_NAME }}-artifacts
+
+      - name: "Upload artifacts to PyPI using trusted publisher"
+        uses: pypa/gh-action-pypi-publish@76f52bc884231f62b9a034ebfe128415bbaabdfc # v1.12.4
+        with:
+          repository-url: "https://upload.pypi.org/legacy/"
+          print-hash: true
+          packages-dir: ${{ env.PACKAGE_NAME }}-artifacts
+          skip-existing: false
 
       - name: "Release to GitHub"
         uses: ansys/actions/release-github@2031be5b84d9f8c1d56a54912209aa489b469a0f # v10.0.13
