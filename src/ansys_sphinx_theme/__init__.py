@@ -500,34 +500,146 @@ def add_home_to_toc(
     # if not pagename == "index":
     #     # Only add 'Home' to the TOC if the current page is not the index page
     #     return
-    original_generate = context.get("generate_toctree_html", None)
-    if not original_generate:
-        warnings.warn(
-            "The 'generate_toctree_html' function is not available in the context. "
-            "This may cause issues with the 'Home' link in the table of contents.",
-            UserWarning,
-        )
-    print(f"original_generate: {original_generate}")
-    exit(1)
-    if callable(original_generate):
+    root_doc = app.config.root_doc  # Usually 'index'
+    root_toc = app.env.tocs.get(root_doc)
 
-        def new_generate_toctree_html(kind="sidebar", **kwargs):
-            html = original_generate(kind=kind, **kwargs)
+    if not root_toc:
+        return
 
-            if kind != "sidebar":
-                return html  # only modify the sidebar TOC
+    # Find the outermost bullet_list node
+    outer_bullet_list = next((n for n in root_toc if isinstance(n, nodes.bullet_list)), None)
+    if not outer_bullet_list:
+        return
 
-            home_url = app.builder.get_relative_uri(pagename, app.config.master_doc)
-            home_html = f"""
-<ul class="bd-sidenav">
-  <li class="toctree-l1">
-    <a class="reference internal" href="{home_url}">Home</a>
-  </li>
-</ul>
-            """
-            return home_html + html
+    # Create a new list_item node for Home
+    home_item = nodes.list_item()
+    para = nodes.paragraph()
+    ref = nodes.reference(
+        internal=True,
+        refuri=app.builder.get_relative_uri(pagename, app.config.master_doc),
+    )
+    ref += nodes.Text("🏠 Home")
+    para += ref
+    home_item += para
 
-        context["generate_toctree_html"] = new_generate_toctree_html
+    # Insert Home at the top of the bullet list
+    outer_bullet_list.insert(0, home_item)
+
+    # Update the doctree in env
+    app.env.tocs[root_doc] = root_toc
+    # original_toctree = context.get("toctree")
+    # import json
+    # JSON_FILE = pathlib.Path("toctree.json")
+    # if JSON_FILE.exists():
+    #     with JSON_FILE.open("r", encoding="utf-8") as f:
+    #         context = json.load(f)
+    # else:
+    #     with JSON_FILE.open("w", encoding="utf-8") as f:
+    #         json.dump(context, f, indent=2, default=str)
+
+    # if not original_toctree:
+    #     warnings.warn(
+    #         "The 'toctree' function is not available in the context. "
+    #         "This may cause issues with the 'Home' link in the table of contents.",
+    #         UserWarning,
+    #     )
+    # exit(1)
+    # exit(1)
+#     original_toctree = context.get("toctree")
+
+#     if not callable(original_toctree):
+#         print(original_toctree)
+#         print("here=========original_toctree is not callable")
+#         exit(1)
+#         return  # Nothing to patch
+
+#     def new_toctree(*args, **kwargs):
+#         # Render the normal toctree
+#         html = original_toctree(*args, **kwargs)
+
+    
+        
+#         # Create the Home link HTML
+#         home_url = app.builder.get_relative_uri(pagename, app.config.master_doc)
+#         home_html = f"""
+# <ul class="toctree-wrapper">
+# <li class="toctree-l1">
+# <a class="reference internal" href="{home_url}">🏠 Home</a>
+# </li>
+# </ul>
+#         """
+#         print("home_html", home_html)
+#         return home_html + html
+
+#         # return html  # Don't modify other kinds of toctree (e.g. in page content)
+
+#     context["toctree"] = new_toctree
+
+from docutils.nodes import Node
+from typing import Callable, Iterable, Union
+
+def traverse_or_findall(
+    node: Node, condition: Union[Callable, type], **kwargs
+) -> Iterable[Node]:
+    """Triage node.traverse (docutils <0.18.1) vs node.findall.
+
+    TODO: This check can be removed when the minimum supported docutils version
+    for numpydoc is docutils>=0.18.1.
+    """
+    return (
+        node.findall(condition, **kwargs)
+        if hasattr(node, "findall")
+        else node.traverse(condition, **kwargs)
+    )
+
+from sphinx.addnodes import toctree as TocTreeNodeClass
+
+def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> None:
+    root_toc = app.env.tocs[app.config.root_doc]
+    for toc in traverse_or_findall(root_toc, TocTreeNodeClass):
+        # TODO: ↑↑↑ use `root_toc.findall(TocTreeNodeClass)` ↑↑↑
+        #              once docutils min version >=0.18.1
+        # ADD HOME TO THE TOC
+        if not toc.attributes.get("entries"):
+            # No entries in the TOC, nothing to do
+            return
+        # Check if 'Home' already exists in the TOC
+        for title, page in toc.attributes["entries"]:
+            # add home, self to the beginning of the TOC
+            if title == "Home" and page == docname:
+                # Home already exists, no need to add it again
+                return
+            # if not title == "Home" and page == docname:
+        # Create a new entry for 'Home', link self to the root document
+        # This is the link to the root document, which is usually 'index'
+        # If the root document is not 'index', it will still link to the root document
+        # This is the link to the root document, which is usually 'index'
+        home_entry = (nodes.Text("🏠 Home"), app.builder.get_relative_uri(docname, app.config.master_doc))
+        # Insert 'Home' at the beginning of the TOC entries
+        toc.attributes["entries"].insert(0, home_entry)
+            
+
+    # # Find the top-level bullet list in the doctree
+    # outer_bullet_list = next((n for n in root_toc if isinstance(n, nodes.bullet_list)), None)
+    # if not outer_bullet_list:
+    #     return
+
+    # # Create a new list_item node for Home
+    # home_item = nodes.list_item()
+    # para = nodes.paragraph()
+    # ref = nodes.reference(
+    #     internal=True,
+    #     refuri=app.builder.get_relative_uri(docname, app.config.master_doc),
+    # )
+    # ref += nodes.Text("🏠 Home")
+    # para += ref
+    # home_item += para
+
+    # # Insert Home at the top of the bullet list
+    # outer_bullet_list.insert(0, home_item)
+
+    # # Update the doctree in env
+    # app.env.tocs[root_doc] = root_toc
 
 
 def setup(app: Sphinx) -> Dict:
@@ -578,7 +690,8 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", update_search_sidebar_context)
     app.connect("html-page-context", update_template_context)
-    app.connect("html-page-context", add_home_to_toc)
+    # app.connect("html-page-context", add_home_to_toc, priority=600)
+    app.connect("doctree-resolved", on_doctree_resolved)
 
     app.connect("build-finished", replace_html_tag)
     if use_ansys_search:
