@@ -476,109 +476,6 @@ def update_search_sidebar_context(
     context["sidebars"] = sidebar
 
 
-# get the toctree and add Home <self> to the beginning
-def add_home_to_toc(
-    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
-) -> None:
-    """Add 'Home' to the beginning of the table of contents.
-
-    This function adds a 'Home' link to the beginning of the table of contents
-    for the documentation. It ensures that the 'Home' link is always present
-    at the top of the table of contents.
-
-    Parameters
-    ----------
-    app : sphinx.application.Sphinx
-        Application instance for rendering the documentation.
-    pagename : str
-        Name of the current page.
-    templatename : str
-        Name of the template being used.
-    context : dict
-        Context dictionary for the page.
-    doctree : docutils.nodes.document
-        Document tree for the page.
-    """
-    # if not pagename == "index":
-    #     # Only add 'Home' to the TOC if the current page is not the index page
-    #     return
-    root_doc = app.config.root_doc  # Usually 'index'
-    root_toc = app.env.tocs.get(root_doc)
-
-    if not root_toc:
-        return
-
-    # Find the outermost bullet_list node
-    outer_bullet_list = next((n for n in root_toc if isinstance(n, nodes.bullet_list)), None)
-    if not outer_bullet_list:
-        return
-
-    # Create a new list_item node for Home
-    home_item = nodes.list_item()
-    para = nodes.paragraph()
-    ref = nodes.reference(
-        internal=True,
-        refuri=app.builder.get_relative_uri(pagename, app.config.master_doc),
-    )
-    ref += nodes.Text("🏠 Home")
-    para += ref
-    home_item += para
-
-    # Insert Home at the top of the bullet list
-    outer_bullet_list.insert(0, home_item)
-
-    # Update the doctree in env
-    app.env.tocs[root_doc] = root_toc
-    # original_toctree = context.get("toctree")
-    # import json
-    # JSON_FILE = pathlib.Path("toctree.json")
-    # if JSON_FILE.exists():
-    #     with JSON_FILE.open("r", encoding="utf-8") as f:
-    #         context = json.load(f)
-    # else:
-    #     with JSON_FILE.open("w", encoding="utf-8") as f:
-    #         json.dump(context, f, indent=2, default=str)
-
-    # if not original_toctree:
-    #     warnings.warn(
-    #         "The 'toctree' function is not available in the context. "
-    #         "This may cause issues with the 'Home' link in the table of contents.",
-    #         UserWarning,
-    #     )
-    # exit(1)
-    # exit(1)
-
-
-#     original_toctree = context.get("toctree")
-
-#     if not callable(original_toctree):
-#         print(original_toctree)
-#         print("here=========original_toctree is not callable")
-#         exit(1)
-#         return  # Nothing to patch
-
-#     def new_toctree(*args, **kwargs):
-#         # Render the normal toctree
-#         html = original_toctree(*args, **kwargs)
-
-
-#         # Create the Home link HTML
-#         home_url = app.builder.get_relative_uri(pagename, app.config.master_doc)
-#         home_html = f"""
-# <ul class="toctree-wrapper">
-# <li class="toctree-l1">
-# <a class="reference internal" href="{home_url}">🏠 Home</a>
-# </li>
-# </ul>
-#         """
-#         print("home_html", home_html)
-#         return home_html + html
-
-#         # return html  # Don't modify other kinds of toctree (e.g. in page content)
-
-#     context["toctree"] = new_toctree
-
-
 def traverse_or_findall(node: Node, condition: Union[Callable, type], **kwargs) -> Iterable[Node]:
     """Triage node.traverse (docutils <0.18.1) vs node.findall.
 
@@ -683,7 +580,6 @@ def setup(app: Sphinx) -> Dict:
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", update_search_sidebar_context)
     app.connect("html-page-context", update_template_context)
-    # app.connect("html-page-context", add_home_to_toc, priority=600)
     app.connect("doctree-resolved", on_doctree_resolved)
 
     app.connect("build-finished", replace_html_tag)
