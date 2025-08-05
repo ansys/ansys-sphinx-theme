@@ -472,8 +472,8 @@ def update_search_sidebar_context(
 
     # Update the sidebar context
     context["sidebars"] = sidebar
-    
-    
+
+
 # get the toctree and add Home <self> to the beginning
 def add_home_to_toc(
     app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
@@ -497,11 +497,9 @@ def add_home_to_toc(
     doctree : docutils.nodes.document
         Document tree for the page.
     """
-    
     # if not pagename == "index":
     #     # Only add 'Home' to the TOC if the current page is not the index page
     #     return
-    orig_toctree_fn = context.get("toctree")
     original_generate = context.get("generate_toctree_html", None)
     if not original_generate:
         warnings.warn(
@@ -512,6 +510,7 @@ def add_home_to_toc(
     print(f"original_generate: {original_generate}")
     exit(1)
     if callable(original_generate):
+
         def new_generate_toctree_html(kind="sidebar", **kwargs):
             html = original_generate(kind=kind, **kwargs)
 
@@ -519,13 +518,13 @@ def add_home_to_toc(
                 return html  # only modify the sidebar TOC
 
             home_url = app.builder.get_relative_uri(pagename, app.config.master_doc)
-            home_html = f'''
+            home_html = f"""
 <ul class="bd-sidenav">
   <li class="toctree-l1">
     <a class="reference internal" href="{home_url}">Home</a>
   </li>
 </ul>
-            '''
+            """
             return home_html + html
 
         context["generate_toctree_html"] = new_generate_toctree_html
