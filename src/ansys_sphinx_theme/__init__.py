@@ -24,11 +24,13 @@
 
 import os
 import pathlib
-from typing import Any, Dict
+from typing import Any, Callable, Dict, Iterable, Union
 import warnings
 
 from docutils import nodes
+from docutils.nodes import Node
 from sphinx import addnodes
+from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
 from sphinx.util import logging
 
@@ -545,6 +547,8 @@ def add_home_to_toc(
     #     )
     # exit(1)
     # exit(1)
+
+
 #     original_toctree = context.get("toctree")
 
 #     if not callable(original_toctree):
@@ -557,8 +561,7 @@ def add_home_to_toc(
 #         # Render the normal toctree
 #         html = original_toctree(*args, **kwargs)
 
-    
-        
+
 #         # Create the Home link HTML
 #         home_url = app.builder.get_relative_uri(pagename, app.config.master_doc)
 #         home_html = f"""
@@ -575,12 +578,8 @@ def add_home_to_toc(
 
 #     context["toctree"] = new_toctree
 
-from docutils.nodes import Node
-from typing import Callable, Iterable, Union
 
-def traverse_or_findall(
-    node: Node, condition: Union[Callable, type], **kwargs
-) -> Iterable[Node]:
+def traverse_or_findall(node: Node, condition: Union[Callable, type], **kwargs) -> Iterable[Node]:
     """Triage node.traverse (docutils <0.18.1) vs node.findall.
 
     TODO: This check can be removed when the minimum supported docutils version
@@ -592,14 +591,10 @@ def traverse_or_findall(
         else node.traverse(condition, **kwargs)
     )
 
-from sphinx.addnodes import toctree as TocTreeNodeClass
 
 def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> None:
     root_toc = app.env.tocs[app.config.root_doc]
-    for toc in traverse_or_findall(root_toc, TocTreeNodeClass):
-        # TODO: ↑↑↑ use `root_toc.findall(TocTreeNodeClass)` ↑↑↑
-        #              once docutils min version >=0.18.1
-        # ADD HOME TO THE TOC
+    for toc in traverse_or_findall(root_toc, toctree):
         if not toc.attributes.get("entries"):
             # No entries in the TOC, nothing to do
             return
@@ -610,14 +605,12 @@ def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> N
                 # Home already exists, no need to add it again
                 return
             # if not title == "Home" and page == docname:
-        # Create a new entry for 'Home', link self to the root document
-        # This is the link to the root document, which is usually 'index'
-        # If the root document is not 'index', it will still link to the root document
-        # This is the link to the root document, which is usually 'index'
-        home_entry = (nodes.Text("🏠 Home"), app.builder.get_relative_uri(docname, app.config.master_doc))
+        home_entry = (
+            nodes.Text("🏠 Home"),
+            app.builder.get_relative_uri(docname, app.config.master_doc),
+        )
         # Insert 'Home' at the beginning of the TOC entries
         toc.attributes["entries"].insert(0, home_entry)
-            
 
     # # Find the top-level bullet list in the doctree
     # outer_bullet_list = next((n for n in root_toc if isinstance(n, nodes.bullet_list)), None)
