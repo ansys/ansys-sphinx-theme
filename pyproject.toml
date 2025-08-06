@@ -47,14 +47,14 @@ autoapi = [
 ]
 doc = [
     "jupytext==1.17.2",
-    "notebook==7.4.4",
+    "notebook==7.4.5",
     "nbsphinx==0.9.7",
     "numpydoc==1.9.0",
     "pandas==2.3.1",
     "Pillow>=9.0",
     "plotly==6.2.0",
     "PyGitHub==2.7.0",
-    "pyvista[jupyter]==0.45.3",
+    "pyvista[jupyter]==0.46.0",
     "PyYAML==6.0.2",
     "requests==2.32.4",
     "sphinx-autoapi==3.6.0",
