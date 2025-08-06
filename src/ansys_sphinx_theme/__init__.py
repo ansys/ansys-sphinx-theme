@@ -383,7 +383,7 @@ def configure_theme_logo(app: Sphinx):
     if logo_option == "ansys":
         theme_options["logo"] = ansys_logo
         # Ansys logo should link to the ANSYS homepage
-        theme_options["logo_link"] = ANSYS_LOGO_LINK 
+        theme_options["logo_link"] = ANSYS_LOGO_LINK
     elif logo_option == "pyansys":
         theme_options["logo"] = pyansys_logo
         # PyAnsys logo should link to the PyAnsys Meta documentation
@@ -493,7 +493,7 @@ def traverse_or_findall(node: Node, condition: Union[Callable, type], **kwargs) 
 
 def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> None:
     """Add a 'Package Home' entry to the root TOC.
-    
+
     Parameters
     ----------
     app : Sphinx
@@ -502,7 +502,7 @@ def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> N
         Document tree for the page.
     docname : str
         Name of the current document.
-        
+
     Notes
     -----
     This function checks if the 'Package Home' entry already exists in the root TOC.
