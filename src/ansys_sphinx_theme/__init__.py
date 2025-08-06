@@ -24,8 +24,7 @@
 
 import os
 import pathlib
-from typing import Any, Callable, Dict, Iterable, Union
-import warnings
+from typing import Any, Callable, Iterable
 
 from docutils import nodes
 from docutils.nodes import Node
@@ -292,7 +291,7 @@ def fix_edit_html_page_context(
 
 
 def update_footer_theme(
-    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document
+    app: Sphinx, pagename: str, templatename: str, context: dict[str, Any], doctree: nodes.document
 ) -> None:
     """Update the version number of the Ansys Sphinx theme in the footer.
 
@@ -478,7 +477,7 @@ def update_search_sidebar_context(
     context["sidebars"] = sidebar
 
 
-def traverse_or_findall(node: Node, condition: Union[Callable, type], **kwargs) -> Iterable[Node]:
+def traverse_or_findall(node: Node, condition: Callable | type, **kwargs) -> Iterable[Node]:
     """Triage node.traverse (docutils <0.18.1) vs node.findall.
 
     TODO: This check can be removed when the minimum supported docutils version
@@ -527,7 +526,7 @@ def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> N
         toc.attributes["entries"].insert(0, home_entry)
 
 
-def setup(app: Sphinx) -> Dict:
+def setup(app: Sphinx) -> dict:
     """Connect to the Sphinx theme app.
 
     Parameters
