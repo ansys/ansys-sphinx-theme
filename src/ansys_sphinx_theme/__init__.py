@@ -490,46 +490,24 @@ def traverse_or_findall(node: Node, condition: Union[Callable, type], **kwargs) 
 
 
 def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> None:
+    """Add a 'Package Home' entry to the root TOC."""
+    index_page = "index"
     root_toc = app.env.tocs[app.config.root_doc]
     for toc in traverse_or_findall(root_toc, toctree):
         if not toc.attributes.get("entries"):
-            # No entries in the TOC, nothing to do
             return
-        # Check if 'Home' already exists in the TOC
+
         for title, page in toc.attributes["entries"]:
-            # add home, self to the beginning of the TOC
-            if title == "Home" and page == docname:
-                # Home already exists, no need to add it again
+            if title == "Package Home":
+                # 'Package Home' already exists, no need to add it again
                 return
-            # if not title == "Home" and page == docname:
+
         home_entry = (
-            nodes.Text("🏠 Home"),
-            app.builder.get_relative_uri(docname, app.config.master_doc),
+            nodes.Text("Package Home"),
+            index_page if index_page != docname else None,
         )
         # Insert 'Home' at the beginning of the TOC entries
         toc.attributes["entries"].insert(0, home_entry)
-
-    # # Find the top-level bullet list in the doctree
-    # outer_bullet_list = next((n for n in root_toc if isinstance(n, nodes.bullet_list)), None)
-    # if not outer_bullet_list:
-    #     return
-
-    # # Create a new list_item node for Home
-    # home_item = nodes.list_item()
-    # para = nodes.paragraph()
-    # ref = nodes.reference(
-    #     internal=True,
-    #     refuri=app.builder.get_relative_uri(docname, app.config.master_doc),
-    # )
-    # ref += nodes.Text("🏠 Home")
-    # para += ref
-    # home_item += para
-
-    # # Insert Home at the top of the bullet list
-    # outer_bullet_list.insert(0, home_item)
-
-    # # Update the doctree in env
-    # app.env.tocs[root_doc] = root_toc
 
 
 def setup(app: Sphinx) -> Dict:
