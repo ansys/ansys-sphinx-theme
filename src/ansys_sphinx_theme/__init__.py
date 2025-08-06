@@ -27,6 +27,7 @@ import pathlib
 from typing import Any
 
 from docutils import nodes
+from pydata_sphinx_theme.toctree import traverse_or_findall
 from sphinx import addnodes
 from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
@@ -40,7 +41,6 @@ from ansys_sphinx_theme.search import (
     create_search_index,
     update_search_config,
 )
-from pydata_sphinx_theme.toctree import traverse_or_findall
 from ansys_sphinx_theme.whatsnew import (
     add_whatsnew_changelog,
     extract_whatsnew,
