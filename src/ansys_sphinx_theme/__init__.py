@@ -24,10 +24,9 @@
 
 import os
 import pathlib
-from typing import Any, Callable, Iterable
+from typing import Any
 
 from docutils import nodes
-from docutils.nodes import Node
 from sphinx import addnodes
 from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
@@ -41,6 +40,7 @@ from ansys_sphinx_theme.search import (
     create_search_index,
     update_search_config,
 )
+from pydata_sphinx_theme.toctree import traverse_or_findall
 from ansys_sphinx_theme.whatsnew import (
     add_whatsnew_changelog,
     extract_whatsnew,
@@ -475,19 +475,6 @@ def update_search_sidebar_context(
 
     # Update the sidebar context
     context["sidebars"] = sidebar
-
-
-def traverse_or_findall(node: Node, condition: Callable | type, **kwargs) -> Iterable[Node]:
-    """Triage node.traverse (docutils <0.18.1) vs node.findall.
-
-    TODO: This check can be removed when the minimum supported docutils version
-    for numpydoc is docutils>=0.18.1.
-    """
-    return (
-        node.findall(condition, **kwargs)
-        if hasattr(node, "findall")
-        else node.traverse(condition, **kwargs)
-    )
 
 
 def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> None:
