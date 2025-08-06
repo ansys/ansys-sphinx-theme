@@ -382,10 +382,12 @@ def configure_theme_logo(app: Sphinx):
 
     if logo_option == "ansys":
         theme_options["logo"] = ansys_logo
-        theme_options["logo_link"] = theme_options.get("logo_link", ANSYS_LOGO_LINK)
+        # Ansys logo should link to the ANSYS homepage
+        theme_options["logo_link"] = ANSYS_LOGO_LINK 
     elif logo_option == "pyansys":
         theme_options["logo"] = pyansys_logo
-        theme_options["logo_link"] = theme_options.get("logo_link", PYANSYS_LOGO_LINK)
+        # PyAnsys logo should link to the PyAnsys Meta documentation
+        theme_options["logo_link"] = PYANSYS_LOGO_LINK
     elif logo_option == "no_logo":
         theme_options["logo"] = None
 
@@ -490,7 +492,23 @@ def traverse_or_findall(node: Node, condition: Union[Callable, type], **kwargs) 
 
 
 def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> None:
-    """Add a 'Package Home' entry to the root TOC."""
+    """Add a 'Package Home' entry to the root TOC.
+    
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application instance for rendering the documentation.
+    doctree : nodes.document
+        Document tree for the page.
+    docname : str
+        Name of the current document.
+        
+    Notes
+    -----
+    This function checks if the 'Package Home' entry already exists in the root TOC.
+    If it does not exist, it adds the 'Package Home' entry at the beginning of the TOC.
+    The 'Package Home' entry links to the index page of the documentation.
+    """
     index_page = "index"
     root_toc = app.env.tocs[app.config.root_doc]
     for toc in traverse_or_findall(root_toc, toctree):
@@ -499,14 +517,13 @@ def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> N
 
         for title, page in toc.attributes["entries"]:
             if title == "Package Home":
-                # 'Package Home' already exists, no need to add it again
                 return
 
         home_entry = (
             nodes.Text("Package Home"),
             index_page if index_page != docname else None,
         )
-        # Insert 'Home' at the beginning of the TOC entries
+        # Insert 'Package Home' entry at the beginning of the TOC
         toc.attributes["entries"].insert(0, home_entry)
 
 
