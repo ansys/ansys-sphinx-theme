@@ -32,6 +32,7 @@ from sphinx import addnodes
 from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
 from sphinx.util import logging
+from bs4 import BeautifulSoup
 
 from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_sidebar_pages
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
@@ -478,7 +479,7 @@ def update_search_sidebar_context(
 
 
 def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> None:
-    """Add a 'Package Home' entry to the root TOC.
+    """Add a 'Home' entry to the root TOC.
 
     Parameters
     ----------
@@ -491,9 +492,9 @@ def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> N
 
     Notes
     -----
-    This function checks if the 'Package Home' entry already exists in the root TOC.
-    If it does not exist, it adds the 'Package Home' entry at the beginning of the TOC.
-    The 'Package Home' entry links to the index page of the documentation.
+    This function checks if the 'Home' entry already exists in the root TOC.
+    If it does not exist, it adds the 'Home' entry at the beginning of the TOC.
+    The 'Home' entry links to the index page of the documentation.
     """
     index_page = "index"
     root_toc = app.env.tocs[app.config.root_doc]
@@ -502,15 +503,49 @@ def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> N
             return
 
         for title, page in toc.attributes["entries"]:
-            if title == "Package Home":
+            if title == "Home":
                 return
 
         home_entry = (
-            nodes.Text("Package Home"),
+            nodes.Text("Home"),
             index_page if index_page != docname else None,
         )
-        # Insert 'Package Home' entry at the beginning of the TOC
+        # Insert 'Home' entry at the beginning of the TOC
         toc.attributes["entries"].insert(0, home_entry)
+        
+        
+
+def add_tooltip_after_build(app: Sphinx, exception):
+    """Add tooltips to 'Home' links after the build process.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application instance for rendering the documentation.
+    exception : Exception
+        Exception raised during the build process.
+
+    Returns
+    -------
+    None
+    """
+    if exception:
+        return  
+
+    outdir = pathlib.Path(app.outdir)
+    project_name = f"{app.config.html_short_title} home" or None
+    if not project_name:
+        project_name = f"{app.config.project} home" or "Package Home"
+
+    for html_file in outdir.rglob("*.html"):
+        with html_file.open("r", encoding="utf-8") as f:
+            soup = BeautifulSoup(f, "html.parser")
+
+        for a in soup.find_all("a", string=lambda t: t and "Home" in t):
+            a['title'] = project_name
+
+        with html_file.open("w", encoding="utf-8") as f:
+            f.write(str(soup))
 
 
 def setup(app: Sphinx) -> dict:
@@ -555,7 +590,6 @@ def setup(app: Sphinx) -> dict:
     if whatsnew_file and changelog_file:
         app.connect("doctree-read", add_whatsnew_changelog)
         app.connect("doctree-resolved", extract_whatsnew)
-
     app.connect("html-page-context", add_sidebar_context)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
@@ -564,6 +598,7 @@ def setup(app: Sphinx) -> dict:
     app.connect("doctree-resolved", on_doctree_resolved)
 
     app.connect("build-finished", replace_html_tag)
+    app.connect("build-finished", add_tooltip_after_build)
     if use_ansys_search:
         app.connect("build-finished", create_search_index)
 
