@@ -26,13 +26,13 @@ import os
 import pathlib
 from typing import Any
 
+from bs4 import BeautifulSoup
 from docutils import nodes
 from pydata_sphinx_theme.toctree import traverse_or_findall
 from sphinx import addnodes
 from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
 from sphinx.util import logging
-from bs4 import BeautifulSoup
 
 from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_sidebar_pages
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
@@ -512,8 +512,7 @@ def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> N
         )
         # Insert 'Home' entry at the beginning of the TOC
         toc.attributes["entries"].insert(0, home_entry)
-        
-        
+
 
 def add_tooltip_after_build(app: Sphinx, exception):
     """Add tooltips to 'Home' links after the build process.
@@ -530,7 +529,7 @@ def add_tooltip_after_build(app: Sphinx, exception):
     None
     """
     if exception:
-        return  
+        return
 
     outdir = pathlib.Path(app.outdir)
     project_name = f"{app.config.html_short_title} home" or None
@@ -542,7 +541,7 @@ def add_tooltip_after_build(app: Sphinx, exception):
             soup = BeautifulSoup(f, "html.parser")
 
         for a in soup.find_all("a", string=lambda t: t and "Home" in t):
-            a['title'] = project_name
+            a["title"] = project_name
 
         with html_file.open("w", encoding="utf-8") as f:
             f.write(str(soup))
