@@ -50,7 +50,7 @@ doc = [
     "notebook==7.4.5",
     "nbsphinx==0.9.7",
     "numpydoc==1.9.0",
-    "pandas==2.3.1",
+    "pandas==2.3.2",
     "Pillow>=9.0",
     "plotly==6.3.0",
     "PyGitHub==2.7.0",
