@@ -24,11 +24,13 @@
 
 import os
 import pathlib
-from typing import Any, Dict
-import warnings
+from typing import Any
 
+from bs4 import BeautifulSoup
 from docutils import nodes
+from pydata_sphinx_theme.toctree import traverse_or_findall
 from sphinx import addnodes
+from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
 from sphinx.util import logging
 
@@ -290,7 +292,7 @@ def fix_edit_html_page_context(
 
 
 def update_footer_theme(
-    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document
+    app: Sphinx, pagename: str, templatename: str, context: dict[str, Any], doctree: nodes.document
 ) -> None:
     """Update the version number of the Ansys Sphinx theme in the footer.
 
@@ -380,10 +382,12 @@ def configure_theme_logo(app: Sphinx):
 
     if logo_option == "ansys":
         theme_options["logo"] = ansys_logo
-        theme_options["logo_link"] = theme_options.get("logo_link", ANSYS_LOGO_LINK)
+        # Ansys logo should link to the ANSYS homepage
+        theme_options["logo_link"] = ANSYS_LOGO_LINK
     elif logo_option == "pyansys":
         theme_options["logo"] = pyansys_logo
-        theme_options["logo_link"] = theme_options.get("logo_link", PYANSYS_LOGO_LINK)
+        # PyAnsys logo should link to the PyAnsys Meta documentation
+        theme_options["logo_link"] = PYANSYS_LOGO_LINK
     elif logo_option == "no_logo":
         theme_options["logo"] = None
 
@@ -474,7 +478,76 @@ def update_search_sidebar_context(
     context["sidebars"] = sidebar
 
 
-def setup(app: Sphinx) -> Dict:
+def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> None:
+    """Add a 'Home' entry to the root TOC.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application instance for rendering the documentation.
+    doctree : nodes.document
+        Document tree for the page.
+    docname : str
+        Name of the current document.
+
+    Notes
+    -----
+    This function checks if the 'Home' entry already exists in the root TOC.
+    If it does not exist, it adds the 'Home' entry at the beginning of the TOC.
+    The 'Home' entry links to the index page of the documentation.
+    """
+    index_page = "index"
+    root_toc = app.env.tocs[app.config.root_doc]
+    for toc in traverse_or_findall(root_toc, toctree):
+        if not toc.attributes.get("entries"):
+            return
+
+        for title, page in toc.attributes["entries"]:
+            if title == "Home":
+                return
+
+        home_entry = (
+            nodes.Text("Home"),
+            index_page if index_page != docname else None,
+        )
+        # Insert 'Home' entry at the beginning of the TOC
+        toc.attributes["entries"].insert(0, home_entry)
+
+
+def add_tooltip_after_build(app: Sphinx, exception):
+    """Add tooltips to 'Home' links after the build process.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application instance for rendering the documentation.
+    exception : Exception
+        Exception raised during the build process.
+
+    Returns
+    -------
+    None
+    """
+    if exception:
+        return
+
+    outdir = pathlib.Path(app.outdir)
+    project_name = f"{app.config.html_short_title} home" or None
+    if not project_name:
+        project_name = f"{app.config.project} home" or "Package Home"
+
+    for html_file in outdir.rglob("*.html"):
+        with html_file.open("r", encoding="utf-8") as f:
+            soup = BeautifulSoup(f, "html.parser")
+
+        for a in soup.find_all("a", string=lambda t: t and "Home" in t):
+            a["title"] = project_name
+
+        with html_file.open("w", encoding="utf-8") as f:
+            f.write(str(soup))
+
+
+def setup(app: Sphinx) -> dict:
     """Connect to the Sphinx theme app.
 
     Parameters
@@ -516,14 +589,15 @@ def setup(app: Sphinx) -> Dict:
     if whatsnew_file and changelog_file:
         app.connect("doctree-read", add_whatsnew_changelog)
         app.connect("doctree-resolved", extract_whatsnew)
-
     app.connect("html-page-context", add_sidebar_context)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", update_search_sidebar_context)
     app.connect("html-page-context", update_template_context)
+    app.connect("doctree-resolved", on_doctree_resolved)
 
     app.connect("build-finished", replace_html_tag)
+    app.connect("build-finished", add_tooltip_after_build)
     if use_ansys_search:
         app.connect("build-finished", create_search_index)
 
