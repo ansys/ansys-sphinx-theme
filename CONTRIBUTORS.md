@@ -19,6 +19,7 @@
 * [Kathy Pippert](https://github.com/PipKat)
 * [Kerry McAdams](https://github.com/klmcadams)
 * [Maxime Rey](https://github.com/MaxJPRey)
+* [Muhammed Adedigba](https://github.com/moe-ad)
 * [Paul Profizi](https://github.com/PProfizi)
 * [Roberto Pastor Muela](https://github.com/RobPasMue)
 * [Sébastien Morais](https://github.com/SMoraisAnsys)
