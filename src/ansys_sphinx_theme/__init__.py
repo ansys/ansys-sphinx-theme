@@ -496,7 +496,7 @@ def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> N
     If it does not exist, it adds the 'Home' entry at the beginning of the TOC.
     The 'Home' entry links to the index page of the documentation.
     """
-    index_page = "index"
+    index_page = app.config.root_doc or app.config.master_doc or "index"
     root_toc = app.env.tocs[app.config.root_doc]
     for toc in traverse_or_findall(root_toc, toctree):
         if not toc.attributes.get("entries"):
