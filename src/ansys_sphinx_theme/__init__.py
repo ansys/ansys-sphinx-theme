@@ -537,14 +537,14 @@ def add_tooltip_after_build(app: Sphinx, exception):
         project_name = f"{app.config.project} home" or "Package Home"
 
     for html_file in outdir.rglob("*.html"):
-        with html_file.open("r", encoding="utf-8") as f:
-            soup = BeautifulSoup(f, "html.parser")
+        with html_file.open("r", encoding="utf-8") as file:
+            soup = BeautifulSoup(file, "html.parser")
 
         for a in soup.find_all("a", string=lambda t: t and "Home" in t):
             a["title"] = project_name
 
-        with html_file.open("w", encoding="utf-8") as f:
-            f.write(str(soup))
+        with html_file.open("w", encoding="utf-8") as file:
+            file.write(str(soup))
 
 
 def setup(app: Sphinx) -> dict:
