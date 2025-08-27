@@ -532,9 +532,11 @@ def add_tooltip_after_build(app: Sphinx, exception):
         return
 
     outdir = pathlib.Path(app.outdir)
-    project_name = f"{app.config.html_short_title} home" or None
-    if not project_name:
-        project_name = f"{app.config.project} home" or "Package Home"
+    if not app.config.html_short_title and not app.config.project:
+        project_name = "Package Home"
+
+    else:
+        project_name = f"{app.config.html_short_title} home" or f"{app.config.project} home"
 
     for html_file in outdir.rglob("*.html"):
         text = html_file.read_text(encoding="utf-8")
