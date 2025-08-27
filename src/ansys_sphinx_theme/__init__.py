@@ -24,6 +24,7 @@
 
 import os
 import pathlib
+import re
 from typing import Any
 
 from bs4 import BeautifulSoup
@@ -71,6 +72,9 @@ LOGOS_PATH = STATIC_PATH / "logos"
 
 ANSYS_LOGO_LINK = "https://www.ansys.com/"
 PYANSYS_LOGO_LINK = "https://docs.pyansys.com/"
+
+PACKAGE_HOME_HTML_PATTERN = re.compile(r'<a([^>]*?)href="[^"]*index\.html"([^>]*?)>\s*Home\s*</a>')
+
 
 # make logo paths available
 ansys_favicon = str((LOGOS_PATH / "ansys-favicon.png").absolute())
@@ -515,25 +519,14 @@ def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> N
 
 
 def add_tooltip_after_build(app: Sphinx, exception):
-    """Add tooltips to 'Home' links after the build process.
-
-    Parameters
-    ----------
-    app : Sphinx
-        Sphinx application instance for rendering the documentation.
-    exception : Exception
-        Exception raised during the build process.
-
-    Returns
-    -------
-    None
-    """
+    """Add tooltips to 'Home' links after the build process."""
     if exception:
         return
 
     outdir = pathlib.Path(app.outdir)
 
     project_name = "Package Home"
+
     if app.config.html_short_title:
         project_name = f"{app.config.html_short_title} home"
     elif app.config.project:
@@ -542,13 +535,16 @@ def add_tooltip_after_build(app: Sphinx, exception):
     for html_file in outdir.rglob("*.html"):
         text = html_file.read_text(encoding="utf-8")
 
-        # Replace only <a> tags containing "Home" without touching regex
-        # We ensure we don’t duplicate the title if it already exists
-        new_text = text.replace(
-            '<a href="index.html">Home</a>', f'<a href="index.html" title="{project_name}">Home</a>'
-        )
+        def replacer(match):
+            attrs_before, attrs_after = match.groups()
+            full_attrs = f"{attrs_before}{attrs_after}"
+            if "title=" in full_attrs:
+                return match.group(0)  # don’t duplicate title
+            return f'<a{attrs_before}href="index.html"{attrs_after} title="{project_name}">\n    Home\n</a>'  # noqa: E501
 
-        if new_text != text:  # only write if changed
+        new_text = PACKAGE_HOME_HTML_PATTERN.sub(replacer, text)
+
+        if new_text != text:
             html_file.write_text(new_text, encoding="utf-8")
 
 
