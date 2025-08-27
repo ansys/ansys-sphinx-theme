@@ -537,15 +537,17 @@ def add_tooltip_after_build(app: Sphinx, exception):
         project_name = f"{app.config.project} home" or "Package Home"
 
     for html_file in outdir.rglob("*.html"):
-        with html_file.open("r", encoding="utf-8") as file:
-            soup = BeautifulSoup(file, "html.parser")
+        text = html_file.read_text(encoding="utf-8")
 
-        for a in soup.find_all("a", string=lambda t: t and "Home" in t):
-            a["title"] = project_name
+        # Replace only <a> tags containing "Home" without touching regex
+        # We ensure we don’t duplicate the title if it already exists
+        new_text = text.replace(
+            '<a href="index.html">Home</a>',
+            f'<a href="index.html" title="{project_name}">Home</a>'
+        )
 
-        with html_file.open("w", encoding="utf-8") as file:
-            file.write(str(soup))
-
+        if new_text != text:  # only write if changed
+            html_file.write_text(new_text, encoding="utf-8")
 
 def setup(app: Sphinx) -> dict:
     """Connect to the Sphinx theme app.
