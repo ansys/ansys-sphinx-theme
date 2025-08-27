@@ -542,12 +542,12 @@ def add_tooltip_after_build(app: Sphinx, exception):
         # Replace only <a> tags containing "Home" without touching regex
         # We ensure we don’t duplicate the title if it already exists
         new_text = text.replace(
-            '<a href="index.html">Home</a>',
-            f'<a href="index.html" title="{project_name}">Home</a>'
+            '<a href="index.html">Home</a>', f'<a href="index.html" title="{project_name}">Home</a>'
         )
 
         if new_text != text:  # only write if changed
             html_file.write_text(new_text, encoding="utf-8")
+
 
 def setup(app: Sphinx) -> dict:
     """Connect to the Sphinx theme app.
