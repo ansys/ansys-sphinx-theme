@@ -30,25 +30,25 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
 ]
 dependencies = [
-    "Sphinx>=6.1.0",
-    "pydata-sphinx-theme>=0.15.4,<0.17",
-    "Jinja2>=3.1.2",
     "importlib-metadata>=4.0",
+    "Jinja2>=3.1.2",
     "pdf2image>=1.17.0",
+    "pydata-sphinx-theme>=0.15.4,<0.17",
     "PyYAML==6.0.2",
+    "Sphinx>=6.1.0",
 ]
 
 [project.optional-dependencies]
 autoapi = [
+    "astroid>=3.0,<4.0",
     "sphinx-autoapi==3.6.0",
     "sphinx-design==0.6.1",
     "sphinx-jinja==2.0.2",
-    "astroid>=3.0,<4.0",
 ]
 doc = [
     "jupytext==1.17.2",
-    "notebook==7.4.5",
     "nbsphinx==0.9.7",
+    "notebook==7.4.5",
     "numpydoc==1.9.0",
     "pandas==2.3.2",
     "Pillow>=9.0",
@@ -63,8 +63,8 @@ doc = [
     "sphinx-gallery==0.19.0",
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
-    "tox==4.28.4",
     "sphinx-theme-builder[cli]==0.2.0b2",
+    "tox==4.28.4",
 ]
 changelog = [
     "PyYAML==6.0.2",
