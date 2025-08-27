@@ -27,7 +27,6 @@ import pathlib
 import re
 from typing import Any
 
-from bs4 import BeautifulSoup
 from docutils import nodes
 from pydata_sphinx_theme.toctree import traverse_or_findall
 from sphinx import addnodes
@@ -519,7 +518,19 @@ def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> N
 
 
 def add_tooltip_after_build(app: Sphinx, exception):
-    """Add tooltips to 'Home' links after the build process."""
+    """Add tooltips to 'Home' links after the build process.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application instance for rendering the documentation.
+    exception : Exception
+        Exception raised during the build process.
+
+    Returns
+    -------
+    None
+    """
     if exception:
         return
 
