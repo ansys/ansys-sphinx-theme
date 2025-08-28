@@ -32,12 +32,18 @@ div.navbar-dropdown {
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: 0em 1em;
+  padding: 0em 0.25em;
 
 }
 
 ul.navbar-toplevel li:hover > div.navbar-dropdown {
   display: block;
+}
+
+@media (min-width: 960px) {
+    .navbar-expand-lg .navbar-nav {
+        flex-direction: column;
+    }
 }
 
 .navbar-content ul.navbar-sublevel {
@@ -70,10 +76,14 @@ div.navbar-content a {
   justify-content: center;
   height: 100%;
 }
+
 /* Highlight active nav bar link */
 li.active-link {
-  font-weight: bold;
+  font-weight: var(--ast-font-weight-bold);
+  color: var(--ast-navbar-active-color);
+  border-bottom: 2px solid var(--ast-navbar-active-border-color);
 }
+
 /* Set the first .navbar-persistent--mobile element to have auto left margin */
 /* Disable underline for hovered links in the nav bar */
 .navbar-nav li a:hover {
