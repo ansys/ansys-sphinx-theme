@@ -25,14 +25,10 @@ import os
 from pathlib import Path
 
 from llama_index.core import Settings, VectorStoreIndex
-from llama_index.embeddings.azure_openai import AzureOpenAIEmbedding
-from llama_index.llms.azure_openai import AzureOpenAI
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.ollama import Ollama
 from llama_index.readers.github import GithubRepositoryReader
 from llama_index.readers.github.repository.github_client import GithubClient
-from llama_index.llms.ollama import Ollama
-from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-
-
 
 API_KEY = os.getenv("API_KEY")
 AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT")
@@ -85,7 +81,6 @@ def create_new_index(index_storage, project_name, github_repo):
     else:
         print("[DEBUG] No JSON files found.")
     try:
-
         # Azure OpenAI =========================>>>>
         # Settings.llm = AzureOpenAI(
         #     model=LLM_MODEL,
@@ -101,13 +96,15 @@ def create_new_index(index_storage, project_name, github_repo):
         #     azure_endpoint=AZURE_ENDPOINT,
         #     api_version=API_VERSION,
         # )
-        
+
         # Azure Local =========================>>>>
-        
-        Settings.llm = Ollama(model="llama3.2", request_timeout=120.0, max_tokens=1000, repetition_penalty=1.5)
+
+        Settings.llm = Ollama(
+            model="llama3.2", request_timeout=120.0, max_tokens=1000, repetition_penalty=1.5
+        )
         embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
         Settings.embed_model = embed_model
-        
+
     except Exception as e:
         print(f"[LLM Setup Error] {e}")
 
