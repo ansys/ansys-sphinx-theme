@@ -1,0 +1,7 @@
+llama-index
+llama-index-llms-azure-openai
+llama-index-llms-ollama
+llama-index-embeddings-azure-openai
+llama-index-embeddings-huggingface
+llama-index-embeddings-ollama
+llama-index-readers-github

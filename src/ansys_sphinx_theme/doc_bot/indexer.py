@@ -29,6 +29,10 @@ from llama_index.embeddings.azure_openai import AzureOpenAIEmbedding
 from llama_index.llms.azure_openai import AzureOpenAI
 from llama_index.readers.github import GithubRepositoryReader
 from llama_index.readers.github.repository.github_client import GithubClient
+from llama_index.llms.ollama import Ollama
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+
+
 
 API_KEY = os.getenv("API_KEY")
 AZURE_ENDPOINT = os.getenv("AZURE_ENDPOINT")
@@ -38,6 +42,7 @@ LLM_MODEL = os.getenv("MODEL_NAME")
 EMBEDDINGS_MODEL = os.getenv("EMBEDDINGS_MODEL")
 LLM_DEPLOYMENT_NAME = os.getenv("LLM_DEPLOYMENT_NAME")
 EMBEDDINGS_DEPLOYMENT_NAME = os.getenv("EMBEDDINGS_DEPLOYMENT_NAME")
+HF_TOKEN = os.getenv("HF_TOKEN")
 
 THIS_DIR = Path(__file__).parent
 INDEX_STORAGE = THIS_DIR / "index"
@@ -80,20 +85,29 @@ def create_new_index(index_storage, project_name, github_repo):
     else:
         print("[DEBUG] No JSON files found.")
     try:
-        Settings.llm = AzureOpenAI(
-            model=LLM_MODEL,
-            deployment_name=LLM_DEPLOYMENT_NAME,
-            api_key=API_KEY,
-            azure_endpoint=AZURE_ENDPOINT,
-            api_version=API_VERSION,
-        )
-        Settings.embed_model = AzureOpenAIEmbedding(
-            model=EMBEDDINGS_MODEL,
-            deployment_name=EMBEDDINGS_DEPLOYMENT_NAME,
-            api_key=API_KEY,
-            azure_endpoint=AZURE_ENDPOINT,
-            api_version=API_VERSION,
-        )
+
+        # Azure OpenAI =========================>>>>
+        # Settings.llm = AzureOpenAI(
+        #     model=LLM_MODEL,
+        #     deployment_name=LLM_DEPLOYMENT_NAME,
+        #     api_key=API_KEY,
+        #     azure_endpoint=AZURE_ENDPOINT,
+        #     api_version=API_VERSION,
+        # )
+        # Settings.embed_model = AzureOpenAIEmbedding(
+        #     model=EMBEDDINGS_MODEL,
+        #     deployment_name=EMBEDDINGS_DEPLOYMENT_NAME,
+        #     api_key=API_KEY,
+        #     azure_endpoint=AZURE_ENDPOINT,
+        #     api_version=API_VERSION,
+        # )
+        
+        # Azure Local =========================>>>>
+        
+        Settings.llm = Ollama(model="llama3.2", request_timeout=120.0, max_tokens=1000, repetition_penalty=1.5)
+        embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
+        Settings.embed_model = embed_model
+        
     except Exception as e:
         print(f"[LLM Setup Error] {e}")
 

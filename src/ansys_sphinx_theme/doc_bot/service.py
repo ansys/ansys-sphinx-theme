@@ -37,6 +37,9 @@ from llama_index.core.retrievers import VectorIndexRetriever
 from llama_index.embeddings.azure_openai import AzureOpenAIEmbedding
 from llama_index.llms.azure_openai import AzureOpenAI
 
+from llama_index.llms.ollama import Ollama
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+
 from ansys_sphinx_theme.doc_bot.prompts import DEFAULT_PROMPT
 
 app = Flask(__name__)
@@ -66,20 +69,23 @@ INDEX_STORAGE = THIS_DIR / "index"
 def setup_llm():
     """Set the LLM and embeddings with Azure OpenAI."""
     try:
-        Settings.llm = AzureOpenAI(
-            model=LLM_MODEL,
-            deployment_name=LLM_DEPLOYMENT_NAME,
-            api_key=API_KEY,
-            azure_endpoint=AZURE_ENDPOINT,
-            api_version=API_VERSION,
-        )
-        Settings.embed_model = AzureOpenAIEmbedding(
-            model=EMBEDDINGS_MODEL,
-            deployment_name=EMBEDDINGS_DEPLOYMENT_NAME,
-            api_key=API_KEY,
-            azure_endpoint=AZURE_ENDPOINT,
-            api_version=API_VERSION,
-        )
+        # Settings.llm = AzureOpenAI(
+        #     model=LLM_MODEL,
+        #     deployment_name=LLM_DEPLOYMENT_NAME,
+        #     api_key=API_KEY,
+        #     azure_endpoint=AZURE_ENDPOINT,
+        #     api_version=API_VERSION,
+        # )
+        # Settings.embed_model = AzureOpenAIEmbedding(
+        #     model=EMBEDDINGS_MODEL,
+        #     deployment_name=EMBEDDINGS_DEPLOYMENT_NAME,
+        #     api_key=API_KEY,
+        #     azure_endpoint=AZURE_ENDPOINT,
+        #     api_version=API_VERSION,
+        # )
+        Settings.llm = Ollama(model="llama3.2", request_timeout=120.0, max_tokens=100, repetition_penalty=1.5, temperature=0.1)
+        embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
+        Settings.embed_model = embed_model
         return True
     except Exception as e:
         print(f"LLM Setup Error: {e}")
@@ -101,6 +107,33 @@ def load_index_optimized(lib_name):
     except Exception as e:
         print(f"Failed loading index for {lib_name}: {e}")
         return None
+
+# from llama_index.core.prompts import RichPromptTemplate
+
+# text_qa_template_str = """Context information is below:
+# <context>
+# {{ context_str }}
+# </context>
+
+# Using both the context information as an expert in library, ans
+# {{ query_str }} as an expert in library
+# """
+# text_qa_template = RichPromptTemplate(text_qa_template_str)
+
+# refine_template_str = """New context information has been provided:
+# <context>
+# {{ context_msg }}
+# </context>
+
+# We also have an existing answer generated using previous context:
+# <existing_answer>
+# {{ existing_answer }}
+# </existing_answer>
+
+# Using the new context, either update the existing answer, or repeat it if the new context is not relevant, when answering this query:
+# {query_str}
+# """
+# refine_template = RichPromptTemplate(refine_template_str)
 
 
 def initialize_chatbot(lib_name):
@@ -152,23 +185,32 @@ def get_chat_session(lib_name, session_id):
     if key in chat_sessions:
         return chat_sessions[key]
 
-    memory = ChatMemoryBuffer.from_defaults(token_limit=3000)
+    memory = ChatMemoryBuffer.from_defaults(token_limit=1000)
+    prompt = PromptTemplate(DEFAULT_PROMPT)
     retriever = VectorIndexRetriever(index=load_index_optimized(lib_name), similarity_top_k=10)
     chat_engine = CondensePlusContextChatEngine.from_defaults(
         retriever=retriever,
+        node_postprocessors=[SimilarityPostprocessor(similarity_cutoff=0.7)],
         memory=memory,
         verbose=True,
-        system_prompt="""You are a senior software engineer and expert on the {lib_name} library.
-        Your job is to answer questions based ONLY on the provided documentation context.
-        Using the scraped documentation and GitHub repository as your knowledge base, respond
-        precisely and clearly to user questions.
-        Your response must:
-        1. Be concise and relevant to the question
-        2. Use the provided context to answer the question
-        3. If the question is not related to the {lib_name} library or there is no relative context,
-        respond EXACTLY with: "Sorry i can only answer questions based on the provided documentation
-        and codebase." and provide the docs link to the documentation
-        4. Be concise but helpful in your responses""",
+        condense_question_prompt=prompt,
+        # system_prompt="""You are a senior software engineer and expert on the {lib_name} library.
+        # avoiding unnecessary elaboration or additional context unless explicitly requested.
+        # If a response requires further detail, prioritize the most relevant information and conclude promptly.
+        
+        # Your job is to answer questions based ONLY on the provided documentation context.
+        # Using the scraped documentation and GitHub repository as your knowledge base, respond
+        # precisely and clearly to user questions.
+        # Your response must:
+        # 1. Be concise and relevant to the question
+        # 2. Use the provided context to answer the question
+        # 3. If the question is not related to the {lib_name} library or there is no relative context,
+        # respond EXACTLY with: "Sorry i can only answer questions based on the provided documentation
+        # and codebase." and provide the docs link to the documentation
+        # 4. Be concise but helpful in your responses
+        # Avoid apologies or mentions of limitations; simply deliver the most direct and straightforward answer.
+
+        # Only answer based on the **Context**, Do NOT CREATE NEW INFORMATION"""
     )
     chat_sessions[key] = chat_engine
     return chat_engine

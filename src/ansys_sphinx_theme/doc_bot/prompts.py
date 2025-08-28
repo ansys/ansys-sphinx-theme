@@ -22,7 +22,7 @@
 
 """Prompts for the documentation bot."""
 
-DEFAULT_PROMPT = """You are a senior software engineer and expert on the pyansys-geometry library.
+DEFAULT_PROMPT = """You are a senior software engineer and expert on the {lib_name} library.
   Your job is to answer questions based ONLY on the provided documentation context.
   Using the scraped documentation and GitHub repository as your knowledge base, respond precisely
   and clearly to user questions.
