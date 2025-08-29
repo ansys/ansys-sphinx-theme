@@ -276,7 +276,7 @@ else:
         "download_all_examples": False,
         # Modules for which function level galleries are created.  In
         "image_scrapers": ("pyvista", "matplotlib", "plotly.io._sg_scraper.plotly_sg_scraper"),
-        "doc_module": ("ansys_sphinx_theme",),
+        # "doc_module": ("ansys_sphinx_theme",),
         "backreferences_dir": "api/_gallery_backreferences",
         "default_thumb_file": str(PYANSYS_LIGHT_SQUARE),
     }
