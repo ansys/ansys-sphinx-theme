@@ -12,6 +12,9 @@
   <meta name="physics" content="{{ pyansys_tags }}" />
     {%- endif %}
   {%- endif %}
+  {% if theme_use_ansys_search %}
+    {%- include "components/ast-search-button.html" %}
+  {%  endif %}
 {%- endblock %}
 
 {# Append our custom CSS after the bootstrap stylesheet so we can override where necessary #}
@@ -39,13 +42,6 @@
     {% include 'components/announcement_version.html' %}
   {% endif %}
 {% endblock %}
-
-{%- block content %}
-  {{ super() }}
-  {% if theme_use_ansys_search %}
-    {%- include "components/ast-search-button.html" %}
-  {%  endif %}
-{%- endblock %}
 
 {%- block scripts_end %}
   {{ super() }}
