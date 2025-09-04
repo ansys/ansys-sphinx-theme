@@ -64,7 +64,7 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.2.0b2",
-    "tox==4.29.0",
+    "tox==4.30.1",
 ]
 changelog = [
     "PyYAML==6.0.2",
