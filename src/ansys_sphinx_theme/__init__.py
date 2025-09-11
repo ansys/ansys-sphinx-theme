@@ -501,21 +501,23 @@ def resolve_home_entry(app: Sphinx, doctree: nodes.document, docname: str) -> No
     The 'Home' entry links to the index page of the documentation.
     """
     index_page = app.config.root_doc or app.config.master_doc or "index"
-    root_toc = app.env.tocs[app.config.root_doc]
-    for toc in traverse_or_findall(root_toc, toctree):
 
+    # Get the root TOC
+    root_toc = app.env.tocs.get(app.config.root_doc)
+    if not root_toc:
+        return
+
+    for toc in root_toc.findall(addnodes.toctree):
         if not toc.attributes.get("entries"):
-            return
+            continue
 
+        # Skip if "Home" already exists
         for title, page in toc.attributes["entries"]:
-            if title == "Home":
+            if title == "Home" and page in ("self", index_page):
                 return
-        home_entry = (
-            nodes.Text("Home"),
-            index_page if index_page != docname else index_page
-        )
-        
-        # Insert 'Home' entry at the beginning of the TOC
+
+        # Insert "Home <self>" entry at the beginning
+        home_entry = ("Home", "self")
         toc.attributes["entries"].insert(0, home_entry)
 
 
@@ -549,7 +551,6 @@ def add_tooltip_after_build(app: Sphinx, exception):
         text = html_file.read_text(encoding="utf-8")
 
         def replacer(match):
-            print(match.group(0))
             attrs_before, href_link, attrs_after = match.groups()
             full_attrs = f"{attrs_before}{attrs_after}"
 
@@ -566,7 +567,6 @@ def add_tooltip_after_build(app: Sphinx, exception):
 
         if new_text != text:
             html_file.write_text(new_text, encoding="utf-8")
-
 
 
 def setup(app: Sphinx) -> dict:
