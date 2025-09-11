@@ -503,7 +503,7 @@ def resolve_home_entry(app: Sphinx, doctree: nodes.document, docname: str) -> No
     index_page = app.config.root_doc or app.config.master_doc or "index"
 
     # Get the root TOC
-    root_toc = app.env.tocs.get(app.config.root_doc)
+    root_toc = app.env.tocs[app.config.root_doc]
     if not root_toc:
         return
 
