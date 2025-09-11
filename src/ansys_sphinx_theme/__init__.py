@@ -548,10 +548,14 @@ def add_tooltip_after_build(app: Sphinx, exception):
 
         def replacer(match):
             attrs_before, attrs_after = match.groups()
+            # get the href link
+            relative_link = re.search(r'href="([^"]*)"', match.group(0)).group(1)
+            # get the full attributes
             full_attrs = f"{attrs_before}{attrs_after}"
+            
             if "title=" in full_attrs:
                 return match.group(0)  # don't duplicate title
-            return f'<a{attrs_before}href="index.html"{attrs_after} title="{project_name}">\n    Home\n</a>'  # noqa: E501
+            return f'<a{attrs_before}href="{relative_link}"{attrs_after} title="{project_name}">\n    Home\n</a>'  # noqa: E501
 
         new_text = PACKAGE_HOME_HTML_PATTERN.sub(replacer, text)
 
