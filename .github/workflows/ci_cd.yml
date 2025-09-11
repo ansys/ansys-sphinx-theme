@@ -187,13 +187,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: "Release to the private PyPI repository"
-        uses: ansys/actions/release-pypi-private@1096998b81f7ebdea116b683e11f3a8bda759ca6 # v10.0.14
-        with:
-          library-name: ${{ env.PACKAGE_NAME }}
-          twine-username: "__token__"
-          twine-token: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
-
       - name: "Download the library artifacts from build-library step"
         uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
         with:
