@@ -72,8 +72,9 @@ LOGOS_PATH = STATIC_PATH / "logos"
 ANSYS_LOGO_LINK = "https://www.ansys.com/"
 PYANSYS_LOGO_LINK = "https://docs.pyansys.com/"
 
-PACKAGE_HOME_HTML_PATTERN = re.compile(r'<a([^>]*?)href="[^"]*index\.html"([^>]*?)>\s*Home\s*</a>')
-
+PACKAGE_HOME_HTML_PATTERN = re.compile(
+    r'<a([^>]*)href="([^"]*index\.html)"([^>]*)>\s*Home\s*</a>', re.IGNORECASE
+)
 
 # make logo paths available
 ansys_favicon = str((LOGOS_PATH / "ansys-favicon.png").absolute())
@@ -481,7 +482,7 @@ def update_search_sidebar_context(
     context["sidebars"] = sidebar
 
 
-def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> None:
+def resolve_home_entry(app: Sphinx, doctree: nodes.document, docname: str) -> None:
     """Add a 'Home' entry to the root TOC.
 
     Parameters
@@ -502,17 +503,18 @@ def on_doctree_resolved(app: Sphinx, doctree: nodes.document, docname: str) -> N
     index_page = app.config.root_doc or app.config.master_doc or "index"
     root_toc = app.env.tocs[app.config.root_doc]
     for toc in traverse_or_findall(root_toc, toctree):
+
         if not toc.attributes.get("entries"):
             return
 
         for title, page in toc.attributes["entries"]:
             if title == "Home":
                 return
-
         home_entry = (
             nodes.Text("Home"),
-            index_page if index_page != docname else None,
+            index_page if index_page != docname else index_page
         )
+        
         # Insert 'Home' entry at the beginning of the TOC
         toc.attributes["entries"].insert(0, home_entry)
 
@@ -547,20 +549,24 @@ def add_tooltip_after_build(app: Sphinx, exception):
         text = html_file.read_text(encoding="utf-8")
 
         def replacer(match):
-            attrs_before, attrs_after = match.groups()
-            # get the href link
-            relative_link = re.search(r'href="([^"]*)"', match.group(0)).group(1)
-            # get the full attributes
+            print(match.group(0))
+            attrs_before, href_link, attrs_after = match.groups()
             full_attrs = f"{attrs_before}{attrs_after}"
 
+            # don’t duplicate if title already exists
             if "title=" in full_attrs:
-                return match.group(0)  # don't duplicate title
-            return f'<a{attrs_before}href="{relative_link}"{attrs_after} title="{project_name}">\n    Home\n</a>'  # noqa: E501
+                return match.group(0)
+
+            return (
+                f'<a{attrs_before}href="{href_link}"{attrs_after} '
+                f'title="{project_name}">Home</a>'
+            )
 
         new_text = PACKAGE_HOME_HTML_PATTERN.sub(replacer, text)
 
         if new_text != text:
             html_file.write_text(new_text, encoding="utf-8")
+
 
 
 def setup(app: Sphinx) -> dict:
@@ -610,7 +616,7 @@ def setup(app: Sphinx) -> dict:
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", update_search_sidebar_context)
     app.connect("html-page-context", update_template_context)
-    app.connect("doctree-resolved", on_doctree_resolved)
+    app.connect("doctree-resolved", resolve_home_entry)
 
     app.connect("build-finished", replace_html_tag)
     app.connect("build-finished", add_tooltip_after_build)
