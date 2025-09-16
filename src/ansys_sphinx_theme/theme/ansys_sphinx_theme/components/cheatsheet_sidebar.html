@@ -1,13 +1,19 @@
+
+{#
+  Cheatsheet Sidebar
+  Displays a cheatsheet link and thumbnail in the sidebar if configured.
+  Uses <div> for compatibility as requested.
+#}
 {% if theme_cheatsheet %}
   {% set theme_cheatsheet_title = theme_cheatsheet.get('title', 'Cheatsheet') %}
-  <div class="sidebar-cheatsheets">
+  {% set theme_cheatsheet_output_dir = theme_cheatsheet.get('output_dir') %}
+  {% set theme_cheatsheet_thumbnail = theme_cheatsheet.get('thumbnail') %}
+  {% set theme_cheatsheet_output = pathto(theme_cheatsheet_output_dir, 1) %}
+  {% set theme_cheatsheet_thumbnail = pathto(theme_cheatsheet_thumbnail, 1) %}
+  <div class="sidebar-cheatsheets" aria-label="Cheatsheet">
     <h4>{{ theme_cheatsheet_title }}</h4>
-    {% set theme_cheatsheet_output_dir = theme_cheatsheet.get('output_dir') %}
-    {% set theme_cheatsheet_thumbnail = theme_cheatsheet.get('thumbnail') %}
-    {% set theme_cheatsheet_output = pathto(theme_cheatsheet_output_dir, 1) %}
-    {% set theme_cheatsheet_thumbnail = pathto(theme_cheatsheet_thumbnail, 1) %}
-    <a href="{{ theme_cheatsheet_output }}">
-      <img src="{{ theme_cheatsheet_thumbnail }}" alt="{{ theme_cheatsheet_title }}" />
+    <a href="{{ theme_cheatsheet_output }}" target="_blank" rel="noopener noreferrer">
+      <img src="{{ theme_cheatsheet_thumbnail }}" alt="{{ theme_cheatsheet_title }} thumbnail" loading="lazy" />
     </a>
   </div>
 {% endif %}
