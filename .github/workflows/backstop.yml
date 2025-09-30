@@ -21,7 +21,7 @@ jobs:
 
       - name: Install Sphinx dependencies
         run: |
-          pip install -e .
+          pip install -e .[doc]
 
       - name: Build Sphinx HTML
         run: make -C doc html
