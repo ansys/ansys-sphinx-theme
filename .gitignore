@@ -168,3 +168,10 @@ doc/source/examples/api/
 node_modules/
 .nodeenv/
 package-lock.json
+
+# BackstopJS outputs (do not commit)
+backstop_data/bitmaps_test/
+backstop_data/html_report/
+backstop_data/ci_report/
+backstop_data/engine_scripts/cookies.json
+backstop_data/engine_scripts/
