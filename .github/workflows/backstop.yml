@@ -24,7 +24,7 @@ jobs:
           pip install -e .[doc]
 
       - name: Build Sphinx HTML
-        run: make -C doc html
+        run: xvfb run make -C doc html
 
       - name: Set up Node
         uses: actions/setup-node@v4
