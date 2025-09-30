@@ -10,6 +10,11 @@
       "label": "tablet",
       "width": 1024,
       "height": 768
+    },
+    {
+      "label": "desktop",
+      "width": 1920,
+      "height": 1080
     }
   ],
   "onBeforeScript": "puppet/onBefore.js",
@@ -18,8 +23,8 @@
     {
       "label": "BackstopJS Homepage",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": "http://localhost:8000/index.html",
-      "referenceUrl": "",
+      "url": "https://sphinxdocs.ansys.com/",
+      "referenceUrl": "https://sphinxdocs.ansys.com/",
       "readyEvent": "",
       "readySelector": "",
       "delay": 0,
