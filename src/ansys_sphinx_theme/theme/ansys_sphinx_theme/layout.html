@@ -133,15 +133,17 @@
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${sender === 'user' ? 'user-message' : 'bot-message'}`;
 
+    // Parse markdown to HTML
     let parsedContent = marked.parse(text);
-    parsedContent = parsedContent.replace(
-      /<pre><code class="language-([^"]*)">([\s\S]*?)<\/code><\/pre>/g,
-      '<div class="code-block-container"><pre><code class="language-$1">$2</code></pre></div>'
-    );
 
+    // Ensure code blocks have a language class for Prism
     parsedContent = parsedContent.replace(
-      /<pre><code>([\s\S]*?)<\/code><\/pre>/g,
-      '<div class="code-block-container"><pre><code>$1</code></pre></div>'
+      /<pre><code( class="language-([^"]*)")?>([\s\S]*?)<\/code><\/pre>/g,
+      function(match, langAttr, lang, code) {
+        // If no language, add language-none
+        const languageClass = lang ? `language-${lang}` : 'language-none';
+        return `<div class="code-block-container"><pre><code class="${languageClass}">${code}</code></pre></div>`;
+      }
     );
 
     messageDiv.innerHTML = parsedContent;
@@ -154,6 +156,8 @@
     }
 
     chatContainer.appendChild(messageDiv);
+
+    // Only highlight code blocks inside <pre><code>
     messageDiv.querySelectorAll('pre code').forEach((block) => {
       Prism.highlightElement(block);
     });
