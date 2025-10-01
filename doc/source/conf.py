@@ -83,7 +83,8 @@ html_theme_options = {
         "Contributing": ["contribute/"],
     },
     "chatbot": {
-        "github_repo": "ansys-sphinx-theme",
+        "github_repo": "pyansys-geometry",
+        "project_name": "PyAnsys Geometry",
     },
 }
 

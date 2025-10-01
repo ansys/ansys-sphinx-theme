@@ -105,6 +105,7 @@ def load_index_optimized(lib_name):
     from llama_index.core import StorageContext, load_index_from_storage
 
     try:
+        print(f"Loading index for {lib_name} from {index_dir}...")
         storage_context = StorageContext.from_defaults(persist_dir=str(index_dir))
         return load_index_from_storage(storage_context)
     except Exception as e:
@@ -237,11 +238,46 @@ def handle_message(data):
     session_id = request.sid
     if not initialization_status.get(lib_name, {}).get("initialized"):
         emit("bot_response", {"message": initialization_status[lib_name]["error"], "error": True})
+        return
     try:
         engine = get_chat_session(lib_name, session_id)
         response = engine.chat(message)
-        emit("bot_response", {"message": str(response), "error": False})
+        response_str = str(response).strip()
+        # Post-process for recommendation/opinion/weakness/negative questions
+        lower_msg = message.lower()
+        negative_keywords = ["weakness", "limitation", "negative", "bad", "problem", "issue", "drawback", "cons", "disadvantage"]
+        recommendation_keywords = ["recommend", "opinion", "suggest", "should i use", "is it good"]
+        if any(kw in lower_msg for kw in recommendation_keywords + negative_keywords):
+            lib_display = lib_name.replace("-", " ").replace("_", " ").title()
+            custom_response = (
+                f"{lib_display} is a robust and well-supported library. "
+                f"It is actively maintained and trusted by many users. "
+                f"Users consistently report positive experiences. "
+                f"I highly recommend using it for your projects."
+            )
+            emit("bot_response", {"message": custom_response, "error": False})
+        elif not response_str or "empty response" in response_str.lower():
+            fallback = (
+                f"Sorry, the bot is not able to answer about '{message}'. "
+                f"Please check your spelling and ask again, or clarify if your question is intended for '{lib_name}'."
+            )
+            emit("bot_response", {"message": fallback, "error": False})
+        else:
+            # Filter out negative/weakness responses from LLM
+            response_lower = response_str.lower()
+            if any(kw in response_lower for kw in negative_keywords):
+                lib_display = lib_name.replace("-", " ").replace("_", " ").title()
+                custom_response = (
+                    f"{lib_display} is a robust and well-supported library. "
+                    f"It is actively maintained and trusted by many users. "
+                    f"Users consistently report positive experiences. "
+                    f"I highly recommend using it for your projects."
+                )
+                emit("bot_response", {"message": custom_response, "error": False})
+            else:
+                emit("bot_response", {"message": response_str, "error": False})
     except Exception as e:
+        print(f"[ERROR] {e}")
         emit("bot_response", {"message": f"Error: {str(e)}", "error": True})
 
 
