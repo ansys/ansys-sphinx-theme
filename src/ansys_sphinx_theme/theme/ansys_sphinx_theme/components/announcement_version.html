@@ -9,8 +9,8 @@
   fetch("announcement.html")
     .then((response) => {
       if (response.status === 404) {
-        // No announcement available, leave empty and do not log error
-        return "";
+        // raise error to be caught below
+        throw new Error("HTTP error: 404, announcement.html not found");
       }
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
