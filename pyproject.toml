@@ -52,7 +52,7 @@ doc = [
     "numpydoc==1.9.0",
     "pandas==2.3.3",
     "Pillow>=9.0",
-    "plotly==6.3.0",
+    "plotly==6.3.1",
     "PyGitHub==2.8.1",
     "pyvista[jupyter]==0.46.3",
     "PyYAML==6.0.3",
@@ -64,7 +64,7 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.2.0b2",
-    "tox==4.30.2",
+    "tox==4.30.3",
 ]
 changelog = [
     "PyYAML==6.0.3",
