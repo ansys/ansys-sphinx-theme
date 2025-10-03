@@ -8,10 +8,6 @@
   // Fetch and inject the announcement HTML content
   fetch("announcement.html")
     .then((response) => {
-      if (response.status === 404) {
-        // raise error to be caught below
-        throw new Error("HTTP error: 404, announcement.html not found");
-      }
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
