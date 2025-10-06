@@ -2,11 +2,6 @@
   "id": "ansys_sphinx_theme_backstop",
   "viewports": [
     {
-      "label": "phone",
-      "width": 320,
-      "height": 480
-    },
-    {
       "label": "tablet",
       "width": 1024,
       "height": 768
@@ -27,7 +22,7 @@
       "referenceUrl": "https://sphinxdocs.ansys.com/",
       "readyEvent": "",
       "readySelector": "",
-      "delay": 0,
+      "delay": 20,
       "hideSelectors": [],
       "removeSelectors": [],
       "hoverSelector": "",
@@ -41,53 +36,61 @@
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-1",
-      "url": "https://sphinxdocs.ansys.com/version/stable/examples/sphinx-design.html",
+      "url": "http://localhost:8000/examples/sphinx-design.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/stable/examples/sphinx-design.html",
       "readyEvent": "",
       "readySelector": "",
-      "delay": 0,
+      "delay": 20,
       "misMatchThreshold" : 0.1,
       "requireSameDimensions": true
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-2",
-      "url": "https://sphinxdocs.ansys.com/version/stable/examples/api/examples/index.html",
+      "url": "http://localhost:8000/examples/api/examples/index.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/stable/examples/api/examples/index.html",
       "readyEvent": "",
       "readySelector": "",
-      "delay": 0,
+      "delay": 20,
       "misMatchThreshold" : 0.1,
       "requireSameDimensions": true
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-3",
-      "url": "https://sphinxdocs.ansys.com/version/stable/examples/gallery-examples/sphinx-gallery.html#sphx-glr-examples-gallery-examples-sphinx-gallery-py",
+      "url": "http://localhost:8000/examples/gallery-examples/sphinx-gallery.html#sphx-glr-examples-gallery-examples-sphinx-gallery-py",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/stable/examples/gallery-examples/sphinx-gallery.html#sphx-glr-examples-gallery-examples-sphinx-gallery-py",
       "readyEvent": "",
       "readySelector": "",
-      "delay": 0,
+      "delay": 20,
       "misMatchThreshold" : 0.1,
       "requireSameDimensions": true
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-4",
-      "url": "https://sphinxdocs.ansys.com/version/stable/examples/nbsphinx/jupyter-notebook.html",
+      "url": "http://localhost:8000/examples/nbsphinx/jupyter-notebook.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/stable/examples/nbsphinx/jupyter-notebook.html",
       "readyEvent": "",
       "readySelector": "",
-      "delay": 0,
+      "delay": 20,
       "misMatchThreshold" : 0.1,
       "requireSameDimensions": true
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-5",
-      "url": "https://sphinxdocs.ansys.com/version/stable/examples/table.html",
+      "url": "http://localhost:8000/examples/table.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/stable/examples/table.html",
+      "readyEvent": "",
+      "readySelector": "",
+      "delay": 20,
       "misMatchThreshold" : 0.1,
       "requireSameDimensions": true
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-6",
-      "url": "https://sphinxdocs.ansys.com/version/stable/examples/admonitions.html",
+      "url": "http://localhost:8000/examples/admonitions.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/stable/examples/admonitions.html",
+      "readyEvent": "",
+      "readySelector": "",
+      "delay": 20,
       "misMatchThreshold" : 0.1,
       "requireSameDimensions": true
     }
