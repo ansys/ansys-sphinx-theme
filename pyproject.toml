@@ -40,13 +40,11 @@ dependencies = [
 
 [project.optional-dependencies]
 autoapi = [
-    "astroid>=3.0,<4.0", # for sphinx-autoapi
-    "sphinx-autoapi==3.6.0",
+    "sphinx-autoapi==3.6.1",
     "sphinx-design==0.6.1",
     "sphinx-jinja==2.0.2",
 ]
 doc = [
-    "astroid>=3.0,<4.0", # for sphinx-autoapi
     "jupytext==1.17.3",
     "nbsphinx==0.9.7",
     "notebook==7.4.7",
@@ -58,7 +56,7 @@ doc = [
     "pyvista[jupyter]==0.46.3",
     "PyYAML==6.0.3",
     "requests==2.32.5",
-    "sphinx-autoapi==3.6.0",
+    "sphinx-autoapi==3.6.1",
     "sphinx-copybutton==0.5.2",
     "sphinx-design==0.6.1",
     "sphinx-gallery==0.19.0",
