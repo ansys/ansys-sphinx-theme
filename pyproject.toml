@@ -46,7 +46,6 @@ autoapi = [
     "sphinx-jinja==2.0.2",
 ]
 doc = [
-    "astroid>=3.0,<4.0", # for sphinx-autoapi
     "jupytext==1.17.3",
     "nbsphinx==0.9.7",
     "notebook==7.4.7",
