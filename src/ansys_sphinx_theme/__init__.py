@@ -87,8 +87,6 @@ pyansys_logo_white = str((LOGOS_PATH / "pyansys-logo-white-cropped.png").absolut
 watermark = str((LOGOS_PATH / "watermark.pdf").absolute())
 pyansys_logo_dark_mode = str((LOGOS_PATH / "pyansys_logo_transparent_white.png").absolute())
 pyansys_logo_light_mode = str((LOGOS_PATH / "pyansys_logo_transparent_black.png").absolute())
-# ansys_logo_light_mode = str((LOGOS_PATH / "ansys_logo_transparent_black.png").absolute())
-# ansys_logo_dark_mode = str((LOGOS_PATH / "ansys_logo_transparent_white.png").absolute())
 ansys_part_of_synopsys_logo_light_mode = str(
     (LOGOS_PATH / "ansys_part_of_synopsys_logo_transparent_light.png").absolute()
 )
