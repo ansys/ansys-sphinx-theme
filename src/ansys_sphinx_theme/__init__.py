@@ -87,8 +87,14 @@ pyansys_logo_white = str((LOGOS_PATH / "pyansys-logo-white-cropped.png").absolut
 watermark = str((LOGOS_PATH / "watermark.pdf").absolute())
 pyansys_logo_dark_mode = str((LOGOS_PATH / "pyansys_logo_transparent_white.png").absolute())
 pyansys_logo_light_mode = str((LOGOS_PATH / "pyansys_logo_transparent_black.png").absolute())
-ansys_logo_light_mode = str((LOGOS_PATH / "ansys_logo_transparent_black.png").absolute())
-ansys_logo_dark_mode = str((LOGOS_PATH / "ansys_logo_transparent_white.png").absolute())
+# ansys_logo_light_mode = str((LOGOS_PATH / "ansys_logo_transparent_black.png").absolute())
+# ansys_logo_dark_mode = str((LOGOS_PATH / "ansys_logo_transparent_white.png").absolute())
+ansys_part_of_synopsys_logo_light_mode = str(
+    (LOGOS_PATH / "ansys_part_of_synopsys_logo_transparent_light.png").absolute()
+)
+ansys_part_of_synopsys_logo_dark_mode = str(
+    (LOGOS_PATH / "ansys_part_of_synopsys_logo_transparent_black.png").absolute()
+)
 
 
 def get_html_theme_path() -> pathlib.Path:
@@ -370,8 +376,8 @@ def configure_theme_logo(app: Sphinx):
     }
 
     ansys_logo = {
-        "image_dark": ansys_logo_dark_mode,
-        "image_light": ansys_logo_light_mode,
+        "image_dark": ansys_part_of_synopsys_logo_dark_mode,
+        "image_light": ansys_part_of_synopsys_logo_light_mode,
     }
     theme_options = app.config.html_theme_options
     logo_option = theme_options.get("logo")
