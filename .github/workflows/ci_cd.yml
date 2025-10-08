@@ -120,7 +120,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [doc-build]
     # Run when the PR is closed i.e. when docs job is skipped
-    if: always() && (needs.doc-build.result == 'success' || needs.doc-build.result == 'skipped')
+    if: github.event.action != 'closed' && (needs.doc-build.result == 'success' || needs.doc-build.result == 'skipped')
     steps:
       - uses: ansys/actions/doc-deploy-pr@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
         with:
