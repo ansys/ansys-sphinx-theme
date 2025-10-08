@@ -93,7 +93,7 @@ ansys_part_of_synopsys_logo_light_mode = str(
     (LOGOS_PATH / "ansys_part_of_synopsys_logo_transparent_light.png").absolute()
 )
 ansys_part_of_synopsys_logo_dark_mode = str(
-    (LOGOS_PATH / "ansys_part_of_synopsys_logo_transparent_black.jpg").absolute()
+    (LOGOS_PATH / "ansys_part_of_synopsys_logo_transparent_black.png").absolute()
 )
 
 
