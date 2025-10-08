@@ -388,6 +388,21 @@ img.logo__image {
 }
 
 /**
+* Logo height customization based on logo type
+* Using attribute selectors to target logos by their source path
+*/
+.navbar-brand img[src*="ansys_logo_transparent"] {
+  height: 3em;
+}
+
+/* Ensure responsive behavior */
+@media (max-width: 768px) {
+  .navbar-brand img[src*="ansys_logo_transparent"] {
+    height: 100%;
+  }
+}
+
+/**
 *Nav-bar entity right side.
 */
 
