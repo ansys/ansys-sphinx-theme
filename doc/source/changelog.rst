@@ -8,6 +8,32 @@ Release notes
 
 .. towncrier release notes start
 
+`1.6.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.6.2>`_ (October 08, 2025)
+=============================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Adapt new logo
+          - `#811 <https://github.com/ansys/ansys-sphinx-theme/pull/811>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Add flexible range for the \`\`pyyaml\`\` version
+          - `#814 <https://github.com/ansys/ansys-sphinx-theme/pull/814>`_
+
+
 `1.6.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.6.1>`_ (September 11, 2025)
 ===============================================================================================
 
