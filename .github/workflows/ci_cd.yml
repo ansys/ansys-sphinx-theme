@@ -122,7 +122,7 @@ jobs:
     # Run when the PR is closed i.e. when docs job is skipped
     if: always() && (needs.doc-build.result == 'success' || needs.doc-build.result == 'skipped')
     steps:
-      - uses: ansys/actions/doc-deploy-pr@v10
+      - uses: ansys/actions/doc-deploy-pr@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
