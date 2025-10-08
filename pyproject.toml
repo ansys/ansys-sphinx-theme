@@ -34,7 +34,7 @@ dependencies = [
     "Jinja2>=3.1.2",
     "pdf2image>=1.17.0",
     "pydata-sphinx-theme>=0.15.4,<0.17",
-    "PyYAML==6.0.3",
+    "PyYAML>=6.0,<7.0",
     "Sphinx>=6.1.0",
 ]
 
