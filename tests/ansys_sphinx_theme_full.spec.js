@@ -1,3 +1,5 @@
+import { test, expect } from '@playwright/test';
+
 test('navbar contains all main components', async ({ page }) => {
     await page.goto('http://localhost:3000');
     // Check main nav links
@@ -50,7 +52,7 @@ test('navbar contains all main components', async ({ page }) => {
     const githubLink = await page.$('a[href*="github.com/ansys/ansys-sphinx-theme"]');
     expect(githubLink).not.toBeNull();
 });
-import { test, expect } from '@playwright/test';
+
 
 // Homepage and header
 
@@ -61,16 +63,16 @@ test('homepage loads correctly', async ({ page }) => {
     expect(await header.textContent()).toMatch(/Welcome to Our Website|Ansys Sphinx Theme/i);
 });
 
-// Navigation bar
+// Navigation bar with home link
 
-test('renders navigation bar with About link', async ({ page }) => {
+test('renders navigation bar with Home link', async ({ page }) => {
     await page.goto('http://localhost:3000');
     const nav = await page.$('nav, [role="navigation"]');
     expect(nav).not.toBeNull();
-    // Try to find About link in nav
-    const aboutLink = await page.$('nav a:has-text("About"), [role="navigation"] a:has-text("About")');
-    if (!aboutLink) test.skip('About link not found in navigation bar');
-    expect(aboutLink).not.toBeNull();
+    // Try to find Home link in nav
+    const homeLink = await page.$('nav a:has-text("Home"), [role="navigation"] a:has-text("Home")');
+    if (!homeLink) test.skip('About link not found in navigation bar');
+    expect(homeLink).not.toBeNull();
 });
 
 // Sidebar
@@ -95,10 +97,35 @@ test('version switcher is present', async ({ page }) => {
 
 test('theme switcher toggles dark/light mode', async ({ page }) => {
     await page.goto('http://localhost:3000');
-    const themeSwitcher = await page.$('button[aria-label*="theme" i], button[title*="theme" i], .theme-switcher, [id*="theme-switcher"], [class*="theme-switcher"]');
+    // Use the actual button class from the provided HTML
+    const themeSwitcher = await page.$('button.theme-switch-button[aria-label="Color mode"]');
     if (!themeSwitcher) test.skip('Theme switcher not found');
     expect(themeSwitcher).not.toBeNull();
+    // Find the currently active mode (the visible svg or the one with aria-current or similar)
+    const getActiveMode = async () => {
+        // Try to get the mode from the html class or data attribute if available
+        const htmlMode = await page.evaluate(() => {
+            if (document.documentElement.dataset.theme) return document.documentElement.dataset.theme;
+            if (document.body.dataset.theme) return document.body.dataset.theme;
+            // Fallback: find the first visible svg with data-mode
+            const svgs = Array.from(document.querySelectorAll('button.theme-switch-button svg.theme-switch[data-mode]'));
+            for (const svg of svgs) {
+                const style = window.getComputedStyle(svg);
+                if (style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== '0') {
+                    return svg.getAttribute('data-mode');
+                }
+            }
+            return svgs.length ? svgs[0].getAttribute('data-mode') : null;
+        });
+        return htmlMode;
+    };
+    const currentMode = await getActiveMode();
     await themeSwitcher.click();
+    console.log(`Switched theme from ${currentMode}`);
+    await page.waitForTimeout(500);
+    const newMode = await getActiveMode();
+    console.log(`New theme mode is ${newMode}`);
+    expect(newMode).not.toBe(currentMode);
 });
 
 // Code blocks and copy button
