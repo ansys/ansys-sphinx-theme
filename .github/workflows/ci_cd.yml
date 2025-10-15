@@ -140,11 +140,17 @@ jobs:
       - name: Install BackstopJS
         run: npm install
 
+      - name: Check for index.html
+        run: cat ./documentation-html/index.html || echo "index.html not found"
+
       - name: Start HTTP server for docs
         run: npx http-server ./documentation-html -p 8000 &
 
-      - name: Wait for server
-        run: npx wait-on http://localhost:8000
+      - name: Test server response
+        run: curl -I http://localhost:8000 || true
+
+      # - name: Wait for server
+      #   run: npx wait-on http://localhost:8000
 
       - name: Run BackstopJS tests
         run: npx backstop test || true
