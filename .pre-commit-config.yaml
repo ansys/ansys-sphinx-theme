@@ -41,3 +41,8 @@ repos:
     files: '(src|doc/source/examples)/.*\.(py)'
     args:
     - --start_year=2021
+
+- repo: https://github.com/zizmorcore/zizmor-pre-commit
+  rev: v1.12.1
+  hooks:
+    - id: zizmor
