@@ -13,10 +13,6 @@ test("search bar appears and returns results", async ({ page }) => {
     );
   }
   console.log("Tried to open search");
-  const searchInput = await page.waitForSelector(
-    'input[type="search"]:visible, input[placeholder*="Search" i]:visible',
-    { timeout: 5000 },
-  );
   const searchBar = await page.$(
     '.search-bar input[type="search"], .search-bar input[placeholder*="Search" i]',
   );
