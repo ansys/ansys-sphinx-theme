@@ -1,10 +1,17 @@
 name: Visual Regression Tests
+description: Run BackstopJS visual regression tests on the built documentation site.
 
-on:
-  pull_request:
-    branches: [ "main" ]
-  push:
-    branches: [ "main" ]
+inputs:
+  python-version:
+    description: 'Python version to use'
+    required: true
+    default: '3.13'
+  documentation-html:
+    description: 'documentation HTML directory'
+    required: true
+    default: 'doc/_build/html'
+
+
 
 jobs:
   backstop:
