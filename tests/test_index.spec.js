@@ -7,44 +7,43 @@ test("homepage loads and shows main header", async ({ page }) => {
   expect(await header.textContent()).toMatch(/Ansys Sphinx Theme|Welcome/i);
 });
 
-
 test("navbar contains all main components", async ({ page }) => {
-    await page.goto("http://localhost:3000");
-    const navLinks = [
-        { text: "Home", href: "#" },
-        { text: "Getting started", href: "getting-started.html" },
-        { text: "User guide", href: "user-guide.html" },
-        { text: "Examples", href: "examples.html" },
-        { text: "Release notes", href: "changelog.html" },
-    ];
-    for (const { text, href } of navLinks) {
-        const link = await page.$(`nav a.nav-link:has-text("${text}")`);
-        expect(link).not.toBeNull();
-        if (link && href) {
-        const actualHref = await link.getAttribute("href");
-        expect(actualHref).toContain(href);
-        }
+  await page.goto("http://localhost:3000");
+  const navLinks = [
+    { text: "Home", href: "#" },
+    { text: "Getting started", href: "getting-started.html" },
+    { text: "User guide", href: "user-guide.html" },
+    { text: "Examples", href: "examples.html" },
+    { text: "Release notes", href: "changelog.html" },
+  ];
+  for (const { text, href } of navLinks) {
+    const link = await page.$(`nav a.nav-link:has-text("${text}")`);
+    expect(link).not.toBeNull();
+    if (link && href) {
+      const actualHref = await link.getAttribute("href");
+      expect(actualHref).toContain(href);
     }
-    const moreBtn = await page.$('button.dropdown-toggle:has-text("More")');
-    expect(moreBtn).not.toBeNull();
-    await moreBtn.click();
-    const dropdownLinks = [
-        { text: "Contribute", href: "contribute.html" },
-        { text: "API reference", href: "examples/api/index.html" },
-    ];
-    for (const { text, href } of dropdownLinks) {
-        const link = await page.$(`.dropdown-menu a:has-text("${text}")`);
-        expect(link).not.toBeNull();
-        if (link && href) {
-        const actualHref = await link.getAttribute("href");
-        expect(actualHref).toContain(href);
-        }
+  }
+  const moreBtn = await page.$('button.dropdown-toggle:has-text("More")');
+  expect(moreBtn).not.toBeNull();
+  await moreBtn.click();
+  const dropdownLinks = [
+    { text: "Contribute", href: "contribute.html" },
+    { text: "API reference", href: "examples/api/index.html" },
+  ];
+  for (const { text, href } of dropdownLinks) {
+    const link = await page.$(`.dropdown-menu a:has-text("${text}")`);
+    expect(link).not.toBeNull();
+    if (link && href) {
+      const actualHref = await link.getAttribute("href");
+      expect(actualHref).toContain(href);
     }
+  }
 });
 
 test("navbar end components are present", async ({ page }) => {
-    await page.goto("http://localhost:3000");
-      const searchBar = await page.$(
+  await page.goto("http://localhost:3000");
+  const searchBar = await page.$(
     '.search-bar input[type="search"], .search-bar input[placeholder*="Search" i]',
   );
   expect(searchBar).not.toBeNull();
@@ -99,18 +98,17 @@ test("version switcher is present", async ({ page }) => {
 });
 
 test("click on version switcher shows dropdown", async ({ page }) => {
-    await page.goto("http://localhost:3000");
-    const versionSwitcher = await page.$(
-      '.version-switcher, [id*="version-switcher"], [class*="version-switcher"]',
-    );
-    expect(versionSwitcher).not.toBeNull();
-    await versionSwitcher.click();
-    const dropdown = await page.$(
-      '.version-switcher__menu, [id*="pst-version-switcher-list-2"], [class*="version-switcher__menu"]',
-    );
-    expect(dropdown).not.toBeNull();
+  await page.goto("http://localhost:3000");
+  const versionSwitcher = await page.$(
+    '.version-switcher, [id*="version-switcher"], [class*="version-switcher"]',
+  );
+  expect(versionSwitcher).not.toBeNull();
+  await versionSwitcher.click();
+  const dropdown = await page.$(
+    '.version-switcher__menu, [id*="pst-version-switcher-list-2"], [class*="version-switcher__menu"]',
+  );
+  expect(dropdown).not.toBeNull();
 });
-
 
 test("theme switcher toggles dark/light mode", async ({ page }) => {
   await page.goto("http://localhost:3000");
@@ -156,10 +154,11 @@ test("theme switcher toggles dark/light mode", async ({ page }) => {
   expect(newMode).not.toBe(currentMode);
 });
 
-
 test("breadcrumbs are present", async ({ page }) => {
   await page.goto("http://localhost:3000/user-guide/configuration.html");
-  const breadcrumbs = await page.$('.bd-breadcrumb, nav[aria-label="Breadcrumb"]');
+  const breadcrumbs = await page.$(
+    '.bd-breadcrumb, nav[aria-label="Breadcrumb"]',
+  );
   if (!breadcrumbs) test.skip("Breadcrumbs not found");
   expect(breadcrumbs).not.toBeNull();
 });

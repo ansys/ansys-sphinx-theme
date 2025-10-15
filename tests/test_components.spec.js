@@ -2,44 +2,46 @@ import { test, expect } from "@playwright/test";
 
 // Code blocks and copy button
 test("code blocks and copy button work", async ({ page }) => {
-    await page.goto("http://localhost:3000/user-guide/configuration.html");
-    const codeBlock = await page.$(".highlight");
-    if (!codeBlock) test.skip("No code block found on this page");
-    expect(codeBlock).not.toBeNull();
-    const copyBtn = await page.$("button.copybtn, .copy-button, .btn-copy");
-    if (copyBtn) await copyBtn.click();
-        expect(copyBtn).not.toBeNull();
+  await page.goto("http://localhost:3000/user-guide/configuration.html");
+  const codeBlock = await page.$(".highlight");
+  if (!codeBlock) test.skip("No code block found on this page");
+  expect(codeBlock).not.toBeNull();
+  const copyBtn = await page.$("button.copybtn, .copy-button, .btn-copy");
+  if (copyBtn) await copyBtn.click();
+  expect(copyBtn).not.toBeNull();
 });
 
 // Tabs (Sphinx-design)
 test("tab sets render and switch", async ({ page }) => {
-    await page.goto("http://localhost:3000/user-guide/configuration.html");
-    const tabSet = await page.$(".sd-tab-set, .tab-set, .tab-content");
-    expect(tabSet).not.toBeNull();
-    const tabLabels = await page.$$(
-        ".sd-tab-label, .tab-label, .nav-tabs .nav-link",
-    );
-    if (tabLabels.length > 1) {
-        await tabLabels[1].click();
-    }
+  await page.goto("http://localhost:3000/user-guide/configuration.html");
+  const tabSet = await page.$(".sd-tab-set, .tab-set, .tab-content");
+  expect(tabSet).not.toBeNull();
+  const tabLabels = await page.$$(
+    ".sd-tab-label, .tab-label, .nav-tabs .nav-link",
+  );
+  if (tabLabels.length > 1) {
+    await tabLabels[1].click();
+  }
 });
 
 // Tables
 test("tables render correctly", async ({ page }) => {
-    await page.goto("http://localhost:3000/examples/table.html");
-    const table = await page.$(".pst-scrollable-table-container");
-    expect(table).not.toBeNull();
-    const headers = await table.$$("th");
-    expect(headers.length).toBeGreaterThan(0);
-    const rows = await table.$$("tbody tr");
-    expect(rows.length).toBeGreaterThan(0);
+  await page.goto("http://localhost:3000/examples/table.html");
+  const table = await page.$(".pst-scrollable-table-container");
+  expect(table).not.toBeNull();
+  const headers = await table.$$("th");
+  expect(headers.length).toBeGreaterThan(0);
+  const rows = await table.$$("tbody tr");
+  expect(rows.length).toBeGreaterThan(0);
 });
 
 // Admonitions
 test("admonitions render", async ({ page }) => {
-    await page.goto("http://localhost:3000/examples/admonitions.html");
-    const admonition = await page.$(".admonition, .note, .warning, .caution, .tip, .important");
-    expect(admonition).not.toBeNull();
+  await page.goto("http://localhost:3000/examples/admonitions.html");
+  const admonition = await page.$(
+    ".admonition, .note, .warning, .caution, .tip, .important",
+  );
+  expect(admonition).not.toBeNull();
 });
 
 // Sphinx-design components
@@ -100,13 +102,13 @@ test("clickable card navigates to external link", async ({ page }) => {
 test("sphinx-design dropdown works", async ({ page }) => {
   await page.goto("http://localhost:3000/examples/sphinx-design.html");
   // Target the <details> element with .sd-dropdown
-  const dropdown = await page.$('details.sd-dropdown');
+  const dropdown = await page.$("details.sd-dropdown");
   expect(dropdown).not.toBeNull();
   // Find the summary inside the dropdown
-  const summary = await dropdown.$('summary.sd-summary-title');
+  const summary = await dropdown.$("summary.sd-summary-title");
   expect(summary).not.toBeNull();
   // If the dropdown is open, close it first
-  let isOpen = await dropdown.getAttribute('open');
+  let isOpen = await dropdown.getAttribute("open");
   if (isOpen) {
     await summary.click();
     await page.waitForTimeout(200);
@@ -114,11 +116,21 @@ test("sphinx-design dropdown works", async ({ page }) => {
   // Now open the dropdown
   await summary.click();
   await page.waitForTimeout(200);
-  isOpen = await dropdown.getAttribute('open');
+  isOpen = await dropdown.getAttribute("open");
   expect(isOpen).not.toBeNull();
   // Check for dropdown content
-  const content = await dropdown.$('.sd-summary-content');
+  const content = await dropdown.$(".sd-summary-content");
   expect(content).not.toBeNull();
   const text = await content.textContent();
-  expect(text).toContain('Dropdown content');
+  expect(text).toContain("Dropdown content");
+});
+
+test("sidebar is present and contains links", async ({ page }) => {
+  await page.goto("http://localhost:3000/user-guide.html");
+  const sidebar = await page.$(
+    '.bd-sidebar-primary, .bd-sidebar-secondary, .sidebar, nav[role="navigation"]',
+  );
+  expect(sidebar).not.toBeNull();
+  const links = await sidebar.$$("a");
+  expect(links.length).toBeGreaterThan(0);
 });
