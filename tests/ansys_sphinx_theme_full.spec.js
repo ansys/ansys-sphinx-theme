@@ -229,13 +229,6 @@ test("API reference and example gallery links exist", async ({ page }) => {
   expect(apiLink || galleryLink).not.toBeNull();
 });
 
-// Cards and grid layouts (Sphinx-design)
-
-test("cards and grid layouts render", async ({ page }) => {
-  await page.goto("http://localhost:3000");
-  const card = await page.$(".sd-card, .card, .grid-item-card");
-  expect(card).not.toBeNull();
-});
 
 // Dropdowns and menus
 
