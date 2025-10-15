@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("homepage loads and shows main header", async ({ page }) => {
-  await page.goto("http://localhost:3000/index.html");
+  await page.goto("http://localhost:8000/index.html");
   const header = await page.$("h1");
   expect(header).not.toBeNull();
   expect(await header.textContent()).toMatch(/Ansys Sphinx Theme|Welcome/i);
@@ -155,7 +155,7 @@ test("theme switcher toggles dark/light mode", async ({ page }) => {
 });
 
 test("breadcrumbs are present", async ({ page }) => {
-  await page.goto("http://localhost:3000/user-guide/configuration.html");
+  await page.goto("http://localhost:8000/user-guide/configuration.html");
   const breadcrumbs = await page.$(
     '.bd-breadcrumb, nav[aria-label="Breadcrumb"]',
   );
@@ -174,7 +174,7 @@ test("logo is present and links to homepage", async ({ page }) => {
 });
 
 test("edit this page button is present", async ({ page }) => {
-  await page.goto("http://localhost:3000/user-guide/configuration.html");
+  await page.goto("http://localhost:8000/user-guide/configuration.html");
   const editBtn = await page.$(
     'tocsection.editthispage, a:has-text("Edit on GitHub")',
   );

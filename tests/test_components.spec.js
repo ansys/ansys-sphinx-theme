@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 // Code blocks and copy button
 test("code blocks and copy button work", async ({ page }) => {
-  await page.goto("http://localhost:3000/user-guide/configuration.html");
+  await page.goto("http://localhost:8000/user-guide/configuration.html");
   const codeBlock = await page.$(".highlight");
   if (!codeBlock) test.skip("No code block found on this page");
   expect(codeBlock).not.toBeNull();
@@ -13,7 +13,7 @@ test("code blocks and copy button work", async ({ page }) => {
 
 // Tabs (Sphinx-design)
 test("tab sets render and switch", async ({ page }) => {
-  await page.goto("http://localhost:3000/user-guide/configuration.html");
+  await page.goto("http://localhost:8000/user-guide/configuration.html");
   const tabSet = await page.$(".sd-tab-set, .tab-set, .tab-content");
   expect(tabSet).not.toBeNull();
   const tabLabels = await page.$$(
@@ -26,7 +26,7 @@ test("tab sets render and switch", async ({ page }) => {
 
 // Tables
 test("tables render correctly", async ({ page }) => {
-  await page.goto("http://localhost:3000/examples/table.html");
+  await page.goto("http://localhost:8000/examples/table.html");
   const table = await page.$(".pst-scrollable-table-container");
   expect(table).not.toBeNull();
   const headers = await table.$$("th");
@@ -37,7 +37,7 @@ test("tables render correctly", async ({ page }) => {
 
 // Admonitions
 test("admonitions render", async ({ page }) => {
-  await page.goto("http://localhost:3000/examples/admonitions.html");
+  await page.goto("http://localhost:8000/examples/admonitions.html");
   const admonition = await page.$(
     ".admonition, .note, .warning, .caution, .tip, .important",
   );
@@ -46,21 +46,21 @@ test("admonitions render", async ({ page }) => {
 
 // Sphinx-design components
 test("example sphinx design page card", async ({ page }) => {
-  await page.goto("http://localhost:3000/examples/sphinx-design.html");
+  await page.goto("http://localhost:8000/examples/sphinx-design.html");
   const card = await page.$(".sd-card, .card, div.sd-card");
   expect(card).not.toBeNull();
 });
 
 // Sphinx-design grid layout
 test("example sphinx design page grid", async ({ page }) => {
-  await page.goto("http://localhost:3000/examples/sphinx-design.html");
+  await page.goto("http://localhost:8000/examples/sphinx-design.html");
   const grid = await page.$(".sd-row, .sd-grid, .row, .grid");
   expect(grid).not.toBeNull();
 });
 
 // Sphinx-design badge
 test("example sphinx design page badge", async ({ page }) => {
-  await page.goto("http://localhost:3000/examples/sphinx-design.html");
+  await page.goto("http://localhost:8000/examples/sphinx-design.html");
   // Sphinx-design badges are usually rendered as span.sd-badge or similar
   const badge = await page.$(".sd-badge, span.sd-badge, button.sd-badge");
   expect(badge).not.toBeNull();
@@ -76,7 +76,7 @@ test("example sphinx design page badge", async ({ page }) => {
 
 // Sphinx-design clickable card
 test("clickable card navigates to external link", async ({ page }) => {
-  await page.goto("http://localhost:3000/examples/sphinx-design.html");
+  await page.goto("http://localhost:8000/examples/sphinx-design.html");
   // Find the stretched link inside the card
   const link = await page.$(
     '.sd-card:has(.sd-card-title:has-text("Clickable Card (external)")) a.sd-stretched-link',
@@ -100,7 +100,7 @@ test("clickable card navigates to external link", async ({ page }) => {
 
 // Sphinx-design dropdown
 test("sphinx-design dropdown works", async ({ page }) => {
-  await page.goto("http://localhost:3000/examples/sphinx-design.html");
+  await page.goto("http://localhost:8000/examples/sphinx-design.html");
   // Target the <details> element with .sd-dropdown
   const dropdown = await page.$("details.sd-dropdown");
   expect(dropdown).not.toBeNull();
@@ -126,7 +126,7 @@ test("sphinx-design dropdown works", async ({ page }) => {
 });
 
 test("sidebar is present and contains links", async ({ page }) => {
-  await page.goto("http://localhost:3000/user-guide.html");
+  await page.goto("http://localhost:8000/user-guide.html");
   const sidebar = await page.$(
     '.bd-sidebar-primary, .bd-sidebar-secondary, .sidebar, nav[role="navigation"]',
   );
