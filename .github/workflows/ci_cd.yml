@@ -141,7 +141,7 @@ jobs:
         run: npm install
 
       - name: Start HTTP server for docs
-        run: npx http-server doc/_build/html -p 8000 &
+        run: npx http-server ./documentation-html -p 8000 &
 
       - name: Wait for server
         run: npx wait-on http://localhost:8000
