@@ -137,8 +137,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install BackstopJS
-        run: npm install
+      - name: Setup Node & Cache
+        uses: actions/setup-node@v4
+        with:
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - name: Install
+        run: npm ci
 
       - name: Check for index.html
         run: cat ./documentation-html/index.html || echo "index.html not found"

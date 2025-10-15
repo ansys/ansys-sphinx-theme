@@ -106,7 +106,7 @@
     "format": "junit",
     "testReportFileName": "myproject-xunit"
   },
-  "report": ["browser", "CI"],
+  "report": ["CI"],
   "engine": "puppeteer",
   "engineOptions": {
     "args": ["--no-sandbox"]
