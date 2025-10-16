@@ -9,6 +9,12 @@ on:
       - "*"
     branches:
       - main
+
+
+permissions:
+  contents: read
+  pull-requests: read
+
 env:
   MAIN_PYTHON_VERSION : '3.13'
   PACKAGE_NAME: 'ansys_sphinx_theme'
@@ -28,6 +34,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          persist-credentials: false
 
       - name: "Update labels"
         uses: micnncim/action-label-syncer@3abd5ab72fda571e69fffd97bd4e0033dd5f495c # v1.3.0
@@ -87,6 +95,16 @@ jobs:
           python-package-name: ${{ env.PACKAGE_NAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           dev-mode: ${{ github.ref != 'refs/heads/main' }}
+
+  actions-security:
+    name: Actions Security
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ansys/actions/check-actions-security@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
+        with:
+          generate-summary: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          auditing-level: 'high'
 
   update-changelog:
     name: "Update CHANGELOG (on release)"
@@ -165,6 +183,9 @@ jobs:
   doc-deploy-pr:
     name: "Deploy PR documentation"
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     needs: [doc-build]
     # Run when the PR is closed i.e. when docs job is skipped
     if: github.event.action != 'closed' && (needs.doc-build.result == 'success' || needs.doc-build.result == 'skipped')
