@@ -157,7 +157,6 @@ jobs:
         with:
           node-version: "20"
 
-
       - name: Install dependencies
         run: npm install ci
 
@@ -174,7 +173,11 @@ jobs:
       #   run: npx wait-on http://localhost:8000
 
       - name: Run BackstopJS tests
-        run: npx backstop test
+        run: |
+          # create reference
+          npx backstop reference
+          # run test
+          npx backstop test
 
       - name: Upload Backstop report (if failed)
         if: failure()
