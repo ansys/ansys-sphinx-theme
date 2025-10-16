@@ -1,11 +1,14 @@
 name: Backstop test
-on: 
+on:
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
+
+permissions:
+  contents: read
 
 jobs:
   backstop-tests:
@@ -14,6 +17,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -35,4 +40,4 @@ jobs:
       - name: check if server is up
         run: curl -I http://localhost:8000 || true
 
-        
+
