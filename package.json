@@ -19,6 +19,7 @@
         "wait-on": "^9.0.1"
     },
     "dependencies": {
+        "ci": "^2.3.0",
         "postcss-scss": "^4.0.9"
     }
 }

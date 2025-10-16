@@ -157,8 +157,9 @@ jobs:
         with:
           node-version: "20"
 
-      # - name: Install
-      #   run: npm ci
+
+      - name: Install dependencies
+        run: npm install ci
 
       - name: Check for index.html
         run: cat ./documentation-html/index.html || echo "index.html not found"
@@ -173,8 +174,7 @@ jobs:
       #   run: npx wait-on http://localhost:8000
 
       - name: Run BackstopJS tests
-        run: |
-          npx backstop test || true
+        run: npx backstop test
 
       - name: Upload Backstop report (if failed)
         if: failure()
