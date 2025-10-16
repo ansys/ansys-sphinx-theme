@@ -36,7 +36,7 @@ jobs:
       - name: Build documentation
         run: |
           pip install -e .[doc]
-          tox -e doc-html
+          xvfb-run make -C doc html
 
       - name: Serve documentation
         run: npx http-server -u -p 8000 ./doc/_build/html &
