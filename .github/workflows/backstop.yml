@@ -1,0 +1,38 @@
+name: Backstop test
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  backstop-tests:
+    name: Visual regression tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install ci
+
+      - name: Build documentation
+        run: |
+          pip install -e .[doc]
+          tox -e doc-html
+
+      - name: Serve documentation
+        run: npx http-server -u -p 8000 ./doc/_build/html &
+
+      - name: check if server is up
+        run: curl -I http://localhost:8000 || true
+
+        
