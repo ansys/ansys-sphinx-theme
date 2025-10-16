@@ -155,8 +155,8 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install
-        run: npm ci
+      # - name: Install
+      #   run: npm ci
 
       - name: Check for index.html
         run: cat ./documentation-html/index.html || echo "index.html not found"
