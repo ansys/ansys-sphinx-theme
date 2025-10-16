@@ -18,8 +18,8 @@
     {
       "label": "Ansys Sphinx Theme - Home Page",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": "http://localhost:8010",
-      "referenceUrl": "https://sphinxdocs.ansys.com/",
+      "url": "http://localhost:8000",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev",
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
@@ -36,7 +36,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-1",
-      "url": "http://localhost:8010/examples/sphinx-design.html",
+      "url": "http://localhost:8000/examples/sphinx-design.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/sphinx-design.html",
       "readyEvent": "",
       "readySelector": "",
@@ -46,7 +46,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-2",
-      "url": "http://localhost:8010/examples/api/examples/index.html",
+      "url": "http://localhost:8000/examples/api/examples/index.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/api/examples/index.html",
       "readyEvent": "",
       "readySelector": "",
@@ -56,7 +56,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-3",
-      "url": "http://localhost:8010/examples/gallery-examples/sphinx-gallery.html#sphx-glr-examples-gallery-examples-sphinx-gallery-py",
+      "url": "http://localhost:8000/examples/gallery-examples/sphinx-gallery.html#sphx-glr-examples-gallery-examples-sphinx-gallery-py",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/gallery-examples/sphinx-gallery.html#sphx-glr-examples-gallery-examples-sphinx-gallery-py",
       "readyEvent": "",
       "readySelector": "",
@@ -66,7 +66,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-4",
-      "url": "http://localhost:8010/examples/nbsphinx/jupyter-notebook.html",
+      "url": "http://localhost:8000/examples/nbsphinx/jupyter-notebook.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/nbsphinx/jupyter-notebook.html",
       "readyEvent": "",
       "readySelector": "",
@@ -76,7 +76,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-5",
-      "url": "http://localhost:8010/examples/table.html",
+      "url": "http://localhost:8000/examples/table.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/table.html",
       "readyEvent": "",
       "readySelector": "",
@@ -86,7 +86,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - Examples Page-6",
-      "url": "http://localhost:8010/examples/admonitions.html",
+      "url": "http://localhost:8000/examples/admonitions.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/admonitions.html",
       "readyEvent": "",
       "readySelector": "",
