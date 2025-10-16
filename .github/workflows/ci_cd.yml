@@ -137,9 +137,6 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Setup Node & Cache
-        uses: actions/setup-node@v4
-
       - name: Install
         run: npm ci
 
