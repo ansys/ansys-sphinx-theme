@@ -173,7 +173,9 @@ jobs:
       #   run: npx wait-on http://localhost:8000
 
       - name: Run BackstopJS tests
-        run: npx backstop reference && npx backstop test
+        run: |
+          npx backstop reference
+          npx backstop test 
 
       - name: Upload Backstop report (if failed)
         if: failure()
