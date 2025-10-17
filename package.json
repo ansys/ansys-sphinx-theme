@@ -4,18 +4,25 @@
     "scripts": {
         "build:scss": "sass src/ansys_sphinx_theme/assets/styles/ansys-sphinx-theme.scss  src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css",
         "build:postcss": "postcss src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css -o src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css",
-        "build": "npm run build:scss && npm run build:postcss"
+        "build": "npm run build:scss && npm run build:postcss",
+        "reference-tests": "cd tests && backstop reference && backstop test",
+        "playwright-test": "cd tests && playwright test",
+        "test": "npm run reference-tests && npm run playwright-test"
     },
     "devDependencies": {
+        "@playwright/test": "^1.56.0",
         "autoprefixer": "^10.4.21",
+        "backstopjs": "^6.3.25",
         "postcss": "^8.5.3",
         "postcss-cli": "^11.0.0",
         "postcss-import": "^16.1.0",
         "postcss-minify": "^1.1.0",
         "postcss-nested": "^7.0.2",
-        "sass": "^1.85.1"
+        "sass": "^1.85.1",
+        "wait-on": "^9.0.1"
     },
     "dependencies": {
+        "ci": "^2.3.0",
         "postcss-scss": "^4.0.9"
     }
 }
