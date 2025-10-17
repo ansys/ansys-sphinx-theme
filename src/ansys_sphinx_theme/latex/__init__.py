@@ -74,7 +74,7 @@ def generate_preamble(title, watermark="watermark", date=None):
 def generate_404(
     owner="ansys",
     project_name="ansys-sphinx-theme",
-    mail_id="pyansys.support@ansys.com",
+    mail_id="pyansys.core@ansys.com",
     team_name="PyAnsys",
 ):
     """Generate the html body for 404 page.
@@ -85,7 +85,7 @@ def generate_404(
         GitHub organisation in which the project belongs to.
     project_name : str, default: "ansys-sphinx-theme"
         Name of the project.
-    mail_id : str, default: "pyansys.support@ansys.com"
+    mail_id : str, default: "pyansys.core@ansys.com"
         E-mail address to contact.
     team_name : str, default: "PyAnsys"
        Name of the team.
