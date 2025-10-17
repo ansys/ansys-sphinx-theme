@@ -53,6 +53,7 @@ jobs:
           npx backstop reference
           # run test
           npx backstop test
+          npx playwright install
           npx playwright test tests/
 
       - name: Upload Backstop report (if failed)
