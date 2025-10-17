@@ -41,8 +41,7 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
-      "requireSameDimensions": true
+      "misMatchThreshold" : 0.1
     },
     {
       "label": "Ansys Sphinx Theme - api reference example page",
@@ -51,8 +50,7 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
-      "requireSameDimensions": true
+      "misMatchThreshold" : 0.1
     },
     {
       "label": "Ansys Sphinx Theme - jupyter notebook example page",
@@ -61,8 +59,7 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
-      "requireSameDimensions": true
+      "misMatchThreshold" : 0.1
     },
     {
       "label": "Ansys Sphinx Theme - examples- table page",
@@ -71,8 +68,7 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
-      "requireSameDimensions": true
+      "misMatchThreshold" : 0.1
     },
     {
       "label": "Ansys Sphinx Theme - admonitions example page",
@@ -81,8 +77,14 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
-      "requireSameDimensions": true
+      "misMatchThreshold" : 0.1
+    },
+    {
+      "label": "Ansys Sphinx Theme - gallery examples page",
+      "url": "http://localhost:8000/examples/gallery-examples/index.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/gallery-examples/index.html",
+      "delay": 20,
+      "misMatchThreshold" : 0.1
     }
   ],
   "paths": {

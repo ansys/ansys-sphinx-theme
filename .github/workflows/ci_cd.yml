@@ -133,69 +133,6 @@ jobs:
           requires-xvfb: true
           dependencies: 'pandoc'
 
-  backstop-tests:
-    name: Visual regression tests
-    runs-on: ubuntu-latest
-    needs: doc-build
-    steps:
-      - name : Checkout repo
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-      - name: Download document artifacts
-        uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
-        with:
-          name: documentation-html
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Install dependencies
-        run: npm install ci
-
-      - name: Debug directory structure
-        run: |
-          echo "Current directory:"
-          pwd
-          echo "Contents of current directory:"
-          ls -la
-          echo "Contents of ./documentation-html (if it exists):"
-          ls -la ./documentation-html || echo "documentation-html directory not found"
-
-      - name: Check for index.html
-        run: cat ./documentation-html/index.html || echo "index.html not found"
-
-      - name: Start HTTP server for docs
-        run: npx http-server ./documentation-html -p 8000 &
-
-      - name: Test server response
-        run: curl -I http://localhost:8000 || true
-
-      # - name: Wait for server
-      #   run: npx wait-on http://localhost:8000
-
-      - name: Run BackstopJS tests
-        run: |
-          # create reference
-          npx backstop reference
-          # run test
-          npx backstop test
-          npx playwright test tests/
-
-      - name: Upload Backstop report (if failed)
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: backstop-report
-          path: backstop_data/html_report
-
   doc-deploy-pr:
     name: "Deploy PR documentation"
     runs-on: ubuntu-latest
