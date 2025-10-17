@@ -35,7 +35,7 @@
       "requireSameDimensions": true
     },
     {
-      "label": "Ansys Sphinx Theme - Examples Page-1",
+      "label": "Ansys Sphinx Theme - sphinx design example page",
       "url": "http://localhost:8000/examples/sphinx-design.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/sphinx-design.html",
       "readyEvent": "",
@@ -45,7 +45,7 @@
       "requireSameDimensions": true
     },
     {
-      "label": "Ansys Sphinx Theme - Examples Page-2",
+      "label": "Ansys Sphinx Theme - api reference example page",
       "url": "http://localhost:8000/examples/api/examples/index.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/api/examples/index.html",
       "readyEvent": "",
@@ -55,17 +55,7 @@
       "requireSameDimensions": true
     },
     {
-      "label": "Ansys Sphinx Theme - Examples Page-3",
-      "url": "http://localhost:8000/examples/gallery-examples/sphinx-gallery.html#sphx-glr-examples-gallery-examples-sphinx-gallery-py",
-      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/gallery-examples/sphinx-gallery.html#sphx-glr-examples-gallery-examples-sphinx-gallery-py",
-      "readyEvent": "",
-      "readySelector": "",
-      "delay": 20,
-      "misMatchThreshold" : 0.1,
-      "requireSameDimensions": true
-    },
-    {
-      "label": "Ansys Sphinx Theme - Examples Page-4",
+      "label": "Ansys Sphinx Theme - jupyter notebook example page",
       "url": "http://localhost:8000/examples/nbsphinx/jupyter-notebook.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/nbsphinx/jupyter-notebook.html",
       "readyEvent": "",
@@ -75,7 +65,7 @@
       "requireSameDimensions": true
     },
     {
-      "label": "Ansys Sphinx Theme - Examples Page-5",
+      "label": "Ansys Sphinx Theme - examples- table page",
       "url": "http://localhost:8000/examples/table.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/table.html",
       "readyEvent": "",
@@ -85,7 +75,7 @@
       "requireSameDimensions": true
     },
     {
-      "label": "Ansys Sphinx Theme - Examples Page-6",
+      "label": "Ansys Sphinx Theme - admonitions example page",
       "url": "http://localhost:8000/examples/admonitions.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/admonitions.html",
       "readyEvent": "",

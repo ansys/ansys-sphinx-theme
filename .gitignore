@@ -170,9 +170,5 @@ node_modules/
 package-lock.json
 
 # BackstopJS outputs (do not commit)
-backstop_data/bitmaps_test/
-backstop_data/html_report/
-backstop_data/ci_report/
-backstop_data/engine_scripts/cookies.json
-backstop_data/engine_scripts/
+tests/backstop_data/
 test-results/

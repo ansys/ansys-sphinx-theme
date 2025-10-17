@@ -8,7 +8,7 @@ test("homepage loads and shows main header", async ({ page }) => {
 });
 
 test("navbar contains all main components", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:8000");
   const navLinks = [
     { text: "Home", href: "#" },
     { text: "Getting started", href: "getting-started.html" },
@@ -42,7 +42,7 @@ test("navbar contains all main components", async ({ page }) => {
 });
 
 test("navbar end components are present", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:8000");
   const searchBar = await page.$(
     '.search-bar input[type="search"], .search-bar input[placeholder*="Search" i]',
   );
@@ -68,7 +68,7 @@ test("navbar end components are present", async ({ page }) => {
 });
 
 test("renders navigation bar with Home link", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:8000");
   const nav = await page.$('nav, [role="navigation"]');
   expect(nav).not.toBeNull();
   // Try to find Home link in nav
@@ -80,7 +80,7 @@ test("renders navigation bar with Home link", async ({ page }) => {
 });
 
 test("sidebar is present and contains items", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:8000");
   const sidebar = await page.$(
     '.bd-sidebar-primary, .bd-sidebar-secondary, .sidebar, nav[role="navigation"]',
   );
@@ -90,7 +90,7 @@ test("sidebar is present and contains items", async ({ page }) => {
 });
 
 test("version switcher is present", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:8000");
   const versionSwitcher = await page.$(
     '.version-switcher, [id*="version-switcher"], [class*="version-switcher"]',
   );
@@ -98,7 +98,7 @@ test("version switcher is present", async ({ page }) => {
 });
 
 test("click on version switcher shows dropdown", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:8000");
   const versionSwitcher = await page.$(
     '.version-switcher, [id*="version-switcher"], [class*="version-switcher"]',
   );
@@ -111,7 +111,7 @@ test("click on version switcher shows dropdown", async ({ page }) => {
 });
 
 test("theme switcher toggles dark/light mode", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:8000");
   // Use the actual button class from the provided HTML
   const themeSwitcher = await page.$(
     'button.theme-switch-button[aria-label="Color mode"]',
@@ -164,7 +164,7 @@ test("breadcrumbs are present", async ({ page }) => {
 });
 
 test("logo is present and links to homepage", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:8000");
   const logo = await page.$('img[alt*="logo" i], .navbar-brand img, .logo');
   expect(logo).not.toBeNull();
   const logoLink = await logo.evaluate((el) =>
@@ -183,7 +183,7 @@ test("edit this page button is present", async ({ page }) => {
 });
 
 test("footer contains correct links", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:8000");
   const footer = await page.$(".bd-footer");
   expect(footer).not.toBeNull();
   const Footercopyright = await footer.$(".copyright");

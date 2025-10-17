@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("search bar appears and returns results", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:8000");
   const searchBtn = await page.$(
     'button[aria-label*="search" i], .search-bar .fa-magnifying-glass, .search-button, [data-bs-toggle="search"]',
   );

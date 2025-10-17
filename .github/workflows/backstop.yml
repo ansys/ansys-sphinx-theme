@@ -31,7 +31,9 @@ jobs:
           python-version: "3.13"
 
       - name: Install dependencies
-        run: npm install ci
+        run: |
+          npm install ci 
+          npx playwright install
 
       - name: Install xvfb
         run: sudo apt-get install -y xvfb pandoc
@@ -49,12 +51,7 @@ jobs:
 
       - name: Run BackstopJS tests
         run: |
-          # create reference
-          npx backstop reference
-          # run test
-          npx backstop test
-          npx playwright install
-          npx playwright test tests/
+          npm run test
 
       - name: Upload Backstop report (if failed)
         if: failure()

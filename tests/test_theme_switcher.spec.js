@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("theme switch button toggles mode", async ({ page }) => {
-  await page.goto("http://localhost:3000");
+  await page.goto("http://localhost:8000");
   const themeSwitcher = await page.$(
     'button.theme-switch-button[aria-label="Color mode"]',
   );
@@ -30,8 +30,10 @@ test("theme switch button toggles mode", async ({ page }) => {
     });
   };
   const currentMode = await getActiveMode();
+  console.log("Current mode:", currentMode);
   await themeSwitcher.click();
   await page.waitForTimeout(500);
   const newMode = await getActiveMode();
+  console.log("New mode:", newMode);
   expect(newMode).not.toBe(currentMode);
 });
