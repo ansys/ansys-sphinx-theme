@@ -1,13 +1,13 @@
 import { test, expect } from "@playwright/test";
 
-test("homepage loads and shows main header", async ({ page }) => {
+test("Test homepage loading", async ({ page }) => {
   await page.goto("http://localhost:8000/index.html");
   const header = await page.$("h1");
   expect(header).not.toBeNull();
   expect(await header.textContent()).toMatch(/Ansys Sphinx Theme|Welcome/i);
 });
 
-test("navbar contains all main components", async ({ page }) => {
+test("Test navbar components", async ({ page }) => {
   await page.goto("http://localhost:8000");
   const navLinks = [
     { text: "Home", href: "#" },
@@ -41,7 +41,7 @@ test("navbar contains all main components", async ({ page }) => {
   }
 });
 
-test("navbar end components are present", async ({ page }) => {
+test("Test navbar end components", async ({ page }) => {
   await page.goto("http://localhost:8000");
   const searchBar = await page.$(
     '.search-bar input[type="search"], .search-bar input[placeholder*="Search" i]',
@@ -67,7 +67,7 @@ test("navbar end components are present", async ({ page }) => {
   expect(githubLink).not.toBeNull();
 });
 
-test("renders navigation bar with Home link", async ({ page }) => {
+test("Test navigation bar", async ({ page }) => {
   await page.goto("http://localhost:8000");
   const nav = await page.$('nav, [role="navigation"]');
   expect(nav).not.toBeNull();
@@ -79,7 +79,7 @@ test("renders navigation bar with Home link", async ({ page }) => {
   expect(homeLink).not.toBeNull();
 });
 
-test("sidebar is present and contains items", async ({ page }) => {
+test("Test sidebar", async ({ page }) => {
   await page.goto("http://localhost:8000");
   const sidebar = await page.$(
     '.bd-sidebar-primary, .bd-sidebar-secondary, .sidebar, nav[role="navigation"]',
@@ -89,7 +89,7 @@ test("sidebar is present and contains items", async ({ page }) => {
   expect(sidebarLinks.length).toBeGreaterThan(0);
 });
 
-test("version switcher is present", async ({ page }) => {
+test("Test version switcher", async ({ page }) => {
   await page.goto("http://localhost:8000");
   const versionSwitcher = await page.$(
     '.version-switcher, [id*="version-switcher"], [class*="version-switcher"]',
@@ -97,7 +97,7 @@ test("version switcher is present", async ({ page }) => {
   expect(versionSwitcher).not.toBeNull();
 });
 
-test("click on version switcher shows dropdown", async ({ page }) => {
+test("Test version switcher dropdown", async ({ page }) => {
   await page.goto("http://localhost:8000");
   const versionSwitcher = await page.$(
     '.version-switcher, [id*="version-switcher"], [class*="version-switcher"]',
@@ -110,7 +110,7 @@ test("click on version switcher shows dropdown", async ({ page }) => {
   expect(dropdown).not.toBeNull();
 });
 
-test("theme switcher toggles dark/light mode", async ({ page }) => {
+test("Test theme switcher", async ({ page }) => {
   await page.goto("http://localhost:8000");
   // Use the actual button class from the provided HTML
   const themeSwitcher = await page.$(
@@ -154,7 +154,7 @@ test("theme switcher toggles dark/light mode", async ({ page }) => {
   expect(newMode).not.toBe(currentMode);
 });
 
-test("breadcrumbs are present", async ({ page }) => {
+test("Test breadcrumbs", async ({ page }) => {
   await page.goto("http://localhost:8000/user-guide/configuration.html");
   const breadcrumbs = await page.$(
     '.bd-breadcrumb, nav[aria-label="Breadcrumb"]',
@@ -163,7 +163,7 @@ test("breadcrumbs are present", async ({ page }) => {
   expect(breadcrumbs).not.toBeNull();
 });
 
-test("logo is present and links to homepage", async ({ page }) => {
+test("Test logo", async ({ page }) => {
   await page.goto("http://localhost:8000");
   const logo = await page.$('img[alt*="logo" i], .navbar-brand img, .logo');
   expect(logo).not.toBeNull();
@@ -173,7 +173,7 @@ test("logo is present and links to homepage", async ({ page }) => {
   expect(logoLink).toMatch(/\/?(index\.html)?$/);
 });
 
-test("edit this page button is present", async ({ page }) => {
+test("Test edit this page button", async ({ page }) => {
   await page.goto("http://localhost:8000/user-guide/configuration.html");
   const editBtn = await page.$(
     'tocsection.editthispage, a:has-text("Edit on GitHub")',
@@ -182,7 +182,7 @@ test("edit this page button is present", async ({ page }) => {
   expect(editBtn).not.toBeNull();
 });
 
-test("footer contains correct links", async ({ page }) => {
+test("Test footer links", async ({ page }) => {
   await page.goto("http://localhost:8000");
   const footer = await page.$(".bd-footer");
   expect(footer).not.toBeNull();

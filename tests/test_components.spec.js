@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 // Code blocks and copy button
-test("code blocks and copy button work", async ({ page }) => {
+test("Test code blocks and copy button", async ({ page }) => {
   await page.goto("http://localhost:8000/user-guide/configuration.html");
   const codeBlock = await page.$(".highlight");
   if (!codeBlock) test.skip("No code block found on this page");
@@ -12,7 +12,7 @@ test("code blocks and copy button work", async ({ page }) => {
 });
 
 // Tabs (Sphinx-design)
-test("tab sets render and switch", async ({ page }) => {
+test("Test sphinx tabs", async ({ page }) => {
   await page.goto("http://localhost:8000/user-guide/configuration.html");
   const tabSet = await page.$(".sd-tab-set, .tab-set, .tab-content");
   expect(tabSet).not.toBeNull();
@@ -25,7 +25,7 @@ test("tab sets render and switch", async ({ page }) => {
 });
 
 // Tables
-test("tables render correctly", async ({ page }) => {
+test("Test tables", async ({ page }) => {
   await page.goto("http://localhost:8000/examples/table.html");
   const table = await page.$(".pst-scrollable-table-container");
   expect(table).not.toBeNull();
@@ -36,7 +36,7 @@ test("tables render correctly", async ({ page }) => {
 });
 
 // Admonitions
-test("admonitions render", async ({ page }) => {
+test("Test admonitions", async ({ page }) => {
   await page.goto("http://localhost:8000/examples/admonitions.html");
   const admonition = await page.$(
     ".admonition, .note, .warning, .caution, .tip, .important",
@@ -45,21 +45,21 @@ test("admonitions render", async ({ page }) => {
 });
 
 // Sphinx-design components
-test("example sphinx design page card", async ({ page }) => {
+test("Test example sphinx design page card", async ({ page }) => {
   await page.goto("http://localhost:8000/examples/sphinx-design.html");
   const card = await page.$(".sd-card, .card, div.sd-card");
   expect(card).not.toBeNull();
 });
 
 // Sphinx-design grid layout
-test("example sphinx design page grid", async ({ page }) => {
+test("Test example sphinx design page grid", async ({ page }) => {
   await page.goto("http://localhost:8000/examples/sphinx-design.html");
   const grid = await page.$(".sd-row, .sd-grid, .row, .grid");
   expect(grid).not.toBeNull();
 });
 
 // Sphinx-design badge
-test("example sphinx design page badge", async ({ page }) => {
+test("Test example sphinx design page badge", async ({ page }) => {
   await page.goto("http://localhost:8000/examples/sphinx-design.html");
   // Sphinx-design badges are usually rendered as span.sd-badge or similar
   const badge = await page.$(".sd-badge, span.sd-badge, button.sd-badge");
@@ -75,7 +75,7 @@ test("example sphinx design page badge", async ({ page }) => {
 });
 
 // Sphinx-design clickable card
-test("clickable card navigates to external link", async ({ page }) => {
+test("Test clickable card", async ({ page }) => {
   await page.goto("http://localhost:8000/examples/sphinx-design.html");
   // Find the stretched link inside the card
   const link = await page.$(
@@ -99,7 +99,7 @@ test("clickable card navigates to external link", async ({ page }) => {
 });
 
 // Sphinx-design dropdown
-test("sphinx-design dropdown works", async ({ page }) => {
+test("Test sphinx-design dropdown", async ({ page }) => {
   await page.goto("http://localhost:8000/examples/sphinx-design.html");
   // Target the <details> element with .sd-dropdown
   const dropdown = await page.$("details.sd-dropdown");
@@ -125,7 +125,7 @@ test("sphinx-design dropdown works", async ({ page }) => {
   expect(text).toContain("Dropdown content");
 });
 
-test("sidebar is present and contains links", async ({ page }) => {
+test("Test sidebar", async ({ page }) => {
   await page.goto("http://localhost:8000/user-guide.html");
   const sidebar = await page.$(
     '.bd-sidebar-primary, .bd-sidebar-secondary, .sidebar, nav[role="navigation"]',

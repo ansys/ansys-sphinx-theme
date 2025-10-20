@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("search bar appears and returns results", async ({ page }) => {
+test("Test search functionality", async ({ page }) => {
   await page.goto("http://localhost:8000");
   const searchBtn = await page.$(
     'button[aria-label*="search" i], .search-bar .fa-magnifying-glass, .search-button, [data-bs-toggle="search"]',
