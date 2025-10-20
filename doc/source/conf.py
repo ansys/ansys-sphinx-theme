@@ -58,7 +58,7 @@ html_context = {
 
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
-    "contact_mail": "pyansys.support@ansys.com",
+    "contact_mail": "pyansys.core@ansys.com",
     "use_edit_page_button": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
