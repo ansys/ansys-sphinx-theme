@@ -32,7 +32,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npx playwright install
+          npm install
 
       - name: Install xvfb
         run: sudo apt-get install -y xvfb pandoc
