@@ -6,7 +6,7 @@
         "build:postcss": "postcss src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css -o src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css",
         "build": "npm run build:scss && npm run build:postcss",
         "reference-tests": "cd tests && backstop reference && backstop test",
-        "playwright-test": "cd tests && playwright test",
+        "playwright-test": "npx playwright install && cd tests && npx playwright test",
         "test": "npm run reference-tests && npm run playwright-test"
     },
     "scriptsDescription": {
