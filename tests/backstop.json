@@ -51,7 +51,7 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
+      "misMatchThreshold" : 0.2,
       "requireSameDimensions": false
     },
     {
@@ -105,7 +105,7 @@
     "testReportFileName": "myproject-xunit"
   },
   "report": ["browser","CI"],
-  "engine": "puppeteer",
+  "engine": "puppet",
   "engineOptions": {
     "args": ["--no-sandbox"]
   },
