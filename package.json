@@ -9,6 +9,14 @@
         "playwright-test": "cd tests && playwright test",
         "test": "npm run reference-tests && npm run playwright-test"
     },
+    "scriptsDescription": {
+        "build:scss": "Compile SCSS to CSS",
+        "build:postcss": "Apply PostCSS transformations (autoprefixer, minify, etc.)",
+        "build": "Build complete CSS from SCSS and apply PostCSS",
+        "reference-tests": "Run BackstopJS visual regression tests (reference and test)",
+        "playwright-test": "Run Playwright end-to-end tests",
+        "test": "Run all tests (visual regression + e2e)"
+    },
     "devDependencies": {
         "@playwright/test": "^1.56.0",
         "autoprefixer": "^10.4.21",
@@ -22,7 +30,6 @@
         "wait-on": "^9.0.1"
     },
     "dependencies": {
-        "ci": "^2.3.0",
         "postcss-scss": "^4.0.9"
     }
 }

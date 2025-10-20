@@ -32,7 +32,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install ci
           npx playwright install
 
       - name: Install xvfb
