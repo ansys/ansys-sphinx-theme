@@ -9,7 +9,7 @@
   fetch("announcement.html")
     .then((response) => {
       if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
+        throw new Error(`HTTP error: ${response.status} Announcement.html file not found.`);
       }
       return response.text();
     })
@@ -22,7 +22,7 @@
     .catch((error) => {
       // Log only unexpected fetch errors
       if (!(error.message && error.message.startsWith("HTTP error: 404"))) {
-        console.error(`Fetch problem: ${error.message}`);
+        console.error(`Fetch problem: ${error.message} Announcement.html could not be loaded.`);
       }
     });
 </script>
