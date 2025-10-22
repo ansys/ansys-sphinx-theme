@@ -239,6 +239,13 @@ html[data-theme="light"] .search-highlight {
 
 /* ========== Chips (Selected Filter Tags) ========== */
 
+.selected-chips {
+  margin-top: 0.625rem; /* 10px */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3125rem; /* 5px */
+}
+
 .chip {
   display: inline-flex;
   align-items: center;

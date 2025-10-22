@@ -36,16 +36,16 @@
 {% block docs_navbar %}
   {{ super() }}
   {% if theme_switcher %}
-    {% include 'components/announcement_version.html' %}
+    {% include "components/announcement_version.html" %}
   {% endif %}
-{% endblock %}
+{% endblock docs_navbar %}
 
 {%- block content %}
   {{ super() }}
   {% if theme_use_ansys_search %}
     {%- include "components/ast-search-button.html" %}
-  {%  endif %}
-{%- endblock %}
+  {% endif %}
+{%- endblock content %}
 
 {%- block scripts_end %}
   {{ super() }}
@@ -62,4 +62,4 @@
   {% endif %}
   {% endif %}
 
-{%- endblock %}
+{%- endblock scripts_end %}

@@ -49,3 +49,10 @@ repos:
       args:
       - "--no-progress"
       - "--persona=pedantic"
+
+# Do not use this tool with proprietary ansys source code.
+- repo: "https://github.com/djlint/djLint"
+  rev: v1.36.4
+  hooks:
+    - id: djlint-jinja
+      types_or: ["html"]

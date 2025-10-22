@@ -13,7 +13,9 @@
   <div class="sidebar-cheatsheets" aria-label="Cheatsheet">
     <h4>{{ theme_cheatsheet_title }}</h4>
     <a href="{{ theme_cheatsheet_output }}" target="_blank" rel="noopener noreferrer">
+      {# djlint:off H006 #}
       <img src="{{ theme_cheatsheet_thumbnail }}" alt="{{ theme_cheatsheet_title }} thumbnail" loading="lazy" />
+      {# djlint:on H006 #}
     </a>
   </div>
 {% endif %}

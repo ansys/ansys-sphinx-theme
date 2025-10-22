@@ -9,7 +9,7 @@
   fetch("announcement.html")
     .then((response) => {
       if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status} Announcement.html file not found.`);
+        throw new Error(`HTTP error: ${response.status} Announcement.html file not found, Please ignore this, if you are in dev/stable documentation`);
       }
       return response.text();
     })
