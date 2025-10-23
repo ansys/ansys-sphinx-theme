@@ -44,6 +44,12 @@ autoapi = [
     "sphinx-design==0.6.1",
     "sphinx-jinja==2.0.2",
 ]
+changelog = [
+    "PyYAML==6.0.3",
+    "sphinx-design==0.6.1",
+]
+
+[dependency-groups]
 doc = [
     "jupytext==1.18.1",
     "nbsphinx==0.9.7",
@@ -64,10 +70,6 @@ doc = [
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.2.0b2",
     "tox==4.31.0",
-]
-changelog = [
-    "PyYAML==6.0.3",
-    "sphinx-design==0.6.1",
 ]
 
 [project.entry-points."sphinx.html_themes"]
