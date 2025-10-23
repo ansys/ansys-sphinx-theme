@@ -1,14 +1,31 @@
-<p class="theme-version">
-  {% trans theme_version=ansys_sphinx_theme_version|e %}Built with the
-  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
-    >Ansys Sphinx Theme</a
-  >
-  {{ ansys_sphinx_theme_version }}.{% endtrans %} <br />Last updated on
-  <span id="ast_build_date"></span>
-</p>
+
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    {% trans theme_version=ansys_sphinx_theme_version|e %}
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      {{ ansys_sphinx_theme_version }}.
+    {% endtrans %}
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
 <script>
-  var options = { day: "numeric", month: "long", year: "numeric" };
-  var ast_lastModifiedDate = new Date(document.lastModified);
-  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
-  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
 </script>

@@ -17,14 +17,14 @@
 
   </div>
   </div>
-  <div id="selected-chips" style="margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px;"></div>
+  <div id="selected-chips" class="selected-chips"></div>
   <div class="results" id="search-results"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
 <script src="{{ pathto('_static/js/search-main.js', 1) }}"></script>
 
-{% endblock %}
+{% endblock docs_body %}
 
 {%- block htmltitle -%}
   <title>{{ _("Search") }} - {{ title or docstitle }}</title>

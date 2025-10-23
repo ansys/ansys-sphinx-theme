@@ -22,7 +22,7 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    {% endblock %} {%- else %} {# Home icon #}
+    {% endblock rootrellink %} {%- else %} {# Home icon #}
     <li class="breadcrumb-item breadcrumb-home">
       <a
         href="{{ pathto(root_doc) }}"
@@ -44,4 +44,4 @@
     {% endif %}
   </ul>
 </nav>
-{% endblock %}
+{% endblock breadcrumbs %}
