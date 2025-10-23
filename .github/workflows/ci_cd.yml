@@ -130,6 +130,7 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           group-dependencies-name: 'doc'
+          optional-dependencies-name: ''
           add-pdf-html-docs-as-assets: true
           requires-xvfb: true
           dependencies: 'pandoc'
