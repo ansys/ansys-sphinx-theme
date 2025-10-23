@@ -32,6 +32,7 @@ jobs:
       contents: read
       pull-requests: write
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
@@ -55,9 +56,9 @@ jobs:
       contents: write
       pull-requests: write
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
     steps:
     - uses: ansys/actions/doc-changelog@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
-      if: ${{ github.event_name == 'pull_request' }}
       with:
         token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
         use-conventional-commits: true
@@ -68,6 +69,7 @@ jobs:
   code-style:
     name: Code style
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     needs: "changelog-fragment"
     steps:
       - name: "Run Ansys code style checks"
@@ -78,6 +80,7 @@ jobs:
   doc-style:
     name: Doc style
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     needs: "changelog-fragment"
     steps:
       - name: "Run Ansys documentation style checks"
@@ -88,6 +91,7 @@ jobs:
   vulnerabilities:
     name: Vulnerabilities
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     steps:
       - uses: ansys/actions/check-vulnerabilities@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
         with:
@@ -99,6 +103,7 @@ jobs:
   actions-security:
     name: Actions Security
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     steps:
       - uses: ansys/actions/check-actions-security@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
         with:
@@ -108,7 +113,7 @@ jobs:
 
   update-changelog:
     name: "Update CHANGELOG (on release)"
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags') && github.event.action != 'closed'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -123,6 +128,7 @@ jobs:
   doc-build:
     name: Doc building
     runs-on: ubuntu-latest
+    if: github.event.action != 'closed'
     needs: doc-style
     steps:
       - name: "Run Ansys documentation building action"
@@ -143,7 +149,9 @@ jobs:
       pull-requests: write
     needs: [doc-build]
     # Run when the PR is closed i.e. when docs job is skipped
-    if: github.event.action != 'closed' && (needs.doc-build.result == 'success' || needs.doc-build.result == 'skipped')
+    if: |
+      always() &&
+      (needs.doc-build.result == 'success' || needs.doc-build.result == 'skipped')
     steps:
       - uses: ansys/actions/doc-deploy-pr@c2fa7c93f6883114e0e643599431b33d29f0b13f # v10.1.4
         with:
