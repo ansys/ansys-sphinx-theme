@@ -559,8 +559,7 @@ def add_tooltip_after_build(app: Sphinx, exception):
                 return match.group(0)
 
             return (
-                f'<a{attrs_before}href="{href_link}"{attrs_after} '
-                f'title="{project_name}">Home</a>'
+                f'<a{attrs_before}href="{href_link}"{attrs_after} title="{project_name}">Home</a>'
             )
 
         new_text = PACKAGE_HOME_HTML_PATTERN.sub(replacer, text)
