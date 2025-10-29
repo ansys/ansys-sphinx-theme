@@ -1,0 +1,62 @@
+name: Backstop test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  backstop-tests:
+    name: Visual regression tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903
+        with:
+          node-version: "20"
+
+      - name: Set up Python
+        uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Install xvfb
+        run: sudo apt-get install -y xvfb pandoc
+
+      - name: Build documentation
+        run: |
+          pip install -e .[doc]
+          xvfb-run make -C doc html
+
+      - name: Serve documentation
+        run: npx http-server -u -p 8000 ./doc/_build/html &
+
+      - name: check if server is up
+        run: curl -I http://localhost:8000 || true
+
+      - name: Run BackstopJS tests
+        run: |
+          npm run test
+
+      - name: Upload Backstop report (if failed)
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: backstop-report
+          path: backstop_data/html_report
+
+
