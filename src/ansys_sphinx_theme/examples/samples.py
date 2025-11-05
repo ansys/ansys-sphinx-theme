@@ -359,4 +359,4 @@ class ExamplePydanticClass(BaseModel):
         le=100.0,
         ge=0.0,
     )
-    "A optional parameter with constraints using field for default value, description and constraints."
+    "A optional parameter with constraints using field for default value, description and constraints."  # noqa: E501
