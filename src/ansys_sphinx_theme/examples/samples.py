@@ -350,6 +350,7 @@ class ExamplePydanticClass(BaseModel):
         default=3.14,
         description="A simple optional parameter using field for default value and description.",
     )
+    "A simple optional parameter using field for default value and description."
 
     value_with_constraints: float = Field(
         default=10.0,
@@ -358,3 +359,4 @@ class ExamplePydanticClass(BaseModel):
         le=100.0,
         ge=0.0,
     )
+    "A optional parameter with constraints using field for default value, description and constraints."
