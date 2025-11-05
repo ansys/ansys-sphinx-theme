@@ -22,6 +22,7 @@
 
 """Sample classes and functions for ansys-sphinx-theme."""
 
+from dataclasses import dataclass, field
 from math import sqrt
 
 
@@ -269,3 +270,39 @@ class Complex(object):
         if self._imag < 0:
             return f"({self._real} - {abs(self._imag)}j)"
         return f"({self._real} + {self._imag}j)"
+
+
+@dataclass
+class ExampleDataClass:
+    """An example dataclass.
+
+    Parameters
+    ----------
+    value : float
+        A mandatory parameter.
+    value_with_default : float, optional
+        An optional parameter with a default value of 3.14.
+    value_with_default_field : float, optional
+        An optional parameter using field for the defaults and description.
+        Default is 10.0.
+
+    Examples
+    --------
+    >>> example = ExampleDataClass(value=42)
+    >>> example.value
+    42
+    >>> example.value_with_default
+    3.14
+    >>> example.value_with_default_field
+    10.0
+
+    """
+
+    value: float
+    """A mandatory parameter."""
+
+    value_with_default: float = 3.14
+    """An optional parameter with a default value."""
+
+    value_with_default_field: float = field(default=10.0)
+    "An optional parameter using field for the default value"
