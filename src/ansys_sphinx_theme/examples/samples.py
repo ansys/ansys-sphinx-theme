@@ -285,8 +285,8 @@ class ExampleDataClass:
     value_with_default : float, optional
         An optional parameter with a default value of 3.14.
     value_with_default_field : float, optional
-        An optional parameter using field for the defaults and description.
-        Default is 10.0.
+        An optional parameter using field for the default value.
+        Default is 3.14.
 
     Examples
     --------
@@ -296,7 +296,7 @@ class ExampleDataClass:
     >>> example.value_with_default
     3.14
     >>> example.value_with_default_field
-    10.0
+    3.14
 
     """
 
@@ -306,8 +306,8 @@ class ExampleDataClass:
     value_with_default: float = 3.14
     """An optional parameter with a default value."""
 
-    value_with_default_field: float = field(default=10.0)
-    "An optional parameter using field for the default value"
+    value_with_default_field: float = field(default=3.14)
+    """An optional parameter using field for the default value."""
 
 
 class ExamplePydanticClass(BaseModel):
@@ -316,21 +316,26 @@ class ExamplePydanticClass(BaseModel):
     Parameters
     ----------
     value : float
-        A mandatory parameter.
-    value_with_default : float, optional
-        An optional parameter with a default value of 3.14.
-    value_with_default_field : float, optional
-        An optional parameter using field for the defaults and description.
-        Default is 10.0.
+        A required parameter.
+    value_with_default1 : float, optional
+        A simple optional parameter with a default value of 3.14.
+    value_with_default2 : float, optional
+        A simple optional parameter using Field for the default value and description.
+        Default is 3.14.
+    value_with_constraints : float, optional
+        An optional parameter with constraints using Field for the default value,
+        description and constraints. Default is 10.0, with constraints: 0.0 <= value <= 100.0.
 
     Examples
     --------
-    >>> example = ExampleDataClass(value=42)
+    >>> example = ExamplePydanticClass(value=42)
     >>> example.value
     42
-    >>> example.value_with_default
+    >>> example.value_with_default1
     3.14
-    >>> example.value_with_default_field
+    >>> example.value_with_default2
+    3.14
+    >>> example.value_with_constraints
     10.0
 
     """
