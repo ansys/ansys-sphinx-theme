@@ -24,11 +24,13 @@
 
 import os
 import pathlib
-from typing import Any, Dict
-import warnings
+import re
+from typing import Any
 
 from docutils import nodes
+from pydata_sphinx_theme.toctree import traverse_or_findall
 from sphinx import addnodes
+from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
 from sphinx.util import logging
 
@@ -69,6 +71,10 @@ LOGOS_PATH = STATIC_PATH / "logos"
 
 ANSYS_LOGO_LINK = "https://www.ansys.com/"
 PYANSYS_LOGO_LINK = "https://docs.pyansys.com/"
+
+PACKAGE_HOME_HTML_PATTERN = re.compile(
+    r'<a([^>]*)href="([^"]*index\.html)"([^>]*)>\s*Home\s*</a>', re.IGNORECASE
+)
 
 # make logo paths available
 ansys_favicon = str((LOGOS_PATH / "ansys-favicon.png").absolute())
@@ -290,7 +296,7 @@ def fix_edit_html_page_context(
 
 
 def update_footer_theme(
-    app: Sphinx, pagename: str, templatename: str, context: Dict[str, Any], doctree: nodes.document
+    app: Sphinx, pagename: str, templatename: str, context: dict[str, Any], doctree: nodes.document
 ) -> None:
     """Update the version number of the Ansys Sphinx theme in the footer.
 
@@ -380,10 +386,12 @@ def configure_theme_logo(app: Sphinx):
 
     if logo_option == "ansys":
         theme_options["logo"] = ansys_logo
-        theme_options["logo_link"] = theme_options.get("logo_link", ANSYS_LOGO_LINK)
+        # Ansys logo should link to the ANSYS homepage
+        theme_options["logo_link"] = ANSYS_LOGO_LINK
     elif logo_option == "pyansys":
         theme_options["logo"] = pyansys_logo
-        theme_options["logo_link"] = theme_options.get("logo_link", PYANSYS_LOGO_LINK)
+        # PyAnsys logo should link to the PyAnsys Meta documentation
+        theme_options["logo_link"] = PYANSYS_LOGO_LINK
     elif logo_option == "no_logo":
         theme_options["logo"] = None
 
@@ -474,7 +482,93 @@ def update_search_sidebar_context(
     context["sidebars"] = sidebar
 
 
-def setup(app: Sphinx) -> Dict:
+def resolve_home_entry(app: Sphinx, doctree: nodes.document, docname: str) -> None:
+    """Add a 'Home' entry to the root TOC.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application instance for rendering the documentation.
+    doctree : nodes.document
+        Document tree for the page.
+    docname : str
+        Name of the current document.
+
+    Notes
+    -----
+    This function checks if the 'Home' entry already exists in the root TOC.
+    If it does not exist, it adds the 'Home' entry at the beginning of the TOC.
+    The 'Home' entry links to the index page of the documentation.
+    """
+    index_page = app.config.root_doc or app.config.master_doc or "index"
+
+    # Get the root TOC
+    root_toc = app.env.tocs[app.config.root_doc]
+    if not root_toc:
+        return
+
+    for toc in root_toc.findall(addnodes.toctree):
+        if not toc.attributes.get("entries"):
+            continue
+
+        # Skip if "Home" already exists
+        for title, page in toc.attributes["entries"]:
+            if title == "Home" and page in ("self", index_page):
+                return
+
+        # Insert "Home <self>" entry at the beginning
+        home_entry = ("Home", "self")
+        toc.attributes["entries"].insert(0, home_entry)
+
+
+def add_tooltip_after_build(app: Sphinx, exception):
+    """Add tooltips to 'Home' links after the build process.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application instance for rendering the documentation.
+    exception : Exception
+        Exception raised during the build process.
+
+    Returns
+    -------
+    None
+    """
+    if exception:
+        return
+
+    outdir = pathlib.Path(app.outdir)
+
+    project_name = "Package Home"
+
+    if app.config.html_short_title:
+        project_name = f"{app.config.html_short_title} home"
+    elif app.config.project:
+        project_name = f"{app.config.project} home"
+
+    for html_file in outdir.rglob("*.html"):
+        text = html_file.read_text(encoding="utf-8")
+
+        def replacer(match):
+            attrs_before, href_link, attrs_after = match.groups()
+            full_attrs = f"{attrs_before}{attrs_after}"
+
+            # don’t duplicate if title already exists
+            if "title=" in full_attrs:
+                return match.group(0)
+
+            return (
+                f'<a{attrs_before}href="{href_link}"{attrs_after} title="{project_name}">Home</a>'
+            )
+
+        new_text = PACKAGE_HOME_HTML_PATTERN.sub(replacer, text)
+
+        if new_text != text:
+            html_file.write_text(new_text, encoding="utf-8")
+
+
+def setup(app: Sphinx) -> dict:
     """Connect to the Sphinx theme app.
 
     Parameters
@@ -516,14 +610,15 @@ def setup(app: Sphinx) -> Dict:
     if whatsnew_file and changelog_file:
         app.connect("doctree-read", add_whatsnew_changelog)
         app.connect("doctree-resolved", extract_whatsnew)
-
     app.connect("html-page-context", add_sidebar_context)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", update_search_sidebar_context)
     app.connect("html-page-context", update_template_context)
+    app.connect("doctree-resolved", resolve_home_entry)
 
     app.connect("build-finished", replace_html_tag)
+    app.connect("build-finished", add_tooltip_after_build)
     if use_ansys_search:
         app.connect("build-finished", create_search_index)
 

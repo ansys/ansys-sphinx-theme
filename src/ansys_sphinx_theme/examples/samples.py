@@ -22,7 +22,10 @@
 
 """Sample classes and functions for ansys-sphinx-theme."""
 
+from dataclasses import dataclass, field
 from math import sqrt
+
+from pydantic import BaseModel, Field
 
 
 class ExampleClass:
@@ -269,3 +272,91 @@ class Complex(object):
         if self._imag < 0:
             return f"({self._real} - {abs(self._imag)}j)"
         return f"({self._real} + {self._imag}j)"
+
+
+@dataclass
+class ExampleDataClass:
+    """An example dataclass.
+
+    Parameters
+    ----------
+    value : float
+        A mandatory parameter.
+    value_with_default : float, optional
+        An optional parameter with a default value of 3.14.
+    value_with_default_field : float, optional
+        An optional parameter using field for the default value.
+        Default is 3.14.
+
+    Examples
+    --------
+    >>> example = ExampleDataClass(value=42)
+    >>> example.value
+    42
+    >>> example.value_with_default
+    3.14
+    >>> example.value_with_default_field
+    3.14
+
+    """
+
+    value: float
+    """A mandatory parameter."""
+
+    value_with_default: float = 3.14
+    """An optional parameter with a default value."""
+
+    value_with_default_field: float = field(default=3.14)
+    """An optional parameter using field for the default value."""
+
+
+class ExamplePydanticClass(BaseModel):
+    """An example Pydantic class.
+
+    Parameters
+    ----------
+    value : float
+        A required parameter.
+    value_with_default1 : float, optional
+        A simple optional parameter with a default value of 3.14.
+    value_with_default2 : float, optional
+        A simple optional parameter using Field for the default value and description.
+        Default is 3.14.
+    value_with_constraints : float, optional
+        An optional parameter with constraints using Field for the default value,
+        description and constraints. Default is 10.0, with constraints: 0.0 <= value <= 100.0.
+
+    Examples
+    --------
+    >>> example = ExamplePydanticClass(value=42)
+    >>> example.value
+    42
+    >>> example.value_with_default1
+    3.14
+    >>> example.value_with_default2
+    3.14
+    >>> example.value_with_constraints
+    10.0
+
+    """
+
+    value: float
+    """A required parameter."""
+
+    value_with_default1: float = 3.14
+    """A simple optional parameter with a default value."""
+
+    value_with_default2: float = Field(
+        default=3.14,
+        description="A simple optional parameter using field for default value and description.",
+    )
+    "A simple optional parameter using field for default value and description."
+
+    value_with_constraints: float = Field(
+        default=10.0,
+        description="A optional parameter with constraints using field for default value, "
+        "description and constraints.",
+        le=100.0,
+        ge=0.0,
+    )
+    "A optional parameter with constraints using field for default value, description and constraints."  # noqa: E501

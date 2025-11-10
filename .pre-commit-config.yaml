@@ -1,27 +1,27 @@
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.8.6
+  rev: v0.14.1
   hooks:
     - id: ruff
       args: [--fix]
     - id: ruff-format
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.3.0
+  rev: v2.4.1
   hooks:
   - id: codespell
     exclude: doc/source/examples/nbsphinx/jupyter-notebook.ipynb
     args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt", "-w"]
 
 - repo: https://github.com/pycontribs/mirrors-prettier
-  rev: v3.4.2
+  rev: v3.6.2
   hooks:
   - id: prettier
     types_or: [css, javascript]
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v5.0.0
+  rev: v6.0.0
   hooks:
   - id: check-merge-conflict
   - id: debug-statements
@@ -30,14 +30,29 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.31.0
+  rev: 0.34.1
   hooks:
     - id: check-github-workflows
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.5.1
+  rev: v0.5.2
   hooks:
   - id: add-license-headers
     files: '(src|doc/source/examples)/.*\.(py)'
     args:
     - --start_year=2021
+
+- repo: https://github.com/zizmorcore/zizmor-pre-commit
+  rev: v1.12.1
+  hooks:
+    - id: zizmor
+      args:
+      - "--no-progress"
+      - "--persona=pedantic"
+
+# Do not use this tool with proprietary ansys source code.
+- repo: "https://github.com/djlint/djLint"
+  rev: v1.36.4
+  hooks:
+    - id: djlint-jinja
+      types_or: ["html"]
