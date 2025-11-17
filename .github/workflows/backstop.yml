@@ -40,7 +40,7 @@ jobs:
 
       - name: Build documentation
         run: |
-          uv pip install -e .[doc]
+          uv pip install --group doc .
           xvfb-run make -C doc html
 
       - name: Serve documentation
