@@ -13,7 +13,6 @@ permissions:
 env:
   NODE_VERSION: "25.2.1"
   PYTHON_VERSION: "3.13"
-  DOC_PORT: 8000
 
 jobs:
   backstop-tests:
@@ -52,10 +51,10 @@ jobs:
           xvfb-run make -C doc html
 
       - name: Serve documentation
-        run: npx http-server -u -p $env.DOC_PORT ./doc/_build/html &
+        run: npx http-server -u -p 8000 ./doc/_build/html &
 
       - name: check if server is up
-        run: curl -I http://localhost:$env.DOC_PORT || true
+        run: curl -I http://localhost:8000 || true
 
       - name: Run BackstopJS tests
         run: |
