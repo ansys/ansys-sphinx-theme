@@ -53,7 +53,7 @@ changelog = [
 doc = [
     "jupytext==1.18.1",
     "nbsphinx==0.9.7",
-    "notebook==7.4.7",
+    "notebook==7.5.0",
     "numpydoc==1.9.0",
     "pandas==2.3.3",
     "Pillow>=9.0",
