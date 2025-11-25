@@ -82,12 +82,6 @@ html_theme_options = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
-    "cheatsheet": {
-        "file": "cheat_sheet.qmd",
-        "pages": ["index"],
-        "title": "PyAnsys test cheatsheet",
-        "version": __version__,
-    },
 }
 
 html_js_files = ["https://cdn.plot.ly/plotly-3.0.1.min.js"]
