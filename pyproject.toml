@@ -52,7 +52,7 @@ changelog = [
 [dependency-groups]
 doc = [
     "jupytext==1.18.1",
-    "nbsphinx==0.9.7",
+    "nbsphinx==0.9.8",
     "notebook==7.5.0",
     "numpydoc==1.9.0",
     "pandas==2.3.3",
