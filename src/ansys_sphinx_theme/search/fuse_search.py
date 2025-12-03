@@ -64,7 +64,10 @@ class SearchIndex:
         self.filter_options = filter_options
 
     def build_sections(self):
-        """Build sections from the document tree, handling subsections, descriptions, and anchors."""
+        """Build sections from the document tree.
+        
+        Nodes indexed include titles, subsections, descriptions, and anchors.
+        """
         for node in self.doc_tree.traverse(nodes.section):
             subsections = list(node.traverse(nodes.section))
 
