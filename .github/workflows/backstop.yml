@@ -1,0 +1,70 @@
+name: Backstop test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "25.2.1"
+  PYTHON_VERSION: "3.13"
+
+jobs:
+  backstop-tests:
+    name: Visual regression tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@5a7eac68fb9809dea845d802897dc5c723910fa3 # v7.1.3
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          npm install
+
+      - name: Install xvfb
+        run: sudo apt-get install -y xvfb pandoc
+
+      - name: Create virtual environment
+        run: uv venv
+
+      - name: Build documentation
+        run: |
+          source .venv/bin/activate
+          uv pip install --group doc .
+          xvfb-run make -C doc html
+
+      - name: Serve documentation
+        run: npx http-server -u -p 8000 ./doc/_build/html &
+
+      - name: check if server is up
+        run: curl -I http://localhost:8000 || true
+
+      - name: Run BackstopJS tests
+        run: |
+          npm run test
+
+      - name: Upload Backstop report (if failed)
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: backstop-report
+          path: backstop_data/html_report
+
+
