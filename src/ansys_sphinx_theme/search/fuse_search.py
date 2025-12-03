@@ -65,7 +65,7 @@ class SearchIndex:
 
     def build_sections(self):
         """Build sections from the document tree.
-        
+
         Nodes indexed include titles, subsections, descriptions, and anchors.
         """
         for node in self.doc_tree.traverse(nodes.section):
