@@ -29,8 +29,8 @@ jobs:
   labeler:
     name: "Labels"
     permissions:
-      contents: read
-      pull-requests: write
+      contents: read # To checkout code
+      pull-requests: write # To add labels to PRs
     runs-on: ubuntu-latest
     if: github.event.action != 'closed'
     steps:
@@ -53,8 +53,8 @@ jobs:
     name: "Create changelog fragment"
     needs: [labeler]
     permissions:
-      contents: write
-      pull-requests: write
+      contents: write # To push changelog fragment commit
+      pull-requests: write # To create PR if needed
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request' && github.event.action != 'closed'
     steps:
