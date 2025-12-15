@@ -27,6 +27,7 @@ from pathlib import Path
 import re
 
 from docutils import nodes
+from docutils.nodes import Element
 from sphinx.util import logging
 
 logger = logging.getLogger(__name__)
@@ -63,7 +64,10 @@ class SearchIndex:
         self.filter_options = filter_options
 
     def build_sections(self):
-        """Build sections from the document tree, handling subsections and descriptions."""
+        """Build sections from the document tree.
+
+        Nodes indexed include titles, subsections, descriptions, and anchors.
+        """
         for node in self.doc_tree.traverse(nodes.section):
             subsections = list(node.traverse(nodes.section))
 
@@ -77,6 +81,7 @@ class SearchIndex:
 
             section_title = node[0].astext()
 
+            # Remove unwanted node types
             unwanted_types = (
                 nodes.math,
                 nodes.raw,
@@ -85,14 +90,13 @@ class SearchIndex:
                 nodes.comment,
                 nodes.literal_block,
             )
-
-            # Collect all unwanted nodes first
             unwanted_nodes = [n for n in node.traverse() if isinstance(n, unwanted_types)]
-
             [n.parent.remove(n) for n in unwanted_nodes if n.parent]
-            clean_text = node.astext()
 
+            clean_text = node.astext()
             section_anchor_id = _title_to_anchor(section_title)
+
+            # Add the main section
             self.sections.append(
                 {
                     "title": section_title,
@@ -100,6 +104,32 @@ class SearchIndex:
                     "anchor_id": section_anchor_id,
                 }
             )
+
+            # Process `desc` elements (anchors) inside the section
+            for element in node.traverse(Element):
+                if element.tagname != "desc":
+                    continue
+
+                anchor_id = element.attributes.get("ids", [])
+                if element.children:
+                    for child in element.children:
+                        if child.tagname == "desc_signature" and child.attributes.get("ids"):
+                            anchor_id = child.attributes["ids"]
+
+                if isinstance(anchor_id, list) and anchor_id:
+                    anchor_id = anchor_id[0]
+                else:
+                    anchor_id = None
+
+                if anchor_id:
+                    anchor_title = f"{section_title} > {anchor_id.split('.')[-1]}"
+                    self.sections.append(
+                        {
+                            "title": anchor_title,
+                            "text": element.astext(),
+                            "anchor_id": anchor_id,
+                        }
+                    )
 
     def generate_breadcrumbs(self, section_title: str) -> str:
         """
