@@ -5,6 +5,11 @@ updates:
     insecure-external-code-execution: allow
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 5 # Fallback cooldown if no specific rule applies
+      semver-major-days: 30
+      semver-minor-days: 7
+      semver-patch-days: 3
     labels:
       - "maintenance"
       - "dependencies"
@@ -16,7 +21,11 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+    cooldown:
+      default-days: 7
+      exclude:
+        - "ansys/actions/*"
     labels:
       - "maintenance"
     assignees:
