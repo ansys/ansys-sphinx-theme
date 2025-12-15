@@ -3,7 +3,7 @@ name: CI
 on:
   workflow_dispatch:
   pull_request:
-    types: [opened, reopened, synchronize, edited, closed]
+    types: [opened, reopened, synchronize, edited]
   push:
     tags:
       - "*"
@@ -32,7 +32,6 @@ jobs:
       contents: read # To checkout code
       pull-requests: write # To add labels to PRs
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
@@ -69,7 +68,6 @@ jobs:
   code-style:
     name: Code style
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     needs: "changelog-fragment"
     steps:
       - name: "Run Ansys code style checks"
@@ -80,7 +78,6 @@ jobs:
   doc-style:
     name: Doc style
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     needs: "changelog-fragment"
     steps:
       - name: "Run Ansys documentation style checks"
@@ -91,7 +88,6 @@ jobs:
   vulnerabilities:
     name: Vulnerabilities
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     steps:
       - uses: ansys/actions/check-vulnerabilities@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
         with:
@@ -103,7 +99,6 @@ jobs:
   actions-security:
     name: Actions Security
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     steps:
       - uses: ansys/actions/check-actions-security@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
         with:
@@ -128,7 +123,6 @@ jobs:
   doc-build:
     name: Doc building
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     needs: doc-style
     steps:
       - name: "Run Ansys documentation building action"
@@ -148,10 +142,6 @@ jobs:
       contents: write # To upload documentation as PR artifacts
       pull-requests: write # To post comments with doc links
     needs: [doc-build]
-    # Run when the PR is closed i.e. when docs job is skipped
-    if: |
-      always() &&
-      (needs.doc-build.result == 'success' || needs.doc-build.result == 'skipped')
     steps:
       - uses: ansys/actions/doc-deploy-pr@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
         with:
@@ -193,7 +183,6 @@ jobs:
   smoke-tests:
     name: Build and smoke tests
     runs-on: ${{ matrix.os }}
-    if: github.event.action != 'closed'
     needs: [code-style]
     strategy:
       fail-fast: false
@@ -217,7 +206,6 @@ jobs:
   build-library:
     name: "Build library"
     runs-on: ubuntu-latest
-    if: github.event.action != 'closed'
     needs: [doc-build, smoke-tests]
     steps:
       - name: "Build library source and wheel artifacts"
