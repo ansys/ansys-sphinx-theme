@@ -55,7 +55,7 @@ jobs:
       contents: write # To push changelog fragment commit
       pull-requests: write # To create PR if needed
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request' && github.event.action != 'closed'
+    if: github.event_name == 'pull_request'
     steps:
     - uses: ansys/actions/doc-changelog@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
       with:
