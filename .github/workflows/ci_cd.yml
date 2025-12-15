@@ -12,8 +12,8 @@ on:
 
 
 permissions:
-  contents: read
-  pull-requests: read
+  contents: read # To checkout code
+  pull-requests: read # To read PR metadata
 
 env:
   MAIN_PYTHON_VERSION : '3.13'
@@ -116,8 +116,8 @@ jobs:
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
+      contents: write # To push changelog update commit
+      pull-requests: write # To create PR if needed
     steps:
       - uses: ansys/actions/doc-deploy-changelog@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
         with:
@@ -145,8 +145,8 @@ jobs:
     name: "Deploy PR documentation"
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      pull-requests: write
+      contents: write # To upload documentation as PR artifacts
+      pull-requests: write # To post comments with doc links
     needs: [doc-build]
     # Run when the PR is closed i.e. when docs job is skipped
     if: |
@@ -231,8 +231,9 @@ jobs:
     needs: [build-library, update-changelog]
     environment: release
     permissions:
-      id-token: write
-      contents: write
+      id-token: write # For actions that require OIDC token
+      contents: write # To push changelog update commit
+      pull-requests: write # To create PR if needed
     runs-on: ubuntu-latest
     steps:
 
