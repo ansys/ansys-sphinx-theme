@@ -12,8 +12,6 @@
       "height": 1080
     }
   ],
-  "onBeforeScript": "puppet/onBefore.js",
-  "onReadyScript": "puppet/onReady.js",
   "scenarios": [
     {
       "label": "Ansys Sphinx Theme - Home Page",
