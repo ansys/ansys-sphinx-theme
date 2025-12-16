@@ -90,7 +90,7 @@ html_js_files = ["https://cdn.plot.ly/plotly-3.0.1.min.js"]
 
 # Sphinx extensions
 extensions = [
-    #"numpydoc",
+    # "numpydoc",
     "sphinx_design",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",

@@ -1,4 +1,5 @@
 name: Backstop test
+
 on:
   push:
     branches:
@@ -7,8 +8,12 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
-  contents: read
+  contents: read # To checkout code
 
 env:
   NODE_VERSION: "25.2.1"
