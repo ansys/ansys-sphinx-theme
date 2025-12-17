@@ -28,7 +28,7 @@ import re
 from typing import Any
 
 from docutils import nodes
-from pydata_sphinx_theme.toctree import traverse_or_findall
+from pydata_sphinx_theme.toctree import traverse_or_findall  # type: ignore
 from sphinx import addnodes
 from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
@@ -50,11 +50,11 @@ from ansys_sphinx_theme.whatsnew import (
 )
 
 try:
-    import importlib.metadata as importlib_metadata
+    import importlib.metadata as importlib_metadata_pkg
 except ModuleNotFoundError:  # pragma: no cover
-    import importlib_metadata
+    import importlib_metadata as importlib_metadata_pkg  # type: ignore
 
-__version__ = importlib_metadata.version(__name__.replace(".", "-"))
+__version__ = importlib_metadata_pkg.version(__name__.replace(".", "-"))
 logger = logging.getLogger(__name__)
 
 
@@ -222,7 +222,7 @@ def fix_edit_html_page_context(
     see https://github.com/pyvista/pyvista/pull/4113
     """
 
-    def fix_edit_link_page(link: str) -> str:
+    def fix_edit_link_page(link: str) -> str | None:
         """Transform "edit on GitHub" links to the correct URL.
 
         This function fixes the URL for the "edit this page" link.
@@ -270,6 +270,7 @@ def fix_edit_html_page_context(
                 except ValueError as e:
                     logger.error(f"An error occurred: {e}")  # Log the exception as debug info
                     return link
+            return link
 
         elif "api" in pagename:
             for obj_node in list(doctree.findall(addnodes.desc)):
@@ -288,6 +289,7 @@ def fix_edit_html_page_context(
                         return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{github_source}/{modname}.{domain}"  # noqa: E501
                     else:
                         return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{modname}.{domain}"  # noqa: E501
+            return link
 
         else:
             return link
@@ -439,7 +441,8 @@ def add_sidebar_context(
 
     if whatsnew_pages and pagename in whatsnew_pages:
         whatsnew = context.get("whatsnew", [])
-        whatsnew.extend(app.env.whatsnew)
+        if hasattr(app.env, "whatsnew"):
+            whatsnew.extend(app.env.whatsnew)
         context["whatsnew"] = whatsnew
         sidebars_to_add.append("whatsnew")
 
@@ -584,7 +587,7 @@ def setup(app: Sphinx) -> dict:
     """
     # Add the theme configuration
     theme_path = get_html_theme_path()
-    app.add_html_theme("ansys_sphinx_theme", theme_path)
+    app.add_html_theme("ansys_sphinx_theme", str(theme_path))
     app.config.templates_path.append(str(THEME_PATH / "components"))
 
     # Add default HTML configuration

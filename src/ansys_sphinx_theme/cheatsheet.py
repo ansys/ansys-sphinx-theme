@@ -167,7 +167,7 @@ def build_quarto_cheatsheet(app: Sphinx) -> None:
             "--to",
             "cheat_sheet-pdf",
             "--output-dir",
-            output_dir_path,
+            str(output_dir_path),
             "-V",
             f"version={version}",
         ],
