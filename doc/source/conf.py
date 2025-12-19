@@ -82,6 +82,25 @@ html_theme_options = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
+    "latest_news": {
+        "title": "Latest News",
+        "items": [
+            {
+                "title": "Ansys 2024 R1 Released",
+                "url": "https://www.ansys.com/products/release-highlights",
+                "date": "2024-01-15",
+                "excerpt": "New features and simulation capabilities now available.",
+            },
+            {
+                "title": "PyAnsys Documentation Updated",
+                "url": "/getting-started",
+                "date": "2024-01-10",
+                "excerpt": "Enhanced tutorials and examples added.",
+            },
+        ],
+        "more_url": "https://www.ansys.com/news",
+        "more_text": "View all news",
+    },
 }
 
 
