@@ -58,7 +58,7 @@ jobs:
       - name: Serve documentation
         run: npx http-server -u -p 8000 ./doc/_build/html &
 
-      - name: check if server is up
+      - name: Check if server is up
         run: curl -I http://localhost:8000
 
       - name: Run BackstopJS tests
