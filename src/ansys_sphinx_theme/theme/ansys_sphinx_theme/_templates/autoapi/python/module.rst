@@ -249,4 +249,9 @@ Module detail
 {% endif %}
 {% endif %}
 
+.. minigallery::
+    :add-heading: Examples using {{ obj.obj["full_name"] }}
+
+    {{ obj.obj["full_name"] }}
+
 {# ---------------------- End module detail description -------------------- #}
