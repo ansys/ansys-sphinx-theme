@@ -32,6 +32,7 @@ jobs:
       contents: read # To checkout code
       pull-requests: write # To add labels to PRs
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
@@ -48,29 +49,35 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
 
-  changelog-fragment:
-    name: "Create changelog fragment"
+  changelog:
+    name: "Changelog"
     needs: [labeler]
     permissions:
       contents: write # To push changelog fragment commit
       pull-requests: write # To create PR if needed
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
     steps:
-    - uses: ansys/actions/doc-changelog@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
-      with:
-        token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
-        use-conventional-commits: true
-        use-default-towncrier-config: true
-        bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
-        bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+      - name: "Create fragment"
+        uses: ansys/actions/doc-changelog@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        if: github.event_name == 'pull_request'
+        with:
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          use-conventional-commits: true
+          use-default-towncrier-config: true
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
+
+      - name: "Update changelog"
+        uses: ansys/actions/doc-deploy-changelog@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        with:
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
   code-style:
     name: Code style
     runs-on: ubuntu-latest
-    needs: "changelog-fragment"
-    # To ensure the job still runs on push to main or push of tags
-    if: ${{ !cancelled() && (needs.changelog-fragment.result == 'success' || needs.changelog-fragment.result == 'skipped') }}
+    needs: changelog
     steps:
       - name: "Run Ansys code style checks"
         uses: ansys/actions/code-style@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
@@ -80,18 +87,17 @@ jobs:
   doc-style:
     name: Doc style
     runs-on: ubuntu-latest
-    needs: "changelog-fragment"
-    # To ensure the job still runs on push to main or push of tags
-    if: ${{ !cancelled() && (needs.changelog-fragment.result == 'success' || needs.changelog-fragment.result == 'skipped') }}
+    needs: changelog
     steps:
       - name: "Run Ansys documentation style checks"
         uses: ansys/actions/doc-style@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-  vulnerabilities:
+  check-vulnerabilities:
     name: Vulnerabilities
     runs-on: ubuntu-latest
+    needs: changelog
     steps:
       - uses: ansys/actions/check-vulnerabilities@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
         with:
@@ -100,29 +106,16 @@ jobs:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
           dev-mode: ${{ github.ref != 'refs/heads/main' }}
 
-  actions-security:
+  check-actions:
     name: Actions Security
     runs-on: ubuntu-latest
+    needs: changelog
     steps:
       - uses: ansys/actions/check-actions-security@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
         with:
           generate-summary: true
           token: ${{ secrets.GITHUB_TOKEN }}
           auditing-level: 'high'
-
-  update-changelog:
-    name: "Update CHANGELOG (on release)"
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write # To push changelog update commit
-      pull-requests: write # To create PR if needed
-    steps:
-      - uses: ansys/actions/doc-deploy-changelog@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
-        with:
-          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
-          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
-          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
   doc-build:
     name: Doc building
@@ -145,7 +138,7 @@ jobs:
     permissions:
       contents: write # To upload documentation as PR artifacts
       pull-requests: write # To post comments with doc links
-    needs: [doc-build]
+    needs: doc-build
     steps:
       - uses: ansys/actions/doc-deploy-pr@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
         with:
@@ -154,6 +147,38 @@ jobs:
           bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
           bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
           maximum-pr-doc-deployments: 20
+
+  wheelhouse:
+    name: "Wheelhouse ${{ matrix.os }} ${{ matrix.python-version }}"
+    runs-on: ${{ matrix.os }}
+    needs: code-style
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.10', '3.11', '3.12', '3.13']
+        should-release:
+          - ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') }}
+        exclude:
+          - should-release: false
+            os: macos-latest
+    steps:
+      - uses: ansys/actions/build-wheelhouse@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
+          operating-system: ${{ matrix.os }}
+          python-version: ${{ matrix.python-version }}
+          whitelist-license-check: "Sphinx" # This has BSD licence , but check failed
+
+  build-library:
+    name: "Build library"
+    runs-on: ubuntu-latest
+    needs: [check-vulnerabilities, check-actions, doc-build, wheelhouse]
+    steps:
+      - name: "Build library source and wheel artifacts"
+        uses: ansys/actions/build-library@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        with:
+          library-name: ${{ env.PACKAGE_NAME }}
 
   doc-deploy-development:
     name: Doc dev version deploy
@@ -169,58 +194,10 @@ jobs:
             bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
             bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
-  doc-deploy-stable:
-    name: Doc stable version deploy
-    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-    runs-on: ubuntu-latest
-    needs: release
-    steps:
-      - name: "Deploy stable documentation"
-        uses: ansys/actions/doc-deploy-stable@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
-        with:
-          cname: ${{ env.DOCUMENTATION_CNAME }}
-          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
-          python-version: ${{ env.MAIN_PYTHON_VERSION }}
-          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
-          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
-
-  smoke-tests:
-    name: Build and smoke tests
-    runs-on: ${{ matrix.os }}
-    needs: [code-style]
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.10', '3.11', '3.12', '3.13']
-        should-release:
-          - ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') }}
-        exclude:
-          - should-release: false
-            os: macos-latest
-    steps:
-      - name: "Build wheelhouse and perform smoke test"
-        uses: ansys/actions/build-wheelhouse@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
-        with:
-          library-name: ${{ env.PACKAGE_NAME }}
-          operating-system: ${{ matrix.os }}
-          python-version: ${{ matrix.python-version }}
-          whitelist-license-check: "Sphinx" # This has BSD licence , but check failed
-
-  build-library:
-    name: "Build library"
-    runs-on: ubuntu-latest
-    needs: [doc-build, smoke-tests]
-    steps:
-      - name: "Build library source and wheel artifacts"
-        uses: ansys/actions/build-library@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
-        with:
-          library-name: ${{ env.PACKAGE_NAME }}
-
   release:
     name: "Release project to private PyPI, public PyPI and GitHub"
     if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
-    needs: [build-library, update-changelog]
+    needs: build-library
     environment: release
     permissions:
       id-token: write # For actions that require OIDC token
@@ -256,3 +233,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           library-name: ${{ env.PACKAGE_NAME }}
           changelog-release-notes: true
+
+  doc-deploy-stable:
+    name: Doc stable version deploy
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    needs: release
+    steps:
+      - name: "Deploy stable documentation"
+        uses: ansys/actions/doc-deploy-stable@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        with:
+          cname: ${{ env.DOCUMENTATION_CNAME }}
+          token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
+          python-version: ${{ env.MAIN_PYTHON_VERSION }}
+          bot-user: ${{ secrets.PYANSYS_CI_BOT_USERNAME }}
+          bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
