@@ -171,7 +171,7 @@ jobs:
     permissions:
       contents: write # To upload documentation as PR artifacts
       pull-requests: write # To post comments with doc links
-    needs: doc-deploy-pr
+    needs: build-library
     steps:
       - uses: ansys/actions/doc-deploy-pr@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
         with:
