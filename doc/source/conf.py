@@ -84,7 +84,6 @@ html_theme_options = {
     },
 }
 
-
 html_js_files = ["https://cdn.plot.ly/plotly-3.0.1.min.js"]
 
 
