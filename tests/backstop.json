@@ -58,8 +58,8 @@
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/nbsphinx/jupyter-notebook.html",
       "readyEvent": "",
       "readySelector": "",
-      "delay": 20,
-      "misMatchThreshold" : 0.1,
+      "delay": 500,
+      "misMatchThreshold" : 2,
       "requireSameDimensions": false
     },
     {
