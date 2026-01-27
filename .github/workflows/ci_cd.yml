@@ -68,9 +68,6 @@ jobs:
   code-style:
     name: Code style
     runs-on: ubuntu-latest
-    needs: "changelog-fragment"
-    # To ensure the job still runs on push to main or push of tags
-    if: ${{ !cancelled() && (needs.changelog-fragment.result == 'success' || needs.changelog-fragment.result == 'skipped') }}
     steps:
       - name: "Run Ansys code style checks"
         uses: ansys/actions/code-style@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
@@ -80,9 +77,6 @@ jobs:
   doc-style:
     name: Doc style
     runs-on: ubuntu-latest
-    needs: "changelog-fragment"
-    # To ensure the job still runs on push to main or push of tags
-    if: ${{ !cancelled() && (needs.changelog-fragment.result == 'success' || needs.changelog-fragment.result == 'skipped') }}
     steps:
       - name: "Run Ansys documentation style checks"
         uses: ansys/actions/doc-style@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
