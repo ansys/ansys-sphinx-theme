@@ -60,7 +60,14 @@
       "readySelector": "",
       "delay": 20,
       "misMatchThreshold" : 2.5,
-      "requireSameDimensions": false
+      "requireSameDimensions": false,
+      "viewports": [
+        {
+          "label": "desktop",
+          "width": 1920,
+          "height": 1080
+        }
+      ]
     },
     {
       "label": "Ansys Sphinx Theme - examples- table page",
