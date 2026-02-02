@@ -8,6 +8,264 @@ Release notes
 
 .. towncrier release notes start
 
+`1.7.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.7.0>`_ (January 28, 2026)
+=============================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Cleanup \`\`js\`\`
+          - `#798 <https://github.com/ansys/ansys-sphinx-theme/pull/798>`_
+
+        * - Add backstop js test
+          - `#804 <https://github.com/ansys/ansys-sphinx-theme/pull/804>`_
+
+        * - Use dependency groups
+          - `#823 <https://github.com/ansys/ansys-sphinx-theme/pull/823>`_
+
+        * - Add dataclass and pydantic class example
+          - `#832 <https://github.com/ansys/ansys-sphinx-theme/pull/832>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Style fixes with navigation dropdown
+          - `#785 <https://github.com/ansys/ansys-sphinx-theme/pull/785>`_
+
+        * - Update contact mail
+          - `#821 <https://github.com/ansys/ansys-sphinx-theme/pull/821>`_
+
+        * - Doc-deploy-pr
+          - `#825 <https://github.com/ansys/ansys-sphinx-theme/pull/825>`_
+
+        * - Update license year
+          - `#862 <https://github.com/ansys/ansys-sphinx-theme/pull/862>`_
+
+        * - Sphinx design version
+          - `#872 <https://github.com/ansys/ansys-sphinx-theme/pull/872>`_
+
+        * - Workflow layout
+          - `#874 <https://github.com/ansys/ansys-sphinx-theme/pull/874>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Update \`\`CONTRIBUTORS.md\`\` with the latest contributors
+          - `#835 <https://github.com/ansys/ansys-sphinx-theme/pull/835>`_
+
+        * - Update CONTRIBUTING.md
+          - `#846 <https://github.com/ansys/ansys-sphinx-theme/pull/846>`_
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Bump pyvista[jupyter] from 0.46.2 to 0.46.3
+          - `#782 <https://github.com/ansys/ansys-sphinx-theme/pull/782>`_
+
+        * - Bump jupytext from 1.17.2 to 1.17.3
+          - `#786 <https://github.com/ansys/ansys-sphinx-theme/pull/786>`_
+
+        * - Bump tox from 4.28.4 to 4.29.0
+          - `#787 <https://github.com/ansys/ansys-sphinx-theme/pull/787>`_
+
+        * - Bump pygithub from 2.7.0 to 2.8.1
+          - `#789 <https://github.com/ansys/ansys-sphinx-theme/pull/789>`_
+
+        * - Bump tox from 4.29.0 to 4.30.2
+          - `#791 <https://github.com/ansys/ansys-sphinx-theme/pull/791>`_
+
+        * - Bump pyyaml from 6.0.2 to 6.0.3
+          - `#800 <https://github.com/ansys/ansys-sphinx-theme/pull/800>`_
+
+        * - Bump notebook from 7.4.5 to 7.4.7
+          - `#802 <https://github.com/ansys/ansys-sphinx-theme/pull/802>`_
+
+        * - Bump pandas from 2.3.2 to 2.3.3
+          - `#803 <https://github.com/ansys/ansys-sphinx-theme/pull/803>`_
+
+        * - Bump tox from 4.30.2 to 4.30.3
+          - `#806 <https://github.com/ansys/ansys-sphinx-theme/pull/806>`_
+
+        * - Bump plotly from 6.3.0 to 6.3.1
+          - `#807 <https://github.com/ansys/ansys-sphinx-theme/pull/807>`_
+
+        * - Bump tox from 4.30.3 to 4.31.0
+          - `#819 <https://github.com/ansys/ansys-sphinx-theme/pull/819>`_
+
+        * - Bump jupytext from 1.17.3 to 1.18.1
+          - `#822 <https://github.com/ansys/ansys-sphinx-theme/pull/822>`_
+
+        * - Update to tox==4.32.0
+          - `#827 <https://github.com/ansys/ansys-sphinx-theme/pull/827>`_
+
+        * - Bump pyvista[jupyter] from 0.46.3 to 0.46.4
+          - `#828 <https://github.com/ansys/ansys-sphinx-theme/pull/828>`_
+
+        * - Bump plotly from 6.3.1 to 6.4.0
+          - `#831 <https://github.com/ansys/ansys-sphinx-theme/pull/831>`_
+
+        * - Bump pydantic from 2.12.3 to 2.12.4
+          - `#834 <https://github.com/ansys/ansys-sphinx-theme/pull/834>`_
+
+        * - Bump plotly from 6.4.0 to 6.5.0
+          - `#836 <https://github.com/ansys/ansys-sphinx-theme/pull/836>`_
+
+        * - Bump notebook from 7.4.7 to 7.5.0
+          - `#837 <https://github.com/ansys/ansys-sphinx-theme/pull/837>`_
+
+        * - Bump pydantic from 2.12.4 to 2.12.5
+          - `#841 <https://github.com/ansys/ansys-sphinx-theme/pull/841>`_
+
+        * - Bump nbsphinx from 0.9.7 to 0.9.8
+          - `#842 <https://github.com/ansys/ansys-sphinx-theme/pull/842>`_
+
+        * - Bump numpydoc from 1.9.0 to 1.10.0
+          - `#844 <https://github.com/ansys/ansys-sphinx-theme/pull/844>`_
+
+        * - Bump sphinx-gallery from 0.19.0 to 0.20.0
+          - `#845 <https://github.com/ansys/ansys-sphinx-theme/pull/845>`_
+
+        * - Bump notebook from 7.5.0 to 7.5.1
+          - `#857 <https://github.com/ansys/ansys-sphinx-theme/pull/857>`_
+
+        * - Bump sphinx-theme-builder[cli] from 0.2.0b2 to 0.2.0
+          - `#858 <https://github.com/ansys/ansys-sphinx-theme/pull/858>`_
+
+        * - Bump sphinx-theme-builder[cli] from 0.2.0 to 0.3.2
+          - `#859 <https://github.com/ansys/ansys-sphinx-theme/pull/859>`_
+
+        * - Bump tox from 4.32.0 to 4.33.0
+          - `#860 <https://github.com/ansys/ansys-sphinx-theme/pull/860>`_
+
+        * - Bump plotly from 6.5.0 to 6.5.1
+          - `#861 <https://github.com/ansys/ansys-sphinx-theme/pull/861>`_
+
+        * - Bump notebook from 7.5.1 to 7.5.2
+          - `#864 <https://github.com/ansys/ansys-sphinx-theme/pull/864>`_
+
+        * - Bump plotly from 6.5.1 to 6.5.2
+          - `#865 <https://github.com/ansys/ansys-sphinx-theme/pull/865>`_
+
+        * - Bump pyvista[jupyter] from 0.46.4 to 0.46.5
+          - `#866 <https://github.com/ansys/ansys-sphinx-theme/pull/866>`_
+
+        * - Bump tox from 4.33.0 to 4.34.1
+          - `#868 <https://github.com/ansys/ansys-sphinx-theme/pull/868>`_
+
+        * - Bump jupytext from 1.18.1 to 1.19.0
+          - `#870 <https://github.com/ansys/ansys-sphinx-theme/pull/870>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Update CHANGELOG for v1.6.0
+          - `#781 <https://github.com/ansys/ansys-sphinx-theme/pull/781>`_
+
+        * - Bump version 1.7.dev0
+          - `#783 <https://github.com/ansys/ansys-sphinx-theme/pull/783>`_
+
+        * - Bump the actions group with 3 updates
+          - `#793 <https://github.com/ansys/ansys-sphinx-theme/pull/793>`_, `#871 <https://github.com/ansys/ansys-sphinx-theme/pull/871>`_
+
+        * - Update CHANGELOG for v1.6.1
+          - `#797 <https://github.com/ansys/ansys-sphinx-theme/pull/797>`_
+
+        * - Bump ansys/actions from 10.0.20 to 10.1.1 in the actions group
+          - `#799 <https://github.com/ansys/ansys-sphinx-theme/pull/799>`_
+
+        * - Bump ansys/actions from 10.1.1 to 10.1.2 in the actions group
+          - `#801 <https://github.com/ansys/ansys-sphinx-theme/pull/801>`_
+
+        * - Bump ansys/actions from 10.1.2 to 10.1.4 in the actions group
+          - `#808 <https://github.com/ansys/ansys-sphinx-theme/pull/808>`_
+
+        * - Add pull request preview action
+          - `#813 <https://github.com/ansys/ansys-sphinx-theme/pull/813>`_
+
+        * - Update CHANGELOG for v1.6.2
+          - `#817 <https://github.com/ansys/ansys-sphinx-theme/pull/817>`_
+
+        * - Update CHANGELOG for v1.6.3
+          - `#818 <https://github.com/ansys/ansys-sphinx-theme/pull/818>`_
+
+        * - Add \`zizmor\` security actions
+          - `#820 <https://github.com/ansys/ansys-sphinx-theme/pull/820>`_
+
+        * - Bump actions/download-artifact from 5.0.0 to 6.0.0 in the actions group
+          - `#826 <https://github.com/ansys/ansys-sphinx-theme/pull/826>`_
+
+        * - Bump ansys/actions from 10.1.4 to 10.1.5 in the actions group
+          - `#829 <https://github.com/ansys/ansys-sphinx-theme/pull/829>`_
+
+        * - Bump actions/checkout from 5.0.0 to 6.0.0 in the actions group
+          - `#839 <https://github.com/ansys/ansys-sphinx-theme/pull/839>`_
+
+        * - Update missing or outdated files
+          - `#843 <https://github.com/ansys/ansys-sphinx-theme/pull/843>`_
+
+        * - Update doc-deploy-pr configuration in workflow
+          - `#847 <https://github.com/ansys/ansys-sphinx-theme/pull/847>`_
+
+        * - Update CHANGELOG for v1.6.4
+          - `#850 <https://github.com/ansys/ansys-sphinx-theme/pull/850>`_
+
+        * - Bump the actions group across 1 directory with 3 updates
+          - `#851 <https://github.com/ansys/ansys-sphinx-theme/pull/851>`_
+
+        * - Update workflow
+          - `#852 <https://github.com/ansys/ansys-sphinx-theme/pull/852>`_
+
+        * - Update workflow dependencies
+          - `#853 <https://github.com/ansys/ansys-sphinx-theme/pull/853>`_
+
+        * - Update job dependencies
+          - `#854 <https://github.com/ansys/ansys-sphinx-theme/pull/854>`_
+
+        * - Bump actions/checkout from 6.0.1 to 6.0.2 in the actions group
+          - `#869 <https://github.com/ansys/ansys-sphinx-theme/pull/869>`_
+
+        * - Fix labels
+          - `#876 <https://github.com/ansys/ansys-sphinx-theme/pull/876>`_
+
+
+`1.6.4 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.6.4>`_ (December 09, 2025)
+==============================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Index anchors
+          - `#848 <https://github.com/ansys/ansys-sphinx-theme/pull/848>`_
+
+
 `1.6.3 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.6.3>`_ (October 08, 2025)
 =============================================================================================
 
