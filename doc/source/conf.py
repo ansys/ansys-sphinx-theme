@@ -162,7 +162,7 @@ if switcher_version != "dev":
         f"https://github.com/ansys/ansys-sphinx-theme/releases/tag/v{__version__}"
     )
 
-# latex_engine = "xelatex"
+latex_engine = "xelatex"
 
 # Configure the Jinja contexts
 
