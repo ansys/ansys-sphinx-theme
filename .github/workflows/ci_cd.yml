@@ -130,7 +130,7 @@ jobs:
           optional-dependencies-name: ''
           add-pdf-html-docs-as-assets: true
           requires-xvfb: true
-          dependencies: 'pandoc texlive-full'
+          dependencies: 'pandoc texlive-xetex texlive-fonts-extra texlive-latex-extra latexmk'
 
   wheelhouse:
     name: "Wheelhouse ${{ matrix.os }} ${{ matrix.python-version }}"
