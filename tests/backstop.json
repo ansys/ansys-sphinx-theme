@@ -1,0 +1,121 @@
+{
+  "id": "ansys_sphinx_theme_backstop",
+  "viewports": [
+    {
+      "label": "tablet",
+      "width": 1024,
+      "height": 768
+    },
+    {
+      "label": "desktop",
+      "width": 1920,
+      "height": 1080
+    }
+  ],
+  "scenarios": [
+    {
+      "label": "Ansys Sphinx Theme - Home Page",
+      "cookiePath": "backstop_data/engine_scripts/cookies.json",
+      "url": "http://localhost:8000",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev",
+      "readyEvent": "",
+      "readySelector": "",
+      "delay": 20,
+      "hideSelectors": [],
+      "removeSelectors": [],
+      "hoverSelector": "",
+      "clickSelector": "",
+      "postInteractionWait": 0,
+      "selectors": [],
+      "selectorExpansion": true,
+      "expect": 0,
+      "misMatchThreshold" : 0.1,
+      "requireSameDimensions": true
+    },
+    {
+      "label": "Ansys Sphinx Theme - sphinx design example page",
+      "url": "http://localhost:8000/examples/sphinx-design.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/sphinx-design.html",
+      "readyEvent": "",
+      "readySelector": "",
+      "delay": 20,
+      "misMatchThreshold" : 0.1,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Ansys Sphinx Theme - api reference example page",
+      "url": "http://localhost:8000/examples/api/examples/index.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/api/examples/index.html",
+      "readyEvent": "",
+      "readySelector": "",
+      "delay": 20,
+      "misMatchThreshold" : 0.2,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Ansys Sphinx Theme - jupyter notebook example page",
+      "url": "http://localhost:8000/examples/nbsphinx/jupyter-notebook.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/nbsphinx/jupyter-notebook.html",
+      "readyEvent": "",
+      "readySelector": "",
+      "delay": 20,
+      "misMatchThreshold" : 2.5,
+      "requireSameDimensions": false,
+      "viewports": [
+      {
+        "label": "desktop",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+    },
+    {
+      "label": "Ansys Sphinx Theme - examples- table page",
+      "url": "http://localhost:8000/examples/table.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/table.html",
+      "readyEvent": "",
+      "readySelector": "",
+      "delay": 20,
+      "misMatchThreshold" : 0.1,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Ansys Sphinx Theme - admonitions example page",
+      "url": "http://localhost:8000/examples/admonitions.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/admonitions.html",
+      "readyEvent": "",
+      "readySelector": "",
+      "delay": 20,
+      "misMatchThreshold" : 0.1,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Ansys Sphinx Theme - gallery examples page",
+      "url": "http://localhost:8000/examples/gallery-examples/index.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/gallery-examples/index.html",
+      "delay": 20,
+      "misMatchThreshold" : 0.1,
+      "requireSameDimensions": false
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "tests/backstop_data/bitmaps_reference",
+    "bitmaps_test": "tests/backstop_data/bitmaps_test",
+    "engine_scripts": "tests/backstop_data/engine_scripts",
+    "html_report": "tests/backstop_data/html_report",
+    "ci_report": "tests/backstop_data/ci_report"
+  },
+  "ci": {
+    "format": "junit",
+    "testReportFileName": "myproject-xunit"
+  },
+  "report": ["browser","CI"],
+  "engine": "puppet",
+  "engineOptions": {
+    "args": ["--no-sandbox"]
+  },
+  "asyncCaptureLimit": 5,
+  "asyncCompareLimit": 50,
+  "debug": false,
+  "debugWindow": false
+}
