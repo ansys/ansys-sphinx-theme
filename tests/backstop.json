@@ -60,7 +60,14 @@
       "readySelector": "",
       "delay": 20,
       "misMatchThreshold" : 2.5,
-      "requireSameDimensions": false
+      "requireSameDimensions": false,
+      "viewports": [
+      {
+        "label": "desktop",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
     },
     {
       "label": "Ansys Sphinx Theme - examples- table page",
@@ -92,11 +99,11 @@
     }
   ],
   "paths": {
-    "bitmaps_reference": "backstop_data/bitmaps_reference",
-    "bitmaps_test": "backstop_data/bitmaps_test",
-    "engine_scripts": "backstop_data/engine_scripts",
-    "html_report": "backstop_data/html_report",
-    "ci_report": "backstop_data/ci_report"
+    "bitmaps_reference": "tests/backstop_data/bitmaps_reference",
+    "bitmaps_test": "tests/backstop_data/bitmaps_test",
+    "engine_scripts": "tests/backstop_data/engine_scripts",
+    "html_report": "tests/backstop_data/html_report",
+    "ci_report": "tests/backstop_data/ci_report"
   },
   "ci": {
     "format": "junit",
