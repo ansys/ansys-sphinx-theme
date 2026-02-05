@@ -51,9 +51,9 @@ changelog = [
 
 [dependency-groups]
 doc = [
-    "jupytext==1.19.0",
+    "jupytext==1.19.1",
     "nbsphinx==0.9.8",
-    "notebook==7.5.2",
+    "notebook==7.5.3",
     "numpydoc==1.10.0",
     "pandas==2.3.3",
     "Pillow>=9.0",
