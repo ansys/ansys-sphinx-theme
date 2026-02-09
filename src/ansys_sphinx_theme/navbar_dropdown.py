@@ -29,7 +29,6 @@ from typing import TypedDict
 
 import bs4
 from docutils import nodes
-import sphinx
 from sphinx.application import Sphinx
 from sphinx.util import logging
 from sphinx.util.nodes import make_refnode
@@ -48,7 +47,7 @@ class NavEntry(TypedDict, total=False):
     sections: list["NavEntry"]
 
 
-def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
+def load_navbar_configuration(app: Sphinx) -> None:
     """Load the navbar configuration from a YAML file for the Sphinx app."""
     navigation_theme_options = app.config.html_theme_options.get("navigation_dropdown", {})
     if not navigation_theme_options or "layout_file" not in navigation_theme_options:

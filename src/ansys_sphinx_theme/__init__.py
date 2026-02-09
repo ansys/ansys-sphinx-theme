@@ -22,13 +22,13 @@
 
 """Module for the Ansys Sphinx theme."""
 
+import importlib.metadata as importlib_metadata
 import os
 import pathlib
 import re
 from typing import Any
 
 from docutils import nodes
-from pydata_sphinx_theme.toctree import traverse_or_findall  # type: ignore
 from sphinx import addnodes
 from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
@@ -49,12 +49,7 @@ from ansys_sphinx_theme.whatsnew import (
     whatsnew_sidebar_pages,
 )
 
-try:
-    import importlib.metadata as importlib_metadata_pkg
-except ModuleNotFoundError:  # pragma: no cover
-    import importlib_metadata as importlib_metadata_pkg  # type: ignore
-
-__version__ = importlib_metadata_pkg.version(__name__.replace(".", "-"))
+__version__ = importlib_metadata.version(__name__.replace(".", "-"))
 logger = logging.getLogger(__name__)
 
 

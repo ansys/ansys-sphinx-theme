@@ -72,6 +72,9 @@ doc = [
     "tox==4.34.1",
     "pydantic==2.12.5"
 ]
+styles = [
+    "ty>=0.0.15",
+]
 
 [project.entry-points."sphinx.html_themes"]
 "ansys_sphinx_theme" = "ansys_sphinx_theme"
@@ -121,6 +124,9 @@ source = ["src"]
 
 [tool.coverage.report]
 show_missing = true
+
+[tool.ty.rules]
+unresolved-attribute = "ignore"
 
 [tool.towncrier]
 directory = "doc/changelog.d"

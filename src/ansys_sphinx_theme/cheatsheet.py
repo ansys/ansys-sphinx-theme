@@ -93,7 +93,7 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
         )
 
 
-def run_quarto_command(command: List[str], cwd: str) -> None:
+def run_quarto_command(command: List[str], cwd: str | pathlib.Path) -> None:
     """
     Run a Quarto command and log its output.
 
@@ -101,15 +101,15 @@ def run_quarto_command(command: List[str], cwd: str) -> None:
     ----------
     command : List[str]
         List of command arguments.
-    cwd : str
-        Current working directory.
+    cwd : str | pathlib.Path
+        Current working directory to run the command in.
     """
     command = ["quarto"] + command
     try:
         # Excluding bandit rule because subprocess is using quarto command
         # and we are handling the command execution securely.
         # The command is run in a controlled environment and not accepting user input.
-        result = subprocess.run(command, cwd=cwd, check=True, capture_output=True, text=True)  # nosec: B603
+        result = subprocess.run(command, cwd=str(cwd), check=True, capture_output=True, text=True)  # nosec: B603
         if result.stdout:
             logger.info(result.stdout)
 
