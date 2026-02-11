@@ -36,6 +36,7 @@ dependencies = [
     "pydata-sphinx-theme>=0.15.4,<0.17",
     "PyYAML>=6.0",
     "Sphinx>=6.1.0",
+    "ty>=0.0.15",
 ]
 
 [project.optional-dependencies]
@@ -72,10 +73,6 @@ doc = [
     "tox==4.34.1",
     "pydantic==2.12.5"
 ]
-styles = [
-    "ty>=0.0.15",
-]
-
 [project.entry-points."sphinx.html_themes"]
 "ansys_sphinx_theme" = "ansys_sphinx_theme"
 
