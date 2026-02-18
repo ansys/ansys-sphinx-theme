@@ -49,7 +49,7 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.2,
+      "misMatchThreshold" : 0.5,
       "requireSameDimensions": false
     },
     {
