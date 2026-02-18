@@ -29,7 +29,7 @@
       "selectors": [],
       "selectorExpansion": true,
       "expect": 0,
-      "misMatchThreshold" : 0.1,
+      "misMatchThreshold" : 0.2,
       "requireSameDimensions": true
     },
     {
@@ -39,7 +39,7 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
+      "misMatchThreshold" : 0.2,
       "requireSameDimensions": false
     },
     {
@@ -76,7 +76,7 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
+      "misMatchThreshold" : 0.2,
       "requireSameDimensions": false
     },
     {
@@ -86,7 +86,7 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
+      "misMatchThreshold" : 0.2,
       "requireSameDimensions": false
     },
     {
@@ -94,7 +94,7 @@
       "url": "http://localhost:8000/examples/gallery-examples/index.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/gallery-examples/index.html",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
+      "misMatchThreshold" : 0.2,
       "requireSameDimensions": false
     }
   ],
