@@ -50,6 +50,14 @@ repos:
       - "--no-progress"
       - "--persona=pedantic"
 
+- repo: local
+  hooks:
+    - id: ty
+      name: ty
+      entry: ty check
+      language: system
+      types: [python]
+
 # Do not use this tool with proprietary ansys source code.
 - repo: "https://github.com/djlint/djLint"
   rev: v1.36.4
