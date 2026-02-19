@@ -156,6 +156,7 @@ with Path.open(THIS_PATH / "links.rst", "r") as f:
 
 linkcheck_ignore = [
     r"https://sphinxdocs.ansys.com/version/*",
+    r"https://example.com/*",
 ]
 if switcher_version != "dev":
     linkcheck_ignore.append(
