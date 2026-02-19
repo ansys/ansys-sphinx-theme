@@ -155,12 +155,14 @@ with Path.open(THIS_PATH / "links.rst", "r") as f:
 
 linkcheck_ignore = [
     r"https://sphinxdocs.ansys.com/version/*",
+    r"https://example.com/*",
 ]
 if switcher_version != "dev":
     linkcheck_ignore.append(
         f"https://github.com/ansys/ansys-sphinx-theme/releases/tag/v{__version__}"
     )
 
+latex_engine = "xelatex"
 
 # Configure the Jinja contexts
 
