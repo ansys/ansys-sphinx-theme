@@ -200,7 +200,8 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github()
+    token = os.getenv("GITHUB_TOKEN")
+    g = Github(token) if token else Github()
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):
@@ -277,6 +278,8 @@ else:
         "download_all_examples": False,
         # Modules for which function level galleries are created.  In
         "image_scrapers": ("pyvista", "matplotlib", "plotly.io._sg_scraper.plotly_sg_scraper"),
+        # "doc_module": ("ansys_sphinx_theme",),
+        "backreferences_dir": "api/_gallery_backreferences",
         "default_thumb_file": str(PYANSYS_LIGHT_SQUARE),
     }
     pyvista.BUILDING_GALLERY = True
