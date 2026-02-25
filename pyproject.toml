@@ -35,7 +35,7 @@ dependencies = [
     "pdf2image>=1.17.0",
     "pydata-sphinx-theme>=0.15.4,<0.17",
     "PyYAML>=6.0",
-    "Sphinx>=6.1.0",
+    "Sphinx>=8.1.0",
 ]
 
 [project.optional-dependencies]
