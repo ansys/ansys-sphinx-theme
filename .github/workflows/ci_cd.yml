@@ -152,7 +152,7 @@ jobs:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
-          whitelist-license-check: "Sphinx" # This has BSD licence , but check failed
+          whitelist-license-check: "Sphinx, zipp" # This has BSD licence , but check failed
           target: "all"
 
   build-library:
