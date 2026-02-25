@@ -35,18 +35,24 @@ dependencies = [
     "pdf2image>=1.17.0",
     "pydata-sphinx-theme>=0.15.4,<0.17",
     "PyYAML>=6.0",
-    "Sphinx>=8.1.0",
+    "Sphinx>=6.1.0",
 ]
 
 [project.optional-dependencies]
 autoapi = [
-    "sphinx-autoapi==3.7.0",
-    "sphinx-design==0.7.0",
-    "sphinx-jinja==2.0.2",
+    "sphinx-autoapi>=3.7.0",
+    "sphinx-design>=0.7.0",
+    "sphinx-jinja>=2.0.2",
 ]
 changelog = [
-    "PyYAML==6.0.3",
-    "sphinx-design==0.7.0",
+    "PyYAML>=6.0.3",
+    "sphinx-design>=0.7.0",
+]
+all = [
+    "sphinx-autoapi>=3.7.0",
+    "sphinx-design>=0.7.0",
+    "sphinx-jinja>=2.0.2",
+    "PyYAML>=6.0.3",
 ]
 
 [dependency-groups]
