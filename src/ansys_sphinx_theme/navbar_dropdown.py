@@ -29,7 +29,7 @@ from typing import TypedDict
 
 import bs4
 from docutils import nodes
-import sphinx
+from sphinx.application import Sphinx
 from sphinx.util import logging
 from sphinx.util.nodes import make_refnode
 import yaml
@@ -47,7 +47,7 @@ class NavEntry(TypedDict, total=False):
     sections: list["NavEntry"]
 
 
-def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
+def load_navbar_configuration(app: Sphinx) -> None:
     """Load the navbar configuration from a YAML file for the Sphinx app."""
     navigation_theme_options = app.config.html_theme_options.get("navigation_dropdown", {})
     if not navigation_theme_options or "layout_file" not in navigation_theme_options:
@@ -71,7 +71,7 @@ def load_navbar_configuration(app: sphinx.application.Sphinx) -> None:
 
 
 def update_template_context(
-    app: sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document | None
+    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document | None
 ) -> None:
     """Inject navbar rendering logic into the Sphinx HTML template context."""
 
@@ -83,7 +83,7 @@ def update_template_context(
 
         nav_root = nodes.container(classes=["navbar-content"])
         nav_root.append(build_navbar_nodes(app.config.navbar_contents))
-        rendered = app.builder.render_partial(nav_root)["fragment"]
+        rendered = app.builder.render_partial(nav_root)["fragment"]  # type: ignore
         return add_navbar_chevrons(bs4.BeautifulSoup(rendered, "html.parser"))
 
     def build_navbar_nodes(entries: list[NavEntry], is_top_level: bool = True) -> nodes.bullet_list:
