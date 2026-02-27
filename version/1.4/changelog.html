@@ -1,0 +1,1790 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <meta property="og:site_name" content="PyAnsys" />
+    <title>Release notes &#8212; Ansys Sphinx Theme</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/ansys-sphinx-theme.css?v=fbf3eb5d" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+  
+  
+  
+
+  
+    <link href="_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="_static/documentation_options.js?v=6723694a"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'changelog';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://sphinxdocs.ansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.4';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+    <link rel="icon" href="_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contribute" href="contribute.html" />
+    <link rel="prev" title="Admonitions" href="examples/admonitions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.4.5" />
+  <link rel="canonical" href="https://sphinxdocs.ansys.com/version/stable/changelog.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://www.ansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/ansys_logo_transparent_black.png" class="logo__image only-light" alt="Ansys Sphinx Theme - Home"/>
+    <img src="_static/ansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="Ansys Sphinx Theme - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user-guide.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Release notes
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contribute.html">
+    Contribute
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="examples/api/index.html">
+    API reference
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+        </div>
+      
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/ansys-sphinx-theme" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+</div>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user-guide.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="#">
+    Release notes
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="contribute.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="examples/api/index.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/ansys-sphinx-theme" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"></div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Release notes</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="release-notes">
+<span id="ref-release-notes"></span><h1>Release notes<a class="headerlink" href="#release-notes" title="Link to this heading">#</a></h1>
+<section id="may-27-2025">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.5">1.4.5</a> (May 27, 2025)<a class="headerlink" href="#may-27-2025" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Added</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>add deprecated warning for <cite>index_pattern</cite> search option</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/704">#704</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="may-08-2025">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.4">1.4.4</a> (May 08, 2025)<a class="headerlink" href="#may-08-2025" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-1" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Added</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>add metatag content</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/680">#680</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+Fixed</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>block snowbalstemmer &lt;3 for now</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/686">#686</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
+Documentation</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>Update <code class="docutils literal notranslate"><span class="pre">CONTRIBUTORS.md</span></code> with the latest contributors</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/669">#669</a>, <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/677">#677</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-4">
+Dependencies</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>bump tox from 4.24.2 to 4.25.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/668">#668</a></p></td>
+</tr>
+<tr class="row-even"><td><p>bump pyvista[jupyter] from 0.44.2 to 0.45.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/675">#675</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>bump notebook from 7.3.3 to 7.4.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/676">#676</a></p></td>
+</tr>
+<tr class="row-even"><td><p>bump jupytext from 1.16.7 to 1.17.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/678">#678</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-5">
+Maintenance</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>add github token</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/661">#661</a></p></td>
+</tr>
+<tr class="row-even"><td><p>update CHANGELOG for v1.4.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/662">#662</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>bump version 1.5.dev0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/663">#663</a></p></td>
+</tr>
+<tr class="row-even"><td><p>update CHANGELOG for v1.4.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/665">#665</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>bump ansys/actions from 8 to 9 in the actions group</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/670">#670</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="may-07-2025">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.3">1.4.3</a> (May 07, 2025)<a class="headerlink" href="#may-07-2025" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-6">
+Added</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>add metatag content</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/680">#680</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-7">
+Maintenance</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>bump ansys/actions from 8 to 9 in the actions group</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/670">#670</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="march-27-2025">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.2">1.4.2</a> (March 27, 2025)<a class="headerlink" href="#march-27-2025" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-8">
+Fixed</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>autoapi child class template</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/666">#666</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="id23">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.1">1.4.1</a> (March 27, 2025)<a class="headerlink" href="#id23" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-9" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-9">
+Fixed</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>quarto std logging</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/664">#664</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="id26">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.4.0">1.4.0</a> (March 27, 2025)<a class="headerlink" href="#id26" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-10" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-10">
+Added</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>enable matplotlib and plotly in examples</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/567">#567</a></p></td>
+</tr>
+<tr class="row-even"><td><p>feat: add python 3.13 support</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/635">#635</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>feat: Add Tox environment for documentation preview</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/642">#642</a></p></td>
+</tr>
+<tr class="row-even"><td><p>migrate css to scss</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/644">#644</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-11" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-11">
+Fixed</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>update the style for highlight name function</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/652">#652</a></p></td>
+</tr>
+<tr class="row-even"><td><p>update the changelog action only for PR</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/654">#654</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>change logging info to error in quarto build</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/655">#655</a></p></td>
+</tr>
+<tr class="row-even"><td><p>quarto error logging</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/658">#658</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-12" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-12">
+Documentation</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>chore: update CHANGELOG for v1.3.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/614">#614</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore: update CHANGELOG for v1.3.1</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/618">#618</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>chore: update CHANGELOG for v1.3.2</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/631">#631</a></p></td>
+</tr>
+<tr class="row-even"><td><p>docs: add contribute section</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/636">#636</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>docs: add contribute page in toctree</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/638">#638</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore: update CHANGELOG for v1.3.3</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/648">#648</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-13" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-13">
+Dependencies</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>chore(deps): bump jupytext from 1.16.6 to 1.16.7</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/622">#622</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore(deps): bump sphinx-autoapi from 3.4.0 to 3.5.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/623">#623</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>chore(deps): bump sphinx-gallery from 0.18.0 to 0.19.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/625">#625</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore(deps): bump pygithub from 2.5.0 to 2.6.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/626">#626</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>chore(deps): bump sphinx from 8.1.3 to 8.2.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/628">#628</a></p></td>
+</tr>
+<tr class="row-even"><td><p>chore(deps): bump sphinx-autoapi from 3.5.0 to 3.6.0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/629">#629</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>build: bump nbsphinx from 0.9.6 to 0.9.7</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/637">#637</a></p></td>
+</tr>
+<tr class="row-even"><td><p>build: bump tox from 4.24.1 to 4.24.2</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/645">#645</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>build: bump notebook from 7.3.2 to 7.3.3</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/651">#651</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-14" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-14">
+Maintenance</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>feat: migrate the builds system to stb</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/639">#639</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<input id="sd-tab-item-15" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-15">
+Miscellaneous</label><div class="sd-tab-content docutils">
+<div class="pst-scrollable-table-container"><table class="table">
+<tbody>
+<tr class="row-odd"><td><p>chore: bump version 1.4.dev0</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/615">#615</a></p></td>
+</tr>
+<tr class="row-even"><td><p>fix: remove flake8 configuration file</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/641">#641</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>fix: improve Logging in Quarto cheatsheet build process</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/646">#646</a></p></td>
+</tr>
+<tr class="row-even"><td><p>cheatsheet and whatsnew functions into separate modules and implement sidebar ordering</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/656">#656</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>ansys sphinx theme variables</p></td>
+<td><p><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/657">#657</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="march-11-2025">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.3">1.3.3</a> (March 11, 2025)<a class="headerlink" href="#march-11-2025" title="Link to this heading">#</a></h2>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore(deps): bump pygithub from 2.6.0 to 2.6.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/632">#632</a></p></li>
+</ul>
+</section>
+<section id="miscellaneous">
+<h3>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: alignment and styles for primary sidebar <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/621">#621</a></p></li>
+<li><p>fix: typo in autoapi template <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/630">#630</a></p></li>
+</ul>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Fix: whatsnew config instructions <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/619">#619</a></p></li>
+</ul>
+</section>
+<section id="maintenance">
+<h3>Maintenance<a class="headerlink" href="#maintenance" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: prettier pre-commit hook <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/627">#627</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id63">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.1">1.3.1</a> (2025-02-06)<a class="headerlink" href="#id63" title="Link to this heading">#</a></h2>
+<section id="id64">
+<h3>Documentation<a class="headerlink" href="#id64" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Fix: optimize imports for whatsnew <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/617">#617</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id67">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.3.0">1.3.0</a> (2025-02-05)<a class="headerlink" href="#id67" title="Link to this heading">#</a></h2>
+<section id="id68">
+<h3>Dependencies<a class="headerlink" href="#id68" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore(deps): bump pygithub from 2.4.0 to 2.5.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/582">#582</a></p></li>
+<li><p>chore(deps): bump pyvista[jupyter] from 0.44.1 to 0.44.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/589">#589</a></p></li>
+<li><p>chore(deps): bump sphinx-autoapi from 3.3.3 to 3.4.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/592">#592</a></p></li>
+<li><p>chore(deps): bump notebook from 7.2.2 to 7.3.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/596">#596</a></p></li>
+<li><p>chore(deps): bump jupytext from 1.16.4 to 1.16.5 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/598">#598</a></p></li>
+<li><p>chore(deps): bump jupytext from 1.16.5 to 1.16.6 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/600">#600</a></p></li>
+<li><p>chore(deps): bump notebook from 7.3.1 to 7.3.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/606">#606</a></p></li>
+<li><p>chore(deps): bump nbsphinx from 0.9.5 to 0.9.6 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/607">#607</a></p></li>
+<li><p>chore(deps): bump sphinx-notfound-page from 1.0.4 to 1.1.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/611">#611</a></p></li>
+</ul>
+</section>
+<section id="id78">
+<h3>Miscellaneous<a class="headerlink" href="#id78" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: bump version 1.3.dev0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/577">#577</a></p></li>
+<li><p>fix: CONTRIBUTORS.md <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/578">#578</a></p></li>
+<li><p>fix: errors and warnings caused by CSS imports <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/588">#588</a></p></li>
+<li><p>fix:  typo in date variable for last modified <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/602">#602</a></p></li>
+<li><p>chore: update CHANGELOG for v1.2.5 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/609">#609</a></p></li>
+</ul>
+</section>
+<section id="id84">
+<h3>Documentation<a class="headerlink" href="#id84" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v1.2.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/576">#576</a></p></li>
+<li><p>feat: add whatsnew options <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/583">#583</a></p></li>
+<li><p>chore: update CHANGELOG for v1.2.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/585">#585</a></p></li>
+<li><p>chore: update CHANGELOG for v1.2.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/587">#587</a></p></li>
+<li><p>chore: update CHANGELOG for v1.2.3 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/595">#595</a></p></li>
+<li><p>chore: update CHANGELOG for v1.2.4 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/604">#604</a></p></li>
+<li><p>chore: update CHANGELOG for v1.2.7 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/613">#613</a></p></li>
+</ul>
+</section>
+<section id="id92">
+<h3>Maintenance<a class="headerlink" href="#id92" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: style and license headers <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/608">#608</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id95">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.7">1.2.7</a> - 2025-02-04<a class="headerlink" href="#id95" title="Link to this heading">#</a></h2>
+<section id="id96">
+<h3>Maintenance<a class="headerlink" href="#id96" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: astroid version <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/612">#612</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id99">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.5">1.2.5</a> - 2025-01-13<a class="headerlink" href="#id99" title="Link to this heading">#</a></h2>
+<section id="id100">
+<h3>Dependencies<a class="headerlink" href="#id100" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore(deps): update pydata-sphinx-theme requirement from &lt;0.16,&gt;=0.15.4 to &gt;=0.15.4,&lt;0.17 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/605">#605</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id103">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.4">1.2.4</a> - 2024-12-20<a class="headerlink" href="#id103" title="Link to this heading">#</a></h2>
+<section id="id104">
+<h3>Miscellaneous<a class="headerlink" href="#id104" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: impose upper version for the pydata-sphinx-theme <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/603">#603</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id107">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.3">1.2.3</a> - 2024-12-05<a class="headerlink" href="#id107" title="Link to this heading">#</a></h2>
+<section id="id108">
+<h3>Miscellaneous<a class="headerlink" href="#id108" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: rename the <code class="docutils literal notranslate"><span class="pre">date</span></code> to <code class="docutils literal notranslate"><span class="pre">ast_build_date</span></code> in js <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/594">#594</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id111">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.2">1.2.2</a> - 2024-11-21<a class="headerlink" href="#id111" title="Link to this heading">#</a></h2>
+<section id="id112">
+<h3>Miscellaneous<a class="headerlink" href="#id112" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: section ids with search <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/586">#586</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id115">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.1">1.2.1</a> - 2024-11-13<a class="headerlink" href="#id115" title="Link to this heading">#</a></h2>
+<section id="id116">
+<h3>Miscellaneous<a class="headerlink" href="#id116" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: enable local page <cite>Search</cite> and default to PyData search on ‘Enter’ <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/584">#584</a></p></li>
+</ul>
+</section>
+<section id="id118">
+<h3>Documentation<a class="headerlink" href="#id118" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Enable ‘show_prev_next’ in the documented defaults <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/580">#580</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id121">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.2.0">1.2.0</a> - 2024-10-31<a class="headerlink" href="#id121" title="Link to this heading">#</a></h2>
+<section id="fixed">
+<h3>Fixed<a class="headerlink" href="#fixed" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: contributors file <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/529">#529</a></p></li>
+<li><p>fix: padding for toctree entry in sidebar <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/554">#554</a></p></li>
+<li><p>fix: revisit header size <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/555">#555</a></p></li>
+</ul>
+</section>
+<section id="id125">
+<h3>Dependencies<a class="headerlink" href="#id125" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: bump version 1.2.dev0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/518">#518</a></p></li>
+<li><p>chore(deps): bump sphinx-gallery from 0.17.1 to 0.18.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/538">#538</a></p></li>
+<li><p>chore(deps): bump sphinx from 8.0.2 to 8.1.3 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/546">#546</a></p></li>
+<li><p>chore(deps): update pydata-sphinx-theme requirement from &lt;0.16,&gt;=0.15.4 to &gt;=0.15.4,&lt;0.17 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/562">#562</a></p></li>
+<li><p>chore(deps): bump sphinx-autoapi from 3.3.2 to 3.3.3 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/569">#569</a></p></li>
+</ul>
+</section>
+<section id="id131">
+<h3>Miscellaneous<a class="headerlink" href="#id131" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: cleanup autoapi templates using macros <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/556">#556</a></p></li>
+<li><p>fix: typos <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/560">#560</a></p></li>
+<li><p>fix: change the display of math rendering <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/568">#568</a></p></li>
+</ul>
+</section>
+<section id="id135">
+<h3>Documentation<a class="headerlink" href="#id135" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v1.1.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/516">#516</a></p></li>
+<li><p>chore: update CHANGELOG for v1.1.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/520">#520</a></p></li>
+<li><p>chore: update CHANGELOG for v1.1.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/522">#522</a></p></li>
+<li><p>docs: adding <code class="docutils literal notranslate"><span class="pre">title</span></code> in example section <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/524">#524</a></p></li>
+<li><p>fix: add more components to the search indexing <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/541">#541</a></p></li>
+<li><p>chore: update CHANGELOG for v1.1.3 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/545">#545</a></p></li>
+<li><p>chore: update CHANGELOG for v1.1.4 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/547">#547</a></p></li>
+<li><p>chore: update CHANGELOG for v1.1.5 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/550">#550</a></p></li>
+<li><p>doc: allow developer to skip examples build <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/553">#553</a></p></li>
+<li><p>chore: update CHANGELOG for v1.1.6 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/559">#559</a></p></li>
+<li><p>docs: update the landing page <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/561">#561</a></p></li>
+<li><p>chore: update CHANGELOG for v1.1.7 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/566">#566</a></p></li>
+<li><p>fix: exclude search files <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/572">#572</a></p></li>
+</ul>
+</section>
+<section id="id149">
+<h3>Maintenance<a class="headerlink" href="#id149" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>ci: bump ansys/actions from 7 to 8 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/530">#530</a></p></li>
+<li><p>chore: add hacktoberfest labels <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/535">#535</a></p></li>
+<li><p>ci: add new labels <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/549">#549</a></p></li>
+<li><p>ci: update labeling strategy <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/558">#558</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id155">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.7">1.1.7</a> - 2024-10-23<a class="headerlink" href="#id155" title="Link to this heading">#</a></h2>
+<section id="id156">
+<h3>Miscellaneous<a class="headerlink" href="#id156" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: ensure app.builder.outdir is a Path object <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/565">#565</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id159">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.6">1.1.6</a> - 2024-10-18<a class="headerlink" href="#id159" title="Link to this heading">#</a></h2>
+<section id="id160">
+<h3>Fixed<a class="headerlink" href="#id160" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: add the default search options in the config env <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/557">#557</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id163">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.5">1.1.5</a> - 2024-10-15<a class="headerlink" href="#id163" title="Link to this heading">#</a></h2>
+<section id="id164">
+<h3>Fixed<a class="headerlink" href="#id164" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>use ansys-sphinx-theme variables in CSS files <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/537">#537</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id167">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.4">1.1.4</a> - 2024-10-14<a class="headerlink" href="#id167" title="Link to this heading">#</a></h2>
+<section id="id168">
+<h3>Fixed<a class="headerlink" href="#id168" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: static search performance <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/525">#525</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id171">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.3">1.1.3</a> - 2024-10-11<a class="headerlink" href="#id171" title="Link to this heading">#</a></h2>
+<section id="id172">
+<h3>Fixed<a class="headerlink" href="#id172" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: add default <cite>enter</cite> for search <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/542">#542</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id175">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.2">1.1.2</a> - 2024-10-02<a class="headerlink" href="#id175" title="Link to this heading">#</a></h2>
+<section id="id176">
+<h3>Fixed<a class="headerlink" href="#id176" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: add version as params in cheatsheet <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/521">#521</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id179">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.1">1.1.1</a> - 2024-10-01<a class="headerlink" href="#id179" title="Link to this heading">#</a></h2>
+<section id="id180">
+<h3>Fixed<a class="headerlink" href="#id180" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix(ci): update to Ansys actions v8 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/517">#517</a></p></li>
+<li><p>fix: update the token and email of bot for changelog actions <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/519">#519</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id184">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.1.0">1.1.0</a> - 2024-10-01<a class="headerlink" href="#id184" title="Link to this heading">#</a></h2>
+<section id="added">
+<h3>Added<a class="headerlink" href="#added" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>feat: add static search <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/487">#487</a></p></li>
+</ul>
+</section>
+<section id="changed">
+<h3>Changed<a class="headerlink" href="#changed" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v1.0.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/445">#445</a></p></li>
+<li><p>chore: update CHANGELOG for v1.0.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/447">#447</a></p></li>
+<li><p>chore: update CHANGELOG for v1.0.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/451">#451</a></p></li>
+<li><p>chore: update CHANGELOG for v1.0.3 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/455">#455</a></p></li>
+</ul>
+</section>
+<section id="id190">
+<h3>Fixed<a class="headerlink" href="#id190" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>maint: update tooling, cleanup and drop python 3.9 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/484">#484</a></p></li>
+<li><p>feat: implement default search bar expansion behavior <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/496">#496</a></p></li>
+<li><p>fix: the anchor url of search with the switcher version <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/497">#497</a></p></li>
+<li><p>fix: change file location for <cite>search.json</cite> file <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/509">#509</a></p></li>
+<li><p>maint: styles for dark theme search bar <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/511">#511</a></p></li>
+<li><p>fix: style for smaller media <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/513">#513</a></p></li>
+<li><p>fix: navigation end columns <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/514">#514</a></p></li>
+<li><p>fix: add title breadcrumbs <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/515">#515</a></p></li>
+</ul>
+</section>
+<section id="id199">
+<h3>Dependencies<a class="headerlink" href="#id199" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>maint: version 1.1.dev0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/448">#448</a></p></li>
+<li><p>build(deps): bump pygithub from 2.3.0 to 2.4.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/480">#480</a></p></li>
+<li><p>build(deps): bump notebook from 7.2.1 to 7.2.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/482">#482</a></p></li>
+<li><p>build(deps): bump sphinx-autoapi from 3.2.1 to 3.3.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/485">#485</a></p></li>
+<li><p>build(deps): bump sphinx-autoapi from 3.3.0 to 3.3.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/488">#488</a></p></li>
+<li><p>build(deps): bump pandas from 2.2.2 to 2.2.3 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/508">#508</a></p></li>
+<li><p>build(deps): bump sphinx-autoapi from 3.3.1 to 3.3.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/512">#512</a></p></li>
+</ul>
+</section>
+<section id="id207">
+<h3>Documentation<a class="headerlink" href="#id207" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v1.0.4 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/463">#463</a></p></li>
+<li><p>chore: update CHANGELOG for v1.0.6 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/476">#476</a></p></li>
+<li><p>chore: update CHANGELOG for v1.0.7 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/478">#478</a></p></li>
+<li><p>chore: update CHANGELOG for v1.0.8 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/491">#491</a></p></li>
+<li><p>chore: update CHANGELOG for v1.0.9 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/501">#501</a></p></li>
+<li><p>chore: update CHANGELOG for v1.0.10 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/504">#504</a></p></li>
+<li><p>chore: update CHANGELOG for v1.0.11 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/507">#507</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id216">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.11">1.0.11</a> - 2024-09-19<a class="headerlink" href="#id216" title="Link to this heading">#</a></h2>
+<section id="id217">
+<h3>Fixed<a class="headerlink" href="#id217" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: location of nbsphinx <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/506">#506</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id220">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.10">1.0.10</a> - 2024-09-18<a class="headerlink" href="#id220" title="Link to this heading">#</a></h2>
+<section id="id221">
+<h3>Fixed<a class="headerlink" href="#id221" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: do not display captions for nbgallery <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/503">#503</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id224">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.9">1.0.9</a> - 2024-09-16<a class="headerlink" href="#id224" title="Link to this heading">#</a></h2>
+<section id="id225">
+<h3>Added<a class="headerlink" href="#id225" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>feat: add member_order to autoapi <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/495">#495</a></p></li>
+</ul>
+</section>
+<section id="id227">
+<h3>Fixed<a class="headerlink" href="#id227" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: <code class="docutils literal notranslate"><span class="pre">autoapi</span></code> relative directory path wrt <code class="docutils literal notranslate"><span class="pre">tox</span></code> env <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/494">#494</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id230">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.8">1.0.8</a> - 2024-09-03<a class="headerlink" href="#id230" title="Link to this heading">#</a></h2>
+<section id="id231">
+<h3>Fixed<a class="headerlink" href="#id231" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: Align jupyter cell output <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/489">#489</a></p></li>
+<li><p>fix: the download in sphinx gallery <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/490">#490</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id235">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.7">1.0.7</a> - 2024-08-23<a class="headerlink" href="#id235" title="Link to this heading">#</a></h2>
+<section id="id236">
+<h3>Fixed<a class="headerlink" href="#id236" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: autoapi extension <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/472">#472</a></p></li>
+<li><p>fix: admonitions styles for <code class="docutils literal notranslate"><span class="pre">topic</span></code> admonition <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/477">#477</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id240">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.6">1.0.6</a> - 2024-08-23<a class="headerlink" href="#id240" title="Link to this heading">#</a></h2>
+<section id="id241">
+<h3>Fixed<a class="headerlink" href="#id241" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: download icon with sphinx-gallery and nbsphinx <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/471">#471</a></p></li>
+<li><p>feat: add different width for different media for main content <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/473">#473</a></p></li>
+<li><p>fix: the scrollbar on sidebar <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/474">#474</a></p></li>
+</ul>
+</section>
+<section id="id245">
+<h3>Documentation<a class="headerlink" href="#id245" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v1.0.5 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/470">#470</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id248">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.5">1.0.5</a> - 2024-08-16<a class="headerlink" href="#id248" title="Link to this heading">#</a></h2>
+<section id="id249">
+<h3>Fixed<a class="headerlink" href="#id249" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>feat: add default logo links for Ansys and PyAnsys logos <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/469">#469</a></p></li>
+</ul>
+</section>
+<section id="id251">
+<h3>Dependencies<a class="headerlink" href="#id251" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>build(deps): bump nbsphinx from 0.9.4 to 0.9.5 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/465">#465</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id254">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.4">1.0.4</a> - 2024-08-13<a class="headerlink" href="#id254" title="Link to this heading">#</a></h2>
+<section id="id255">
+<h3>Fixed<a class="headerlink" href="#id255" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: tables and cell output <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/460">#460</a></p></li>
+</ul>
+</section>
+<section id="id257">
+<h3>Dependencies<a class="headerlink" href="#id257" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>ci: bump ansys/actions from 6 to 7 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/457">#457</a></p></li>
+<li><p>build(deps): bump numpydoc from 1.7.0 to 1.8.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/459">#459</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id261">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.3">1.0.3</a> - 2024-08-09<a class="headerlink" href="#id261" title="Link to this heading">#</a></h2>
+<section id="id262">
+<h3>Fixed<a class="headerlink" href="#id262" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: minor style changes <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/452">#452</a></p></li>
+<li><p>fix: downgrade the autoapi and keep <code class="docutils literal notranslate"><span class="pre">autoapi</span></code> toctree to <code class="docutils literal notranslate"><span class="pre">True</span></code> by default <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/453">#453</a></p></li>
+<li><p>fix: <cite>pygment_styles</cite> with dark and light theme and dark theme table <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/454">#454</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id267">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.2">1.0.2</a> - 2024-08-08<a class="headerlink" href="#id267" title="Link to this heading">#</a></h2>
+<section id="id268">
+<h3>Changed<a class="headerlink" href="#id268" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>maint: update ansys actions <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/449">#449</a></p></li>
+</ul>
+</section>
+<section id="id270">
+<h3>Fixed<a class="headerlink" href="#id270" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: sphinx design image background <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/450">#450</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id273">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.1">1.0.1</a> - 2024-08-08<a class="headerlink" href="#id273" title="Link to this heading">#</a></h2>
+<section id="id274">
+<h3>Fixed<a class="headerlink" href="#id274" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: stable docs indexing package name <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/446">#446</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id277">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.0.0">1.0.0</a> - 2024-08-08<a class="headerlink" href="#id277" title="Link to this heading">#</a></h2>
+<section id="id278">
+<h3>Added<a class="headerlink" href="#id278" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: update the github icon <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/401">#401</a></p></li>
+<li><p>feat: add default logo and update logo option with theme <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/425">#425</a></p></li>
+<li><p>feat: add quarto cheat sheet extension with cheat sheet option <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/428">#428</a></p></li>
+</ul>
+</section>
+<section id="id282">
+<h3>Changed<a class="headerlink" href="#id282" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v0.16.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/381">#381</a></p></li>
+<li><p>chore: update CHANGELOG for v0.16.3 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/389">#389</a></p></li>
+<li><p>chore: update CHANGELOG for v0.16.4 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/390">#390</a></p></li>
+<li><p>chore: update CHANGELOG for v0.16.5 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/394">#394</a></p></li>
+<li><p>chore: update CHANGELOG for v0.16.6 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/402">#402</a></p></li>
+</ul>
+</section>
+<section id="id288">
+<h3>Fixed<a class="headerlink" href="#id288" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: Align cheat sheet center <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/382">#382</a></p></li>
+<li><p>fix: reformat the style files <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/406">#406</a></p></li>
+<li><p>fix: reformat the table styles <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/408">#408</a></p></li>
+<li><p>fix: reformat navigation bar and background <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/409">#409</a></p></li>
+<li><p>fix: <cite>primary</cite> ,`secondary` sidebars and links <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/411">#411</a></p></li>
+<li><p>fix: sphinx design reformat <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/412">#412</a></p></li>
+<li><p>fix: update the breadcrumbs <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/419">#419</a></p></li>
+<li><p>fix: admonitions style <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/424">#424</a></p></li>
+<li><p>fix: sidebar borders and overflow <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/427">#427</a></p></li>
+<li><p>fix: search bar styles <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/429">#429</a></p></li>
+<li><p>fix: updated the logo options <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/431">#431</a></p></li>
+<li><p>fix: add dropdown styles for the header navigation bar <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/437">#437</a></p></li>
+<li><p>fix: dark theme variables <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/438">#438</a></p></li>
+<li><p>fix: sphinx card <cite>box shadow</cite> on focus <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/439">#439</a></p></li>
+<li><p>fix: focus links with keyboard <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/440">#440</a></p></li>
+<li><p>fix: search bar style for dark theme, icons links <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/442">#442</a></p></li>
+</ul>
+</section>
+<section id="id305">
+<h3>Dependencies<a class="headerlink" href="#id305" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>build(deps-dev): update pydata-sphinx-theme requirement from &lt;0.15,&gt;=0.14 to &gt;=0.15 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/336">#336</a></p></li>
+<li><p>chore: version 0.17.dev0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/386">#386</a></p></li>
+<li><p>chore(deps): bump requests from 2.32.2 to 2.32.3 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/391">#391</a></p></li>
+<li><p>docs: reformat the documentation <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/396">#396</a></p></li>
+<li><p>chore(deps): bump sphinx-autoapi from 3.1.1 to 3.1.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/405">#405</a></p></li>
+<li><p>build(deps): bump pyvista[jupyter] from 0.43.10 to 0.44.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/413">#413</a></p></li>
+<li><p>build(deps): bump jupytext from 1.16.2 to 1.16.3 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/415">#415</a></p></li>
+<li><p>build(deps): bump sphinx from 7.3.7 to 7.4.4 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/416">#416</a></p></li>
+<li><p>build(deps): bump sphinx from 7.4.4 to 7.4.5 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/417">#417</a></p></li>
+<li><p>build(deps): bump sphinx from 7.4.5 to 7.4.6 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/418">#418</a></p></li>
+<li><p>build(deps): bump sphinx-autoapi from 3.1.2 to 3.2.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/420">#420</a></p></li>
+<li><p>build(deps): bump sphinx-gallery from 0.16.0 to 0.17.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/421">#421</a></p></li>
+<li><p>build(deps): bump pyvista[jupyter] from 0.44.0 to 0.44.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/422">#422</a></p></li>
+<li><p>build(deps): bump sphinx from 7.4.6 to 7.4.7 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/423">#423</a></p></li>
+<li><p>build(deps): bump sphinx-autoapi from 3.2.0 to 3.2.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/426">#426</a></p></li>
+<li><p>build(deps): bump sphinx-notfound-page from 1.0.2 to 1.0.3 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/432">#432</a></p></li>
+<li><p>build(deps): bump jupytext from 1.16.3 to 1.16.4 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/433">#433</a></p></li>
+<li><p>build(deps): bump sphinx-notfound-page from 1.0.3 to 1.0.4 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/434">#434</a></p></li>
+<li><p>build(deps): bump sphinx-design from 0.6.0 to 0.6.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/435">#435</a></p></li>
+<li><p>build(deps): bump sphinx from 7.4.7 to 8.0.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/436">#436</a></p></li>
+<li><p>build(deps): bump sphinx-gallery from 0.17.0 to 0.17.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/441">#441</a></p></li>
+</ul>
+</section>
+<section id="id327">
+<h3>Miscellaneous<a class="headerlink" href="#id327" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>refactor: remove function duplicate <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/407">#407</a></p></li>
+<li><p>docs: Update <cite>mail id</cite> in README.rst <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/414">#414</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id331">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.6">0.16.6</a> - 2024-06-18<a class="headerlink" href="#id331" title="Link to this heading">#</a></h2>
+<section id="id332">
+<h3>Fixed<a class="headerlink" href="#id332" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: wrong env var name for PACKAGE_NAME <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/395">#395</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id335">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.5">0.16.5</a> - 2024-05-31<a class="headerlink" href="#id335" title="Link to this heading">#</a></h2>
+<section id="id336">
+<h3>Fixed<a class="headerlink" href="#id336" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix:  sphinx design card font size <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/393">#393</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id339">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.4">0.16.4</a> - 2024-05-29<a class="headerlink" href="#id339" title="Link to this heading">#</a></h2>
+<section id="id340">
+<h3>Added<a class="headerlink" href="#id340" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>feat: adapt package to general PyAnsys repository layout <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/387">#387</a></p></li>
+</ul>
+</section>
+<section id="id342">
+<h3>Dependencies<a class="headerlink" href="#id342" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore(deps): bump sphinx-design from 0.5.0 to 0.6.0 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/383">#383</a></p></li>
+<li><p>chore(deps): bump sphinx-notfound-page from 1.0.1 to 1.0.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/384">#384</a></p></li>
+<li><p>chore(deps): bump sphinx-autoapi from 3.1.0 to 3.1.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/385">#385</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id347">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.3">0.16.3</a> - 2024-05-29<a class="headerlink" href="#id347" title="Link to this heading">#</a></h2>
+<section id="id348">
+<h3>Fixed<a class="headerlink" href="#id348" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: update the sphinx design style to disable display of name <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/388">#388</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id351">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.2">0.16.2</a> - 2024-05-22<a class="headerlink" href="#id351" title="Link to this heading">#</a></h2>
+<section id="id352">
+<h3>Changed<a class="headerlink" href="#id352" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore: update CHANGELOG for v0.16.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/379">#379</a></p></li>
+</ul>
+</section>
+<section id="id354">
+<h3>Miscellaneous<a class="headerlink" href="#id354" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>docs: update changelog_template.jinja <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/380">#380</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id357">
+<h2><a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/releases/tag/v0.16.1">0.16.1</a> - 2024-05-22<a class="headerlink" href="#id357" title="Link to this heading">#</a></h2>
+<section id="id358">
+<h3>Added<a class="headerlink" href="#id358" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>feat: add nerd fonts for <code class="docutils literal notranslate"><span class="pre">autoapi</span></code> templates icon <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/362">#362</a></p></li>
+<li><p>feat: add the changelog action <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/370">#370</a></p></li>
+<li><p>feat: add autoapi extension <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/372">#372</a></p></li>
+</ul>
+</section>
+<section id="id362">
+<h3>Fixed<a class="headerlink" href="#id362" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix: add changelog action in ci-cd <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/378">#378</a></p></li>
+</ul>
+</section>
+<section id="id364">
+<h3>Dependencies<a class="headerlink" href="#id364" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>chore(deps): bump requests from 2.31.0 to 2.32.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/374">#374</a></p></li>
+<li><p>maint: update the sphinx-autoapi version <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/375">#375</a></p></li>
+<li><p>chore(deps): bump sphinx-notfound-page from 1.0.0 to 1.0.1 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/376">#376</a></p></li>
+<li><p>chore(deps): bump requests from 2.32.1 to 2.32.2 <a class="reference external" href="https://github.com/ansys/ansys-sphinx-theme/pull/377">#377</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="examples/admonitions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Admonitions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="contribute.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Contribute</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#may-27-2025">1.4.5 (May 27, 2025)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#may-08-2025">1.4.4 (May 08, 2025)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#may-07-2025">1.4.3 (May 07, 2025)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#march-27-2025">1.4.2 (March 27, 2025)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">1.4.1 (March 27, 2025)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">1.4.0 (March 27, 2025)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#march-11-2025">1.3.3 (March 11, 2025)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#miscellaneous">Miscellaneous</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation">Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maintenance">Maintenance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id63">1.3.1 (2025-02-06)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id64">Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id67">1.3.0 (2025-02-05)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id68">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id78">Miscellaneous</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id84">Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id92">Maintenance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id95">1.2.7 - 2025-02-04</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id96">Maintenance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id99">1.2.5 - 2025-01-13</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id100">Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id103">1.2.4 - 2024-12-20</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id104">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id107">1.2.3 - 2024-12-05</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id108">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id111">1.2.2 - 2024-11-21</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id112">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id115">1.2.1 - 2024-11-13</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id116">Miscellaneous</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id118">Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id121">1.2.0 - 2024-10-31</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixed">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id125">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id131">Miscellaneous</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id135">Documentation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id149">Maintenance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id155">1.1.7 - 2024-10-23</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id156">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id159">1.1.6 - 2024-10-18</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id160">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id163">1.1.5 - 2024-10-15</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id164">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id167">1.1.4 - 2024-10-14</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id168">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id171">1.1.3 - 2024-10-11</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id172">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id175">1.1.2 - 2024-10-02</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id176">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id179">1.1.1 - 2024-10-01</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id180">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id184">1.1.0 - 2024-10-01</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#added">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#changed">Changed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id190">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id199">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id207">Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id216">1.0.11 - 2024-09-19</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id217">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id220">1.0.10 - 2024-09-18</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id221">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id224">1.0.9 - 2024-09-16</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id225">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id227">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id230">1.0.8 - 2024-09-03</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id231">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id235">1.0.7 - 2024-08-23</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id236">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id240">1.0.6 - 2024-08-23</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id241">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id245">Documentation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id248">1.0.5 - 2024-08-16</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id249">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id251">Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id254">1.0.4 - 2024-08-13</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id255">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id257">Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id261">1.0.3 - 2024-08-09</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id262">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id267">1.0.2 - 2024-08-08</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id268">Changed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id270">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id273">1.0.1 - 2024-08-08</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id274">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id277">1.0.0 - 2024-08-08</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id278">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id282">Changed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id288">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id305">Dependencies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id327">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id331">0.16.6 - 2024-06-18</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id332">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id335">0.16.5 - 2024-05-31</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id336">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id339">0.16.4 - 2024-05-29</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id340">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id342">Dependencies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id347">0.16.3 - 2024-05-29</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id348">Fixed</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id351">0.16.2 - 2024-05-22</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id352">Changed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id354">Miscellaneous</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id357">0.16.1 - 2024-05-22</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id358">Added</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id362">Fixed</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id364">Dependencies</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/ansys-sphinx-theme/edit/main/doc/source/changelog.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="_sources/changelog.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  
+  
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text"], "limit": 7, "minMatchCharLength": 3, "threshold": 0.2}');
+const SEARCH_FILE = "_static/search.json";
+</script>
+
+
+<script src="_static/js/search.js"></script>
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2025 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the
+  <a href="https://sphinxdocs.ansys.com/version/stable/index.html"
+    >Ansys Sphinx Theme</a
+  >
+  1.4.5. <br />Last updated on
+  <span id="ast_build_date"></span>
+</p>
+<script>
+  var options = { day: "numeric", month: "long", year: "numeric" };
+  var ast_lastModifiedDate = new Date(document.lastModified);
+  var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+  document.getElementById("ast_build_date").innerHTML = ast_build_date;
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
