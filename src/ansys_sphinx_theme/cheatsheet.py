@@ -157,22 +157,22 @@ def build_quarto_cheatsheet(app: Sphinx) -> None:
     output_dir = "_static"
     version = cheatsheet_options.get("version", "main")
 
-    cheatsheet_file = pathlib.Path(app.srcdir) / cheatsheet_file
+    cheatsheet_file_path = pathlib.Path(app.srcdir) / cheatsheet_file
     output_dir_path = pathlib.Path(app.outdir) / output_dir
-    file_name = str(cheatsheet_file.name)
-    file_path = str(cheatsheet_file.parent)
+    file_name = cheatsheet_file_path.name
+    parent_dir = str(cheatsheet_file_path.parent)
 
     logger.info(f"Building Quarto cheatsheet: {file_name}")
 
     # Adapt with new
-    run_quarto_command(["--version"], file_path)
+    run_quarto_command(["--version"], parent_dir)
     run_quarto_command(
         [
             "add",
             f"ansys/pyansys-quarto-cheatsheet@{CHEAT_SHEET_QUARTO_EXTENTION_VERSION}",
             "--no-prompt",
         ],
-        file_path,
+        parent_dir,
     )
     run_quarto_command(
         [
@@ -185,11 +185,11 @@ def build_quarto_cheatsheet(app: Sphinx) -> None:
             "-V",
             f"version={version}",
         ],
-        file_path,
+        parent_dir,
     )
     run_quarto_command(
         ["remove", "ansys/cheat_sheet", "--no-prompt"],
-        file_path,
+        parent_dir,
     )
     supplementary_files = [
         "_static/slash.png",
@@ -197,13 +197,13 @@ def build_quarto_cheatsheet(app: Sphinx) -> None:
         "_static/ansys.png",
     ]
     for file in supplementary_files:
-        supplementary_file_path = cheatsheet_file.parent / file
+        supplementary_file_path = cheatsheet_file_path.parent / file
         if supplementary_file_path.exists():
             supplementary_file_path.unlink()
 
     # If static folder is clean, delete it
-    if not list(cheatsheet_file.parent.glob("_static/*")):
-        cheatsheet_file.parent.joinpath("_static").rmdir()
+    if not list(cheatsheet_file_path.parent.glob("_static/*")):
+        cheatsheet_file_path.parent.joinpath("_static").rmdir()
 
     output_file = output_dir_path / file_name.replace(".qmd", ".pdf")
     app.config.html_theme_options["cheatsheet"]["output_dir"] = f"{output_dir}/{output_file.name}"
