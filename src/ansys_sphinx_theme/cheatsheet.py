@@ -188,7 +188,7 @@ def build_quarto_cheatsheet(app: Sphinx) -> None:
         file_path,
     )
     run_quarto_command(
-        ["remove", "ansys/pyansys-quarto-cheatsheet", "--no-prompt"],
+        ["remove", "ansys/ansys-cheatsheet", "--no-prompt"],
         file_path,
     )
     supplementary_files = [
