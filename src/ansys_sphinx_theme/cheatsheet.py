@@ -119,7 +119,18 @@ def run_quarto_command(command: List[str], cwd: str) -> None:
             logger.info(result.stderr)
 
     except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Failed to run the command: {e}")
+        # Log the output before raising the error
+        if e.stdout:
+            logger.info(f"Command stdout:\n{e.stdout}")
+        if e.stderr:
+            logger.error(f"Command stderr:\n{e.stderr}")
+
+        error_msg = f"Failed to run the command: {e}"
+        if e.stdout:
+            error_msg += f"\n\nStdout:\n{e.stdout}"
+        if e.stderr:
+            error_msg += f"\n\nStderr:\n{e.stderr}"
+        raise RuntimeError(error_msg)
 
 
 def build_quarto_cheatsheet(app: Sphinx) -> None:
@@ -146,7 +157,7 @@ def build_quarto_cheatsheet(app: Sphinx) -> None:
     cheatsheet_file = pathlib.Path(app.srcdir) / cheatsheet_file
     output_dir_path = pathlib.Path(app.outdir) / output_dir
     file_name = str(cheatsheet_file.name)
-    file_path = cheatsheet_file.parent
+    file_path = str(cheatsheet_file.parent)
 
     logger.info(f"Building Quarto cheatsheet: {file_name}")
 
@@ -167,7 +178,7 @@ def build_quarto_cheatsheet(app: Sphinx) -> None:
             "--to",
             "cheat_sheet-pdf",
             "--output-dir",
-            output_dir_path,
+            str(output_dir_path),
             "-V",
             f"version={version}",
         ],
@@ -183,9 +194,9 @@ def build_quarto_cheatsheet(app: Sphinx) -> None:
         "_static/ansys.png",
     ]
     for file in supplementary_files:
-        file_path = cheatsheet_file.parent / file
-        if file_path.exists():
-            file_path.unlink()
+        supplementary_file_path = cheatsheet_file.parent / file
+        if supplementary_file_path.exists():
+            supplementary_file_path.unlink()
 
     # If static folder is clean, delete it
     if not list(cheatsheet_file.parent.glob("_static/*")):
