@@ -8,6 +8,22 @@ Release notes
 
 .. towncrier release notes start
 
+`1.7.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.7.2>`_ (March 02, 2026)
+===========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Cheatsheet logging and remove commands
+          - `#903 <https://github.com/ansys/ansys-sphinx-theme/pull/903>`_
+
+
 `1.7.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.7.1>`_ (February 25, 2026)
 ==============================================================================================
 
