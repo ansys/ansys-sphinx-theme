@@ -105,25 +105,28 @@ def run_quarto_command(command: List[str], cwd: str) -> None:
         Current working directory.
     """
     command = ["quarto"] + command
+    logger.info(f"Running command: {' '.join(command)}")
+
     try:
         # Excluding bandit rule because subprocess is using quarto command
         # and we are handling the command execution securely.
         # The command is run in a controlled environment and not accepting user input.
         result = subprocess.run(command, cwd=cwd, check=True, capture_output=True, text=True)  # nosec: B603
         if result.stdout:
-            logger.info(result.stdout)
+            logger.info(f"Command stdout:\n{result.stdout}")
 
         if result.stderr:
             # HACK: Quarto writes both stdout and stderr to stderr
             # so we need to log it as info if it's not an error
-            logger.info(result.stderr)
+            logger.info(f"Command stderr:\n{result.stderr}")
 
     except subprocess.CalledProcessError as e:
         # Log the output before raising the error
+        logger.error(f"Command failed: {' '.join(command)}")
         if e.stdout:
-            logger.info(f"Command stdout:\n{e.stdout}")
+            logger.info(f"Failed command stdout:\n{e.stdout}")
         if e.stderr:
-            logger.error(f"Command stderr:\n{e.stderr}")
+            logger.error(f"Failed command stderr:\n{e.stderr}")
 
         error_msg = f"Failed to run the command: {e}"
         if e.stdout:
