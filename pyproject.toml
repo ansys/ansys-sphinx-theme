@@ -59,7 +59,7 @@ all = [
 doc = [
     "jupytext==1.19.1",
     "nbsphinx==0.9.8",
-    "notebook==7.5.4",
+    "notebook==7.5.5",
     "numpydoc==1.10.0",
     "pandas==2.3.3",
     "Pillow>=9.0",
