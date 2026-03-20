@@ -138,6 +138,12 @@ def _fqn_set_from_source(source_code: str) -> set:
        local-alias → FQN mapping.
     2. Walk all ``Name`` and ``Attribute`` nodes, resolving them through the
        alias map to recover the original FQN.
+    3. For every ``from X import Y`` import, attempt to dynamically resolve
+       the *canonical* definition location (``Y.__module__ + "." +
+       Y.__qualname__``) via :func:`_canonical_fqns_from_alias_map`.  This
+       means that ``from ansys.dyna.core import Deck`` correctly produces
+       *both* ``ansys.dyna.core.Deck`` (the import path) and
+       ``ansys.dyna.core.deck.Deck`` (where autoapi generates the page).
 
     Parameters
     ----------
@@ -147,7 +153,8 @@ def _fqn_set_from_source(source_code: str) -> set:
     Returns
     -------
     set[str]
-        Every fully-qualified name encountered (imports + usages).
+        Every fully-qualified name encountered (imports + usages), including
+        canonical definition locations resolved via the live Python runtime.
     """
     try:
         tree = ast.parse(source_code)
@@ -155,7 +162,11 @@ def _fqn_set_from_source(source_code: str) -> set:
         return set()
 
     # Pass 1 — build alias map: local_name → fqn
+    # Also keep track of which aliases came from "from X import Y" so we can
+    # attempt runtime resolution.
     alias_map: Dict[str, str] = {}
+    # Maps import-path FQN → (module_str, attr_name) for runtime resolution
+    from_import_map: Dict[str, tuple] = {}
     for node in ast.walk(tree):
         if isinstance(node, ast.Import):
             for alias in node.names:
@@ -164,9 +175,12 @@ def _fqn_set_from_source(source_code: str) -> set:
         elif isinstance(node, ast.ImportFrom):
             module = node.module or ""
             for alias in node.names:
+                if alias.name == "*":
+                    continue
                 local = alias.asname if alias.asname else alias.name
                 fqn = f"{module}.{alias.name}" if module else alias.name
                 alias_map[local] = fqn
+                from_import_map[fqn] = (module, alias.name)
 
     # Pass 2 — collect referenced names
     refs: set = set(alias_map.values())  # every import is already a reference
@@ -194,7 +208,66 @@ def _fqn_set_from_source(source_code: str) -> set:
                 for i in range(2, len(segs) + 1):
                     refs.add(".".join(segs[:i]))
 
+    # Pass 3 — resolve canonical FQNs via the live runtime
+    refs.update(_canonical_fqns_from_alias_map(from_import_map))
+
     return refs
+
+
+def _canonical_fqns_from_alias_map(from_import_map: Dict[str, tuple]) -> set:
+    """Resolve the canonical definition location for every ``from X import Y``.
+
+    Python re-exports are common in large packages: ``ansys.dyna.core``
+    re-exports ``Deck`` from ``ansys.dyna.core.deck``, so
+    ``from ansys.dyna.core import Deck`` gives an AST FQN of
+    ``ansys.dyna.core.Deck``, but autoapi generates a page for the definition
+    site ``ansys.dyna.core.deck.Deck``.
+
+    This function uses :mod:`importlib` to import each module and reads
+    ``obj.__module__`` and ``obj.__qualname__`` to find where the object is
+    actually defined.  Both the import-path FQN and the canonical FQN are
+    returned so the minigallery matches either form.
+
+    Failures (package not installed, import error, missing attribute) are
+    silently skipped — the AST FQN is always kept regardless.
+
+    Parameters
+    ----------
+    from_import_map : dict[str, tuple[str, str]]
+        Mapping of ``import_fqn → (module_str, attr_name)`` collected during
+        AST scanning.
+
+    Returns
+    -------
+    set[str]
+        Additional canonical FQNs to add alongside the AST-derived refs.
+    """
+    import importlib
+
+    extra: set = set()
+    for import_fqn, (module_str, attr_name) in from_import_map.items():
+        if not module_str:
+            continue
+        try:
+            mod = importlib.import_module(module_str)
+            obj = getattr(mod, attr_name, None)
+            if obj is None:
+                continue
+            obj_module = getattr(obj, "__module__", None)
+            obj_qualname = getattr(obj, "__qualname__", None)
+            if not obj_module or not obj_qualname:
+                continue
+            canonical = f"{obj_module}.{obj_qualname}"
+            if canonical != import_fqn:
+                extra.add(canonical)
+                # Also add all intermediate prefixes so module-level pages match
+                parts = canonical.split(".")
+                for i in range(2, len(parts) + 1):
+                    extra.add(".".join(parts[:i]))
+        except Exception:  # noqa: BLE001
+            # ImportError, AttributeError, or any other runtime error — skip
+            pass
+    return extra
 
 
 # ---------------------------------------------------------------------------
