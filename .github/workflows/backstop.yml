@@ -30,12 +30,12 @@ jobs:
           persist-credentials: false
 
       - name: Set up Node
-        uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 #v6.2.0
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f #v6.3.0
         with:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install uv
-        uses: astral-sh/setup-uv@eac588ad8def6316056a12d4907a9d4d84ff7a3b # v7.3.0
+        uses: astral-sh/setup-uv@5a095e7a2014a4212f075830d4f7277575a9d098 # v7.3.1
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
@@ -67,7 +67,7 @@ jobs:
 
       - name: Upload Backstop report (if failed)
         if: failure()
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
         with:
           name: backstop-report
           path: backstop_data/html_report
