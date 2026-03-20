@@ -73,6 +73,7 @@ from dataclasses import dataclass
 import json
 import os
 from pathlib import Path
+import re
 from typing import Any, Dict, List, Optional
 
 from docutils import nodes
@@ -81,7 +82,7 @@ from docutils.statemachine import ViewList
 from sphinx.application import Sphinx
 from sphinx.util import logging as sphinx_logging
 
-from ansys_sphinx_theme import __version__
+from ansys_sphinx_theme import __version__, ansys_favicon
 
 logger = sphinx_logging.getLogger(__name__)
 
@@ -394,8 +395,8 @@ def _default_thumb_path(default_thumb: str) -> str:
     if default_thumb:
         # Strip a leading slash so the path is always srcdir-relative
         return default_thumb.lstrip("/")
-    # pyansys_light_square.png lives in doc/source/_static of every AST project
-    return "_static/pyansys_light_square.png"
+    # ansys favicon is a suitable default thumbnail for examples that don't configure one
+    return ansys_favicon.lstrip("/")
 
 
 def _gallery_thumb_path(
@@ -407,7 +408,7 @@ def _gallery_thumb_path(
     """Return the srcdir-relative path for a sphinx-gallery example thumbnail.
 
     Sphinx-gallery writes thumbnails to
-    ``<gallery_dir>/images/thumb/<stem>_thumb.png`` inside ``srcdir``.
+    ``<gallery_dir>/Folder/images/thumb/<stem>_thumb.png`` inside ``srcdir``.
     We locate the file and return its srcdir-relative path.  If the file
     does not yet exist (first build) we fall back to *default_thumb_path*.
 
@@ -430,21 +431,41 @@ def _gallery_thumb_path(
     if not sphinx_gallery_conf:
         return default_thumb_path
 
+    examples_dirs = sphinx_gallery_conf.get("examples_dirs", [])
     gallery_dirs = sphinx_gallery_conf.get("gallery_dirs", [])
+    if isinstance(examples_dirs, str):
+        examples_dirs = [examples_dirs]
     if isinstance(gallery_dirs, str):
         gallery_dirs = [gallery_dirs]
 
     srcdir_path = Path(srcdir).resolve()
     stem = py_path.stem
-    for gallery_dir in gallery_dirs:
-        # gallery_dir may be relative (to srcdir) or absolute
+
+    for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs):
+        # Resolve examples_dir — may be relative to srcdir (e.g. "../examples")
+        ex_dir = Path(examples_dir)
+        if not ex_dir.is_absolute():
+            ex_dir = (srcdir_path / ex_dir).resolve()
+
+        try:
+            rel_in_ex = py_path.parent.relative_to(ex_dir)
+        except ValueError:
+            continue  # this py file doesn't belong to this examples_dir
+
+        # Resolve gallery_dir — usually srcdir-relative (e.g. "auto_examples")
         gdir = Path(gallery_dir)
         if not gdir.is_absolute():
             gdir = (srcdir_path / gdir).resolve()
-        # sphinx-gallery always prefixes thumbnail filenames with "sphx_glr_"
-        thumb_abs = gdir / "images" / "thumb" / f"sphx_glr_{stem}_thumb.png"
+
+        # sphinx-gallery thumbnail: <gallery_dir>/<subfolder>/images/thumb/sphx_glr_<stem>_thumb.png
+        thumb_abs = gdir / rel_in_ex / "images" / "thumb" / f"sphx_glr_{stem}_thumb.png"
         if thumb_abs.exists():
-            return str(thumb_abs.relative_to(srcdir_path)).replace(os.sep, "/")
+            try:
+                return str(thumb_abs.relative_to(srcdir_path)).replace(os.sep, "/")
+            except ValueError:
+                # gallery_dir is outside srcdir — return absolute URI as fallback
+                return str(thumb_abs).replace(os.sep, "/")
+
     return default_thumb_path
 
 
@@ -503,7 +524,7 @@ def _gallery_output_docname(
         if not gal_dir.is_absolute():
             gal_dir = gallery_dir.rstrip("/")
         else:
-            gal_dir = str(gal_dir.relative_to(srcdir_path)).replace(os.sep, "/")
+            gal_dir = os.path.relpath(str(gal_dir), str(srcdir_path)).replace(os.sep, "/")
 
         stem = rel_to_ex.with_suffix("").as_posix()
         return f"{str(gal_dir).rstrip('/')}/{stem}"
@@ -855,7 +876,7 @@ class AnsysMinigalleryDirective(Directive):
 
         # --- Build a sphinx-design grid via nested RST parsing ---
         rst_lines: List[str] = []
-        rst_lines.append(".. grid:: 1 2 3 3")
+        rst_lines.append(".. grid:: 4 5 6 6")
         rst_lines.append("   :gutter: 2")
         rst_lines.append("   :class-container: ansys-minigallery-grid")
         rst_lines.append("")
@@ -872,26 +893,13 @@ class AnsysMinigalleryDirective(Directive):
             img_rel = _srcdir_to_docrel(thumb_srcrel, env.docname)
             rst_lines.append("   .. grid-item-card::")
             rst_lines.append(f"      :img-top: {img_rel}")
-            # Absolute docname (leading /) so Sphinx resolves correctly from any
-            # page depth. Without the leading / it would be relative to the current
-            # document directory and resolve to a broken path on nested autoapi pages.
             rst_lines.append(f"      :link: /{ex.doc_path}")
             rst_lines.append("      :link-type: doc")
             rst_lines.append("      :class-card: ansys-minigallery-card")
             rst_lines.append("      :class-img-top: ansys-minigallery-thumb")
+            rst_lines.append("      :shadow: sm")
             rst_lines.append("")
             rst_lines.append(f"      {ex.title}")
-            rst_lines.append("")
-            badge_class = "badge-primary" if ex.source_type == "gallery" else "badge-secondary"
-            badge_label = "sphinx-gallery" if ex.source_type == "gallery" else "notebook"
-            # Each string in rst_lines is a single ViewList line — embedded \n breaks parsing.
-            # Split the raw directive into separate lines so the content block is recognised.
-            rst_lines.append("      .. raw:: html")
-            rst_lines.append("")
-            rst_lines.append(
-                f'         <span class="badge {badge_class} ansys-minigallery-badge">'
-                f"{badge_label}</span>"
-            )
             rst_lines.append("")
 
         # Parse RST lines into docutils nodes
@@ -911,6 +919,50 @@ class AnsysMinigalleryDirective(Directive):
 # ---------------------------------------------------------------------------
 # Extension setup
 # ---------------------------------------------------------------------------
+
+
+def _inject_function_minigallery(app: Sphinx, docname: str, source: List[str]) -> None:
+    """Append ``.. ansys-minigallery::`` to autoapi function own-pages.
+
+    Instead of a custom Jinja template (which overwrites autoapi's built-in
+    function template and breaks pydata-sphinx-theme's ``'fullname'`` HTML
+    page-context lookup), this ``source-read`` hook appends the directive text
+    directly to the raw RST that Sphinx has just read from disk.  By the time
+    any source file is read, ``scan_examples`` (``builder-inited``) has already
+    populated ``env.ansys_gallery_backrefs``, so the directive's ``run()``
+    method will resolve correctly.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance.
+    docname : str
+        Sphinx docname being read (e.g. ``api/mypackage/MyClass``).
+    source : list[str]
+        One-element mutable list containing the raw RST source text.
+    """
+    autoapi_root: str = str(getattr(app.config, "autoapi_root", "api") or "api").rstrip("/")
+    if not docname.startswith(autoapi_root + "/"):
+        return
+
+    content = source[0]
+
+    # Detect function own-pages: they contain ``.. py:function::`` but neither
+    # ``.. py:class::`` nor ``.. py:module::`` (those are handled in the Jinja
+    # templates for class.rst / module.rst).
+    if ".. py:function::" not in content:
+        return
+    if ".. py:class::" in content or ".. py:module::" in content:
+        return
+
+    # Extract the fully-qualified name from the directive line, e.g.:
+    #   .. py:function:: ansys.module.my_func(args) -> RetType
+    match = re.search(r"\.\. py:function:: ([A-Za-z_][A-Za-z0-9_.]*)", content)
+    if not match:
+        return
+
+    fqn = match.group(1)
+    source[0] = content.rstrip() + f"\n\n.. ansys-minigallery:: {fqn}\n"
 
 
 def setup(app: Sphinx) -> Dict[str, Any]:
@@ -933,6 +985,7 @@ def setup(app: Sphinx) -> Dict[str, Any]:
 
     app.add_directive("ansys-minigallery", AnsysMinigalleryDirective)
     app.connect("builder-inited", scan_examples)
+    app.connect("source-read", _inject_function_minigallery)
     app.connect("env-merge-info", env_merge_info)
 
     return {
