@@ -263,6 +263,12 @@ else:
         "output": "examples/api",
         "own_page_level": "function",
         "package_depth": 1,
+        # Minigallery: scan these directories for .py and .ipynb examples
+        "examples_dirs": [
+            "doc/source/examples/sphinx-gallery",
+            "doc/source/examples/nbsphinx",
+        ],
+        "gallery_default_thumbnail": "_static/pyansys_light_square.png",
     }
 
     # Gallery of examples
@@ -290,6 +296,7 @@ Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb
 """
     nbsphinx_thumbnails = {
         "examples/nbsphinx/jupyter-notebook": "_static/pyansys_light_square.png",
+        "examples/nbsphinx/minigallery-demo": "_static/pyansys_light_square.png",
     }
 
     # Third party examples

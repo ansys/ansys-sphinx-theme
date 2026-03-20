@@ -52,6 +52,65 @@ div.sphx-glr-download {
   }
 }
 
+/**
+ * Ansys minigallery — thumbnail grid injected on autoapi pages
+ */
+
+.ansys-minigallery {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.ansys-minigallery-heading {
+  font-size: 1.1rem;
+  font-weight: var(--ast-font-weight-semibold, 600);
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--pst-color-border, #dee2e6);
+  padding-bottom: 0.25rem;
+}
+
+.ansys-minigallery-grid {
+  margin-top: 0.5rem;
+}
+
+.ansys-minigallery-card {
+  text-align: center;
+  font-size: 0.85rem;
+  transition: box-shadow 0.15s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.ansys-minigallery-thumb {
+  object-fit: cover;
+  max-height: 140px;
+  width: 100%;
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
+.ansys-minigallery-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  padding: 0.15em 0.5em;
+  border-radius: 0.25rem;
+  margin-top: 0.25rem;
+  font-weight: var(--ast-font-weight-semibold, 600);
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+
+  &.badge-primary {
+    background-color: var(--pst-color-primary, #006eb4);
+    color: #fff;
+  }
+
+  &.badge-secondary {
+    background-color: var(--pst-color-secondary, #e87722);
+    color: #fff;
+  }
+}
+
 div.sphx-glr-footer {
   text-align: center;
   display: flex;

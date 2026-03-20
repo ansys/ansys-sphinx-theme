@@ -88,6 +88,15 @@ def add_autoapi_theme_option(app: Sphinx, config: Dict[str, Any]) -> None:
         relative_autoapi_dir = autoapi_dir
     config["autoapi_dirs"] = [str(relative_autoapi_dir)]
 
+    # --- Minigallery configuration -------------------------------------------
+    examples_dirs = autoapi.get("examples_dirs", [])
+    if isinstance(examples_dirs, str):
+        examples_dirs = [examples_dirs]
+    config["ansys_gallery_dirs"] = list(examples_dirs)
+
+    default_thumb = autoapi.get("gallery_default_thumbnail", "")
+    config["ansys_gallery_default_thumbnail"] = str(default_thumb) if default_thumb else ""
+
 
 def setup(app: Sphinx) -> Dict[str, Any]:
     """Add the autoapi extension to the Sphinx application.
@@ -102,9 +111,15 @@ def setup(app: Sphinx) -> Dict[str, Any]:
     Dict[str, Any]
         A dictionary containing the version and parallel read/write safety flags.
     """
-    # HACK: The ``autoapi.extension``,  ``sphinx_design``, and ``sphinx_jinja`` extensions should be
-    # added to the Sphinx configuration.
-    required_extensions = ["sphinx_design", "sphinx_jinja", "autoapi.extension"]
+    # HACK: The ``autoapi.extension``, ``sphinx_design``, ``sphinx_jinja``, and
+    # ``ansys_sphinx_theme.extension.minigallery`` extensions should be added to
+    # the Sphinx configuration.
+    required_extensions = [
+        "sphinx_design",
+        "sphinx_jinja",
+        "autoapi.extension",
+        "ansys_sphinx_theme.extension.minigallery",
+    ]
     for extension in required_extensions:
         if extension not in app.config["extensions"]:
             app.setup_extension(extension)

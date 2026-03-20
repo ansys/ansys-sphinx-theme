@@ -250,3 +250,9 @@ Module detail
 {% endif %}
 
 {# ---------------------- End module detail description -------------------- #}
+
+{# -------- Begin minigallery section -------- #}
+{% if is_own_page %}
+.. ansys-minigallery:: {{ obj.id }}
+{% endif %}
+{# --------- End minigallery section --------- #}
