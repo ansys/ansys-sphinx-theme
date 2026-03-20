@@ -361,14 +361,15 @@ def _gallery_thumb_path(
     if isinstance(gallery_dirs, str):
         gallery_dirs = [gallery_dirs]
 
-    srcdir_path = Path(srcdir)
+    srcdir_path = Path(srcdir).resolve()
     stem = py_path.stem
     for gallery_dir in gallery_dirs:
         # gallery_dir may be relative (to srcdir) or absolute
         gdir = Path(gallery_dir)
         if not gdir.is_absolute():
             gdir = (srcdir_path / gdir).resolve()
-        thumb_abs = gdir / "images" / "thumb" / f"{stem}_thumb.png"
+        # sphinx-gallery always prefixes thumbnail filenames with "sphx_glr_"
+        thumb_abs = gdir / "images" / "thumb" / f"sphx_glr_{stem}_thumb.png"
         if thumb_abs.exists():
             return str(thumb_abs.relative_to(srcdir_path)).replace(os.sep, "/")
     return default_thumb_path
@@ -411,7 +412,7 @@ def _gallery_output_docname(
     if isinstance(gallery_dirs, str):
         gallery_dirs = [gallery_dirs]
 
-    srcdir_path = Path(srcdir)
+    srcdir_path = Path(srcdir).resolve()
 
     for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs):
         # Resolve examples_dir (may be srcdir-relative or absolute)
