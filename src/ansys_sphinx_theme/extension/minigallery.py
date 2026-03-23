@@ -372,6 +372,156 @@ def _parse_notebook(path: Path) -> tuple:
     return title, fqns, thumbnail_data
 
 
+def _parse_mystnb(path: Path) -> tuple:
+    """Parse a MyST-NB (``.mystnb`` or text-based notebook) file.
+
+    MyST-NB / Jupytext files are plain MyST Markdown documents with the
+    following structure::
+
+        ---
+        jupytext:           ← YAML front-matter (skipped entirely)
+          ...
+        ---
+
+        # Page Title       ← first level-1 heading becomes the title
+
+        +++                 ← MyST-NB cell separator (ignored)
+
+        ```{code-cell} ipython3
+        from ansys.foo import Bar   ← code cells are AST-scanned for FQNs
+        ```
+
+    Parameters
+    ----------
+    path : ~pathlib.Path
+        Absolute path to the MyST-NB file.
+
+    Returns
+    -------
+    tuple[str, set[str]]
+        Human-readable title and set of fully-qualified names referenced in
+        the file.  No thumbnail bytes are returned (text notebooks rarely
+        store embedded image output).
+    """
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError:
+        return path.stem.replace("_", " ").replace("-", " ").title(), set()
+
+    title = path.stem.replace("_", " ").replace("-", " ").title()
+    fqns: set = set()
+    title_found = False
+
+    # --- State machine ---
+    # States: "frontmatter", "body", "code_cell"
+    state = "body"
+    code_lines: List[str] = []
+    fence_marker = ""  # backtick string that opened the current fence
+    first_content_seen = False  # helps detect whether a leading --- starts front-matter
+
+    for line in text.splitlines():
+        stripped = line.strip()
+
+        # ── front-matter detection ────────────────────────────────────────────
+        # YAML front-matter is a `---` block at the very top of the file,
+        # before any other non-empty content.
+        if state == "body" and not first_content_seen:
+            if stripped == "---":
+                state = "frontmatter"
+                continue
+            if stripped:
+                first_content_seen = True
+            # fall through to body processing below
+
+        if state == "frontmatter":
+            if stripped == "---":
+                state = "body"
+                first_content_seen = True
+            # skip every line inside the front-matter block
+            continue
+
+        # ── body / code-cell detection ────────────────────────────────────────
+        if state == "body":
+            if stripped:
+                first_content_seen = True
+
+            # MyST-NB cell separator — ignore.
+            if stripped == "+++":
+                continue
+
+            # Detect the opening of a {code-cell} fence.
+            # Handles: ```{code-cell}, ```{code-cell} python, ```{code-cell} ipython3
+            m = re.match(r"^(`{3,})\{code-cell\}", stripped)
+            if m:
+                state = "code_cell"
+                fence_marker = m.group(1)
+                code_lines = []
+                continue
+
+            # Extract the page title from the first level-1 heading.
+            if not title_found and stripped.startswith("# ") and not stripped.startswith("## "):
+                title = stripped[2:].strip()
+                title_found = True
+
+        elif state == "code_cell":
+            # The closing fence must be exactly the same backtick sequence,
+            # optionally followed by whitespace only.
+            if stripped == fence_marker:
+                state = "body"
+                fqns.update(_fqn_set_from_source("\n".join(code_lines)))
+                code_lines = []
+                fence_marker = ""
+            else:
+                code_lines.append(line)
+
+    # Handle an unclosed fence at EOF (shouldn't happen in valid files).
+    if state == "code_cell" and code_lines:
+        fqns.update(_fqn_set_from_source("\n".join(code_lines)))
+
+    return title, fqns
+
+
+def _notebook_extensions(config: Any) -> Dict[str, str]:
+    """Return a mapping of file extension → parser type for notebook files.
+
+    Detects all file extensions that should be treated as notebooks, based on:
+
+    * ``.ipynb`` — always included (standard Jupyter notebooks).
+    * ``nbsphinx_custom_formats`` — maps extension strings to converter
+      callables/lists configured by the user, e.g.
+      ``{".mystnb": ["jupytext.reads", {"fmt": "mystnb"}]}``.
+    * The ``myst_nb`` extension being active — when ``myst_nb`` is loaded it
+      processes ``.mystnb`` and ``.md`` files that contain notebook metadata.
+
+    Parameters
+    ----------
+    config : ~sphinx.config.Config
+        The Sphinx config object.
+
+    Returns
+    -------
+    dict[str, str]
+        Mapping of file extension (with leading dot) → parser name.
+        Parser name is either ``"ipynb"`` or ``"mystnb"``.
+    """
+    ext_map: Dict[str, str] = {".ipynb": "ipynb"}
+
+    # nbsphinx_custom_formats: dict mapping extension → converter
+    custom_formats: dict = dict(getattr(config, "nbsphinx_custom_formats", {}) or {})
+    for ext in custom_formats:
+        if not ext.startswith("."):
+            ext = f".{ext}"
+        # Treat all custom-format extensions as MyST-NB style (text-based).
+        ext_map[ext] = "mystnb"
+
+    # myst_nb registers .mystnb and optionally .md.
+    extensions: List[str] = list(getattr(config, "extensions", []) or [])
+    if "myst_nb" in extensions:
+        ext_map.setdefault(".mystnb", "mystnb")
+
+    return ext_map
+
+
 # ---------------------------------------------------------------------------
 # Thumbnail helpers
 # ---------------------------------------------------------------------------
@@ -613,12 +763,6 @@ def scan_examples(app: Sphinx) -> None:
         # The source-read hook must NOT inject RST directives into these because
         # their source[0] is raw notebook JSON, not RST.
         app.env.ansys_gallery_notebook_docnames = set()  # type: ignore[attr-defined]
-    # Derive and cache the autoapi-documented package prefixes so the
-    # AnsysAPIReferencesDirective can filter FQNs to only the project's own API.
-    if not hasattr(app.env, "ansys_gallery_package_prefixes"):
-        app.env.ansys_gallery_package_prefixes = _autoapi_package_prefixes(  # type: ignore[attr-defined]
-            app.config, app.srcdir
-        )
 
     backrefs = app.env.ansys_gallery_backrefs
     example_fqns = app.env.ansys_gallery_example_fqns
@@ -632,6 +776,8 @@ def scan_examples(app: Sphinx) -> None:
     # nbsphinx_thumbnails maps docname → thumbnail path (configured in conf.py)
     nbsphinx_thumbnails: dict = dict(getattr(app.config, "nbsphinx_thumbnails", {}) or {})
     default_path = _default_thumb_path(default_thumb)
+    # All notebook-like extensions this project is configured to use.
+    nb_ext_map: Dict[str, str] = _notebook_extensions(app.config)
 
     total_files = 0
 
@@ -694,68 +840,67 @@ def scan_examples(app: Sphinx) -> None:
 
             total_files += 1
 
-        # ---- Jupyter notebooks -----------------------------------------------
-        for nb_file in sorted(dir_path.rglob("*.ipynb")):
-            if nb_file.name.startswith(".") or ".ipynb_checkpoints" in str(nb_file):
-                continue
+        # ---- Jupyter notebooks and MyST-NB files ----------------------------
+        for ext, parser_type in nb_ext_map.items():
+            pattern = f"*{ext}"
+            for nb_file in sorted(dir_path.rglob(pattern)):
+                if nb_file.name.startswith(".") or ".ipynb_checkpoints" in str(nb_file):
+                    continue
 
-            title, fqns, thumb_data = _parse_notebook(nb_file)
+                # Parse according to file type.
+                thumb_data: Optional[bytes] = None
+                if parser_type == "ipynb":
+                    title, fqns, thumb_data = _parse_notebook(nb_file)
+                else:
+                    title, fqns = _parse_mystnb(nb_file)
+                    # MyST-NB files have no embedded image output.
 
-            try:
-                rel = nb_file.relative_to(Path(app.srcdir))
-                docname = str(rel.with_suffix("")).replace(os.sep, "/")
-            except ValueError:
-                logger.debug(f"ansys-minigallery: cannot make {nb_file} relative to srcdir")
-                continue
+                try:
+                    rel = nb_file.relative_to(Path(app.srcdir))
+                    docname = str(rel.with_suffix("")).replace(os.sep, "/")
+                except ValueError:
+                    logger.debug(f"ansys-minigallery: cannot make {nb_file} relative to srcdir")
+                    continue
 
-            # Priority for thumbnails:
-            #  1. First image/png or image/jpeg output embedded in the notebook JSON
-            #     (only present when the notebook was pre-executed with outputs saved).
-            #  2. nbsphinx_thumbnails mapping (configured in conf.py).
-            #  3. Configured default fallback.
-            #
-            # Note: scan_examples runs at builder-inited, before nbsphinx executes
-            # notebooks, so cell outputs on disk are only available when the notebook
-            # was committed with outputs already embedded.
-            if thumb_data is not None:
-                thumb_name = nb_file.stem + ".png"
-                thumb_abs = thumb_dir / thumb_name
-                thumb_abs.write_bytes(thumb_data)
-                # srcdir-relative path (no leading /)
-                thumb_uri = str(thumb_abs.relative_to(Path(app.srcdir))).replace(os.sep, "/")
-            else:
-                # Check nbsphinx_thumbnails: keys are docnames, values are
-                # _static-relative or absolute paths.
-                nb_thumb_configured = nbsphinx_thumbnails.get(docname, "")
-                thumb_uri = (
-                    _default_thumb_path(nb_thumb_configured)
-                    if nb_thumb_configured
-                    else default_path
+                # Thumbnail priority:
+                #  1. Embedded image output (ipynb only).
+                #  2. nbsphinx_thumbnails mapping.
+                #  3. Default fallback.
+                if thumb_data is not None:
+                    thumb_name = nb_file.stem + ".png"
+                    thumb_abs = thumb_dir / thumb_name
+                    thumb_abs.write_bytes(thumb_data)
+                    thumb_uri = str(thumb_abs.relative_to(Path(app.srcdir))).replace(os.sep, "/")
+                else:
+                    nb_thumb_configured = nbsphinx_thumbnails.get(docname, "")
+                    thumb_uri = (
+                        _default_thumb_path(nb_thumb_configured)
+                        if nb_thumb_configured
+                        else default_path
+                    )
+
+                info = ExampleInfo(
+                    title=title,
+                    doc_path=docname,
+                    source_type="notebook",
+                    src_file_abs=str(nb_file),
+                    thumbnail_uri=thumb_uri,
                 )
 
-            info = ExampleInfo(
-                title=title,
-                doc_path=docname,
-                source_type="notebook",
-                src_file_abs=str(nb_file),
-                thumbnail_uri=thumb_uri,
-            )
+                for fqn in fqns:
+                    backrefs.setdefault(fqn, [])
+                    if not any(e.doc_path == docname for e in backrefs[fqn]):
+                        backrefs[fqn].append(info)
 
-            for fqn in fqns:
-                backrefs.setdefault(fqn, [])
-                if not any(e.doc_path == docname for e in backrefs[fqn]):
-                    backrefs[fqn].append(info)
+                if fqns:
+                    existing = example_fqns.get(docname, set())
+                    existing.update(fqns)
+                    example_fqns[docname] = existing
 
-            # Reverse map: record every FQN discovered in this notebook.
-            if fqns:
-                existing = example_fqns.get(docname, set())
-                existing.update(fqns)
-                example_fqns[docname] = existing
+                # Track so the source-read hook skips these docnames.
+                notebook_docnames.add(docname)
 
-            # Track notebook docnames so the source-read hook can skip them.
-            notebook_docnames.add(docname)
-
-            total_files += 1
+                total_files += 1
 
     n_objects = len(backrefs)
     n_refs = sum(len(v) for v in backrefs.values())
@@ -815,13 +960,6 @@ def env_merge_info(
         if not hasattr(env, "ansys_gallery_notebook_docnames"):
             env.ansys_gallery_notebook_docnames = set()
         env.ansys_gallery_notebook_docnames.update(other.ansys_gallery_notebook_docnames)
-
-    # Package prefixes are config-derived and identical across sub-envs;
-    # just ensure the main env has a value.
-    if not hasattr(env, "ansys_gallery_package_prefixes") and hasattr(
-        other, "ansys_gallery_package_prefixes"
-    ):
-        env.ansys_gallery_package_prefixes = other.ansys_gallery_package_prefixes
 
 
 # ---------------------------------------------------------------------------
@@ -1077,10 +1215,7 @@ class AnsysAPIReferencesDirective(Directive):
         backrefs: Dict[str, Any] = getattr(env, "ansys_gallery_backrefs", {})
         known_fqns = set(backrefs.keys())
 
-        # Restrict to FQNs that belong to the project's own documented package(s).
-        # This filters out third-party libraries (numpy, matplotlib, etc.) that
-        # happen to be imported in an example but are not documented via autoapi.
-        pkg_prefixes: List[str] = list(getattr(env, "ansys_gallery_package_prefixes", []))
+        pkg_prefixes: List[str] = _autoapi_package_prefixes(env.config, env.srcdir)
         if pkg_prefixes:
             own_fqns = {
                 fqn
@@ -1088,7 +1223,7 @@ class AnsysAPIReferencesDirective(Directive):
                 if any(fqn == p or fqn.startswith(p + ".") for p in pkg_prefixes)
             }
         else:
-            # No prefixes derived — fall back to showing all indexed FQNs.
+            # No autoapi dirs configured — show all indexed FQNs.
             own_fqns = raw_fqns
 
         api_fqns = sorted(own_fqns & known_fqns)
@@ -1098,15 +1233,12 @@ class AnsysAPIReferencesDirective(Directive):
 
         result_nodes: List[nodes.Node] = []
 
-        # --- Heading (rubric) ---
         if "no-heading" not in self.options:
             heading_text = self.options.get("heading", "API references")
             rubric = nodes.rubric(text=heading_text)
             rubric["classes"].append("ansys-api-references-heading")
             result_nodes.append(rubric)
 
-        # --- Bullet list of :py:obj: cross-references ---
-        # Build the RST inline and parse it so Sphinx resolves the x-refs.
         rst_lines: List[str] = []
         for fqn in api_fqns:
             rst_lines.append(f"* :py:obj:`{fqn}`")
@@ -1117,6 +1249,10 @@ class AnsysAPIReferencesDirective(Directive):
             vl.append(line, source, i)
 
         container = nodes.container()
+        print(container)
+        print(self.content_offset)
+        print(vl)
+        print("=================here=================")
         container["classes"].append("ansys-api-references")
         self.state.nested_parse(vl, self.content_offset, container)
         result_nodes.append(container)
@@ -1193,8 +1329,6 @@ def _add_api_refs_to_notebook_doctree(app: Sphinx, doctree: nodes.document) -> N
         The doctree that was just read.  The docname for the current document
         is available via ``app.env.docname``.
     """
-    from sphinx.addnodes import pending_xref
-
     env = app.env
     docname: str = env.docname
 
@@ -1211,7 +1345,8 @@ def _add_api_refs_to_notebook_doctree(app: Sphinx, doctree: nodes.document) -> N
     backrefs: Dict[str, Any] = getattr(env, "ansys_gallery_backrefs", {})
     known_fqns: set = set(backrefs.keys())
 
-    pkg_prefixes: List[str] = list(getattr(env, "ansys_gallery_package_prefixes", []))
+    # Prefixes derived from autoapi_dirs via __init__.py walk.
+    pkg_prefixes: List[str] = _autoapi_package_prefixes(env.config, env.srcdir)
     if pkg_prefixes:
         own_fqns = {
             fqn
@@ -1229,21 +1364,44 @@ def _add_api_refs_to_notebook_doctree(app: Sphinx, doctree: nodes.document) -> N
     rubric = nodes.rubric(text="API references")
     rubric["classes"].append("ansys-api-references-heading")
 
-    # --- Bullet list of pending cross-references ---
+    # --- Bullet list of direct reference nodes ---
+    # We build the autoapi page URL directly from the FQN rather than using
+    # pending_xref, because Sphinx's Python domain resolver looks up objects in
+    # the domain inventory built from py:class/py:function directives — autoapi
+    # objects are registered there, but the resolution is fragile across
+    # builder types and parallel builds.
+    #
+    # AutoAPI generates pages at:
+    #   <autoapi_root>/<pkg>/<subpkg>/.../<Name>/index  (packages/modules)
+    #   <autoapi_root>/<pkg>/<subpkg>/.../<Name>        (classes/functions)
+    # We link to the backrefs-confirmed docname and compute a relative URL.
+    autoapi_root: str = str(getattr(env.config, "autoapi_root", "api") or "api").rstrip("/")
+
+    # Compute how many directory levels up we need to go from the notebook page
+    # to reach the site root.  For docname "examples/nbsphinx/foo" (depth=2)
+    # the HTML sits at examples/nbsphinx/foo.html, so we need "../../".
+    nb_depth = docname.count("/")
+    up_prefix = "../" * (nb_depth + 1)  # +1: each docname segment is a dir
+
     bullet_list = nodes.bullet_list()
     for fqn in api_fqns:
-        xref = pending_xref(
-            "",
-            nodes.literal(fqn, fqn, classes=["xref", "py", "py-obj"]),
-            refdomain="py",
-            reftype="obj",
-            reftarget=fqn,
-            modname=None,
-            classname=None,
-            refexplicit=True,
-        )
+        # Derive the autoapi page path from the FQN.
+        # autoapi writes:
+        #   <autoapi_root>/<pkg/subpkg/Name>/index.html  →  packages & modules
+        #   <autoapi_root>/<pkg/subpkg/Name>.html        →  classes & functions
+        # We prefer the /index variant (it always exists for higher-level names)
+        # and fall back to the bare path; both resolve correctly in the browser.
+        fqn_path = fqn.replace(".", "/")
+        # Use backrefs to confirm the FQN is known; the ExampleInfo objects
+        # carry the *example* docname, not the API page — so we build the API
+        # URL directly from fqn + autoapi_root.
+        href = f"{up_prefix}{autoapi_root}/{fqn_path}/index.html"
+
+        ref_node = nodes.reference("", "", internal=True, refuri=href)
+        ref_node += nodes.literal(fqn, fqn, classes=["xref", "py", "py-obj"])
+
         para = nodes.paragraph()
-        para += xref
+        para += ref_node
         item = nodes.list_item()
         item += para
         bullet_list += item
