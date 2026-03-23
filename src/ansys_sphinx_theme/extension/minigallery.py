@@ -993,6 +993,15 @@ class AnsysMinigalleryDirective(Directive):
         """Execute the directive and return docutils nodes."""
         env = self.state.document.settings.env
         fqn = self.arguments[0].strip()
+
+        # Skip packages and subpackages (__init__.py level) — the minigallery
+        # is only relevant on module, class, and function pages.
+        # TODO: to be discussed — should we allow package-level galleries? # noqa: TD003
+        all_objects = getattr(env, "autoapi_all_objects", {})
+        if fqn in all_objects:
+            if getattr(all_objects[fqn], "type", "") == "package":
+                return []
+
         backrefs: Dict[str, List[ExampleInfo]] = getattr(env, "ansys_gallery_backrefs", {})
 
         # Fuzzy FQN matching: allow both short names and fully qualified names
