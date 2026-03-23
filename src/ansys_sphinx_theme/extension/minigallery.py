@@ -532,6 +532,57 @@ def _gallery_output_docname(
     return None
 
 
+def _autoapi_package_prefixes(config: Any, srcdir: str) -> List[str]:
+    """Derive the top-level Python package prefix(es) from ``autoapi_dirs``.
+
+    For each directory listed in ``autoapi_dirs``, this function walks *up*
+    from that directory collecting directory names while consecutive
+    ``__init__.py`` files are present.  The resulting dotted name is the
+    importable package prefix that autoapi will document.
+
+    For example, given ``autoapi_dirs = ["../../src/ansys_sphinx_theme/examples"]``
+    (relative to ``srcdir``), where both ``ansys_sphinx_theme/`` and
+    ``ansys_sphinx_theme/examples/`` contain ``__init__.py`` but ``src/``
+    does not, the returned prefix is ``"ansys_sphinx_theme.examples"``.
+
+    Parameters
+    ----------
+    config : ~sphinx.config.Config
+        Sphinx config object.
+    srcdir : str
+        Absolute Sphinx source directory path.
+
+    Returns
+    -------
+    list[str]
+        Sorted list of dotted package prefixes (e.g.
+        ``["ansys_sphinx_theme.examples"]``).
+    """
+    autoapi_dirs: List[str] = list(getattr(config, "autoapi_dirs", []) or [])
+    prefixes: List[str] = []
+    srcdir_path = Path(srcdir).resolve()
+
+    for d in autoapi_dirs:
+        p = Path(d)
+        if not p.is_absolute():
+            p = (srcdir_path / p).resolve()
+        if not p.is_dir():
+            continue
+
+        # Walk upward collecting package components while __init__.py exists.
+        parts: List[str] = []
+        cur = p
+        while (cur / "__init__.py").exists():
+            parts.append(cur.name)
+            cur = cur.parent
+
+        if parts:
+            parts.reverse()
+            prefixes.append(".".join(parts))
+
+    return sorted(set(prefixes))
+
+
 def scan_examples(app: Sphinx) -> None:
     """Scan all configured example directories and build the backrefs map.
 
@@ -554,8 +605,24 @@ def scan_examples(app: Sphinx) -> None:
 
     if not hasattr(app.env, "ansys_gallery_backrefs"):
         app.env.ansys_gallery_backrefs = {}  # type: ignore[attr-defined]
+    if not hasattr(app.env, "ansys_gallery_example_fqns"):
+        # Reverse map: docname → sorted list of FQNs used in that example.
+        app.env.ansys_gallery_example_fqns = {}  # type: ignore[attr-defined]
+    if not hasattr(app.env, "ansys_gallery_notebook_docnames"):
+        # Set of docnames that correspond to Jupyter notebooks (.ipynb).
+        # The source-read hook must NOT inject RST directives into these because
+        # their source[0] is raw notebook JSON, not RST.
+        app.env.ansys_gallery_notebook_docnames = set()  # type: ignore[attr-defined]
+    # Derive and cache the autoapi-documented package prefixes so the
+    # AnsysAPIReferencesDirective can filter FQNs to only the project's own API.
+    if not hasattr(app.env, "ansys_gallery_package_prefixes"):
+        app.env.ansys_gallery_package_prefixes = _autoapi_package_prefixes(  # type: ignore[attr-defined]
+            app.config, app.srcdir
+        )
 
     backrefs = app.env.ansys_gallery_backrefs
+    example_fqns = app.env.ansys_gallery_example_fqns
+    notebook_docnames = app.env.ansys_gallery_notebook_docnames
     thumb_dir = Path(app.srcdir) / "_static" / "ansys-gallery" / "thumbs"
     thumb_dir.mkdir(parents=True, exist_ok=True)
 
@@ -619,6 +686,12 @@ def scan_examples(app: Sphinx) -> None:
                 if not any(e.doc_path == docname for e in backrefs[fqn]):
                     backrefs[fqn].append(info)
 
+            # Reverse map: record every FQN discovered in this example file.
+            if fqns:
+                existing = example_fqns.get(docname, set())
+                existing.update(fqns)
+                example_fqns[docname] = existing
+
             total_files += 1
 
         # ---- Jupyter notebooks -----------------------------------------------
@@ -673,6 +746,15 @@ def scan_examples(app: Sphinx) -> None:
                 if not any(e.doc_path == docname for e in backrefs[fqn]):
                     backrefs[fqn].append(info)
 
+            # Reverse map: record every FQN discovered in this notebook.
+            if fqns:
+                existing = example_fqns.get(docname, set())
+                existing.update(fqns)
+                example_fqns[docname] = existing
+
+            # Track notebook docnames so the source-read hook can skip them.
+            notebook_docnames.add(docname)
+
             total_files += 1
 
     n_objects = len(backrefs)
@@ -718,6 +800,28 @@ def env_merge_info(
             if ex.doc_path not in existing:
                 env.ansys_gallery_backrefs[fqn].append(ex)
                 existing.add(ex.doc_path)
+
+    # Merge the reverse map (docname → fqn set)
+    if hasattr(other, "ansys_gallery_example_fqns"):
+        if not hasattr(env, "ansys_gallery_example_fqns"):
+            env.ansys_gallery_example_fqns = {}
+        for docname, fqns in other.ansys_gallery_example_fqns.items():
+            existing_fqns = env.ansys_gallery_example_fqns.get(docname, set())
+            existing_fqns.update(fqns)
+            env.ansys_gallery_example_fqns[docname] = existing_fqns
+
+    # Merge the notebook docnames set.
+    if hasattr(other, "ansys_gallery_notebook_docnames"):
+        if not hasattr(env, "ansys_gallery_notebook_docnames"):
+            env.ansys_gallery_notebook_docnames = set()
+        env.ansys_gallery_notebook_docnames.update(other.ansys_gallery_notebook_docnames)
+
+    # Package prefixes are config-derived and identical across sub-envs;
+    # just ensure the main env has a value.
+    if not hasattr(env, "ansys_gallery_package_prefixes") and hasattr(
+        other, "ansys_gallery_package_prefixes"
+    ):
+        env.ansys_gallery_package_prefixes = other.ansys_gallery_package_prefixes
 
 
 # ---------------------------------------------------------------------------
@@ -917,8 +1021,238 @@ class AnsysMinigalleryDirective(Directive):
 
 
 # ---------------------------------------------------------------------------
+# API-references directive  (reverse of minigallery)
+# ---------------------------------------------------------------------------
+
+
+class AnsysAPIReferencesDirective(Directive):
+    """Render a bulleted list of API objects referenced in the current example.
+
+    This is the *reverse* of ``.. ansys-minigallery::``.  Whereas the
+    minigallery shows—on an API page—which examples use that object, this
+    directive shows—on an example page—which API objects are imported/used.
+
+    The directive reads the ``ansys_gallery_example_fqns`` map that
+    ``scan_examples`` (``builder-inited``) has already populated, and emits
+    a ``.. rubric::`` heading plus a ``.. py:obj::`` bullet list for every
+    indexed FQN that actually has an autoapi page (i.e. the FQN is also a key
+    in ``ansys_gallery_backrefs``, confirming autoapi knows about it).
+
+    Usage
+    -----
+    .. code-block:: rst
+
+        .. ansys-api-references::
+           :heading: API references used in this example
+           :no-heading:
+
+    Options
+    -------
+    heading : str
+        Custom heading text.  Defaults to ``"API references"``.  Ignored if
+        ``no-heading`` is given.
+    no-heading : flag
+        Suppress the heading entirely.
+    """
+
+    required_arguments = 0
+    optional_arguments = 0
+    option_spec = {
+        "heading": directives.unchanged,
+        "no-heading": directives.flag,
+    }
+    has_content = False
+
+    def run(self) -> List[nodes.Node]:
+        """Execute the directive and return docutils nodes."""
+        env = self.state.document.settings.env
+        docname: str = env.docname
+
+        # Look up which FQNs were found in this example file.
+        example_fqns: Dict[str, Any] = getattr(env, "ansys_gallery_example_fqns", {})
+        raw_fqns: set = example_fqns.get(docname, set())
+
+        # Only surface FQNs that are indexed in backrefs — those are the ones
+        # that have a corresponding autoapi page.
+        backrefs: Dict[str, Any] = getattr(env, "ansys_gallery_backrefs", {})
+        known_fqns = set(backrefs.keys())
+
+        # Restrict to FQNs that belong to the project's own documented package(s).
+        # This filters out third-party libraries (numpy, matplotlib, etc.) that
+        # happen to be imported in an example but are not documented via autoapi.
+        pkg_prefixes: List[str] = list(getattr(env, "ansys_gallery_package_prefixes", []))
+        if pkg_prefixes:
+            own_fqns = {
+                fqn
+                for fqn in raw_fqns
+                if any(fqn == p or fqn.startswith(p + ".") for p in pkg_prefixes)
+            }
+        else:
+            # No prefixes derived — fall back to showing all indexed FQNs.
+            own_fqns = raw_fqns
+
+        api_fqns = sorted(own_fqns & known_fqns)
+
+        if not api_fqns:
+            return []
+
+        result_nodes: List[nodes.Node] = []
+
+        # --- Heading (rubric) ---
+        if "no-heading" not in self.options:
+            heading_text = self.options.get("heading", "API references")
+            rubric = nodes.rubric(text=heading_text)
+            rubric["classes"].append("ansys-api-references-heading")
+            result_nodes.append(rubric)
+
+        # --- Bullet list of :py:obj: cross-references ---
+        # Build the RST inline and parse it so Sphinx resolves the x-refs.
+        rst_lines: List[str] = []
+        for fqn in api_fqns:
+            rst_lines.append(f"* :py:obj:`{fqn}`")
+
+        vl = ViewList()
+        source = docname
+        for i, line in enumerate(rst_lines):
+            vl.append(line, source, i)
+
+        container = nodes.container()
+        container["classes"].append("ansys-api-references")
+        self.state.nested_parse(vl, self.content_offset, container)
+        result_nodes.append(container)
+
+        return result_nodes
+
+
+# ---------------------------------------------------------------------------
 # Extension setup
 # ---------------------------------------------------------------------------
+
+
+def _inject_api_refs_in_example(app: Sphinx, docname: str, source: List[str]) -> None:
+    """Append ``.. ansys-api-references::`` to sphinx-gallery RST pages.
+
+    This ``source-read`` hook fires for every source file Sphinx reads.
+    For ``.ipynb`` notebooks the ``source-read`` event fires with the **raw
+    notebook JSON** as ``source[0]``, not RST — injecting RST into JSON would
+    corrupt the notebook.  We therefore skip any docname that was recorded as
+    a notebook by :func:`scan_examples`.
+
+    For sphinx-gallery ``.py`` examples, sphinx-gallery converts the script to
+    an ``.rst`` file on disk; Sphinx reads that RST via the normal pipeline and
+    ``source-read`` fires with RST, so injection is safe.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance.
+    docname : str
+        Sphinx docname being read.
+    source : list[str]
+        One-element mutable list containing the raw source text (RST for
+        sphinx-gallery pages, JSON for ``.ipynb`` notebook pages).
+    """
+    example_fqns: Dict[str, Any] = getattr(app.env, "ansys_gallery_example_fqns", {})
+    if docname not in example_fqns:
+        return
+
+    # Never inject into notebooks — their source[0] is raw JSON, not RST.
+    notebook_docnames: set = getattr(app.env, "ansys_gallery_notebook_docnames", set())
+    if docname in notebook_docnames:
+        return
+
+    # Only append if there are actually indexed FQNs to show.
+    backrefs: Dict[str, Any] = getattr(app.env, "ansys_gallery_backrefs", {})
+    if not (example_fqns[docname] & set(backrefs.keys())):
+        return
+
+    source[0] = source[0].rstrip() + "\n\n.. ansys-api-references::\n"
+
+
+def _add_api_refs_to_notebook_doctree(app: Sphinx, doctree: nodes.document) -> None:
+    """Append API-references nodes to a notebook page's doctree.
+
+    Unlike sphinx-gallery pages (which produce RST that Sphinx reads via the
+    normal ``source-read`` pipeline), nbsphinx converts ``.ipynb`` notebooks
+    directly to docutils nodes *without* going through ``source-read``.  The
+    ``doctree-read`` event fires after nbsphinx has built the doctree, so this
+    is the correct place to append extra nodes for notebook pages.
+
+    The function builds:
+
+    * A ``rubric`` heading ("API references").
+    * A ``bullet_list`` of ``pending_xref`` nodes — one per API object.  Sphinx
+      resolves these references during its normal cross-reference resolution
+      pass, exactly like any ``:py:obj:`` role in hand-written RST.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance.
+    doctree : docutils.nodes.document
+        The doctree that was just read.  The docname for the current document
+        is available via ``app.env.docname``.
+    """
+    from sphinx.addnodes import pending_xref
+
+    env = app.env
+    docname: str = env.docname
+
+    # Only act on notebook pages.
+    notebook_docnames: set = getattr(env, "ansys_gallery_notebook_docnames", set())
+    if docname not in notebook_docnames:
+        return
+
+    example_fqns: Dict[str, Any] = getattr(env, "ansys_gallery_example_fqns", {})
+    raw_fqns: set = example_fqns.get(docname, set())
+    if not raw_fqns:
+        return
+
+    backrefs: Dict[str, Any] = getattr(env, "ansys_gallery_backrefs", {})
+    known_fqns: set = set(backrefs.keys())
+
+    pkg_prefixes: List[str] = list(getattr(env, "ansys_gallery_package_prefixes", []))
+    if pkg_prefixes:
+        own_fqns = {
+            fqn
+            for fqn in raw_fqns
+            if any(fqn == p or fqn.startswith(p + ".") for p in pkg_prefixes)
+        }
+    else:
+        own_fqns = raw_fqns
+
+    api_fqns = sorted(own_fqns & known_fqns)
+    if not api_fqns:
+        return
+
+    # --- Heading ---
+    rubric = nodes.rubric(text="API references")
+    rubric["classes"].append("ansys-api-references-heading")
+
+    # --- Bullet list of pending cross-references ---
+    bullet_list = nodes.bullet_list()
+    for fqn in api_fqns:
+        xref = pending_xref(
+            "",
+            nodes.literal(fqn, fqn, classes=["xref", "py", "py-obj"]),
+            refdomain="py",
+            reftype="obj",
+            reftarget=fqn,
+            modname=None,
+            classname=None,
+            refexplicit=True,
+        )
+        para = nodes.paragraph()
+        para += xref
+        item = nodes.list_item()
+        item += para
+        bullet_list += item
+
+    container = nodes.container()
+    container["classes"].append("ansys-api-references")
+    container += bullet_list
+
+    doctree += [rubric, container]
 
 
 def _inject_function_minigallery(app: Sphinx, docname: str, source: List[str]) -> None:
@@ -984,8 +1318,11 @@ def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_config_value("ansys_gallery_default_thumbnail", "", "env")
 
     app.add_directive("ansys-minigallery", AnsysMinigalleryDirective)
+    app.add_directive("ansys-api-references", AnsysAPIReferencesDirective)
     app.connect("builder-inited", scan_examples)
+    app.connect("source-read", _inject_api_refs_in_example)
     app.connect("source-read", _inject_function_minigallery)
+    app.connect("doctree-read", _add_api_refs_to_notebook_doctree)
     app.connect("env-merge-info", env_merge_info)
 
     return {
