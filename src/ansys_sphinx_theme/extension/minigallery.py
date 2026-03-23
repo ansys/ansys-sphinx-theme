@@ -372,6 +372,156 @@ def _parse_notebook(path: Path) -> tuple:
     return title, fqns, thumbnail_data
 
 
+def _parse_mystnb(path: Path) -> tuple:
+    """Parse a MyST-NB (``.mystnb`` or text-based notebook) file.
+
+    MyST-NB / Jupytext files are plain MyST Markdown documents with the
+    following structure::
+
+        ---
+        jupytext:           ← YAML front-matter (skipped entirely)
+          ...
+        ---
+
+        # Page Title       ← first level-1 heading becomes the title
+
+        +++                 ← MyST-NB cell separator (ignored)
+
+        ```{code-cell} ipython3
+        from ansys.foo import Bar   ← code cells are AST-scanned for FQNs
+        ```
+
+    Parameters
+    ----------
+    path : ~pathlib.Path
+        Absolute path to the MyST-NB file.
+
+    Returns
+    -------
+    tuple[str, set[str]]
+        Human-readable title and set of fully-qualified names referenced in
+        the file.  No thumbnail bytes are returned (text notebooks rarely
+        store embedded image output).
+    """
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError:
+        return path.stem.replace("_", " ").replace("-", " ").title(), set()
+
+    title = path.stem.replace("_", " ").replace("-", " ").title()
+    fqns: set = set()
+    title_found = False
+
+    # --- State machine ---
+    # States: "frontmatter", "body", "code_cell"
+    state = "body"
+    code_lines: List[str] = []
+    fence_marker = ""  # backtick string that opened the current fence
+    first_content_seen = False  # helps detect whether a leading --- starts front-matter
+
+    for line in text.splitlines():
+        stripped = line.strip()
+
+        # ── front-matter detection ────────────────────────────────────────────
+        # YAML front-matter is a `---` block at the very top of the file,
+        # before any other non-empty content.
+        if state == "body" and not first_content_seen:
+            if stripped == "---":
+                state = "frontmatter"
+                continue
+            if stripped:
+                first_content_seen = True
+            # fall through to body processing below
+
+        if state == "frontmatter":
+            if stripped == "---":
+                state = "body"
+                first_content_seen = True
+            # skip every line inside the front-matter block
+            continue
+
+        # ── body / code-cell detection ────────────────────────────────────────
+        if state == "body":
+            if stripped:
+                first_content_seen = True
+
+            # MyST-NB cell separator — ignore.
+            if stripped == "+++":
+                continue
+
+            # Detect the opening of a {code-cell} fence.
+            # Handles: ```{code-cell}, ```{code-cell} python, ```{code-cell} ipython3
+            m = re.match(r"^(`{3,})\{code-cell\}", stripped)
+            if m:
+                state = "code_cell"
+                fence_marker = m.group(1)
+                code_lines = []
+                continue
+
+            # Extract the page title from the first level-1 heading.
+            if not title_found and stripped.startswith("# ") and not stripped.startswith("## "):
+                title = stripped[2:].strip()
+                title_found = True
+
+        elif state == "code_cell":
+            # The closing fence must be exactly the same backtick sequence,
+            # optionally followed by whitespace only.
+            if stripped == fence_marker:
+                state = "body"
+                fqns.update(_fqn_set_from_source("\n".join(code_lines)))
+                code_lines = []
+                fence_marker = ""
+            else:
+                code_lines.append(line)
+
+    # Handle an unclosed fence at EOF (shouldn't happen in valid files).
+    if state == "code_cell" and code_lines:
+        fqns.update(_fqn_set_from_source("\n".join(code_lines)))
+
+    return title, fqns
+
+
+def _notebook_extensions(config: Any) -> Dict[str, str]:
+    """Return a mapping of file extension → parser type for notebook files.
+
+    Detects all file extensions that should be treated as notebooks, based on:
+
+    * ``.ipynb`` — always included (standard Jupyter notebooks).
+    * ``nbsphinx_custom_formats`` — maps extension strings to converter
+      callables/lists configured by the user, e.g.
+      ``{".mystnb": ["jupytext.reads", {"fmt": "mystnb"}]}``.
+    * The ``myst_nb`` extension being active — when ``myst_nb`` is loaded it
+      processes ``.mystnb`` and ``.md`` files that contain notebook metadata.
+
+    Parameters
+    ----------
+    config : ~sphinx.config.Config
+        The Sphinx config object.
+
+    Returns
+    -------
+    dict[str, str]
+        Mapping of file extension (with leading dot) → parser name.
+        Parser name is either ``"ipynb"`` or ``"mystnb"``.
+    """
+    ext_map: Dict[str, str] = {".ipynb": "ipynb"}
+
+    # nbsphinx_custom_formats: dict mapping extension → converter
+    custom_formats: dict = dict(getattr(config, "nbsphinx_custom_formats", {}) or {})
+    for ext in custom_formats:
+        if not ext.startswith("."):
+            ext = f".{ext}"
+        # Treat all custom-format extensions as MyST-NB style (text-based).
+        ext_map[ext] = "mystnb"
+
+    # myst_nb registers .mystnb and optionally .md.
+    extensions: List[str] = list(getattr(config, "extensions", []) or [])
+    if "myst_nb" in extensions:
+        ext_map.setdefault(".mystnb", "mystnb")
+
+    return ext_map
+
+
 # ---------------------------------------------------------------------------
 # Thumbnail helpers
 # ---------------------------------------------------------------------------
@@ -621,59 +771,59 @@ def scan_examples(app: Sphinx) -> None:
 
             total_files += 1
 
-        # ---- Jupyter notebooks -----------------------------------------------
-        for nb_file in sorted(dir_path.rglob("*.ipynb")):
-            if nb_file.name.startswith(".") or ".ipynb_checkpoints" in str(nb_file):
-                continue
+        # ---- Jupyter notebooks and MyST-NB files ----------------------------
+        nb_ext_map: Dict[str, str] = _notebook_extensions(app.config)
+        for ext, parser_type in nb_ext_map.items():
+            for nb_file in sorted(dir_path.rglob(f"*{ext}")):
+                if nb_file.name.startswith(".") or ".ipynb_checkpoints" in str(nb_file):
+                    continue
 
-            title, fqns, thumb_data = _parse_notebook(nb_file)
+                # Parse according to file type.
+                thumb_data: Optional[bytes] = None
+                if parser_type == "ipynb":
+                    title, fqns, thumb_data = _parse_notebook(nb_file)
+                else:
+                    title, fqns = _parse_mystnb(nb_file)
+                    # MyST-NB files have no embedded image output.
 
-            try:
-                rel = nb_file.relative_to(Path(app.srcdir))
-                docname = str(rel.with_suffix("")).replace(os.sep, "/")
-            except ValueError:
-                logger.debug(f"ansys-minigallery: cannot make {nb_file} relative to srcdir")
-                continue
+                try:
+                    rel = nb_file.relative_to(Path(app.srcdir))
+                    docname = str(rel.with_suffix("")).replace(os.sep, "/")
+                except ValueError:
+                    logger.debug(f"ansys-minigallery: cannot make {nb_file} relative to srcdir")
+                    continue
 
-            # Priority for thumbnails:
-            #  1. First image/png or image/jpeg output embedded in the notebook JSON
-            #     (only present when the notebook was pre-executed with outputs saved).
-            #  2. nbsphinx_thumbnails mapping (configured in conf.py).
-            #  3. Configured default fallback.
-            #
-            # Note: scan_examples runs at builder-inited, before nbsphinx executes
-            # notebooks, so cell outputs on disk are only available when the notebook
-            # was committed with outputs already embedded.
-            if thumb_data is not None:
-                thumb_name = nb_file.stem + ".png"
-                thumb_abs = thumb_dir / thumb_name
-                thumb_abs.write_bytes(thumb_data)
-                # srcdir-relative path (no leading /)
-                thumb_uri = str(thumb_abs.relative_to(Path(app.srcdir))).replace(os.sep, "/")
-            else:
-                # Check nbsphinx_thumbnails: keys are docnames, values are
-                # _static-relative or absolute paths.
-                nb_thumb_configured = nbsphinx_thumbnails.get(docname, "")
-                thumb_uri = (
-                    _default_thumb_path(nb_thumb_configured)
-                    if nb_thumb_configured
-                    else default_path
+                # Thumbnail priority:
+                #  1. Embedded image output (ipynb only).
+                #  2. nbsphinx_thumbnails mapping.
+                #  3. Default fallback.
+                if thumb_data is not None:
+                    thumb_name = nb_file.stem + ".png"
+                    thumb_abs = thumb_dir / thumb_name
+                    thumb_abs.write_bytes(thumb_data)
+                    thumb_uri = str(thumb_abs.relative_to(Path(app.srcdir))).replace(os.sep, "/")
+                else:
+                    nb_thumb_configured = nbsphinx_thumbnails.get(docname, "")
+                    thumb_uri = (
+                        _default_thumb_path(nb_thumb_configured)
+                        if nb_thumb_configured
+                        else default_path
+                    )
+
+                info = ExampleInfo(
+                    title=title,
+                    doc_path=docname,
+                    source_type="notebook",
+                    src_file_abs=str(nb_file),
+                    thumbnail_uri=thumb_uri,
                 )
 
-            info = ExampleInfo(
-                title=title,
-                doc_path=docname,
-                source_type="notebook",
-                src_file_abs=str(nb_file),
-                thumbnail_uri=thumb_uri,
-            )
+                for fqn in fqns:
+                    backrefs.setdefault(fqn, [])
+                    if not any(e.doc_path == docname for e in backrefs[fqn]):
+                        backrefs[fqn].append(info)
 
-            for fqn in fqns:
-                backrefs.setdefault(fqn, [])
-                if not any(e.doc_path == docname for e in backrefs[fqn]):
-                    backrefs[fqn].append(info)
-
-            total_files += 1
+                total_files += 1
 
     n_objects = len(backrefs)
     n_refs = sum(len(v) for v in backrefs.values())
