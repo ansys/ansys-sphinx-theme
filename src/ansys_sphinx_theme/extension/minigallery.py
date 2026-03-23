@@ -265,9 +265,8 @@ def _canonical_fqns_from_alias_map(from_import_map: Dict[str, tuple]) -> set:
                 parts = canonical.split(".")
                 for i in range(2, len(parts) + 1):
                     extra.add(".".join(parts[:i]))
-        except Exception:  # noqa: BLE001
-            # ImportError, AttributeError, or any other runtime error — skip
-            pass
+        except Exception:
+            logger.debug(f"ansys-minigallery: failed to resolve canonical FQN for {import_fqn}")
     return extra
 
 
@@ -306,7 +305,9 @@ def _parse_gallery_py(path: Path) -> tuple:
                 title = stripped
                 break
     except SyntaxError:
-        pass
+        logger.info(
+            f"ansys-minigallery: failed to parse {path} for title extraction; using filename."
+        )
 
     return title, _fqn_set_from_source(source)
 
@@ -364,7 +365,9 @@ def _parse_notebook(path: Path) -> tuple:
                             try:
                                 thumbnail_data = base64.b64decode(raw)
                             except Exception:
-                                pass
+                                logger.info(
+                                    f"ansys-minigallery: failed to decode thumbnail image in {path}"
+                                )
                             break
                     if thumbnail_data is not None:
                         break
