@@ -996,11 +996,11 @@ class AnsysMinigalleryDirective(Directive):
 
         # Skip packages and subpackages (__init__.py level) — the minigallery
         # is only relevant on module, class, and function pages.
-        # TODO: to be discussed — should we allow package-level galleries? # noqa: TD003
-        all_objects = getattr(env, "autoapi_all_objects", {})
-        if fqn in all_objects:
-            if getattr(all_objects[fqn], "type", "") == "package":
-                return []
+        # # TODO: to be discussed — should we allow package-level galleries? # noqa: TD003
+        # all_objects = getattr(env, "autoapi_all_objects", {})
+        # if fqn in all_objects:
+        #     if getattr(all_objects[fqn], "type", "") == "package":
+        #         return []
 
         backrefs: Dict[str, List[ExampleInfo]] = getattr(env, "ansys_gallery_backrefs", {})
 
