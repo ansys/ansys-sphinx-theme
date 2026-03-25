@@ -1027,10 +1027,8 @@ def _load_json_sources(
             logger.warning("ansys-minigallery: examples_json entry missing 'file' key; skipping.")
             continue
 
-        # Resolve path: repo root first, then srcdir
-        json_path = (root_dir / json_file).resolve()
-        if not json_path.is_file():
-            json_path = (Path(app.srcdir) / json_file).resolve()
+        # Resolve path relative to srcdir (conf.py directory)
+        json_path = (Path(app.srcdir) / json_file).resolve()
         if not json_path.is_file():
             logger.warning(
                 f"ansys-minigallery: examples_json file not found: {json_file!r}; skipping."
