@@ -99,6 +99,18 @@ def add_autoapi_theme_option(app: Sphinx, config: Dict[str, Any]) -> None:
     if default_thumb:
         config["ansys_gallery_default_thumbnail"] = str(default_thumb) if default_thumb else ""
 
+    examples_json = autoapi.get("examples_json", [])
+    if isinstance(examples_json, dict):
+        examples_json = [examples_json]  # allow single-dict shorthand
+    if examples_json:
+        config["ansys_gallery_json_sources"] = list(examples_json)
+
+    fqn_prefixes = autoapi.get("fqn_prefixes", [])
+    if isinstance(fqn_prefixes, str):
+        fqn_prefixes = [fqn_prefixes]
+    if fqn_prefixes:
+        config["ansys_gallery_fqn_prefixes"] = list(fqn_prefixes)
+
 
 def setup(app: Sphinx) -> Dict[str, Any]:
     """Add the autoapi extension to the Sphinx application.
@@ -123,7 +135,8 @@ def setup(app: Sphinx) -> Dict[str, Any]:
     ]
     autoapi = app.config.html_theme_options.get("ansys_sphinx_theme_autoapi", {})
     examples_dirs = autoapi.get("examples_dirs", [])
-    if examples_dirs:
+    examples_json = autoapi.get("examples_json", [])
+    if examples_dirs or examples_json:
         # need minigallery for rendering the example cards
         required_extensions.append("ansys_sphinx_theme.extension.minigallery")
     for extension in required_extensions:

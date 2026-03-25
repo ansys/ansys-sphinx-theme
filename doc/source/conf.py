@@ -270,6 +270,26 @@ else:
             "doc/source/examples/nbsphinx",
         ],
         "gallery_default_thumbnail": "_static/pyansys_light_square.png",
+        "fqn_prefixes": ["ansys_sphinx_theme"],
+        # Demo: consume a pre-built JSON from the published stable docs.
+        # In a real project this JSON would come from another library's CI build.
+        # Each entry maps bare filenames in the JSON to a base URL or docdir.
+        # Two entries are needed because .py (gallery) and .ipynb (nbsphinx)
+        # live at different URL paths in the published site.
+        "examples_json": [
+            {
+                "file": "demo_external_examples.json",
+                "base_url": (
+                    "https://sphinxdocs.ansys.com/version/stable/examples/gallery-examples"
+                ),
+                "fqn_prefixes": ["ansys_sphinx_theme"],
+            },
+            {
+                "file": "demo_external_examples.json",
+                "base_url": ("https://sphinxdocs.ansys.com/version/stable/examples/nbsphinx"),
+                "fqn_prefixes": ["ansys_sphinx_theme"],
+            },
+        ],
     }
 
     # Gallery of examples
@@ -289,6 +309,9 @@ else:
     }
     pyvista.BUILDING_GALLERY = True
     pyvista.OFF_SCREEN = True
+    nbsphinx_custom_formats = {
+        ".mystnb": ["jupytext.reads", {"fmt": "ipynb"}],
+    }
 
     nbsphinx_prolog = """
 Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb>`.

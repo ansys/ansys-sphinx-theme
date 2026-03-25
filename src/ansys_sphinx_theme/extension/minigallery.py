@@ -52,11 +52,51 @@ option dict inside ``html_theme_options``:
         }
     }
 
-The extension also reads two Sphinx config values directly (set automatically
+The extension also reads Sphinx config values directly (set automatically
 by ``ansys_sphinx_theme.extension.autoapi``):
 
 * ``ansys_gallery_dirs`` — list of example directory paths
 * ``ansys_gallery_default_thumbnail`` — fallback thumbnail path
+* ``ansys_gallery_json_sources`` — list of ``{"file": ..., "base_docdir": ...}`` dicts
+
+The examples JSON is always written automatically after each build.  The
+filename is derived from the Sphinx ``project`` config value::
+
+    {project_name}_examples.json   (e.g. ``ansys_sphinx_theme_examples.json``)
+
+It is written to two locations:
+
+1. The repository root (two levels above ``srcdir``).
+2. ``<outdir>/_static/`` — served as a downloadable static asset.
+
+To consume a JSON from another project, configure ``examples_json``:
+
+.. code-block:: python
+
+    html_theme_options = {
+        "ansys_sphinx_theme_autoapi": {
+            ...
+            # Consume a pre-built JSON from another project:
+            "examples_json": [
+                {
+                    "file": "other_project_examples.json",
+                    "base_docdir": "examples/gallery-examples",
+                }
+            ],
+        }
+    }
+
+The JSON format (identical to ``ast_pyansys`` output) is::
+
+    {
+        "01_math.py":     ["pkg.math.Vector3D", "pkg.math.Point2D"],
+        "workflow.ipynb": ["pkg.Modeler", "pkg.design.Design"]
+    }
+
+Keys are bare filenames; values are lists of FQNs. The file extension
+determines the card type: ``.py`` → sphinx-gallery card, all others →
+notebook card. ``base_docdir`` is prepended to the filename stem to form
+the Sphinx docname.
 
 Directive
 ---------
@@ -123,6 +163,7 @@ class ExampleInfo:
     source_type: str
     src_file_abs: str
     thumbnail_uri: str = ""
+    link_type: str = "doc"  # "doc" for internal Sphinx docnames, "url" for external URLs
 
 
 # ---------------------------------------------------------------------------
@@ -312,6 +353,44 @@ def _parse_gallery_py(path: Path) -> tuple:
     return title, _fqn_set_from_source(source)
 
 
+def _strip_ipython_magics(source: str) -> str:
+    """Strip IPython magic commands and shell commands from notebook cell source.
+
+    Lines starting with ``%`` (line magics, e.g. ``%matplotlib inline``) or
+    ``!`` (shell commands, e.g. ``!pip install foo``) are not valid Python
+    syntax and cause :func:`ast.parse` to fail, silently dropping all imports
+    in the same cell.  Cell magics (``%%timeit``, ``%%writefile``, etc.) make
+    the *rest* of the cell non-Python as well, so the entire cell body is
+    dropped when a ``%%`` line is encountered.
+
+    Parameters
+    ----------
+    source : str
+        Raw source of a single notebook code cell.
+
+    Returns
+    -------
+    str
+        Source with magic lines removed, safe to pass to :func:`ast.parse`.
+    """
+    lines = source.splitlines()
+    cleaned: List[str] = []
+    skip_rest = False
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith("%%"):
+            # Cell magic — the rest of the cell is non-Python (arguments/body).
+            skip_rest = True
+            continue
+        if skip_rest:
+            continue
+        if stripped.startswith("%") or stripped.startswith("!"):
+            # Line magic or shell command — skip this line only.
+            continue
+        cleaned.append(line)
+    return "\n".join(cleaned)
+
+
 def _parse_notebook(path: Path) -> tuple:
     """Parse a Jupyter notebook (``.ipynb``) file.
 
@@ -351,7 +430,7 @@ def _parse_notebook(path: Path) -> tuple:
                     break
 
         elif cell_type == "code":
-            fqns.update(_fqn_set_from_source(source))
+            fqns.update(_fqn_set_from_source(_strip_ipython_magics(source)))
 
             # Extract the first image output as the thumbnail
             if thumbnail_data is None:
@@ -471,7 +550,7 @@ def _parse_mystnb(path: Path) -> tuple:
             # optionally followed by whitespace only.
             if stripped == fence_marker:
                 state = "body"
-                fqns.update(_fqn_set_from_source("\n".join(code_lines)))
+                fqns.update(_fqn_set_from_source(_strip_ipython_magics("\n".join(code_lines))))
                 code_lines = []
                 fence_marker = ""
             else:
@@ -479,7 +558,7 @@ def _parse_mystnb(path: Path) -> tuple:
 
     # Handle an unclosed fence at EOF (shouldn't happen in valid files).
     if state == "code_cell" and code_lines:
-        fqns.update(_fqn_set_from_source("\n".join(code_lines)))
+        fqns.update(_fqn_set_from_source(_strip_ipython_magics("\n".join(code_lines))))
 
     return title, fqns
 
@@ -700,9 +779,13 @@ def scan_examples(app: Sphinx) -> None:
     """
     config_dirs: List[str] = list(getattr(app.config, "ansys_gallery_dirs", []) or [])
     default_thumb = str(getattr(app.config, "ansys_gallery_default_thumbnail", "") or "")
+    json_sources: List[dict] = list(getattr(app.config, "ansys_gallery_json_sources", []) or [])
+    fqn_prefixes: List[str] = list(getattr(app.config, "ansys_gallery_fqn_prefixes", []) or [])
 
-    if not config_dirs:
-        logger.debug("ansys-minigallery: no example directories configured; skipping scan.")
+    if not config_dirs and not json_sources:
+        logger.debug(
+            "ansys-minigallery: no example directories or JSON sources configured; skipping scan."
+        )
         return
 
     if not hasattr(app.env, "ansys_gallery_backrefs"):
@@ -720,6 +803,7 @@ def scan_examples(app: Sphinx) -> None:
     default_path = _default_thumb_path(default_thumb)
 
     total_files = 0
+    json_output: Dict[str, List[str]] = {}
 
     for dir_str in config_dirs:
         # Resolve relative to repo root first, then srcdir
@@ -738,6 +822,7 @@ def scan_examples(app: Sphinx) -> None:
                 continue
 
             title, fqns = _parse_gallery_py(py_file)
+            json_output[py_file.name] = sorted(_filter_fqns(fqns, fqn_prefixes))
 
             # The built page lives in gallery_dirs, not alongside the source .py.
             # Use sphinx_gallery_conf to find the correct output docname.
@@ -788,6 +873,7 @@ def scan_examples(app: Sphinx) -> None:
                 else:
                     title, fqns = _parse_mystnb(nb_file)
                     # MyST-NB files have no embedded image output.
+                json_output[nb_file.name] = sorted(_filter_fqns(fqns, fqn_prefixes))
 
                 try:
                     rel = nb_file.relative_to(Path(app.srcdir))
@@ -828,12 +914,176 @@ def scan_examples(app: Sphinx) -> None:
 
                 total_files += 1
 
+    # ---- Always write examples JSON into _static/, named from project name --
+    if json_output:
+        # Sanitise: lowercase, replace spaces and hyphens with underscores.
+        raw_project = str(getattr(app.config, "project", "") or "project")
+        safe_name = re.sub(r"[\s\-]+", "_", raw_project).lower()
+        output_filename = f"{safe_name}_examples.json"
+        json_content = json.dumps(json_output, indent=4)
+
+        static_out_dir = Path(app.outdir) / "_static"
+        static_out_dir.mkdir(parents=True, exist_ok=True)
+        static_out_path = static_out_dir / output_filename
+        try:
+            static_out_path.write_text(json_content, encoding="utf-8")
+            logger.info(
+                f"ansys-minigallery: wrote {len(json_output)} example(s) to {static_out_path}"
+            )
+        except OSError as exc:
+            logger.warning(f"ansys-minigallery: failed to write examples JSON to _static: {exc}")
+
+    # ---- Load pre-computed JSON sources -------------------------------------
+    total_files += _load_json_sources(app, backrefs, default_path, root_dir, fqn_prefixes)
+
     n_objects = len(backrefs)
     n_refs = sum(len(v) for v in backrefs.values())
     logger.info(
         f"ansys-minigallery: scanned {total_files} example file(s); "
         f"indexed {n_refs} reference(s) across {n_objects} API object(s)."
     )
+
+
+def _filter_fqns(fqns: set, prefixes: List[str]) -> set:
+    """Return only the FQNs that match one of *prefixes*.
+
+    If *prefixes* is empty, all FQNs are returned unchanged (no filtering).
+
+    Parameters
+    ----------
+    fqns : set[str]
+        Full set of FQNs from AST scanning.
+    prefixes : list[str]
+        Package prefixes to keep, e.g. ``["ansys_sphinx_theme",
+        "ansys.geometry.core"]``.  A FQN matches if it equals a prefix or
+        starts with ``prefix + "."``.
+
+    Returns
+    -------
+    set[str]
+        Filtered subset of *fqns*.
+    """
+    if not prefixes:
+        return fqns
+    return {fqn for fqn in fqns if any(fqn == p or fqn.startswith(p + ".") for p in prefixes)}
+
+
+def _load_json_sources(
+    app: Sphinx,
+    backrefs: Dict[str, List[ExampleInfo]],
+    default_path: str,
+    root_dir: Path,
+    fqn_prefixes: Optional[List[str]] = None,
+) -> int:
+    """Populate *backrefs* from pre-computed JSON files.
+
+    Reads every entry in ``ansys_gallery_json_sources`` config.  Each entry
+    must be a dict with keys:
+
+    * ``"file"`` — path to the JSON file (relative to repo root or srcdir).
+    * ``"base_docdir"`` — Sphinx docname prefix prepended to each filename
+      stem, e.g. ``"examples/gallery-examples"`` yields the docname
+      ``"examples/gallery-examples/01_math"``.
+
+    The JSON format (``ast_pyansys`` / ``ansys_gallery_json_output``) is::
+
+        { "01_math.py": ["fqn1", "fqn2", ...], ... }
+
+    File extension determines source type: ``.py`` → ``"gallery"``,
+    everything else → ``"notebook"``.
+
+    Only FQNs matching ``ansys_gallery_fqn_prefixes`` are loaded (if that
+    config value is set).  This prevents noise from third-party libraries
+    (e.g. ``numpy``, ``matplotlib``) ending up in the backreferences map.
+
+    Parameters
+    ----------
+    app : ~sphinx.application.Sphinx
+        Application instance.
+    backrefs : dict
+        The ``env.ansys_gallery_backrefs`` map to populate.
+    default_path : str
+        Srcdir-relative fallback thumbnail path.
+    root_dir : ~pathlib.Path
+        Repository root (two levels above ``srcdir``).
+    fqn_prefixes : list[str] | None
+        Package prefixes used to filter FQNs.  ``None`` or empty means no
+        filtering (all FQNs are accepted).
+
+    Returns
+    -------
+    int
+        Number of example files loaded from JSON.
+    """
+    json_sources: List[dict] = list(getattr(app.config, "ansys_gallery_json_sources", []) or [])
+    if not json_sources:
+        return 0
+
+    total = 0
+    for entry in json_sources:
+        json_file = entry.get("file", "")
+        base_docdir = entry.get("base_docdir", "").strip("/")
+        if not json_file:
+            logger.warning("ansys-minigallery: examples_json entry missing 'file' key; skipping.")
+            continue
+
+        # Resolve path: repo root first, then srcdir
+        json_path = (root_dir / json_file).resolve()
+        if not json_path.is_file():
+            json_path = (Path(app.srcdir) / json_file).resolve()
+        if not json_path.is_file():
+            logger.warning(
+                f"ansys-minigallery: examples_json file not found: {json_file!r}; skipping."
+            )
+            continue
+
+        try:
+            data: Dict[str, List[str]] = json.loads(json_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError) as exc:
+            logger.warning(f"ansys-minigallery: failed to read {json_file!r}: {exc}")
+            continue
+
+        base_url = entry.get("base_url", "").rstrip("/")
+
+        for filename, fqn_list in data.items():
+            stem = Path(filename).stem
+            suffix = Path(filename).suffix.lower()
+            source_type = "gallery" if suffix == ".py" else "notebook"
+            title = stem.replace("_", " ").replace("-", " ").title()
+
+            # Build link: external URL takes priority over local docname.
+            if base_url:
+                # Replace the extension with .html for the external URL.
+                doc_path = f"{base_url}/{stem}.html"
+                link_type = "url"
+            else:
+                doc_path = f"{base_docdir}/{stem}" if base_docdir else stem
+                link_type = "doc"
+
+            # Filter to only the documented library's FQNs.
+            filtered = _filter_fqns(set(fqn_list), fqn_prefixes or [])
+            if not filtered:
+                continue
+
+            info = ExampleInfo(
+                title=title,
+                doc_path=doc_path,
+                source_type=source_type,
+                src_file_abs="",
+                thumbnail_uri=default_path,
+                link_type=link_type,
+            )
+
+            for fqn in filtered:
+                backrefs.setdefault(fqn, [])
+                if not any(e.doc_path == doc_path for e in backrefs[fqn]):
+                    backrefs[fqn].append(info)
+
+            total += 1
+
+    if total:
+        logger.info(f"ansys-minigallery: loaded {total} example(s) from JSON sources.")
+    return total
 
 
 # ---------------------------------------------------------------------------
@@ -1055,8 +1305,12 @@ class AnsysMinigalleryDirective(Directive):
             img_rel = _srcdir_to_docrel(thumb_srcrel, env.docname)
             rst_lines.append("   .. grid-item-card::")
             rst_lines.append(f"      :img-top: {img_rel}")
-            rst_lines.append(f"      :link: /{ex.doc_path}")
-            rst_lines.append("      :link-type: doc")
+            if ex.link_type == "url":
+                rst_lines.append(f"      :link: {ex.doc_path}")
+                rst_lines.append("      :link-type: url")
+            else:
+                rst_lines.append(f"      :link: /{ex.doc_path}")
+                rst_lines.append("      :link-type: doc")
             rst_lines.append("      :class-card: ansys-minigallery-card")
             rst_lines.append("      :class-img-top: ansys-minigallery-thumb")
             rst_lines.append("      :shadow: sm")
@@ -1144,6 +1398,8 @@ def setup(app: Sphinx) -> Dict[str, Any]:
     # html_theme_options["ansys_sphinx_theme_autoapi"]["examples_dirs"]
     app.add_config_value("ansys_gallery_dirs", [], "env")
     app.add_config_value("ansys_gallery_default_thumbnail", "", "env")
+    app.add_config_value("ansys_gallery_json_sources", [], "env")
+    app.add_config_value("ansys_gallery_fqn_prefixes", [], "env")
 
     app.add_directive("ansys-minigallery", AnsysMinigalleryDirective)
     app.connect("builder-inited", scan_examples)
