@@ -276,20 +276,20 @@ else:
         # Each entry maps bare filenames in the JSON to a base URL or docdir.
         # Two entries are needed because .py (gallery) and .ipynb (nbsphinx)
         # live at different URL paths in the published site.
-        "examples_json": [
-            {
-                "file": "demo_external_examples.json",
-                "base_url": (
-                    "https://sphinxdocs.ansys.com/version/stable/examples/gallery-examples"
-                ),
-                "fqn_prefixes": ["ansys_sphinx_theme"],
-            },
-            {
-                "file": "demo_external_examples.json",
-                "base_url": ("https://sphinxdocs.ansys.com/version/stable/examples/nbsphinx"),
-                "fqn_prefixes": ["ansys_sphinx_theme"],
-            },
-        ],
+        # "examples_json": [
+        #     {
+        #         "file": "demo_external_examples.json",
+        #         "base_url": (
+        #             "https://sphinxdocs.ansys.com/version/stable/examples/gallery-examples"
+        #         ),
+        #         "fqn_prefixes": ["ansys_sphinx_theme"],
+        #     },
+        #     {
+        #         "file": "demo_external_examples.json",
+        #         "base_url": ("https://sphinxdocs.ansys.com/version/stable/examples/nbsphinx"),
+        #         "fqn_prefixes": ["ansys_sphinx_theme"],
+        #     },
+        # ],
     }
 
     # Gallery of examples
