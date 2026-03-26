@@ -350,7 +350,13 @@ def _parse_gallery_py(path: Path) -> tuple:
             f"ansys-minigallery: failed to parse {path} for title extraction; using filename."
         )
 
-    return title, _fqn_set_from_source(source)
+    fqns = _fqn_set_from_source(source)
+    # Text-match pass: union AST results with library-JSON-guided text matching.
+    _lib = getattr(_parse_gallery_py, "_lib_index", None)
+    if _lib is not None:
+        _, short_idx, qual_idx = _lib
+        fqns = fqns | _text_match_fqns(source, short_idx, qual_idx)
+    return title, fqns
 
 
 def _strip_ipython_magics(source: str) -> str:
@@ -430,7 +436,14 @@ def _parse_notebook(path: Path) -> tuple:
                     break
 
         elif cell_type == "code":
-            fqns.update(_fqn_set_from_source(_strip_ipython_magics(source)))
+            cleaned = _strip_ipython_magics(source)
+            fqns.update(_fqn_set_from_source(cleaned))
+            # Text-match on the RAW source (before magic stripping) so that
+            # imports inside %%capture and other magic bodies are not lost.
+            _lib = getattr(_parse_notebook, "_lib_index", None)
+            if _lib is not None:
+                _, short_idx, qual_idx = _lib
+                fqns.update(_text_match_fqns(source, short_idx, qual_idx))
 
             # Extract the first image output as the thumbnail
             if thumbnail_data is None:
@@ -550,7 +563,12 @@ def _parse_mystnb(path: Path) -> tuple:
             # optionally followed by whitespace only.
             if stripped == fence_marker:
                 state = "body"
-                fqns.update(_fqn_set_from_source(_strip_ipython_magics("\n".join(code_lines))))
+                cell_source = "\n".join(code_lines)
+                fqns.update(_fqn_set_from_source(_strip_ipython_magics(cell_source)))
+                _lib = getattr(_parse_mystnb, "_lib_index", None)
+                if _lib is not None:
+                    _, short_idx, qual_idx = _lib
+                    fqns.update(_text_match_fqns(cell_source, short_idx, qual_idx))
                 code_lines = []
                 fence_marker = ""
             else:
@@ -558,7 +576,12 @@ def _parse_mystnb(path: Path) -> tuple:
 
     # Handle an unclosed fence at EOF (shouldn't happen in valid files).
     if state == "code_cell" and code_lines:
-        fqns.update(_fqn_set_from_source(_strip_ipython_magics("\n".join(code_lines))))
+        cell_source = "\n".join(code_lines)
+        fqns.update(_fqn_set_from_source(_strip_ipython_magics(cell_source)))
+        _lib = getattr(_parse_mystnb, "_lib_index", None)
+        if _lib is not None:
+            _, short_idx, qual_idx = _lib
+            fqns.update(_text_match_fqns(cell_source, short_idx, qual_idx))
 
     return title, fqns
 
@@ -781,6 +804,30 @@ def scan_examples(app: Sphinx) -> None:
     default_thumb = str(getattr(app.config, "ansys_gallery_default_thumbnail", "") or "")
     json_sources: List[dict] = list(getattr(app.config, "ansys_gallery_json_sources", []) or [])
     fqn_prefixes: List[str] = list(getattr(app.config, "ansys_gallery_fqn_prefixes", []) or [])
+    library_json_str: str = str(getattr(app.config, "ansys_gallery_library_json", "") or "")
+
+    # ---- Load library JSON for text-match scanning --------------------------
+    # When a library JSON is configured, attach the lookup indexes to the
+    # parser functions so they can union text-match results with AST results
+    # without needing extra arguments propagated everywhere.
+    lib_index = None
+    if library_json_str:
+        lib_json_path = (Path(app.srcdir) / library_json_str).resolve()
+        if not lib_json_path.is_file():
+            # Also try repo root
+            lib_json_path = (Path(app.srcdir).resolve().parent.parent / library_json_str).resolve()
+        if lib_json_path.is_file():
+            lib_index = _fqns_from_library_json(lib_json_path)
+        else:
+            logger.warning(
+                f"ansys-minigallery: library_json file not found: {library_json_str!r}; "
+                "text-match scanning disabled."
+            )
+    # Attach to parser functions (thread-local-safe for sequential builds;
+    # parallel builds each get their own process so this is also safe there).
+    _parse_gallery_py._lib_index = lib_index  # type: ignore[attr-defined]
+    _parse_notebook._lib_index = lib_index  # type: ignore[attr-defined]
+    _parse_mystnb._lib_index = lib_index  # type: ignore[attr-defined]
 
     if not config_dirs and not json_sources:
         logger.debug(
@@ -966,6 +1013,128 @@ def _filter_fqns(fqns: set, prefixes: List[str]) -> set:
     if not prefixes:
         return fqns
     return {fqn for fqn in fqns if any(fqn == p or fqn.startswith(p + ".") for p in prefixes)}
+
+
+def _fqns_from_library_json(path: Path) -> Optional[frozenset]:
+    """Load the set of known FQNs from a library JSON file.
+
+    The expected format is a JSON list where each entry has a ``"name"`` field
+    containing the fully-qualified name of a class, method, function, or
+    module.  Names may carry a short type prefix and a signature which are
+    stripped automatically::
+
+        [{"name": "F:pkg.mod.func(arg1, arg2)"},
+         {"name": "T:pkg.mod.MyClass"},
+         {"name": "MOD:pkg.mod"}]
+
+    This function strips the ``X:`` prefix and the ``(...)`` signature to
+    produce clean FQNs, then builds two lookup dicts used by
+    :func:`_text_match_fqns`:
+
+    * ``short_index`` — last name segment → list of full FQNs
+      (e.g. ``"repair_tools"`` → ``["ansys.geometry.core.modeler.Modeler.repair_tools"]``)
+    * ``qualified_index`` — last two segments → list of full FQNs
+      (e.g. ``"Modeler.repair_tools"`` → same)
+
+    Parameters
+    ----------
+    path : ~pathlib.Path
+        Absolute path to the library JSON file.
+
+    Returns
+    -------
+    tuple[frozenset, dict, dict] | None
+        ``(all_fqns, short_index, qualified_index)`` or ``None`` on error.
+    """
+    try:
+        entries = json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as exc:
+        logger.warning(f"ansys-minigallery: failed to read library JSON {path}: {exc}")
+        return None
+
+    if not isinstance(entries, list):
+        logger.warning(f"ansys-minigallery: library JSON {path} is not a list; skipping.")
+        return None
+
+    all_fqns: set = set()
+    short_index: Dict[str, List[str]] = {}
+    qualified_index: Dict[str, List[str]] = {}
+
+    for entry in entries:
+        raw = entry.get("name", "") if isinstance(entry, dict) else ""
+        if not raw:
+            continue
+        # Strip type prefix ("F:", "T:", "P:", "MOD:", etc.)
+        if ":" in raw:
+            raw = raw.split(":", 1)[1]
+        # Strip signature "(args)"
+        fqn = raw.split("(")[0].strip()
+        if not fqn:
+            continue
+        all_fqns.add(fqn)
+        parts = fqn.split(".")
+        # short index: last segment, e.g. "repair_tools"
+        short = parts[-1]
+        short_index.setdefault(short, []).append(fqn)
+        # qualified index: last two segments, e.g. "Modeler.repair_tools"
+        if len(parts) >= 2:
+            qual = ".".join(parts[-2:])
+            qualified_index.setdefault(qual, []).append(fqn)
+
+    logger.info(
+        f"ansys-minigallery: loaded {len(all_fqns)} known FQNs from library JSON {path.name}"
+    )
+    return frozenset(all_fqns), short_index, qualified_index
+
+
+def _text_match_fqns(
+    source: str,
+    short_index: Dict[str, List[str]],
+    qualified_index: Dict[str, List[str]],
+) -> set:
+    """Return all library FQNs whose name segments appear in *source*.
+
+    This is a text-match pass that catches API objects that are **never
+    explicitly imported** — e.g. objects returned by method calls, objects
+    accessed via chained attribute lookups, or objects in cells that were
+    skipped by magic stripping.
+
+    The matching is done in two rounds to balance recall vs. noise:
+
+    1. **Qualified match** (``Modeler.repair_tools``) — two-segment name must
+       appear as a word boundary.  Highly precise: very unlikely to appear
+       accidentally in non-library code.
+    2. **Short match** (``repair_tools``) — single segment, used only when the
+       short name maps to exactly one FQN (unambiguous).  Multi-FQN short
+       names are skipped to avoid false positives (e.g. ``get``, ``show``).
+
+    Parameters
+    ----------
+    source : str
+        Raw source text of an example file or notebook cell.
+    short_index : dict
+        Mapping of short name → list of full FQNs.
+    qualified_index : dict
+        Mapping of two-segment qualified name → list of full FQNs.
+
+    Returns
+    -------
+    set[str]
+        Full FQNs that were matched.
+    """
+    matched: set = set()
+
+    # Round 1: qualified two-segment names (high precision)
+    for qual_name, fqns in qualified_index.items():
+        if re.search(r"\b" + re.escape(qual_name) + r"\b", source):
+            matched.update(fqns)
+
+    # Round 2: unambiguous short names only
+    for short_name, fqns in short_index.items():
+        if len(fqns) == 1 and re.search(r"\b" + re.escape(short_name) + r"\b", source):
+            matched.update(fqns)
+
+    return matched
 
 
 def _load_json_sources(
@@ -1435,6 +1604,7 @@ def setup(app: Sphinx) -> Dict[str, Any]:
     app.add_config_value("ansys_gallery_default_thumbnail", "", "env")
     app.add_config_value("ansys_gallery_json_sources", [], "env")
     app.add_config_value("ansys_gallery_fqn_prefixes", [], "env")
+    app.add_config_value("ansys_gallery_library_json", "", "env")
 
     app.add_directive("ansys-minigallery", AnsysMinigalleryDirective)
     app.connect("builder-inited", scan_examples)

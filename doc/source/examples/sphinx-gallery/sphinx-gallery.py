@@ -180,12 +180,15 @@ df.head()
 # ``ansys_sphinx_theme.examples.samples.ExampleClass`` and
 # ``ansys_sphinx_theme.examples.sample_func.func`` autoapi pages.
 
-from ansys_sphinx_theme.examples.sample_func import func
+from ansys_sphinx_theme.examples import sample_func
 from ansys_sphinx_theme.examples.samples import ExampleClass
 
+sample_func.func(1, "bar")
 instance = ExampleClass("gallery-example", ["sphinx", "gallery"], param3=7)
 print(f"ExampleClass.readonly_property = {instance.readonly_property!r}")
-print(f"func(1, 'bar')                 = {func(1, 'bar')!r}")
+readwrite_property = instance.readwrite_property = "This is a read/write property"
+print(f"ExampleClass.readwrite_property = {instance.readwrite_property!r}")
+print(f"func(1, 'bar')                 = {sample_func.func(1, 'bar')!r}")
 
 ###############################################################################
 

@@ -111,6 +111,10 @@ def add_autoapi_theme_option(app: Sphinx, config: Dict[str, Any]) -> None:
     if fqn_prefixes:
         config["ansys_gallery_fqn_prefixes"] = list(fqn_prefixes)
 
+    library_json = autoapi.get("library_json", "")
+    if library_json:
+        config["ansys_gallery_library_json"] = str(library_json)
+
 
 def setup(app: Sphinx) -> Dict[str, Any]:
     """Add the autoapi extension to the Sphinx application.
