@@ -1042,20 +1042,29 @@ def _load_json_sources(
             continue
 
         base_url = entry.get("base_url", "").rstrip("/")
+        # Optional: directory where the actual source files live, so we can
+        # extract real titles and thumbnails.  Resolved relative to srcdir.
+        base_examples_dir_str = entry.get("base_examples_dir", "").strip("/")
+        base_examples_dir: Optional[Path] = (
+            (Path(app.srcdir) / base_examples_dir_str).resolve() if base_examples_dir_str else None
+        )
+        thumb_dir = Path(app.srcdir) / "_static" / "ansys-gallery" / "thumbs"
 
         for filename, fqn_list in data.items():
-            stem = Path(filename).stem
-            suffix = Path(filename).suffix.lower()
+            file_path = Path(filename)
+            # Preserve sub-directories: "01/sweep_chain_profile.py" → "01/sweep_chain_profile"
+            path_no_ext = file_path.with_suffix("").as_posix()
+            stem = file_path.stem
+            suffix = file_path.suffix.lower()
             source_type = "gallery" if suffix == ".py" else "notebook"
             title = stem.replace("_", " ").replace("-", " ").title()
 
             # Build link: external URL takes priority over local docname.
             if base_url:
-                # Replace the extension with .html for the external URL.
-                doc_path = f"{base_url}/{stem}.html"
+                doc_path = f"{base_url}/{path_no_ext}.html"
                 link_type = "url"
             else:
-                doc_path = f"{base_docdir}/{stem}" if base_docdir else stem
+                doc_path = f"{base_docdir}/{path_no_ext}" if base_docdir else path_no_ext
                 link_type = "doc"
 
             # Filter to only the documented library's FQNs.
@@ -1063,12 +1072,37 @@ def _load_json_sources(
             if not filtered:
                 continue
 
+            # For internal entries with a base_examples_dir, locate the source
+            # file on disk to extract the real title and thumbnail.
+            thumbnail_uri = default_path
+            src_file_abs = ""
+            if not base_url and base_examples_dir is not None:
+                candidate = (base_examples_dir / filename).resolve()
+                if candidate.is_file():
+                    src_file_abs = str(candidate)
+                    if suffix == ".ipynb":
+                        parsed_title, _, thumb_data = _parse_notebook(candidate)
+                        title = parsed_title
+                        if thumb_data is not None:
+                            thumb_dir.mkdir(parents=True, exist_ok=True)
+                            thumb_abs = thumb_dir / (stem + ".png")
+                            thumb_abs.write_bytes(thumb_data)
+                            thumbnail_uri = str(thumb_abs.relative_to(Path(app.srcdir))).replace(
+                                os.sep, "/"
+                            )
+                    elif suffix == ".py":
+                        parsed_title, _ = _parse_gallery_py(candidate)
+                        title = parsed_title
+                        # Leave thumbnail_uri="" so _resolve_thumbnail picks up
+                        # the sphinx-gallery generated thumbnail lazily.
+                        thumbnail_uri = ""
+
             info = ExampleInfo(
                 title=title,
                 doc_path=doc_path,
                 source_type=source_type,
-                src_file_abs="",
-                thumbnail_uri=default_path,
+                src_file_abs=src_file_abs,
+                thumbnail_uri=thumbnail_uri,
                 link_type=link_type,
             )
 
@@ -1190,6 +1224,9 @@ def _resolve_thumbnail(ex: "ExampleInfo", srcdir: str, default_path: str, config
     if ex.source_type == "gallery":
         # Re-resolve from sphinx_gallery_conf every time so we always pick up
         # the generated thumbnail regardless of when scan_examples ran.
+        # Guard: JSON-sourced entries without base_examples_dir have no local file.
+        if not ex.src_file_abs:
+            return default_path
         sgconf: Optional[dict] = getattr(config, "sphinx_gallery_conf", None)
         return _gallery_thumb_path(Path(ex.src_file_abs), sgconf, default_path, srcdir)
 
