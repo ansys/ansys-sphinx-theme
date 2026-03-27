@@ -265,9 +265,13 @@ require(["fuse"], (Fuse) => {
       const query = SEARCH_INPUT.value.trim();
       if (!query) return (RESULTS_CONTAINER.style.display = "none");
 
-      const searchResults = fuseInstance.search(query, {
-        limit: parseInt(SEARCH_OPTIONS.limit),
-      });
+      const searchResults = fuseInstance
+        .search(query, { limit: parseInt(SEARCH_OPTIONS.limit) })
+        .sort((a, b) => {
+          const scoreA = (1 - (a.score || 0)) * (a.item.weight || 1);
+          const scoreB = (1 - (b.score || 0)) * (b.item.weight || 1);
+          return scoreB - scoreA;
+        });
       displayResults(searchResults);
     },
     parseInt(SEARCH_OPTIONS.delay) || 300,
