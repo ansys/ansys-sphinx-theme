@@ -241,6 +241,23 @@ require(["fuse"], (Fuse) => {
   }
 
   /**
+   * Handle input events (including paste via mouse or keyboard shortcuts).
+   * The 'input' event fires after the value has changed, covering all paste methods.
+   */
+  function handleInputEvent() {
+    if (!SEARCH_INPUT.value.trim()) {
+      RESULTS_CONTAINER.style.display = "none";
+      return;
+    }
+    if (document.documentElement.getAttribute("data-fuse_active") === "true") {
+      searchingForResultsBanner();
+    } else {
+      RESULTS_CONTAINER.style.display = "none";
+    }
+    handleSearchInput();
+  }
+
+  /**
    * Handle search query input with debounce.
    */
   const handleSearchInput = debounce(
@@ -279,6 +296,7 @@ require(["fuse"], (Fuse) => {
     if (SEARCH_INPUT) {
       SEARCH_INPUT.addEventListener("click", expandSearchInput);
       SEARCH_INPUT.addEventListener("keydown", handleKeyDownSearchInput);
+      SEARCH_INPUT.addEventListener("input", handleInputEvent);
     }
   }
 
