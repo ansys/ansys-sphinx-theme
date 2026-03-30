@@ -74,7 +74,6 @@ for this repository, you can create issues to submit questions, report bugs,
 and request new features. To reach the PyAnsys support team, email
 `pyansys.core@ansys.com <pyansys.core@ansys.com>`_.
 
-
 License
 ~~~~~~~
 This theme is licensed under the `MIT License
