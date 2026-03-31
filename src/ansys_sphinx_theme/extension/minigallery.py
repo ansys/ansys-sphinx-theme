@@ -869,7 +869,13 @@ def scan_examples(app: Sphinx) -> None:
                 continue
 
             title, fqns = _parse_gallery_py(py_file)
-            json_output[py_file.name] = sorted(_filter_fqns(fqns, fqn_prefixes))
+            filtered_fqns = sorted(_filter_fqns(fqns, fqn_prefixes))
+            if filtered_fqns:
+                # Use path relative to examples dir to preserve subdirectories
+                # (e.g. "00_basic/example_01.py" not just "example_01.py").
+                # This ensures base_url + key correctly reconstructs the URL.
+                json_key = str(py_file.relative_to(dir_path)).replace(os.sep, "/")
+                json_output[json_key] = filtered_fqns
 
             # The built page lives in gallery_dirs, not alongside the source .py.
             # Use sphinx_gallery_conf to find the correct output docname.
@@ -920,7 +926,10 @@ def scan_examples(app: Sphinx) -> None:
                 else:
                     title, fqns = _parse_mystnb(nb_file)
                     # MyST-NB files have no embedded image output.
-                json_output[nb_file.name] = sorted(_filter_fqns(fqns, fqn_prefixes))
+                filtered_fqns = sorted(_filter_fqns(fqns, fqn_prefixes))
+                if filtered_fqns:
+                    json_key = str(nb_file.relative_to(dir_path)).replace(os.sep, "/")
+                    json_output[json_key] = filtered_fqns
 
                 try:
                     rel = nb_file.relative_to(Path(app.srcdir))
@@ -1217,8 +1226,12 @@ def _load_json_sources(
         base_examples_dir: Optional[Path] = (
             (Path(app.srcdir) / base_examples_dir_str).resolve() if base_examples_dir_str else None
         )
+        # Per-entry fqn_prefixes overrides the global filter for this source.
+        entry_fqn_prefixes = entry.get("fqn_prefixes", [])
+        if isinstance(entry_fqn_prefixes, str):
+            entry_fqn_prefixes = [entry_fqn_prefixes]
+        effective_fqn_prefixes = entry_fqn_prefixes if entry_fqn_prefixes else (fqn_prefixes or [])
         thumb_dir = Path(app.srcdir) / "_static" / "ansys-gallery" / "thumbs"
-
         for filename, fqn_list in data.items():
             file_path = Path(filename)
             # Preserve sub-directories: "01/sweep_chain_profile.py" → "01/sweep_chain_profile"
@@ -1237,7 +1250,8 @@ def _load_json_sources(
                 link_type = "doc"
 
             # Filter to only the documented library's FQNs.
-            filtered = _filter_fqns(set(fqn_list), fqn_prefixes or [])
+            # Per-entry fqn_prefixes takes priority over the global filter.
+            filtered = _filter_fqns(set(fqn_list), effective_fqn_prefixes)
             if not filtered:
                 continue
 
@@ -1461,7 +1475,9 @@ class AnsysMinigalleryDirective(Directive):
 
         backrefs: Dict[str, List[ExampleInfo]] = getattr(env, "ansys_gallery_backrefs", {})
 
-        # Fuzzy FQN matching: allow both short names and fully qualified names
+        # Fuzzy FQN matching: allow both short names and fully qualified names.
+        # Also match child members (e.g. key="Mechanical.name" when fqn="Mechanical"),
+        # so class/module pages show examples that reference any of their members.
         examples: List[ExampleInfo] = []
         seen_paths: set = set()
         for key, infos in backrefs.items():
@@ -1470,6 +1486,7 @@ class AnsysMinigalleryDirective(Directive):
                 or key.endswith(f".{fqn}")
                 or fqn.endswith(f".{key}")
                 or fqn == key.split(".")[-1]
+                or key.startswith(f"{fqn}.")
             )
             if matched:
                 for ex in infos:
