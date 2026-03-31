@@ -43,10 +43,14 @@ option dict inside ``html_theme_options``:
         "ansys_sphinx_theme_autoapi": {
             ...
             # List of example directories relative to the repository root.
+            # Both sphinx-gallery .py files and Jupyter .ipynb notebooks are scanned.
             "examples_dirs": [
                 "doc/source/examples/sphinx-gallery",
                 "doc/source/examples/nbsphinx",
             ],
+            # Only index FQNs that start with one of these package prefixes.
+            # This filters out noise from numpy, matplotlib, etc.
+            "fqn_prefixes": ["ansys.my_project"],
             # Optional: fallback thumbnail (relative to srcdir or absolute).
             "gallery_default_thumbnail": "_static/pyansys_light_square.png",
         }
@@ -57,46 +61,81 @@ by ``ansys_sphinx_theme.extension.autoapi``):
 
 * ``ansys_gallery_dirs`` — list of example directory paths
 * ``ansys_gallery_default_thumbnail`` — fallback thumbnail path
-* ``ansys_gallery_json_sources`` — list of ``{"file": ..., "base_docdir": ...}`` dicts
+* ``ansys_gallery_fqn_prefixes`` — list of package-prefix strings for filtering
+* ``ansys_gallery_json_sources`` — list of external-JSON config dicts
+  (see ``examples_json`` below)
 
 The examples JSON is always written automatically after each build.  The
 filename is derived from the Sphinx ``project`` config value::
 
     {project_name}_examples.json   (e.g. ``ansys_sphinx_theme_examples.json``)
 
-It is written to two locations:
+It is written to ``<outdir>/_static/`` and served as a downloadable static
+asset.  Other projects can then consume this file via ``examples_json``.
 
-1. The repository root (two levels above ``srcdir``).
-2. ``<outdir>/_static/`` — served as a downloadable static asset.
+Consuming external examples
+---------------------------
+To include examples from *another* project's docs in your own minigallery,
+use the ``examples_json`` key.  Each entry is a dict with the following fields:
 
-To consume a JSON from another project, configure ``examples_json``:
+``file``
+    **Required.** Path to the pre-built JSON file, relative to ``srcdir``
+    (the ``conf.py`` directory).  The file must follow the format described
+    below.
+
+``base_url``
+    URL prefix for the external docs site.  The final card link is built as
+    ``base_url + "/" + <path-without-extension> + ".html"``.
+    Use this for fully-hosted external examples (e.g. PyMechanical).
+
+``base_docdir``
+    Sphinx docname prefix prepended to each key stem to form a *local*
+    docname (e.g. ``"examples/gallery-examples"``).  Use this when the
+    other project's examples are included directly in the current doc tree.
+    Ignored when ``base_url`` is set.
+
+``fqn_prefixes``
+    Per-entry filter list (e.g. ``["ansys.mechanical.core"]``).  Only FQNs
+    that start with one of these prefixes are loaded from this JSON.  When
+    omitted the global ``fqn_prefixes`` from ``ansys_sphinx_theme_autoapi``
+    is used instead.
+
+``base_examples_dir``
+    Optional path to the actual source files (relative to ``srcdir``).  When
+    provided the extension opens each file to extract the real title and
+    thumbnail instead of deriving them from the filename.  Only useful for
+    internal (local) JSON sources where the source files are available.
 
 .. code-block:: python
 
     html_theme_options = {
         "ansys_sphinx_theme_autoapi": {
             ...
-            # Consume a pre-built JSON from another project:
+            # Consume examples from PyMechanical (external, hosted on another site).
             "examples_json": [
                 {
-                    "file": "other_project_examples.json",
-                    "base_docdir": "examples/gallery-examples",
-                }
+                    "file": "_static/ansys_mechanical_core_examples.json",
+                    "base_url": "https://examples.mechanical.docs.pyansys.com/examples/",
+                    "fqn_prefixes": ["ansys.mechanical.core"],
+                },
             ],
         }
     }
 
-The JSON format (identical to ``ast_pyansys`` output) is::
+JSON file format
+----------------
+The JSON is a mapping of **dir-relative file paths** to lists of FQNs::
 
     {
-        "01_math.py":     ["pkg.math.Vector3D", "pkg.math.Point2D"],
-        "workflow.ipynb": ["pkg.Modeler", "pkg.design.Design"]
+        "00_basic/example_01.py":     ["pkg.math.Vector3D", "pkg.math.Point2D"],
+        "01_advanced/workflow.ipynb": ["pkg.Modeler", "pkg.design.Design"]
     }
 
-Keys are bare filenames; values are lists of FQNs. The file extension
-determines the card type: ``.py`` → sphinx-gallery card, all others →
-notebook card. ``base_docdir`` is prepended to the filename stem to form
-the Sphinx docname.
+Keys are paths relative to the examples directory, preserving subdirectories
+(e.g. ``"00_basic/example_01.py"`` rather than bare ``"example_01.py"``).  The
+file extension determines the card type: ``.py`` → sphinx-gallery card, all
+others → notebook card.  An empty list means the file was scanned but no
+matching FQNs were found (these entries are omitted from the output).
 
 Directive
 ---------
@@ -650,8 +689,9 @@ def _default_thumb_path(default_thumb: str) -> str:
     if default_thumb:
         # Strip a leading slash so the path is always srcdir-relative
         return default_thumb.lstrip("/")
-    # ansys favicon is a suitable default thumbnail for examples that don't configure one
-    return ansys_favicon.lstrip("/")
+    # Fall back to a placeholder path; the actual file is copied into
+    # _static/ansys-gallery/ by scan_examples() before this is used.
+    return "_static/ansys-gallery/ansys-favicon.png"
 
 
 def _gallery_thumb_path(
@@ -842,6 +882,18 @@ def scan_examples(app: Sphinx) -> None:
     thumb_dir = Path(app.srcdir) / "_static" / "ansys-gallery" / "thumbs"
     thumb_dir.mkdir(parents=True, exist_ok=True)
 
+    # Copy the ansys favicon into the gallery static directory so it can be
+    # used as a srcdir-relative fallback thumbnail.  ansys_favicon is an
+    # absolute filesystem path, not a valid srcdir-relative path on its own.
+    import shutil as _shutil
+
+    favicon_dest = Path(app.srcdir) / "_static" / "ansys-gallery" / "ansys-favicon.png"
+    if not favicon_dest.exists():
+        try:
+            _shutil.copy2(ansys_favicon, favicon_dest)
+        except OSError:
+            pass  # Non-fatal: thumbnail will fall back gracefully
+
     # Repository root: assume docs live two levels below it (e.g. doc/source/).
     root_dir = Path(app.srcdir).resolve().parent.parent
     sphinx_gallery_conf: Optional[dict] = getattr(app.config, "sphinx_gallery_conf", None)
@@ -905,7 +957,7 @@ def scan_examples(app: Sphinx) -> None:
                 thumbnail_uri="",
             )
 
-            for fqn in fqns:
+            for fqn in _filter_fqns(fqns, fqn_prefixes):
                 backrefs.setdefault(fqn, [])
                 if not any(e.doc_path == docname for e in backrefs[fqn]):
                     backrefs[fqn].append(info)
@@ -963,7 +1015,7 @@ def scan_examples(app: Sphinx) -> None:
                     thumbnail_uri=thumb_uri,
                 )
 
-                for fqn in fqns:
+                for fqn in _filter_fqns(fqns, fqn_prefixes):
                     backrefs.setdefault(fqn, [])
                     if not any(e.doc_path == docname for e in backrefs[fqn]):
                         backrefs[fqn].append(info)
@@ -1156,23 +1208,40 @@ def _load_json_sources(
     """Populate *backrefs* from pre-computed JSON files.
 
     Reads every entry in ``ansys_gallery_json_sources`` config.  Each entry
-    must be a dict with keys:
+    is a dict that supports the following keys:
 
-    * ``"file"`` — path to the JSON file (relative to repo root or srcdir).
-    * ``"base_docdir"`` — Sphinx docname prefix prepended to each filename
-      stem, e.g. ``"examples/gallery-examples"`` yields the docname
-      ``"examples/gallery-examples/01_math"``.
+    ``file``
+        **Required.** Path to the examples JSON file, relative to ``srcdir``.
 
-    The JSON format (``ast_pyansys`` / ``ansys_gallery_json_output``) is::
+    ``base_url``
+        URL prefix for the external docs site.  The card link is built as
+        ``base_url + "/" + path_without_extension + ".html"``.
+        Takes priority over ``base_docdir``.
 
-        { "01_math.py": ["fqn1", "fqn2", ...], ... }
+    ``base_docdir``
+        Sphinx docname prefix prepended to each key stem when ``base_url`` is
+        not set (e.g. ``"examples/gallery-examples"`` → docname
+        ``"examples/gallery-examples/00_basic/example_01"``).
 
-    File extension determines source type: ``.py`` → ``"gallery"``,
+    ``fqn_prefixes``
+        Per-entry override of the global ``fqn_prefixes`` filter.  Only FQNs
+        starting with one of these strings are loaded.  Falls back to the
+        global *fqn_prefixes* argument when omitted.
+
+    ``base_examples_dir``
+        Optional srcdir-relative path to the actual source files.  When given,
+        the extension opens each file to extract the real title and thumbnail.
+        Only meaningful for internal (local) JSON sources.
+
+    The JSON format is a mapping of dir-relative file paths to FQN lists::
+
+        {
+            "00_basic/example_01.py": ["pkg.MyClass", "pkg.func"],
+            "notebooks/demo.ipynb":   ["pkg.Modeler"]
+        }
+
+    File extension determines card type: ``.py`` → ``"gallery"``,
     everything else → ``"notebook"``.
-
-    Only FQNs matching ``ansys_gallery_fqn_prefixes`` are loaded (if that
-    config value is set).  This prevents noise from third-party libraries
-    (e.g. ``numpy``, ``matplotlib``) ending up in the backreferences map.
 
     Parameters
     ----------
@@ -1185,8 +1254,9 @@ def _load_json_sources(
     root_dir : ~pathlib.Path
         Repository root (two levels above ``srcdir``).
     fqn_prefixes : list[str] | None
-        Package prefixes used to filter FQNs.  ``None`` or empty means no
-        filtering (all FQNs are accepted).
+        Global package prefixes used to filter FQNs.  ``None`` or empty means
+        no filtering.  Per-entry ``fqn_prefixes`` in the JSON config overrides
+        this value for that specific source.
 
     Returns
     -------
