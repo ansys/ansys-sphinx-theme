@@ -89,11 +89,14 @@ def add_autoapi_theme_option(app: Sphinx, config: Dict[str, Any]) -> None:
     config["autoapi_dirs"] = [str(relative_autoapi_dir)]
 
     # --- Minigallery configuration -------------------------------------------
+    # HACK: The ``examples_dirs`` and ``examples_json`` options should be given as a relative path
+    # to the conf.py, and the paths should be relative to the autoapi directory since that's where
+    # the templates will look for them.
     examples_dirs = autoapi.get("examples_dirs", [])
     if isinstance(examples_dirs, str):
         examples_dirs = [examples_dirs]
     if examples_dirs:
-        config["ansys_gallery_dirs"] = list(examples_dirs)
+        config["ansys_gallery_example_dirs"] = list(examples_dirs)
 
     default_thumb = autoapi.get("gallery_default_thumbnail", "")
     if default_thumb:
@@ -103,7 +106,7 @@ def add_autoapi_theme_option(app: Sphinx, config: Dict[str, Any]) -> None:
     if isinstance(examples_json, dict):
         examples_json = [examples_json]  # allow single-dict shorthand
     if examples_json:
-        config["ansys_gallery_json_sources"] = list(examples_json)
+        config["ansys_gallery_example_json"] = list(examples_json)
 
     fqn_prefixes = autoapi.get("fqn_prefixes", [])
     if isinstance(fqn_prefixes, str):

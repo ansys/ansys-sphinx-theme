@@ -161,7 +161,7 @@ from docutils.statemachine import ViewList
 from sphinx.application import Sphinx
 from sphinx.util import logging as sphinx_logging
 
-from ansys_sphinx_theme import __version__, ansys_favicon
+from ansys_sphinx_theme import __version__, pyansys_light_square_logo
 
 logger = sphinx_logging.getLogger(__name__)
 
@@ -691,7 +691,7 @@ def _default_thumb_path(default_thumb: str) -> str:
         return default_thumb.lstrip("/")
     # Fall back to a placeholder path; the actual file is copied into
     # _static/ansys-gallery/ by scan_examples() before this is used.
-    return "_static/ansys-gallery/ansys-favicon.png"
+    return "_static/ansys-gallery/pyansys_light_square.png"
 
 
 def _gallery_thumb_path(
@@ -840,9 +840,9 @@ def scan_examples(app: Sphinx) -> None:
     app : ~sphinx.application.Sphinx
         Application instance for rendering the documentation.
     """
-    config_dirs: List[str] = list(getattr(app.config, "ansys_gallery_dirs", []) or [])
+    config_dirs: List[str] = list(getattr(app.config, "ansys_gallery_example_dirs", []) or [])
     default_thumb = str(getattr(app.config, "ansys_gallery_default_thumbnail", "") or "")
-    json_sources: List[dict] = list(getattr(app.config, "ansys_gallery_json_sources", []) or [])
+    json_sources: List[dict] = list(getattr(app.config, "ansys_gallery_example_json", []) or [])
     fqn_prefixes: List[str] = list(getattr(app.config, "ansys_gallery_fqn_prefixes", []) or [])
     library_json_str: str = str(getattr(app.config, "ansys_gallery_library_json", "") or "")
 
@@ -879,7 +879,7 @@ def scan_examples(app: Sphinx) -> None:
         app.env.ansys_gallery_backrefs = {}  # type: ignore[attr-defined]
 
     backrefs = app.env.ansys_gallery_backrefs
-    thumb_dir = Path(app.srcdir) / "_static" / "ansys-gallery" / "thumbs"
+    thumb_dir = Path(app.outdir) / "_static" / "ansys-gallery" / "thumbs"
     thumb_dir.mkdir(parents=True, exist_ok=True)
 
     # Copy the ansys favicon into the gallery static directory so it can be
@@ -887,14 +887,13 @@ def scan_examples(app: Sphinx) -> None:
     # absolute filesystem path, not a valid srcdir-relative path on its own.
     import shutil as _shutil
 
-    favicon_dest = Path(app.srcdir) / "_static" / "ansys-gallery" / "ansys-favicon.png"
-    if not favicon_dest.exists():
+    logo_dest = Path(app.outdir) / "_static" / "ansys-gallery" / "pyansys-light-square.png"
+    if not logo_dest.exists():
         try:
-            _shutil.copy2(ansys_favicon, favicon_dest)
+            _shutil.copy2(pyansys_light_square_logo, logo_dest)
         except OSError:
             pass  # Non-fatal: thumbnail will fall back gracefully
 
-    # Repository root: assume docs live two levels below it (e.g. doc/source/).
     root_dir = Path(app.srcdir).resolve().parent.parent
     sphinx_gallery_conf: Optional[dict] = getattr(app.config, "sphinx_gallery_conf", None)
     # nbsphinx_thumbnails maps docname → thumbnail path (configured in conf.py)
@@ -1093,9 +1092,7 @@ def _fqns_from_library_json(path: Path) -> Optional[frozenset]:
     :func:`_text_match_fqns`:
 
     * ``short_index`` — last name segment → list of full FQNs
-      (e.g. ``"repair_tools"`` → ``["ansys.geometry.core.modeler.Modeler.repair_tools"]``)
     * ``qualified_index`` — last two segments → list of full FQNs
-      (e.g. ``"Modeler.repair_tools"`` → same)
 
     Parameters
     ----------
@@ -1122,13 +1119,22 @@ def _fqns_from_library_json(path: Path) -> Optional[frozenset]:
     qualified_index: Dict[str, List[str]] = {}
 
     for entry in entries:
-        raw = entry.get("name", "") if isinstance(entry, dict) else ""
+        # Accept three formats:
+        #   1. Plain FQN string:           "ansys.geometry.core.modeler.Modeler"
+        #   2. Dict with plain "name":     {"name": "ansys.geometry.core.modeler.Modeler"}
+        #   3. Dict with prefixed "name":  {"name": "T:ansys.geometry.core.modeler.Modeler(args)"}
+        if isinstance(entry, str):
+            raw = entry.strip()
+        elif isinstance(entry, dict):
+            raw = entry.get("name", "").strip()
+        else:
+            continue
         if not raw:
             continue
-        # Strip type prefix ("F:", "T:", "P:", "MOD:", etc.)
+        # Strip optional type prefix ("F:", "T:", "P:", "MOD:", etc.)
         if ":" in raw:
             raw = raw.split(":", 1)[1]
-        # Strip signature "(args)"
+        # Strip optional signature "(args)"
         fqn = raw.split("(")[0].strip()
         if not fqn:
             continue
@@ -1687,9 +1693,9 @@ def setup(app: Sphinx) -> Dict[str, Any]:
     """
     # Config values — populated by ansys_sphinx_theme.extension.autoapi from
     # html_theme_options["ansys_sphinx_theme_autoapi"]["examples_dirs"]
-    app.add_config_value("ansys_gallery_dirs", [], "env")
+    app.add_config_value("ansys_gallery_example_dirs", [], "env")
     app.add_config_value("ansys_gallery_default_thumbnail", "", "env")
-    app.add_config_value("ansys_gallery_json_sources", [], "env")
+    app.add_config_value("ansys_gallery_example_json", [], "env")
     app.add_config_value("ansys_gallery_fqn_prefixes", [], "env")
     app.add_config_value("ansys_gallery_library_json", "", "env")
 
