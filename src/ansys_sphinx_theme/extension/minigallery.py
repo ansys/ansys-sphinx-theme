@@ -1512,12 +1512,13 @@ class AnsysMinigalleryDirective(Directive):
     .. code-block:: rst
 
         .. ansys-minigallery:: ansys_sphinx_theme.examples.samples.ExampleClass
-           :heading: Gallery examples
+           :heading: My custom heading
 
     Options
     -------
     heading : str
-        Custom heading text.  Defaults to ``"Gallery examples"``.
+        Custom heading text.  Defaults to ``'Examples using "<name>"'`` where
+        ``<name>`` is the last segment of the FQN argument.
     no-heading : flag
         Suppress the heading entirely.
 
@@ -1576,12 +1577,21 @@ class AnsysMinigalleryDirective(Directive):
 
         result_nodes: List[nodes.Node] = []
 
-        # --- Heading (rubric) ---
+        # --- Heading ---
         if "no-heading" not in self.options:
-            heading_text = self.options.get("heading", "Gallery examples")
-            rubric = nodes.rubric(text=heading_text)
-            rubric["classes"].append("ansys-minigallery-heading")
-            result_nodes.append(rubric)
+            short_name = fqn.split(".")[-1]
+            custom_heading = self.options.get("heading", "")
+            para = nodes.paragraph()
+            para["classes"].append("ansys-minigallery-heading")
+            if custom_heading:
+                para += nodes.Text(custom_heading)
+            else:
+                para += nodes.Text("Examples using ")
+                fn_span = nodes.inline()
+                fn_span["classes"].append("ansys-minigallery-fn")
+                fn_span += nodes.Text(short_name)
+                para += fn_span
+            result_nodes.append(para)
 
         # --- Build a sphinx-design grid via nested RST parsing ---
         rst_lines: List[str] = []

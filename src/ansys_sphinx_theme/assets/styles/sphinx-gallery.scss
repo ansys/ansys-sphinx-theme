@@ -62,11 +62,16 @@ div.sphx-glr-download {
 }
 
 .ansys-minigallery-heading {
-  font-size: 1rem;
+  font-size: var(--pst-font-size-h3, 2rem);
   font-weight: var(--ast-font-weight-semibold, 600);
+  font-family: var(--ast-header-family, inherit);
   margin-bottom: 0.5rem;
-  border-bottom: 1px solid var(--pst-color-border, #dee2e6);
-  padding-bottom: 0.2rem;
+  margin-top: 0;
+  color: var(--pst-color-text-base, inherit);
+}
+
+.ansys-minigallery-fn {
+  font-family: var(--pst-font-family-monospace, monospace);
 }
 
 .ansys-minigallery-grid {
