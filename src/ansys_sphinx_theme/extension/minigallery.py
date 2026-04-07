@@ -1577,21 +1577,24 @@ class AnsysMinigalleryDirective(Directive):
 
         result_nodes: List[nodes.Node] = []
 
-        # --- Heading ---
+        short_name = fqn.split(".")[-1]
+        custom_heading = self.options.get("heading", "")
+
+        section_id = "ansys-minigallery-" + fqn.replace(".", "-").lower()
+        section = nodes.section(ids=[section_id])
+        section["classes"].append("ansys-minigallery")
+
         if "no-heading" not in self.options:
-            short_name = fqn.split(".")[-1]
-            custom_heading = self.options.get("heading", "")
-            para = nodes.paragraph()
-            para["classes"].append("ansys-minigallery-heading")
             if custom_heading:
-                para += nodes.Text(custom_heading)
+                title_node = nodes.title(text=custom_heading)
             else:
-                para += nodes.Text("Examples using ")
+                title_node = nodes.title()
+                title_node += nodes.Text("Examples using ")
                 fn_span = nodes.inline()
                 fn_span["classes"].append("ansys-minigallery-fn")
                 fn_span += nodes.Text(short_name)
-                para += fn_span
-            result_nodes.append(para)
+                title_node += fn_span
+            section += title_node
 
         # --- Build a sphinx-design grid via nested RST parsing ---
         rst_lines: List[str] = []
@@ -1632,9 +1635,10 @@ class AnsysMinigalleryDirective(Directive):
             vl.append(line, source, i)
 
         container = nodes.container()
-        container["classes"].append("ansys-minigallery")
+        container["classes"].append("ansys-minigallery-grid-wrap")
         self.state.nested_parse(vl, self.content_offset, container)
-        result_nodes.append(container)
+        section += container
+        result_nodes.append(section)
 
         return result_nodes
 
