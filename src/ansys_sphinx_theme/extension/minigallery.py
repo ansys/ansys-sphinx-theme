@@ -1269,7 +1269,7 @@ def _load_json_sources(
     int
         Number of example files loaded from JSON.
     """
-    json_sources: List[dict] = list(getattr(app.config, "ansys_gallery_json_sources", []) or [])
+    json_sources: List[dict] = list(getattr(app.config, "ansys_gallery_example_json", []) or [])
     if not json_sources:
         return 0
 

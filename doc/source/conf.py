@@ -108,6 +108,8 @@ intersphinx_mapping = {
     "sphinx": ("https://www.sphinx-doc.org/en/master", None),
 }
 
+autosummary_generate = True
+
 # numpydoc configuration
 numpydoc_show_class_members = False
 numpydoc_xref_param_type = True

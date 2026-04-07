@@ -36,6 +36,12 @@ These examples show how the Ansys Sphinx Theme renders different Sphinx extensio
 
       Examples of how Sphinx AutoAPI documentation is rendered.
 
+   .. grid-item-card:: :octicon:`list-unordered` Sphinx autosummary
+      :link: sphinx-autosummary
+      :link-type: ref
+
+      Examples of autosummary pages with minigallery integration.
+
 Documentation components
 ========================
 
@@ -69,6 +75,7 @@ These examples show how the Ansys Sphinx Theme renders different documentation c
    examples/nbsphinx
    examples/gallery-examples/index
    examples/sphinx-autoapi
+   examples/sphinx-autosummary
 
 
 .. toctree::
