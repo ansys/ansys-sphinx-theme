@@ -158,6 +158,7 @@ linkcheck_exclude_documents = ["changelog"]
 linkcheck_ignore = [
     r"https://sphinxdocs.ansys.com/version/*",
     r"https://example.com/*",
+    r"https://www.fusejs.io/api/*",
 ]
 if switcher_version != "dev":
     linkcheck_ignore.append(
