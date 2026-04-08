@@ -702,10 +702,15 @@ def _gallery_thumb_path(
 ) -> str:
     """Return the srcdir-relative path for a sphinx-gallery example thumbnail.
 
-    Sphinx-gallery writes thumbnails to
-    ``<gallery_dir>/Folder/images/thumb/<stem>_thumb.png`` inside ``srcdir``.
-    We locate the file and return its srcdir-relative path.  If the file
-    does not yet exist (first build) we fall back to *default_thumb_path*.
+    Checks three locations in priority order:
+
+    1. sphinx-gallery standard location:
+       ``<gallery_dir>/<subfolder>/images/thumb/sphx_glr_<stem>_thumb.png``
+    2. ``_images/<stem>.png`` — at the same level as ``_static/``, inside the
+       Sphinx output directory.  Some setups (e.g. Sphinx autodoc image
+       copy, or custom gallery configurations) place images here using the
+       bare stem name with a ``.png`` extension.
+    3. Fall back to *default_thumb_path*.
 
     Parameters
     ----------
@@ -723,43 +728,51 @@ def _gallery_thumb_path(
     str
         Srcdir-relative path to the thumbnail (no leading ``/``).
     """
-    if not sphinx_gallery_conf:
-        return default_thumb_path
-
-    examples_dirs = sphinx_gallery_conf.get("examples_dirs", [])
-    gallery_dirs = sphinx_gallery_conf.get("gallery_dirs", [])
-    if isinstance(examples_dirs, str):
-        examples_dirs = [examples_dirs]
-    if isinstance(gallery_dirs, str):
-        gallery_dirs = [gallery_dirs]
-
     srcdir_path = Path(srcdir).resolve()
     stem = py_path.stem
 
-    for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs):
-        # Resolve examples_dir — may be relative to srcdir (e.g. "../examples")
-        ex_dir = Path(examples_dir)
-        if not ex_dir.is_absolute():
-            ex_dir = (srcdir_path / ex_dir).resolve()
+    # ── Priority 1: sphinx-gallery standard thumbnail location ───────────────
+    if sphinx_gallery_conf:
+        examples_dirs = sphinx_gallery_conf.get("examples_dirs", [])
+        gallery_dirs = sphinx_gallery_conf.get("gallery_dirs", [])
+        if isinstance(examples_dirs, str):
+            examples_dirs = [examples_dirs]
+        if isinstance(gallery_dirs, str):
+            gallery_dirs = [gallery_dirs]
 
-        try:
-            rel_in_ex = py_path.parent.relative_to(ex_dir)
-        except ValueError:
-            continue  # this py file doesn't belong to this examples_dir
+        for examples_dir, gallery_dir in zip(examples_dirs, gallery_dirs):
+            # Resolve examples_dir — may be relative to srcdir (e.g. "../examples")
+            ex_dir = Path(examples_dir)
+            if not ex_dir.is_absolute():
+                ex_dir = (srcdir_path / ex_dir).resolve()
 
-        # Resolve gallery_dir — usually srcdir-relative (e.g. "auto_examples")
-        gdir = Path(gallery_dir)
-        if not gdir.is_absolute():
-            gdir = (srcdir_path / gdir).resolve()
-
-        # sphinx-gallery thumbnail: <gallery_dir>/<subfolder>/images/thumb/sphx_glr_<stem>_thumb.png
-        thumb_abs = gdir / rel_in_ex / "images" / "thumb" / f"sphx_glr_{stem}_thumb.png"
-        if thumb_abs.exists():
             try:
-                return str(thumb_abs.relative_to(srcdir_path)).replace(os.sep, "/")
+                rel_in_ex = py_path.parent.relative_to(ex_dir)
             except ValueError:
-                # gallery_dir is outside srcdir — return absolute URI as fallback
-                return str(thumb_abs).replace(os.sep, "/")
+                continue  # this py file doesn't belong to this examples_dir
+
+            # Resolve gallery_dir — usually srcdir-relative (e.g. "auto_examples")
+            gdir = Path(gallery_dir)
+            if not gdir.is_absolute():
+                gdir = (srcdir_path / gdir).resolve()
+
+            # <gallery_dir>/<subfolder>/images/thumb/sphx_glr_<stem>_thumb.png
+            thumb_abs = gdir / rel_in_ex / "images" / "thumb" / f"sphx_glr_{stem}_thumb.png"
+            if thumb_abs.exists():
+                try:
+                    return str(thumb_abs.relative_to(srcdir_path)).replace(os.sep, "/")
+                except ValueError:
+                    return str(thumb_abs).replace(os.sep, "/")
+
+    # ── Priority 2: _images/<stem>.png (same level as _static/) ─────────────
+    # Some Sphinx setups copy gallery images to _images/ using the bare
+    # filename stem (i.e. remove .py, add .png).
+    images_thumb = srcdir_path / "_images" / f"{stem}.png"
+    if images_thumb.exists():
+        try:
+            return str(images_thumb.relative_to(srcdir_path)).replace(os.sep, "/")
+        except ValueError:
+            return str(images_thumb).replace(os.sep, "/")
 
     return default_thumb_path
 
@@ -1331,10 +1344,39 @@ def _load_json_sources(
             if not filtered:
                 continue
 
-            # For internal entries with a base_examples_dir, locate the source
-            # file on disk to extract the real title and thumbnail.
+            # For external entries (base_url set), derive the thumbnail URL from
+            # the external site's _images/ directory: <base_url_root>/_images/<stem>.png
+            # where base_url_root is the scheme+host+version prefix (everything up to
+            # and including the version path segment, e.g.
+            # "https://examples.aedt.docs.pyansys.com/version/stable").
             thumbnail_uri = default_path
             src_file_abs = ""
+            if base_url and suffix == ".py":
+                # Strip the gallery-specific path suffix from base_url to get the
+                # doc root, then append /_images/<stem>.png.
+                # e.g. base_url = "https://host/version/stable/examples/gallery"
+                #   → doc_root  = "https://host/version/stable"
+                # Heuristic: walk up until we find the version segment or just go
+                # two levels up from the last path component.
+                from urllib.parse import urlparse, urlunparse
+
+                parsed = urlparse(base_url)
+                parts = parsed.path.rstrip("/").split("/")
+                # Try to find a version segment ("stable", "dev", or vX.Y.Z).
+                import re as _re
+
+                version_idx = None
+                for i, part in enumerate(parts):
+                    if part in ("stable", "dev", "latest") or _re.match(r"v?\d+\.\d+", part):
+                        version_idx = i
+                # Use version segment + 1 if found, else strip last 2 path components.
+                if version_idx is not None:
+                    root_parts = parts[: version_idx + 1]
+                else:
+                    root_parts = parts[:-2] if len(parts) > 2 else parts
+                root_path = "/".join(root_parts)
+                doc_root = urlunparse((parsed.scheme, parsed.netloc, root_path, "", "", ""))
+                thumbnail_uri = f"{doc_root}/_images/{stem}.png"
             if not base_url and base_examples_dir is not None:
                 candidate = (base_examples_dir / filename).resolve()
                 if candidate.is_file():
@@ -1485,6 +1527,10 @@ def _resolve_thumbnail(ex: "ExampleInfo", srcdir: str, default_path: str, config
         # the generated thumbnail regardless of when scan_examples ran.
         # Guard: JSON-sourced entries without base_examples_dir have no local file.
         if not ex.src_file_abs:
+            # If a pre-computed thumbnail URI was stored (e.g. an external URL
+            # built from base_url + /_images/<stem>.png), use it directly.
+            if ex.thumbnail_uri:
+                return ex.thumbnail_uri
             return default_path
         sgconf: Optional[dict] = getattr(config, "sphinx_gallery_conf", None)
         return _gallery_thumb_path(Path(ex.src_file_abs), sgconf, default_path, srcdir)
@@ -1611,8 +1657,12 @@ class AnsysMinigalleryDirective(Directive):
                 str(getattr(env.config, "ansys_gallery_default_thumbnail", "") or "")
             )
             thumb_srcrel = _resolve_thumbnail(ex, env.srcdir, default_path, env.config)
-            # Convert srcdir-relative path to docname-relative for Sphinx image resolution
-            img_rel = _srcdir_to_docrel(thumb_srcrel, env.docname)
+            # Absolute URLs (https://...) are used as-is; srcdir-relative paths
+            # must be converted to docname-relative for Sphinx image resolution.
+            if thumb_srcrel.startswith(("http://", "https://", "//")):
+                img_rel = thumb_srcrel
+            else:
+                img_rel = _srcdir_to_docrel(thumb_srcrel, env.docname)
             rst_lines.append("   .. grid-item-card::")
             rst_lines.append(f"      :img-top: {img_rel}")
             if ex.link_type == "url":
