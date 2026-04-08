@@ -62,7 +62,7 @@ by ``ansys_sphinx_theme.extension.autoapi``):
 * ``ansys_gallery_dirs`` — list of example directory paths
 * ``ansys_gallery_default_thumbnail`` — fallback thumbnail path
 * ``ansys_gallery_fqn_prefixes`` — list of package-prefix strings for filtering
-* ``ansys_gallery_json_sources`` — list of external-JSON config dicts
+* ``ansys_gallery_example_json`` — list of external-JSON config dicts
   (see ``examples_json`` below)
 
 The examples JSON is always written automatically after each build.  The
@@ -1213,7 +1213,7 @@ def _load_json_sources(
 ) -> int:
     """Populate *backrefs* from pre-computed JSON files.
 
-    Reads every entry in ``ansys_gallery_json_sources`` config.  Each entry
+    Reads every entry in ``ansys_gallery_example_json`` config.  Each entry
     is a dict that supports the following keys:
 
     ``file``
@@ -1269,7 +1269,7 @@ def _load_json_sources(
     int
         Number of example files loaded from JSON.
     """
-    json_sources: List[dict] = list(getattr(app.config, "ansys_gallery_json_sources", []) or [])
+    json_sources: List[dict] = list(getattr(app.config, "ansys_gallery_example_json", []) or [])
     if not json_sources:
         return 0
 
