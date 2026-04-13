@@ -179,11 +179,10 @@ def setup_default_html_theme_options(app):
     # Handle show_page_toc option.
     # When set to False, remove "page-toc" from the secondary sidebar on all pages.
     # Respects any explicit secondary_sidebar_items the user has already configured.
+    # Uses a list (not a dict) so pydata-sphinx-theme applies it globally to all pages.
     if not theme_options.get("show_page_toc", True):
         if "secondary_sidebar_items" not in theme_options:
-            theme_options["secondary_sidebar_items"] = {
-                "**": ["edit-this-page", "sourcelink"],
-            }
+            theme_options["secondary_sidebar_items"] = ["edit-this-page", "sourcelink"]
     theme_options.pop("show_page_toc", None)
 
     # Update the icon links. If not given, add a default GitHub icon.

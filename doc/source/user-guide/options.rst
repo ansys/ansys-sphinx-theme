@@ -444,8 +444,8 @@ Each entry in the YAML file may include the following fields:
 
     You must declare the complete layout of the dropdown navigation bar in the YAML file. Sphinx does not resolve it automatically.
 
-Secondary sidebar (page TOC)
------------------------------
+Secondary sidebar
+-----------------
 
 The right-hand secondary sidebar shows the **"On this page"** table of contents, which lists
 the section anchors for the current page.  It also contains the *Edit this page* and
@@ -454,7 +454,7 @@ the section anchors for the current page.  It also contains the *Edit this page*
 Hide the page TOC globally
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To hide the page TOC on every page, set ``"show_page_toc": False`` in
+To hide the page secondary sidebar on every page, set ``"show_page_toc": False`` in
 ``html_theme_options``.  The *Edit this page* and *View source* links remain visible:
 
 .. code:: python
