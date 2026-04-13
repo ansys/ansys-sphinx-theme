@@ -313,6 +313,11 @@ require(["fuse"], function (Fuse) {
     if (selectedFilter.size === 0 || selectedFilter.has("Documents")) {
       docResults = fuse
         .search(query, { limit: resultLimit })
+        .sort((a, b) => {
+          const scoreA = (1 - (a.score || 0)) * (a.item.weight || 1);
+          const scoreB = (1 - (b.score || 0)) * (b.item.weight || 1);
+          return scoreB - scoreA;
+        })
         .map((r) => r.item);
       if (selectedObjectIDs.length > 0) {
         docResults = docResults.filter((item) =>
