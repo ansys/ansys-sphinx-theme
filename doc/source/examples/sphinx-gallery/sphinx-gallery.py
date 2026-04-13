@@ -171,5 +171,29 @@ df = pd.DataFrame(data)
 df.head()
 
 ###############################################################################
+# Using Ansys Sphinx Theme API objects
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# The lines below import and exercise ``ExampleClass`` and ``func`` from the
+# theme's example modules.  Because the **ansys-minigallery** extension scans
+# every sphinx-gallery script with the Python AST, this example will
+# automatically appear as a card in the minigallery on the
+# ``ansys_sphinx_theme.examples.samples.ExampleClass`` and
+# ``ansys_sphinx_theme.examples.sample_func.func`` autoapi pages.
+
+from ansys_sphinx_theme.examples import sample_func
+from ansys_sphinx_theme.examples.samples import ExampleClass
+
+sample_func.func(1, "bar")
+instance = ExampleClass("gallery-example", ["sphinx", "gallery"], param3=7)
+print(f"ExampleClass.readonly_property = {instance.readonly_property!r}")
+readwrite_property = instance.readwrite_property = "This is a read/write property"
+print(f"ExampleClass.readwrite_property = {instance.readwrite_property!r}")
+print(f"func(1, 'bar')                 = {sample_func.func(1, 'bar')!r}")
+
+###############################################################################
 
 # %%
+from ansys_sphinx_theme.examples.samples import ExampleDataClass
+
+example = ExampleDataClass(value=42)
+print(f"ExampleDataClass.value = {example.value!r}")
