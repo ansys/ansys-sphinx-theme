@@ -443,3 +443,75 @@ Each entry in the YAML file may include the following fields:
 .. warning::
 
     You must declare the complete layout of the dropdown navigation bar in the YAML file. Sphinx does not resolve it automatically.
+
+Secondary sidebar (page TOC)
+-----------------------------
+
+The right-hand secondary sidebar shows the **"On this page"** table of contents, which lists
+the section anchors for the current page.  It also contains the *Edit this page* and
+*View source* links.
+
+Hide the page TOC globally
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To hide the page TOC on every page, set ``"show_page_toc": False`` in
+``html_theme_options``.  The *Edit this page* and *View source* links remain visible:
+
+.. code:: python
+
+    html_theme_options = {
+        "show_page_toc": False,
+    }
+
+Control the secondary sidebar per page
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For finer control, use the ``secondary_sidebar_items`` option from
+`pydata-sphinx-theme <https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/layout.html#secondary-sidebar>`_.
+You can pass a list (applied globally) or a dict with glob patterns (applied per page).
+
+.. code:: python
+
+    html_theme_options = {
+        # Remove the page TOC from all pages but keep other items.
+        "secondary_sidebar_items": {
+            "**": ["edit-this-page", "sourcelink"],
+        },
+    }
+
+.. code:: python
+
+    html_theme_options = {
+        # Show the page TOC on regular pages; hide it on API and index pages.
+        "secondary_sidebar_items": {
+            "**": ["page-toc", "edit-this-page", "sourcelink"],
+            "api/**": ["edit-this-page", "sourcelink"],
+            "index": [],
+        },
+    }
+
+Control the TOC depth
+~~~~~~~~~~~~~~~~~~~~~~
+
+Use ``show_toc_level`` to set how many heading levels are expanded by default in
+the page TOC (default is ``1``, showing only top-level headings):
+
+.. code:: python
+
+    html_theme_options = {
+        "show_toc_level": 2,  # Show h2 and h3 entries expanded by default
+    }
+
+Hide the page TOC on a single page
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To suppress the entire secondary sidebar for a single RST page without changing
+``conf.py``, add the following metadata at the very top of the file:
+
+.. code:: rst
+
+    :html_theme.sidebar_secondary.remove:
+
+    Page Title
+    ==========
+    ...
