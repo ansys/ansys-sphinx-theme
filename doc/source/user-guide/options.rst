@@ -394,7 +394,7 @@ The following images show a sample "What's new" section and sidebar in the chang
 
 .. note::
 
-    If you are using both the "whatsnew" and "cheatsheet" options, the "cheatsheet" option will be
+    If you are using both the "whatsnew" and "cheatsheet" options, the "cheatsheet" option is
     displayed first in the left navigation pane, followed by the "What's new" section to maintain
     sidebar consistency.
 
@@ -448,7 +448,7 @@ Secondary sidebar
 -----------------
 
 The right-hand secondary sidebar shows the **"On this page"** table of contents, which lists
-the section anchors for the current page.  It also contains the *Edit this page* and
+the section anchors for the current page. It also contains the *Edit this page* and
 *View source* links.
 
 Hide the page TOC globally
