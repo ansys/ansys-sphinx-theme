@@ -176,14 +176,21 @@ def setup_default_html_theme_options(app):
     theme_options.setdefault("collapse_navigation", True)
     theme_options.setdefault("navigation_with_keys", True)
 
-    # Handle show_page_toc option.
-    # When set to False, remove "page-toc" from the secondary sidebar on all pages.
+    # Handle show_page_toc and show_source_button options.
+    # When set to False, remove the corresponding item from the secondary sidebar on all pages.
     # Respects any explicit secondary_sidebar_items the user has already configured.
     # Uses a list (not a dict) so pydata-sphinx-theme applies it globally to all pages.
-    if not theme_options.get("show_page_toc", True):
+    show_page_toc = theme_options.pop("show_page_toc", True)
+    show_source_button = theme_options.pop("show_source_button", True)
+
+    if not show_page_toc or not show_source_button:
         if "secondary_sidebar_items" not in theme_options:
-            theme_options["secondary_sidebar_items"] = ["edit-this-page", "sourcelink"]
-    theme_options.pop("show_page_toc", None)
+            items = ["page-toc", "edit-this-page", "sourcelink"]
+            if not show_page_toc:
+                items.remove("page-toc")
+            if not show_source_button:
+                items.remove("sourcelink")
+            theme_options["secondary_sidebar_items"] = items
 
     # Update the icon links. If not given, add a default GitHub icon.
     if not theme_options.get("icon_links") and theme_options.get("github_url"):

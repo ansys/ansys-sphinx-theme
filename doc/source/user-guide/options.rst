@@ -454,13 +454,34 @@ the section anchors for the current page.  It also contains the *Edit this page*
 Hide the page TOC globally
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To hide the page secondary sidebar on every page, set ``"show_page_toc": False`` in
-``html_theme_options``.  The *Edit this page* and *View source* links remain visible:
+Set ``"show_page_toc": False`` to hide the page TOC on every page.
+The *Edit this page* and *View source* links remain visible:
 
 .. code:: python
 
     html_theme_options = {
         "show_page_toc": False,
+    }
+
+Hide the "View source" button globally
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Set ``"show_source_button": False`` to remove the *View source* link from every page.
+The page TOC and *Edit this page* link remain visible:
+
+.. code:: python
+
+    html_theme_options = {
+        "show_source_button": False,
+    }
+
+Both options can be combined:
+
+.. code:: python
+
+    html_theme_options = {
+        "show_page_toc": False,
+        "show_source_button": False,
     }
 
 Control the secondary sidebar per page
