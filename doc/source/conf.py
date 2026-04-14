@@ -59,7 +59,6 @@ html_context = {
 html_theme_options = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
     "contact_mail": "pyansys.core@ansys.com",
-    # "use_edit_page_button": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
     ],
@@ -70,6 +69,7 @@ html_theme_options = {
     "logo": "ansys",
     "show_page_toc": False,
     "show_source_button": False,
+    # "use_edit_page_button": True,
     "search_extra_sources": {
         "PyAnsys": "https://docs.pyansys.com/version/stable/",
         "Actions": "https://actions.docs.ansys.com/version/stable/",
