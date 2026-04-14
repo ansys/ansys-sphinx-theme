@@ -771,7 +771,8 @@ button.btn.version-switcher__button:hover {
 
 @media (min-width: 1200px) {
   .bd-sidebar-primary {
-    width: 20%;
+    width: fit-content;
+    max-width: 20%;
   }
 }
 
