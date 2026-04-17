@@ -64,7 +64,7 @@ doc = [
     "numpydoc==1.10.0",
     "pandas==2.3.3",
     "Pillow>=9.0",
-    "plotly==6.6.0",
+    "plotly==6.7.0",
     "PyGitHub==2.9.0",
     "pyvista[jupyter]==0.47.3",
     "PyYAML==6.0.3",
