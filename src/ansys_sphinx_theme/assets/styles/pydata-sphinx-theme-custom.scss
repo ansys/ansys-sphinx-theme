@@ -42,6 +42,11 @@
   border: none;
 }
 
+// Hide the primary sidebar when it contains no navigation links
+// (i.e., only the "Section Navigation" heading is present)
+.bd-sidebar-primary:not(:has(nav.bd-links li)) {
+  display: none;
+}
 nav.bd-links p.bd-links__title,
 nav.bd-links p.caption {
   font-size: var(--ast-font-sidebar-header);
@@ -304,9 +309,8 @@ a.headerlink {
 */
 
 .bd-main .bd-content {
-  display: flex;
-  height: 100%;
-  justify-content: end;
+  // Remove pydata-sphinx-theme's default top/bottom margin on the content area
+  margin-block: 0;
 }
 
 .bd-main .bd-content .bd-article-container .bd-article {
@@ -759,9 +763,16 @@ button.btn.version-switcher__button:hover {
   max-width: 100%;
 }
 
+// Prevent the footer (prev/next nav) from being pushed to the very bottom
+// by pydata's `margin-top: auto` when content is short
+.bd-footer-article {
+  margin-top: 0;
+}
+
 @media (min-width: 1200px) {
   .bd-sidebar-primary {
-    width: 20%;
+    width: fit-content;
+    max-width: 20%;
   }
 }
 
@@ -777,9 +788,17 @@ button.btn.version-switcher__button:hover {
   }
 }
 
+// When the secondary sidebar (page TOC) is present
 @media (min-width: 1200px) {
-  .bd-main .bd-content .bd-article-container {
+  .bd-main:has(.bd-sidebar-secondary) .bd-content .bd-article-container {
     width: min(100%, 1070px);
+  }
+}
+
+// When there is no secondary sidebar, give the article more room
+@media (min-width: 1200px) {
+  .bd-main:not(:has(.bd-sidebar-secondary)) .bd-content .bd-article-container {
+    width: min(100%, 1300px);
   }
 }
 

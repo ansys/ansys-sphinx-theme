@@ -176,6 +176,18 @@ def setup_default_html_theme_options(app):
     theme_options.setdefault("collapse_navigation", True)
     theme_options.setdefault("navigation_with_keys", True)
 
+    # Handle show_page_toc and show_source_button options.
+    show_flags = {
+        "page-toc": theme_options.pop("show_page_toc", True),
+        "sourcelink": theme_options.pop("show_source_button", True),
+    }
+
+    if "secondary_sidebar_items" not in theme_options:
+        default_items = ["page-toc", "edit-this-page", "sourcelink"]
+        theme_options["secondary_sidebar_items"] = [
+            item for item in default_items if show_flags.get(item, True)
+        ]
+
     # Update the icon links. If not given, add a default GitHub icon.
     if not theme_options.get("icon_links") and theme_options.get("github_url"):
         theme_options["icon_links"] = [
