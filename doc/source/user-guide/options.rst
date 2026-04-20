@@ -367,9 +367,9 @@ to the ``html_theme_options`` dictionary:
 The dictionary contains the following keys:
 
 - ``whatsnew_file_path``: The path to the YAML file containing what's new content local to the
-  ``doc/source`` directory. If not provided, the what's new section will not be generated.
+  ``doc/source`` directory. If not provided, the what's new section is not generated.
 - ``changelog_file_path``: The path to the changelog.rst file local to the ``doc/source``
-  directory. If not provided, the what's new section will not be generated.
+  directory. If not provided, the what's new section is not generated.
 - ``sidebar_pages``: List of names for the pages to include the what's new sidebar on. If not
   provided, the what's new sidebar is not displayed.
 - ``sidebar_no_of_headers``: Number of minor version sections to display in the what's new sidebar.
@@ -479,7 +479,7 @@ can move the TOC into the primary (left-hand) sidebar instead by setting
 
 The TOC entries are injected directly under the current page's entry in the
 section navigation tree. A small chevron toggle (``›``) appears beside the page
-link — clicking it expands or collapses the entries manually. As the user
+link—clicking it expands or collapses the entries manually. As the user
 scrolls through the page, the TOC auto-expands and highlights the active
 section heading automatically.
 
