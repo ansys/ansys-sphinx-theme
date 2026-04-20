@@ -479,7 +479,7 @@ can move the TOC into the primary (left-hand) sidebar instead by setting
 
 The TOC entries are injected directly under the current page's entry in the
 section navigation tree. A small chevron toggle (``›``) appears beside the page
-link—clicking it expands or collapses the entries manually. As the user
+link. Clicking it expands or collapses the entries manually. As the user
 scrolls through the page, the TOC auto-expands and highlights the active
 section heading automatically.
 
