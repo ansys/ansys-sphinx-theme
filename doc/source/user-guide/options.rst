@@ -463,6 +463,26 @@ The *Edit this page* and *View source* links remain visible:
         "show_page_toc": False,
     }
 
+Show the page TOC inside the primary sidebar
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When the secondary sidebar TOC is disabled with ``"show_page_toc": False``, you
+can move the TOC into the primary (left-hand) sidebar instead by setting
+``"show_page_toc_in_primary_sidebar": True``.
+
+.. code:: python
+
+    html_theme_options = {
+        "show_page_toc": False,
+        "show_page_toc_in_primary_sidebar": True,
+    }
+
+The TOC entries are injected directly under the current page's entry in the
+section navigation tree. A small chevron toggle (``›``) appears beside the page
+link — clicking it expands or collapses the entries manually. As the user
+scrolls through the page, the TOC auto-expands and highlights the active
+section heading automatically.
+
 Hide the "View source" button globally
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

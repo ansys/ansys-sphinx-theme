@@ -181,6 +181,21 @@ def setup_default_html_theme_options(app):
         "page-toc": theme_options.pop("show_page_toc", True),
         "sourcelink": theme_options.pop("show_source_button", True),
     }
+    show_page_toc_in_primary = theme_options.pop("show_page_toc_in_primary_sidebar", False)
+    page_toc_visible = show_flags.get("page-toc", True)
+
+    if show_page_toc_in_primary and page_toc_visible:
+        import warnings
+
+        warnings.warn(
+            "'show_page_toc_in_primary_sidebar' has no effect when 'show_page_toc' is True "
+            "(the default). Set 'show_page_toc': False to move the TOC into the primary sidebar.",
+            UserWarning,
+            stacklevel=2,
+        )
+
+    # Store for use in sidebar-nav-bs.html template context.
+    app._ast_page_toc_in_primary = show_page_toc_in_primary and not page_toc_visible
 
     if "secondary_sidebar_items" not in theme_options:
         default_items = ["page-toc", "edit-this-page", "sourcelink"]
@@ -434,6 +449,9 @@ def add_sidebar_context(
     doctree : docutils.nodes.document
         Document tree for the page.
     """
+    # Expose flag to Jinja templates (used by sidebar-nav-bs.html).
+    context["ast_page_toc_in_primary"] = getattr(app, "_ast_page_toc_in_primary", False)
+
     whatsnew_pages = whatsnew_sidebar_pages(app)
     cheatsheet_pages = cheatsheet_sidebar_pages(app)
 
