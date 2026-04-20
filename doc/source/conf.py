@@ -67,10 +67,6 @@ html_theme_options = {
         "version_match": get_version_match(__version__),
     },
     "logo": "ansys",
-    # "show_page_toc": False,
-    "show_source_button": False,
-    # "show_page_toc_in_primary_sidebar": True,
-    # "use_edit_page_button": True,
     "search_extra_sources": {
         "PyAnsys": "https://docs.pyansys.com/version/stable/",
         "Actions": "https://actions.docs.ansys.com/version/stable/",
