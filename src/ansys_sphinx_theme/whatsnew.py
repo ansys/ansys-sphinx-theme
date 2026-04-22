@@ -511,9 +511,9 @@ def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None
     whatsnew = []
     # Initialize the whatsnew attribute if it doesn't exist
     if not hasattr(app.env, "whatsnew"):
-        app.env.whatsnew = []  # type: ignore
+        app.env.whatsnew = []  # type: ignore[attr-defined]
     else:
-        app.env.whatsnew = []  # type: ignore
+        app.env.whatsnew = []  # type: ignore[attr-defined]
 
     # Get a list of nodes whose ids start with "version" that contain "What's new" sections
     versions_nodes = []
@@ -565,7 +565,7 @@ def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None
 
         whatsnew.append(contents)
 
-    app.env.whatsnew = whatsnew  # type: ignore
+    app.env.whatsnew = whatsnew  # type: ignore[attr-defined]
 
 
 def whatsnew_sidebar_pages(app: Sphinx) -> list | None:
