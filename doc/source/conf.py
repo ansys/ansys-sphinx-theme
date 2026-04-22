@@ -154,9 +154,11 @@ with Path.open(THIS_PATH / "links.rst", "r") as f:
     rst_epilog += f.read()
 
 
+linkcheck_exclude_documents = ["changelog"]
 linkcheck_ignore = [
     r"https://sphinxdocs.ansys.com/version/*",
     r"https://example.com/*",
+    r"https://www.fusejs.io/api/*",
 ]
 if switcher_version != "dev":
     linkcheck_ignore.append(
