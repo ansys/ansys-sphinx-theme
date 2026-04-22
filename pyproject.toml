@@ -57,7 +57,7 @@ all = [
 ]
 
 [dependency-groups]
-code-style = [
+type-check = [
     "ty==0.0.29",
 ]
 doc = [
