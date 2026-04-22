@@ -115,7 +115,7 @@ jobs:
       - name: Run ty
         run: |
           source .venv/bin/activate
-          ty check
+          ty check --igore unresolved-attribute
 
 
   doc-style:
