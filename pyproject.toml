@@ -57,6 +57,9 @@ all = [
 ]
 
 [dependency-groups]
+code-style = [
+    "ty==0.0.29",
+]
 doc = [
     "jupytext==1.19.1",
     "nbsphinx==0.9.8",

@@ -83,7 +83,7 @@ def update_template_context(
 
         nav_root = nodes.container(classes=["navbar-content"])
         nav_root.append(build_navbar_nodes(app.config.navbar_contents))
-        rendered = app.builder.render_partial(nav_root)["fragment"]  # type: ignore
+        rendered = app.builder.render_partial(nav_root)["fragment"]
         return add_navbar_chevrons(bs4.BeautifulSoup(rendered, "html.parser"))
 
     def build_navbar_nodes(entries: list[NavEntry], is_top_level: bool = True) -> nodes.bullet_list:
