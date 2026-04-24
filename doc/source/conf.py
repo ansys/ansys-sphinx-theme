@@ -82,7 +82,6 @@ html_theme_options = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
-    "collapse_navigation": True,
 }
 
 
