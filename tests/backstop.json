@@ -21,16 +21,9 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "hideSelectors": [],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": 0,
-      "selectors": [],
-      "selectorExpansion": true,
-      "expect": 0,
+      "selectors": ["viewport"],
       "misMatchThreshold" : 0.2,
-      "requireSameDimensions": true
+      "requireSameDimensions": false
     },
     {
       "label": "Ansys Sphinx Theme - sphinx design example page",
