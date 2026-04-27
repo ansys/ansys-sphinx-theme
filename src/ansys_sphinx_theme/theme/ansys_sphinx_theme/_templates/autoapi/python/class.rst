@@ -209,4 +209,10 @@ Import detail
     {% endif %}
 
 {# ---------------------- End class details -------------------- #}
+
+{# -------- Begin minigallery section -------- #}
+{% if is_own_page %}
+.. ansys-minigallery:: {{ obj.id }}
+{% endif %}
+{# --------- End minigallery section --------- #}
 {% endif %}

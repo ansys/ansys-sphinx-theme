@@ -202,7 +202,8 @@ def extract_example_links(
     list
         List of example links.
     """
-    g = Github()
+    token = os.getenv("GITHUB_TOKEN", "")
+    g = Github(token) if token else Github()
     repo = g.get_repo(repo_fullname)
     contents = repo.get_contents(path_relative_to_root)
     if not isinstance(contents, list):
@@ -264,6 +265,32 @@ else:
         "output": "examples/api",
         "own_page_level": "function",
         "package_depth": 1,
+        # Minigallery: scan these directories for .py and .ipynb examples
+        "examples_dirs": [
+            "doc/source/examples/sphinx-gallery",
+            "doc/source/examples/nbsphinx",
+        ],
+        "gallery_default_thumbnail": "_static/pyansys_light_square.png",
+        "fqn_prefixes": ["ansys_sphinx_theme"],
+        # Demo: consume a pre-built JSON from the published stable docs.
+        # In a real project this JSON would come from another library's CI build.
+        # Each entry maps bare filenames in the JSON to a base URL or docdir.
+        # Two entries are needed because .py (gallery) and .ipynb (nbsphinx)
+        # live at different URL paths in the published site.
+        # "examples_json": [
+        #     {
+        #         "file": "demo_external_examples.json",
+        #         "base_url": (
+        #             "https://sphinxdocs.ansys.com/version/stable/examples/gallery-examples"
+        #         ),
+        #         "fqn_prefixes": ["ansys_sphinx_theme"],
+        #     },
+        #     {
+        #         "file": "demo_external_examples.json",
+        #         "base_url": ("https://sphinxdocs.ansys.com/version/stable/examples/nbsphinx"),
+        #         "fqn_prefixes": ["ansys_sphinx_theme"],
+        #     },
+        # ],
     }
 
     # Gallery of examples
@@ -283,6 +310,9 @@ else:
     }
     pyvista.BUILDING_GALLERY = True
     pyvista.OFF_SCREEN = True
+    nbsphinx_custom_formats = {
+        ".mystnb": ["jupytext.reads", {"fmt": "ipynb"}],
+    }
 
     nbsphinx_prolog = """
 Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb>`.
@@ -291,6 +321,7 @@ Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb
 """
     nbsphinx_thumbnails = {
         "examples/nbsphinx/jupyter-notebook": "_static/pyansys_light_square.png",
+        "examples/nbsphinx/minigallery-demo": "_static/pyansys_light_square.png",
     }
 
     # Third party examples
