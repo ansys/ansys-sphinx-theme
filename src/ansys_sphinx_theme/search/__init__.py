@@ -37,9 +37,15 @@ def update_search_config(app: Sphinx) -> None:
         Sphinx application.
     """
     theme_static_options = app.config.html_theme_options.get("static_search", {})
-    theme_static_options["keys"] = ["title", "text", "objectID"]
+    theme_static_options["keys"] = [
+        {"name": "section", "weight": 3},
+        {"name": "title", "weight": 2},
+        {"name": "text", "weight": 1},
+        {"name": "objectID", "weight": 0.5},
+    ]
     theme_static_options["threshold"] = theme_static_options.get("threshold", 0.2)
     theme_static_options["limit"] = theme_static_options.get("limit", 10)
+    theme_static_options["includeScore"] = True
     app.config.html_theme_options["static_search"] = theme_static_options
 
 

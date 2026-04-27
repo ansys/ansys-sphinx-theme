@@ -102,6 +102,7 @@ class SearchIndex:
                     "title": section_title,
                     "text": clean_text,
                     "anchor_id": section_anchor_id,
+                    "type": "section",
                 }
             )
 
@@ -128,6 +129,7 @@ class SearchIndex:
                             "title": anchor_title,
                             "text": element.astext(),
                             "anchor_id": anchor_id,
+                            "type": "desc",
                         }
                     )
 
@@ -183,7 +185,9 @@ class SearchIndex:
                 "objectID": self.object_id,
                 "href": f"{self.doc_path}#{section['anchor_id']}",
                 "title": breadcrumbs,
+                "section": section["title"],
                 "text": section["text"],
+                "weight": 1.0 if section["type"] == "section" else 0.9,
             }
 
 
