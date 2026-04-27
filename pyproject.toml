@@ -1,6 +1,6 @@
 [build-system]
 requires = [
-  "sphinx-theme-builder>=0.2.0b2,<1",
+  "sphinx-theme-builder>=0.2.0b2,<1"
 ]
 build-backend = "sphinx_theme_builder"
 
@@ -15,44 +15,45 @@ version = "1.8.dev0"
 description = "A theme devised by ANSYS, Inc. for Sphinx documentation."
 readme = "README.rst"
 requires-python = ">=3.10,<4"
-license = {file = "LICENSE"}
+license = "MIT"
+license-files = ["LICENSE"]
 authors = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
 maintainers = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Framework :: Sphinx",
     "Framework :: Sphinx :: Theme",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14"
 ]
 dependencies = [
     "importlib-metadata>=4.0",
     "Jinja2>=3.1.2",
     "pdf2image>=1.17.0",
-    "pydata-sphinx-theme>=0.15.4,<0.17",
+    "pydata-sphinx-theme>=0.15.4,<0.18",
     "PyYAML>=6.0",
-    "Sphinx>=6.1.0",
+    "Sphinx>=6.1.0"
 ]
 
 [project.optional-dependencies]
 autoapi = [
     "sphinx-autoapi>=3.7.0",
     "sphinx-design>=0.6.0",
-    "sphinx-jinja>=2.0.2",
+    "sphinx-jinja>=2.0.2"
 ]
 changelog = [
     "PyYAML>=6.0.3",
-    "sphinx-design>=0.6.0",
+    "sphinx-design>=0.6.0"
 ]
 all = [
     "sphinx-autoapi>=3.7.0",
     "sphinx-design>=0.6.0",
     "sphinx-jinja>=2.0.2",
-    "PyYAML>=6.0.3",
+    "PyYAML>=6.0.3"
 ]
 
 [dependency-groups]
@@ -63,9 +64,9 @@ doc = [
     "numpydoc==1.10.0",
     "pandas==2.3.3",
     "Pillow>=9.0",
-    "plotly==6.6.0",
-    "PyGitHub==2.9.0",
-    "pyvista[jupyter]==0.47.1",
+    "plotly==6.7.0",
+    "PyGitHub==2.9.1",
+    "pyvista[jupyter]==0.47.3",
     "PyYAML==6.0.3",
     "requests==2.33.1",
     "sphinx-autoapi==3.8.0",
@@ -75,8 +76,8 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.3.2",
-    "tox==4.52.0",
-    "pydantic==2.12.5"
+    "tox==4.53.0",
+    "pydantic==2.13.3"
 ]
 
 [project.entry-points."sphinx.html_themes"]
