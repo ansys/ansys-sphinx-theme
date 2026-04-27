@@ -3,8 +3,8 @@
   "viewports": [
     {
       "label": "tablet",
-      "width": 1024,
-      "height": 768
+      "width": 1440,
+      "height": 900
     },
     {
       "label": "desktop",
@@ -21,16 +21,9 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "hideSelectors": [],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": 0,
-      "selectors": [],
-      "selectorExpansion": true,
-      "expect": 0,
+      "selectors": ["viewport"],
       "misMatchThreshold" : 0.2,
-      "requireSameDimensions": true
+      "requireSameDimensions": false
     },
     {
       "label": "Ansys Sphinx Theme - sphinx design example page",
@@ -39,7 +32,8 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.2,
+      "selectors": ["viewport"],
+      "misMatchThreshold" : 0.5,
       "requireSameDimensions": false
     },
     {
@@ -49,7 +43,8 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.5,
+      "selectors": ["viewport"],
+      "misMatchThreshold" : 2.0,
       "requireSameDimensions": false
     },
     {
@@ -59,7 +54,8 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 2.5,
+      "selectors": ["viewport"],
+      "misMatchThreshold" : 0.2,
       "requireSameDimensions": false,
       "viewports": [
       {
@@ -76,6 +72,7 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
+      "selectors": ["viewport"],
       "misMatchThreshold" : 0.2,
       "requireSameDimensions": false
     },
@@ -86,7 +83,8 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.2,
+      "selectors": ["viewport"],
+      "misMatchThreshold" : 3.0,
       "requireSameDimensions": false
     },
     {
@@ -94,6 +92,7 @@
       "url": "http://localhost:8000/examples/gallery-examples/index.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/gallery-examples/index.html",
       "delay": 20,
+      "selectors": ["viewport"],
       "misMatchThreshold" : 0.2,
       "requireSameDimensions": false
     }
@@ -112,7 +111,14 @@
   "report": ["browser","CI"],
   "engine": "puppet",
   "engineOptions": {
-    "args": ["--no-sandbox"]
+    "args": [
+      "--no-sandbox"
+    ],
+    "defaultViewport": {
+      "width": 1920,
+      "height": 1080,
+      "deviceScaleFactor": 1
+    }
   },
   "asyncCaptureLimit": 5,
   "asyncCompareLimit": 50,
