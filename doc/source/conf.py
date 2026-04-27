@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 from pathlib import Path
 import subprocess
-from typing import Dict, List
+from typing import Any, Dict, List
 
 from github import Github
 import plotly.io as pio
@@ -56,7 +56,7 @@ html_context = {
     },
 }
 
-html_theme_options = {
+html_theme_options: dict[str, Any] = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
     "contact_mail": "pyansys.core@ansys.com",
     "additional_breadcrumbs": [
@@ -168,7 +168,7 @@ latex_engine = "xelatex"
 
 # Configure the Jinja contexts
 
-jinja_contexts = {
+jinja_contexts: dict[str, dict[str, Any]] = {
     "install_guide": {
         "version": f"v{version}" if not version.endswith("dev0") else "main",
     },
@@ -339,6 +339,10 @@ def revert_exclude_patterns(app, env):
     env.config.exclude_patterns = excluded_pattern
 
 
-def setup(app: Sphinx) -> Dict:
+def setup(app: Sphinx) -> Dict[str, str | bool]:
     """Sphinx hooks to add to the setup."""
     app.connect("env-updated", revert_exclude_patterns)
+    return {
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
+    }
