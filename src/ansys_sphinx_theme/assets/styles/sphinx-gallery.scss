@@ -65,3 +65,33 @@ div.sphx-glr-footer {
 div.sphx-glr-download {
   margin: 0rem; // 0px
 }
+
+/**
+  * sphinx gallery tags
+ */
+
+
+.sphx-glr-tag-label{
+  display: none;
+}
+
+.sphx-glr-tag {
+  background-color: var(--ast-sphinx-gallery-tag-background);
+  color: var(--ast-sphinx-gallery-tag-color);
+
+  &:hover {
+    background-color: var(--ast-sphinx-gallery-tag-hover-background);
+    color: var(--ast-sphinx-gallery-tag-active-hover-color);
+    border: none;
+  }
+
+  &.active {
+    background-color: var(--ast-sphinx-gallery-tag-active-background);
+    color: var(--ast-sphinx-gallery-tag-active-hover-color);
+    border: none;
+  }
+}
+
+
+
+

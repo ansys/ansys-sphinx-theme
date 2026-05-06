@@ -85,6 +85,16 @@
   --ast-admonition-icon-height: 1.5rem; /* 24px */
   --ast-admonition-icon-width: 1.5rem; /* 24px */
   --ast-admonition-icon-margin-left: 0.5rem; /* 8px */
+
+
+  /** 
+  * ast sphinx gallery tag variables
+  */
+  --ast-sphinx-gallery-tag-color: #fff;
+  --ast-sphinx-gallery-tag-background: #000;
+  --ast-sphinx-gallery-tag-hover-background: #ececec;
+  --ast-sphinx-gallery-tag-active-hover-color: #353535;
+  --ast-sphinx-gallery-tag-active-background: #d9d9d9;
 }
 
 html[data-theme="light"] {
@@ -525,3 +535,4 @@ h1 {
     display: none;
   }
 }
+
