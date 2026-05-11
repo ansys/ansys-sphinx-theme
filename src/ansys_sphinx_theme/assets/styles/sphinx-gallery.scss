@@ -98,9 +98,19 @@ div.sphx-glr-download {
       width: 1.5rem; // 24px
       height: 1.5rem; // 24px
       vertical-align: middle;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M19 7.68885L9.70279 17L5 12.2902L6.7482 10.6013L9.70279 13.5603L17.2518 6L19 7.68885Z' fill='%23353535'/%3E%3C/svg%3E");
-      background-size: contain;
-      background-repeat: no-repeat;
+      background-color: var(--ast-sphinx-gallery-tag-color);
+      mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M19 7.68885L9.70279 17L5 12.2902L6.7482 10.6013L9.70279 13.5603L17.2518 6L19 7.68885Z' fill='black'/%3E%3C/svg%3E");
+      -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M19 7.68885L9.70279 17L5 12.2902L6.7482 10.6013L9.70279 13.5603L17.2518 6L19 7.68885Z' fill='black'/%3E%3C/svg%3E");
+      mask-size: contain;
+      -webkit-mask-size: contain;
+      mask-repeat: no-repeat;
+      -webkit-mask-repeat: no-repeat;
     }
   }
+}
+
+.sphx-glr-thumbcontainer a.internal:focus-visible {
+  box-shadow: none;
+  outline: none;
+  color: inherit;
 }
