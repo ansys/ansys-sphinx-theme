@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Create fragment"
-        uses: ansys/actions/doc-changelog@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+        uses: ansys/actions/doc-changelog@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         if: github.event_name == 'pull_request'
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -70,7 +70,7 @@ jobs:
           bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
       - name: "Update changelog"
-        uses: ansys/actions/doc-deploy-changelog@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+        uses: ansys/actions/doc-deploy-changelog@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -83,7 +83,7 @@ jobs:
     needs: changelog
     steps:
       - name: "Run Ansys code style checks"
-        uses: ansys/actions/code-style@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+        uses: ansys/actions/code-style@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
@@ -124,7 +124,7 @@ jobs:
     needs: changelog
     steps:
       - name: "Run Ansys documentation style checks"
-        uses: ansys/actions/doc-style@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+        uses: ansys/actions/doc-style@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -133,7 +133,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: changelog
     steps:
-      - uses: ansys/actions/check-vulnerabilities@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+      - uses: ansys/actions/check-vulnerabilities@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           python-package-name: ${{ env.PACKAGE_NAME }}
@@ -145,7 +145,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: changelog
     steps:
-      - uses: ansys/actions/check-actions-security@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+      - uses: ansys/actions/check-actions-security@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
           generate-summary: true
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -157,7 +157,7 @@ jobs:
     needs: doc-style
     steps:
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+        uses: ansys/actions/doc-build@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           group-dependencies-name: 'doc'
@@ -181,7 +181,7 @@ jobs:
           - should-release: false
             os: macos-latest
     steps:
-      - uses: ansys/actions/build-wheelhouse@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+      - uses: ansys/actions/build-wheelhouse@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
@@ -195,7 +195,7 @@ jobs:
     needs: [check-vulnerabilities, check-actions, doc-build, wheelhouse]
     steps:
       - name: "Build library source and wheel artifacts"
-        uses: ansys/actions/build-library@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+        uses: ansys/actions/build-library@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
           library-name: ${{ env.PACKAGE_NAME }}
 
@@ -208,7 +208,7 @@ jobs:
       pull-requests: write # To post comments with doc links
     needs: build-library
     steps:
-      - uses: ansys/actions/doc-deploy-pr@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+      - uses: ansys/actions/doc-deploy-pr@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -223,7 +223,7 @@ jobs:
     needs: build-library
     steps:
       - name: "Deploy developers documentation"
-        uses: ansys/actions/doc-deploy-dev@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+        uses: ansys/actions/doc-deploy-dev@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
             cname: ${{ env.DOCUMENTATION_CNAME }}
             token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -243,7 +243,7 @@ jobs:
     steps:
 
       - name: "Release to the private PyPI repository"
-        uses: ansys/actions/release-pypi-private@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+        uses: ansys/actions/release-pypi-private@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
@@ -264,7 +264,7 @@ jobs:
           skip-existing: false
 
       - name: "Release to GitHub"
-        uses: ansys/actions/release-github@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+        uses: ansys/actions/release-github@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           library-name: ${{ env.PACKAGE_NAME }}
@@ -277,7 +277,7 @@ jobs:
     needs: release
     steps:
       - name: "Deploy stable documentation"
-        uses: ansys/actions/doc-deploy-stable@7d55ff0b9f67c77dae50a286d711ee1ae27b0a25 # v10.2.12
+        uses: ansys/actions/doc-deploy-stable@73fa84c704bb6691f254cfe4d4b928c338b0d4da # v10.3.0
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
