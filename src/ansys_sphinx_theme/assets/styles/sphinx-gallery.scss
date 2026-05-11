@@ -79,17 +79,18 @@ div.sphx-glr-download {
   color: var(--ast-sphinx-gallery-tag-color);
   padding: 0.25rem 0.5rem; // 4px 8px
   border-radius: 0.25rem; // 4px
+  border: var(--ast-border-sphinx-gallery-tag);
 
   &:hover {
     background-color: var(--ast-sphinx-gallery-tag-hover-background);
     color: var(--ast-sphinx-gallery-tag-active-hover-color);
-    border-color: transparent;
+    border: var(--ast-border-sphinx-gallery-tag-hover);
   }
 
   &.active {
     background-color: var(--ast-sphinx-gallery-tag-active-background);
     color: var(--ast-sphinx-gallery-tag-active-hover-color);
-    border-color: transparent;
+    border: var(--ast-border-sphinx-gallery-tag-active);
 
     &::before {
       content: "";
