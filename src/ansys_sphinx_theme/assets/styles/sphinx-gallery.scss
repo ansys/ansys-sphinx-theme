@@ -109,8 +109,15 @@ div.sphx-glr-download {
   }
 }
 
-.sphx-glr-thumbcontainer a.internal:focus-visible {
-  box-shadow: none;
-  outline: none;
-  color: inherit;
+.sphx-glr-thumbcontainer {
+  --sg-thumb-hover-border: transparent;
+  border-radius: 0.5rem; // 8px - matches sd-card
+  box-shadow: var(--ast-box-shadow-hover);
+  background-color: var(--ast-color-sphinx-design-background);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background-color: var(--ast-color-hover-card-background);
+    box-shadow: var(--ast-box-shadow-active);
+  }
 }
