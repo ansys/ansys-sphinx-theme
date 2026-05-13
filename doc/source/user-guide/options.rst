@@ -447,7 +447,7 @@ Each entry in the YAML file may include the following fields:
 Secondary sidebar
 -----------------
 
-The right-hand secondary sidebar shows the **"On this page"** table of contents, which lists
+The right-hand secondary sidebar shows the **"On this page"** table of contents (TOC), which lists
 the section anchors for the current page. It also contains the *Edit this page* and
 *View source* links.
 
