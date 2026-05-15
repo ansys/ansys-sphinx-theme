@@ -172,11 +172,21 @@ def setup_default_html_theme_options(app):
     theme_options.setdefault("navigation_with_keys", True)
 
     # Handle show_page_toc and show_source_button options.
+    # Sphinx can deliver theme.conf values as strings ("True"/"False"), so
+    # coerce explicitly to bool so that e.g. the string "False" is not treated
+    # as truthy.
+    def _as_bool(val, default: bool) -> bool:
+        if isinstance(val, str):
+            return val.lower() not in ("false", "0", "no", "off")
+        return bool(val) if val is not None else default
+
     show_flags = {
-        "page-toc": theme_options.pop("show_page_toc", True),
-        "sourcelink": theme_options.pop("show_source_button", True),
+        "page-toc": _as_bool(theme_options.pop("show_page_toc", None), default=True),
+        "sourcelink": _as_bool(theme_options.pop("show_source_button", None), default=True),
     }
-    show_page_toc_in_primary = theme_options.pop("show_page_toc_in_primary_sidebar", False)
+    show_page_toc_in_primary = _as_bool(
+        theme_options.pop("show_page_toc_in_primary_sidebar", None), default=False
+    )
     page_toc_visible = show_flags.get("page-toc", True)
 
     if show_page_toc_in_primary and page_toc_visible:

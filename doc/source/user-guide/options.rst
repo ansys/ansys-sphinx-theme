@@ -371,7 +371,7 @@ The dictionary contains the following keys:
 - ``changelog_file_path``: Path to the ``changelog.rst`` file local to the ``doc/source``
   directory. If not provided, the **What's new** section is not generated.
 - ``sidebar_pages``: List of names for the pages to include in the **What's new** sidebar. If not
- provided, the **What's new** sidebar is not shown.
+  provided, the **What's new** sidebar is not shown.
 - ``sidebar_no_of_headers``: Number of minor version sections to display in the **What's new** sidebar.
    By default, it displays three version sections in the sidebar.
 - ``sidebar_no_of_contents``: Number of what's new content to display under each minor version in the
@@ -394,9 +394,9 @@ The following images show a sample "What's new" section and sidebar in the chang
 
 .. note::
 
-    If you are displaying both the **What's new** and **Cheat sheet**" section, the **Cheat sheet** section is
-   shown first in the left navigation pane, followed by the **What's new** section to maintain
-   sidebar consistency.
+    If you are displaying both the **What's new** and **Cheat sheet** sections, the **Cheat sheet** section is
+    shown first in the left navigation pane, followed by the **What's new** section to maintain
+    sidebar consistency.
 
 Navigation bar dropdown
 ------------------------
@@ -548,7 +548,7 @@ Hide the page TOC on a single page
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To suppress the entire secondary sidebar for a single RST page without changing
-the ``conf.py` file`, add the following metadata at the very top of the file:
+the ``conf.py`` file, add the following metadata at the very top of the file:
 
 .. code:: rst
 
