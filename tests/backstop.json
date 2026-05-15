@@ -95,6 +95,28 @@
       "selectors": ["viewport"],
       "misMatchThreshold" : 0.2,
       "requireSameDimensions": false
+    },
+    {
+      "label": "Ansys Sphinx Theme - secondary sidebar (options page)",
+      "url": "http://localhost:8000/user-guide/options.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/user-guide/options.html",
+      "readyEvent": "",
+      "readySelector": "#pst-page-toc-nav, .ast-primary-toc",
+      "delay": 30,
+      "selectors": [".bd-sidebar-secondary", ".bd-sidebar-primary"],
+      "misMatchThreshold": 0.3,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Ansys Sphinx Theme - secondary sidebar (configuration page)",
+      "url": "http://localhost:8000/user-guide/configuration.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/user-guide/configuration.html",
+      "readyEvent": "",
+      "readySelector": "#pst-page-toc-nav, .ast-primary-toc",
+      "delay": 30,
+      "selectors": [".bd-sidebar-secondary", ".bd-sidebar-primary"],
+      "misMatchThreshold": 0.3,
+      "requireSameDimensions": false
     }
   ],
   "paths": {

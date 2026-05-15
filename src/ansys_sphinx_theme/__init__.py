@@ -171,6 +171,43 @@ def setup_default_html_theme_options(app):
     theme_options.setdefault("collapse_navigation", True)
     theme_options.setdefault("navigation_with_keys", True)
 
+    # Handle show_page_toc and show_source_button options.
+    # Sphinx can deliver theme.conf values as strings ("True"/"False"), so
+    # coerce explicitly to bool so that e.g. the string "False" is not treated
+    # as truthy.
+    def _as_bool(val, default: bool) -> bool:
+        if isinstance(val, str):
+            return val.lower() not in ("false", "0", "no", "off")
+        return bool(val) if val is not None else default
+
+    show_flags = {
+        "page-toc": _as_bool(theme_options.pop("show_page_toc", None), default=True),
+        "sourcelink": _as_bool(theme_options.pop("show_source_button", None), default=True),
+    }
+    show_page_toc_in_primary = _as_bool(
+        theme_options.pop("show_page_toc_in_primary_sidebar", None), default=False
+    )
+    page_toc_visible = show_flags.get("page-toc", True)
+
+    if show_page_toc_in_primary and page_toc_visible:
+        import warnings
+
+        warnings.warn(
+            "'show_page_toc_in_primary_sidebar' has no effect when 'show_page_toc' is True "
+            "(the default). Set 'show_page_toc': False to move the TOC into the primary sidebar.",
+            UserWarning,
+            stacklevel=2,
+        )
+
+    # Store for use in sidebar-nav-bs.html template context.
+    app._ast_page_toc_in_primary = show_page_toc_in_primary and not page_toc_visible
+
+    if "secondary_sidebar_items" not in theme_options:
+        default_items = ["page-toc", "edit-this-page", "sourcelink"]
+        theme_options["secondary_sidebar_items"] = [
+            item for item in default_items if show_flags.get(item, True)
+        ]
+
     # Update the icon links. If not given, add a default GitHub icon.
     if not theme_options.get("icon_links") and theme_options.get("github_url"):
         theme_options["icon_links"] = [
@@ -419,6 +456,9 @@ def add_sidebar_context(
     doctree : docutils.nodes.document
         Document tree for the page.
     """
+    # Expose flag to Jinja templates (used by sidebar-nav-bs.html).
+    context["ast_page_toc_in_primary"] = getattr(app, "_ast_page_toc_in_primary", False)
+
     whatsnew_pages = whatsnew_sidebar_pages(app)
     cheatsheet_pages = cheatsheet_sidebar_pages(app)
 

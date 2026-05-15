@@ -42,6 +42,11 @@
   border: none;
 }
 
+// Hide the primary sidebar when it contains no navigation links
+// (when only the **Section Navigation** heading is present)
+.bd-sidebar-primary:not(:has(nav.bd-links li)) {
+  display: none;
+}
 nav.bd-links p.bd-links__title,
 nav.bd-links p.caption {
   font-size: var(--ast-font-sidebar-header);
@@ -304,9 +309,8 @@ a.headerlink {
 */
 
 .bd-main .bd-content {
-  display: flex;
-  height: 100%;
-  justify-content: end;
+  // Remove pydata-sphinx-theme's default top/bottom margin on the content area
+  margin-block: 0;
 }
 
 .bd-main .bd-content .bd-article-container .bd-article {
@@ -759,9 +763,16 @@ button.btn.version-switcher__button:hover {
   max-width: 100%;
 }
 
+// Prevent the footer (prev/next nav) from being pushed to the very bottom
+// by PyData's `margin-top: auto` when content is short
+.bd-footer-article {
+  margin-top: 0;
+}
+
 @media (min-width: 1200px) {
   .bd-sidebar-primary {
-    width: 20%;
+    width: fit-content;
+    max-width: 20%;
   }
 }
 
@@ -777,9 +788,17 @@ button.btn.version-switcher__button:hover {
   }
 }
 
+// When the secondary sidebar (page TOC) is present
 @media (min-width: 1200px) {
-  .bd-main .bd-content .bd-article-container {
+  .bd-main:has(.bd-sidebar-secondary) .bd-content .bd-article-container {
     width: min(100%, 1070px);
+  }
+}
+
+// When there is no secondary sidebar, give the article more room
+@media (min-width: 1200px) {
+  .bd-main:not(:has(.bd-sidebar-secondary)) .bd-content .bd-article-container {
+    width: min(100%, 1300px);
   }
 }
 
@@ -802,4 +821,97 @@ div.highlight .nf{
 
 code, kbd, pre, samp {
   font-family: var(--ast-code-family);
+}
+
+/**
+ * Page TOC injected inline under li.current in primary sidebar
+ * when show_page_toc_in_primary_sidebar = True
+ */
+
+// Flex wrapper so chevron sits inline with the page link// Hidden container for the page TOC injected into the primary sidebar
+.ast-inline-toc-hidden {
+  display: none;
+}
+
+// Bold "On this page" heading in the secondary sidebar
+#pst-page-navigation-heading-2 {
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+// Active state for secondary sidebar (right-hand) TOC links
+// All items get a subtle grey left line; active item makes it dark
+.bd-toc .toc-entry a.nav-link {
+  margin-left: 0 !important;
+  padding-left: 1rem !important;
+  border-left: 2px solid transparent;
+  transition: border-color 0.15s ease, font-weight 0s;
+
+  &.active {
+    color: var(--pst-color-text-base) !important;
+    font-weight: 700 !important;
+    border-left-color: var(--pst-color-text-base) !important;
+    background-color: transparent !important;
+  }
+}
+
+// Injected page TOC inside the primary sidebar li.current
+.bd-docs-nav li.current .ast-primary-toc {
+  li.toc-h2 > a.nav-link {
+    font-size: inherit;
+    margin-left: 0;
+    padding-left: 1.5rem;
+  }
+
+  li.toc-h3 > a.nav-link {
+    font-size: inherit;
+    margin-left: 0;
+    padding-left: 2.5rem;
+  }
+
+  li.toc-h4 > a.nav-link {
+    font-size: inherit;
+    margin-left: 0;
+    padding-left: 3.5rem;
+  }
+
+}
+
+.ast-toc-toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  padding: 0 4px;
+  cursor: pointer;
+  color: var(--ast-sidebar-primary-text);
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  opacity: 0.5;
+  line-height: 1;
+
+  &:hover { opacity: 0.9; }
+
+  &:focus-visible {
+    box-shadow: var(--ast-ring-shadow-focused);
+    outline: none;
+    border-radius: var(--ast-sphinx-design-border-radius);
+  }
+
+  .fa-chevron-down {
+    transition: transform 0.2s ease;
+  }
+
+  &--open .fa-chevron-down {
+    transform: rotate(180deg);
+  }
+}
+
+.ast-inline-toc-list {
+  list-style: none;
+  padding-inline-start: 0;
+  width: 100%;
 }
