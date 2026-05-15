@@ -369,7 +369,7 @@ The dictionary contains the following keys:
 - ``whatsnew_file_path``: Path to the YAML file containing what's new content local to the
   ``doc/source`` directory. If not provided, the what's new section is not generated.
 - ``changelog_file_path``: Path to the ``changelog.rst`` file local to the ``doc/source``
-  directory. If not provided, the what's new section is not generated.
+  directory. If not provided, the **What's new** section is not generated.
 - ``sidebar_pages``: List of names for the pages to include in the **What's new** sidebar. If not
  provided, the **What's new** sidebar is not shown.
 - ``sidebar_no_of_headers``: Number of minor version sections to display in the **What's new** sidebar.
@@ -535,7 +535,8 @@ Control the TOC depth
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Use ``show_toc_level`` to set how many heading levels are expanded by default in
-the page TOC (default is ``1``, showing only top-level headings):
+the page TOC. The default is ``1``, which causes only top-level headings to be shown.
+This code would show h2 and h3 headings by default:
 
 .. code:: python
 
