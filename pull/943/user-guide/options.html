@@ -871,9 +871,9 @@ YAML file should contain the following structure:</p>
 </div>
 </li>
 </ul>
-<p>If a format is used in the “content” field that does not fall into the categories above, it will not
+<p>If a format is used in the <code class="docutils literal notranslate"><span class="pre">content</span></code> field that does not fall into the categories above, it is not
 be rendered correctly.</p>
-<p>To enable the “What’s new” sections and sidebar in the changelog file, add the following dictionary
+<p>To enable the <strong>What’s new</strong> section and sidebar in the changelog file, add the following dictionary
 to the <code class="docutils literal notranslate"><span class="pre">html_theme_options</span></code> dictionary:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">(</span>
     <span class="p">{</span>
@@ -890,14 +890,14 @@ to the <code class="docutils literal notranslate"><span class="pre">html_theme_o
 </div>
 <p>The dictionary contains the following keys:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">whatsnew_file_path</span></code>: The path to the YAML file containing what’s new content local to the
+<li><p><code class="docutils literal notranslate"><span class="pre">whatsnew_file_path</span></code>: Path to the YAML file containing what’s new content local to the
 <code class="docutils literal notranslate"><span class="pre">doc/source</span></code> directory. If not provided, the what’s new section is not generated.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">changelog_file_path</span></code>: The path to the changelog.rst file local to the <code class="docutils literal notranslate"><span class="pre">doc/source</span></code>
-directory. If not provided, the what’s new section is not generated.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sidebar_pages</span></code>: List of names for the pages to include the what’s new sidebar on. If not
-provided, the what’s new sidebar is not displayed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">changelog_file_path</span></code>: Path to the <code class="docutils literal notranslate"><span class="pre">changelog.rst</span></code> file local to the <code class="docutils literal notranslate"><span class="pre">doc/source</span></code>
+directory. If not provided, the <strong>What’s new</strong> section is not generated.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sidebar_pages</span></code>: List of names for the pages to include in the <strong>What’s new</strong> sidebar. If not
+provided, the <strong>What’s new</strong> sidebar is not shown.</p></li>
 <li><dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">sidebar_no_of_headers</span></code>: Number of minor version sections to display in the what’s new sidebar.</dt><dd><p>By default, it displays three version sections in the sidebar.</p>
+<dt><code class="docutils literal notranslate"><span class="pre">sidebar_no_of_headers</span></code>: Number of minor version sections to display in the <strong>What’s new</strong> sidebar.</dt><dd><p>By default, it displays three version sections in the sidebar.</p>
 </dd>
 </dl>
 </li>
@@ -922,8 +922,8 @@ What’s new sidebar</label><div class="sd-tab-content docutils">
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you are using both the “whatsnew” and “cheatsheet” options, the “cheatsheet” option is
-displayed first in the left navigation pane, followed by the “What’s new” section to maintain
+<p>If you are displaying both the <strong>What’s new</strong> and <strong>Cheat sheet</strong> sections, the <strong>Cheat sheet</strong> section is
+shown first in the left navigation pane, followed by the <strong>What’s new</strong> section to maintain
 sidebar consistency.</p>
 </div>
 </section>
@@ -972,12 +972,12 @@ The file path is relative to the <code class="docutils literal notranslate"><spa
 <section id="secondary-sidebar">
 <h2>Secondary sidebar<a class="headerlink" href="#secondary-sidebar" title="Link to this heading">#</a></h2>
 <p>The right-hand secondary sidebar shows the <strong>“On this page”</strong> table of contents (TOC), which lists
-the section anchors for the current page. It also contains the <em>Edit this page</em> and
-<em>View source</em> links.</p>
+the section anchors for the current page. It also contains the <strong>Edit this page</strong> and
+<strong>View source</strong> links.</p>
 <section id="hide-the-page-toc-globally">
 <h3>Hide the page TOC globally<a class="headerlink" href="#hide-the-page-toc-globally" title="Link to this heading">#</a></h3>
 <p>Set <code class="docutils literal notranslate"><span class="pre">&quot;show_page_toc&quot;:</span> <span class="pre">False</span></code> to hide the page TOC on every page.
-The <em>Edit this page</em> and <em>View source</em> links remain visible:</p>
+The <strong>Edit this page</strong> and <strong>View source</strong> links remain visible:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;show_page_toc&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">}</span>
@@ -986,7 +986,7 @@ The <em>Edit this page</em> and <em>View source</em> links remain visible:</p>
 </section>
 <section id="show-the-page-toc-inside-the-primary-sidebar">
 <h3>Show the page TOC inside the primary sidebar<a class="headerlink" href="#show-the-page-toc-inside-the-primary-sidebar" title="Link to this heading">#</a></h3>
-<p>When the secondary sidebar TOC is disabled with <code class="docutils literal notranslate"><span class="pre">&quot;show_page_toc&quot;:</span> <span class="pre">False</span></code>, you
+<p>When the secondary sidebar TOC is turned off by with <code class="docutils literal notranslate"><span class="pre">&quot;show_page_toc&quot;:</span> <span class="pre">False</span></code>, you
 can move the TOC into the primary (left-hand) sidebar instead by setting
 <code class="docutils literal notranslate"><span class="pre">&quot;show_page_toc_in_primary_sidebar&quot;:</span> <span class="pre">True</span></code>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
@@ -997,14 +997,14 @@ can move the TOC into the primary (left-hand) sidebar instead by setting
 </div>
 <p>The TOC entries are injected directly under the current page’s entry in the
 section navigation tree. A small chevron toggle (<code class="docutils literal notranslate"><span class="pre">›</span></code>) appears beside the page
-link. Clicking it expands or collapses the entries manually. As the user
-scrolls through the page, the TOC auto-expands and highlights the active
+link. Clicking it expands or collapses the entries manually. As you
+scroll through the page, the TOC auto-expands and highlights the active
 section heading automatically.</p>
 </section>
 <section id="hide-the-view-source-button-globally">
-<h3>Hide the “View source” button globally<a class="headerlink" href="#hide-the-view-source-button-globally" title="Link to this heading">#</a></h3>
-<p>Set <code class="docutils literal notranslate"><span class="pre">&quot;show_source_button&quot;:</span> <span class="pre">False</span></code> to remove the <em>View source</em> link from every page.
-The page TOC and <em>Edit this page</em> link remain visible:</p>
+<h3>Hide the <strong>View source</strong> button globally<a class="headerlink" href="#hide-the-view-source-button-globally" title="Link to this heading">#</a></h3>
+<p>Set <code class="docutils literal notranslate"><span class="pre">&quot;show_source_button&quot;:</span> <span class="pre">False</span></code> to remove the <strong>View source*</strong> link from every page.
+The page TOC and <strong>Edit this page</strong> link remain visible:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;show_source_button&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">}</span>
@@ -1045,9 +1045,10 @@ You can pass a list (applied globally) or a dict with glob patterns (applied per
 <section id="control-the-toc-depth">
 <h3>Control the TOC depth<a class="headerlink" href="#control-the-toc-depth" title="Link to this heading">#</a></h3>
 <p>Use <code class="docutils literal notranslate"><span class="pre">show_toc_level</span></code> to set how many heading levels are expanded by default in
-the page TOC (default is <code class="docutils literal notranslate"><span class="pre">1</span></code>, showing only top-level headings):</p>
+the page TOC. The default is <code class="docutils literal notranslate"><span class="pre">1</span></code>, which causes only top-level headings to be shown.
+This code would show h2 and h3 headings by default:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;show_toc_level&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1"># Show h2 and h3 entries expanded by default</span>
+    <span class="s2">&quot;show_toc_level&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>  <span class="c1"># Expand h2 and h3 entries by default</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1055,10 +1056,10 @@ the page TOC (default is <code class="docutils literal notranslate"><span class=
 <section id="hide-the-page-toc-on-a-single-page">
 <h3>Hide the page TOC on a single page<a class="headerlink" href="#hide-the-page-toc-on-a-single-page" title="Link to this heading">#</a></h3>
 <p>To suppress the entire secondary sidebar for a single RST page without changing
-<code class="docutils literal notranslate"><span class="pre">conf.py</span></code>, add the following metadata at the very top of the file:</p>
+the <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> file, add the following metadata at the very top of the file:</p>
 <div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="nc">:html_theme.sidebar_secondary.remove:</span>
 
-<span class="gh">Page Title</span>
+<span class="gh">Page title</span>
 <span class="gh">==========</span>
 <span class="c">...</span>
 </pre></div>
@@ -1134,7 +1135,7 @@ the page TOC (default is <code class="docutils literal notranslate"><span class=
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#secondary-sidebar">Secondary sidebar</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-the-page-toc-globally">Hide the page TOC globally</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#show-the-page-toc-inside-the-primary-sidebar">Show the page TOC inside the primary sidebar</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-the-view-source-button-globally">Hide the “View source” button globally</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-the-view-source-button-globally">Hide the <strong>View source</strong> button globally</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#control-the-secondary-sidebar-per-page">Control the secondary sidebar per page</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#control-the-toc-depth">Control the TOC depth</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hide-the-page-toc-on-a-single-page">Hide the page TOC on a single page</a></li>
