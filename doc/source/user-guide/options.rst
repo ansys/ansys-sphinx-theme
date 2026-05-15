@@ -344,10 +344,10 @@ The dropdown generation only supports the following RST formats in the "content"
 
            print("hello world")
 
-If a format is used in the "content" field that does not fall into the categories above, it will not
+If a format is used in the ``content`` field that does not fall into the categories above, it is not
 be rendered correctly.
 
-To enable the "What's new" sections and sidebar in the changelog file, add the following dictionary
+To enable the **What's new** section and sidebar in the changelog file, add the following dictionary
 to the ``html_theme_options`` dictionary:
 
 .. code-block:: python
@@ -366,13 +366,13 @@ to the ``html_theme_options`` dictionary:
 
 The dictionary contains the following keys:
 
-- ``whatsnew_file_path``: The path to the YAML file containing what's new content local to the
+- ``whatsnew_file_path``: Path to the YAML file containing what's new content local to the
   ``doc/source`` directory. If not provided, the what's new section is not generated.
-- ``changelog_file_path``: The path to the changelog.rst file local to the ``doc/source``
+- ``changelog_file_path``: Path to the ``changelog.rst`` file local to the ``doc/source``
   directory. If not provided, the what's new section is not generated.
-- ``sidebar_pages``: List of names for the pages to include the what's new sidebar on. If not
-  provided, the what's new sidebar is not displayed.
-- ``sidebar_no_of_headers``: Number of minor version sections to display in the what's new sidebar.
+- ``sidebar_pages``: List of names for the pages to include in the **What's new** sidebar. If not
+ provided, the **What's new** sidebar is not shown.
+- ``sidebar_no_of_headers``: Number of minor version sections to display in the **What's new** sidebar.
    By default, it displays three version sections in the sidebar.
 - ``sidebar_no_of_contents``: Number of what's new content to display under each minor version in the
    what's new sidebar. If not provided, it displays all dropdowns by default.
@@ -394,9 +394,9 @@ The following images show a sample "What's new" section and sidebar in the chang
 
 .. note::
 
-    If you are using both the "whatsnew" and "cheatsheet" options, the "cheatsheet" option is
-    displayed first in the left navigation pane, followed by the "What's new" section to maintain
-    sidebar consistency.
+    If you are displaying both the **What's new** and **Cheat sheet**" section, the **Cheat sheet** section is
+   shown first in the left navigation pane, followed by the **What's new** section to maintain
+   sidebar consistency.
 
 Navigation bar dropdown
 ------------------------
@@ -448,14 +448,14 @@ Secondary sidebar
 -----------------
 
 The right-hand secondary sidebar shows the **"On this page"** table of contents (TOC), which lists
-the section anchors for the current page. It also contains the *Edit this page* and
-*View source* links.
+the section anchors for the current page. It also contains the **Edit this page** and
+**View source** links.
 
 Hide the page TOC globally
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Set ``"show_page_toc": False`` to hide the page TOC on every page.
-The *Edit this page* and *View source* links remain visible:
+The **Edit this page** and **View source** links remain visible:
 
 .. code:: python
 
@@ -466,7 +466,7 @@ The *Edit this page* and *View source* links remain visible:
 Show the page TOC inside the primary sidebar
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When the secondary sidebar TOC is disabled with ``"show_page_toc": False``, you
+When the secondary sidebar TOC is turned off by with ``"show_page_toc": False``, you
 can move the TOC into the primary (left-hand) sidebar instead by setting
 ``"show_page_toc_in_primary_sidebar": True``.
 
@@ -479,15 +479,15 @@ can move the TOC into the primary (left-hand) sidebar instead by setting
 
 The TOC entries are injected directly under the current page's entry in the
 section navigation tree. A small chevron toggle (``›``) appears beside the page
-link. Clicking it expands or collapses the entries manually. As the user
-scrolls through the page, the TOC auto-expands and highlights the active
+link. Clicking it expands or collapses the entries manually. As you
+scroll through the page, the TOC auto-expands and highlights the active
 section heading automatically.
 
-Hide the "View source" button globally
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Hide the **View source** button globally
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Set ``"show_source_button": False`` to remove the *View source* link from every page.
-The page TOC and *Edit this page* link remain visible:
+Set ``"show_source_button": False`` to remove the **View source*** link from every page.
+The page TOC and **Edit this page** link remain visible:
 
 .. code:: python
 
@@ -540,19 +540,19 @@ the page TOC (default is ``1``, showing only top-level headings):
 .. code:: python
 
     html_theme_options = {
-        "show_toc_level": 2,  # Show h2 and h3 entries expanded by default
+        "show_toc_level": 2,  # Expand h2 and h3 entries by default
     }
 
 Hide the page TOC on a single page
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To suppress the entire secondary sidebar for a single RST page without changing
-``conf.py``, add the following metadata at the very top of the file:
+the ``conf.py` file`, add the following metadata at the very top of the file:
 
 .. code:: rst
 
     :html_theme.sidebar_secondary.remove:
 
-    Page Title
+    Page title
     ==========
     ...

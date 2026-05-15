@@ -43,7 +43,7 @@
 }
 
 // Hide the primary sidebar when it contains no navigation links
-// (i.e., only the "Section Navigation" heading is present)
+// (when only the **Section Navigation** heading is present)
 .bd-sidebar-primary:not(:has(nav.bd-links li)) {
   display: none;
 }
@@ -764,7 +764,7 @@ button.btn.version-switcher__button:hover {
 }
 
 // Prevent the footer (prev/next nav) from being pushed to the very bottom
-// by pydata's `margin-top: auto` when content is short
+// by PyData's `margin-top: auto` when content is short
 .bd-footer-article {
   margin-top: 0;
 }
