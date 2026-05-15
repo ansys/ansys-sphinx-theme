@@ -509,7 +509,7 @@ Control the secondary sidebar per page
 
 For finer control, use the ``secondary_sidebar_items`` option from
 `pydata-sphinx-theme <https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/layout.html#secondary-sidebar-right>`_.
-You can pass a list (applied globally) or a dict with glob patterns (applied per page).
+You can pass a list of item names (applied globally) or a dictionary with glob patterns as keys (applied per page).
 
 .. code:: python
 

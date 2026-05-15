@@ -1022,7 +1022,7 @@ The page TOC and <strong>Edit this page</strong> link remain visible:</p>
 <h3>Control the secondary sidebar per page<a class="headerlink" href="#control-the-secondary-sidebar-per-page" title="Link to this heading">#</a></h3>
 <p>For finer control, use the <code class="docutils literal notranslate"><span class="pre">secondary_sidebar_items</span></code> option from
 <a class="reference external" href="https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/layout.html#secondary-sidebar-right">pydata-sphinx-theme</a>.
-You can pass a list (applied globally) or a dict with glob patterns (applied per page).</p>
+You can pass a list of item names (applied globally) or a dictionary with glob patterns as keys (applied per page).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># Remove the page TOC from all pages but keep other items.</span>
     <span class="s2">&quot;secondary_sidebar_items&quot;</span><span class="p">:</span> <span class="p">{</span>
