@@ -59,7 +59,6 @@ html_context = {
 html_theme_options: dict[str, Any] = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
     "contact_mail": "pyansys.core@ansys.com",
-    "use_edit_page_button": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
     ],
