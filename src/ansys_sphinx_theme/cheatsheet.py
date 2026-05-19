@@ -39,7 +39,7 @@ from sphinx.util import logging
 logger = logging.getLogger(__name__)
 
 # Cheat sheet extension version
-CHEAT_SHEET_QUARTO_EXTENTION_VERSION = "v1"
+CHEAT_SHEET_QUARTO_EXTENTION_VERSION = "v2"
 
 
 def cheatsheet_sidebar_pages(app: Sphinx) -> Optional[List[str]]:
