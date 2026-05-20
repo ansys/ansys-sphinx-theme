@@ -47,7 +47,7 @@ def add_autoapi_theme_option(app: Sphinx, config: Dict[str, Any]) -> None:
     app : ~sphinx.application.Sphinx
         Application instance for rendering the documentation.
     """
-    autoapi = config.html_theme_options.get("ansys_sphinx_theme_autoapi", {})
+    autoapi = app.config.html_theme_options.get("ansys_sphinx_theme_autoapi", {})
     if not autoapi:
         return
     autoapi_template_dir = autoapi.get("templates", "")

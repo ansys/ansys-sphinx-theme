@@ -22,13 +22,13 @@
 
 """Module for the Ansys Sphinx theme."""
 
+import importlib.metadata as importlib_metadata
 import os
 import pathlib
 import re
 from typing import Any
 
 from docutils import nodes
-from pydata_sphinx_theme.toctree import traverse_or_findall
 from sphinx import addnodes
 from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
@@ -48,11 +48,6 @@ from ansys_sphinx_theme.whatsnew import (
     get_whatsnew_options,
     whatsnew_sidebar_pages,
 )
-
-try:
-    import importlib.metadata as importlib_metadata
-except ModuleNotFoundError:  # pragma: no cover
-    import importlib_metadata
 
 __version__ = importlib_metadata.version(__name__.replace(".", "-"))
 logger = logging.getLogger(__name__)
@@ -177,6 +172,43 @@ def setup_default_html_theme_options(app):
     theme_options.setdefault("collapse_navigation", True)
     theme_options.setdefault("navigation_with_keys", True)
 
+    # Handle show_page_toc and show_source_button options.
+    # Sphinx can deliver theme.conf values as strings ("True"/"False"), so
+    # coerce explicitly to bool so that e.g. the string "False" is not treated
+    # as truthy.
+    def _as_bool(val, default: bool) -> bool:
+        if isinstance(val, str):
+            return val.lower() not in ("false", "0", "no", "off")
+        return bool(val) if val is not None else default
+
+    show_flags = {
+        "page-toc": _as_bool(theme_options.pop("show_page_toc", None), default=True),
+        "sourcelink": _as_bool(theme_options.pop("show_source_button", None), default=True),
+    }
+    show_page_toc_in_primary = _as_bool(
+        theme_options.pop("show_page_toc_in_primary_sidebar", None), default=False
+    )
+    page_toc_visible = show_flags.get("page-toc", True)
+
+    if show_page_toc_in_primary and page_toc_visible:
+        import warnings
+
+        warnings.warn(
+            "'show_page_toc_in_primary_sidebar' has no effect when 'show_page_toc' is True "
+            "(the default). Set 'show_page_toc': False to move the TOC into the primary sidebar.",
+            UserWarning,
+            stacklevel=2,
+        )
+
+    # Store for use in sidebar-nav-bs.html template context.
+    app._ast_page_toc_in_primary = show_page_toc_in_primary and not page_toc_visible
+
+    if "secondary_sidebar_items" not in theme_options:
+        default_items = ["page-toc", "edit-this-page", "sourcelink"]
+        theme_options["secondary_sidebar_items"] = [
+            item for item in default_items if show_flags.get(item, True)
+        ]
+
     # Update the icon links. If not given, add a default GitHub icon.
     if not theme_options.get("icon_links") and theme_options.get("github_url"):
         theme_options["icon_links"] = [
@@ -223,7 +255,7 @@ def fix_edit_html_page_context(
     see https://github.com/pyvista/pyvista/pull/4113
     """
 
-    def fix_edit_link_page(link: str) -> str:
+    def fix_edit_link_page(link: str) -> str | None:
         """Transform "edit on GitHub" links to the correct URL.
 
         This function fixes the URL for the "edit this page" link.
@@ -271,6 +303,7 @@ def fix_edit_html_page_context(
                 except ValueError as e:
                     logger.error(f"An error occurred: {e}")  # Log the exception as debug info
                     return link
+            return link
 
         elif "api" in pagename:
             for obj_node in list(doctree.findall(addnodes.desc)):
@@ -289,6 +322,7 @@ def fix_edit_html_page_context(
                         return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{github_source}/{modname}.{domain}"  # noqa: E501
                     else:
                         return f"http://github.com/{github_user}/{github_repo}/edit/{kind}/{modname}.{domain}"  # noqa: E501
+            return link
 
         else:
             return link
@@ -423,6 +457,9 @@ def add_sidebar_context(
     doctree : docutils.nodes.document
         Document tree for the page.
     """
+    # Expose flag to Jinja templates (used by sidebar-nav-bs.html).
+    context["ast_page_toc_in_primary"] = getattr(app, "_ast_page_toc_in_primary", False)
+
     whatsnew_pages = whatsnew_sidebar_pages(app)
     cheatsheet_pages = cheatsheet_sidebar_pages(app)
 
@@ -440,7 +477,8 @@ def add_sidebar_context(
 
     if whatsnew_pages and pagename in whatsnew_pages:
         whatsnew = context.get("whatsnew", [])
-        whatsnew.extend(app.env.whatsnew)
+        if hasattr(app.env, "whatsnew"):
+            whatsnew.extend(app.env.whatsnew)
         context["whatsnew"] = whatsnew
         sidebars_to_add.append("whatsnew")
 
@@ -585,7 +623,7 @@ def setup(app: Sphinx) -> dict:
     """
     # Add the theme configuration
     theme_path = get_html_theme_path()
-    app.add_html_theme("ansys_sphinx_theme", theme_path)
+    app.add_html_theme("ansys_sphinx_theme", str(theme_path))
     app.config.templates_path.append(str(THEME_PATH / "components"))
 
     # Add default HTML configuration

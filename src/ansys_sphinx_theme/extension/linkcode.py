@@ -66,7 +66,7 @@ DOMAIN_KEYS = {
 
 def sphinx_linkcode_resolve(
     domain: str, info: dict, library: str, source_path: str, github_version: str, edit: bool = False
-) -> str or None:
+) -> str | None:
     """
     Resolve the URL corresponding to a Python object for linking to the source code.
 
@@ -144,19 +144,22 @@ def sphinx_linkcode_resolve(
         except Exception:
             return None
 
-    fn = Path(fn).resolve()
+    if not fn:
+        return None
+
+    fn_path = Path(fn).resolve()
 
     # Ensure fn is within the expected repository directory
     base_path = Path(__file__).resolve().parent
-    if not fn.is_relative_to(base_path):
+    if not fn_path.is_relative_to(base_path):
         return None  # Avoid errors due to files outside the expected path
 
     try:
-        fn = fn.relative_to(base_path)
+        fn_path = fn_path.relative_to(base_path)
     except ValueError:
         return None  # Avoid errors when the file is not within the base path
 
-    fn_components = list(fn.parts)
+    fn_components = list(fn_path.parts)
 
     if not source_path:
         module = modname.split(".")[0]

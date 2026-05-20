@@ -193,7 +193,10 @@ print(f"func(1, 'bar')                 = {sample_func.func(1, 'bar')!r}")
 ###############################################################################
 
 # %%
+
 from ansys_sphinx_theme.examples.samples import ExampleDataClass
 
 example = ExampleDataClass(value=42)
 print(f"ExampleDataClass.value = {example.value!r}")
+
+# sphinx_gallery_tags = ["sphinx-gallery-rendered"]

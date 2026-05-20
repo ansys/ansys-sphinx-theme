@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: "daily"
     cooldown:
-      default-days: 5 # Fallback cooldown if no specific rule applies
+      default-days: 7 # Fallback cooldown if no specific rule applies
       semver-major-days: 30
       semver-minor-days: 7
       semver-patch-days: 5
