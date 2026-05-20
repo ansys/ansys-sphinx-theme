@@ -71,7 +71,7 @@ doc = [
     "PyGitHub==2.9.1",
     "pyvista[jupyter]==0.48.2",
     "PyYAML==6.0.3",
-    "requests==2.34.0",
+    "requests==2.34.2",
     "sphinx-autoapi==3.8.0",
     "sphinx-copybutton==0.5.2",
     "sphinx-design==0.7.0",
