@@ -81,6 +81,12 @@ html_theme_options: dict[str, Any] = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
+    "cheatsheet": {
+        "file": "cheat_sheet/cheat_sheet.qmd",
+        "title": "Ansys Sphinx Theme cheat sheet",
+        "version": f"{version}",
+        "pages": ["index"],
+    },
 }
 
 
