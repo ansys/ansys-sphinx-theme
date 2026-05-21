@@ -10,7 +10,7 @@
   {% set cheatsheet_thumbnail = cheatsheet.get('thumbnail') %}
   {% set cheatsheet_output = pathto(cheatsheet_output_dir, 1) %}
   {% set cheatsheet_thumbnail_path = pathto(cheatsheet_thumbnail, 1) %}
-  <div class="sidebar-cheatsheets" aria-label="Cheatsheet">
+  <div class="sidebar-cheatsheets ast-sidebar-widget" aria-label="Cheatsheet">
     <h4>{{ cheatsheet_title }}</h4>
     <a href="{{ cheatsheet_output }}" target="_blank" rel="noopener noreferrer">
       {# djlint:off H006 #}
