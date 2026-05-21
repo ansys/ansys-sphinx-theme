@@ -42,9 +42,10 @@
   border: none;
 }
 
-// Hide the primary sidebar when it contains no navigation links
-// (when only the **Section Navigation** heading is present)
-.bd-sidebar-primary:not(:has(nav.bd-links li)) {
+// Hide the primary sidebar when it contains no navigation links and no custom
+// sidebar content. The selector list inside :has() covers all content types
+// in a single check — add new sidebar component classes here if needed.
+.bd-sidebar-primary:not(:has(nav.bd-links li)):not(:has(.sidebar-cheatsheets, .whatsnew-sidebar)) {
   display: none;
 }
 nav.bd-links p.bd-links__title,
