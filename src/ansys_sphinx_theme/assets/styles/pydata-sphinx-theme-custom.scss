@@ -922,6 +922,10 @@ code, kbd, pre, samp {
  * Target style for headings
   */
 
-.bd-main .bd-content .bd-article-container .bd-article :target>:is(h1,.h1,h2,.h2,h3,.h3,h4,.h4,h5,.h5) {
-  background-color: transparent;
+.bd-main .bd-content .bd-article-container .bd-article {
+  :target {
+    > :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5) {
+      background-color: transparent;
+    }
+  }
 }
