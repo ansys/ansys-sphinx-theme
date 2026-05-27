@@ -42,9 +42,11 @@
   border: none;
 }
 
-// Hide the primary sidebar when it contains no navigation links
-// (when only the **Section Navigation** heading is present)
-.bd-sidebar-primary:not(:has(nav.bd-links li)) {
+// Hide the primary sidebar when it contains no navigation links and no custom
+// sidebar content. Every custom sidebar component must include the
+// `ast-sidebar-widget` class on its root element — this rule then works
+// automatically without any CSS changes for new components.
+.bd-sidebar-primary:not(:has(nav.bd-links li)):not(:has(.ast-sidebar-widget)) {
   display: none;
 }
 nav.bd-links p.bd-links__title,
@@ -914,4 +916,16 @@ code, kbd, pre, samp {
   list-style: none;
   padding-inline-start: 0;
   width: 100%;
+}
+
+/**
+ * Target style for headings
+  */
+
+.bd-main .bd-content .bd-article-container .bd-article {
+  :target {
+    > :is(h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5) {
+      background-color: transparent;
+    }
+  }
 }

@@ -474,6 +474,7 @@ def add_sidebar_context(
 
     if cheatsheet_pages and pagename in cheatsheet_pages:
         sidebars_to_add.append("cheatsheet")
+        context["cheatsheet"] = app.config.html_theme_options.get("cheatsheet", {})
 
     if whatsnew_pages and pagename in whatsnew_pages:
         whatsnew = context.get("whatsnew", [])

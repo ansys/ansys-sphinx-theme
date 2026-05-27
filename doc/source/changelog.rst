@@ -8,6 +8,41 @@ Release notes
 
 .. towncrier release notes start
 
+`1.8.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.8.2>`_ (May 26, 2026)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Collapse the search results bar after results
+          - `#986 <https://github.com/ansys/ansys-sphinx-theme/pull/986>`_
+
+        * - Target color style
+          - `#989 <https://github.com/ansys/ansys-sphinx-theme/pull/989>`_
+
+
+`1.8.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.8.1>`_ (May 21, 2026)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Cheatsheet configurations in sidebar
+          - `#983 <https://github.com/ansys/ansys-sphinx-theme/pull/983>`_
+
+
 `1.8.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.8.0>`_ (May 19, 2026)
 =========================================================================================
 
