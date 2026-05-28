@@ -1,14 +1,14 @@
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.14.1
+  rev: v0.15.14
   hooks:
     - id: ruff
       args: [--fix]
     - id: ruff-format
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.4.1
+  rev: v2.4.2
   hooks:
   - id: codespell
     exclude: doc/source/examples/nbsphinx/jupyter-notebook.ipynb
@@ -30,20 +30,22 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.34.1
+  rev: 0.37.2
   hooks:
     - id: check-github-workflows
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.5.2
+  rev: v0.7.2
   hooks:
   - id: add-license-headers
     files: '(src|doc/source/examples)/.*\.(py)'
     args:
     - --start_year=2021
+    - --custom_license=Apache-2.0
+
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: v1.12.1
+  rev: v1.25.2
   hooks:
     - id: zizmor
       args:
