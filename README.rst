@@ -76,5 +76,5 @@ and request new features. To reach the PyAnsys support team, email
 
 License
 ~~~~~~~
-This theme is licensed under the `Apache License 2.0`_.
+This theme is licensed under the `Apache License 2.0
 <https://raw.githubusercontent.com/ansys/ansys-sphinx-theme/main/LICENSE>`_.
