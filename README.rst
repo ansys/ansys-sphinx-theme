@@ -18,9 +18,9 @@ Ansys Sphinx theme
    :target: https://github.com/ansys/ansys-sphinx-theme/actions/workflows/ci_cd.yml
    :alt: GH-CI
 
-.. |Apache| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
+.. |Apache-2.0| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
    :target: https://opensource.org/license/Apache-2.0
-   :alt: Apache
+   :alt: Apache-2.0
 
 .. |Downloads| image:: https://img.shields.io/pypi/dm/ansys-sphinx-theme.svg?label=PyPI%20downloads
    :target: https://pypi.org/project/ansys-sphinx-theme
