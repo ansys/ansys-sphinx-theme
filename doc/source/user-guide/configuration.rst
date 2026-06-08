@@ -21,13 +21,15 @@ Copyright
 ~~~~~~~~~
 
 The Ansys Sphinx Theme includes a copyright notice in the footer of the documentation.
-To set the copyright notice, add the following code to your project's Sphinx ``conf.py`` file:
+To define a copyright notice, add the following to your project’s ``conf.py`` file:
 
 .. code-block:: python
 
    copyright = "Copyright © <YEAR> Synopsys, Inc. and ANSYS, Inc. All rights reserved."
 
-customise the year dynamically, you can use the following code:
+Replace <YEAR> with the appropriate year.
+
+To automatically update the year, use the following:
 
 .. code-block:: python
 
@@ -35,6 +37,8 @@ customise the year dynamically, you can use the following code:
 
    current_year = datetime.now().year
    copyright = f"Copyright © {current_year} Synopsys, Inc. and ANSYS, Inc. All rights reserved."
+
+This ensures the copyright year remains up to date without manual changes.
 
 PyAnsys and Ansys logos
 ~~~~~~~~~~~~~~~~~~~~~~~
