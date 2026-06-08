@@ -1,6 +1,6 @@
 Ansys Sphinx theme
 ==================
-|ansys| |python| |pypi| |GH-CI| |MIT| |Ruff|
+|ansys| |python| |pypi| |GH-CI| |Apache-2.0| |Ruff|
 
 .. |ansys| image:: https://img.shields.io/badge/Ansys-ffc107.svg?logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAABDklEQVQ4jWNgoDfg5mD8vE7q/3bpVyskbW0sMRUwofHD7Dh5OBkZGBgW7/3W2tZpa2tLQEOyOzeEsfumlK2tbVpaGj4N6jIs1lpsDAwMJ278sveMY2BgCA0NFRISwqkhyQ1q/Nyd3zg4OBgYGNjZ2ePi4rB5loGBhZnhxTLJ/9ulv26Q4uVk1NXV/f///////69du4Zdg78lx//t0v+3S88rFISInD59GqIH2esIJ8G9O2/XVwhjzpw5EAam1xkkBJn/bJX+v1365hxxuCAfH9+3b9/+////48cPuNehNsS7cDEzMTAwMMzb+Q2u4dOnT2vWrMHu9ZtzxP9vl/69RVpCkBlZ3N7enoDXBwEAAA+YYitOilMVAAAAAElFTkSuQmCC
    :target: https://github.com/ansys
@@ -18,9 +18,9 @@ Ansys Sphinx theme
    :target: https://github.com/ansys/ansys-sphinx-theme/actions/workflows/ci_cd.yml
    :alt: GH-CI
 
-.. |MIT| image:: https://img.shields.io/badge/License-MIT-yellow.svg
-   :target: https://opensource.org/licenses/MIT
-   :alt: MIT
+.. |Apache-2.0| image:: https://img.shields.io/badge/License-Apache%202.0-blue.svg
+   :target: https://opensource.org/license/Apache-2.0
+   :alt: Apache-2.0
 
 .. |Downloads| image:: https://img.shields.io/pypi/dm/ansys-sphinx-theme.svg?label=PyPI%20downloads
    :target: https://pypi.org/project/ansys-sphinx-theme
@@ -76,5 +76,5 @@ and request new features. To reach the PyAnsys support team, email
 
 License
 ~~~~~~~
-This theme is licensed under the `MIT License
+This theme is licensed under the `Apache License 2.0
 <https://raw.githubusercontent.com/ansys/ansys-sphinx-theme/main/LICENSE>`_.
