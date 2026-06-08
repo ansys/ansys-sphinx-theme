@@ -11,10 +11,30 @@ To use the Ansys Sphinx Theme, add the following line to your project's Sphinx `
 
 The Ansys Sphinx Theme provides these features:
 
+- `Copyright`_
 - `PyAnsys and Ansys logos`_
 - `Version switcher`_
 - `PDF cover page`_
 - `Custom CSS`_
+
+Copyright
+~~~~~~~~~
+
+The Ansys Sphinx Theme includes a copyright notice in the footer of the documentation.
+To set the copyright notice, add the following code to your project's Sphinx ``conf.py`` file:
+
+.. code-block:: python
+
+   copyright = "Copyright © <YEAR> Synopsys, Inc. and ANSYS, Inc. All rights reserved."
+
+customise the year dynamically, you can use the following code:
+
+.. code-block:: python
+
+   from datetime import datetime
+
+   current_year = datetime.now().year
+   copyright = f"Copyright © {current_year} Synopsys, Inc. and ANSYS, Inc. All rights reserved."
 
 PyAnsys and Ansys logos
 ~~~~~~~~~~~~~~~~~~~~~~~
