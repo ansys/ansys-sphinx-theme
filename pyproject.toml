@@ -85,6 +85,9 @@ doc = [
 [project.entry-points."sphinx.html_themes"]
 "ansys_sphinx_theme" = "ansys_sphinx_theme"
 
+[project.entry-points."console_scripts"]
+"ansys-sphinx-theme" = "ansys_sphinx_theme._cli:main"
+
 [project.urls]
 Home = "https://sphinxdocs.ansys.com/"
 Source = "https://github.com/ansys/ansys-sphinx-theme"
