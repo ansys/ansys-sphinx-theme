@@ -15,7 +15,7 @@ version = "1.9.dev0"
 description = "A theme devised by ANSYS, Inc. for Sphinx documentation."
 readme = "README.rst"
 requires-python = ">=3.10,<4"
-license = "MIT"
+license = "Apache-2.0"
 license-files = ["LICENSE"]
 authors = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
 maintainers = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
