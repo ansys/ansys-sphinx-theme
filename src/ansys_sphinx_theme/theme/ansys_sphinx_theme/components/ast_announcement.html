@@ -10,13 +10,24 @@
             var announcementElement = document.querySelector(".ast-announcement");
             if (announcementElement) {
                 announcementElement.classList.add("{{ ast_announcement_type }}");
-                if ("{{ ast_announcement_background_color }}") {
-                    announcementElement.style.backgroundColor = "{{ ast_announcement_background_color }}";
-                }
                 // add the message content to the announcement element
                 announcementElement.innerHTML = `{{ ast_announcement_message | safe }}`;
             }
         });
+        //show the element block all the tim eand add a close button to the announcement
+        var closeButton = document.createElement("button");
+        closeButton.innerHTML = "&times;";
+        closeButton.classList.add("ast-announcement-close");
+        closeButton.addEventListener("click", function() {
+            var announcementElement = document.querySelector(".ast-announcement");
+            if (announcementElement) {
+                announcementElement.style.display = "none";
+            }
+        });
+        var announcementElement = document.querySelector(".ast-announcement");
+        if (announcementElement) {
+            announcementElement.appendChild(closeButton);
+        }
     </script>
     <style>
         .ast-announcement {
@@ -25,13 +36,13 @@
             font-weight: bold;
         }
         .ast-announcement.info {
-            color: #0c5460;
+            background-color: var(--ast-admonition-info-icon);
         }
         .ast-announcement.warning {
-            color: #856404;
+            background-color: var(--ast-admonition-warning-icon);
         }
         .ast-announcement.error {
-            color: #721c24;
+            background-color: var(--ast-admonition-danger-icon);
         }
     </style>
     {% endif %}

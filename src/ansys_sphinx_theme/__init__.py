@@ -601,45 +601,6 @@ def add_tooltip_after_build(app: Sphinx, exception):
             html_file.write_text(new_text, encoding="utf-8")
 
 
-def render_announcement(app: Sphinx, announcement: dict) -> None:
-    """Render the announcement banner based on the type in the theme configuration.
-
-    Parameters
-    ----------
-    app : Sphinx
-        Sphinx application instance for rendering the documentation.
-    announcement : dict
-        Dictionary containing the announcement configuration.
-
-    Returns
-    -------
-    None
-    """
-    # Validate the announcement configuration
-    if not isinstance(announcement, dict):
-        logger.error("The 'ast_announcement' configuration must be a dictionary.")
-        return
-
-    # get the type and cusstomise the background color of the banner based on the type
-    announcement_type = announcement.get("type", "info").lower()
-    if announcement_type == "info":
-        announcement["background_color"] = "var(--ast-admonition-info-icon)"
-    elif announcement_type == "warning":
-        announcement["background_color"] = "var(--ast-admonition-warning-icon)"
-    elif announcement_type == "error":
-        announcement["background_color"] = "var(--ast-admonition-danger-icon)"
-    elif announcement_type == "success":
-        announcement["background_color"] = "var(--ast-admonition-success-icon)"
-    else:
-        logger.warning(f"Unknown announcement type '{announcement_type}'. Defaulting to 'info'.")
-        announcement["background_color"] = "var(--ast-admonition-info-icon)"
-
-    # Add the announcement to the theme options so that it can be accessed in the Jinja templates
-    app.config.html_theme_options["ast_announcement"] = announcement
-    print("Announcement banner has been rendered with the following configuration:")
-    print(announcement)
-
-
 def setup(app: Sphinx) -> dict:
     """Connect to the Sphinx theme app.
 
@@ -666,7 +627,6 @@ def setup(app: Sphinx) -> dict:
     if ast_announcement:
         print("Rendering announcement banner with the following configuration:")
         print(ast_announcement)
-        render_announcement(app, ast_announcement)
 
     # Check for what's new options in the theme configuration
     whatsnew_file, changelog_file = get_whatsnew_options(app)
