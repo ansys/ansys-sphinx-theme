@@ -1,48 +1,69 @@
 {% if theme_ast_announcement %}
 {% set ast_announcement_message = theme_ast_announcement.get('message', '') %}
 {% set ast_announcement_type = theme_ast_announcement.get('type', 'info') %}
-{% set ast_announcement_background_color = theme_ast_announcement.get('background_color', '') %}
-    <div class="ast-announcement" role="region" aria-label="Announcement">
-        {{ ast_announcement_message | safe }}
-    </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var announcementElement = document.querySelector(".ast-announcement");
-            if (announcementElement) {
-                announcementElement.classList.add("{{ ast_announcement_type }}");
-                // add the message content to the announcement element
-                announcementElement.innerHTML = `{{ ast_announcement_message | safe }}`;
-            }
-        });
-        //show the element block all the tim eand add a close button to the announcement
-        var closeButton = document.createElement("button");
-        closeButton.innerHTML = "&times;";
-        closeButton.classList.add("ast-announcement-close");
-        closeButton.addEventListener("click", function() {
-            var announcementElement = document.querySelector(".ast-announcement");
-            if (announcementElement) {
-                announcementElement.style.display = "none";
-            }
-        });
-        var announcementElement = document.querySelector(".ast-announcement");
-        if (announcementElement) {
-            announcementElement.appendChild(closeButton);
-        }
-    </script>
-    <style>
-        .ast-announcement {
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-        }
-        .ast-announcement.info {
-            background-color: var(--ast-admonition-info-icon);
-        }
-        .ast-announcement.warning {
-            background-color: var(--ast-admonition-warning-icon);
-        }
-        .ast-announcement.error {
-            background-color: var(--ast-admonition-danger-icon);
-        }
-    </style>
-    {% endif %}
+
+<div class="ast-announcement" role="region" aria-label="Announcement">
+    {{ ast_announcement_message | safe }}
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const announcementElement = document.querySelector(".ast-announcement");
+
+    if (!announcementElement) return;
+
+    // Add type class
+    announcementElement.classList.add("{{ ast_announcement_type }}");
+
+    // Create close button
+    const closeButton = document.createElement("button");
+    closeButton.innerHTML = "&times;";
+    closeButton.classList.add("ast-announcement-close");
+
+    closeButton.addEventListener("click", function() {
+        announcementElement.style.display = "none";
+    });
+
+    // Append button
+    announcementElement.appendChild(closeButton);
+});
+</script>
+
+<style>
+.ast-announcement {
+    padding: 12px 40px 12px 16px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Close button */
+.ast-announcement-close {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Types */
+.ast-announcement.info {
+    background-color: var(--ast-admonition-info-icon);
+}
+
+.ast-announcement.warning {
+    background-color: var(--ast-admonition-warning-icon);
+}
+
+.ast-announcement.error {
+    background-color: var(--ast-admonition-danger-icon);
+}
+</style>
+
+{% endif %}
