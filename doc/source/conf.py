@@ -81,6 +81,10 @@ html_theme_options: dict[str, Any] = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
+    "ast_announcement": {
+        "message": "Welcome to the Ansys Sphinx Theme documentation!",
+        "type": "info",
+    },
 }
 
 

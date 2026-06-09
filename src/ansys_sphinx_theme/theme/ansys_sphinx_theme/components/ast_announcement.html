@@ -1,0 +1,37 @@
+{% if theme_ast_announcement %}
+{% set ast_announcement_message = theme_ast_announcement.get('message', '') %}
+{% set ast_announcement_type = theme_ast_announcement.get('type', 'info') %}
+{% set ast_announcement_background_color = theme_ast_announcement.get('background_color', '') %}
+    <div class="ast-announcement" role="region" aria-label="Announcement">
+        {{ ast_announcement_message | safe }}
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var announcementElement = document.querySelector(".ast-announcement");
+            if (announcementElement) {
+                announcementElement.classList.add("{{ ast_announcement_type }}");
+                if ("{{ ast_announcement_background_color }}") {
+                    announcementElement.style.backgroundColor = "{{ ast_announcement_background_color }}";
+                }
+                // add the message content to the announcement element
+                announcementElement.innerHTML = `{{ ast_announcement_message | safe }}`;
+            }
+        });
+    </script>
+    <style>
+        .ast-announcement {
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .ast-announcement.info {
+            color: #0c5460;
+        }
+        .ast-announcement.warning {
+            color: #856404;
+        }
+        .ast-announcement.error {
+            color: #721c24;
+        }
+    </style>
+    {% endif %}
