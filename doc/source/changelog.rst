@@ -8,6 +8,313 @@ Release notes
 
 .. towncrier release notes start
 
+`1.8.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.8.2>`_ (May 26, 2026)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Collapse the search results bar after results
+          - `#986 <https://github.com/ansys/ansys-sphinx-theme/pull/986>`_
+
+        * - Target color style
+          - `#989 <https://github.com/ansys/ansys-sphinx-theme/pull/989>`_
+
+
+`1.8.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.8.1>`_ (May 21, 2026)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Cheatsheet configurations in sidebar
+          - `#983 <https://github.com/ansys/ansys-sphinx-theme/pull/983>`_
+
+
+`1.8.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.8.0>`_ (May 19, 2026)
+=========================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Use python \`3.14\`
+          - `#938 <https://github.com/ansys/ansys-sphinx-theme/pull/938>`_
+
+        * - Add  option to globally hide the secondary sidebar page TOC
+          - `#943 <https://github.com/ansys/ansys-sphinx-theme/pull/943>`_
+
+
+  .. tab-item:: Fixed
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Resolve type checking errors
+          - `#856 <https://github.com/ansys/ansys-sphinx-theme/pull/856>`_
+
+        * - \`\`backstop\`\` test config for tablet and pdf build
+          - `#882 <https://github.com/ansys/ansys-sphinx-theme/pull/882>`_
+
+        * - Search bar for copy-paste
+          - `#927 <https://github.com/ansys/ansys-sphinx-theme/pull/927>`_
+
+        * - \`backstop\` tests issue with collapsible sidebar
+          - `#955 <https://github.com/ansys/ansys-sphinx-theme/pull/955>`_
+
+        * - Sphinx tags style with \`ansys-sphinx-theme\`
+          - `#965 <https://github.com/ansys/ansys-sphinx-theme/pull/965>`_
+
+        * - \`cheatsheet\` extension version
+          - `#975 <https://github.com/ansys/ansys-sphinx-theme/pull/975>`_
+
+
+  .. tab-item:: Documentation
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Update \`\`CONTRIBUTORS.md\`\` with the latest contributors
+          - `#883 <https://github.com/ansys/ansys-sphinx-theme/pull/883>`_
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Bump jupytext from 1.19.0 to 1.19.1
+          - `#879 <https://github.com/ansys/ansys-sphinx-theme/pull/879>`_
+
+        * - Bump notebook from 7.5.2 to 7.5.3
+          - `#880 <https://github.com/ansys/ansys-sphinx-theme/pull/880>`_
+
+        * - Bump pyvista[jupyter] from 0.46.5 to 0.47.0
+          - `#885 <https://github.com/ansys/ansys-sphinx-theme/pull/885>`_
+
+        * - Bump sphinx-autoapi from 3.6.1 to 3.7.0
+          - `#888 <https://github.com/ansys/ansys-sphinx-theme/pull/888>`_
+
+        * - Bump tox from 4.34.1 to 4.36.0
+          - `#890 <https://github.com/ansys/ansys-sphinx-theme/pull/890>`_
+
+        * - Bump tox from 4.36.1 to 4.38.0
+          - `#892 <https://github.com/ansys/ansys-sphinx-theme/pull/892>`_
+
+        * - Bump tox from 4.38.0 to 4.39.0
+          - `#897 <https://github.com/ansys/ansys-sphinx-theme/pull/897>`_
+
+        * - Bump notebook from 7.5.3 to 7.5.4
+          - `#900 <https://github.com/ansys/ansys-sphinx-theme/pull/900>`_
+
+        * - Bump pyvista[jupyter] from 0.47.0 to 0.47.1
+          - `#901 <https://github.com/ansys/ansys-sphinx-theme/pull/901>`_
+
+        * - Bump tox from 4.39.0 to 4.44.0
+          - `#902 <https://github.com/ansys/ansys-sphinx-theme/pull/902>`_
+
+        * - Bump tox from 4.44.0 to 4.45.0
+          - `#905 <https://github.com/ansys/ansys-sphinx-theme/pull/905>`_
+
+        * - Bump tox from 4.45.0 to 4.46.0
+          - `#907 <https://github.com/ansys/ansys-sphinx-theme/pull/907>`_
+
+        * - Bump tox from 4.46.0 to 4.46.3
+          - `#908 <https://github.com/ansys/ansys-sphinx-theme/pull/908>`_
+
+        * - Bump tox from 4.46.3 to 4.47.0
+          - `#911 <https://github.com/ansys/ansys-sphinx-theme/pull/911>`_
+
+        * - Bump plotly from 6.5.2 to 6.6.0
+          - `#913 <https://github.com/ansys/ansys-sphinx-theme/pull/913>`_
+
+        * - Bump tox from 4.47.0 to 4.47.3
+          - `#914 <https://github.com/ansys/ansys-sphinx-theme/pull/914>`_
+
+        * - Bump tox from 4.47.3 to 4.48.0
+          - `#916 <https://github.com/ansys/ansys-sphinx-theme/pull/916>`_
+
+        * - Bump sphinx-autoapi from 3.7.0 to 3.8.0
+          - `#917 <https://github.com/ansys/ansys-sphinx-theme/pull/917>`_
+
+        * - Bump tox from 4.48.0 to 4.49.0
+          - `#918 <https://github.com/ansys/ansys-sphinx-theme/pull/918>`_
+
+        * - Bump notebook from 7.5.4 to 7.5.5
+          - `#919 <https://github.com/ansys/ansys-sphinx-theme/pull/919>`_
+
+        * - Bump tox from 4.49.0 to 4.49.1
+          - `#920 <https://github.com/ansys/ansys-sphinx-theme/pull/920>`_
+
+        * - Bump tox from 4.49.1 to 4.50.2
+          - `#926 <https://github.com/ansys/ansys-sphinx-theme/pull/926>`_
+
+        * - Bump pygithub from 2.8.1 to 2.9.0
+          - `#929 <https://github.com/ansys/ansys-sphinx-theme/pull/929>`_
+
+        * - Bump tox from 4.50.2 to 4.50.3
+          - `#930 <https://github.com/ansys/ansys-sphinx-theme/pull/930>`_
+
+        * - Bump requests from 2.32.5 to 2.33.0
+          - `#931 <https://github.com/ansys/ansys-sphinx-theme/pull/931>`_
+
+        * - Bump requests from 2.33.0 to 2.33.1
+          - `#933 <https://github.com/ansys/ansys-sphinx-theme/pull/933>`_
+
+        * - Bump tox from 4.50.3 to 4.52.0
+          - `#936 <https://github.com/ansys/ansys-sphinx-theme/pull/936>`_
+
+        * - Update pydata-sphinx-theme requirement from <0.17,>=0.15.4 to >=0.15.4,<0.18
+          - `#941 <https://github.com/ansys/ansys-sphinx-theme/pull/941>`_
+
+        * - Bump tox from 4.52.0 to 4.52.1
+          - `#944 <https://github.com/ansys/ansys-sphinx-theme/pull/944>`_
+
+        * - Bump pyvista from 0.47.1 to 0.47.3
+          - `#945 <https://github.com/ansys/ansys-sphinx-theme/pull/945>`_
+
+        * - Bump plotly from 6.6.0 to 6.7.0
+          - `#946 <https://github.com/ansys/ansys-sphinx-theme/pull/946>`_
+
+        * - Bump pygithub from 2.9.0 to 2.9.1
+          - `#949 <https://github.com/ansys/ansys-sphinx-theme/pull/949>`_
+
+        * - Bump pydantic from 2.12.5 to 2.13.0
+          - `#950 <https://github.com/ansys/ansys-sphinx-theme/pull/950>`_
+
+        * - Bump tox from 4.52.1 to 4.53.0
+          - `#951 <https://github.com/ansys/ansys-sphinx-theme/pull/951>`_
+
+        * - Bump pydantic from 2.13.0 to 2.13.1
+          - `#952 <https://github.com/ansys/ansys-sphinx-theme/pull/952>`_
+
+        * - Bump pydantic from 2.13.1 to 2.13.2
+          - `#953 <https://github.com/ansys/ansys-sphinx-theme/pull/953>`_
+
+        * - Bump pydantic from 2.13.2 to 2.13.3
+          - `#956 <https://github.com/ansys/ansys-sphinx-theme/pull/956>`_
+
+        * - Bump ty from 0.0.29 to 0.0.32
+          - `#958 <https://github.com/ansys/ansys-sphinx-theme/pull/958>`_
+
+        * - Bump notebook from 7.5.5 to 7.5.6
+          - `#960 <https://github.com/ansys/ansys-sphinx-theme/pull/960>`_
+
+        * - Bump sphinx-gallery from 0.20.0 to 0.21.0
+          - `#961 <https://github.com/ansys/ansys-sphinx-theme/pull/961>`_
+
+        * - Bump ty from 0.0.32 to 0.0.33
+          - `#962 <https://github.com/ansys/ansys-sphinx-theme/pull/962>`_
+
+        * - Bump ty from 0.0.33 to 0.0.34
+          - `#966 <https://github.com/ansys/ansys-sphinx-theme/pull/966>`_
+
+        * - Bump tox from 4.53.0 to 4.53.1
+          - `#967 <https://github.com/ansys/ansys-sphinx-theme/pull/967>`_
+
+        * - Bump pyvista from 0.47.3 to 0.48.0
+          - `#968 <https://github.com/ansys/ansys-sphinx-theme/pull/968>`_
+
+        * - Bump pydantic from 2.13.3 to 2.13.4
+          - `#969 <https://github.com/ansys/ansys-sphinx-theme/pull/969>`_
+
+        * - Bump pyvista from 0.48.0 to 0.48.1
+          - `#971 <https://github.com/ansys/ansys-sphinx-theme/pull/971>`_
+
+        * - Bump pyvista from 0.48.1 to 0.48.2
+          - `#972 <https://github.com/ansys/ansys-sphinx-theme/pull/972>`_
+
+        * - Bump jupytext from 1.19.1 to 1.19.2
+          - `#973 <https://github.com/ansys/ansys-sphinx-theme/pull/973>`_
+
+        * - Bump ty from 0.0.34 to 0.0.35
+          - `#974 <https://github.com/ansys/ansys-sphinx-theme/pull/974>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Update CHANGELOG for v1.7.0
+          - `#877 <https://github.com/ansys/ansys-sphinx-theme/pull/877>`_
+
+        * - Bump version 1.8.dev0
+          - `#878 <https://github.com/ansys/ansys-sphinx-theme/pull/878>`_
+
+        * - Extend the cool down period up to 5 days for the patch releases.
+          - `#881 <https://github.com/ansys/ansys-sphinx-theme/pull/881>`_
+
+        * - Bump ansys/actions from 10.2.3 to 10.2.4 in the actions group
+          - `#884 <https://github.com/ansys/ansys-sphinx-theme/pull/884>`_
+
+        * - Update CHANGELOG for v1.7.1
+          - `#896 <https://github.com/ansys/ansys-sphinx-theme/pull/896>`_
+
+        * - Update CHANGELOG for v1.7.2
+          - `#904 <https://github.com/ansys/ansys-sphinx-theme/pull/904>`_
+
+        * - Bump actions/download-artifact from 7.0.0 to 8.0.0 in the actions group
+          - `#906 <https://github.com/ansys/ansys-sphinx-theme/pull/906>`_
+
+        * - Bump actions/upload-artifact from 6.0.0 to 7.0.0 in the actions group
+          - `#909 <https://github.com/ansys/ansys-sphinx-theme/pull/909>`_
+
+        * - Bump the actions group with 2 updates
+          - `#912 <https://github.com/ansys/ansys-sphinx-theme/pull/912>`_
+
+        * - Bump actions/setup-node from 6.2.0 to 6.3.0 in the actions group
+          - `#915 <https://github.com/ansys/ansys-sphinx-theme/pull/915>`_
+
+        * - Bump actions/download-artifact from 8.0.0 to 8.0.1 in the actions group
+          - `#921 <https://github.com/ansys/ansys-sphinx-theme/pull/921>`_
+
+        * - Bump astral-sh/setup-uv from 7.3.1 to 7.6.0 in the actions group
+          - `#924 <https://github.com/ansys/ansys-sphinx-theme/pull/924>`_
+
+        * - Bump the actions group across 1 directory with 3 updates
+          - `#939 <https://github.com/ansys/ansys-sphinx-theme/pull/939>`_
+
+        * - Bump actions/upload-artifact from 7.0.0 to 7.0.1 in the actions group
+          - `#947 <https://github.com/ansys/ansys-sphinx-theme/pull/947>`_
+
+        * - Update license metadata in pyproject.toml
+          - `#948 <https://github.com/ansys/ansys-sphinx-theme/pull/948>`_
+
+        * - Bump astral-sh/setup-uv from 8.0.0 to 8.1.0 in the actions group
+          - `#954 <https://github.com/ansys/ansys-sphinx-theme/pull/954>`_, `#959 <https://github.com/ansys/ansys-sphinx-theme/pull/959>`_
+
+        * - Bump actions/setup-node from 6.3.0 to 6.4.0 in the actions group
+          - `#957 <https://github.com/ansys/ansys-sphinx-theme/pull/957>`_
+
+        * - Bump ansys/actions from 10.2.12 to 10.3.0 in the actions group across 1 directory
+          - `#964 <https://github.com/ansys/ansys-sphinx-theme/pull/964>`_
+
+        * - Bump actions/labeler from 6.0.1 to 6.1.0 in the actions group
+          - `#970 <https://github.com/ansys/ansys-sphinx-theme/pull/970>`_
+
+
 `1.7.2 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.7.2>`_ (March 02, 2026)
 ===========================================================================================
 

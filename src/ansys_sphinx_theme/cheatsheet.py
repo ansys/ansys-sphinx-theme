@@ -1,24 +1,18 @@
 # Copyright (C) 2021 - 2026 ANSYS, Inc. and/or its affiliates.
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 #
 #
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
+# http://www.apache.org/licenses/LICENSE-2.0
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """Module to configure cheatsheet options and build the Quarto cheatsheet.
 
@@ -39,7 +33,7 @@ from sphinx.util import logging
 logger = logging.getLogger(__name__)
 
 # Cheat sheet extension version
-CHEAT_SHEET_QUARTO_EXTENTION_VERSION = "v1"
+CHEAT_SHEET_QUARTO_EXTENTION_VERSION = "v2"
 
 
 def cheatsheet_sidebar_pages(app: Sphinx) -> Optional[List[str]]:
@@ -93,7 +87,7 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
         )
 
 
-def run_quarto_command(command: List[str], cwd: str) -> None:
+def run_quarto_command(command: List[str], cwd: str | pathlib.Path) -> None:
     """
     Run a Quarto command and log its output.
 
@@ -101,8 +95,8 @@ def run_quarto_command(command: List[str], cwd: str) -> None:
     ----------
     command : List[str]
         List of command arguments.
-    cwd : str
-        Current working directory.
+    cwd : str | pathlib.Path
+        Current working directory to run the command in.
     """
     command = ["quarto"] + command
     logger.info(f"Running command: {' '.join(command)}")
@@ -111,7 +105,7 @@ def run_quarto_command(command: List[str], cwd: str) -> None:
         # Excluding bandit rule because subprocess is using quarto command
         # and we are handling the command execution securely.
         # The command is run in a controlled environment and not accepting user input.
-        result = subprocess.run(command, cwd=cwd, check=True, capture_output=True, text=True)  # nosec: B603
+        result = subprocess.run(command, cwd=str(cwd), check=True, capture_output=True, text=True)  # nosec: B603
         if result.stdout:
             logger.info(f"Command stdout:\n{result.stdout}")
 

@@ -1,24 +1,18 @@
 # Copyright (C) 2021 - 2026 ANSYS, Inc. and/or its affiliates.
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 #
 #
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
+# http://www.apache.org/licenses/LICENSE-2.0
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """Module to configure whatsnew options and layer the what's new content on the documentation.
 
@@ -28,7 +22,7 @@ from the changelog document, and layer the what's new content on the documentati
 
 import pathlib
 import re
-from typing import Iterable
+from typing import Iterator
 
 from docutils import nodes
 from sphinx.application import Sphinx
@@ -133,7 +127,7 @@ def add_whatsnew_changelog(app: Sphinx, doctree: nodes.document) -> None:
         # Get the semantic version number from the section title link
         next_node = node.next_node(nodes.reference)
         # Get the name of the section title link
-        version = next_node.get("name")
+        version = next_node.get("name") if next_node else None
 
         if version:
             # Create the minor version from the patch version
@@ -188,7 +182,7 @@ def get_whatsnew_data(whatsnew_file: pathlib.Path) -> dict:
 
         # Create a dictionary containing the what's new data for each minor version
         # For example: { minor_version: [fragment1_dict, fragment2_dict, ...] }
-        minor_version_whatsnew_data = {}
+        minor_version_whatsnew_data: dict[str, list] = {}
         for fragment in whatsnew_data["fragments"]:
             # Get the minor version from the fragment version
             whatsnew_minor_version = ".".join(fragment["version"].split(".")[:2])
@@ -200,6 +194,8 @@ def get_whatsnew_data(whatsnew_file: pathlib.Path) -> dict:
             minor_version_whatsnew_data[whatsnew_minor_version].append(fragment)
 
         return minor_version_whatsnew_data
+
+    return {}
 
 
 def add_whatsnew_section(minor_version: str, whatsnew_data: dict) -> nodes.section:
@@ -258,7 +254,7 @@ def add_whatsnew_section(minor_version: str, whatsnew_data: dict) -> nodes.secti
         content_iterator = iter(content_lines)
 
         # Navigate to first line in the iterator
-        line = next(content_iterator, None)
+        line = next(iter(content_iterator), None)
 
         while line is not None:
             if ".. code" in line or ".. sourcecode" in line:
@@ -290,7 +286,9 @@ def add_whatsnew_section(minor_version: str, whatsnew_data: dict) -> nodes.secti
     return minor_version_whatsnew
 
 
-def fill_code_block(content_iterator: Iterable, code_block: nodes.container) -> nodes.container:
+def fill_code_block(
+    content_iterator: Iterator[str], code_block: nodes.container
+) -> tuple[nodes.container, str | None]:
     """Fill the code block.
 
     Parameters
@@ -355,8 +353,8 @@ def fill_code_block(content_iterator: Iterable, code_block: nodes.container) -> 
 
 
 def fill_paragraph(
-    content_iterator: Iterable, paragraph: nodes.paragraph, next_line: str
-) -> nodes.paragraph:
+    content_iterator: Iterator[str], paragraph: nodes.paragraph, next_line: str | None
+) -> tuple[nodes.paragraph, str | None]:
     """Fill the paragraph node.
 
     Parameters
@@ -505,7 +503,11 @@ def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None
         return
 
     whatsnew = []
-    app.env.whatsnew = []
+    # Initialize the whatsnew attribute if it doesn't exist
+    if not hasattr(app.env, "whatsnew"):
+        app.env.whatsnew = []  # type: ignore[attr-defined]
+    else:
+        app.env.whatsnew = []  # type: ignore[attr-defined]
 
     # Get a list of nodes whose ids start with "version" that contain "What's new" sections
     versions_nodes = []
@@ -557,10 +559,10 @@ def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None
 
         whatsnew.append(contents)
 
-    app.env.whatsnew = whatsnew
+    app.env.whatsnew = whatsnew  # type: ignore[attr-defined]
 
 
-def whatsnew_sidebar_pages(app: Sphinx) -> list:
+def whatsnew_sidebar_pages(app: Sphinx) -> list | None:
     """Get the pages the what's new section should be displayed on and return the list of pages.
 
     Parameters
