@@ -110,48 +110,41 @@ test("Test version switcher dropdown", async ({ page }) => {
   expect(dropdown).not.toBeNull();
 });
 
+// theme switcher dropdown test
 test("Test theme switcher", async ({ page }) => {
   await page.goto("http://localhost:8000");
-  // Use the actual button class from the provided HTML
-  const themeSwitcher = await page.$(
-    'button.theme-switch-button[aria-label="Color mode"]',
-  );
-  if (!themeSwitcher) test.skip("Theme switcher not found");
-  expect(themeSwitcher).not.toBeNull();
-  // Find the currently active mode (the visible svg or the one with aria-current or similar)
-  const getActiveMode = async () => {
-    // Try to get the mode from the html class or data attribute if available
-    const htmlMode = await page.evaluate(() => {
-      if (document.documentElement.dataset.theme)
-        return document.documentElement.dataset.theme;
-      if (document.body.dataset.theme) return document.body.dataset.theme;
-      // Fallback: find the first visible svg with data-mode
-      const svgs = Array.from(
-        document.querySelectorAll(
-          "button.theme-switch-button svg.theme-switch[data-mode]",
-        ),
-      );
-      for (const svg of svgs) {
-        const style = window.getComputedStyle(svg);
-        if (
-          style.display !== "none" &&
-          style.visibility !== "hidden" &&
-          style.opacity !== "0"
-        ) {
-          return svg.getAttribute("data-mode");
-        }
-      }
-      return svgs.length ? svgs[0].getAttribute("data-mode") : null;
-    });
-    return htmlMode;
-  };
-  const currentMode = await getActiveMode();
+
+  // The toggle button that opens the dropdown
+  const themeSwitcher = page
+    .locator('button.theme-switch-button[aria-label="Color mode"]')
+    .first();
+  if (!(await themeSwitcher.count())) {
+    test.skip();
+    return;
+  }
+
   await themeSwitcher.click();
-  console.log(`Switched theme from ${currentMode}`);
-  await page.waitForTimeout(500);
-  const newMode = await getActiveMode();
-  console.log(`New theme mode is ${newMode}`);
-  expect(newMode).not.toBe(currentMode);
+  const dropdown = page
+    .locator(".theme-switch-container .dropdown-menu")
+    .first();
+  await expect(dropdown).toBeVisible();
+
+  // Verify all three mode options are present
+  const lightBtn = page
+    .locator('button.theme-change-button[data-mode="light"]')
+    .first();
+  const darkBtn = page
+    .locator('button.theme-change-button[data-mode="dark"]')
+    .first();
+  const autoBtn = page
+    .locator('button.theme-change-button[data-mode="auto"]')
+    .first();
+  await expect(lightBtn).toBeAttached();
+  await expect(darkBtn).toBeAttached();
+  await expect(autoBtn).toBeAttached();
+
+  await darkBtn.click({ force: true });
+  await expect(page.locator("html")).toHaveAttribute("data-mode", "dark");
 });
 
 test("Test breadcrumbs", async ({ page }) => {
