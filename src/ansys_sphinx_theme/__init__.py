@@ -16,6 +16,7 @@
 
 """Module for the Ansys Sphinx theme."""
 
+import datetime
 import importlib.metadata as importlib_metadata
 import os
 import pathlib
@@ -620,7 +621,6 @@ def add_default_copyright(app: Sphinx) -> None:
         logging.getLogger(__name__).info(
             "The 'copyright' configuration adding from ansys-sphinx-theme is being overwritten by the user's configuration. "  # noqa: E501
         )
-    import datetime
 
     current_year = datetime.datetime.now().year
     app.config.copyright = f"{current_year} Synopsys, Inc. and ANSYS, Inc. All rights reserved."
