@@ -22,8 +22,7 @@ Update `ansys-sphinx-theme` to the latest version in this PyAnsys library projec
 Run: `pip show ansys-sphinx-theme`
 
 ### 2. Check latest version
-The latest theme version is **{{theme_version}}** (from the prompt header above). No network call needed.
-If `{{theme_version}}` contains `dev`, the project is already on the development tip — skip the upgrade step and tell the user.
+Check the latest stable version of `ansys-sphinx-theme` on PyPI.
 
 ### 3. Fetch the release notes
 Fetch: https://sphinxdocs.ansys.com/version/stable/changelog.html
@@ -74,8 +73,7 @@ Review the current `ansys-sphinx-theme` setup in this project and report finding
 Run: `pip show ansys-sphinx-theme`
 
 ### 2. Check if up-to-date
-The latest theme version is **{{theme_version}}** (from the prompt header). Compare against the installed version from step 1.
-If `{{theme_version}}` contains `dev`, the project is on a development build — report it as the latest and skip any upgrade suggestion.
+#TODO
 
 ### 3. Find all theme references
 Run: `grep -r "ansys-sphinx-theme\|html_theme\|html_theme_options" pyproject.toml requirements*.txt tox.ini doc/ 2>/dev/null`
