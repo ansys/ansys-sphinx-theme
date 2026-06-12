@@ -16,6 +16,7 @@
 
 """Module for the Ansys Sphinx theme."""
 
+import datetime
 import importlib.metadata as importlib_metadata
 import os
 import pathlib
@@ -601,6 +602,30 @@ def add_tooltip_after_build(app: Sphinx, exception):
             html_file.write_text(new_text, encoding="utf-8")
 
 
+def add_default_copyright(app: Sphinx) -> None:
+    """Add a default copyright notice to the Sphinx configuration.
+
+    Parameters
+    ----------
+    app : Sphinx
+        Sphinx application instance for rendering the documentation.
+
+    Notes
+    -----
+    This function checks if the 'copyright' configuration is already set by the user.
+    If it is set, it logs a message indicating that the user's configuration
+    will overwrite the default.
+    """
+    copyright = getattr(app.config, "copyright", None)
+    if copyright:
+        logging.getLogger(__name__).info(
+            "The user's 'copyright' configuration is being overwritten by ansys-sphinx-theme's default."  # noqa: E501
+        )
+
+    current_year = datetime.datetime.now().year
+    app.config.copyright = f"{current_year} Synopsys, Inc. and ANSYS, Inc. All rights reserved."
+
+
 def setup(app: Sphinx) -> dict:
     """Connect to the Sphinx theme app.
 
@@ -623,6 +648,8 @@ def setup(app: Sphinx) -> dict:
     # Add default HTML configuration
     setup_default_html_theme_options(app)
     load_navbar_configuration(app)
+
+    add_default_copyright(app)
 
     # Check for what's new options in the theme configuration
     whatsnew_file, changelog_file = get_whatsnew_options(app)

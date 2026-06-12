@@ -1,7 +1,7 @@
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.15.14
+  rev: v0.15.16
   hooks:
     - id: ruff
       args: [--fix]
@@ -11,7 +11,6 @@ repos:
   rev: v2.4.2
   hooks:
   - id: codespell
-    exclude: doc/source/examples/nbsphinx/jupyter-notebook.ipynb
     args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt", "-w"]
 
 - repo: https://github.com/pycontribs/mirrors-prettier
@@ -54,7 +53,7 @@ repos:
 
 # Do not use this tool with proprietary ansys source code.
 - repo: "https://github.com/djlint/djLint"
-  rev: v1.36.4
+  rev: v1.39.0
   hooks:
     - id: djlint-jinja
       types_or: ["html"]

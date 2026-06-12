@@ -10,6 +10,8 @@
 (?i)Sphinx-Gallery
 (?i)theme
 (?i)whatsnew
+(?i)TOC
+Synopsys
 astroid
 Chris
 datatable
@@ -25,4 +27,3 @@ PDF
 Pradyun
 Sewell
 stb
-(?i)TOC
