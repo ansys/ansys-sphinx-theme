@@ -614,12 +614,12 @@ def add_default_copyright(app: Sphinx) -> None:
     -----
     This function checks if the 'copyright' configuration is already set by the user.
     If it is set, it logs a message indicating that the user's configuration
-    will overwrite the default
+    will overwrite the default.
     """
     copyright = getattr(app.config, "copyright", None)
     if copyright:
         logging.getLogger(__name__).info(
-            "The 'copyright' configuration adding from ansys-sphinx-theme is being overwritten by the user's configuration. "  # noqa: E501
+            "The user's 'copyright' configuration is being overwritten by ansys-sphinx-theme's default."  # noqa: E501
         )
 
     current_year = datetime.datetime.now().year
