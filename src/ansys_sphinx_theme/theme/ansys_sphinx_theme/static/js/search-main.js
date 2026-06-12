@@ -309,15 +309,19 @@ require(["fuse"], function (Fuse) {
     let docResults = [];
     let libResults = [];
     const resultLimit = getSelectedResultLimit();
-    // Search in internal documents
+    // Search in internal documents.
+    // Over-fetch candidates before re-ranking so the best weighted results
+    // Reference: https://www.fusejs.io/api/options.html#includescore
+    const candidateLimit = Math.min(resultLimit * 2, 50);
     if (selectedFilter.size === 0 || selectedFilter.has("Documents")) {
       docResults = fuse
-        .search(query, { limit: resultLimit })
+        .search(query, { limit: candidateLimit })
         .sort((a, b) => {
           const scoreA = (1 - (a.score || 0)) * (a.item.weight || 1);
           const scoreB = (1 - (b.score || 0)) * (b.item.weight || 1);
           return scoreB - scoreA;
         })
+        .slice(0, resultLimit)
         .map((r) => r.item);
       if (selectedObjectIDs.length > 0) {
         docResults = docResults.filter((item) =>
@@ -325,7 +329,8 @@ require(["fuse"], function (Fuse) {
         );
       }
     }
-    // Search in selected libraries
+    // Search in selected libraries — apply the same re-ranking as doc results.
+    // Reference: https://www.fusejs.io/api/options.html#keys
     for (const lib of selectedLibraries) {
       const libBaseUrl = EXTRA_SOURCES[lib];
       const cacheKey = `lib-search-${lib}`;
@@ -341,7 +346,13 @@ require(["fuse"], function (Fuse) {
           }));
           const libFuse = new Fuse(enrichedEntries, SEARCH_OPTIONS);
           const results = libFuse
-            .search(query, { limit: resultLimit })
+            .search(query, { limit: candidateLimit })
+            .sort((a, b) => {
+              const scoreA = (1 - (a.score || 0)) * (a.item.weight || 1);
+              const scoreB = (1 - (b.score || 0)) * (b.item.weight || 1);
+              return scoreB - scoreA;
+            })
+            .slice(0, resultLimit)
             .map((r) => r.item);
           libResults.push(...results);
         }
@@ -367,31 +378,33 @@ require(["fuse"], function (Fuse) {
    */
   function highlightResults(results, query) {
     const regex = new RegExp(`(${query})`, "gi");
-    return results
-      .map((result) => {
-        const matchIndex = result.text
-          .toLowerCase()
-          .indexOf(query.toLowerCase());
-        if (matchIndex === -1) return null;
+    return results.map((result) => {
+      // Find the query in the body text first for a context snippet.
+      // If the match is only in title/section, still include the result
+      const text = result.text || "";
+      const matchIndex = text.toLowerCase().indexOf(query.toLowerCase());
+      let highlightedText = "";
+      if (matchIndex !== -1) {
         const contextLength = 100;
         const start = Math.max(0, matchIndex - contextLength);
-        const end = Math.min(result.text.length, matchIndex + contextLength);
-        let snippet = result.text.slice(start, end);
+        const end = Math.min(text.length, matchIndex + contextLength);
+        let snippet = text.slice(start, end);
         if (start > 0) snippet = "…" + snippet;
-        if (end < result.text.length) snippet += "…";
-        return {
-          ...result,
-          title: result.title.replace(
-            regex,
-            `<span class="search-highlight">$1</span>`,
-          ),
-          text: snippet.replace(
-            regex,
-            `<span class="search-highlight">$1</span>`,
-          ),
-        };
-      })
-      .filter(Boolean);
+        if (end < text.length) snippet += "…";
+        highlightedText = snippet.replace(
+          regex,
+          `<span class="search-highlight">$1</span>`,
+        );
+      }
+      return {
+        ...result,
+        title: result.title.replace(
+          regex,
+          `<span class="search-highlight">$1</span>`,
+        ),
+        text: highlightedText,
+      };
+    });
   }
 
   /**
