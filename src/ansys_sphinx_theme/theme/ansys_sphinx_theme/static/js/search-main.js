@@ -299,6 +299,25 @@ require(["fuse"], function (Fuse) {
   }
 
   /**
+   * Compute a final relevance score for a Fuse.js result.
+   *
+   * Fuse.js assigns a fuzziness score in [0, 1]:
+   *   0 = perfect match, 1 = complete mismatch
+   * Reference: https://www.fusejs.io/fuzzy-search.html
+   *
+   * @param {Object} result - A Fuse.js result object with .score and .matches.
+   * @returns {number} Relevance score.
+   */
+  function computeRelevance(result) {
+    const fieldWeights = { section: 3, title: 2, text: 1, objectID: 0.5 };
+    const matches = result.matches || [];
+    const fieldWeight = matches.length
+      ? Math.max(...matches.map((m) => fieldWeights[m.key] || 1))
+      : 1;
+    return (1 - (result.score || 0)) * fieldWeight;
+  }
+
+  /**
    * Perform the search and update the results UI.
    */
   async function performSearch() {
@@ -309,18 +328,10 @@ require(["fuse"], function (Fuse) {
     let docResults = [];
     let libResults = [];
     const resultLimit = getSelectedResultLimit();
-    // Search in internal documents.
-    // Over-fetch candidates before re-ranking so the best weighted results
-    // Reference: https://www.fusejs.io/api/options.html#includescore
-    const candidateLimit = Math.min(resultLimit * 2, 50);
     if (selectedFilter.size === 0 || selectedFilter.has("Documents")) {
       docResults = fuse
-        .search(query, { limit: candidateLimit })
-        .sort((a, b) => {
-          const scoreA = (1 - (a.score || 0)) * (a.item.weight || 1);
-          const scoreB = (1 - (b.score || 0)) * (b.item.weight || 1);
-          return scoreB - scoreA;
-        })
+        .search(query, { limit: resultLimit })
+        .sort((a, b) => computeRelevance(b) - computeRelevance(a))
         .slice(0, resultLimit)
         .map((r) => r.item);
       if (selectedObjectIDs.length > 0) {
@@ -346,12 +357,8 @@ require(["fuse"], function (Fuse) {
           }));
           const libFuse = new Fuse(enrichedEntries, SEARCH_OPTIONS);
           const results = libFuse
-            .search(query, { limit: candidateLimit })
-            .sort((a, b) => {
-              const scoreA = (1 - (a.score || 0)) * (a.item.weight || 1);
-              const scoreB = (1 - (b.score || 0)) * (b.item.weight || 1);
-              return scoreB - scoreA;
-            })
+            .search(query, { limit: resultLimit })
+            .sort((a, b) => computeRelevance(b) - computeRelevance(a))
             .slice(0, resultLimit)
             .map((r) => r.item);
           libResults.push(...results);
