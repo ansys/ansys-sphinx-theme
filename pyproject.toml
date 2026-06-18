@@ -17,8 +17,8 @@ readme = "README.rst"
 requires-python = ">=3.10,<4"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
-authors = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
-maintainers = [{ name = "ANSYS, Inc.", email = "pyansys.core@ansys.com" }]
+authors = [{ name = "Synopsys, Inc. and ANSYS, Inc.", email = "pyansys-core@synopsys.com" }]
+maintainers = [{ name = "Synopsys, Inc. and ANSYS, Inc.", email = "pyansys-core@synopsys.com" }]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Framework :: Sphinx",
@@ -58,7 +58,7 @@ all = [
 
 [dependency-groups]
 type-check = [
-    "ty==0.0.48",
+    "ty==0.0.49",
 ]
 doc = [
     "jupytext==1.19.3",

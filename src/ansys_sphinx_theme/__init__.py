@@ -1,4 +1,4 @@
-# Copyright (C) 2021 - 2026 ANSYS, Inc. and/or its affiliates.
+# Copyright (C) 2021 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 #
 #
@@ -623,7 +623,7 @@ def add_default_copyright(app: Sphinx) -> None:
         )
 
     current_year = datetime.datetime.now().year
-    app.config.copyright = f"{current_year} Synopsys, Inc. and ANSYS, Inc. All rights reserved."
+    app.config.copyright = f"{current_year} Synopsys, Inc. and ANSYS, Inc. All rights reserved"
 
 
 def setup(app: Sphinx) -> dict:
