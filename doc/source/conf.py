@@ -30,7 +30,7 @@ EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 
 # Project information
 project = "ansys_sphinx_theme"
-author = "ANSYS, Inc."
+author = "Synopsys, Inc. and ANSYS, Inc."
 release = version = __version__
 cname = os.getenv("DOCUMENTATION_CNAME", "sphinxdocs.ansys.com")
 switcher_version = get_version_match(__version__)
