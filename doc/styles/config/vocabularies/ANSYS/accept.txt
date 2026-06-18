@@ -12,6 +12,7 @@
 (?i)whatsnew
 (?i)TOC
 Synopsys
+synopsys
 astroid
 Chris
 datatable
