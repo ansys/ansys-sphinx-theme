@@ -1,9 +1,11 @@
 
 <!--
   Announcement Version Loader
-  Dynamically loads the announcement.html content into the announcement_msg div.
+  Dynamically loads the announcement.html content into:
+    1. #announcement_msg  — legacy banner bar (if present)
+    2. .ast-announcement-modal .ast-announcement-extra — new modal popup (if present)
 -->
-<div id="announcement_msg" aria-live="polite"></div>
+<div id="announcement_msg" aria-live="polite" style="display:none;"></div>
 <script>
   // Fetch and inject the announcement HTML content
   fetch("announcement.html")
@@ -14,9 +16,13 @@
       return response.text();
     })
     .then((text) => {
-      var msgDiv = document.getElementById("announcement_msg");
-      if (msgDiv) {
-        msgDiv.innerHTML = text;
+      if (!text || !text.trim()) return;
+
+      // Only inject into the ast_announcement modal extra section.
+      // The legacy #announcement_msg bar is intentionally skipped.
+      var extra = document.querySelector(".ast-announcement-modal-body .ast-announcement-extra");
+      if (extra) {
+        extra.innerHTML = text;
       }
     })
     .catch((error) => {
