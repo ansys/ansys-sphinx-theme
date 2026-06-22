@@ -1,10 +1,9 @@
 """Sphinx documentation configuration file."""
 
-from datetime import datetime
 import os
 from pathlib import Path
 import subprocess
-from typing import Dict, List
+from typing import Any, Dict, List
 
 from github import Github
 import plotly.io as pio
@@ -31,8 +30,7 @@ EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 
 # Project information
 project = "ansys_sphinx_theme"
-copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
-author = "ANSYS, Inc."
+author = "Synopsys, Inc. and ANSYS, Inc."
 release = version = __version__
 cname = os.getenv("DOCUMENTATION_CNAME", "sphinxdocs.ansys.com")
 switcher_version = get_version_match(__version__)
@@ -56,10 +54,9 @@ html_context = {
     },
 }
 
-html_theme_options = {
+html_theme_options: dict[str, Any] = {
     "github_url": "https://github.com/ansys/ansys-sphinx-theme",
     "contact_mail": "pyansys.core@ansys.com",
-    "use_edit_page_button": True,
     "additional_breadcrumbs": [
         ("PyAnsys", "https://docs.pyansys.com/"),
     ],
@@ -154,18 +151,22 @@ with Path.open(THIS_PATH / "links.rst", "r") as f:
     rst_epilog += f.read()
 
 
+linkcheck_exclude_documents = ["changelog"]
 linkcheck_ignore = [
     r"https://sphinxdocs.ansys.com/version/*",
+    r"https://example.com/*",
+    r"https://www.fusejs.io/api/*",
 ]
 if switcher_version != "dev":
     linkcheck_ignore.append(
         f"https://github.com/ansys/ansys-sphinx-theme/releases/tag/v{__version__}"
     )
 
+latex_engine = "xelatex"
 
 # Configure the Jinja contexts
 
-jinja_contexts = {
+jinja_contexts: dict[str, dict[str, Any]] = {
     "install_guide": {
         "version": f"v{version}" if not version.endswith("dev0") else "main",
     },
@@ -336,6 +337,10 @@ def revert_exclude_patterns(app, env):
     env.config.exclude_patterns = excluded_pattern
 
 
-def setup(app: Sphinx) -> Dict:
+def setup(app: Sphinx) -> Dict[str, str | bool]:
     """Sphinx hooks to add to the setup."""
     app.connect("env-updated", revert_exclude_patterns)
+    return {
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
+    }

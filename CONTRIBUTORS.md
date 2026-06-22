@@ -14,6 +14,7 @@
 * [Dominik Gresch](https://github.com/greschd)
 * [German](https://github.com/germa89)
 * [Guillem Barroso](https://github.com/GuillemBarroso)
+* [inimaz](https://github.com/inimaz)
 * [jleonatti](https://github.com/jleonatti)
 * [Jorge Martínez](https://github.com/jorgepiloto)
 * [Kathy Pippert](https://github.com/PipKat)

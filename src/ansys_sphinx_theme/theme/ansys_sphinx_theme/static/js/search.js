@@ -135,7 +135,10 @@ require(["fuse"], (Fuse) => {
       const resultItem = document.createElement("div");
       resultItem.className = "result-item";
       resultItem.dataset.href = href;
-      resultItem.addEventListener("click", () => navigateToHref(href));
+      resultItem.addEventListener("click", () => {
+        collapseSearchInput();
+        navigateToHref(href);
+      });
 
       const resultTitle = document.createElement("div");
       resultTitle.className = "result-title";
@@ -199,11 +202,16 @@ require(["fuse"], (Fuse) => {
         event.preventDefault();
         if (event.ctrlKey || event.metaKey) {
           const query = SEARCH_INPUT.value.trim();
+          collapseSearchInput();
           window.location.href = ADVANCE_SEARCH_PATH + "?q=" + query;
         } else if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultItems.length) {
-          navigateToHref(resultItems[CURRENT_INDEX].dataset.href);
+          const href = resultItems[CURRENT_INDEX].dataset.href;
+          collapseSearchInput();
+          navigateToHref(href);
         } else if (resultItems.length > 0) {
-          navigateToHref(resultItems[0].dataset.href);
+          const href = resultItems[0].dataset.href;
+          collapseSearchInput();
+          navigateToHref(href);
         }
         break;
       case "ArrowDown":
@@ -238,6 +246,23 @@ require(["fuse"], (Fuse) => {
         }
         handleSearchInput();
     }
+  }
+
+  /**
+   * Handle input events (including paste via mouse or keyboard shortcuts).
+   * The 'input' event fires after the value has changed, covering all paste methods.
+   */
+  function handleInputEvent() {
+    if (!SEARCH_INPUT.value.trim()) {
+      RESULTS_CONTAINER.style.display = "none";
+      return;
+    }
+    if (document.documentElement.getAttribute("data-fuse_active") === "true") {
+      searchingForResultsBanner();
+    } else {
+      RESULTS_CONTAINER.style.display = "none";
+    }
+    handleSearchInput();
   }
 
   /**
@@ -279,6 +304,7 @@ require(["fuse"], (Fuse) => {
     if (SEARCH_INPUT) {
       SEARCH_INPUT.addEventListener("click", expandSearchInput);
       SEARCH_INPUT.addEventListener("keydown", handleKeyDownSearchInput);
+      SEARCH_INPUT.addEventListener("input", handleInputEvent);
     }
   }
 

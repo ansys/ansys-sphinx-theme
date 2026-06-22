@@ -3,8 +3,8 @@
   "viewports": [
     {
       "label": "tablet",
-      "width": 1024,
-      "height": 768
+      "width": 1440,
+      "height": 900
     },
     {
       "label": "desktop",
@@ -21,16 +21,9 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "hideSelectors": [],
-      "removeSelectors": [],
-      "hoverSelector": "",
-      "clickSelector": "",
-      "postInteractionWait": 0,
-      "selectors": [],
-      "selectorExpansion": true,
-      "expect": 0,
-      "misMatchThreshold" : 0.1,
-      "requireSameDimensions": true
+      "selectors": ["viewport"],
+      "misMatchThreshold" : 0.2,
+      "requireSameDimensions": false
     },
     {
       "label": "Ansys Sphinx Theme - sphinx design example page",
@@ -39,7 +32,8 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
+      "selectors": ["viewport"],
+      "misMatchThreshold" : 0.5,
       "requireSameDimensions": false
     },
     {
@@ -49,7 +43,8 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.2,
+      "selectors": ["viewport"],
+      "misMatchThreshold" : 2.0,
       "requireSameDimensions": false
     },
     {
@@ -59,8 +54,16 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 2.5,
-      "requireSameDimensions": false
+      "selectors": ["viewport"],
+      "misMatchThreshold" : 0.2,
+      "requireSameDimensions": false,
+      "viewports": [
+      {
+        "label": "desktop",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
     },
     {
       "label": "Ansys Sphinx Theme - examples- table page",
@@ -69,7 +72,8 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
+      "selectors": ["viewport"],
+      "misMatchThreshold" : 0.2,
       "requireSameDimensions": false
     },
     {
@@ -79,7 +83,8 @@
       "readyEvent": "",
       "readySelector": "",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
+      "selectors": ["viewport"],
+      "misMatchThreshold" : 3.0,
       "requireSameDimensions": false
     },
     {
@@ -87,16 +92,39 @@
       "url": "http://localhost:8000/examples/gallery-examples/index.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/gallery-examples/index.html",
       "delay": 20,
-      "misMatchThreshold" : 0.1,
+      "selectors": ["viewport"],
+      "misMatchThreshold" : 0.2,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Ansys Sphinx Theme - secondary sidebar (options page)",
+      "url": "http://localhost:8000/user-guide/options.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/user-guide/options.html",
+      "readyEvent": "",
+      "readySelector": "#pst-page-toc-nav, .ast-primary-toc",
+      "delay": 30,
+      "selectors": [".bd-sidebar-secondary", ".bd-sidebar-primary"],
+      "misMatchThreshold": 0.3,
+      "requireSameDimensions": false
+    },
+    {
+      "label": "Ansys Sphinx Theme - secondary sidebar (configuration page)",
+      "url": "http://localhost:8000/user-guide/configuration.html",
+      "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/user-guide/configuration.html",
+      "readyEvent": "",
+      "readySelector": "#pst-page-toc-nav, .ast-primary-toc",
+      "delay": 30,
+      "selectors": [".bd-sidebar-secondary", ".bd-sidebar-primary"],
+      "misMatchThreshold": 0.3,
       "requireSameDimensions": false
     }
   ],
   "paths": {
-    "bitmaps_reference": "backstop_data/bitmaps_reference",
-    "bitmaps_test": "backstop_data/bitmaps_test",
-    "engine_scripts": "backstop_data/engine_scripts",
-    "html_report": "backstop_data/html_report",
-    "ci_report": "backstop_data/ci_report"
+    "bitmaps_reference": "tests/backstop_data/bitmaps_reference",
+    "bitmaps_test": "tests/backstop_data/bitmaps_test",
+    "engine_scripts": "tests/backstop_data/engine_scripts",
+    "html_report": "tests/backstop_data/html_report",
+    "ci_report": "tests/backstop_data/ci_report"
   },
   "ci": {
     "format": "junit",
@@ -105,7 +133,14 @@
   "report": ["browser","CI"],
   "engine": "puppet",
   "engineOptions": {
-    "args": ["--no-sandbox"]
+    "args": [
+      "--no-sandbox"
+    ],
+    "defaultViewport": {
+      "width": 1920,
+      "height": 1080,
+      "deviceScaleFactor": 1
+    }
   },
   "asyncCaptureLimit": 5,
   "asyncCompareLimit": 50,

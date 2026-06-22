@@ -1,24 +1,18 @@
-# Copyright (C) 2021 - 2026 ANSYS, Inc. and/or its affiliates.
-# SPDX-License-Identifier: MIT
+# Copyright (C) 2021 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 #
 #
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
+# http://www.apache.org/licenses/LICENSE-2.0
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """Module to configure cheatsheet options and build the Quarto cheatsheet.
 
@@ -39,7 +33,7 @@ from sphinx.util import logging
 logger = logging.getLogger(__name__)
 
 # Cheat sheet extension version
-CHEAT_SHEET_QUARTO_EXTENTION_VERSION = "v1"
+CHEAT_SHEET_QUARTO_EXTENTION_VERSION = "v2"
 
 
 def cheatsheet_sidebar_pages(app: Sphinx) -> Optional[List[str]]:
@@ -93,7 +87,7 @@ def convert_pdf_to_png(pdf_path: pathlib.Path, output_dir: pathlib.Path, output_
         )
 
 
-def run_quarto_command(command: List[str], cwd: str) -> None:
+def run_quarto_command(command: List[str], cwd: str | pathlib.Path) -> None:
     """
     Run a Quarto command and log its output.
 
@@ -101,25 +95,39 @@ def run_quarto_command(command: List[str], cwd: str) -> None:
     ----------
     command : List[str]
         List of command arguments.
-    cwd : str
-        Current working directory.
+    cwd : str | pathlib.Path
+        Current working directory to run the command in.
     """
     command = ["quarto"] + command
+    logger.info(f"Running command: {' '.join(command)}")
+
     try:
         # Excluding bandit rule because subprocess is using quarto command
         # and we are handling the command execution securely.
         # The command is run in a controlled environment and not accepting user input.
-        result = subprocess.run(command, cwd=cwd, check=True, capture_output=True, text=True)  # nosec: B603
+        result = subprocess.run(command, cwd=str(cwd), check=True, capture_output=True, text=True)  # nosec: B603
         if result.stdout:
-            logger.info(result.stdout)
+            logger.info(f"Command stdout:\n{result.stdout}")
 
         if result.stderr:
             # HACK: Quarto writes both stdout and stderr to stderr
             # so we need to log it as info if it's not an error
-            logger.info(result.stderr)
+            logger.info(f"Command stderr:\n{result.stderr}")
 
     except subprocess.CalledProcessError as e:
-        raise RuntimeError(f"Failed to run the command: {e}")
+        # Log the output before raising the error
+        logger.error(f"Command failed: {' '.join(command)}")
+        if e.stdout:
+            logger.info(f"Failed command stdout:\n{e.stdout}")
+        if e.stderr:
+            logger.error(f"Failed command stderr:\n{e.stderr}")
+
+        error_msg = f"Failed to run the command: {e}"
+        if e.stdout:
+            error_msg += f"\n\nStdout:\n{e.stdout}"
+        if e.stderr:
+            error_msg += f"\n\nStderr:\n{e.stderr}"
+        raise RuntimeError(error_msg)
 
 
 def build_quarto_cheatsheet(app: Sphinx) -> None:
@@ -143,22 +151,22 @@ def build_quarto_cheatsheet(app: Sphinx) -> None:
     output_dir = "_static"
     version = cheatsheet_options.get("version", "main")
 
-    cheatsheet_file = pathlib.Path(app.srcdir) / cheatsheet_file
+    cheatsheet_file_path = pathlib.Path(app.srcdir) / cheatsheet_file
     output_dir_path = pathlib.Path(app.outdir) / output_dir
-    file_name = str(cheatsheet_file.name)
-    file_path = cheatsheet_file.parent
+    file_name = cheatsheet_file_path.name
+    parent_dir = str(cheatsheet_file_path.parent)
 
     logger.info(f"Building Quarto cheatsheet: {file_name}")
 
     # Adapt with new
-    run_quarto_command(["--version"], file_path)
+    run_quarto_command(["--version"], parent_dir)
     run_quarto_command(
         [
             "add",
             f"ansys/pyansys-quarto-cheatsheet@{CHEAT_SHEET_QUARTO_EXTENTION_VERSION}",
             "--no-prompt",
         ],
-        file_path,
+        parent_dir,
     )
     run_quarto_command(
         [
@@ -167,15 +175,15 @@ def build_quarto_cheatsheet(app: Sphinx) -> None:
             "--to",
             "cheat_sheet-pdf",
             "--output-dir",
-            output_dir_path,
+            str(output_dir_path),
             "-V",
             f"version={version}",
         ],
-        file_path,
+        parent_dir,
     )
     run_quarto_command(
-        ["remove", "ansys/pyansys-quarto-cheatsheet", "--no-prompt"],
-        file_path,
+        ["remove", "ansys/cheat_sheet", "--no-prompt"],
+        parent_dir,
     )
     supplementary_files = [
         "_static/slash.png",
@@ -183,13 +191,13 @@ def build_quarto_cheatsheet(app: Sphinx) -> None:
         "_static/ansys.png",
     ]
     for file in supplementary_files:
-        file_path = cheatsheet_file.parent / file
-        if file_path.exists():
-            file_path.unlink()
+        supplementary_file_path = cheatsheet_file_path.parent / file
+        if supplementary_file_path.exists():
+            supplementary_file_path.unlink()
 
     # If static folder is clean, delete it
-    if not list(cheatsheet_file.parent.glob("_static/*")):
-        cheatsheet_file.parent.joinpath("_static").rmdir()
+    if not list(cheatsheet_file_path.parent.glob("_static/*")):
+        cheatsheet_file_path.parent.joinpath("_static").rmdir()
 
     output_file = output_dir_path / file_name.replace(".qmd", ".pdf")
     app.config.html_theme_options["cheatsheet"]["output_dir"] = f"{output_dir}/{output_file.name}"

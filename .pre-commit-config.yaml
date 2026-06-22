@@ -1,27 +1,26 @@
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.14.1
+  rev: 3b3f7c3f57fe9925356faf5fe6230835138be230  # frozen: v0.15.17
   hooks:
     - id: ruff
       args: [--fix]
     - id: ruff-format
 
 - repo: https://github.com/codespell-project/codespell
-  rev: v2.4.1
+  rev: 2ccb47ff45ad361a21071a7eedda4c37e6ae8c5a  # frozen: v2.4.2
   hooks:
   - id: codespell
-    exclude: doc/source/examples/nbsphinx/jupyter-notebook.ipynb
     args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt", "-w"]
 
 - repo: https://github.com/pycontribs/mirrors-prettier
-  rev: v3.6.2
+  rev: c79518d33a81b378af7b186e99e360a2c9b63223  # frozen: v3.6.2
   hooks:
   - id: prettier
     types_or: [css, javascript]
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v6.0.0
+  rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
   hooks:
   - id: check-merge-conflict
   - id: debug-statements
@@ -30,20 +29,22 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 0.34.1
+  rev: 8ef330cbb7204d388aa7a620f9549bcea8009663  # frozen: 0.37.3
   hooks:
     - id: check-github-workflows
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: v0.5.2
+  rev: 55c5b6a5439abd847613579c6924da750e8b78b2  # frozen: v0.8.0
   hooks:
   - id: add-license-headers
     files: '(src|doc/source/examples)/.*\.(py)'
     args:
     - --start_year=2021
+    - --custom_license=Apache-2.0
+
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: v1.12.1
+  rev: 9257c6050c0261b8c57e712f632dc4a8010109a9  # frozen: v1.25.2
   hooks:
     - id: zizmor
       args:
@@ -52,7 +53,7 @@ repos:
 
 # Do not use this tool with proprietary ansys source code.
 - repo: "https://github.com/djlint/djLint"
-  rev: v1.36.4
+  rev: a8264ddb425b07a8bd1bfd758c4d8d938ed064ad  # frozen: v1.39.2
   hooks:
     - id: djlint-jinja
       types_or: ["html"]

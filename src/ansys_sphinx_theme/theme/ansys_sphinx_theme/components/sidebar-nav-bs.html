@@ -1,0 +1,136 @@
+{# Displays the TOC-subtree for pages nested under the currently active top-level TOCtree element.
+   When ast_page_toc_in_primary is True, the current page's heading TOC is injected
+   as child items inside the active li.current entry of the nav tree. #}
+{% set show_nav_level = meta['html_theme.show_nav_level'] if (meta is defined and meta is not none and 'html_theme.show_nav_level' in meta) else theme_show_nav_level %}
+{% set page_toc = generate_toc_html() if ast_page_toc_in_primary else '' %}
+<nav class="bd-docs-nav bd-links"
+     aria-label="{{ _('Section Navigation') }}">
+  <p class="bd-links__title" role="heading" aria-level="1">{{ _("Section Navigation") }}</p>
+  <div class="bd-toc-item navbar-nav">
+    {{- generate_toctree_html(
+      "sidebar",
+      show_nav_level=show_nav_level | int,
+      maxdepth=theme_navigation_depth | int,
+      collapse=theme_collapse_navigation | tobool,
+      includehidden=theme_sidebar_includehidden | tobool,
+      titles_only=True
+      )
+    -}}
+  </div>
+  {%- if ast_page_toc_in_primary and page_toc | length >= 1 %}
+  <div id="ast-inline-page-toc" class="ast-inline-toc-hidden">{{ page_toc }}</div>
+  <script>
+    (function () {
+      var toc = document.getElementById("ast-inline-page-toc");
+      if (!toc) return;
+
+      var ul = toc.querySelector("ul");
+      toc.parentNode.removeChild(toc);
+      if (!ul) return;
+
+      var current = document.querySelector(".bd-docs-nav .bd-toc-item li.current");
+
+      if (!current) {
+        // No section nav entries — inject TOC directly into the nav container
+        var container = document.querySelector(".bd-docs-nav .bd-toc-item");
+        if (!container) return;
+        ul.hidden = false;
+        container.appendChild(ul);
+
+        return;
+      }
+
+      // Section nav exists — inject TOC as nested children of li.current
+      ul.hidden = true;
+      // Swap section-nav (right-sidebar sizing) for bd-sidenav (primary sidebar sizing)
+      ul.classList.remove("section-nav", "visible");
+      ul.classList.add("bd-sidenav", "ast-primary-toc");
+      ul.querySelectorAll("ul").forEach(function (sub) {
+        sub.classList.remove("section-nav");
+        sub.classList.add("bd-sidenav");
+      });
+      // Make li.current a flex container so button sits inline with the link
+      current.style.display = "flex";
+      current.style.flexWrap = "wrap";
+      current.style.alignItems = "center";
+      var pageLink = current.querySelector(":scope > a");
+      if (pageLink) pageLink.style.flex = "1";
+      ul.style.flexBasis = "100%";
+      current.appendChild(ul);
+
+      // Chevron toggle button inserted after the page <a> link
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "ast-toc-toggle";
+      btn.setAttribute("aria-label", "Toggle page sections");
+      btn.setAttribute("aria-expanded", "false");
+      btn.innerHTML = '<i class="fa-solid fa-chevron-down" aria-hidden="true"></i>';
+      current.insertBefore(btn, ul);
+
+      function openToc() {
+        if (!ul.hidden) return;
+        ul.hidden = false;
+        btn.classList.add("ast-toc-toggle--open");
+        btn.setAttribute("aria-expanded", "true");
+      }
+
+      btn.addEventListener("click", function () {
+        var isOpen = !ul.hidden;
+        ul.hidden = isOpen;
+        btn.classList.toggle("ast-toc-toggle--open", !isOpen);
+        btn.setAttribute("aria-expanded", isOpen ? "false" : "true");
+      });
+
+      // Scroll-spy — highlights the last heading scrolled past
+      var tocLinks = Array.from(ul.querySelectorAll("a[href]"));
+      if (!tocLinks.length) return;
+
+      var sections = tocLinks.map(function (a) {
+        return document.getElementById(a.getAttribute("href").slice(1));
+      }).filter(Boolean);
+
+      if (!sections.length) return;
+
+      var activeLink = null;
+
+      function applyActive(link) {
+        if (link === activeLink) return;
+        if (activeLink) {
+          activeLink.style.color = "";
+          activeLink.style.backgroundColor = "";
+          activeLink.style.borderLeft = "";
+          activeLink.style.paddingLeft = "";
+          activeLink.style.fontWeight = "";
+          activeLink.style.borderRadius = "";
+          activeLink.style.marginLeft = "";
+        }
+        activeLink = link;
+        if (!link) return;
+        link.style.color = "var(--pst-color-text-base, #1a1a1a)";
+        link.style.backgroundColor = "var(--ast-sidebar-active-background)";
+        link.style.borderLeft = "3px solid var(--ast-color-link)";
+        link.style.paddingLeft = "";
+        link.style.marginLeft = "3px";
+        link.style.fontWeight = "700";
+        link.style.borderRadius = "0 4px 4px 0";
+        openToc();
+      }
+
+      function updateActive() {
+        var threshold = 120; // px from top of viewport
+        var best = null;
+        for (var i = sections.length - 1; i >= 0; i--) {
+          if (sections[i].getBoundingClientRect().top <= threshold) {
+            best = tocLinks[i];
+            break;
+          }
+        }
+        applyActive(best);
+      }
+
+      window.addEventListener("scroll", updateActive, { passive: true });
+      updateActive();
+    })();
+  </script>
+  {%- endif %}
+</nav>

@@ -16,9 +16,12 @@ permissions:
   pull-requests: read # To read PR metadata
 
 env:
-  MAIN_PYTHON_VERSION : '3.13'
+  MAIN_PYTHON_VERSION : '3.14'
   PACKAGE_NAME: 'ansys_sphinx_theme'
   DOCUMENTATION_CNAME: 'sphinxdocs.ansys.com'
+  # astroid -> dependency of sphinx-autoapi, has LGPL-2.1-or-later
+  # Sphinx -> has BSD licence, but check failed
+  WHITE_LIST_LICENSES: "Sphinx, astroid"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -33,7 +36,7 @@ jobs:
       pull-requests: write # To add labels to PRs
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
 
@@ -43,7 +46,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Label pull-request"
-        uses: actions/labeler@634933edcd8ababfe52f92936142cc22ac488b1b # v6.0.1
+        uses: actions/labeler@f27b608878404679385c85cfa523b85ccb86e213 # v6.1.0
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -57,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Create fragment"
-        uses: ansys/actions/doc-changelog@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        uses: ansys/actions/doc-changelog@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         if: github.event_name == 'pull_request'
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -67,7 +70,7 @@ jobs:
           bot-email: ${{ secrets.PYANSYS_CI_BOT_EMAIL }}
 
       - name: "Update changelog"
-        uses: ansys/actions/doc-deploy-changelog@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        uses: ansys/actions/doc-deploy-changelog@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         if: github.event_name == 'push' && contains(github.ref, 'refs/tags')
         with:
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -80,9 +83,40 @@ jobs:
     needs: changelog
     steps:
       - name: "Run Ansys code style checks"
-        uses: ansys/actions/code-style@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        uses: ansys/actions/code-style@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
+
+  type-check:
+    name: Type check
+    runs-on: ubuntu-latest
+    needs: changelog
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: "Set up uv"
+        uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
+        with:
+          prune-cache: true
+          enable-cache: false
+
+      - name: Create virtual environment
+        run: uv venv .venv
+
+      # TODO: Once dependency update logic has been defined, the handling of ty should align
+      - name: Install dependencies
+        run: |
+          source .venv/bin/activate
+          uv pip install --group type-check
+
+      - name: Run ty
+        run: |
+          source .venv/bin/activate
+          ty check --ignore unresolved-import
+
 
   doc-style:
     name: Doc style
@@ -90,7 +124,7 @@ jobs:
     needs: changelog
     steps:
       - name: "Run Ansys documentation style checks"
-        uses: ansys/actions/doc-style@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        uses: ansys/actions/doc-style@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -99,7 +133,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: changelog
     steps:
-      - uses: ansys/actions/check-vulnerabilities@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+      - uses: ansys/actions/check-vulnerabilities@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           python-package-name: ${{ env.PACKAGE_NAME }}
@@ -111,7 +145,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: changelog
     steps:
-      - uses: ansys/actions/check-actions-security@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+      - uses: ansys/actions/check-actions-security@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           generate-summary: true
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -123,14 +157,14 @@ jobs:
     needs: doc-style
     steps:
       - name: "Run Ansys documentation building action"
-        uses: ansys/actions/doc-build@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        uses: ansys/actions/doc-build@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
           group-dependencies-name: 'doc'
           optional-dependencies-name: ''
           add-pdf-html-docs-as-assets: true
           requires-xvfb: true
-          dependencies: 'pandoc'
+          dependencies: 'pandoc texlive-xetex texlive-fonts-extra texlive-latex-extra latexmk'
 
   wheelhouse:
     name: "Wheelhouse ${{ matrix.os }} ${{ matrix.python-version }}"
@@ -140,19 +174,20 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ['3.10', '3.11', '3.12', '3.13']
+        python-version: ['3.10', '3.11', '3.12', '3.13', '3.14']
         should-release:
           - ${{ github.event_name == 'push' && contains(github.ref, 'refs/tags') }}
         exclude:
           - should-release: false
             os: macos-latest
     steps:
-      - uses: ansys/actions/build-wheelhouse@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+      - uses: ansys/actions/build-wheelhouse@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           operating-system: ${{ matrix.os }}
           python-version: ${{ matrix.python-version }}
-          whitelist-license-check: "Sphinx" # This has BSD licence , but check failed
+          whitelist-license-check: ${{ env.WHITE_LIST_LICENSES }}
+          target: "all"
 
   build-library:
     name: "Build library"
@@ -160,7 +195,7 @@ jobs:
     needs: [check-vulnerabilities, check-actions, doc-build, wheelhouse]
     steps:
       - name: "Build library source and wheel artifacts"
-        uses: ansys/actions/build-library@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        uses: ansys/actions/build-library@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           library-name: ${{ env.PACKAGE_NAME }}
 
@@ -173,7 +208,7 @@ jobs:
       pull-requests: write # To post comments with doc links
     needs: build-library
     steps:
-      - uses: ansys/actions/doc-deploy-pr@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+      - uses: ansys/actions/doc-deploy-pr@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -188,7 +223,7 @@ jobs:
     needs: build-library
     steps:
       - name: "Deploy developers documentation"
-        uses: ansys/actions/doc-deploy-dev@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        uses: ansys/actions/doc-deploy-dev@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
             cname: ${{ env.DOCUMENTATION_CNAME }}
             token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}
@@ -208,20 +243,20 @@ jobs:
     steps:
 
       - name: "Release to the private PyPI repository"
-        uses: ansys/actions/release-pypi-private@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        uses: ansys/actions/release-pypi-private@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           library-name: ${{ env.PACKAGE_NAME }}
           twine-username: "__token__"
           twine-token: ${{ secrets.PYANSYS_PYPI_PRIVATE_PAT }}
 
       - name: "Download the library artifacts from build-library step"
-        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
         with:
           name: ${{ env.PACKAGE_NAME }}-artifacts
           path: ${{ env.PACKAGE_NAME }}-artifacts
 
       - name: "Upload artifacts to PyPI using trusted publisher"
-        uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # v1.13.0
+        uses: pypa/gh-action-pypi-publish@cef221092ed1bacb1cc03d23a2d87d1d172e277b # v1.14.0
         with:
           repository-url: "https://upload.pypi.org/legacy/"
           print-hash: true
@@ -229,7 +264,7 @@ jobs:
           skip-existing: false
 
       - name: "Release to GitHub"
-        uses: ansys/actions/release-github@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        uses: ansys/actions/release-github@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           library-name: ${{ env.PACKAGE_NAME }}
@@ -242,7 +277,7 @@ jobs:
     needs: release
     steps:
       - name: "Deploy stable documentation"
-        uses: ansys/actions/doc-deploy-stable@41f86da4c9ead510db9135e428e33df9cc6f92e1 # v10.2.3
+        uses: ansys/actions/doc-deploy-stable@d946b24b9a765f4169bcc94afdb27bd1a0533741 # v10.3.2
         with:
           cname: ${{ env.DOCUMENTATION_CNAME }}
           token: ${{ secrets.PYANSYS_CI_BOT_TOKEN }}

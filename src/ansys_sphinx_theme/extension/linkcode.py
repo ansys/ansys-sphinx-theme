@@ -1,24 +1,18 @@
-# Copyright (C) 2021 - 2026 ANSYS, Inc. and/or its affiliates.
-# SPDX-License-Identifier: MIT
+# Copyright (C) 2021 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
 #
 #
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 #
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
+# http://www.apache.org/licenses/LICENSE-2.0
 #
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 """A module containing the an extension for creating links to original source code files."""
 
@@ -66,7 +60,7 @@ DOMAIN_KEYS = {
 
 def sphinx_linkcode_resolve(
     domain: str, info: dict, library: str, source_path: str, github_version: str, edit: bool = False
-) -> str or None:
+) -> str | None:
     """
     Resolve the URL corresponding to a Python object for linking to the source code.
 
@@ -144,19 +138,22 @@ def sphinx_linkcode_resolve(
         except Exception:
             return None
 
-    fn = Path(fn).resolve()
+    if not fn:
+        return None
+
+    fn_path = Path(fn).resolve()
 
     # Ensure fn is within the expected repository directory
     base_path = Path(__file__).resolve().parent
-    if not fn.is_relative_to(base_path):
+    if not fn_path.is_relative_to(base_path):
         return None  # Avoid errors due to files outside the expected path
 
     try:
-        fn = fn.relative_to(base_path)
+        fn_path = fn_path.relative_to(base_path)
     except ValueError:
         return None  # Avoid errors when the file is not within the base path
 
-    fn_components = list(fn.parts)
+    fn_components = list(fn_path.parts)
 
     if not source_path:
         module = modname.split(".")[0]
