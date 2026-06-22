@@ -1,9 +1,12 @@
+{# Normalise: accept a single dict, a list of dicts, or nothing #}
 {% if theme_ast_announcement %}
-{# Normalise: accept a single dict or a list of dicts #}
-{% if theme_ast_announcement is mapping %}
-  {% set ast_items = [theme_ast_announcement] %}
+  {% if theme_ast_announcement is mapping %}
+    {% set ast_items = [theme_ast_announcement] %}
+  {% else %}
+    {% set ast_items = theme_ast_announcement %}
+  {% endif %}
 {% else %}
-  {% set ast_items = theme_ast_announcement %}
+  {% set ast_items = [] %}
 {% endif %}
 {# Compute most-severe type for the banner border/icon #}
 {% set _priority = {'error': 3, 'warning': 2, 'success': 1, 'info': 0} %}
@@ -14,10 +17,10 @@
   {% endif %}
 {% endfor %}
 {% set ast_announcement_type = ns.banner_type %}
-{% set ast_first_message = ast_items[0].get('message', '') %}
-{% set ast_first_url = ast_items[0].get('url', '') %}
+{% set ast_first_message = ast_items[0].get('message', '') if ast_items else '' %}
+{% set ast_first_url = ast_items[0].get('url', '') if ast_items else '' %}
 
-<div class="ast-announcement-wrap" role="region" aria-label="Announcement">
+<div class="ast-announcement-wrap" role="region" aria-label="Announcement"{% if not ast_items %} hidden{% endif %}>
     <div class="ast-announcement {{ ast_announcement_type }}">
         <span class="ast-announcement-icon" aria-hidden="true"></span>
         <span class="ast-announcement-text" id="ast-announcement-text">{{ ast_first_message | safe }}</span>
@@ -54,12 +57,15 @@ document.addEventListener("DOMContentLoaded", function() {
             wrap.style.marginLeft = (rect.left - wrap.getBoundingClientRect().left) + "px";
         }
     }
-    alignToBdArticle();
+    // Defer initial alignment until after layout is complete
+    if (wrap && !wrap.hasAttribute("hidden")) {
+        requestAnimationFrame(alignToBdArticle);
+    }
     window.addEventListener("resize", alignToBdArticle);
 
     if (closeBtn && wrap) {
         closeBtn.addEventListener("click", function() {
-            wrap.style.display = "none";
+            wrap.setAttribute("hidden", "");
         });
     }
 
@@ -144,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (btnEl) {
             if (total === 1) {
-                // Single notification: show button only if a url is configured
+                // Single ast_announcement with a url: direct link button
                 if (astUrl) {
                     btnEl.href = astUrl;
                     btnEl.target = "_blank";
@@ -177,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Fetch announcement.html then build notifications
-    fetch("announcement.html")
+    fetch("{{ pathto('', 1) }}announcement.html")
         .then(function(response) {
             if (!response.ok) { return null; }
             return response.text();
@@ -195,9 +201,46 @@ document.addEventListener("DOMContentLoaded", function() {
                     extraItems.push({ type: type, html: p.innerHTML });
                 });
             }
+
+            // If no ast config items but announcement.html has content:
+            // derive banner type from fetched items and show the wrap
+            const modalBody = document.querySelector(".ast-announcement-modal-body");
+            let astItems = [];
+            try { astItems = JSON.parse((modalBody && modalBody.dataset.astItems) || "[]"); } catch(e) {}
+
+            if (astItems.length === 0 && extraItems.length > 0) {
+                const PRIORITY = { error: 3, warning: 2, success: 1, info: 0 };
+                let dominant = "info";
+                extraItems.forEach(function(i) {
+                    if ((PRIORITY[i.type] || 0) > (PRIORITY[dominant] || 0)) dominant = i.type;
+                });
+                // Apply dominant type class to banner and modal
+                const banner = document.querySelector(".ast-announcement");
+                const modal  = document.querySelector(".ast-announcement-modal");
+                ["info","warning","error","success"].forEach(function(t) {
+                    if (banner) banner.classList.remove(t);
+                    if (modal)  modal.classList.remove(t);
+                });
+                if (banner) banner.classList.add(dominant);
+                if (modal)  modal.classList.add(dominant);
+
+                // Set initial banner text from first extraItem
+                const textEl = document.getElementById("ast-announcement-text");
+                if (textEl && extraItems.length === 1) {
+                    textEl.innerHTML = extraItems[0].html;
+                }
+
+                if (wrap) {
+                    wrap.removeAttribute("hidden");
+                    // Re-run alignment now that the wrap is visible
+                    alignToBdArticle();
+                }
+            }
+
             buildNotifications(extraItems);
         })
         .catch(function() { buildNotifications([]); });
+
 
     // Modal open/close
     const detailsBtn = document.getElementById("ast-announcement-details-btn");
@@ -284,26 +327,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
 /* "View" inline button (can be <a> or <button>) */
 .ast-announcement-details-btn {
-    background: transparent;
-    border: 1px solid currentColor;
+    display: inline-flex;
+    height: 32px;
+    max-width: 280px;
+    padding: 0 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
     border-radius: 4px;
-    font-size: 0.8em;
-    font-weight: bold;
-    padding: 2px 8px;
+    border: 1px solid var(--ast-dropdown-border-color, #d9d9d9);
+    background: var(--pst-color-background, #ffffff);
+    color: var(--pst-color-text-base);
     cursor: pointer;
     white-space: nowrap;
     flex-shrink: 0;
-    color: inherit;
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
+    font-size: 0.85em;
+    font-weight: 500;
 }
 
-.ast-announcement.info    .ast-announcement-details-btn { color: var(--ast-admonition-info-icon); border-color: var(--ast-admonition-info-icon); }
-.ast-announcement.warning .ast-announcement-details-btn { color: var(--ast-admonition-warning-icon); border-color: var(--ast-admonition-warning-icon); }
-.ast-announcement.error   .ast-announcement-details-btn { color: var(--ast-admonition-danger-icon); border-color: var(--ast-admonition-danger-icon); }
-
-.ast-announcement-details-btn:hover { opacity: 0.75; }
+.ast-announcement-details-btn:hover {
+    border-color: var(--ast-dropdown-border-color-hover, #8e8e8e);
+    opacity: 0.9;
+}
 
 /* Close button */
 .ast-announcement-close {
@@ -435,5 +481,3 @@ document.addEventListener("DOMContentLoaded", function() {
 }
 .ast-notification-link:hover { opacity: 1; }
 </style>
-
-{% endif %}

@@ -82,10 +82,6 @@ html_theme_options: dict[str, Any] = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
-    # "ast_announcement": {
-    #     "message": "Welcome to the Ansys Sphinx Theme documentation!",
-    #     "type": "info",
-    # },
     "ast_announcement": [
         {
             "message": "Welcome to the Ansys Sphinx Theme documentation!",
@@ -96,10 +92,10 @@ html_theme_options: dict[str, Any] = {
             "type": "warning",
             "link": "https://docs.pyansys.com/version/stable/",
         },
-        # {
-        #     "message": "Critical security patch required.",
-        #     "type": "error",
-        # },
+        {
+            "message": "Critical security patch required.",
+            "type": "error",
+        },
     ],
 }
 

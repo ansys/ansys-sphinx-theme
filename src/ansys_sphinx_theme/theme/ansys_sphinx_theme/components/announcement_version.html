@@ -8,7 +8,7 @@
 <div id="announcement_msg" aria-live="polite" style="display:none;"></div>
 <script>
   // Fetch and inject the announcement HTML content
-  fetch("announcement.html")
+  fetch("{{ pathto('', 1) }}announcement.html")
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status} Announcement.html file not found, Please ignore this, if you are in dev/stable documentation`);
