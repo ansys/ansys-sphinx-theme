@@ -1,6 +1,5 @@
 """Sphinx documentation configuration file."""
 
-from datetime import datetime
 import os
 from pathlib import Path
 import subprocess
@@ -31,8 +30,7 @@ EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
 
 # Project information
 project = "ansys_sphinx_theme"
-copyright = f"(c) {datetime.now().year} ANSYS, Inc. All rights reserved"
-author = "ANSYS, Inc."
+author = "Synopsys, Inc. and ANSYS, Inc."
 release = version = __version__
 cname = os.getenv("DOCUMENTATION_CNAME", "sphinxdocs.ansys.com")
 switcher_version = get_version_match(__version__)
