@@ -5,7 +5,10 @@
     1. #announcement_msg  — legacy banner bar (if present)
     2. .ast-announcement-modal .ast-announcement-extra — new modal popup (if present)
 -->
+<!-- djlint:off H021-->
+<!-- for inline styles -->
 <div id="announcement_msg" aria-live="polite" style="display:none;"></div>
+<!-- djlint:on -->
 <script>
   // Fetch and inject the announcement HTML content
   fetch("{{ pathto('', 1) }}announcement.html")

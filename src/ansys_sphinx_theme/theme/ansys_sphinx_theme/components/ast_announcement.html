@@ -24,16 +24,24 @@
     <div class="ast-announcement {{ ast_announcement_type }}">
         <span class="ast-announcement-icon" aria-hidden="true"></span>
         <span class="ast-announcement-text" id="ast-announcement-text">{{ ast_first_message | safe }}</span>
+        <!-- djlint:off H021-->
+        <!-- for inline styles -->
         <a class="ast-announcement-details-btn" id="ast-announcement-details-btn"
            href="{{ ast_first_url | e }}"
            data-ast-url="{{ ast_first_url | e }}"
            aria-label="View notifications"
            style="display:none">View</a>
+        <!-- djlint:on -->
+        <!-- djlint:off H023-->
+        <!-- use entity reference for &times; -->
         <button class="ast-announcement-close" id="ast-announcement-close" aria-label="Close announcement">&times;</button>
+        <!-- djlint:on -->
     </div>
 </div>
 
 <!-- Modal overlay -->
+<!-- djlint:off H023-->
+<!-- use entity reference for &times; -->
 <div class="ast-announcement-overlay" id="ast-announcement-overlay" role="dialog" aria-modal="true" aria-label="Announcement details">
     <div class="ast-announcement-modal {{ ast_announcement_type }}">
         <div class="ast-announcement-modal-body"
@@ -42,6 +50,7 @@
         <button class="ast-announcement-modal-close" id="ast-announcement-modal-close" aria-label="Close">&times;</button>
     </div>
 </div>
+<!-- djlint:on -->
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -144,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const btnEl = document.getElementById("ast-announcement-details-btn");
         const textEl = document.getElementById("ast-announcement-text");
         const total = astItems.length + extraItems.length;
-        const astUrl = (astItems.length === 1 && astItems[0].url) ? astItems[0].url : "";
+        const astUrl = (astItems.length === 1 && (astItems[0].url || astItems[0].link)) ? (astItems[0].url || astItems[0].link) : "";
         const attention = astItems.filter(function(i) { return ATTENTION_TYPES.includes(i.type); }).length
             + extraItems.filter(function(i) { return ATTENTION_TYPES.includes(i.type); }).length;
 
