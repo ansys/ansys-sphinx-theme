@@ -32,7 +32,7 @@ dependencies = [
     "importlib-metadata>=4.0",
     "Jinja2>=3.1.2",
     "pdf2image>=1.17.0",
-    "pydata-sphinx-theme>=0.15.4,<0.19",
+    "pydata-sphinx-theme>=0.15.4,<0.20",
     "PyYAML>=6.0",
     "Sphinx>=6.1.0",
 ]
