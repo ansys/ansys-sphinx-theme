@@ -1,12 +1,17 @@
 
 <!--
   Announcement Version Loader
-  Dynamically loads the announcement.html content into the announcement_msg div.
+  Dynamically loads the announcement.html content into:
+    1. #announcement_msg  — legacy banner bar (if present)
+    2. .ast-announcement-modal .ast-announcement-extra — new modal popup (if present)
 -->
-<div id="announcement_msg" aria-live="polite"></div>
+<!-- djlint:off H021-->
+<!-- for inline styles -->
+<div id="announcement_msg" aria-live="polite" style="display:none;"></div>
+<!-- djlint:on -->
 <script>
   // Fetch and inject the announcement HTML content
-  fetch("announcement.html")
+  fetch("{{ pathto('', 1) }}announcement.html")
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status} Announcement.html file not found, Please ignore this, if you are in dev/stable documentation`);
@@ -14,9 +19,13 @@
       return response.text();
     })
     .then((text) => {
-      var msgDiv = document.getElementById("announcement_msg");
-      if (msgDiv) {
-        msgDiv.innerHTML = text;
+      if (!text || !text.trim()) return;
+
+      // Only inject into the ast_announcement modal extra section.
+      // The legacy #announcement_msg bar is intentionally skipped.
+      var extra = document.querySelector(".ast-announcement-modal-body .ast-announcement-extra");
+      if (extra) {
+        extra.innerHTML = text;
       }
     })
     .catch((error) => {

@@ -648,6 +648,10 @@ def setup(app: Sphinx) -> dict:
     # Add default HTML configuration
     setup_default_html_theme_options(app)
     load_navbar_configuration(app)
+    ast_announcement = app.config.html_theme_options.get("ast_announcement", {})
+    if ast_announcement:
+        print("Rendering announcement banner with the following configuration:")
+        print(ast_announcement)
 
     add_default_copyright(app)
 
