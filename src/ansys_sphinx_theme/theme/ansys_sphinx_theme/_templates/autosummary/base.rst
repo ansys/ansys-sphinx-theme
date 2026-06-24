@@ -3,3 +3,6 @@
 .. currentmodule:: {{ module }}
 
 .. auto{{ objtype }}:: {{ objname }}
+
+
+.. ansys-minigallery:: {{ module }}.{{ objname }}
