@@ -1,0 +1,1012 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sphinx-Gallery &#8212; Ansys Sphinx Theme</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=a23b20f3" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+  
+  
+  
+
+  
+    <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../_static/documentation_options.js?v=22505836"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gallery-examples/sphinx-gallery';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.16.1';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://sphinxdocs.ansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '1.7';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Sphinx AutoAPI" href="../sphinx-autoapi.html" />
+    <link rel="prev" title="Sphinx-Gallery" href="index.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.7.2" />
+  <link rel="canonical" href="https://sphinxdocs.ansys.com/version/stable/examples/gallery-examples/sphinx-gallery.html" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://www.ansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/ansys_logo_transparent_black.png" class="logo__image only-light" alt="Ansys Sphinx Theme - Home"/>
+    <img src="../../_static/ansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="Ansys Sphinx Theme - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="Ansys Sphinx Theme home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user-guide.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../contribute.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/ansys-sphinx-theme" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+    
+<!--
+  Announcement Version Loader
+  Dynamically loads the announcement.html content into the announcement_msg div.
+-->
+<div id="announcement_msg" aria-live="polite"></div>
+<script>
+  // Fetch and inject the announcement HTML content
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status} Announcement.html file not found, Please ignore this, if you are in dev/stable documentation`);
+      }
+      return response.text();
+    })
+    .then((text) => {
+      var msgDiv = document.getElementById("announcement_msg");
+      if (msgDiv) {
+        msgDiv.innerHTML = text;
+      }
+    })
+    .catch((error) => {
+      // Log only unexpected fetch errors
+      if (!(error.message && error.message.startsWith("HTTP error: 404"))) {
+        console.error(`Fetch problem: ${error.message} Announcement.html could not be loaded.`);
+      }
+    });
+</script>
+  
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="Ansys Sphinx Theme home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user-guide.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contribute.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/ansys-sphinx-theme" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Sphinx extensions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sphinx-design.html">Sphinx design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nbsphinx.html">Jupyter notebook - nbsphinx</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Sphinx-Gallery</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Sphinx-Gallery</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx-autoapi.html">Sphinx AutoAPI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation components</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../table.html">Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admonitions.html">Admonitions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../examples.html" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Sphinx-Gallery</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Sphinx-Gallery</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gallery-examples-sphinx-gallery-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="sphinx-gallery">
+<span id="sphx-glr-examples-gallery-examples-sphinx-gallery-py"></span><h1>Sphinx-Gallery<a class="headerlink" href="#sphinx-gallery" title="Link to this heading">#</a></h1>
+<p>This example shows how to add a new example when using <a class="reference external" href="https://sphinx-gallery.github.io/">Sphinx-Gallery</a>.</p>
+<p>To use Sphinx-Gallery, first install the package with this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-gallery
+</pre></div>
+</div>
+<p>Then, add the package to the <code class="docutils literal notranslate"><span class="pre">extensions</span></code> variable in your Sphinx <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;sphinx_gallery.gen_gallery&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<section id="plot-a-simple-sphere-using-pyvista">
+<h2>Plot a simple sphere using PyVista<a class="headerlink" href="#plot-a-simple-sphere-using-pyvista" title="Link to this heading">#</a></h2>
+<p>This code plots a simple sphere using PyVista.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span>
+
+<span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;html&quot;</span><span class="p">)</span>
+
+<span class="n">sphere</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Sphere</span><span class="p">()</span>
+<span class="n">sphere</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_sphinx-gallery_001.png" srcset="../../_images/sphx_glr_sphinx-gallery_001.png" alt="sphinx gallery" class = "sphx-glr-single-img"/><p>Plot a simple sphere using PyVista with a plotter</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">plotter</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">notebook</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">sphere</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">plotter</span><span class="o">.</span><span class="n">title</span></a> <span class="o">=</span> <span class="s2">&quot;3D Sphere Visualization&quot;</span>
+<span class="n">plotter</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_sphinx-gallery_002.png" srcset="../../_images/sphx_glr_sphinx-gallery_002.png" alt="sphinx gallery" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>EmbeddableWidget(value=&#39;&lt;iframe srcdoc=&quot;&lt;!DOCTYPE html&gt;\n&lt;html lang=&amp;quot;en-US&amp;quot; dir=&amp;quot;ltr&amp;quot;&gt;\n  &lt;head&gt;\n    &lt;meta charset=&amp;quot;utf-8&amp;quot;&gt;\n    &lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;quot;width=device-width,initial-scale=1&amp;quot;&gt;\n    &lt;title&gt;404 | VTK.js &lt;/title&gt;\n    &lt;meta name=&amp;quot;description&amp;quot; content=&amp;quot;Not Found&amp;quot;&gt;\n    &lt;meta name=&amp;quot;generator&amp;quot; content=&amp;quot;VitePress v1.6.4&amp;quot;&gt;\n    &lt;link rel=&amp;quot;preload stylesheet&amp;quot; href=&amp;quot;/vtk-js/assets/style.BfuHIIC4.css&amp;quot; as=&amp;quot;style&amp;quot;&gt;\n    &lt;link rel=&amp;quot;preload stylesheet&amp;quot; href=&amp;quot;/vtk-js/vp-icons.css&amp;quot; as=&amp;quot;style&amp;quot;&gt;\n    \n    &lt;script type=&amp;quot;module&amp;quot; src=&amp;quot;/vtk-js/assets/app.DfjizcSH.js&amp;quot;&gt;&lt;/script&gt;\n    &lt;link rel=&amp;quot;preload&amp;quot; href=&amp;quot;/vtk-js/assets/inter-roman-latin.Di8DUHzh.woff2&amp;quot; as=&amp;quot;font&amp;quot; type=&amp;quot;font/woff2&amp;quot; crossorigin=&amp;quot;&amp;quot;&gt;\n    &lt;script id=&amp;quot;check-dark-mode&amp;quot;&gt;(()=&gt;{const e=localStorage.getItem(&amp;quot;vitepress-theme-appearance&amp;quot;)||&amp;quot;auto&amp;quot;,a=window.matchMedia(&amp;quot;(prefers-color-scheme: dark)&amp;quot;).matches;(!e||e===&amp;quot;auto&amp;quot;?a:e===&amp;quot;dark&amp;quot;)&amp;&amp;document.documentElement.classList.add(&amp;quot;dark&amp;quot;)})();&lt;/script&gt;\n    &lt;script id=&amp;quot;check-mac-os&amp;quot;&gt;document.documentElement.classList.toggle(&amp;quot;mac&amp;quot;,/Mac|iPhone|iPod|iPad/i.test(navigator.platform));&lt;/script&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n    &lt;div id=&amp;quot;app&amp;quot;&gt;&lt;/div&gt;\n    &lt;script&gt;window.__VP_HASH_MAP__=JSON.parse(&amp;quot;{\\&amp;quot;api_common_core_base64.md\\&amp;quot;:\\&amp;quot;DdzQd5cm\\&amp;quot;,\\&amp;quot;api_common_core_cellarray.md\\&amp;quot;:\\&amp;quot;Bol3FrQj\\&amp;quot;,\\&amp;quot;api_common_core_dataarray.md\\&amp;quot;:\\&amp;quot;CE0w5aq9\\&amp;quot;,\\&amp;quot;api_common_core_endian.md\\&amp;quot;:\\&amp;quot;CiyBcDyT\\&amp;quot;,\\&amp;quot;api_common_core_halffloat.md\\&amp;quot;:\\&amp;quot;BtMeKCgy\\&amp;quot;,\\&amp;quot;api_common_core_imagehelper.md\\&amp;quot;:\\&amp;quot;Bn1oq0Mb\\&amp;quot;,\\&amp;quot;api_common_core_lookuptable.md\\&amp;quot;:\\&amp;quot;ByDXJshg\\&amp;quot;,\\&amp;quot;api_common_core_math.md\\&amp;quot;:\\&amp;quot;DdnVufOV\\&amp;quot;,\\&amp;quot;api_common_core_matrixbuilder.md\\&amp;quot;:\\&amp;quot;DtnAVDJf\\&amp;quot;,\\&amp;quot;api_common_core_points.md\\&amp;quot;:\\&amp;quot;DfNzzAJ-\\&amp;quot;,\\&amp;quot;api_common_core_priorityqueue.md\\&amp;quot;:\\&amp;quot;DUNdXGx0\\&amp;quot;,\\&amp;quot;api_common_core_progresshandler.md\\&amp;quot;:\\&amp;quot;C3AIwmQi\\&amp;quot;,\\&amp;quot;api_common_core_scalarstocolors.md\\&amp;quot;:\\&amp;quot;B6dSJBjD\\&amp;quot;,\\&amp;quot;api_common_core_stringarray.md\\&amp;quot;:\\&amp;quot;CtzIu7_C\\&amp;quot;,\\&amp;quot;api_common_core_urlextract.md\\&amp;quot;:\\&amp;quot;BW04Xinu\\&amp;quot;,\\&amp;quot;api_common_core_variantarray.md\\&amp;quot;:\\&amp;quot;C0BiKWJg\\&amp;quot;,\\&amp;quot;api_common_datamodel_abstractpointlocator.md\\&amp;quot;:\\&amp;quot;DGX2ef_9\\&amp;quot;,\\&amp;quot;api_common_datamodel_boundingbox.md\\&amp;quot;:\\&amp;quot;CLmc6rWQ\\&amp;quot;,\\&amp;quot;api_common_datamodel_box.md\\&amp;quot;:\\&amp;quot;D_h1VVn8\\&amp;quot;,\\&amp;quot;api_common_datamodel_cardinalspline1d.md\\&amp;quot;:\\&amp;quot;DinplnDG\\&amp;quot;,\\&amp;quot;api_common_datamodel_cell.md\\&amp;quot;:\\&amp;quot;DyTXzJa2\\&amp;quot;,\\&amp;quot;api_common_datamodel_collection.md\\&amp;quot;:\\&amp;quot;BVqmNHuN\\&amp;quot;,\\&amp;quot;api_common_datamodel_cone.md\\&amp;quot;:\\&amp;quot;xvaTYeq8\\&amp;quot;,\\&amp;quot;api_common_datamodel_cylinder.md\\&amp;quot;:\\&amp;quot;BCvRfyy9\\&amp;quot;,\\&amp;quot;api_common_datamodel_dataset.md\\&amp;quot;:\\&amp;quot;D9wQIHNc\\&amp;quot;,\\&amp;quot;api_common_datamodel_datasetattributes.md\\&amp;quot;:\\&amp;quot;CYhekXwf\\&amp;quot;,\\&amp;quot;api_common_datamodel_edgelocator.md\\&amp;quot;:\\&amp;quot;Br1lgIoF\\&amp;quot;,\\&amp;quot;api_common_datamodel_imagedata.md\\&amp;quot;:\\&amp;quot;qmID88K0\\&amp;quot;,\\&amp;quot;api_common_datamodel_implicitfunction.md\\&amp;quot;:\\&amp;quot;x3BokgCS\\&amp;quot;,\\&amp;quot;api_common_datamodel_incrementaloctreenode.md\\&amp;quot;:\\&amp;quot;lJEcM-3s\\&amp;quot;,\\&amp;quot;api_common_datamodel_incrementaloctreepointlocator.md\\&amp;quot;:\\&amp;quot;DbxeZqkk\\&amp;quot;,\\&amp;quot;api_common_datamodel_itkhelper.md\\&amp;quot;:\\&amp;quot;BPHxwfV0\\&amp;quot;,\\&amp;quot;api_common_datamodel_kochanekspline1d.md\\&amp;quot;:\\&amp;quot;C7s2URVM\\&amp;quot;,\\&amp;quot;api_common_datamodel_line.md\\&amp;quot;:\\&amp;quot;CzWwGmK7\\&amp;quot;,\\&amp;quot;api_common_datamodel_locator.md\\&amp;quot;:\\&amp;quot;CeASSBbQ\\&amp;quot;,\\&amp;quot;api_common_datamodel_mergepoints.md\\&amp;quot;:\\&amp;quot;DNo2bVJ5\\&amp;quot;,\\&amp;quot;api_common_datamodel_piecewisefunction.md\\&amp;quot;:\\&amp;quot;DzminddT\\&amp;quot;,\\&amp;quot;api_common_datamodel_plane.md\\&amp;quot;:\\&amp;quot;BroodFPx\\&amp;quot;,\\&amp;quot;api_common_datamodel_planes.md\\&amp;quot;:\\&amp;quot;B66uR19u\\&amp;quot;,\\&amp;quot;api_common_datamodel_pointlocator.md\\&amp;quot;:\\&amp;quot;B49_1JQZ\\&amp;quot;,\\&amp;quot;api_common_datamodel_pointset.md\\&amp;quot;:\\&amp;quot;DZ3If-I-\\&amp;quot;,\\&amp;quot;api_common_datamodel_polydata.md\\&amp;quot;:\\&amp;quot;MPOlWRP2\\&amp;quot;,\\&amp;quot;api_common_datamodel_polygon.md\\&amp;quot;:\\&amp;quot;DhQUN4FC\\&amp;quot;,\\&amp;quot;api_common_datamodel_polyline.md\\&amp;quot;:\\&amp;quot;BLf6vmpZ\\&amp;quot;,\\&amp;quot;api_common_datamodel_quad.md\\&amp;quot;:\\&amp;quot;CQ8XxNGQ\\&amp;quot;,\\&amp;quot;api_common_datamodel_selectionnode.md\\&amp;quot;:\\&amp;quot;BMT2bS14\\&amp;quot;,\\&amp;quot;api_common_datamodel_sphere.md\\&amp;quot;:\\&amp;quot;DWMJWhkO\\&amp;quot;,\\&amp;quot;api_common_datamodel_spline1d.md\\&amp;quot;:\\&amp;quot;DXPmUIyw\\&amp;quot;,\\&amp;quot;api_common_datamodel_spline3d.md\\&amp;quot;:\\&amp;quot;D4dHrnf4\\&amp;quot;,\\&amp;quot;api_common_datamodel_triangle.md\\&amp;quot;:\\&amp;quot;7jCddbvw\\&amp;quot;,\\&amp;quot;api_common_datamodel_trianglestrip.md\\&amp;quot;:\\&amp;quot;DkpZkTY8\\&amp;quot;,\\&amp;quot;api_common_transform_landmarktransform.md\\&amp;quot;:\\&amp;quot;DljyrjRP\\&amp;quot;,\\&amp;quot;api_common_transform_transform.md\\&amp;quot;:\\&amp;quot;lj-rbnii\\&amp;quot;,\\&amp;quot;api_filters_core_cleanpolydata.md\\&amp;quot;:\\&amp;quot;bXhbSisE\\&amp;quot;,\\&amp;quot;api_filters_core_thresholdpoints.md\\&amp;quot;:\\&amp;quot;9clanFiC\\&amp;quot;,\\&amp;quot;api_filters_general_appendpolydata.md\\&amp;quot;:\\&amp;quot;BTFFsBEs\\&amp;quot;,\\&amp;quot;api_filters_general_clipclosedsurface.md\\&amp;quot;:\\&amp;quot;uX8pJXNC\\&amp;quot;,\\&amp;quot;api_filters_general_contourloopextraction.md\\&amp;quot;:\\&amp;quot;D_MAdsFy\\&amp;quot;,\\&amp;quot;api_filters_general_contourtriangulator.md\\&amp;quot;:\\&amp;quot;DxpXGylX\\&amp;quot;,\\&amp;quot;api_filters_general_imagecropfilter.md\\&amp;quot;:\\&amp;quot;D4Qe_61U\\&amp;quot;,\\&amp;quot;api_filters_general_imagedataoutlinefilter.md\\&amp;quot;:\\&amp;quot;B2MnG1Wf\\&amp;quot;,\\&amp;quot;api_filters_general_imageoutlinefilter.md\\&amp;quot;:\\&amp;quot;jNp72hcJ\\&amp;quot;,\\&amp;quot;api_filters_general_imageslicefilter.md\\&amp;quot;:\\&amp;quot;DXDhly2e\\&amp;quot;,\\&amp;quot;api_filters_general_imagestreamline.md\\&amp;quot;:\\&amp;quot;CPX7Gvpk\\&amp;quot;,\\&amp;quot;api_filters_general_linefilter.md\\&amp;quot;:\\&amp;quot;jJMc1HaW\\&amp;quot;,\\&amp;quot;api_filters_general_outlinefilter.md\\&amp;quot;:\\&amp;quot;6gjPBDUo\\&amp;quot;,\\&amp;quot;api_filters_general_shrinkpolydata.md\\&amp;quot;:\\&amp;quot;DVRKj8bQ\\&amp;quot;,\\&amp;quot;api_filters_general_transformpolydatafilter.md\\&amp;quot;:\\&amp;quot;4RQEwWFJ\\&amp;quot;,\\&amp;quot;api_filters_general_trianglefilter.md\\&amp;quot;:\\&amp;quot;DTl5Ulcp\\&amp;quot;,\\&amp;quot;api_filters_general_tubefilter.md\\&amp;quot;:\\&amp;quot;BpO0yaXs\\&amp;quot;,\\&amp;quot;api_filters_sources_arcsource.md\\&amp;quot;:\\&amp;quot;DuzRTNvb\\&amp;quot;,\\&amp;quot;api_filters_sources_arrow2dsource.md\\&amp;quot;:\\&amp;quot;DKZZ6IjH\\&amp;quot;,\\&amp;quot;api_filters_sources_arrowsource.md\\&amp;quot;:\\&amp;quot;A4d7PkDG\\&amp;quot;,\\&amp;quot;api_filters_sources_circlesource.md\\&amp;quot;:\\&amp;quot;CH_jC4-m\\&amp;quot;,\\&amp;quot;api_filters_sources_conesource.md\\&amp;quot;:\\&amp;quot;DwOuQeTy\\&amp;quot;,\\&amp;quot;api_filters_sources_cubesource.md\\&amp;quot;:\\&amp;quot;zIuiz86-\\&amp;quot;,\\&amp;quot;api_filters_sources_cursor3d.md\\&amp;quot;:\\&amp;quot;-VoBYwoS\\&amp;quot;,\\&amp;quot;api_filters_sources_cylindersource.md\\&amp;quot;:\\&amp;quot;BBpqJlan\\&amp;quot;,\\&amp;quot;api_filters_sources_disksource.md\\&amp;quot;:\\&amp;quot;DsN6XxuB\\&amp;quot;,\\&amp;quot;api_filters_sources_ellipsearcsource.md\\&amp;quot;:\\&amp;quot;CsICSCpm\\&amp;quot;,\\&amp;quot;api_filters_sources_frustumsource.md\\&amp;quot;:\\&amp;quot;DIWITu8z\\&amp;quot;,\\&amp;quot;api_filters_sources_linesource.md\\&amp;quot;:\\&amp;quot;BGdixqN1\\&amp;quot;,\\&amp;quot;api_filters_sources_planesource.md\\&amp;quot;:\\&amp;quot;CX6RM45W\\&amp;quot;,\\&amp;quot;api_filters_sources_platonicsolidsource.md\\&amp;quot;:\\&amp;quot;CQ-umK2B\\&amp;quot;,\\&amp;quot;api_filters_sources_pointsource.md\\&amp;quot;:\\&amp;quot;H6ReJsz9\\&amp;quot;,\\&amp;quot;api_filters_sources_spheresource.md\\&amp;quot;:\\&amp;quot;BGKfQssB\\&amp;quot;,\\&amp;quot;api_filters_texture_texturemaptoplane.md\\&amp;quot;:\\&amp;quot;BBTrTqXJ\\&amp;quot;,\\&amp;quot;api_filters_texture_texturemaptosphere.md\\&amp;quot;:\\&amp;quot;DpTd6uAO\\&amp;quot;,\\&amp;quot;api_imaging_core_imagereslice.md\\&amp;quot;:\\&amp;quot;NzjZ-ldO\\&amp;quot;,\\&amp;quot;api_index.md\\&amp;quot;:\\&amp;quot;BvWmymfg\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_3dcontrollermodelselectormanipulator.md\\&amp;quot;:\\&amp;quot;BVsXfp_U\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_compositecameramanipulator.md\\&amp;quot;:\\&amp;quot;CHeh9gjQ\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_compositegesturemanipulator.md\\&amp;quot;:\\&amp;quot;UNeyESLd\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_compositekeyboardmanipulator.md\\&amp;quot;:\\&amp;quot;D5qnZ_RN\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_compositemousemanipulator.md\\&amp;quot;:\\&amp;quot;Dnpx-D0i\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_compositevrmanipulator.md\\&amp;quot;:\\&amp;quot;ChHZ0RuC\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_gesturecameramanipulator.md\\&amp;quot;:\\&amp;quot;aJAF5uzg\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_keyboardcameramanipulator.md\\&amp;quot;:\\&amp;quot;B7oaNZhj\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_mouseboxselectormanipulator.md\\&amp;quot;:\\&amp;quot;eID9Rz1J\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_mousecameratrackballmultirotatemanipulator.md\\&amp;quot;:\\&amp;quot;B-Pbz8nr\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_mousecameratrackballpanmanipulator.md\\&amp;quot;:\\&amp;quot;D3F-EbI6\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_mousecameratrackballrollmanipulator.md\\&amp;quot;:\\&amp;quot;CZ4FOmzs\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_mousecameratrackballrotatemanipulator.md\\&amp;quot;:\\&amp;quot;C6RIS8MW\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_mousecameratrackballzoommanipulator.md\\&amp;quot;:\\&amp;quot;Dov5QoXI\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_mousecameratrackballzoomtomousemanipulator.md\\&amp;quot;:\\&amp;quot;B8El1QNm\\&amp;quot;,\\&amp;quot;api_interaction_manipulators_mouserangemanipulator.md\\&amp;quot;:\\&amp;quot;8u64FeQN\\&amp;quot;,\\&amp;quot;api_interaction_style_interactorstylehmdxr.md\\&amp;quot;:\\&amp;quot;BH-MttJB\\&amp;quot;,\\&amp;quot;api_interaction_style_interactorstyleimage.md\\&amp;quot;:\\&amp;quot;D89P0-BL\\&amp;quot;,\\&amp;quot;api_interaction_style_interactorstylemanipulator.md\\&amp;quot;:\\&amp;quot;DGgGMmu0\\&amp;quot;,\\&amp;quot;api_interaction_style_interactorstyletrackballcamera.md\\&amp;quot;:\\&amp;quot;2uzxEzhG\\&amp;quot;,\\&amp;quot;api_interaction_widgets_orientationmarkerwidget.md\\&amp;quot;:\\&amp;quot;Cs9nrRav\\&amp;quot;,\\&amp;quot;api_io_core_dataaccesshelper.md\\&amp;quot;:\\&amp;quot;DnH9K2fL\\&amp;quot;,\\&amp;quot;api_io_core_httpdatasetreader.md\\&amp;quot;:\\&amp;quot;BPV-H-qu\\&amp;quot;,\\&amp;quot;api_io_core_httpsceneloader.md\\&amp;quot;:\\&amp;quot;DyiQWYzG\\&amp;quot;,\\&amp;quot;api_io_core_imagestream.md\\&amp;quot;:\\&amp;quot;CQPtM5uW\\&amp;quot;,\\&amp;quot;api_io_core_wslinkclient.md\\&amp;quot;:\\&amp;quot;DMO9d8Qx\\&amp;quot;,\\&amp;quot;api_io_geometry_dracoreader.md\\&amp;quot;:\\&amp;quot;sLXVsq6V\\&amp;quot;,\\&amp;quot;api_io_geometry_gltfimporter.md\\&amp;quot;:\\&amp;quot;BZQuYv7E\\&amp;quot;,\\&amp;quot;api_io_geometry_ifcimporter.md\\&amp;quot;:\\&amp;quot;BQronL5_\\&amp;quot;,\\&amp;quot;api_io_geometry_plyreader.md\\&amp;quot;:\\&amp;quot;DUqF92jw\\&amp;quot;,\\&amp;quot;api_io_geometry_plywriter.md\\&amp;quot;:\\&amp;quot;ObA-pQfq\\&amp;quot;,\\&amp;quot;api_io_geometry_stlreader.md\\&amp;quot;:\\&amp;quot;D_B_T0a6\\&amp;quot;,\\&amp;quot;api_io_geometry_stlwriter.md\\&amp;quot;:\\&amp;quot;C4mNISct\\&amp;quot;,\\&amp;quot;api_io_image_hdrreader.md\\&amp;quot;:\\&amp;quot;DL0wIqDT\\&amp;quot;,\\&amp;quot;api_io_image_tgareader.md\\&amp;quot;:\\&amp;quot;POpLRW3i\\&amp;quot;,\\&amp;quot;api_io_image_tiffreader.md\\&amp;quot;:\\&amp;quot;D8liXYie\\&amp;quot;,\\&amp;quot;api_io_misc_elevationreader.md\\&amp;quot;:\\&amp;quot;BNO1mYKK\\&amp;quot;,\\&amp;quot;api_io_misc_gcodereader.md\\&amp;quot;:\\&amp;quot;CYAPxa5r\\&amp;quot;,\\&amp;quot;api_io_misc_itkimagereader.md\\&amp;quot;:\\&amp;quot;DTKdvS2N\\&amp;quot;,\\&amp;quot;api_io_misc_itkpolydatareader.md\\&amp;quot;:\\&amp;quot;BWhw0b9E\\&amp;quot;,\\&amp;quot;api_io_misc_jsonnucleoreader.md\\&amp;quot;:\\&amp;quot;BR1w3c6s\\&amp;quot;,\\&amp;quot;api_io_misc_jsonreader.md\\&amp;quot;:\\&amp;quot;D2c3-6ML\\&amp;quot;,\\&amp;quot;api_io_misc_mtlreader.md\\&amp;quot;:\\&amp;quot;C8LpZyRg\\&amp;quot;,\\&amp;quot;api_io_misc_objreader.md\\&amp;quot;:\\&amp;quot;CixaQ7aC\\&amp;quot;,\\&amp;quot;api_io_misc_objwriter.md\\&amp;quot;:\\&amp;quot;6-pL_Sor\\&amp;quot;,\\&amp;quot;api_io_misc_pdbreader.md\\&amp;quot;:\\&amp;quot;D3_Ng8UW\\&amp;quot;,\\&amp;quot;api_io_xml_xmlimagedatareader.md\\&amp;quot;:\\&amp;quot;CLLdtNrE\\&amp;quot;,\\&amp;quot;api_io_xml_xmlpolydatareader.md\\&amp;quot;:\\&amp;quot;CmzJ_SQ4\\&amp;quot;,\\&amp;quot;api_io_xml_xmlreader.md\\&amp;quot;:\\&amp;quot;C411kBoj\\&amp;quot;,\\&amp;quot;api_proxy_core_abstractrepresentationproxy.md\\&amp;quot;:\\&amp;quot;tHkrZNXe\\&amp;quot;,\\&amp;quot;api_proxy_core_lookuptableproxy.md\\&amp;quot;:\\&amp;quot;cHts6dJN\\&amp;quot;,\\&amp;quot;api_proxy_core_piecewisefunctionproxy.md\\&amp;quot;:\\&amp;quot;CW5StQ0T\\&amp;quot;,\\&amp;quot;api_proxy_core_proxymanager.md\\&amp;quot;:\\&amp;quot;BwZ3MBdM\\&amp;quot;,\\&amp;quot;api_proxy_core_sourceproxy.md\\&amp;quot;:\\&amp;quot;CWjq-KnX\\&amp;quot;,\\&amp;quot;api_proxy_core_view2dproxy.md\\&amp;quot;:\\&amp;quot;ChNGNgwq\\&amp;quot;,\\&amp;quot;api_proxy_core_viewproxy.md\\&amp;quot;:\\&amp;quot;ikyWLAVb\\&amp;quot;,\\&amp;quot;api_proxy_representations_geometryrepresentationproxy.md\\&amp;quot;:\\&amp;quot;Ddvc1RBS\\&amp;quot;,\\&amp;quot;api_proxy_representations_reslicerepresentationproxy.md\\&amp;quot;:\\&amp;quot;DZoo9ifw\\&amp;quot;,\\&amp;quot;api_proxy_representations_slicerepresentationproxy.md\\&amp;quot;:\\&amp;quot;BiQE08Qe\\&amp;quot;,\\&amp;quot;api_proxy_representations_volumerepresentationproxy.md\\&amp;quot;:\\&amp;quot;DijKtNBO\\&amp;quot;,\\&amp;quot;api_rendering_core_abstractimagemapper.md\\&amp;quot;:\\&amp;quot;DdcXI3CY\\&amp;quot;,\\&amp;quot;api_rendering_core_abstractmapper.md\\&amp;quot;:\\&amp;quot;B9NWte5x\\&amp;quot;,\\&amp;quot;api_rendering_core_abstractmapper3d.md\\&amp;quot;:\\&amp;quot;Ci02rWWJ\\&amp;quot;,\\&amp;quot;api_rendering_core_abstractpicker.md\\&amp;quot;:\\&amp;quot;SfHKiXOU\\&amp;quot;,\\&amp;quot;api_rendering_core_actor.md\\&amp;quot;:\\&amp;quot;BBDbhDyt\\&amp;quot;,\\&amp;quot;api_rendering_core_actor2d.md\\&amp;quot;:\\&amp;quot;C2zwlYCl\\&amp;quot;,\\&amp;quot;api_rendering_core_annotatedcubeactor.md\\&amp;quot;:\\&amp;quot;CrOa9T-7\\&amp;quot;,\\&amp;quot;api_rendering_core_axesactor.md\\&amp;quot;:\\&amp;quot;BJkK0R23\\&amp;quot;,\\&amp;quot;api_rendering_core_camera.md\\&amp;quot;:\\&amp;quot;B_cNBzGS\\&amp;quot;,\\&amp;quot;api_rendering_core_cellpicker.md\\&amp;quot;:\\&amp;quot;DWvfxHfc\\&amp;quot;,\\&amp;quot;api_rendering_core_colortransferfunction.md\\&amp;quot;:\\&amp;quot;DjD1VkJD\\&amp;quot;,\\&amp;quot;api_rendering_core_coordinate.md\\&amp;quot;:\\&amp;quot;Bh3Xqsbd\\&amp;quot;,\\&amp;quot;api_rendering_core_follower.md\\&amp;quot;:\\&amp;quot;Dv1u-SdP\\&amp;quot;,\\&amp;quot;api_rendering_core_glyph3dmapper.md\\&amp;quot;:\\&amp;quot;Ej0Cunej\\&amp;quot;,\\&amp;quot;api_rendering_core_hardwareselector.md\\&amp;quot;:\\&amp;quot;D_jvQwdq\\&amp;quot;,\\&amp;quot;api_rendering_core_imagearraymapper.md\\&amp;quot;:\\&amp;quot;CACw5UFW\\&amp;quot;,\\&amp;quot;api_rendering_core_imagecprmapper.md\\&amp;quot;:\\&amp;quot;CZtZ2tt-\\&amp;quot;,\\&amp;quot;api_rendering_core_imagemapper.md\\&amp;quot;:\\&amp;quot;rAudLGEi\\&amp;quot;,\\&amp;quot;api_rendering_core_imageproperty.md\\&amp;quot;:\\&amp;quot;ctXxRxAf\\&amp;quot;,\\&amp;quot;api_rendering_core_imagereslicemapper.md\\&amp;quot;:\\&amp;quot;aM1IVV0z\\&amp;quot;,\\&amp;quot;api_rendering_core_imageslice.md\\&amp;quot;:\\&amp;quot;B_W1dSBa\\&amp;quot;,\\&amp;quot;api_rendering_core_interactorobserver.md\\&amp;quot;:\\&amp;quot;DxSDdhsS\\&amp;quot;,\\&amp;quot;api_rendering_core_interactorstyle.md\\&amp;quot;:\\&amp;quot;i6YkkX1g\\&amp;quot;,\\&amp;quot;api_rendering_core_light.md\\&amp;quot;:\\&amp;quot;DYKVbOuG\\&amp;quot;,\\&amp;quot;api_rendering_core_mapper.md\\&amp;quot;:\\&amp;quot;GOcxswou\\&amp;quot;,\\&amp;quot;api_rendering_core_mapper2d.md\\&amp;quot;:\\&amp;quot;B7-yJUVD\\&amp;quot;,\\&amp;quot;api_rendering_core_picker.md\\&amp;quot;:\\&amp;quot;D1uM7wji\\&amp;quot;,\\&amp;quot;api_rendering_core_pixelspacecallbackmapper.md\\&amp;quot;:\\&amp;quot;D1eohrNC\\&amp;quot;,\\&amp;quot;api_rendering_core_pointpicker.md\\&amp;quot;:\\&amp;quot;xdAGdgH0\\&amp;quot;,\\&amp;quot;api_rendering_core_prop.md\\&amp;quot;:\\&amp;quot;ogpBlRSI\\&amp;quot;,\\&amp;quot;api_rendering_core_prop3d.md\\&amp;quot;:\\&amp;quot;Dn-hzWM5\\&amp;quot;,\\&amp;quot;api_rendering_core_property.md\\&amp;quot;:\\&amp;quot;BbWUEsF9\\&amp;quot;,\\&amp;quot;api_rendering_core_property2d.md\\&amp;quot;:\\&amp;quot;CJv1G3nP\\&amp;quot;,\\&amp;quot;api_rendering_core_renderer.md\\&amp;quot;:\\&amp;quot;BnVGbdX2\\&amp;quot;,\\&amp;quot;api_rendering_core_renderwindow.md\\&amp;quot;:\\&amp;quot;DEXg1nlX\\&amp;quot;,\\&amp;quot;api_rendering_core_renderwindowinteractor.md\\&amp;quot;:\\&amp;quot;B12_1ctK\\&amp;quot;,\\&amp;quot;api_rendering_core_scalarbaractor.md\\&amp;quot;:\\&amp;quot;1lC8AZHm\\&amp;quot;,\\&amp;quot;api_rendering_core_skybox.md\\&amp;quot;:\\&amp;quot;Bl6sTjNN\\&amp;quot;,\\&amp;quot;api_rendering_core_spheremapper.md\\&amp;quot;:\\&amp;quot;DzCQtJ0o\\&amp;quot;,\\&amp;quot;api_rendering_core_stickmapper.md\\&amp;quot;:\\&amp;quot;p2hQLRkF\\&amp;quot;,\\&amp;quot;api_rendering_core_textactor.md\\&amp;quot;:\\&amp;quot;Cc0oaGSx\\&amp;quot;,\\&amp;quot;api_rendering_core_textproperty.md\\&amp;quot;:\\&amp;quot;DTv3xIiW\\&amp;quot;,\\&amp;quot;api_rendering_core_texture.md\\&amp;quot;:\\&amp;quot;B3vc3-T8\\&amp;quot;,\\&amp;quot;api_rendering_core_vectortext.md\\&amp;quot;:\\&amp;quot;D9Uir7da\\&amp;quot;,\\&amp;quot;api_rendering_core_viewport.md\\&amp;quot;:\\&amp;quot;CaoXFn7f\\&amp;quot;,\\&amp;quot;api_rendering_core_volume.md\\&amp;quot;:\\&amp;quot;D86S26P4\\&amp;quot;,\\&amp;quot;api_rendering_core_volumemapper.md\\&amp;quot;:\\&amp;quot;B97n_j1E\\&amp;quot;,\\&amp;quot;api_rendering_core_volumeproperty.md\\&amp;quot;:\\&amp;quot;BCq4swnR\\&amp;quot;,\\&amp;quot;api_rendering_misc_canvasview.md\\&amp;quot;:\\&amp;quot;tq3vaI3n\\&amp;quot;,\\&amp;quot;api_rendering_misc_fullscreenrenderwindow.md\\&amp;quot;:\\&amp;quot;Br3XDvRM\\&amp;quot;,\\&amp;quot;api_rendering_misc_genericrenderwindow.md\\&amp;quot;:\\&amp;quot;BDqVhLNM\\&amp;quot;,\\&amp;quot;api_rendering_misc_remoteview.md\\&amp;quot;:\\&amp;quot;CqaWB0n7\\&amp;quot;,\\&amp;quot;api_rendering_misc_renderwindowwithcontrolbar.md\\&amp;quot;:\\&amp;quot;Bbl5BOTD\\&amp;quot;,\\&amp;quot;api_rendering_misc_synchronizablerenderwindow.md\\&amp;quot;:\\&amp;quot;BNdAvmT0\\&amp;quot;,\\&amp;quot;api_rendering_misc_synchronizablerenderwindow_objectmanager.md\\&amp;quot;:\\&amp;quot;CIZ4GhkB\\&amp;quot;,\\&amp;quot;api_rendering_misc_texturelodsdownloader.md\\&amp;quot;:\\&amp;quot;D-EOIbmW\\&amp;quot;,\\&amp;quot;api_rendering_opengl_bufferobject.md\\&amp;quot;:\\&amp;quot;CJrRkK2S\\&amp;quot;,\\&amp;quot;api_rendering_opengl_hardwareselector.md\\&amp;quot;:\\&amp;quot;Ba-Ya7mx\\&amp;quot;,\\&amp;quot;api_rendering_opengl_renderwindow.md\\&amp;quot;:\\&amp;quot;DmcFmGMg\\&amp;quot;,\\&amp;quot;api_rendering_opengl_texture.md\\&amp;quot;:\\&amp;quot;KG0bhhc0\\&amp;quot;,\\&amp;quot;api_rendering_scenegraph_renderpass.md\\&amp;quot;:\\&amp;quot;BUazvKu2\\&amp;quot;,\\&amp;quot;api_rendering_scenegraph_viewnode.md\\&amp;quot;:\\&amp;quot;DiFYGIeZ\\&amp;quot;,\\&amp;quot;api_rendering_scenegraph_viewnodefactory.md\\&amp;quot;:\\&amp;quot;BzXGxqcQ\\&amp;quot;,\\&amp;quot;api_rendering_webxr_renderwindowhelper.md\\&amp;quot;:\\&amp;quot;BWMrR_Kg\\&amp;quot;,\\&amp;quot;api_widgets_core_abstractwidget.md\\&amp;quot;:\\&amp;quot;CIJ3Gv2c\\&amp;quot;,\\&amp;quot;api_widgets_core_abstractwidgetfactory.md\\&amp;quot;:\\&amp;quot;Bp_yz5bG\\&amp;quot;,\\&amp;quot;api_widgets_core_statebuilder.md\\&amp;quot;:\\&amp;quot;uHVHaQ4J\\&amp;quot;,\\&amp;quot;api_widgets_core_widgetmanager.md\\&amp;quot;:\\&amp;quot;DZPfL6fI\\&amp;quot;,\\&amp;quot;api_widgets_core_widgetstate.md\\&amp;quot;:\\&amp;quot;NbxYHZk_\\&amp;quot;,\\&amp;quot;api_widgets_manipulators_abstractmanipulator.md\\&amp;quot;:\\&amp;quot;BKh1s_LH\\&amp;quot;,\\&amp;quot;api_widgets_manipulators_linemanipulator.md\\&amp;quot;:\\&amp;quot;rbYMiXvy\\&amp;quot;,\\&amp;quot;api_widgets_manipulators_pickermanipulator.md\\&amp;quot;:\\&amp;quot;BHIcHjW0\\&amp;quot;,\\&amp;quot;api_widgets_manipulators_planemanipulator.md\\&amp;quot;:\\&amp;quot;ClxYSb2X\\&amp;quot;,\\&amp;quot;api_widgets_manipulators_trackballmanipulator.md\\&amp;quot;:\\&amp;quot;CNrQtTO1\\&amp;quot;,\\&amp;quot;api_widgets_representations_widgetrepresentation.md\\&amp;quot;:\\&amp;quot;jjHjWVwU\\&amp;quot;,\\&amp;quot;api_widgets_widgets3d_interactiveorientationwidget.md\\&amp;quot;:\\&amp;quot;VEGfqghF\\&amp;quot;,\\&amp;quot;api_widgets_widgets3d_reslicecursorwidget.md\\&amp;quot;:\\&amp;quot;BO_sMaTa\\&amp;quot;,\\&amp;quot;api_widgets_widgets3d_seedwidget.md\\&amp;quot;:\\&amp;quot;BXqP67ZS\\&amp;quot;,\\&amp;quot;api_widgets_widgets3d_spherewidget.md\\&amp;quot;:\\&amp;quot;CAdXPGfL\\&amp;quot;,\\&amp;quot;docs_concepts_widgets.md\\&amp;quot;:\\&amp;quot;DM0qN-sF\\&amp;quot;,\\&amp;quot;docs_develop_build.md\\&amp;quot;:\\&amp;quot;BGZusmjC\\&amp;quot;,\\&amp;quot;docs_develop_class.md\\&amp;quot;:\\&amp;quot;CCRSevgu\\&amp;quot;,\\&amp;quot;docs_develop_example.md\\&amp;quot;:\\&amp;quot;BNrQwmsu\\&amp;quot;,\\&amp;quot;docs_develop_requirement.md\\&amp;quot;:\\&amp;quot;BQM_0izm\\&amp;quot;,\\&amp;quot;docs_develop_test.md\\&amp;quot;:\\&amp;quot;C-A3D7GN\\&amp;quot;,\\&amp;quot;docs_develop_webgpu.md\\&amp;quot;:\\&amp;quot;4pBYfo0T\\&amp;quot;,\\&amp;quot;docs_develop_webxr.md\\&amp;quot;:\\&amp;quot;aCl4vlrs\\&amp;quot;,\\&amp;quot;docs_develop_widget.md\\&amp;quot;:\\&amp;quot;CXGGzr2B\\&amp;quot;,\\&amp;quot;docs_index.md\\&amp;quot;:\\&amp;quot;BYD85lr1\\&amp;quot;,\\&amp;quot;docs_intro_vtk_as_es6_dependency.md\\&amp;quot;:\\&amp;quot;CYLUYOsW\\&amp;quot;,\\&amp;quot;docs_intro_vtk_as_external_script.md\\&amp;quot;:\\&amp;quot;B4i7tvx7\\&amp;quot;,\\&amp;quot;docs_misc_contributing.md\\&amp;quot;:\\&amp;quot;BohlyumU\\&amp;quot;,\\&amp;quot;docs_misc_tools.md\\&amp;quot;:\\&amp;quot;BgzCM0c9\\&amp;quot;,\\&amp;quot;docs_misc_troubleshooting.md\\&amp;quot;:\\&amp;quot;Cyqf78S9\\&amp;quot;,\\&amp;quot;docs_old_intro_vtk_es6.md\\&amp;quot;:\\&amp;quot;DuwG4_uf\\&amp;quot;,\\&amp;quot;docs_structures.md\\&amp;quot;:\\&amp;quot;BA1rMO3O\\&amp;quot;,\\&amp;quot;docs_structures_dataarray.md\\&amp;quot;:\\&amp;quot;CVBj0aOX\\&amp;quot;,\\&amp;quot;docs_structures_multiblock.md\\&amp;quot;:\\&amp;quot;aP4QQmAD\\&amp;quot;,\\&amp;quot;docs_structures_parametricdataset.md\\&amp;quot;:\\&amp;quot;BL-1sEMd\\&amp;quot;,\\&amp;quot;docs_structures_polydata.md\\&amp;quot;:\\&amp;quot;CIMVMcsx\\&amp;quot;,\\&amp;quot;docs_structures_stringarray.md\\&amp;quot;:\\&amp;quot;C643QvV3\\&amp;quot;,\\&amp;quot;docs_structures_table.md\\&amp;quot;:\\&amp;quot;DeHI7_gc\\&amp;quot;,\\&amp;quot;docs_structures_unstructuredgrid.md\\&amp;quot;:\\&amp;quot;Bh12LZGp\\&amp;quot;,\\&amp;quot;docs_tutorial.md\\&amp;quot;:\\&amp;quot;ClzCAgkz\\&amp;quot;,\\&amp;quot;docs_vtk_react.md\\&amp;quot;:\\&amp;quot;pkMN9i1v\\&amp;quot;,\\&amp;quot;docs_vtk_vanilla.md\\&amp;quot;:\\&amp;quot;CwlrkD7c\\&amp;quot;,\\&amp;quot;docs_vtk_vue.md\\&amp;quot;:\\&amp;quot;B3Q_Vimn\\&amp;quot;,\\&amp;quot;examples_actor2d.md\\&amp;quot;:\\&amp;quot;C2ShRu6T\\&amp;quot;,\\&amp;quot;examples_anglewidget.md\\&amp;quot;:\\&amp;quot;Ct05nTGN\\&amp;quot;,\\&amp;quot;examples_animationproxymanager.md\\&amp;quot;:\\&amp;quot;CgisqtKy\\&amp;quot;,\\&amp;quot;examples_ar.md\\&amp;quot;:\\&amp;quot;LBMT2ibo\\&amp;quot;,\\&amp;quot;examples_arcsource.md\\&amp;quot;:\\&amp;quot;Bti2AiHq\\&amp;quot;,\\&amp;quot;examples_arrowsource.md\\&amp;quot;:\\&amp;quot;DCCoH8IM\\&amp;quot;,\\&amp;quot;examples_axesactor.md\\&amp;quot;:\\&amp;quot;Gzkg8Cve\\&amp;quot;,\\&amp;quot;examples_box.md\\&amp;quot;:\\&amp;quot;C5n6U9eB\\&amp;quot;,\\&amp;quot;examples_calculator.md\\&amp;quot;:\\&amp;quot;CG05gTCy\\&amp;quot;,\\&amp;quot;examples_cellpicker.md\\&amp;quot;:\\&amp;quot;7LGBt50b\\&amp;quot;,\\&amp;quot;examples_circlesource.md\\&amp;quot;:\\&amp;quot;6talWc61\\&amp;quot;,\\&amp;quot;examples_cleanpolydata.md\\&amp;quot;:\\&amp;quot;BbgjuDIQ\\&amp;quot;,\\&amp;quot;examples_clipclosedsurface.md\\&amp;quot;:\\&amp;quot;brEcaV7F\\&amp;quot;,\\&amp;quot;examples_concentriccylindersource.md\\&amp;quot;:\\&amp;quot;DkJeVN1X\\&amp;quot;,\\&amp;quot;examples_cone.md\\&amp;quot;:\\&amp;quot;EFXBgICo\\&amp;quot;,\\&amp;quot;examples_conesource.md\\&amp;quot;:\\&amp;quot;BGR-b703\\&amp;quot;,\\&amp;quot;examples_contourloopextraction.md\\&amp;quot;:\\&amp;quot;CorNFIfd\\&amp;quot;,\\&amp;quot;examples_contourtriangulator.md\\&amp;quot;:\\&amp;quot;CvmVGVXm\\&amp;quot;,\\&amp;quot;examples_convolution2dpass.md\\&amp;quot;:\\&amp;quot;DrD6V2u6\\&amp;quot;,\\&amp;quot;examples_cubeaxes.md\\&amp;quot;:\\&amp;quot;XPfAsJZN\\&amp;quot;,\\&amp;quot;examples_cubesource.md\\&amp;quot;:\\&amp;quot;vHjiSgLl\\&amp;quot;,\\&amp;quot;examples_cursor3d.md\\&amp;quot;:\\&amp;quot;BSdksjiy\\&amp;quot;,\\&amp;quot;examples_customwebgpucone.md\\&amp;quot;:\\&amp;quot;B96vz9UQ\\&amp;quot;,\\&amp;quot;examples_cutter.md\\&amp;quot;:\\&amp;quot;Bz-eVhtw\\&amp;quot;,\\&amp;quot;examples_cylindersource.md\\&amp;quot;:\\&amp;quot;DQ7xgco5\\&amp;quot;,\\&amp;quot;examples_depthtest.md\\&amp;quot;:\\&amp;quot;6ZETzADK\\&amp;quot;,\\&amp;quot;examples_deviceorientationtocamera.md\\&amp;quot;:\\&amp;quot;CoC3DxwE\\&amp;quot;,\\&amp;quot;examples_disksource.md\\&amp;quot;:\\&amp;quot;DJsgTug_\\&amp;quot;,\\&amp;quot;examples_dracoreader.md\\&amp;quot;:\\&amp;quot;kGoowrPZ\\&amp;quot;,\\&amp;quot;examples_elevationreader.md\\&amp;quot;:\\&amp;quot;Dax9eXq3\\&amp;quot;,\\&amp;quot;examples_ellipsearcsource.md\\&amp;quot;:\\&amp;quot;CAl1EVJD\\&amp;quot;,\\&amp;quot;examples_frustumsource.md\\&amp;quot;:\\&amp;quot;DEs4kHw5\\&amp;quot;,\\&amp;quot;examples_gcodereader.md\\&amp;quot;:\\&amp;quot;BqI5fp50\\&amp;quot;,\\&amp;quot;examples_geometryviewer.md\\&amp;quot;:\\&amp;quot;BusdNYIe\\&amp;quot;,\\&amp;quot;examples_gltfimporter.md\\&amp;quot;:\\&amp;quot;D1Gj9p9i\\&amp;quot;,\\&amp;quot;examples_glyph3dmapper.md\\&amp;quot;:\\&amp;quot;DQ2X4btV\\&amp;quot;,\\&amp;quot;examples_glyphrotation.md\\&amp;quot;:\\&amp;quot;Lk_mDqix\\&amp;quot;,\\&amp;quot;examples_hardwareselector.md\\&amp;quot;:\\&amp;quot;CmIgThQC\\&amp;quot;,\\&amp;quot;examples_hdrreader.md\\&amp;quot;:\\&amp;quot;BbywDVOA\\&amp;quot;,\\&amp;quot;examples_httpdatasetreader.md\\&amp;quot;:\\&amp;quot;CqzoILkY\\&amp;quot;,\\&amp;quot;examples_httpdatasetseriesreader.md\\&amp;quot;:\\&amp;quot;DpFAyc1a\\&amp;quot;,\\&amp;quot;examples_httpsceneloader.md\\&amp;quot;:\\&amp;quot;DKSXz8IZ\\&amp;quot;,\\&amp;quot;examples_ifcimporter.md\\&amp;quot;:\\&amp;quot;Dmwhi5_2\\&amp;quot;,\\&amp;quot;examples_imagecprmapper.md\\&amp;quot;:\\&amp;quot;E6eEEFki\\&amp;quot;,\\&amp;quot;examples_imagecropfilter.md\\&amp;quot;:\\&amp;quot;iYf7uxfs\\&amp;quot;,\\&amp;quot;examples_imagecroppingwidget.md\\&amp;quot;:\\&amp;quot;EeC9LTo4\\&amp;quot;,\\&amp;quot;examples_imagelabeloutline.md\\&amp;quot;:\\&amp;quot;iiGFzcad\\&amp;quot;,\\&amp;quot;examples_imagemapper.md\\&amp;quot;:\\&amp;quot;CjWJ1K4Y\\&amp;quot;,\\&amp;quot;examples_imagemarchingcubes.md\\&amp;quot;:\\&amp;quot;CXC77n8b\\&amp;quot;,\\&amp;quot;examples_imagemarchingsquares.md\\&amp;quot;:\\&amp;quot;CnaMvHUe\\&amp;quot;,\\&amp;quot;examples_imageoutlinefilter.md\\&amp;quot;:\\&amp;quot;DmyWG8wt\\&amp;quot;,\\&amp;quot;examples_imagereslicemapper.md\\&amp;quot;:\\&amp;quot;fY-HSlDh\\&amp;quot;,\\&amp;quot;examples_imagestream.md\\&amp;quot;:\\&amp;quot;MyL0TWYI\\&amp;quot;,\\&amp;quot;examples_imagestreamline.md\\&amp;quot;:\\&amp;quot;KCBhok0Q\\&amp;quot;,\\&amp;quot;examples_imageviewer.md\\&amp;quot;:\\&amp;quot;DwUTsuqM\\&amp;quot;,\\&amp;quot;examples_implicitboolean.md\\&amp;quot;:\\&amp;quot;zEcmZF5Z\\&amp;quot;,\\&amp;quot;examples_implicitplanerepresentation.md\\&amp;quot;:\\&amp;quot;CkgZ3zHO\\&amp;quot;,\\&amp;quot;examples_implicitplanewidget.md\\&amp;quot;:\\&amp;quot;B1P7esIK\\&amp;quot;,\\&amp;quot;examples_index.md\\&amp;quot;:\\&amp;quot;BrZyzytg\\&amp;quot;,\\&amp;quot;examples_interactiveorientationwidget.md\\&amp;quot;:\\&amp;quot;BRAXfY_D\\&amp;quot;,\\&amp;quot;examples_interactorstylehmdxr.md\\&amp;quot;:\\&amp;quot;CZTloXGm\\&amp;quot;,\\&amp;quot;examples_interactorstylemanipulator.md\\&amp;quot;:\\&amp;quot;CrTgaV7Y\\&amp;quot;,\\&amp;quot;examples_interactorstylemanipulatorrotatecameracenter.md\\&amp;quot;:\\&amp;quot;D4gGh0YB\\&amp;quot;,\\&amp;quot;examples_interactorstylemprslice.md\\&amp;quot;:\\&amp;quot;DFHFfIGR\\&amp;quot;,\\&amp;quot;examples_interactorstyletrackballcamera.md\\&amp;quot;:\\&amp;quot;H1rLdZB9\\&amp;quot;,\\&amp;quot;examples_interactorstyleunicam.md\\&amp;quot;:\\&amp;quot;COpovsfS\\&amp;quot;,\\&amp;quot;examples_itkwasmgeometry.md\\&amp;quot;:\\&amp;quot;C9sHIszK\\&amp;quot;,\\&amp;quot;examples_itkwasmvolume.md\\&amp;quot;:\\&amp;quot;cdQ2z1A2\\&amp;quot;,\\&amp;quot;examples_jsonnucleoreader.md\\&amp;quot;:\\&amp;quot;C1tvb5fi\\&amp;quot;,\\&amp;quot;examples_keyboardcameramanipulator.md\\&amp;quot;:\\&amp;quot;UocDnTX9\\&amp;quot;,\\&amp;quot;examples_keypressevents.md\\&amp;quot;:\\&amp;quot;CCKt63oo\\&amp;quot;,\\&amp;quot;examples_labelmapedgeprojection.md\\&amp;quot;:\\&amp;quot;C26y5E7y\\&amp;quot;,\\&amp;quot;examples_labelwidget.md\\&amp;quot;:\\&amp;quot;CMYXfszB\\&amp;quot;,\\&amp;quot;examples_linesource.md\\&amp;quot;:\\&amp;quot;CxPbtuvU\\&amp;quot;,\\&amp;quot;examples_linewidget.md\\&amp;quot;:\\&amp;quot;DkmVZbLP\\&amp;quot;,\\&amp;quot;examples_lookingglass.md\\&amp;quot;:\\&amp;quot;CcCY3eYY\\&amp;quot;,\\&amp;quot;examples_manyrenderers.md\\&amp;quot;:\\&amp;quot;C3tZg_tx\\&amp;quot;,\\&amp;quot;examples_manyrenderwindows.md\\&amp;quot;:\\&amp;quot;Bzbw_v-u\\&amp;quot;,\\&amp;quot;examples_mouseboxselectormanipulator.md\\&amp;quot;:\\&amp;quot;BqbGRKbF\\&amp;quot;,\\&amp;quot;examples_mousecameratrackballfirstpersonmanipulator.md\\&amp;quot;:\\&amp;quot;DEm03kGg\\&amp;quot;,\\&amp;quot;examples_mouserangemanipulator.md\\&amp;quot;:\\&amp;quot;C-sLGtPU\\&amp;quot;,\\&amp;quot;examples_multisliceimagemapper.md\\&amp;quot;:\\&amp;quot;DeJ3FPUS\\&amp;quot;,\\&amp;quot;examples_obbtree.md\\&amp;quot;:\\&amp;quot;OzT95F3u\\&amp;quot;,\\&amp;quot;examples_objreader.md\\&amp;quot;:\\&amp;quot;DXsD_gnj\\&amp;quot;,\\&amp;quot;examples_objviewer.md\\&amp;quot;:\\&amp;quot;jxX73jO4\\&amp;quot;,\\&amp;quot;examples_objwriter.md\\&amp;quot;:\\&amp;quot;Bk0kh8Wz\\&amp;quot;,\\&amp;quot;examples_octreeviewer.md\\&amp;quot;:\\&amp;quot;DGpbfHIG\\&amp;quot;,\\&amp;quot;examples_offlinelocalview.md\\&amp;quot;:\\&amp;quot;ChtZpQH9\\&amp;quot;,\\&amp;quot;examples_orientationmarkerwidget.md\\&amp;quot;:\\&amp;quot;DsZHx7sg\\&amp;quot;,\\&amp;quot;examples_outlinefilter.md\\&amp;quot;:\\&amp;quot;CzCDj0Ip\\&amp;quot;,\\&amp;quot;examples_paintwidget.md\\&amp;quot;:\\&amp;quot;CyTSfqJD\\&amp;quot;,\\&amp;quot;examples_pbr.md\\&amp;quot;:\\&amp;quot;B30cqXOE\\&amp;quot;,\\&amp;quot;examples_pdbreader.md\\&amp;quot;:\\&amp;quot;CCCPH_mG\\&amp;quot;,\\&amp;quot;examples_picking.md\\&amp;quot;:\\&amp;quot;CKJJ-bnF\\&amp;quot;,\\&amp;quot;examples_piecewisegaussianwidget.md\\&amp;quot;:\\&amp;quot;BX9V4vqv\\&amp;quot;,\\&amp;quot;examples_planesource.md\\&amp;quot;:\\&amp;quot;CLrIc6Ro\\&amp;quot;,\\&amp;quot;examples_platonicsolidsource.md\\&amp;quot;:\\&amp;quot;DB33xkkr\\&amp;quot;,\\&amp;quot;examples_plyreader.md\\&amp;quot;:\\&amp;quot;DXjnqarl\\&amp;quot;,\\&amp;quot;examples_plywriter.md\\&amp;quot;:\\&amp;quot;CElEl_ZZ\\&amp;quot;,\\&amp;quot;examples_pointlocator.md\\&amp;quot;:\\&amp;quot;DOglasc0\\&amp;quot;,\\&amp;quot;examples_pointpicker.md\\&amp;quot;:\\&amp;quot;BChGUPSD\\&amp;quot;,\\&amp;quot;examples_pointsource.md\\&amp;quot;:\\&amp;quot;JABvUmSK\\&amp;quot;,\\&amp;quot;examples_polydatanormals.md\\&amp;quot;:\\&amp;quot;THkHMJuQ\\&amp;quot;,\\&amp;quot;examples_polydatareader.md\\&amp;quot;:\\&amp;quot;D9A3gVHe\\&amp;quot;,\\&amp;quot;examples_polylinewidget.md\\&amp;quot;:\\&amp;quot;DtKinh03\\&amp;quot;,\\&amp;quot;examples_proxymanager.md\\&amp;quot;:\\&amp;quot;CmXBoLcQ\\&amp;quot;,\\&amp;quot;examples_quadview.md\\&amp;quot;:\\&amp;quot;DEfM7gPm\\&amp;quot;,\\&amp;quot;examples_remoteview.md\\&amp;quot;:\\&amp;quot;CEgoPJE6\\&amp;quot;,\\&amp;quot;examples_renderwindowwithcontrolbar.md\\&amp;quot;:\\&amp;quot;BKQ-Ozg4\\&amp;quot;,\\&amp;quot;examples_reslicecursorwidget.md\\&amp;quot;:\\&amp;quot;Di-34Mha\\&amp;quot;,\\&amp;quot;examples_reslicerepresentationproxy.md\\&amp;quot;:\\&amp;quot;CMa_Hp9N\\&amp;quot;,\\&amp;quot;examples_scalarbaractor.md\\&amp;quot;:\\&amp;quot;DkCc7yVS\\&amp;quot;,\\&amp;quot;examples_scalartorgba.md\\&amp;quot;:\\&amp;quot;CYC7ssdL\\&amp;quot;,\\&amp;quot;examples_sceneexplorer.md\\&amp;quot;:\\&amp;quot;DI96TqDm\\&amp;quot;,\\&amp;quot;examples_scrolling2dmixedimages.md\\&amp;quot;:\\&amp;quot;VP8eVjTQ\\&amp;quot;,\\&amp;quot;examples_seedwidget.md\\&amp;quot;:\\&amp;quot;DqNMcvn0\\&amp;quot;,\\&amp;quot;examples_shapewidget.md\\&amp;quot;:\\&amp;quot;CblvN6HX\\&amp;quot;,\\&amp;quot;examples_shrinkpolydata.md\\&amp;quot;:\\&amp;quot;7MbGa656\\&amp;quot;,\\&amp;quot;examples_simplecone.md\\&amp;quot;:\\&amp;quot;95Z3bOxN\\&amp;quot;,\\&amp;quot;examples_skyboxviewer.md\\&amp;quot;:\\&amp;quot;DbuuTJyo\\&amp;quot;,\\&amp;quot;examples_slicsource.md\\&amp;quot;:\\&amp;quot;D_Y-dZPJ\\&amp;quot;,\\&amp;quot;examples_spherearray.md\\&amp;quot;:\\&amp;quot;CBq0nP3X\\&amp;quot;,\\&amp;quot;examples_spheremapper.md\\&amp;quot;:\\&amp;quot;BAsTE9X1\\&amp;quot;,\\&amp;quot;examples_spheresandlabels.md\\&amp;quot;:\\&amp;quot;DAZtSYpa\\&amp;quot;,\\&amp;quot;examples_spheresource.md\\&amp;quot;:\\&amp;quot;CqCEa8Pb\\&amp;quot;,\\&amp;quot;examples_spherewidget.md\\&amp;quot;:\\&amp;quot;DUAV3o5Y\\&amp;quot;,\\&amp;quot;examples_splinewidget.md\\&amp;quot;:\\&amp;quot;B7_AH2pn\\&amp;quot;,\\&amp;quot;examples_stickmapper.md\\&amp;quot;:\\&amp;quot;BzyZu6XV\\&amp;quot;,\\&amp;quot;examples_stlreader.md\\&amp;quot;:\\&amp;quot;Cch5vwER\\&amp;quot;,\\&amp;quot;examples_stlwriter.md\\&amp;quot;:\\&amp;quot;C6tjKKC-\\&amp;quot;,\\&amp;quot;examples_surfacelicmapper.md\\&amp;quot;:\\&amp;quot;BbrVMSxC\\&amp;quot;,\\&amp;quot;examples_synchronizablerenderwindow.md\\&amp;quot;:\\&amp;quot;4OwG2e8E\\&amp;quot;,\\&amp;quot;examples_testvolumetypes.md\\&amp;quot;:\\&amp;quot;CXcTffjr\\&amp;quot;,\\&amp;quot;examples_textactor.md\\&amp;quot;:\\&amp;quot;C3TJpfyJ\\&amp;quot;,\\&amp;quot;examples_texture.md\\&amp;quot;:\\&amp;quot;kRi8uq-w\\&amp;quot;,\\&amp;quot;examples_tgareader.md\\&amp;quot;:\\&amp;quot;Cz5LgI-S\\&amp;quot;,\\&amp;quot;examples_thresholdpoints.md\\&amp;quot;:\\&amp;quot;_lYxDmt-\\&amp;quot;,\\&amp;quot;examples_tiffreader.md\\&amp;quot;:\\&amp;quot;CU2h6TYP\\&amp;quot;,\\&amp;quot;examples_timeseries.md\\&amp;quot;:\\&amp;quot;DUGOpkW8\\&amp;quot;,\\&amp;quot;examples_timestepbasedanimationhandler.md\\&amp;quot;:\\&amp;quot;M4-KGXXq\\&amp;quot;,\\&amp;quot;examples_transformcontrolswidget.md\\&amp;quot;:\\&amp;quot;LmElGFOa\\&amp;quot;,\\&amp;quot;examples_trianglefilter.md\\&amp;quot;:\\&amp;quot;93UCfLHo\\&amp;quot;,\\&amp;quot;examples_trianglestrip.md\\&amp;quot;:\\&amp;quot;CtjAM8UF\\&amp;quot;,\\&amp;quot;examples_tubefilter.md\\&amp;quot;:\\&amp;quot;CtfV2Nqz\\&amp;quot;,\\&amp;quot;examples_tubesviewer.md\\&amp;quot;:\\&amp;quot;Bfs6v8gM\\&amp;quot;,\\&amp;quot;examples_vectortext.md\\&amp;quot;:\\&amp;quot;BJ3sQbbV\\&amp;quot;,\\&amp;quot;examples_view2dproxy.md\\&amp;quot;:\\&amp;quot;DGUdNY19\\&amp;quot;,\\&amp;quot;examples_volumeclipplane.md\\&amp;quot;:\\&amp;quot;BzRt2TIf\\&amp;quot;,\\&amp;quot;examples_volumecontour.md\\&amp;quot;:\\&amp;quot;DCFTgJW6\\&amp;quot;,\\&amp;quot;examples_volumemapper.md\\&amp;quot;:\\&amp;quot;Il8p1dUf\\&amp;quot;,\\&amp;quot;examples_volumemapperblendmodes.md\\&amp;quot;:\\&amp;quot;BBqPD4PO\\&amp;quot;,\\&amp;quot;examples_volumemapperlightandshadow.md\\&amp;quot;:\\&amp;quot;C6M8GzD5\\&amp;quot;,\\&amp;quot;examples_volumemapperparallelprojection.md\\&amp;quot;:\\&amp;quot;vEcKg52b\\&amp;quot;,\\&amp;quot;examples_volumeoutline.md\\&amp;quot;:\\&amp;quot;61ooppEL\\&amp;quot;,\\&amp;quot;examples_volumepicker.md\\&amp;quot;:\\&amp;quot;CxvK4BW9\\&amp;quot;,\\&amp;quot;examples_volumerenderingwithpolydata.md\\&amp;quot;:\\&amp;quot;DRNrQHab\\&amp;quot;,\\&amp;quot;examples_volumeviewer.md\\&amp;quot;:\\&amp;quot;Bq9gJgrg\\&amp;quot;,\\&amp;quot;examples_vr.md\\&amp;quot;:\\&amp;quot;CdBH2ihd\\&amp;quot;,\\&amp;quot;examples_warpscalar.md\\&amp;quot;:\\&amp;quot;W1Kbc3UM\\&amp;quot;,\\&amp;quot;examples_webxrchestctblendedcvr.md\\&amp;quot;:\\&amp;quot;DLMA1rZO\\&amp;quot;,\\&amp;quot;examples_webxrheadfullvolumecvr.md\\&amp;quot;:\\&amp;quot;B1z5Rwbj\\&amp;quot;,\\&amp;quot;examples_webxrheadgradientcvr.md\\&amp;quot;:\\&amp;quot;DDJ9V_AQ\\&amp;quot;,\\&amp;quot;examples_webxrvolume.md\\&amp;quot;:\\&amp;quot;DI-0vFQA\\&amp;quot;,\\&amp;quot;examples_widgetmanager.md\\&amp;quot;:\\&amp;quot;BFkLB0JJ\\&amp;quot;,\\&amp;quot;examples_widgetrepresentation.md\\&amp;quot;:\\&amp;quot;DXDe73Ls\\&amp;quot;,\\&amp;quot;examples_windowedsincpolydatafilter.md\\&amp;quot;:\\&amp;quot;BobyC7S7\\&amp;quot;,\\&amp;quot;examples_xmlimagedatawriter.md\\&amp;quot;:\\&amp;quot;B6H-Kcef\\&amp;quot;,\\&amp;quot;examples_xmlpolydatawriter.md\\&amp;quot;:\\&amp;quot;DrlXFTdh\\&amp;quot;,\\&amp;quot;examples_ziphttpreader.md\\&amp;quot;:\\&amp;quot;LHbxk43p\\&amp;quot;,\\&amp;quot;index.md\\&amp;quot;:\\&amp;quot;B1FHKd-q\\&amp;quot;}&amp;quot;);window.__VP_SITE_DATA__=JSON.parse(&amp;quot;{\\&amp;quot;lang\\&amp;quot;:\\&amp;quot;en-US\\&amp;quot;,\\&amp;quot;dir\\&amp;quot;:\\&amp;quot;ltr\\&amp;quot;,\\&amp;quot;title\\&amp;quot;:\\&amp;quot;VTK.js \\&amp;quot;,\\&amp;quot;description\\&amp;quot;:\\&amp;quot;VTK.js a Visualization Toolkit for the Web\\&amp;quot;,\\&amp;quot;base\\&amp;quot;:\\&amp;quot;/vtk-js/\\&amp;quot;,\\&amp;quot;head\\&amp;quot;:[],\\&amp;quot;router\\&amp;quot;:{\\&amp;quot;prefetchLinks\\&amp;quot;:true},\\&amp;quot;appearance\\&amp;quot;:true,\\&amp;quot;themeConfig\\&amp;quot;:{\\&amp;quot;logo\\&amp;quot;:\\&amp;quot;/logo-wide.svg\\&amp;quot;,\\&amp;quot;siteTitle\\&amp;quot;:\\&amp;quot;\\&amp;quot;,\\&amp;quot;nav\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Docs\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;API\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Examples\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/examples/\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Datasets\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;https://kitware.github.io/vtk-js-datasets/\\&amp;quot;}],\\&amp;quot;sidebar\\&amp;quot;:{\\&amp;quot;/docs/\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Getting Started\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Overview\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/index.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Import from a CDN\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/intro_vtk_as_external_script.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ES6 Dependency\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/intro_vtk_as_es6_dependency.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;React Usage\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/vtk_react.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Vue Usage\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/vtk_vue.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Vanilla Usage\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/vtk_vanilla.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Tutorial\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/tutorial.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Old ES6 Docs\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/old_intro_vtk_es6.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Develop\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Requirement\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/develop_requirement.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Class\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/develop_class.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Example\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/develop_example.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Test\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/develop_test.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Build\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/develop_build.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Widget\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/develop_widget.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;WebGPU\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/develop_webgpu.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;WebXR\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/develop_webxr.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Concepts\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Widgets\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/concepts_widgets.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Miscellaneous\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Tools\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/misc_tools.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Troubleshooting\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/misc_troubleshooting.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Contributing\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/misc_contributing.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Data Format\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Structures\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/structures.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Data Array\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/structures_DataArray.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;String Array\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/structures_StringArray.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Poly Data\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/docs/structures_PolyData.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Testing\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Tests\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/vtk-js/coverage/tests.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Coverage\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/vtk-js/coverage/home.html\\&amp;quot;}]}],\\&amp;quot;/api/\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Common\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Core\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Base64\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_Base64.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CellArray\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_CellArray.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;DataArray\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_DataArray.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Endian\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_Endian.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;HalfFloat\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_HalfFloat.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageHelper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_ImageHelper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;LookupTable\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_LookupTable.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Math\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_Math.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;MatrixBuilder\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_MatrixBuilder.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Points\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_Points.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PriorityQueue\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_PriorityQueue.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ProgressHandler\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_ProgressHandler.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ScalarsToColors\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_ScalarsToColors.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;StringArray\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_StringArray.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;URLExtract\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_URLExtract.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;VariantArray\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Core_VariantArray.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;DataModel\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AbstractPointLocator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_AbstractPointLocator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;BoundingBox\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_BoundingBox.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Box\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Box.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CardinalSpline1D\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_CardinalSpline1D.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Cell\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Cell.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Collection\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Collection.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Cone\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Cone.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Cylinder\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Cylinder.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;DataSet\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_DataSet.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;DataSetAttributes\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_DataSetAttributes.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;EdgeLocator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_EdgeLocator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ITKHelper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_ITKHelper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageData\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_ImageData.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImplicitFunction\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_ImplicitFunction.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;IncrementalOctreeNode\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_IncrementalOctreeNode.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;IncrementalOctreePointLocator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_IncrementalOctreePointLocator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;KochanekSpline1D\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_KochanekSpline1D.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Line\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Line.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Locator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Locator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;MergePoints\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_MergePoints.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PiecewiseFunction\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_PiecewiseFunction.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Plane\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Plane.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Planes\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Planes.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PointLocator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_PointLocator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PointSet\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_PointSet.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PolyData\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_PolyData.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PolyLine\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_PolyLine.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Polygon\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Polygon.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Quad\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Quad.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;SelectionNode\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_SelectionNode.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Sphere\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Sphere.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Spline1D\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Spline1D.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Spline3D\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Spline3D.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Triangle\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_Triangle.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TriangleStrip\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_DataModel_TriangleStrip.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Transform\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;LandmarkTransform\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Transform_LandmarkTransform.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Transform\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Common_Transform_Transform.html\\&amp;quot;}]}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Filters\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Core\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CleanPolyData\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Core_CleanPolyData.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ThresholdPoints\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Core_ThresholdPoints.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;General\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AppendPolyData\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_AppendPolyData.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ClipClosedSurface\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_ClipClosedSurface.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ContourLoopExtraction\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_ContourLoopExtraction.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ContourTriangulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_ContourTriangulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageCropFilter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_ImageCropFilter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageDataOutlineFilter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_ImageDataOutlineFilter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageOutlineFilter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_ImageOutlineFilter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageSliceFilter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_ImageSliceFilter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageStreamline\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_ImageStreamline.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;LineFilter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_LineFilter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;OutlineFilter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_OutlineFilter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ShrinkPolyData\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_ShrinkPolyData.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TransformPolyDataFilter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_TransformPolyDataFilter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TriangleFilter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_TriangleFilter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TubeFilter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_General_TubeFilter.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Sources\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ArcSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_ArcSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Arrow2DSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_Arrow2DSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ArrowSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_ArrowSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CircleSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_CircleSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ConeSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_ConeSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CubeSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_CubeSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Cursor3D\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_Cursor3D.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CylinderSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_CylinderSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;DiskSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_DiskSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;EllipseArcSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_EllipseArcSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;FrustumSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_FrustumSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;LineSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_LineSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PlaneSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_PlaneSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PlatonicSolidSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_PlatonicSolidSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PointSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_PointSource.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;SphereSource\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Sources_SphereSource.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Texture\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TextureMapToPlane\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Texture_TextureMapToPlane.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TextureMapToSphere\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Filters_Texture_TextureMapToSphere.html\\&amp;quot;}]}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;IO\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Core\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;DataAccessHelper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Core_DataAccessHelper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;HttpDataSetReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Core_HttpDataSetReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;HttpSceneLoader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Core_HttpSceneLoader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageStream\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Core_ImageStream.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;WSLinkClient\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Core_WSLinkClient.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Geometry\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;DracoReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Geometry_DracoReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;GLTFImporter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Geometry_GLTFImporter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;IFCImporter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Geometry_IFCImporter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PLYReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Geometry_PLYReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PLYWriter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Geometry_PLYWriter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;STLReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Geometry_STLReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;STLWriter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Geometry_STLWriter.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Image\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;HDRReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Image_HDRReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TGAReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Image_TGAReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TIFFReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Image_TIFFReader.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Misc\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ElevationReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Misc_ElevationReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;GCodeReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Misc_GCodeReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ITKImageReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Misc_ITKImageReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ITKPolyDataReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Misc_ITKPolyDataReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;JSONNucleoReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Misc_JSONNucleoReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;JSONReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Misc_JSONReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;MTLReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Misc_MTLReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;OBJReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Misc_OBJReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;OBJWriter\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Misc_OBJWriter.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PDBReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_Misc_PDBReader.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;XML\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;XMLImageDataReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_XML_XMLImageDataReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;XMLPolyDataReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_XML_XMLPolyDataReader.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;XMLReader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/IO_XML_XMLReader.html\\&amp;quot;}]}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Imaging\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Core\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageReslice\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Imaging_Core_ImageReslice.html\\&amp;quot;}]}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Interaction\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Manipulators\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;3DControllerModelSelectorManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_3DControllerModelSelectorManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CompositeCameraManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_CompositeCameraManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CompositeGestureManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_CompositeGestureManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CompositeKeyboardManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_CompositeKeyboardManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CompositeMouseManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_CompositeMouseManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CompositeVRManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_CompositeVRManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;GestureCameraManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_GestureCameraManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;KeyboardCameraManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_KeyboardCameraManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;MouseBoxSelectorManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_MouseBoxSelectorManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;MouseCameraTrackballMultiRotateManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_MouseCameraTrackballMultiRotateManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;MouseCameraTrackballPanManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_MouseCameraTrackballPanManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;MouseCameraTrackballRollManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_MouseCameraTrackballRollManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;MouseCameraTrackballRotateManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_MouseCameraTrackballRotateManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;MouseCameraTrackballZoomManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_MouseCameraTrackballZoomManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;MouseCameraTrackballZoomToMouseManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_MouseCameraTrackballZoomToMouseManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;MouseRangeManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Manipulators_MouseRangeManipulator.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Style\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;InteractorStyleHMDXR\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Style_InteractorStyleHMDXR.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;InteractorStyleImage\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Style_InteractorStyleImage.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;InteractorStyleManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Style_InteractorStyleManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;InteractorStyleTrackballCamera\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Style_InteractorStyleTrackballCamera.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Widgets\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;OrientationMarkerWidget\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Interaction_Widgets_OrientationMarkerWidget.html\\&amp;quot;}]}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Proxy\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Core\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AbstractRepresentationProxy\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Proxy_Core_AbstractRepresentationProxy.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;LookupTableProxy\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Proxy_Core_LookupTableProxy.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PiecewiseFunctionProxy\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Proxy_Core_PiecewiseFunctionProxy.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ProxyManager\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Proxy_Core_ProxyManager.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;SourceProxy\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Proxy_Core_SourceProxy.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;View2DProxy\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Proxy_Core_View2DProxy.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ViewProxy\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Proxy_Core_ViewProxy.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Representations\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;GeometryRepresentationProxy\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Proxy_Representations_GeometryRepresentationProxy.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ResliceRepresentationProxy\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Proxy_Representations_ResliceRepresentationProxy.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;SliceRepresentationProxy\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Proxy_Representations_SliceRepresentationProxy.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;VolumeRepresentationProxy\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Proxy_Representations_VolumeRepresentationProxy.html\\&amp;quot;}]}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Rendering\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Core\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AbstractImageMapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_AbstractImageMapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AbstractMapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_AbstractMapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AbstractMapper3D\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_AbstractMapper3D.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AbstractPicker\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_AbstractPicker.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Actor\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Actor.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Actor2D\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Actor2D.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AnnotatedCubeActor\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_AnnotatedCubeActor.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AxesActor\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_AxesActor.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Camera\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Camera.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CellPicker\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_CellPicker.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ColorTransferFunction\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_ColorTransferFunction.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Coordinate\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Coordinate.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Follower\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Follower.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Glyph3DMapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Glyph3DMapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;HardwareSelector\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_HardwareSelector.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageArrayMapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_ImageArrayMapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageCPRMapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_ImageCPRMapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageMapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_ImageMapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageProperty\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_ImageProperty.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageResliceMapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_ImageResliceMapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ImageSlice\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_ImageSlice.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;InteractorObserver\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_InteractorObserver.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;InteractorStyle\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_InteractorStyle.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Light\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Light.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Mapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Mapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Mapper2D\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Mapper2D.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Picker\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Picker.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PixelSpaceCallbackMapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_PixelSpaceCallbackMapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PointPicker\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_PointPicker.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Prop\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Prop.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Prop3D\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Prop3D.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Property\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Property.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Property2D\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Property2D.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;RenderWindow\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_RenderWindow.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;RenderWindowInteractor\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_RenderWindowInteractor.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Renderer\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Renderer.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ScalarBarActor\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_ScalarBarActor.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Skybox\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Skybox.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;SphereMapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_SphereMapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;StickMapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_StickMapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TextActor\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_TextActor.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TextProperty\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_TextProperty.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Texture\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Texture.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;VectorText\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_VectorText.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Viewport\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Viewport.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Volume\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_Volume.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;VolumeMapper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_VolumeMapper.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;VolumeProperty\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Core_VolumeProperty.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Misc\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;CanvasView\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Misc_CanvasView.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;FullScreenRenderWindow\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Misc_FullScreenRenderWindow.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;GenericRenderWindow\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Misc_GenericRenderWindow.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;RemoteView\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Misc_RemoteView.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;RenderWindowWithControlBar\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Misc_RenderWindowWithControlBar.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;SynchronizableRenderWindow\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;SynchronizableRenderWindow\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Misc_SynchronizableRenderWindow.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ObjectManager\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Misc_SynchronizableRenderWindow_ObjectManager.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TextureLODsDownloader\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_Misc_TextureLODsDownloader.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;OpenGL\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;BufferObject\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_OpenGL_BufferObject.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;HardwareSelector\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_OpenGL_HardwareSelector.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;RenderWindow\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_OpenGL_RenderWindow.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Texture\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_OpenGL_Texture.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;SceneGraph\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;RenderPass\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_SceneGraph_RenderPass.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ViewNode\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_SceneGraph_ViewNode.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ViewNodeFactory\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_SceneGraph_ViewNodeFactory.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;WebXR\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;RenderWindowHelper\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Rendering_WebXR_RenderWindowHelper.html\\&amp;quot;}]}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Widgets\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Core\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AbstractWidget\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Core_AbstractWidget.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AbstractWidgetFactory\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Core_AbstractWidgetFactory.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;StateBuilder\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Core_StateBuilder.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;WidgetManager\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Core_WidgetManager.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;WidgetState\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Core_WidgetState.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Manipulators\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;AbstractManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Manipulators_AbstractManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;LineManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Manipulators_LineManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PickerManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Manipulators_PickerManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;PlaneManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Manipulators_PlaneManipulator.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;TrackballManipulator\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Manipulators_TrackballManipulator.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Representations\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;WidgetRepresentation\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Representations_WidgetRepresentation.html\\&amp;quot;}]},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;Widgets3D\\&amp;quot;,\\&amp;quot;collapsed\\&amp;quot;:true,\\&amp;quot;items\\&amp;quot;:[{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;InteractiveOrientationWidget\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Widgets3D_InteractiveOrientationWidget.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;ResliceCursorWidget\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Widgets3D_ResliceCursorWidget.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;SeedWidget\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Widgets3D_SeedWidget.html\\&amp;quot;},{\\&amp;quot;text\\&amp;quot;:\\&amp;quot;SphereWidget\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;/api/Widgets_Widgets3D_SphereWidget.html\\&amp;quot;}]}]}]},\\&amp;quot;socialLinks\\&amp;quot;:[{\\&amp;quot;icon\\&amp;quot;:\\&amp;quot;github\\&amp;quot;,\\&amp;quot;link\\&amp;quot;:\\&amp;quot;https://github.com/Kitware/vtk-js\\&amp;quot;}],\\&amp;quot;outline\\&amp;quot;:\\&amp;quot;deep\\&amp;quot;,\\&amp;quot;search\\&amp;quot;:{\\&amp;quot;provider\\&amp;quot;:\\&amp;quot;local\\&amp;quot;},\\&amp;quot;footer\\&amp;quot;:{\\&amp;quot;copyright\\&amp;quot;:\\&amp;quot;© 2026 Kitware Inc.\\&amp;quot;}},\\&amp;quot;locales\\&amp;quot;:{},\\&amp;quot;scrollOffset\\&amp;quot;:134,\\&amp;quot;cleanUrls\\&amp;quot;:false}&amp;quot;);&lt;/script&gt;\n    \n&lt;script&gt;\nvar container = document.querySelector(\&#39;.content\&#39;);\nvar base64Str = &amp;quot;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&amp;quot;;\n\nOfflineLocalView.load(container, { base64Str });\n&lt;/script&gt;\n  &lt;/body&gt;\n&lt;/html&gt;&quot; class=&quot;pyvista&quot; style=&quot;width: 99%; height: 600px; border: 1px solid rgb(221,221,221);&quot;&gt;&lt;/iframe&gt;&#39;)
+</pre></div>
+</div>
+</section>
+<section id="figures-with-matplotlib">
+<h2>Figures with Matplotlib<a class="headerlink" href="#figures-with-matplotlib" title="Link to this heading">#</a></h2>
+<p>This example shows how to render a figure using Matplotlib.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">pi</span></a><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\cos{(t)}$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\sin{(t)}$&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time [time units]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Amplitude [distance units]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Trigonometric functions&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../_images/sphx_glr_sphinx-gallery_003.png" srcset="../../_images/sphx_glr_sphinx-gallery_003.png" alt="Trigonometric functions" class = "sphx-glr-single-img"/></section>
+<section id="figures-with-plotly">
+<h2>Figures with Plotly<a class="headerlink" href="#figures-with-plotly" title="Link to this heading">#</a></h2>
+<p>This example shows how to render a figure using Plotly.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+
+<span class="c1"># More info: https://plotly.com/python/renderers/</span>
+
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">pi</span></a><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">cos_trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;cos(t)&quot;</span><span class="p">)</span>
+<span class="n">sin_trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sin(t)&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data</span></a><span class="o">=</span><span class="p">[</span><span class="n">cos_trace</span><span class="p">,</span> <span class="n">sin_trace</span><span class="p">])</span>
+
+<span class="n">fig</span>
+</pre></div>
+</div>
+<div class="output_subarea output_html rendered_html output_result">
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.1.min.js" integrity="sha256-4rD3fugVb/nVJYUv5Ky3v+fYXoouHaBSP20WIJuEiWg=" crossorigin="anonymous"></script>                <div id="98d9b5cd-a6c1-4739-b6c5-88506ff16468" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("98d9b5cd-a6c1-4739-b6c5-88506ff16468")) {                    Plotly.newPlot(                        "98d9b5cd-a6c1-4739-b6c5-88506ff16468",                        [{"mode":"lines","name":"cos(t)","x":{"dtype":"f8","bdata":"AAAAAAAAAACRGkt8Vz+wP5EaS3xXP8A\u002f2qdwOgNfyD+RGkt8Vz\u002fQPzXhXVstT9Q\u002f2qdwOgNf2D9+boMZ2W7cP5EaS3xXP+A\u002f433Ua0JH4j814V1bLU\u002fkP4dE50oYV+Y\u002f2qdwOgNf6D8sC\u002fop7mbqP35ugxnZbuw\u002f0NEMCcR27j+RGkt8Vz\u002fwPzrMD\u002fRMQ\u002fE\u002f433Ua0JH8j+ML5njN0vzPzXhXVstT\u002fQ\u002f3pIi0yJT9T+HROdKGFf2PzD2q8INW\u002fc\u002f2qdwOgNf+D+DWTWy+GL5PywL+inuZvo\u002f1by+oeNq+z9+boMZ2W78PycgSJHOcv0\u002f0NEMCcR2\u002fj95g9GAuXr\u002fP5EaS3xXPwBAZnMtOFLBAEA6zA\u002f0TEMBQA8l8q9HxQFA433Ua0JHAkC41rYnPckCQIwvmeM3SwNAYYh7nzLNA0A14V1bLU8EQAo6QBco0QRA3pIi0yJTBUCz6wSPHdUFQIdE50oYVwZAXJ3JBhPZBkAw9qvCDVsHQAVPjn4I3QdA2qdwOgNfCECuAFP2\u002feAIQINZNbL4YglAV7IXbvPkCUAsC\u002fop7mYKQABk3OXo6ApA1by+oeNqC0CpFaFd3uwLQH5ugxnZbgxAUsdl1dPwDEAnIEiRznINQPt4Kk3J9A1A0NEMCcR2DkCkKu\u002fEvvgOQHmD0YC5eg9ATdyzPLT8D0CRGkt8Vz8QQPtGPNpUgBBAZnMtOFLBEEDQnx6WTwIRQDrMD\u002fRMQxFApPgAUkqEEUAPJfKvR8URQHlR4w1FBhJA433Ua0JHEkBNqsXJP4gSQLjWtic9yRJAIgOohToKE0CML5njN0sTQPZbikE1jBNAYYh7nzLNE0DLtGz9Lw4UQDXhXVstTxRAoA1PuSqQFEAKOkAXKNEUQHRmMXUlEhVA3pIi0yJTFUBJvxMxIJQVQLPrBI8d1RVAHRj27BoWFkCHROdKGFcWQPJw2KgVmBZAXJ3JBhPZFkDGybpkEBoXQDD2q8INWxdAmyKdIAucF0AFT45+CN0XQG97f9wFHhhA2qdwOgNfGEBE1GGYAKAYQK4AU\u002fb94BhAGC1EVPshGUA="},"y":{"dtype":"f8","bdata":"AAAAAAAA8D+VSynBge\u002fvP2j6BgUYvu8\u002fJek3u\u002fVr7z8jfxaOb\u002fnuP\u002fFJcov7Zu4\u002fXLHeqjC17T9+NRQyxuTsP1+hBPiS9us\u002fuvBkh4zr6j9WMpEhxsTpPzlQz6Jvg+g\u002ftDkVSdQo5z+WUJVeWbblP0ATccl8LeQ\u002fA6sNgtOP4j9cLKDxB9\u002fgP1a1P3WwOd4\u002fthLH2SiW2j+KU4hOOdfWP1tDY1G+ANM\u002fjFrgSlktzj+Mcwt+GjrGPyLsuGvkX7w\u002fcyCwKKhcqD\u002fN+ijPKj+QvwzJ6KS5SbS\u002f3kQPZF83wr9P3qvaGjfKv5OAwi7oDdG\u002fPSGBd67u1L83i\u002fTn4LnYv4vJmF6Wa9y\u002fAgAAAAAA4L\u002fP5tyRtrnhv860DJEnYeO\u002fhlh3f5705L\u002fbPrV2e3Lmv11Sx9Q02ee\u002fJuDa0Vgn6b9dHHf9jlvqv4pZi6GZdOu\u002fwfLvCVdx7L\u002fZTwivwlDtvxstUkL2Ee6\u002fV1DNmyq07r9D8kaHuDbvvwQ9tXAZme+\u002fXjTx7ufa778HB0As4PvvvwcHQCzg+++\u002fXjTx7ufa778EPbVwGZnvv0PyRoe4Nu+\u002fV1DNmyq07r8cLVJC9hHuv9lPCK\u002fCUO2\u002fwvLvCVdx7L+JWYuhmXTrv14cd\u002f2OW+q\u002fJeDa0Vgn6b9eUsfUNNnnv9o+tXZ7cua\u002fiFh3f5705L\u002fMtAyRJ2Hjv9Hm3JG2ueG\u002f+f\u002f\u002f\u002f\u002f\u002f\u002f37+IyZhelmvcvzeL9Ofgudi\u002fQSGBd67u1L+MgMIu6A3Rv0jeq9oaN8q\u002f3kQPZF83wr8eyeikuUm0v1T6KM8qP5C\u002fkCCwKKhcqD8R7Lhr5F+8P3xzC34aOsY\u002fk1rgSlktzj9bQ2NRvgDTP4ZTiE4519Y\u002fvRLH2SiW2j9ZtT91sDneP1wsoPEH3+A\u002fAasNgtOP4j9DE3HJfC3kP5dQlV5ZtuU\u002ftDkVSdQo5z83UM+ib4PoP1cykSHGxOk\u002fuvBkh4zr6j9foQT4kvbrP301FDLG5Ow\u002fXbHeqjC17T\u002fxSXKL+2buPyN\u002fFo5v+e4\u002fJuk3u\u002fVr7z9o+gYFGL7vP5VLKcGB7+8\u002fAAAAAAAA8D8="},"type":"scatter"},{"mode":"lines","name":"sin(t)","x":{"dtype":"f8","bdata":"AAAAAAAAAACRGkt8Vz+wP5EaS3xXP8A\u002f2qdwOgNfyD+RGkt8Vz\u002fQPzXhXVstT9Q\u002f2qdwOgNf2D9+boMZ2W7cP5EaS3xXP+A\u002f433Ua0JH4j814V1bLU\u002fkP4dE50oYV+Y\u002f2qdwOgNf6D8sC\u002fop7mbqP35ugxnZbuw\u002f0NEMCcR27j+RGkt8Vz\u002fwPzrMD\u002fRMQ\u002fE\u002f433Ua0JH8j+ML5njN0vzPzXhXVstT\u002fQ\u002f3pIi0yJT9T+HROdKGFf2PzD2q8INW\u002fc\u002f2qdwOgNf+D+DWTWy+GL5PywL+inuZvo\u002f1by+oeNq+z9+boMZ2W78PycgSJHOcv0\u002f0NEMCcR2\u002fj95g9GAuXr\u002fP5EaS3xXPwBAZnMtOFLBAEA6zA\u002f0TEMBQA8l8q9HxQFA433Ua0JHAkC41rYnPckCQIwvmeM3SwNAYYh7nzLNA0A14V1bLU8EQAo6QBco0QRA3pIi0yJTBUCz6wSPHdUFQIdE50oYVwZAXJ3JBhPZBkAw9qvCDVsHQAVPjn4I3QdA2qdwOgNfCECuAFP2\u002feAIQINZNbL4YglAV7IXbvPkCUAsC\u002fop7mYKQABk3OXo6ApA1by+oeNqC0CpFaFd3uwLQH5ugxnZbgxAUsdl1dPwDEAnIEiRznINQPt4Kk3J9A1A0NEMCcR2DkCkKu\u002fEvvgOQHmD0YC5eg9ATdyzPLT8D0CRGkt8Vz8QQPtGPNpUgBBAZnMtOFLBEEDQnx6WTwIRQDrMD\u002fRMQxFApPgAUkqEEUAPJfKvR8URQHlR4w1FBhJA433Ua0JHEkBNqsXJP4gSQLjWtic9yRJAIgOohToKE0CML5njN0sTQPZbikE1jBNAYYh7nzLNE0DLtGz9Lw4UQDXhXVstTxRAoA1PuSqQFEAKOkAXKNEUQHRmMXUlEhVA3pIi0yJTFUBJvxMxIJQVQLPrBI8d1RVAHRj27BoWFkCHROdKGFcWQPJw2KgVmBZAXJ3JBhPZFkDGybpkEBoXQDD2q8INWxdAmyKdIAucF0AFT45+CN0XQG97f9wFHhhA2qdwOgNfGEBE1GGYAKAYQK4AU\u002fb94BhAGC1EVPshGUA="},"y":{"dtype":"f8","bdata":"AAAAAAAAAAADhrXMjDywP\u002fCDAnguNMA\u002fkayggGI5yD+aiNkBzxLQP9ofIiFb+NM\u002f+5MNU1HJ1z+CQNqEwoHbPxlNPurYHd8\u002fC1i7+O1M4T9GhZoMGvniPxwWPFK3keQ\u002fABg\u002flCAV5j+GGZN4xoHnP4hAIRwx1ug\u002flkFFlgER6j93zoZi8zDrPzKcHq\u002fdNOw\u002fEyzujrQb7T\u002fB8a4NiuTtP\u002f0jPCWPju4\u002f3176khQZ7z8XHIGMi4PvPzTGy1KGze8\u002fg6xao7j27z\u002fvOc8G+P7vP2Zmsvw75u8\u002f70I4BJ6s7z+\u002fl\u002feBWVLvPwOssILL1+4\u002fxVNiW3I97j+TIxAn7YPtP1EHwCL7q+w\u002fqUxY6Hq26z+RVimJaaTqP5aCD4nhduk\u002foSg6uxkv6D+158MBZM7mP9OHZvErVuU\u002f8XixWvXH4z8mRkW6WiXiP2ITsJELcOA\u002f8qg+VZVT3T\u002fagWKM2KjZP\u002fgLinSo49U\u002fv412\u002fecH0j\u002flKaSyIjPMP+bENsZjOcQ\u002f3FNHxZdVuD+s23zJpD6gP8nbfMmkPqC\u002f6lNHxZdVuL\u002ftxDbGYznEv9wppLIiM8y\u002fwo12\u002fecH0r\u002f0C4p0qOPVv92BYozYqNm\u002f7qg+VZVT3b9jE7CRC3DgvyRGRbpaJeK\u002f83ixWvXH47\u002fRh2bxK1blv7fnwwFkzua\u002foCg6uxkv6L+Xgg+J4Xbpv5BWKYlppOq\u002frExY6Hq2679SB8Ai+6vsv5MjECftg+2\u002fxFNiW3I97r8ErLCCy9fuv7+X94FZUu+\u002f70I4BJ6s779lZrL8O+bvv+85zwb4\u002fu+\u002fg6xao7j27780xstShs3vvxgcgYyLg++\u002f3176khQZ77\u002f9Izwlj47uv8Lxrg2K5O2\u002fEizujrQb7b8xnB6v3TTsv3fOhmLzMOu\u002fl0FFlgER6r+GQCEcMdbov4UZk3jGgee\u002fABg\u002flCAV5r8fFjxSt5Hkv0SFmgwa+eK\u002fCli7+O1M4b8bTT7q2B3fv4dA2oTCgdu\u002f9ZMNU1HJ17\u002fZHyIhW\u002fjTv52I2QHPEtC\u002fgKyggGI5yL\u002fogwJ4LjTAvwSGtcyMPLC\u002fB1wUMyamsbw="},"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}}},                        {"responsive": true}                    )                };            </script>        </div>
+</div>
+<br />
+<br /><div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data</span></a><span class="o">.</span><span class="n">tips</span><span class="p">()</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span>
+    <span class="n">facet_col</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;smoker&quot;</span><span class="p">,</span>
+    <span class="n">barmode</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">,</span>
+    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;presentation+plotly&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">fig</span>
+</pre></div>
+</div>
+<div class="output_subarea output_html rendered_html output_result">
+<div>                        <script type="text/javascript">window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.3.1.min.js" integrity="sha256-4rD3fugVb/nVJYUv5Ky3v+fYXoouHaBSP20WIJuEiWg=" crossorigin="anonymous"></script>                <div id="9cea0c88-48bd-4d18-b7e4-35defe70ad14" class="plotly-graph-div" style="height:400px; width:100%;"></div>            <script type="text/javascript">                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("9cea0c88-48bd-4d18-b7e4-35defe70ad14")) {                    Plotly.newPlot(                        "9cea0c88-48bd-4d18-b7e4-35defe70ad14",                        [{"alignmentgroup":"True","hovertemplate":"smoker=No\u003cbr\u003eday=Sun\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"No","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"No","offsetgroup":"No","orientation":"v","showlegend":true,"textposition":"auto","x":["Female","Male","Male","Male","Female","Male","Male","Male","Male","Male","Male","Female","Male","Male","Female","Male","Female","Male","Female","Male","Male","Male","Male","Male","Male","Male","Male","Male","Male","Female","Female","Male","Male","Male","Male","Male","Female","Female","Male","Male","Male","Male","Male","Male","Female","Male","Female","Female","Male","Male","Male","Female","Male","Male","Male","Male","Male"],"xaxis":"x","y":{"dtype":"f8","bdata":"PQrXo3D9MECuR+F6FK4kQMP1KFyPAjVArkfhehSuN0DXo3A9Cpc4QArXo3A9SjlACtejcD2KIUDhehSuR+E6QBSuR+F6FC5Aj8L1KFyPLUAK16NwPYokQOF6FK5HoUFA16NwPQrXLkCuR+F6FG4yQClcj8L1qC1AFK5H4XqUNUApXI\u002fC9agkQArXo3A9SjBAuB6F61H4MED2KFyPwnUxQOF6FK5H4StAXI\u002fC9ShcI0BmZmZmZmY+QArXo3A9SjJAexSuR+E6NkAzMzMzMzNAQM3MzMzMjDxACtejcD0KMkAUrkfhehQpQBSuR+F6lCRASOF6FK5nQUDhehSuR+EjQI\u002fC9ShcjzlAPQrXo3B9M0ApXI\u002fC9QhDQDMzMzMz8zdA9ihcj8K1OUCPwvUoXE8xQK5H4XoU7j1ApHA9CtcjLEDD9Shcj0IqQMP1KFyPQjFAzczMzMyMOECF61G4HsUzQJqZmZmZ2T1A9ihcj8IVSEAAAAAAAAA5QEjhehSuxypAPQrXo3B9MEAAAAAAAIA1QFK4HoXrUSlA9ihcj8I1MEAfhetRuJ4rQIXrUbgehThAw\u002fUoXI\u002fCNED2KFyPwrU\u002fQHE9CtejsDRA"},"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=No\u003cbr\u003eday=Sat\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"No","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"No","offsetgroup":"No","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Male","Female","Female","Male","Male","Male","Male","Male","Male","Female","Male","Male","Female","Female","Male","Male","Male","Female","Male","Male","Male","Female","Male","Male","Male","Female","Male","Male","Female","Female","Male","Female","Male","Male","Female","Male","Male","Male","Male","Male","Male","Female","Male","Male"],"xaxis":"x2","y":{"dtype":"f8","bdata":"ZmZmZmamNEDsUbgehesxQArXo3A9SjRACtejcD2KL0D2KFyPwrVDQFK4HoXr0TNAj8L1KFzPMUA9CtejcL0qQOF6FK5HYSlAMzMzMzOzNUBmZmZmZqYzQJqZmZmZGSNAmpmZmZlZMkAfhetRuB4uQHE9CtejsDRASOF6FK7HMUCPwvUoXA84QI\u002fC9ShcTzBArkfhehTuMEBxPQrXo7AyQIXrUbgeRT9ACtejcD0KMEApXI\u002fC9Wg6QMP1KFyPIkhA16NwPQqXMUAUrkfhehQ0QDMzMzMzczBAexSuR+E6NEAK16NwPQooQFK4HoXrETFA9ihcj8J1LUCF61G4HgUlQOxRuB6F6zRAPQrXo3A9MkAAAAAAAAAsQAAAAAAAAB1ACtejcD0qSEAzMzMzM3M0QI\u002fC9ShcjypAuB6F61E4J0AK16NwPYolQKRwPQrXIyRACtejcD3qQUBI4XoUrgc9QFK4HoXr0TFA"},"yaxis":"y2","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=No\u003cbr\u003eday=Thur\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"No","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"No","offsetgroup":"No","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Male","Male","Male","Female","Male","Female","Male","Male","Male","Male","Female","Female","Female","Male","Female","Male","Male","Female","Female","Male","Female","Female","Male","Male","Female","Female","Female","Female","Female","Female","Female","Female","Female","Male","Male","Female","Female","Female","Female","Female","Male","Male","Male","Female"],"xaxis":"x3","y":{"dtype":"f8","bdata":"MzMzMzMzO0DD9Shcj8I2QArXo3A9SjFAKVyPwvWoMECkcD0K1yMkQPYoXI\u002fC9S9ACtejcD1qQUCPwvUoXA8qQEjhehSuRzJA9ihcj8K1OEApXI\u002fC9Sg1QM3MzMzMTCVAXI\u002fC9SjcKEAUrkfhehQ4QOF6FK5HYSdA16NwPQrXKkCF61G4HoUsQGZmZmZm5i9A9ihcj8L1KEDNzMzMzMw9QArXo3A9CiFACtejcD0KLUDD9Shcj8ImQFK4HoXr0TZAFK5H4XoUM0CF61G4HkU0QNejcD0KVyZAhetRuB6FKEDD9Shcj0IyQIXrUbgeBSFAKVyPwvWoJEDNzMzMzEwsQFK4HoXrUSpAuB6F61F4MUBmZmZmZiZBQLgehetRmERAzczMzMwMO0CuR+F6FG4wQDMzMzMzsyBApHA9CtejMkA9CtejcL0nQI\u002fC9ShcjyNACtejcD0KHkA9CtejcD0eQEjhehSuxzJA"},"yaxis":"y3","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=No\u003cbr\u003eday=Fri\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"No","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"No","offsetgroup":"No","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Female","Male","Female"],"xaxis":"x4","y":{"dtype":"f8","bdata":"PQrXo3B9NkAAAAAAAMA2QOxRuB6F6yhA9ihcj8L1L0A="},"yaxis":"y4","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=Yes\u003cbr\u003eday=Sun\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Yes","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"Yes","offsetgroup":"Yes","orientation":"v","showlegend":true,"textposition":"auto","x":["Female","Male","Male","Male","Male","Male","Male","Female","Male","Male","Male","Male","Male","Male","Female","Male","Female","Male","Male"],"xaxis":"x","y":{"dtype":"f8","bdata":"w\u002fUoXI+CMUAAAAAAAAAdQJqZmZmZ2T9AUrgehevRMEAzMzMzM3NAQKRwPQrX4zFA9ihcj8L1LEAzMzMzMzMjQHE9CtejUEFAMzMzMzNTQUAUrkfhelQ3QM3MzMzMrEZA7FG4HoUrN0BmZmZmZkZEQGZmZmZm5jRA9ihcj8J1PkBmZmZmZiYyQJqZmZmZGTdA4XoUrkdhL0A="},"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=Yes\u003cbr\u003eday=Sat\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Yes","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"Yes","offsetgroup":"Yes","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Male","Male","Male","Male","Male","Female","Male","Female","Female","Male","Female","Female","Male","Male","Male","Female","Female","Female","Male","Male","Male","Male","Male","Female","Male","Male","Female","Female","Female","Male","Male","Male","Female","Female","Male","Male","Male","Male","Male","Female","Male"],"xaxis":"x2","y":{"dtype":"f8","bdata":"4XoUrkcBQ0B7FK5H4XomQArXo3A9SjRAH4XrUbieK0AK16NwPQomQArXo3A9SjJAj8L1KFyPCECF61G4HgUuQFyPwvUo3DpASOF6FK5HOUDsUbgehesxQGZmZmZmJkZA7FG4HoVrNkC4HoXrUbguQD0K16NwfTRA9ihcj8I1OUAfhetRuJ4sQK5H4XoULiVAw\u002fUoXI9CJUBI4XoUrmdJQB+F61G4ni9A16NwPQqXOkA9CtejcF1DQIXrUbgeRThAhetRuB6FKUCPwvUoXA8+QKRwPQrX4zlACtejcD2KKkDsUbgehSs8QM3MzMzMzClAZmZmZmYmPECuR+F6FC4nQPYoXI\u002fC9R5ApHA9CtcjPkAfhetRuB42QMP1KFyPAjhA4XoUrkdhL0CPwvUoXA8vQDMzMzMzMylACtejcD1qQECuR+F6FC47QOxRuB6FqzZA"},"yaxis":"y2","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=Yes\u003cbr\u003eday=Thur\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Yes","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"Yes","offsetgroup":"Yes","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Male","Male","Female","Male","Male","Male","Male","Female","Female","Male","Male","Female","Female","Female","Male","Female"],"xaxis":"x3","y":{"dtype":"f8","bdata":"cT0K16NwM0DXo3A9CldAQAAAAAAAADBAj8L1KFzPM0BxPQrXo3A8QPYoXI\u002fC9S5AFK5H4XqUMECuR+F6FK4kQK5H4XoUjkVAAAAAAAAAKkCF61G4HgUrQPYoXI\u002fCtTJAexSuR+F6KUAAAAAAAAAqQGZmZmZmZjBASOF6FK6HNEC4HoXrUXgwQA=="},"yaxis":"y3","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=Yes\u003cbr\u003eday=Fri\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Yes","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"Yes","offsetgroup":"Yes","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Female","Female","Male","Male","Male","Male","Female","Female","Male","Female","Male","Male","Female","Female"],"xaxis":"x4","y":{"dtype":"f8","bdata":"uB6F61H4PEAAAAAAAAAXQFK4HoXrUTBA9ihcj8IVREBI4XoUrkc7QI\u002fC9ShcDyhAw\u002fUoXI8CNUAzMzMzM7MmQMP1KFyPwi5AUrgehetRKEDXo3A9CtcqQClcj8L1KCFA16NwPQrXKkCF61G4HkUwQK5H4XoULiRA"},"yaxis":"y4","type":"bar"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""},"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"line":{"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scattergeo"}],"scattergl":[{"line":{"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scattergl"}],"scattermapbox":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermapbox"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"line":{"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scatterpolargl"}],"scatterpolar":[{"line":{"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"line":{"width":3},"marker":{"size":9},"type":"scatter"}],"scatterternary":[{"line":{"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"height":30,"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"height":36,"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f","size":18},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","mapbox":{"style":"light"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,0.235],"title":{"text":"sex"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"total_bill"}},"xaxis2":{"anchor":"y2","domain":[0.255,0.49],"matches":"x","title":{"text":"sex"}},"yaxis2":{"anchor":"x2","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis3":{"anchor":"y3","domain":[0.51,0.745],"matches":"x","title":{"text":"sex"}},"yaxis3":{"anchor":"x3","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis4":{"anchor":"y4","domain":[0.7649999999999999,0.9999999999999999],"matches":"x","title":{"text":"sex"}},"yaxis4":{"anchor":"x4","domain":[0.0,1.0],"matches":"y","showticklabels":false},"annotations":[{"font":{},"showarrow":false,"text":"day=Sun","x":0.1175,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"day=Sat","x":0.3725,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"day=Thur","x":0.6275,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"day=Fri","x":0.8824999999999998,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"}],"legend":{"title":{"text":"smoker"},"tracegroupgap":0},"margin":{"t":60},"barmode":"group","height":400},                        {"responsive": true}                    )                };            </script>        </div>
+</div>
+<br />
+<br /></section>
+<section id="render-equations-using-ipython-math">
+<h2>Render equations using IPython <code class="docutils literal notranslate"><span class="pre">math</span></code><a class="headerlink" href="#render-equations-using-ipython-math" title="Link to this heading">#</a></h2>
+<p>This example shows how to render equations using the IPython <code class="docutils literal notranslate"><span class="pre">math</span></code> module.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Math</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="c1"># LaTeX formatted equation</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">equation</span></a> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;\int\limits_{-\infty}^\infty f(x) \delta(x - x_0) \, dx = f(x_0)&quot;</span>
+<span class="c1"># Display the equation</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">equation</span></a><span class="p">))</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Math object&gt;
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Latex</span>
+
+<span class="n">Latex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;This is a \LaTeX</span><span class="si">{}</span><span class="s2"> equation: $a^2 + b^2 = c^2$&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Latex object&gt;
+</pre></div>
+</div>
+</section>
+<section id="render-a-table">
+<h2>Render a table<a class="headerlink" href="#render-a-table" title="Link to this heading">#</a></h2>
+<p>This is an example to render a table with Sphinx-Gallery.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p>A and B</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>False</p></td>
+<td><p>False</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>True</p></td>
+<td><p>False</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-even"><td><p>False</p></td>
+<td><p>True</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>True</p></td>
+<td><p>True</p></td>
+<td><p>True</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Render a table using pandas</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Create a dictionary of data</span>
+<a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data</span></a> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;A&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+    <span class="s2">&quot;B&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+    <span class="s2">&quot;C&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="c1"># Create DataFrame from the dictionary</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">data</span></a><span class="p">)</span>
+
+<span class="c1"># Display the DataFrame</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="output_subarea output_html rendered_html output_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<br />
+<br /><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 9.213 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-sphinx-gallery-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/714930556b5962c1be400898294d217f/sphinx-gallery.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">sphinx-gallery.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/7f9d1ecb95a7e184e81659ee58d5df01/sphinx-gallery.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">sphinx-gallery.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/198596c7d15fe991154a2ebccb0cd5a6/sphinx-gallery.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">sphinx-gallery.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sphinx-Gallery</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../sphinx-autoapi.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Sphinx AutoAPI</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-simple-sphere-using-pyvista">Plot a simple sphere using PyVista</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-with-matplotlib">Figures with Matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-with-plotly">Figures with Plotly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#render-equations-using-ipython-math">Render equations using IPython <code class="docutils literal notranslate"><span class="pre">math</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#render-a-table">Render a table</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+
+  
+  <nav class="tocsection editthispage" aria-label="Edit this page">
+    <a href="https://github.com/ansys/ansys-sphinx-theme/edit/main/doc/source/examples/gallery-examples/sphinx-gallery.rst" rel="noopener noreferrer">
+      <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </nav>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/examples/gallery-examples/sphinx-gallery.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+
+  <!-- Include desired assets -->
+  
+  
+  
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"keys": ["title", "text", "objectID"], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../search.html";
+const EXTRA_SOURCES = JSON.parse('{"Actions": "https://actions.docs.ansys.com/version/stable/", "PyAnsys": "https://docs.pyansys.com/version/stable/"}');
+</script>
+
+
+<script src="../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright (c) 2026 ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.1.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      1.7.2.
+    
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
+<script>
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

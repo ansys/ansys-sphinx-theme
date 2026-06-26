@@ -1,0 +1,211 @@
+
+
+
+
+
+
+:class:`ExamplePydanticClass`
+=============================
+
+
+.. py:class:: examples.samples.ExamplePydanticClass(/, **data: Any)
+
+   Bases: :py:obj:`pydantic.BaseModel`
+
+
+   
+   An example Pydantic class.
+
+
+   :Parameters:
+
+       **value** : :class:`python:float`
+           A required parameter.
+
+       **value_with_default1** : :class:`python:float`, :obj:`optional`
+           A simple optional parameter with a default value of 3.14.
+
+       **value_with_default2** : :class:`python:float`, :obj:`optional`
+           A simple optional parameter using Field for the default value and description.
+           Default is 3.14.
+
+       **value_with_constraints** : :class:`python:float`, :obj:`optional`
+           An optional parameter with constraints using Field for the default value,
+           description and constraints. Default is 10.0, with constraints: 0.0 <= value <= 100.0.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   >>> example = ExamplePydanticClass(value=42)
+   >>> example.value
+   42
+   >>> example.value_with_default1
+   3.14
+   >>> example.value_with_default2
+   3.14
+   >>> example.value_with_constraints
+   10.0
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ExamplePydanticClass
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~value`
+            - A required parameter.
+          * - :py:attr:`~value_with_default1`
+            - A simple optional parameter with a default value.
+          * - :py:attr:`~value_with_default2`
+            - A simple optional parameter using field for default value and description.
+          * - :py:attr:`~value_with_constraints`
+            - A optional parameter with constraints using field for default value, description and constraints.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from examples.samples import ExamplePydanticClass
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: value
+   :type:  float
+
+   
+   A required parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:attribute:: value_with_default1
+   :type:  float
+   :value: 3.14
+
+
+   
+   A simple optional parameter with a default value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:attribute:: value_with_default2
+   :type:  float
+   :value: None
+
+
+   
+   A simple optional parameter using field for default value and description.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:attribute:: value_with_constraints
+   :type:  float
+   :value: None
+
+
+   
+   A optional parameter with constraints using field for default value, description and constraints.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+
