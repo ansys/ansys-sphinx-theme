@@ -59,7 +59,7 @@ type-check = [
     "ty==0.0.52",
 ]
 doc = [
-    "jupytext==1.19.3",
+    "jupytext==1.19.4",
     "nbsphinx==0.9.8",
     "notebook==7.6.0",
     "numpydoc==1.10.0",
