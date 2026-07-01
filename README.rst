@@ -60,9 +60,9 @@ Documentation for the latest stabe release of Ansys Sphinx theme is hosted at
 
 The documentation has these sections:
 
-- `Getting started <https://sphinxdocs.ansys.com/version/stable/getting_started.html>`_ : Learn
+- `Getting started <https://sphinxdocs.ansys.com/version/stable/getting-started.html>`_ : Learn
   how to install the theme and use it in your Sphinx project.
-- `User guide <https://sphinxdocs.ansys.com/version/stable/user_guide.html>`_ : Learn how to
+- `User guide <https://sphinxdocs.ansys.com/version/stable/user-guide.html>`_ : Learn how to
   customize the theme and use its features.
 - `Examples <https://sphinxdocs.ansys.com/version/stable/examples.html>`_ : See examples of
   Sphinx components and how it renders with the Ansys Sphinx theme.
