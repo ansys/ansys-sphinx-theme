@@ -1,0 +1,13 @@
+{
+    "sphinx-gallery.py": [
+        "ansys_sphinx_theme.examples",
+        "ansys_sphinx_theme.examples.sample_func",
+        "ansys_sphinx_theme.examples.sample_func.func",
+        "ansys_sphinx_theme.examples.samples.ExampleClass",
+        "ansys_sphinx_theme.examples.samples.ExampleDataClass"
+    ],
+    "minigallery-demo.ipynb": [
+        "ansys_sphinx_theme.examples.sample_func.func",
+        "ansys_sphinx_theme.examples.samples.ExampleClass"
+    ]
+}
