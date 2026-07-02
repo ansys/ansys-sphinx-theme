@@ -57,13 +57,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const wrap = document.querySelector(".ast-announcement-wrap");
     const closeBtn = document.getElementById("ast-announcement-close");
 
-    // Size banner to match .bd-article
+    // Size banner to 80% of .bd-content (middle column, adapts to sidebar presence)
     function alignToBdArticle() {
-        const article = document.querySelector(".bd-main .bd-content .bd-article-container .bd-article");
-        if (article && wrap) {
-            const rect = article.getBoundingClientRect();
-            wrap.style.width = rect.width + "px";
-            wrap.style.marginLeft = (rect.left - wrap.getBoundingClientRect().left) + "px";
+        const content = document.querySelector(".bd-main .bd-content");
+        if (content && wrap) {
+            wrap.style.width = (content.getBoundingClientRect().width * 0.8) + "px";
+            wrap.style.marginLeft = "auto";
+            wrap.style.marginRight = "auto";
         }
     }
     // Defer initial alignment until after layout is complete
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", function() {
     display: flex;
     align-items: center;
     gap: 8px;
-    background: transparent;
+    background: var(--ast-color-enable-card-background);
     box-sizing: border-box;
     color: var(--ast-admonitions-color, inherit);
 }
