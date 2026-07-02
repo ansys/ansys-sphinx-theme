@@ -56,6 +56,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     const wrap = document.querySelector(".ast-announcement-wrap");
     const closeBtn = document.getElementById("ast-announcement-close");
+    const STORAGE_KEY = "ast-announcement-dismissed";
+
+    // Hide immediately if already dismissed in this session
+    if (wrap && sessionStorage.getItem(STORAGE_KEY) === "1") {
+        wrap.setAttribute("hidden", "");
+    }
 
     // Size banner to 80% of .bd-content (middle column, adapts to sidebar presence)
     function alignToBdArticle() {
@@ -75,6 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (closeBtn && wrap) {
         closeBtn.addEventListener("click", function() {
             wrap.setAttribute("hidden", "");
+            sessionStorage.setItem(STORAGE_KEY, "1");
         });
     }
 
