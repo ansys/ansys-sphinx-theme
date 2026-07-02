@@ -56,11 +56,39 @@
 document.addEventListener("DOMContentLoaded", function() {
     const wrap = document.querySelector(".ast-announcement-wrap");
     const closeBtn = document.getElementById("ast-announcement-close");
-    const STORAGE_KEY = "ast-announcement-dismissed";
 
-    // Hide immediately if already dismissed
-    if (wrap && localStorage.getItem(STORAGE_KEY) === "1") {
-        wrap.setAttribute("hidden", "");
+    // Hash the banner message so the key changes whenever content changes.
+    // Uses crypto.subtle (HTTPS/localhost) with a simple djb2 fallback for HTTP.
+    function hashTextFallback(str) {
+        var h = 5381;
+        for (var i = 0; i < str.length; i++) { h = ((h << 5) + h) ^ str.charCodeAt(i); }
+        return (h >>> 0).toString(16);
+    }
+
+    async function hashText(str) {
+        try {
+            const buf = await crypto.subtle.digest("SHA-1", new TextEncoder().encode(str));
+            return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("").slice(0, 16);
+        } catch (e) {
+            return hashTextFallback(str);
+        }
+    }
+
+    // Called after all banner content is known (ast_items + fetched announcement.html)
+    function applyDismiss(contentKey) {
+        hashText(contentKey).then(function(hash) {
+            const STORAGE_KEY = "ast-announcement-dismissed:" + hash;
+            if (wrap && localStorage.getItem(STORAGE_KEY) === "1") {
+                wrap.setAttribute("hidden", "");
+                return;
+            }
+            if (closeBtn && wrap) {
+                closeBtn.addEventListener("click", function() {
+                    wrap.setAttribute("hidden", "");
+                    localStorage.setItem(STORAGE_KEY, "1");
+                }, { once: true });
+            }
+        });
     }
 
     // Size banner to 80% of .bd-content (middle column, adapts to sidebar presence)
@@ -77,13 +105,6 @@ document.addEventListener("DOMContentLoaded", function() {
         requestAnimationFrame(alignToBdArticle);
     }
     window.addEventListener("resize", alignToBdArticle);
-
-    if (closeBtn && wrap) {
-        closeBtn.addEventListener("click", function() {
-            wrap.setAttribute("hidden", "");
-            localStorage.setItem(STORAGE_KEY, "1");
-        });
-    }
 
     const ATTENTION_TYPES = ["warning", "error"];
 
@@ -254,8 +275,13 @@ document.addEventListener("DOMContentLoaded", function() {
             }
 
             buildNotifications(extraItems);
+
+            // Compute dismiss key from all known content (ast_items + fetched items)
+            const allContent = astItems.map(function(i) { return i.message || ""; }).join("|")
+                + "|" + extraItems.map(function(i) { return i.html || ""; }).join("|");
+            applyDismiss(allContent);
         })
-        .catch(function() { buildNotifications([]); });
+        .catch(function() { buildNotifications([]); applyDismiss(""); });
 
 
     // Modal open/close
