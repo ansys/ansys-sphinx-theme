@@ -58,8 +58,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const closeBtn = document.getElementById("ast-announcement-close");
     const STORAGE_KEY = "ast-announcement-dismissed";
 
-    // Hide immediately if already dismissed in this session
-    if (wrap && sessionStorage.getItem(STORAGE_KEY) === "1") {
+    // Hide immediately if already dismissed
+    if (wrap && localStorage.getItem(STORAGE_KEY) === "1") {
         wrap.setAttribute("hidden", "");
     }
 
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (closeBtn && wrap) {
         closeBtn.addEventListener("click", function() {
             wrap.setAttribute("hidden", "");
-            sessionStorage.setItem(STORAGE_KEY, "1");
+            localStorage.setItem(STORAGE_KEY, "1");
         });
     }
 
