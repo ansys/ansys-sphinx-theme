@@ -316,32 +316,79 @@ def _build_table(entries: list) -> nodes.raw:
         parts.append("</div>")  # .nr-row
 
     parts.append("</div>")  # .nr-table
+    parts.append('<div class="nr-pagination" aria-label="Pagination"></div>')
 
-    # Inline filter + dropdown script — scoped by unique wrapper ID
+    # Inline filter + dropdown + pagination script — scoped by unique wrapper ID
     parts.append(f"""
 <script>
 (function () {{
+  var PAGE_SIZE = 10;
+  var currentPage = 1;
   var scope = document.getElementById('{wrapper_id}');
   if (!scope) return;
 
+  // ── Filter helpers ───────────────────────────────────
   function getSelected(dropdown) {{
     return Array.from(dropdown.querySelectorAll('input[type=checkbox]:checked'))
       .map(function (cb) {{ return cb.value; }})
       .filter(function (v) {{ return v !== '__all__'; }});
   }}
 
-  function applyFilters() {{
+  function getMatchingRows() {{
     var typeDD   = scope.querySelector('.nr-dropdown[data-filter-type="type"]');
     var authorDD = scope.querySelector('.nr-dropdown[data-filter-type="author"]');
     var selTypes   = typeDD   ? getSelected(typeDD)   : [];
     var selAuthors = authorDD ? getSelected(authorDD) : [];
-    scope.querySelectorAll('.nr-row').forEach(function (row) {{
+    return Array.from(scope.querySelectorAll('.nr-row')).filter(function (row) {{
       var typeOk = selTypes.length === 0
         || selTypes.indexOf(row.dataset.type) !== -1;
       var authorOk = selAuthors.length === 0
         || selAuthors.indexOf(row.dataset.author) !== -1;
-      row.hidden = !(typeOk && authorOk);
+      return typeOk && authorOk;
     }});
+  }}
+
+  // ── Pagination ───────────────────────────────────────
+  function applyPage(page) {{
+    currentPage = page;
+    var matching = getMatchingRows();
+    var all = Array.from(scope.querySelectorAll('.nr-row'));
+    var start = (page - 1) * PAGE_SIZE;
+    var end   = start + PAGE_SIZE;
+    all.forEach(function (row) {{ row.hidden = true; }});
+    matching.slice(start, end).forEach(function (row) {{ row.hidden = false; }});
+    renderPagination(matching.length);
+  }}
+
+  function renderPagination(total) {{
+    var bar = scope.querySelector('.nr-pagination');
+    if (!bar) return;
+    var totalPages = Math.ceil(total / PAGE_SIZE);
+    bar.innerHTML = '';
+    if (totalPages <= 1) return;
+
+    function makeBtn(label, page, active, disabled) {{
+      var btn = document.createElement('button');
+      btn.textContent = label;
+      btn.className = 'nr-page-btn' + (active ? ' nr-page-btn--active' : '');
+      btn.disabled = disabled;
+      if (!disabled) {{
+        btn.addEventListener('click', function () {{ applyPage(page); }});
+      }}
+      return btn;
+    }}
+
+    bar.appendChild(makeBtn('\u2039', currentPage - 1, false, currentPage === 1));
+    for (var i = 1; i <= totalPages; i++) {{
+      bar.appendChild(makeBtn(String(i), i, i === currentPage, false));
+    }}
+    bar.appendChild(makeBtn('\u203a', currentPage + 1, false, currentPage === totalPages));
+  }}
+
+  // ── Filters ──────────────────────────────────────────
+  function applyFilters() {{
+    currentPage = 1;
+    applyPage(1);
   }}
 
   function updateLabel(dropdown) {{
@@ -398,6 +445,9 @@ def _build_table(entries: list) -> nodes.raw:
   }});
 
   document.addEventListener('click', closeAll);
+
+  // Initial render
+  applyPage(1);
 }})();
 </script>
 """)

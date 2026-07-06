@@ -191,6 +191,47 @@
   font-style: italic;
 }
 
+// ── Pagination bar ───────────────────────────────────────
+.nr-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--ast-color-table-inner-border);
+}
+
+.nr-page-btn {
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+  border: 1px solid var(--ast-color-table-inner-border);
+  border-radius: 6px;
+  background: var(--ast-color-table-background, #fff);
+  color: var(--pst-color-text-base, #374151);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+
+  &:hover:not(:disabled) {
+    border-color: var(--pst-color-primary, #0070ad);
+    color: var(--pst-color-primary, #0070ad);
+  }
+
+  &--active {
+    background: var(--pst-color-primary, #0070ad);
+    border-color: var(--pst-color-primary, #0070ad);
+    color: #fff;
+    cursor: default;
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+}
+
 // Shift the news & resources page content away from the left sidebar
 .bd-article-container .nr-wrapper {
   margin-left: 0.5rem;
