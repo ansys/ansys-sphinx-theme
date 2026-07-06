@@ -226,12 +226,14 @@ def _build_table(entries: list) -> nodes.raw:
         html = '<p class="nr-empty">No news or resource entries have been defined.</p>'
         return nodes.raw("", html, format="html")
 
-    # Collect unique types and authors (preserve insertion order)
-    seen_types: list = []
+    # Collect unique types (deduplicated case-insensitively) and authors.
+    # seen_types: lowercase key -> display label (title-case of first occurrence)
+    seen_types: dict = {}
     seen_authors: list = []
     for e in entries:
-        if e["type"] not in seen_types:
-            seen_types.append(e["type"])
+        key = e["type"].lower()
+        if key not in seen_types:
+            seen_types[key] = e["type"].title()
         if e["author"] not in seen_authors:
             seen_authors.append(e["author"])
 
@@ -242,7 +244,7 @@ def _build_table(entries: list) -> nodes.raw:
     # --- Filter bar ---
     parts.append('<div class="nr-filters" aria-label="Filter news and resources">')
 
-    def _dropdown(filter_type: str, label: str, options: list) -> None:
+    def _dropdown(filter_type: str, label: str, options) -> None:
         parts.append(f'<div class="nr-dropdown" data-filter-type="{_e(filter_type)}">')
         parts.append(
             f'<button class="nr-dropdown-toggle" type="button" '
@@ -254,16 +256,17 @@ def _build_table(entries: list) -> nodes.raw:
         parts.append(
             '<div class="nr-dropdown-menu" hidden role="listbox" aria-multiselectable="true">'
         )
-        # "All" option
         parts.append(
             f'<label class="nr-dropdown-item">'
             f'<input type="checkbox" value="__all__" checked> {_e(label)}'
             f"</label>"
         )
-        for opt in options:
+        # options is dict {value: display} for types, list for authors
+        items = options.items() if isinstance(options, dict) else [(o, o) for o in options]
+        for val, display in items:
             parts.append(
                 f'<label class="nr-dropdown-item">'
-                f'<input type="checkbox" value="{_e(opt)}"> {_e(opt)}'
+                f'<input type="checkbox" value="{_e(val)}"> {_e(display)}'
                 f"</label>"
             )
         parts.append("</div>")  # .nr-dropdown-menu
@@ -286,7 +289,9 @@ def _build_table(entries: list) -> nodes.raw:
         author = entry["author"]
         date = entry.get("date", "")
 
-        parts.append(f'<div class="nr-row" data-type="{_e(etype)}" data-author="{_e(author)}">')
+        parts.append(
+            f'<div class="nr-row" data-type="{_e(etype.lower())}" data-author="{_e(author)}">'
+        )
 
         # Type badge
         parts.append(f'<span class="nr-badge nr-badge--{_e(bc)}">{_e(etype)}</span>')

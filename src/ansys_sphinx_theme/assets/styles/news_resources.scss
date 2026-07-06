@@ -126,19 +126,17 @@
   flex-shrink: 0;
   display: inline-flex;
   align-items: center;
-  padding: 0.2rem 0.6rem;
-  font-size: 0.72rem;
-  font-weight: 600;
-  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 12px;
+  border-radius: 999px;
   white-space: nowrap;
-  margin-top: 0.1rem;
-  color: #fff;
+  margin-right: 0.75rem;
   background: var(--pst-color-text-muted, #6b7280); // fallback for 'other'
 
-  &--video { background: #e96b1f; }
-  &--blog  { background: #c49a00; color: #1a1a1a; }
-  &--event { background: #2e7d52; }
-  &--news  { background: #1a6fa3; }
+  &--video { background: #ffd199; }
+  &--blog  { background: #feefae; color: #1a1a1a; }
+  &--event { background: #99cc99; }
+  &--news  { background: #a6d5fa; }
 }
 
 /* Card content */
@@ -149,11 +147,11 @@
 
 .nr-title {
   display: block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--pst-color-link);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--ast-color-link);
   text-decoration: none;
-  line-height: 1.35;
+  line-height: 24px;
 
   &:hover {
     text-decoration: underline;
@@ -162,9 +160,7 @@
 
 .nr-desc {
   margin: 0.2rem 0 0;
-  font-size: 0.82rem;
-  color: var(--pst-color-text-muted, #6b7280);
-  line-height: 1.45;
+  line-height: 24px;
 }
 
 /* Meta column (author + date) */

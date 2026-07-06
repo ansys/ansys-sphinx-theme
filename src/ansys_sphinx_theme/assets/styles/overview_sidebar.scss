@@ -13,10 +13,11 @@ nav.bd-links.sidebar-overview {
   .bd-sidenav {
     padding-left: 0;
 
-    // More spacing between items + slightly smaller font
+    // More spacing between items + font size
     li > a {
-      font-size: 12px;
-      padding: 0.35rem 0.65rem;
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+      line-height: 1.5rem;
     }
   }
 }

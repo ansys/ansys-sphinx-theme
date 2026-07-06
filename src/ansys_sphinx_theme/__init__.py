@@ -496,9 +496,7 @@ def add_sidebar_context(
 
         if pagename in overview_pages:
             cheatsheet_ctx = (
-                app.config.html_theme_options.get("cheatsheet", {})
-                if (cheatsheet_pages and pagename in cheatsheet_pages)
-                else None
+                app.config.html_theme_options.get("cheatsheet", {}) if cheatsheet_pages else None
             )
             nr_ctx = get_news_resources_context(app) if nr_options else None
             home_page = getattr(app.config, "master_doc", None) or getattr(

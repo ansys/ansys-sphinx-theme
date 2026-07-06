@@ -1,3 +1,5 @@
+:orphan:
+
 .. _news_resources:
 
 News & Resources
