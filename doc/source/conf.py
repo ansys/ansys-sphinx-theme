@@ -90,6 +90,11 @@ html_theme_options: dict[str, Any] = {
         "version": f"{version}",
         "pages": ["index"],
     },
+    "whatsnew": {
+        "whatsnew_file_name": "../changelog.d/whatsnew.yml",
+        "changelog_file_name": "changelog.rst",
+        "sidebar_pages": ["changelog", "index"],
+    },
 }
 
 

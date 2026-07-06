@@ -477,17 +477,20 @@ def add_sidebar_context(
         if "whatsnew_sidebar.html" not in sidebar:
             sidebar.append("whatsnew_sidebar.html")
 
-    # --- Overview sidebar: Package Home + optional Cheatsheet + optional News & Resources ---
+    # --- Overview sidebar: Package Home + optional Cheatsheet + optional News & Resources +
+    # optional What's New ---
     # Only rendered when at least one of cheatsheet or news_resources is configured.
     nr_options = app.config.html_theme_options.get("news_resources") or {}
     nr_link_page = nr_options.get("link", "")
 
-    if cheatsheet_pages or news_resources_pages:
+    if cheatsheet_pages or news_resources_pages or whatsnew_pages:
         overview_pages: set = set()
         if cheatsheet_pages:
             overview_pages.update(cheatsheet_pages)
         if news_resources_pages:
             overview_pages.update(news_resources_pages)
+        if whatsnew_pages:
+            overview_pages.update(whatsnew_pages)
         # Always show overview on index when either feature is active
         overview_pages.add("index")
         # Always show overview on the news & resources target page itself
@@ -502,13 +505,22 @@ def add_sidebar_context(
             home_page = getattr(app.config, "master_doc", None) or getattr(
                 app.config, "root_doc", "index"
             )
+            wn_ctx = None
+            if whatsnew_pages:
+                wn_ctx = context.get("whatsnew", [])
+                if hasattr(app.env, "whatsnew"):
+                    wn_ctx = list(app.env.whatsnew)
             context["overview_sidebar"] = {
                 "home_page": home_page,
                 "cheatsheet": cheatsheet_ctx,
                 "news_resources": nr_ctx,
+                "whatsnew_items": wn_ctx,
             }
             if "overview_sidebar.html" not in sidebar:
                 sidebar.append("overview_sidebar.html")
+            # Remove standalone whatsnew sidebar if overview already shows whatsnew dropdown
+            if wn_ctx and "whatsnew_sidebar.html" in sidebar:
+                sidebar.remove("whatsnew_sidebar.html")
 
     # Update the sidebar context
     context["sidebars"] = sidebar

@@ -64,6 +64,31 @@
         </li>
       {% endif %}
 
+      {# --- What's New dropdown --- #}
+      {% if overview_sidebar.whatsnew_items %}
+
+        {% for wn in overview_sidebar.whatsnew_items %}
+          <li class="whatsnew-overview-item">
+            <details>
+              <summary>
+                <a href="{{ wn.title_url }}" class="reference internal">{{ wn.title }}</a>
+              </summary>
+              {% if wn.children %}
+                <ul class="bd-sidenav">
+                  {% for child in wn.children %}
+                    <li>
+                      <a href="{{ wn.url }}#{{ child.astext().replace(' ', '-').lower() }}" class="reference internal">
+                        {{ child.astext() }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </details>
+          </li>
+        {% endfor %}
+      {% endif %}
+
     </ul>
   </div>
 </nav>
