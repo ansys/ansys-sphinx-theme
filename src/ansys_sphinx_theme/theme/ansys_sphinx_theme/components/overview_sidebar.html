@@ -1,0 +1,63 @@
+{#
+  Overview Sidebar
+  Renders an "Overview" section styled identically to the pydata-sphinx-theme
+  sidebar navigation (bd-links). Contains:
+    - Package Home link (always shown)
+    - Cheatsheet link + thumbnail (if cheatsheet is configured)
+    - News & Resources link (if news_resources is configured)
+#}
+{% if overview_sidebar %}
+<nav class="bd-links sidebar-overview" aria-label="{{ _('Overview') }}">
+  <p class="bd-links__title" role="heading" aria-level="2">{{ shorttitle }}</p>
+  <div class="bd-toc-item navbar-nav">
+    <ul class="bd-sidenav">
+
+      {# --- Package Home --- #}
+      <li class="{% if pagename == overview_sidebar.home_page %}current {% endif %}">
+        <a href="{{ pathto(overview_sidebar.home_page) }}" class="reference internal">
+          {{ _("Package Home") }}
+        </a>
+      </li>
+
+      {# --- Cheatsheet --- #}
+      {% if overview_sidebar.cheatsheet %}
+        {% set cs = overview_sidebar.cheatsheet %}
+        {% set cs_title = cs.get('title', 'Cheatsheet') %}
+        {% set cs_output = pathto(cs.get('output_dir', ''), 1) %}
+        {% set cs_thumbnail = cs.get('thumbnail', '') %}
+        <li>
+          <a href="{{ cs_output }}" target="_blank" rel="noopener noreferrer"
+             class="reference external">
+            {{ cs_title }}
+          </a>
+          {% if cs_thumbnail %}
+            {% set cs_thumbnail_path = pathto(cs_thumbnail, 1) %}
+            <a href="{{ cs_output }}" target="_blank" rel="noopener noreferrer"
+               class="sidebar-overview-thumbnail-link">
+              {# djlint:off H006 #}
+              <img src="{{ cs_thumbnail_path }}"
+                   alt="{{ cs_title }} thumbnail"
+                   class="sidebar-overview-thumbnail"
+                   loading="lazy" />
+              {# djlint:on H006 #}
+            </a>
+          {% endif %}
+        </li>
+      {% endif %}
+
+      {# --- News & Resources --- #}
+      {% if overview_sidebar.news_resources %}
+        {% set nr = overview_sidebar.news_resources %}
+        {% set nr_title = nr.get('title', 'News & Resources') %}
+        {% set nr_link = nr.get('link', '') %}
+        <li class="{% if pagename == nr_link %}current {% endif %}">
+          <a href="{{ pathto(nr_link) }}" class="reference internal">
+            {{ nr_title }}
+          </a>
+        </li>
+      {% endif %}
+
+    </ul>
+  </div>
+</nav>
+{% endif %}

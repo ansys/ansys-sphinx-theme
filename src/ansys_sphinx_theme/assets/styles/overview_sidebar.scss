@@ -1,0 +1,35 @@
+/*
+ * Links, active state and hover reuse pydata's .bd-links rules automatically
+ * because we use the same HTML structure (bd-links, bd-toc-item, bd-sidenav,
+ * li.current). Only the extras below are needed.
+ *
+ * Separator from the section above; remove any extra top padding pydata adds
+ */
+nav.bd-links.sidebar-overview {
+  padding-top: 0.25rem;
+  margin-top: 0.25rem;
+
+  // Align the list flush-left (no extra indent beyond pydata's own .65rem link padding)
+  .bd-sidenav {
+    padding-left: 0;
+
+    // More spacing between items + slightly smaller font
+    li > a {
+      font-size: 0.82rem;
+      padding: 0.35rem 0.65rem;
+    }
+  }
+}
+
+/* Thumbnails for overview sidebar */
+.sidebar-overview-thumbnail-link {
+  display: block;
+  padding: 0.25rem 0.65rem 0.5rem 0.65rem;
+}
+
+.sidebar-overview-thumbnail {
+  max-width: 100%;
+  border: 1px solid var(--pst-color-border, #dee2e6);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}

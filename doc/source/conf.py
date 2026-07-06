@@ -79,6 +79,11 @@ html_theme_options: dict[str, Any] = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
+    "news_resources": {
+        "pages": ["index"],
+        "link": "news_resources",
+        "title": "News and resources",
+    },
 }
 
 

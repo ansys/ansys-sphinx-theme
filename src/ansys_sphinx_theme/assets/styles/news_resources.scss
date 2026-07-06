@@ -1,0 +1,201 @@
+
+.nr-wrapper {
+  border-radius: var(--awc-core-radius-card, 8px);
+  background: var(--ast-color-table-background, #fff);
+  box-shadow:
+    0 1px 2px 0 rgba(0, 0, 0, 0.08),
+    0 2px 4px 0 rgba(0, 0, 0, 0.12);
+  // NO overflow:hidden — would clip the dropdown menus
+  margin: 1.5rem 0;
+}
+
+/* Round the top corners on the filter bar and bottom corners on the last row
+ * so the card shape is preserved without overflow:hidden.
+ */
+.nr-row:last-child {
+  border-radius: 0 0 var(--awc-core-radius-card, 8px) var(--awc-core-radius-card, 8px);
+}
+
+.nr-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ast-color-table-inner-border);
+  background: var(--ast-color-table-background, #fff);
+  border-radius: var(--awc-core-radius-card, 8px) var(--awc-core-radius-card, 8px) 0 0;
+}
+
+/* Dropdown */
+.nr-dropdown {
+  position: relative;
+}
+
+.nr-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--ast-color-table-inner-border);
+  border-radius: 999px;
+  background: var(--ast-color-table-background, #fff);
+  color: var(--pst-color-text-base, #374151);
+  cursor: pointer;
+  transition: border-color 0.15s;
+
+  &:hover,
+  &[aria-expanded="true"] {
+    border-color: var(--pst-color-primary, #0070ad);
+    color: var(--pst-color-primary, #0070ad);
+  }
+}
+
+.nr-dropdown-chevron {
+  &::after {
+    content: "▾";
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+}
+
+.nr-dropdown-toggle[aria-expanded="true"] .nr-dropdown-chevron::after {
+  content: "▴";
+}
+
+.nr-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 100;
+  min-width: 11rem;
+  background: var(--ast-color-table-background, #fff);
+  border: 1px solid var(--ast-color-table-inner-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  padding: 0.35rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.nr-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  user-select: none;
+  color: var(--pst-color-text-base, #374151);
+
+  &:hover {
+    background: var(--ast-color-table-row-hover-bg, #ececec);
+  }
+
+  input[type="checkbox"] {
+    accent-color: var(--pst-color-primary, #0070ad);
+    width: 0.875rem;
+    height: 0.875rem;
+    flex-shrink: 0;
+  }
+}
+
+/* Card rows */
+.nr-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.nr-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--ast-color-table-inner-border);
+  background: var(--ast-color-table-background, #fff);
+
+  &:last-child {
+    border-bottom: none;
+    border-radius: 0 0 var(--awc-core-radius-card, 8px) var(--awc-core-radius-card, 8px);
+  }
+}
+
+/* Badge */
+.nr-badge {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border-radius: 12px;
+  white-space: nowrap;
+  margin-top: 0.1rem;
+  color: #fff;
+  background: var(--pst-color-text-muted, #6b7280); // fallback for 'other'
+
+  &--video { background: #e96b1f; }
+  &--blog  { background: #c49a00; color: #1a1a1a; }
+  &--event { background: #2e7d52; }
+  &--news  { background: #1a6fa3; }
+}
+
+/* Card content */
+.nr-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.nr-title {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--pst-color-link);
+  text-decoration: none;
+  line-height: 1.35;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.nr-desc {
+  margin: 0.2rem 0 0;
+  font-size: 0.82rem;
+  color: var(--pst-color-text-muted, #6b7280);
+  line-height: 1.45;
+}
+
+/* Meta column (author + date) */
+.nr-meta {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+  min-width: 8rem;
+  text-align: right;
+}
+
+.nr-author {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--pst-color-text-base, #374151);
+}
+
+.nr-date {
+  font-size: 0.75rem;
+  color: var(--pst-color-text-muted, #9ca3af);
+}
+
+.nr-empty {
+  padding: 1rem;
+  color: var(--pst-color-text-muted, #6b7280);
+  font-style: italic;
+}
+
+// Shift the news & resources page content away from the left sidebar
+.bd-article-container .nr-wrapper {
+  margin-left: 0.5rem;
+}
