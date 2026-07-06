@@ -478,38 +478,39 @@ def add_sidebar_context(
             sidebar.append("whatsnew_sidebar.html")
 
     # --- Overview sidebar: Package Home + optional Cheatsheet + optional News & Resources ---
-    overview_pages: set = set()
-    if cheatsheet_pages:
-        overview_pages.update(cheatsheet_pages)
-    if news_resources_pages:
-        overview_pages.update(news_resources_pages)
-    # Always show overview on index when either feature is active
-    if overview_pages:
-        overview_pages.add("index")
-    # Always show overview on the news & resources target page itself
+    # Only rendered when at least one of cheatsheet or news_resources is configured.
     nr_options = app.config.html_theme_options.get("news_resources") or {}
     nr_link_page = nr_options.get("link", "")
-    if nr_link_page:
-        overview_pages.add(nr_link_page)
 
-    if overview_pages and pagename in overview_pages:
-        cheatsheet_ctx = (
-            app.config.html_theme_options.get("cheatsheet", {})
-            if (cheatsheet_pages and pagename in cheatsheet_pages)
-            else None
-        )
-        nr_ctx = get_news_resources_context(app) if nr_options else None
-        # Determine the doc root page name (master_doc or "index")
-        home_page = getattr(app.config, "master_doc", None) or getattr(
-            app.config, "root_doc", "index"
-        )
-        context["overview_sidebar"] = {
-            "home_page": home_page,
-            "cheatsheet": cheatsheet_ctx,
-            "news_resources": nr_ctx,
-        }
-        if "overview_sidebar.html" not in sidebar:
-            sidebar.append("overview_sidebar.html")
+    if cheatsheet_pages or news_resources_pages:
+        overview_pages: set = set()
+        if cheatsheet_pages:
+            overview_pages.update(cheatsheet_pages)
+        if news_resources_pages:
+            overview_pages.update(news_resources_pages)
+        # Always show overview on index when either feature is active
+        overview_pages.add("index")
+        # Always show overview on the news & resources target page itself
+        if nr_link_page:
+            overview_pages.add(nr_link_page)
+
+        if pagename in overview_pages:
+            cheatsheet_ctx = (
+                app.config.html_theme_options.get("cheatsheet", {})
+                if (cheatsheet_pages and pagename in cheatsheet_pages)
+                else None
+            )
+            nr_ctx = get_news_resources_context(app) if nr_options else None
+            home_page = getattr(app.config, "master_doc", None) or getattr(
+                app.config, "root_doc", "index"
+            )
+            context["overview_sidebar"] = {
+                "home_page": home_page,
+                "cheatsheet": cheatsheet_ctx,
+                "news_resources": nr_ctx,
+            }
+            if "overview_sidebar.html" not in sidebar:
+                sidebar.append("overview_sidebar.html")
 
     # Update the sidebar context
     context["sidebars"] = sidebar

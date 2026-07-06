@@ -7,6 +7,29 @@
     - News & Resources link (if news_resources is configured)
 #}
 {% if overview_sidebar %}
+<style>
+  nav.bd-links.sidebar-overview .bd-sidenav li > a {
+    font-size: 12px;
+  }
+  .sidebar-overview-cs-link {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 0.4rem;
+  }
+  .sidebar-overview-pdf-badge {
+    flex-shrink: 0;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    background: #ececec;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+</style>
 <nav class="bd-links sidebar-overview" aria-label="{{ _('Overview') }}">
   <p class="bd-links__title" role="heading" aria-level="2">{{ shorttitle }}</p>
   <div class="bd-toc-item navbar-nav">
@@ -22,26 +45,13 @@
       {# --- Cheatsheet --- #}
       {% if overview_sidebar.cheatsheet %}
         {% set cs = overview_sidebar.cheatsheet %}
-        {% set cs_title = cs.get('title', 'Cheatsheet') %}
         {% set cs_output = pathto(cs.get('output_dir', ''), 1) %}
-        {% set cs_thumbnail = cs.get('thumbnail', '') %}
         <li>
           <a href="{{ cs_output }}" target="_blank" rel="noopener noreferrer"
-             class="reference external">
-            {{ cs_title }}
+             class="sidebar-overview-cs-link">
+            {{ _("Cheatsheet") }}
+            <span class="sidebar-overview-pdf-badge">PDF</span>
           </a>
-          {% if cs_thumbnail %}
-            {% set cs_thumbnail_path = pathto(cs_thumbnail, 1) %}
-            <a href="{{ cs_output }}" target="_blank" rel="noopener noreferrer"
-               class="sidebar-overview-thumbnail-link">
-              {# djlint:off H006 #}
-              <img src="{{ cs_thumbnail_path }}"
-                   alt="{{ cs_title }} thumbnail"
-                   class="sidebar-overview-thumbnail"
-                   loading="lazy" />
-              {# djlint:on H006 #}
-            </a>
-          {% endif %}
         </li>
       {% endif %}
 

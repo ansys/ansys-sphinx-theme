@@ -15,21 +15,29 @@ nav.bd-links.sidebar-overview {
 
     // More spacing between items + slightly smaller font
     li > a {
-      font-size: 0.82rem;
+      font-size: 12px;
       padding: 0.35rem 0.65rem;
     }
   }
 }
 
-/* Thumbnails for overview sidebar */
-.sidebar-overview-thumbnail-link {
-  display: block;
-  padding: 0.25rem 0.65rem 0.5rem 0.65rem;
+/* Cheatsheet link — flex row so PDF badge sits inline to the right */
+.sidebar-overview-cs-link {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 0.4rem;
 }
 
-.sidebar-overview-thumbnail {
-  max-width: 100%;
-  border: 1px solid var(--pst-color-border, #dee2e6);
-  border-radius: 4px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+/* PDF badge */
+.sidebar-overview-pdf-badge {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: #ececec;
+  color: var(--pst-color-text-muted, #4b5563);
 }
