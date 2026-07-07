@@ -18,10 +18,10 @@ nav.bd-links.sidebar-overview {
       margin-top: 0.25rem;
       margin-bottom: 0.25rem;
       line-height: 1.5rem;
+      font-size: 0.875rem; // 14px
     }
   }
 }
-
 /* Cheatsheet link — flex row so PDF badge sits inline to the right */
 .sidebar-overview-cs-link {
   display: flex !important;
@@ -41,4 +41,61 @@ nav.bd-links.sidebar-overview {
   border-radius: 999px;
   background: #ececec;
   color: var(--pst-color-text-muted, #4b5563);
+}
+
+// what's new overview summary arrow
+
+.whatsnew-overview-item summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  width: 100%;
+}
+.whatsnew-overview-item summary::-webkit-details-marker {
+  display: none;
+}
+
+// /* Put arrow AFTER the text */
+// .whatsnew-overview-item summary::after {
+//   content: "›";
+//   margin-left: 0.5rem;
+//   font-size: 1.1em;
+//   transition: transform 0.2s ease;
+// }
+
+// /* Rotate when open */
+// .whatsnew-overview-item details[open] summary::after {
+//   transform: rotate(90deg);
+// }
+
+.whatsnew-overview-item summary::after {
+  content: "\f054";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 600;
+  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+  margin-right: 0.5rem;
+}
+
+.whatsnew-overview-item details[open] summary::after {
+  transform: rotate(90deg);
+}
+
+.whatsnew-overview-item summary .bd-links__title {
+  margin: 0;
+}
+
+.whatsnew-overview-item .bd-links__title a {
+  color: var(--ast-sidebar-primary-text) !important;
+  text-decoration: none;
+}
+
+
+.whatsnew-overview-item summary,
+.whatsnew-overview-item summary a,
+.whatsnew-overview-item summary .bd-links__title {
+  color: var(--pst-color-text-base) !important;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 24px;
 }

@@ -7,28 +7,8 @@
     - News & Resources link (if news_resources is configured)
 #}
 {% if overview_sidebar %}
-<style>
-  .sidebar-overview-cs-link {
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    gap: 0.4rem;
-  }
-  .sidebar-overview-pdf-badge {
-    flex-shrink: 0;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 0.1rem 0.45rem;
-    border-radius: 999px;
-    background: #ececec;
-    color: #4b5563;
-    line-height: 1.6;
-  }
-</style>
 <nav class="bd-links sidebar-overview" aria-label="{{ _('Overview') }}">
-  <p class="bd-links__title" role="heading" aria-level="2">{{ shorttitle }}</p>
+  <p class="bd-links__title" role="heading" aria-level="2">{{ _('Overview') }}</p>
   <div class="bd-toc-item navbar-nav">
     <ul class="bd-sidenav">
 
@@ -71,7 +51,7 @@
           <li class="whatsnew-overview-item">
             <details>
               <summary>
-                <a href="{{ wn.title_url }}" class="reference internal">{{ wn.title }}</a>
+                <p class="bd-links__title" role="heading" aria-level="2"><a href="{{ wn.title_url }}">{{ wn.title }}</a></p>
               </summary>
               {% if wn.children %}
                 <ul class="bd-sidenav">
