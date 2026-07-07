@@ -9,6 +9,11 @@ nav.bd-links.sidebar-overview {
   padding-top: 0.25rem;
   margin-top: 0.25rem;
 
+  // Plain text headings — no bold
+  p.bd-links__title {
+    font-weight: normal;
+  }
+
   // Align the list flush-left (no extra indent beyond pydata's own .65rem link padding)
   .bd-sidenav {
     padding-left: 0;
@@ -55,32 +60,6 @@ nav.bd-links.sidebar-overview {
   display: none;
 }
 
-// /* Put arrow AFTER the text */
-// .whatsnew-overview-item summary::after {
-//   content: "›";
-//   margin-left: 0.5rem;
-//   font-size: 1.1em;
-//   transition: transform 0.2s ease;
-// }
-
-// /* Rotate when open */
-// .whatsnew-overview-item details[open] summary::after {
-//   transform: rotate(90deg);
-// }
-
-// .whatsnew-overview-item summary::after {
-//   content: "\f054";
-//   font-family: "Font Awesome 6 Free";
-//   font-weight: 600;
-//   font-size: 0.75rem;
-//   transition: transform 0.2s ease;
-//   margin-right: 0.5rem;
-// }
-
-// .whatsnew-overview-item details[open] summary::after {
-//   transform: rotate(90deg);
-// }
-
 .whatsnew-overview-item summary::after {
   content: "›";
   margin-right: 0.5rem;
@@ -92,19 +71,10 @@ nav.bd-links.sidebar-overview {
   transform: rotate(90deg);
 }
 
-.whatsnew-overview-item summary .bd-links__title {
-  margin: 0;
-}
-
-.whatsnew-overview-item .bd-links__title a {
-  color: var(--ast-sidebar-primary-text) !important;
-  text-decoration: none;
-}
-
-
 .whatsnew-overview-item summary,
 .whatsnew-overview-item summary a,
-.whatsnew-overview-item summary .bd-links__title {
+.whatsnew-overview-item summary .bd-links__title,
+.bd-sidenav .bd-links__title {
   color: var(--pst-color-text-base) !important;
   font-size: 0.875rem;
   font-weight: 500;

@@ -8,13 +8,12 @@
 #}
 {% if overview_sidebar %}
 <nav class="bd-links sidebar-overview" aria-label="{{ _('Overview') }}">
-  <p class="bd-links__title" role="heading" aria-level="2">{{ _('Overview') }}</p>
   <div class="bd-toc-item navbar-nav">
     <ul class="bd-sidenav">
 
       {# --- Package Home --- #}
       <li class="{% if pagename == overview_sidebar.home_page %}current {% endif %}">
-        <a href="{{ pathto(overview_sidebar.home_page) }}" class="reference internal">
+        <p class="bd-links__title" role="heading" aria-level="2"><a href="{{ pathto(overview_sidebar.home_page) }}" class="reference internal"></a></p>
           {{ _("Package Home") }}
         </a>
       </li>
@@ -24,11 +23,11 @@
         {% set cs = overview_sidebar.cheatsheet %}
         {% set cs_output = pathto(cs.get('output_dir', ''), 1) %}
         <li>
-          <a href="{{ cs_output }}" target="_blank" rel="noopener noreferrer"
+          <p class="bd-links__title" role="heading" aria-level="2"><a href="{{ cs_output }}" target="_blank" rel="noopener noreferrer"
              class="sidebar-overview-cs-link">
             {{ _("Cheatsheet") }}
             <span class="sidebar-overview-pdf-badge">PDF</span>
-          </a>
+          </a></p>
         </li>
       {% endif %}
 
@@ -38,9 +37,8 @@
         {% set nr_title = nr.get('title', 'News & Resources') %}
         {% set nr_link = nr.get('link', '') %}
         <li class="{% if pagename == nr_link %}current {% endif %}">
-          <a href="{{ pathto(nr_link) }}" class="reference internal">
-            {{ nr_title }}
-          </a>
+          <p class="bd-links__title" role="heading" aria-level="2"><a href="{{ pathto(nr_link) }}" class="reference internal">
+            {{ nr_title }}</a></p>
         </li>
       {% endif %}
 
