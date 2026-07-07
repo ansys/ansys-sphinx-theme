@@ -81,12 +81,14 @@ nav.bd-links.sidebar-overview {
 //   transform: rotate(90deg);
 // }
 
-summary::after {
-  content: "❯";
-  margin-right: 0.5rem
+.whatsnew-overview-item summary::after {
+  content: "›";
+  margin-right: 0.5rem;
+  color: var(--ast-sidebar-primary-text);
+      font-size: 1.5rem;
 }
 
-details[open] summary::after {
+.whatsnew-overview-item details[open] summary::after {
   transform: rotate(90deg);
 }
 
