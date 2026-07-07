@@ -36,7 +36,9 @@ from ansys_sphinx_theme.navbar_dropdown import load_navbar_configuration, update
 from ansys_sphinx_theme.news_resources import (
     NewsItemDirective,
     NewsResourcesTableDirective,
+    NewsResourcesTableNode,
     get_news_resources_context,
+    merge_news_resources,
     news_resources_sidebar_pages,
     purge_news_resources,
     resolve_news_resources_table,
@@ -711,9 +713,11 @@ def setup(app: Sphinx) -> dict:
         app.connect("doctree-resolved", extract_whatsnew)
 
     # Register news & resources directives and resolver
+    app.add_node(NewsResourcesTableNode)
     app.add_directive("news-item", NewsItemDirective)
     app.add_directive("news-resources-table", NewsResourcesTableDirective)
     app.connect("env-purge-doc", purge_news_resources)
+    app.connect("env-merge-info", merge_news_resources)
     app.connect("doctree-resolved", resolve_news_resources_table)
 
     app.connect("html-page-context", add_sidebar_context)

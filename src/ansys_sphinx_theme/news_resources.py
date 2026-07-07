@@ -154,6 +154,23 @@ def purge_news_resources(app: Sphinx, env, docname: str) -> None:
     env.news_resources = [e for e in env.news_resources if e["docname"] != docname]
 
 
+def merge_news_resources(app: Sphinx, env, docnames, other) -> None:
+    """Merge news entries collected by parallel-read worker envs into the main env.
+
+    Connected to the ``env-merge-info`` Sphinx event so that entries defined on
+    pages read in worker processes are not lost when the envs are merged back.
+    """
+    if not hasattr(other, "news_resources"):
+        return
+    if not hasattr(env, "news_resources"):
+        env.news_resources = []
+    # Avoid duplicates in case of re-merge
+    existing = {(e["docname"], e["title"]) for e in env.news_resources}
+    for entry in other.news_resources:
+        if (entry["docname"], entry["title"]) not in existing:
+            env.news_resources.append(entry)
+
+
 def resolve_news_resources_table(app: Sphinx, doctree: nodes.document, docname: str) -> None:
     """Replace ``news_resources_table_node`` placeholders with a real table.
 
@@ -170,14 +187,14 @@ def resolve_news_resources_table(app: Sphinx, doctree: nodes.document, docname: 
     docname : str
         Name of the document being resolved.
     """
-    placeholders = doctree.findall(NewsResourcesTableNode)
-    placeholder_list = list(placeholders)
+    placeholder_list = list(
+        doctree.traverse(lambda n: n.__class__.__name__ == "NewsResourcesTableNode")
+    )
     if not placeholder_list:
         return
 
-    # Collect entries belonging to this document
-    all_entries: list = getattr(app.env, "news_resources", [])
-    entries = [e for e in all_entries if e["docname"] == docname]
+    # Collect all entries regardless of which document defined them
+    entries: list = getattr(app.env, "news_resources", [])
 
     for placeholder in placeholder_list:
         raw_node = _build_table(entries)
@@ -453,8 +470,6 @@ def _build_table(entries: list) -> nodes.raw:
 """)
 
     parts.append("</div>")  # .nr-wrapper
-
-    return nodes.raw("", "\n".join(parts), format="html")
 
     return nodes.raw("", "\n".join(parts), format="html")
 
