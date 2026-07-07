@@ -68,16 +68,25 @@ nav.bd-links.sidebar-overview {
 //   transform: rotate(90deg);
 // }
 
-.whatsnew-overview-item summary::after {
-  content: "\f054";
-  font-family: "Font Awesome 6 Free";
-  font-weight: 600;
-  font-size: 0.75rem;
-  transition: transform 0.2s ease;
-  margin-right: 0.5rem;
+// .whatsnew-overview-item summary::after {
+//   content: "\f054";
+//   font-family: "Font Awesome 6 Free";
+//   font-weight: 600;
+//   font-size: 0.75rem;
+//   transition: transform 0.2s ease;
+//   margin-right: 0.5rem;
+// }
+
+// .whatsnew-overview-item details[open] summary::after {
+//   transform: rotate(90deg);
+// }
+
+summary::after {
+  content: "❯";
+  margin-right: 0.5rem
 }
 
-.whatsnew-overview-item details[open] summary::after {
+details[open] summary::after {
   transform: rotate(90deg);
 }
 
