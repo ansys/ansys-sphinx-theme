@@ -27,12 +27,9 @@ nav.bd-links.sidebar-overview {
     }
   }
 }
-/* Cheatsheet link — flex row so PDF badge sits inline to the right */
+/* Cheatsheet link — PDF badge sits inline via inherited flex from common rule */
 .sidebar-overview-cs-link {
-  display: flex !important;
-  align-items: center;
   justify-content: space-between;
-  width: 100%;
   gap: 0.4rem;
 }
 
@@ -71,12 +68,41 @@ nav.bd-links.sidebar-overview {
   transform: rotate(90deg);
 }
 
-.whatsnew-overview-item summary,
-.whatsnew-overview-item summary a,
-.whatsnew-overview-item summary .bd-links__title,
-.bd-sidenav .bd-links__title {
+// Shared token — single source of truth for item padding
+$_nr-item-padding: 4px 24px;
+$_nr-item-radius: var(--ast-sphinx-design-border-radius);
+
+
+.bd-sidenav .bd-links__title a{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.bd-sidenav .bd-links__title a, .whatsnew-overview-item summary {
+  padding: $_nr-item-padding;
   color: var(--pst-color-text-base) !important;
+  border-radius: $_nr-item-radius;
+  line-height: 1.5rem;
   font-size: 0.875rem;
-  font-weight: 500;
-  line-height: 24px;
+  text-decoration: none;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.whatsnew-overview-item summary a {
+  width: auto;
+  color: var(--pst-color-text-base) !important;
+  line-height: 1.5rem;
+}
+
+p.whatsnew-overview-item-title{
+  margin-bottom: 0;
+}
+
+.bd-sidenav .bd-links__title a:hover, .whatsnew-overview-item summary:hover {
+  color: var(--ast-sidebar-primary-text) !important;
+  background: var(--ast-sidebar-hover-background);
+  box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
+  border-radius: $_nr-item-radius;
+  text-decoration: none;
 }

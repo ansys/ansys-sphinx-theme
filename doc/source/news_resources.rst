@@ -130,7 +130,3 @@ ecosystem.
     :author: PyMAPDL Team
 
     Getting started with PyMAPDL, the Python interface to Ansys Mechanical APDL.
-
-.. news-resources-table::
-
-

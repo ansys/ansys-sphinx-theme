@@ -15,7 +15,7 @@
       <li class="{% if pagename == overview_sidebar.home_page %}current {% endif %}">
         <p class="bd-links__title" role="heading" aria-level="2"><a href="{{ pathto(overview_sidebar.home_page) }}" class="reference internal">
           {{ _("Package Home") }}
-        </a>
+          </a>
         </p>
       </li>
 
@@ -53,7 +53,7 @@
           <li class="whatsnew-overview-item">
             <details>
               <summary>
-                <p class="bd-links__title" role="heading" aria-level="2"><a href="{{ wn.title_url }}">{{ wn.title }}</a></p>
+                <p class="whatsnew-overview-item-title" role="heading" aria-level="2"><a href="{{ wn.title_url }}">{{ wn.title }}</a></p>
               </summary>
               {% if wn.children %}
                 <ul class="bd-sidenav">

@@ -190,11 +190,16 @@ def resolve_news_resources_table(app: Sphinx, doctree: nodes.document, docname: 
     placeholder_list = list(
         doctree.traverse(lambda n: n.__class__.__name__ == "NewsResourcesTableNode")
     )
-    if not placeholder_list:
-        return
 
     # Collect all entries regardless of which document defined them
     entries: list = getattr(app.env, "news_resources", [])
+
+    if not placeholder_list:
+        # Auto-inject the table when the page has news-item directives but no
+        # explicit news-resources-table directive.
+        if any(e["docname"] == docname for e in entries):
+            doctree.append(_build_table(entries))
+        return
 
     for placeholder in placeholder_list:
         raw_node = _build_table(entries)
