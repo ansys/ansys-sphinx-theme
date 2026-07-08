@@ -13,9 +13,10 @@
 
       {# --- Package Home --- #}
       <li class="{% if pagename == overview_sidebar.home_page %}current {% endif %}">
-        <p class="bd-links__title" role="heading" aria-level="2"><a href="{{ pathto(overview_sidebar.home_page) }}" class="reference internal"></a></p>
+        <p class="bd-links__title" role="heading" aria-level="2"><a href="{{ pathto(overview_sidebar.home_page) }}" class="reference internal">
           {{ _("Package Home") }}
         </a>
+        </p>
       </li>
 
       {# --- Cheatsheet --- #}
@@ -37,8 +38,11 @@
         {% set nr_title = nr.get('title', 'News & Resources') %}
         {% set nr_link = nr.get('link', '') %}
         <li class="{% if pagename == nr_link %}current {% endif %}">
-          <p class="bd-links__title" role="heading" aria-level="2"><a href="{{ pathto(nr_link) }}" class="reference internal">
-            {{ nr_title }}</a></p>
+          <p class="bd-links__title" role="heading" aria-level="2">
+            <a href="{{ pathto(nr_link) }}" class="reference internal">
+              {{ nr_title }}
+            </a>
+          </p>
         </li>
       {% endif %}
 
