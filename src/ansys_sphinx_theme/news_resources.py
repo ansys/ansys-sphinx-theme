@@ -321,7 +321,10 @@ def _build_table(entries: list) -> nodes.raw:
         # Content: title (linked if :link: provided) + description
         parts.append('<div class="nr-content">')
         if link:
-            parts.append(f'<a href="{_e(link)}" class="nr-title">{_e(title)}</a>')
+            parts.append(
+                f'<a href="{_e(link)}" class="nr-title"'
+                f' target="_blank" rel="noopener noreferrer">{_e(title)}</a>'
+            )
         else:
             parts.append(f'<span class="nr-title">{_e(title)}</span>')
         if description.strip():
