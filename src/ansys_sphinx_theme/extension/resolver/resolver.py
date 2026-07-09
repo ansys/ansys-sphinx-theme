@@ -14,31 +14,40 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""``urlinclude`` Sphinx extension."""
+"""Content resolver Sphinx directive: ``include-from-url``.
+
+Fetches reusable documentation snippets from a GitHub repository, optionally
+renders Jinja2 variables defined in the directive body, and inserts the result
+into the RST document tree.
+"""
 
 import asyncio
 import os
 from pathlib import Path
 import shutil
 
-from ansys_sphinx_theme.extension.url_include import __version__
-from ansys_sphinx_theme.extension.url_include.base import BaseInclude
-from ansys_sphinx_theme.extension.url_include.github_file import GitHubFile
-from ansys_sphinx_theme.extension.url_include.jinja_include import (
-    jinja_literal_block,
-    jinja_raw_block,
-)
-from ansys_sphinx_theme.extension.url_include.utils import add_literal_block, create_temp_file
 from docutils import statemachine
 from docutils.parsers.rst import directives
 from sphinx.util import logging
 from sphinx.util.console import bold
 from sphinx.util.docutils import SphinxDirective
 
+from ansys_sphinx_theme.extension.resolver.base import BaseInclude
+from ansys_sphinx_theme.extension.resolver.github_file import GitHubFile
+from ansys_sphinx_theme.extension.resolver.jinja_resolver import (
+    jinja_literal_block,
+    jinja_raw_block,
+)
+from ansys_sphinx_theme.extension.resolver.utils import add_literal_block, create_temp_file
+
 logger = logging.getLogger(__name__)
 
+_EXTENSION_VERSION = "0.1.dev0"
+
 DIRECTIVE_NAME = "include-from-url"
-processed_url_set = set()
+
+# URLs processed in this build; reset on builder-inited to avoid cross-build leakage.
+_processed_urls: set[str] = set()
 
 
 class UrlIncludeDirective(BaseInclude, SphinxDirective):
@@ -68,32 +77,16 @@ class UrlIncludeDirective(BaseInclude, SphinxDirective):
         "encoding": directives.encoding,
     }
 
-    def _process_content(self):
-        """Process the content.
-
-        Process the file content of file fetched from the URL, based on the number of lines.
+    def _process_content(self) -> str:
+        """Return the fetched text, optionally clamped to a line count.
 
         Returns
         -------
         str
-            Processed content.
+            Processed content as a single string.
         """
-        total_lines = len(self.text_content)
-
-        self.start_line = 1
-        # Simplify condition
-        self.end_line = total_lines
-        total_content = "".join(self.text_content[0 : self.end_line])
-
-        number_lines = self.number_lines if self.number_lines else 0
-
-        if number_lines:
-            number_lines = int(number_lines)
-            total_content = "\n".join(self.text_content[self.start_line - 1 : number_lines])
-        else:
-            total_content = "\n".join(self.text_content[self.start_line - 1 : self.end_line])
-
-        return total_content
+        end = int(self.number_lines) if self.number_lines else len(self.text_content)
+        return "\n".join(self.text_content[:end])
 
     def _get_language(self):
         """Get the language of the content."""
@@ -202,25 +195,23 @@ class UrlIncludeDirective(BaseInclude, SphinxDirective):
         self.file_name = self.file_name if self.file_name else Path(self.url).name.split("@")[0]
         temp_folder_path = self._get_temp_folder_path()
 
-        if self.url in processed_url_set and not self.jinja_include and not self.literal:
+        if self.url in _processed_urls and not self.jinja_include and not self.literal:
             # URL is already processed
             temp_file = self._get_temp_file_path(temp_folder_path)
             if Path.exists(temp_file):
                 self.run_template(temp_file)
                 return []
-        processed_url_set.add(self.url)
+        _processed_urls.add(self.url)
         total_content = self._get_github_content()
 
         if not total_content:
             return []
 
-        if self.has_content:
-            contents = {
-                key.strip(): value.strip()
-                for key, value in (pair.split(":", 1) for pair in self.content)
-            }
-        else:
-            contents = {}
+        contents = {}
+        for pair in self.content:
+            if ":" in pair:
+                key, value = pair.split(":", 1)
+                contents[key.strip()] = value.strip()
 
         if self.literal:
             if self.jinja_include:
@@ -258,19 +249,15 @@ class UrlIncludeDirective(BaseInclude, SphinxDirective):
         return []
 
 
-def process_raw_content(app, docname, source):
-    """Process the raw content.
+def _reset_processed_urls(app):
+    """Clear the URL cache at the start of each Sphinx build.
 
     Parameters
     ----------
     app : object
         Sphinx application object.
-    docname : str
-        Document name.
-    source : str
-        Source content.
     """
-    # Reset the url include folder
+    _processed_urls.clear()
     directives.register_directive(DIRECTIVE_NAME, UrlIncludeDirective)
 
 
@@ -296,8 +283,8 @@ def clear_url_include_folder(app, exception):
         logger.info("done")
 
 
-def setup_url_include(app):
-    """Set up the URL include directive.
+def setup_content_resolver(app):
+    """Register the ``include-from-url`` directive and connect Sphinx events.
 
     Parameters
     ----------
@@ -307,10 +294,10 @@ def setup_url_include(app):
     Returns
     -------
     dict
-        Dictionary containing the version.
+        Extension metadata.
     """
-    app.connect("source-read", process_raw_content)
+    app.connect("builder-inited", _reset_processed_urls)
     app.connect("build-finished", clear_url_include_folder)
     app.add_config_value("urlinclude_template_folder", "urlinclude_template_folder", "html")
     app.add_config_value("clear_urlinclude_folder", False, "html")
-    return {"version": __version__}
+    return {"version": _EXTENSION_VERSION}

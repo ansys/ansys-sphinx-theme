@@ -62,9 +62,9 @@ def create_temp_file(temp_folder_path: str, content: str, file_name: str) -> Pat
         The path to the temporary file.
     """
     temp_folder = Path(temp_folder_path)
-    Path(temp_folder).mkdir(parents=True, exist_ok=True)
+    temp_folder.mkdir(parents=True, exist_ok=True)
 
-    file_path = Path(temp_folder) / file_name
+    file_path = temp_folder / file_name
     with Path.open(file_path, "w", encoding="utf-8") as f:
         f.write(content)
     return file_path

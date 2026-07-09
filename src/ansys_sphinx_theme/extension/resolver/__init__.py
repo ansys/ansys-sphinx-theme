@@ -1,7 +1,6 @@
 # Copyright (C) 2021 - 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 #
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -14,31 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Content resolver Sphinx extension entry point."""
+"""Resolver sub-package: fetches reusable doc snippets from GitHub and renders them via Jinja."""
 
-from sphinx.application import Sphinx
+__version__ = "0.1.dev0"
 
-from ansys_sphinx_theme.extension.resolver import __version__, setup_content_resolver
+from ansys_sphinx_theme.extension.resolver.resolver import setup_content_resolver
 
-__all__ = ["__version__", "setup"]
-
-
-def setup(app: Sphinx) -> dict:
-    """Set up the Content Resolver Sphinx Extension.
-
-    Parameters
-    ----------
-    app : Sphinx
-        The Sphinx application instance.
-
-    Returns
-    -------
-    dict
-        Configuration information for the extension.
-    """
-    setup_content_resolver(app)
-    return {
-        "version": __version__,
-        "parallel_read_safe": True,
-        "parallel_write_safe": True,
-    }
+__all__ = ["__version__", "setup_content_resolver"]

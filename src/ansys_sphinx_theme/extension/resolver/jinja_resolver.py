@@ -16,9 +16,10 @@
 
 """Jinja include module contains the JinjaRead class."""
 
-from ansys_sphinx_theme.extension.url_include import add_literal_block, create_temp_file
 from jinja2 import Environment, meta
 from sphinx.util import logging
+
+from ansys_sphinx_theme.extension.resolver.utils import add_literal_block, create_temp_file
 
 logger = logging.getLogger(__name__)
 

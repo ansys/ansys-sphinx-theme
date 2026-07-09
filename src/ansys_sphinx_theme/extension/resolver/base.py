@@ -103,8 +103,8 @@ class BaseInclude(Directive):
             )
 
         if (path, clip_options) in include_log:
-            master_paths = (pth for (pth, opt) in reversed(include_log))
-            inclusion_chain = "\n> ".join(path, *master_paths)
+            master_paths = [pth for (pth, opt) in reversed(include_log)]
+            inclusion_chain = "\n> ".join([path, *master_paths])
             raise self.warning(
                 f'Circular inclusion exists in the "{self.name}" directive:\n{inclusion_chain}.'
             )
@@ -122,5 +122,5 @@ class BaseInclude(Directive):
 
         self.include_lines += ["", f'.. end of inclusion from "{path}"']
         self.state_machine.insert_input(self.include_lines, path)
-        include_log.append(path)
+        include_log.append((path, clip_options))
         return []
