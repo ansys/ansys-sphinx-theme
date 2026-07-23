@@ -21,7 +21,7 @@
     .then((text) => {
       if (!text || !text.trim()) return;
 
-      // Only inject into the ast_announcement modal extra section.
+      // Only inject into the announcement_banner modal extra section.
       // The legacy #announcement_msg bar is intentionally skipped.
       var extra = document.querySelector(".ast-announcement-modal-body .ast-announcement-extra");
       if (extra) {

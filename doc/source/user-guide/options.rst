@@ -22,6 +22,7 @@ Table of contents
    :ref:`whats_new`                             list            Show a "What's new" section in the left navigation pane.
    :ref:`secondary_sidebar`                     list            Control the secondary sidebar on each page.
    :ref:`navigation_bar_dropdown`               list            Add a dropdown navigation bar to the top of your documentation.
+   :ref:`announcement_banner`                   list            Add an announcement banner to the top of your documentation pages.
    ===========================================  ==============  ==========================================================================================
 
 .. _show_breadcrumbs:
@@ -587,3 +588,46 @@ the ``conf.py`` file, add the following metadata at the very top of the file:
     Page title
     ==========
     ...
+
+.. _announcement_banner:
+
+Announcement banner
+-------------------
+
+The Ansys Sphinx Theme supports announcement banners that can be displayed at the top of documentation pages. These banners can be used to communicate important information, such as product updates, deprecation notices, maintenance alerts, or other announcements.
+
+To configure an announcement banner, use the ``announcement_banner`` option in the ``html_theme_options`` dictionary of your ``conf.py`` file. This option accepts a list of announcement dictionaries, as shown in the following example:
+
+.. code:: python
+
+    html_theme_options = {
+        "announcement_banner": [
+            {
+                "message": "Welcome to the Ansys Sphinx Theme documentation!",
+                "type": "info",
+            },
+            {
+                "message": "This release is deprecated. Please upgrade.",
+                "type": "warning",
+                "link": "https://docs.pyansys.com/version/stable/",
+            },
+            {
+                "message": "Critical security patch required.",
+                "type": "error",
+            },
+        ],
+    }
+
+Each announcement supports the following keys:
+
+- ``message``: Text displayed in the announcement banner.
+- ``type``: Type of announcement. Supported values are:
+
+  - ``info``: Informational messages.
+  - ``success``: Successful operations or positive updates.
+  - ``warning``: Warnings or deprecation notices.
+  - ``error``: Critical alerts or issues requiring immediate attention.
+
+  Announcement types are prioritized as follows: **error > warning > success > info**. If multiple announcements are configured, only the announcement with the highest priority is displayed.
+
+- ``link`` *(optional)*: URL associated with the announcement. When provided, the banner message becomes clickable and directs users to the specified URL for additional information.
