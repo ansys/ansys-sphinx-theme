@@ -6,6 +6,26 @@ HTML theme options
 In the Sphinx configuration (``conf.py``) file in the ``doc`` directory, you can use the
 ``html_theme_options`` dictionary to customize the Ansys Sphinx theme.
 
+Table of contents
+-----------------
+
+.. table::
+   :class: datatable
+
+   ===========================================  ==============  ==========================================================================================
+   Option                                       Type            Description
+   ===========================================  ==============  ==========================================================================================
+   :ref:`show_breadcrumbs`                      bool            Show breadcrumbs at the top of each page.
+   :ref:`add_hide_icons_in_navbar`              list            Add and hide icons in the navigation bar.
+   :ref:`static_search`                         list            Additional static search options to customize the search experience.
+   :ref:`cheat_sheets`                          list            Add a cheat sheet to the left navigation pane of your documentation.
+   :ref:`whats_new`                             list            Show a "What's new" section in the left navigation pane.
+   :ref:`secondary_sidebar`                     list            Control the secondary sidebar on each page.
+   :ref:`navigation_bar_dropdown`               list            Add a dropdown navigation bar to the top of your documentation.
+   ===========================================  ==============  ==========================================================================================
+
+.. _show_breadcrumbs:
+
 Show breadcrumbs
 ----------------
 
@@ -50,6 +70,7 @@ include ``|version|`` in the title:
 
    html_short_title = html_title = "Ansys Sphinx Theme |version|"
 
+.. _add_hide_icons_in_navbar:
 
 Add and hide icons in the navigation bar
 ----------------------------------------
@@ -107,6 +128,8 @@ If you want to hide all icons, use the ``show_icons`` Boolean variable:
         "show_icons": False,
         ...
     }
+
+.. _static_search:
 
 Static search options
 ----------------------
@@ -241,6 +264,7 @@ The search filters are displayed as below:
    :alt: Search filters
 
 
+.. _cheat_sheets:
 
 Cheat sheets
 ------------
@@ -296,6 +320,7 @@ main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" s
     the theme is using `pdf2image`. So you should have the ``poppler`` package installed in your system.
     For more information, see the `pdf2image documentation <https://pypi.org/project/pdf2image/>`_.
 
+.. _whats_new:
 
 What's new section
 ------------------
@@ -398,6 +423,8 @@ The following images show a sample "What's new" section and sidebar in the chang
     shown first in the left navigation pane, followed by the **What's new** section to maintain
     sidebar consistency.
 
+.. _navigation_bar_dropdown:
+
 Navigation bar dropdown
 ------------------------
 This theme supports dropdown navigation bars. The layout is declared using a YAML file contained at any level in the ``doc/source`` directory.
@@ -443,6 +470,9 @@ Each entry in the YAML file may include the following fields:
 .. warning::
 
     You must declare the complete layout of the dropdown navigation bar in the YAML file. Sphinx does not resolve it automatically.
+
+
+.. _secondary_sidebar:
 
 Secondary sidebar
 -----------------
