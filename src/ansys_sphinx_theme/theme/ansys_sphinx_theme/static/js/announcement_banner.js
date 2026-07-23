@@ -203,8 +203,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Resolve the base URL from the script tag's data-base-url attribute
+  // (Jinja's pathto() is only available in .html templates, not static .js files)
+  const scriptEl =
+    document.currentScript || document.querySelector("script[data-base-url]");
+  const baseUrl = (scriptEl && scriptEl.dataset.baseUrl) || "";
+
   // Fetch announcement.html then build notifications
-  fetch("{{ pathto('', 1) }}announcement.html")
+  fetch(baseUrl + "announcement.html")
     .then(function (response) {
       if (!response.ok) {
         return null;
