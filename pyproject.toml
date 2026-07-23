@@ -56,7 +56,7 @@ all = [
 
 [dependency-groups]
 type-check = [
-    "ty==0.0.58",
+    "ty==0.0.60",
 ]
 doc = [
     "jupytext==1.19.4",
@@ -65,7 +65,7 @@ doc = [
     "numpydoc==1.10.0",
     "pandas==3.0.3",
     "Pillow>=9.0",
-    "plotly==6.8.0",
+    "plotly==6.9.0",
     "PyGitHub==2.9.1",
     "pyvista[jupyter]==0.48.4",
     "PyYAML==6.0.3",
