@@ -615,6 +615,10 @@ To configure an announcement banner, use the ``announcement_banner`` option in t
                 "message": "Critical security patch required.",
                 "type": "error",
             },
+            {
+                "message": "New features available in the latest release.",
+                "type": "success",
+            },
         ],
     }
 
