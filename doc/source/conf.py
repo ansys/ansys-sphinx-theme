@@ -96,7 +96,10 @@ html_theme_options: dict[str, Any] = {
         },
     ],
 }
-
+exclude_patterns = [
+    "examples/sphinx-design*",
+]
+sd_fontawesome_latex = True
 
 html_js_files = ["https://cdn.plot.ly/plotly-3.0.1.min.js"]
 
@@ -147,7 +150,10 @@ master_doc = "index"
 # additional logos for the latex coverpage
 LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
 latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
-latex_elements = {"preamble": latex.generate_preamble(html_title)}
+latex_elements = {
+    "preamble": latex.generate_preamble(html_title),
+    "extraclassoptions": "openany,oneside",
+}
 
 # Not found page
 notfound_context = {

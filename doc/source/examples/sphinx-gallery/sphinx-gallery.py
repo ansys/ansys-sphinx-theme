@@ -42,7 +42,7 @@ Then, add the package to the ``extensions`` variable in your Sphinx ``conf.py`` 
 
 import pyvista as pv
 
-pv.set_jupyter_backend("html")
+pv.set_jupyter_backend("static")
 
 sphere = pv.Sphere()
 sphere.plot()

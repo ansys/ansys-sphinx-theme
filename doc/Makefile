@@ -31,8 +31,9 @@ clean:
 # customized pdf due to svg issue
 pdf:
 	@$(SPHINXBUILD) -M latex "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
-	cd $(BUILDDIR)/latex && latexmk -r latexmkrc -pdf *.tex -interaction=nonstopmode || true
-	(test -f $(BUILDDIR)/latex/ansys_sphinx*.pdf && echo pdf exists) || exit 1
+	cd $(BUILDDIR)/latex && latexmk -C
+	cd $(BUILDDIR)/latex && latexmk -gg -r latexmkrc -pdf *.tex -interaction=nonstopmode
+	(test -f $(BUILDDIR)/latex/ansys_sphinx*.pdf && echo "pdf exists") || exit 1
 
 # Serve docs
 serve:

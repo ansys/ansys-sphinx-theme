@@ -41,32 +41,35 @@
     \newdimen\myHBoxWidth
     \myHBoxWidth=\hsize \advance\myHBoxWidth-\ansysBlockDistanceFromRightEdge
     % implement the Ansys block
-    \hbox to \myHBoxWidth {\vbox to \distanceToBottomOfAnsysBox {}  %
+    \hbox to \myHBoxWidth{%
+        \vbox to \distanceToBottomOfAnsysBox{}%
         \hfil
-        %
         % draw the box
-        \parbox[b]{\ansysBlockWidth}{\raggedleft {
-            \includegraphics{ansys_logo_white}} \\
+        \parbox[b]{\ansysBlockWidth}{%
+            \raggedleft
+            {\includegraphics{ansys_logo_white}}\\%
             \footnotesize
-            \textcolor{lightgray}
+            \textcolor{lightgray}%
             \hrule
             \vskip 6pt
             \textcopyright{} {\pyvar{_date.year}} ANSYS, Inc. or affiliated companies\\
-            Unauthorized use, distribution, or duplication prohibited.}
-    } %
-    %we use a save box method so that we can get draw the bottom material with respect
-    %to the bottom of the page
-    \sbox{\myTitle}{\vbox{
-    %vskip skips down a specified distance from the previous Ansys block and picture
-    \vskip 1in
-    %title
-    \centerline{\huge \bfseries {\pyvar{_title}}}
-    \vskip 6pt
-    %line under title
-    \centerline{\vrule height 0.0625in  width 6.5in}
-    }
-    }
-    \usebox{\myTitle} \\%
+            Unauthorized use, distribution, or duplication prohibited.
+        }%
+    }%
+    % we use a savebox so that we can draw the bottom material with respect
+    % to the bottom of the page
+    \sbox{\myTitle}{%
+        \vbox{%
+            % vskip skips down from the previous Ansys block and picture
+            \vskip 1in
+            % title
+            \centerline{\huge\bfseries{\pyvar{_title}}}
+            \vskip 6pt
+            % line under title
+            \centerline{\vrule height 0.0625in width 6.5in}
+        }%
+    }%
+    \usebox{\myTitle}\\%
     \newdimen\toBottom%
     %trying to calculate distance from the bottom of the line under the title
     %to the bottom of the page, used to construct a strut (0 width vbox)
@@ -93,17 +96,25 @@
             (T) 724-746-3304\\
             (F) 724-514-9494
         }%
-        \hfil%
-        %hfil pushes the right box to the right
-        %we needed the vbox since we are stacking two objects on the right side
-        \vbox{\hbox {\pyvar{_date.strftime('%b %d, %Y').capitalize()}} \vskip 0.5\baselineskip%\footnotesize
-        %fbox is a horizontal box, so we need to put a vbox in it to get multiple lines.
-        %the fbox is wrapped in an hbox so we can control where it goes.
-        %we stack the hboxes in the vbox. We need the hboxes because otherwise the fbox had
-        %a huge width
-            \hbox{\fbox{\vbox{\hbox{ANSYS, Inc. and}\hbox{ANSYS Europe,}
-            \hbox{Ltd. are UL}\hbox{registered ISO}\hbox{9001:2015}\hbox{companies.}}}}%
-        }
+        \hfil% pushes the right block to the right
+        % vbox stacks the date and the ISO box
+        \vbox{%
+            \hbox{\pyvar{_date.strftime('%b %d, %Y').capitalize()}}
+            \vskip 0.5\baselineskip
+            % fbox wrapped in hbox to control width; vbox gives multiple lines
+            \hbox{%
+                \fbox{%
+                    \vbox{%
+                        \hbox{ANSYS, Inc. and}
+                        \hbox{ANSYS Europe,}
+                        \hbox{Ltd. are UL}
+                        \hbox{registered ISO}
+                        \hbox{9001:2015}
+                        \hbox{companies.}
+                    }%
+                }%
+            }%
+        }%
         %1in of space between the right box and the right edge of the page
         \hskip 1in%
     }
