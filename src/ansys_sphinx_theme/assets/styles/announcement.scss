@@ -5,6 +5,7 @@
   box-sizing: border-box;
 }
 
+/* Announcement banner styles for the top of the page, including modal and notification cards. */
 .ast-announcement {
   width: 100%;
   border: 2px solid;
@@ -39,6 +40,7 @@
   }
 }
 
+/* Announcement icon styles for the left side of the banner. */
 .ast-announcement-icon {
   flex-shrink: 0;
   width: 1.4em;
@@ -77,11 +79,13 @@ $announcement-types: (
   }
 }
 
+/* Announcement text styles for the main content of the banner. */
 .ast-announcement-text {
   flex: 1;
   font-weight: bold;
 }
 
+/* Announcement details button styles for the "Learn more" link. */
 .ast-announcement-details-btn {
   display: inline-flex;
   height: 32px;
@@ -107,6 +111,7 @@ $announcement-types: (
   }
 }
 
+/* Announcement close button styles for the "X" button to dismiss the banner. */
 .ast-announcement-close,
 .ast-announcement-modal-close {
   background: none;
@@ -128,6 +133,7 @@ $announcement-types: (
   color: var(--ast-admonitions-color, inherit);
 }
 
+/* Announcement modal overlay styles for the background overlay when the modal is open. */
 .ast-announcement-overlay {
   display: none;
   position: fixed;
@@ -142,6 +148,7 @@ $announcement-types: (
   }
 }
 
+/* Announcement modal styles for the modal dialog that appears when "Learn more" is clicked. */
 .ast-announcement-modal {
   position: relative;
   max-width: 540px;
@@ -167,6 +174,7 @@ $announcement-types: (
   }
 }
 
+/* Announcement modal close button styles for the "X" button in the modal. */
 .ast-announcement-modal-close {
   position: absolute;
   top: 10px;
@@ -174,12 +182,14 @@ $announcement-types: (
   font-size: 22px;
 }
 
+/* Announcement modal body styles for the content area of the modal. */
 .ast-announcement-extra {
   font-weight: normal;
   display: flex;
   flex-direction: column;
 }
 
+/* Announcement notification card styles for individual notification items in the modal. */
 .ast-notification-heading {
   font-weight: bold;
   font-size: 0.95em;
@@ -187,6 +197,7 @@ $announcement-types: (
   margin-bottom: 6px;
 }
 
+/* Announcement notification card styles for individual notification items in the modal. */
 .ast-notification-card {
   display: flex;
   align-items: flex-start;
@@ -204,6 +215,7 @@ $announcement-types: (
   }
 }
 
+/* Announcement notification icon styles for the icon in each notification card. */
 .ast-notification-icon {
   flex-shrink: 0;
   width: 1.4em;
@@ -247,11 +259,13 @@ $notification-types: (
   }
 }
 
+/* Announcement notification body styles for the text content in each notification card. */
 .ast-notification-body {
   flex: 1;
   line-height: 1.5;
 }
 
+/* Announcement notification link styles for the "Learn more" link in each notification card. */
 .ast-notification-link {
   display: inline-block;
   margin-top: 4px;

@@ -1,9 +1,27 @@
+/**
+ * announcement_banner.js
+ *
+ * Handles the announcement banner and modal, including:
+ * - Dismissal state (localStorage)
+ * - Fetching announcement.html for extra notifications
+ * - Building notification cards from ast config and announcement.html
+ * - Aligning banner to middle column width
+ * - Modal open/close behavior
+ *
+ * This file is included in the theme's static files and is loaded on every page.
+ */
+
 document.addEventListener("DOMContentLoaded", function () {
   const wrap = document.querySelector(".ast-announcement-wrap");
   const closeBtn = document.getElementById("ast-announcement-close");
 
-  // Hash the banner message so the key changes whenever content changes.
-  // Uses crypto.subtle (HTTPS/localhost) with a simple djb2 fallback for HTTP.
+  /**
+   * Function to compute a hash of the banner content for localStorage key.
+   * Uses SHA-1 if available, otherwise falls back to a simple hash.
+   *
+   * @param {string} str - The string to hash
+   * @returns {string} - The hex hash of the string
+   */
   function hashTextFallback(str) {
     var h = 5381;
     for (var i = 0; i < str.length; i++) {
@@ -12,6 +30,11 @@ document.addEventListener("DOMContentLoaded", function () {
     return (h >>> 0).toString(16);
   }
 
+  /**
+   *
+   * @param {string} str - string to hash
+   * @returns {Promise<string>} - hex hash
+   */
   async function hashText(str) {
     try {
       const buf = await crypto.subtle.digest(
@@ -28,6 +51,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Called after all banner content is known (ast_items + fetched announcement.html)
+  /**
+   * Function to apply dismissal state based on content hash.
+   * @param {string} contentKey - The content key to hash and check dismissal state
+   */
   function applyDismiss(contentKey) {
     hashText(contentKey).then(function (hash) {
       const STORAGE_KEY = "ast-announcement-dismissed:" + hash;
@@ -49,6 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Size banner to 80% of .bd-content (middle column, adapts to sidebar presence)
+  /**
+   * Function to align the announcement banner to 80% of the middle column width.
+   * This is called on initial load and on window resize.
+   */
   function alignToBdArticle() {
     const content = document.querySelector(".bd-main .bd-content");
     if (content && wrap) {
@@ -65,6 +96,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const ATTENTION_TYPES = ["warning", "error"];
 
+  /**
+   * Function to detect the type of notification based on the background color of an element.
+   * @param {HTMLElement} el - The element to detect the type from
+   * @returns {string} - The detected type ("success", "warning", "info", etc.)
+   */
   function detectType(el) {
     const tmp = document.createElement("span");
     tmp.style.backgroundColor = el.style.backgroundColor || "";
@@ -81,6 +117,13 @@ document.addEventListener("DOMContentLoaded", function () {
     return "info";
   }
 
+  /**
+   * Function to create a notification card element.
+   * @param {string} type - The type of notification ("success", "warning", "info", etc.)
+   * @param {string} html - The HTML content of the notification
+   * @param {string} link - The URL for the "Learn more" link (optional)
+   * @returns {HTMLElement} - The constructed notification card element
+   */
   function makeCard(type, html, link) {
     const card = document.createElement("div");
     card.classList.add("ast-notification-card", "ast-notification-" + type);
@@ -104,6 +147,10 @@ document.addEventListener("DOMContentLoaded", function () {
     return card;
   }
 
+  /**
+   * Function to build the notifications section in the modal.
+   * @param {Array} extraItems - Array of extra notification items from announcement.html
+   */
   function buildNotifications(extraItems) {
     // extraItems: array of {type, html} from announcement.html
     const modalBody = document.querySelector(".ast-announcement-modal-body");
@@ -210,6 +257,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const baseUrl = (scriptEl && scriptEl.dataset.baseUrl) || "";
 
   // Fetch announcement.html then build notifications
+  /**
+   * Fetches the announcement.html file and builds notifications based on its content.
+   * If announcement.html is not found or empty, it will still build notifications from ast config.
+   * After building notifications, it applies dismissal state based on the combined content.
+   */
   fetch(baseUrl + "announcement.html")
     .then(function (response) {
       if (!response.ok) {
