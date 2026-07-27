@@ -102,11 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
    * @returns {string} - The detected type ("success", "warning", "info", etc.)
    */
   function detectType(el) {
-    const tmp = document.createElement("span");
-    tmp.style.backgroundColor = el.style.backgroundColor || "";
-    document.body.appendChild(tmp);
-    const rgb = window.getComputedStyle(tmp).backgroundColor;
-    document.body.removeChild(tmp);
+    const rgb = el.style.backgroundColor || "";
     const match = rgb.match(/\d+/g);
     if (match) {
       const [r, g, b] = match.map(Number);
