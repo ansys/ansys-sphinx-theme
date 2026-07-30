@@ -35,9 +35,8 @@
 
 {% block docs_navbar %}
   {{ super() }}
-  {% if theme_switcher %}
-    {% include "components/announcement_version.html" %}
-  {% endif %}
+  <!-- {% if theme_switcher %}
+  {% endif %} -->
   {% include "components/announcement_banner.html" %}
 {% endblock docs_navbar %}
 

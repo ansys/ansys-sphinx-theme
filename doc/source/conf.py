@@ -80,21 +80,25 @@ html_theme_options: dict[str, Any] = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
-    "announcement_banner": [
-        {
-            "message": "Welcome to the Ansys Sphinx Theme documentation!",
-            "type": "info",
-        },
-        {
-            "message": "This release is deprecated. Please upgrade.",
-            "type": "warning",
-            "link": "https://docs.pyansys.com/version/stable/",
-        },
-        {
-            "message": "Critical security patch required.",
-            "type": "error",
-        },
-    ],
+    # "announcement_banner": [
+    #     {
+    #         "message": "Welcome to the Ansys Sphinx Theme documentation!",
+    #         "type": "info",
+    #     },
+    #     {
+    #         "message": "This release is deprecated. Please upgrade.",
+    #         "type": "warning",
+    #         "link": "https://docs.pyansys.com/version/stable/",
+    #     },
+    #     {
+    #         "message": "Critical security patch required.",
+    #         "type": "error",
+    #     },
+    #     {
+    #         "message": "This is a success message.",
+    #         "type": "success",
+    #     },
+    # ],
 }
 
 

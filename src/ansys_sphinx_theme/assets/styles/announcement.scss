@@ -39,6 +39,12 @@
       var(--ast-admonition-danger-icon)
     );
   }
+  &.success {
+    border-color: var(
+      --ast-admonition-success-border,
+      var(--ast-admonition-success-icon)
+    );
+  }
 }
 
 /* Announcement icon styles for the left side of the banner. */
