@@ -633,7 +633,7 @@ Each announcement supports the following keys:
   - ``error``: Critical alerts or issues requiring immediate attention.
 
 - ``link`` *(optional)*: URL associated with the announcement. When provided,
- the banner message becomes clickable and directs users to the specified URL for additional information.
+  the banner message becomes clickable and directs users to the specified URL for additional information.
 
 Announcement banners follow this priority order: **Error > Warning > Success > Info**.
 When multiple announcement types are configured, the banner adopts the highest-priority type. For instance,
