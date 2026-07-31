@@ -1,0 +1,294 @@
+/* Announcement banner wrapper styles for the container that holds the announcement banner. */
+.ast-announcement-wrap {
+  width: 100%;
+  max-width: none;
+  padding: 8px 0;
+  box-sizing: border-box;
+}
+
+/* Announcement banner styles for the top of the page, including modal and notification cards. */
+.ast-announcement {
+  width: 100%;
+  border: 2px solid;
+  border-radius: 4px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ast-color-enable-card-background);
+  box-sizing: border-box;
+  color: var(--ast-admonitions-color, inherit);
+
+  &.info {
+    border-color: var(
+      --ast-admonition-info-border,
+      var(--ast-admonition-info-icon)
+    );
+  }
+
+  &.warning {
+    border-color: var(
+      --ast-admonition-warning-border,
+      var(--ast-admonition-warning-icon)
+    );
+  }
+
+  &.error {
+    border-color: var(
+      --ast-admonition-danger-border,
+      var(--ast-admonition-danger-icon)
+    );
+  }
+  &.success {
+    border-color: var(
+      --ast-admonition-success-border,
+      var(--ast-admonition-success-icon)
+    );
+  }
+}
+
+/* Announcement icon styles for the left side of the banner. */
+.ast-announcement-icon {
+  flex-shrink: 0;
+  width: 1.4em;
+  height: 1.4em;
+  font: var(--fa-font-solid);
+  font-size: 1.1em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+$announcement-types: (
+  info: (
+    color: var(--ast-admonition-info-icon),
+    icon: "\f05a",
+  ),
+  warning: (
+    color: var(--ast-admonition-warning-icon),
+    icon: "\f071",
+  ),
+  error: (
+    color: var(--ast-admonition-danger-icon),
+    icon: "\f057",
+  ),
+  success: (
+    color: var(--ast-admonition-success-icon),
+    icon: "\f058",
+  ),
+);
+
+@each $type, $values in $announcement-types {
+  .ast-announcement.#{$type} {
+    .ast-announcement-icon {
+      color: map-get($values, color);
+
+      &::before {
+        content: map-get($values, icon);
+      }
+    }
+  }
+}
+
+/* Announcement text styles for the main content of the banner. */
+.ast-announcement-text {
+  flex: 1;
+  font-weight: bold;
+}
+
+/* Announcement details button styles for the "Learn more" link. */
+.ast-announcement-details-btn {
+  display: inline-flex;
+  height: 32px;
+  max-width: 280px;
+  padding: 0 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  border-radius: 4px;
+  border: 1px solid var(--ast-dropdown-border-color, #d9d9d9);
+  background: var(--pst-color-background, #ffffff);
+  color: var(--pst-color-text-base);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-decoration: none;
+  font-size: 0.85em;
+  font-weight: 500;
+
+  &:hover {
+    border-color: var(--ast-dropdown-border-color-hover, #8e8e8e);
+    opacity: 0.9;
+  }
+}
+
+/* Announcement close button styles for the "X" button to dismiss the banner. */
+.ast-announcement-close,
+.ast-announcement-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  line-height: 1;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.ast-announcement-close {
+  font-size: 18px;
+  flex-shrink: 0;
+  padding: 0 2px;
+  color: var(--ast-admonitions-color, inherit);
+}
+
+/* Announcement modal overlay styles for the background overlay when the modal is open. */
+.ast-announcement-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  background: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+
+  &.visible {
+    display: flex;
+  }
+}
+
+/* Announcement modal styles for the modal dialog that appears when "Learn more" is clicked. */
+.ast-announcement-modal {
+  position: relative;
+  max-width: 540px;
+  width: 90%;
+  border-radius: 6px;
+  border: 2px solid;
+  padding: 20px 48px 20px 20px;
+  background: var(--pst-color-background, #fff);
+  color: var(--ast-admonitions-color, inherit);
+  font-size: 1em;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+
+  &.info {
+    border-color: var(--ast-admonition-info-border);
+  }
+
+  &.warning {
+    border-color: var(--ast-admonition-warning-border);
+  }
+
+  &.error {
+    border-color: var(--ast-admonition-danger-border);
+  }
+  &.success {
+    border-color: var(--ast-admonition-success-border);
+  }
+}
+
+/* Announcement modal close button styles for the "X" button in the modal. */
+.ast-announcement-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 22px;
+}
+
+/* Announcement modal body styles for the content area of the modal. */
+.ast-announcement-extra {
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Announcement notification card styles for individual notification items in the modal. */
+.ast-notification-heading {
+  font-weight: bold;
+  font-size: 0.95em;
+  opacity: 0.75;
+  margin-bottom: 6px;
+}
+
+/* Announcement notification card styles for individual notification items in the modal. */
+.ast-notification-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 4px;
+  border: none;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  font-weight: normal;
+  font-size: 0.95em;
+  background: transparent;
+  color: var(--ast-admonitions-color, inherit);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Announcement notification icon styles for the icon in each notification card. */
+.ast-notification-icon {
+  flex-shrink: 0;
+  width: 1.4em;
+  height: 1.4em;
+  font: var(--fa-font-solid);
+  font-size: 1em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+$notification-types: (
+  success: (
+    color: var(--ast-admonition-success-icon, #006600),
+    icon: "\f058",
+  ),
+  warning: (
+    color: var(--ast-admonition-warning-icon, #caad2a),
+    icon: "\f071",
+  ),
+  info: (
+    color: var(--ast-admonition-info-icon, #1a78c2),
+    icon: "\f05a",
+  ),
+  error: (
+    color: var(--ast-admonition-danger-icon, #b72e2a),
+    icon: "\f057",
+  ),
+);
+
+@each $type, $values in $notification-types {
+  .ast-notification-#{$type} {
+    .ast-notification-icon {
+      color: map-get($values, color);
+
+      &::before {
+        content: map-get($values, icon);
+      }
+    }
+  }
+}
+
+/* Announcement notification body styles for the text content in each notification card. */
+.ast-notification-body {
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* Announcement notification link styles for the "Learn more" link in each notification card. */
+.ast-notification-link {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.85em;
+  font-weight: bold;
+  text-decoration: underline;
+  opacity: 0.85;
+
+  &:hover {
+    opacity: 1;
+  }
+}

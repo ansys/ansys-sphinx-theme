@@ -79,6 +79,14 @@ html_theme_options: dict[str, Any] = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
+    "announcement_banner": [
+        {
+            "message": "From version `1.10.0`, the ansys_sphinx_theme package supports new "
+            "announcement banner features.",
+            "type": "info",
+            "link": "https://sphinxdocs.ansys.com/version/dev/user-guide/options.html#announcement-banner",
+        },
+    ],
 }
 
 
