@@ -40,7 +40,6 @@ html_favicon = ansys_favicon
 html_theme = "ansys_sphinx_theme"
 html_short_title = html_title = "Ansys Sphinx Theme"
 html_static_path = ["_static"]
-html_extra_path = ["announcement.html"]
 templates_path = ["_templates"]
 
 html_context = {
@@ -80,25 +79,15 @@ html_theme_options: dict[str, Any] = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
-    # "announcement_banner": [
-    #     {
-    #         "message": "Welcome to the Ansys Sphinx Theme documentation!",
-    #         "type": "info",
-    #     },
-    #     {
-    #         "message": "This release is deprecated. Please upgrade.",
-    #         "type": "warning",
-    #         "link": "https://docs.pyansys.com/version/stable/",
-    #     },
-    #     {
-    #         "message": "Critical security patch required.",
-    #         "type": "error",
-    #     },
-    #     {
-    #         "message": "This is a success message.",
-    #         "type": "success",
-    #     },
-    # ],
+    "announcement_banner": [
+        {
+            "message": "From version `1.10.0`, the ansys_sphinx_theme package supports new"
+            "announcement banner features. "
+            "Please refer to the documentation for more information.",
+            "type": "info",
+            "link": "https://https://sphinxdocs.ansys.com/version/dev/user-guide/options.html#announcement-banner",
+        },
+    ],
 }
 
 
