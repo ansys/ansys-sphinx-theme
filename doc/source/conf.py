@@ -81,11 +81,10 @@ html_theme_options: dict[str, Any] = {
     },
     "announcement_banner": [
         {
-            "message": "From version `1.10.0`, the ansys_sphinx_theme package supports new"
-            "announcement banner features. "
-            "Please refer to the documentation for more information.",
+            "message": "From version `1.10.0`, the ansys_sphinx_theme package supports new "
+            "announcement banner features.",
             "type": "info",
-            "link": "https://https://sphinxdocs.ansys.com/version/dev/user-guide/options.html#announcement-banner",
+            "link": "https://sphinxdocs.ansys.com/version/dev/user-guide/options.html#announcement-banner",
         },
     ],
 }
