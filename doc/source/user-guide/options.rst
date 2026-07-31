@@ -276,9 +276,9 @@ add it to the left navigation pane of your documentation.
 In the ``html_theme_options`` dictionary, you add a child dictionary named ``cheatsheet``
 that contain these keys, in the order given:
 
-#. ``file``: File name including the extension of the cheat sheet. If the file is inside a directory,
+#. ``file``: filename including the extension of the cheat sheet. If the file is inside a directory,
    include the directory name relative to the root of the documentation. For example, if the cheat sheet
-   is in the ``getting_started`` directory, the file name is ``getting_started/cheat_sheet.qmd``.
+   is in the ``getting_started`` directory, the filename is ``getting_started/cheat_sheet.qmd``.
 #. ``title``: Title of the cheat sheet to be displayed in the left navigation pane.
 #. ``pages``: List of names for the pages to include the cheat sheet on. If no value is provided,
    the cheat sheet is displayed only on the main ``index.html`` file.
@@ -291,7 +291,7 @@ Here is an example of how to add the ``cheatsheet`` dictionary to the `html_them
     html_theme_options = (
         {
             "cheatsheet": {
-                "file": "<file name including the extension of the cheat sheet>",
+                "file": "<filename including the extension of the cheat sheet>",
                 "title": "<title of the cheat sheet>",
                 "version": "<version of the cheat sheet>",
                 "pages": "<list of names for the pages to include the cheat sheet on>",  # Optional
@@ -335,7 +335,7 @@ To install the "What's new" dependencies from ansys-sphinx-theme, run the follow
 
     pip install ansys-sphinx-theme[changelog]
 
-To get started, create a YAML file named ``whatsnew.yml`` in the ``doc/changelog.d`` directory. The
+To get started, create a YAML filenamed ``whatsnew.yml`` in the ``doc/changelog.d`` directory. The
 YAML file should contain the following structure:
 
 .. code-block:: yaml
@@ -637,11 +637,11 @@ Each announcement supports the following keys:
 
 Announcement banners follow this priority order: **Error > Warning > Success > Info**.
 When multiple announcement types are configured, the banner adopts the highest-priority type. For instance,
-if both Error and Warning announcements are available, the landing page banner will be displayed with the Error styling.
+if both Error and Warning announcements are available, the landing page banner  displays with the Error styling.
 
 The order of the announcements in the list determines their display order, with the first announcement appearing at the top of the banner.
 
-For example, for the configuration above, below is how the announcement banner will appear in the documentation:
+For example, for the configuration above, below is how the announcement banner appears in the documentation:
 
 .. image:: ../_static/announcement_banner.png
     :alt: Announcement banner
