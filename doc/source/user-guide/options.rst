@@ -632,6 +632,21 @@ Each announcement supports the following keys:
   - ``warning``: Warnings or deprecation notices.
   - ``error``: Critical alerts or issues requiring immediate attention.
 
-  Announcement types are prioritized as follows: **error > warning > success > info**. If multiple announcements are configured, only the announcement with the highest priority is displayed.
+- ``link`` *(optional)*: URL associated with the announcement. When provided,
+ the banner message becomes clickable and directs users to the specified URL for additional information.
 
-- ``link`` *(optional)*: URL associated with the announcement. When provided, the banner message becomes clickable and directs users to the specified URL for additional information.
+Announcement banners follow this priority order: **Error > Warning > Success > Info**.
+When multiple announcement types are configured, the banner adopts the highest-priority type. For instance,
+if both Error and Warning announcements are available, the landing page banner will be displayed with the Error styling.
+
+The order of the announcements in the list determines their display order, with the first announcement appearing at the top of the banner.
+
+For example, for the configuration above, below is how the announcement banner will appear in the documentation:
+
+.. image:: ../_static/announcement_banner.png
+    :alt: Announcement banner
+
+When the user clicks on the ``view`` button, the banner expands to show all announcements in the order they are defined in the configuration.
+
+.. image:: ../_static/announcement_banner_expanded.png
+    :alt: Expanded announcement banner
