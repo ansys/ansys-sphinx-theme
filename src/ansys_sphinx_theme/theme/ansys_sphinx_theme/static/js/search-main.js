@@ -8,7 +8,6 @@
 
 // DOM Elements
 const SEARCH_BAR = document.getElementById("search-bar");
-const SEARCH_INPUT = SEARCH_BAR.querySelector(".bd-search input.form-control");
 
 // Configure RequireJS for Fuse.js
 require.config({
@@ -88,6 +87,7 @@ require(["fuse"], function (Fuse) {
   let selectedLibraries = [];
   const libSearchData = {};
   let selectedFilter = new Set();
+  const searchPageContainer = document.querySelector(".bd-search-container");
 
   /**
    * Debounce utility to limit function execution rate.
@@ -108,6 +108,11 @@ require(["fuse"], function (Fuse) {
    * Sets up filter dropdowns and triggers initial search if needed.
    */
   async function initializeSearch() {
+    // Build sidebar scaffolding early so filter UI is visible even if
+    // search index/network loading fails.
+    setupFilterDropdown();
+    showLibraryDropdown();
+
     try {
       const cacheKey = "main-search-index";
       let data = await getFromIDB(cacheKey);
@@ -119,23 +124,28 @@ require(["fuse"], function (Fuse) {
       searchData = data;
       fuse = new Fuse(searchData, SEARCH_OPTIONS);
 
+      // Render filter UI immediately after the main index is ready.
+      // External library fetch failures should not block sidebar rendering.
+      showObjectIdDropdown();
+
       // Load library search data
       const allLibs = Object.keys(EXTRA_SOURCES);
       for (const lib of allLibs) {
-        const cacheKey = `lib-search-${lib}`;
-        let libData = await getFromIDB(cacheKey);
-        if (!libData) {
-          const libPath = EXTRA_SOURCES[lib];
-          const url = `${libPath}/_static/search.json`;
-          const res = await fetch(url);
-          libData = await res.json();
-          await saveToIDB(cacheKey, libData);
+        try {
+          const cacheKey = `lib-search-${lib}`;
+          let libData = await getFromIDB(cacheKey);
+          if (!libData) {
+            const libPath = EXTRA_SOURCES[lib];
+            const url = `${libPath}/_static/search.json`;
+            const res = await fetch(url);
+            libData = await res.json();
+            await saveToIDB(cacheKey, libData);
+          }
+          libSearchData[lib] = libData;
+        } catch (libErr) {
+          console.warn(`Failed to preload library index for ${lib}:`, libErr);
         }
-        libSearchData[lib] = libData;
       }
-      setupFilterDropdown();
-      showObjectIdDropdown();
-      showLibraryDropdown();
     } catch (err) {
       console.error("Search init failed", err);
     }
@@ -145,7 +155,14 @@ require(["fuse"], function (Fuse) {
    * Sets up the filter dropdown and its toggle interactions in the sidebar.
    */
   function setupFilterDropdown() {
-    const dropdownContainer = document.getElementById("search-sidebar");
+    const dropdownContainer =
+      searchPageContainer?.querySelector("#search-sidebar") ||
+      document.getElementById("search-sidebar");
+    if (!dropdownContainer) {
+      console.warn("Search sidebar container not found; filters are disabled.");
+      return;
+    }
+    dropdownContainer.innerHTML = "";
     const filters = [
       {
         name: "Documents",
@@ -329,16 +346,18 @@ require(["fuse"], function (Fuse) {
     let libResults = [];
     const resultLimit = getSelectedResultLimit();
     if (selectedFilter.size === 0 || selectedFilter.has("Documents")) {
+      // Filter first, then apply the result limit so selected document filters
+      // are not accidentally dropped by early truncation.
       docResults = fuse
-        .search(query, { limit: resultLimit })
+        .search(query)
         .sort((a, b) => computeRelevance(b) - computeRelevance(a))
-        .slice(0, resultLimit)
         .map((r) => r.item);
       if (selectedObjectIDs.length > 0) {
         docResults = docResults.filter((item) =>
           selectedObjectIDs.includes(item.objectID),
         );
       }
+      docResults = docResults.slice(0, resultLimit);
     }
     // Search in selected libraries — apply the same re-ranking as doc results.
     // Reference: https://www.fusejs.io/api/options.html#keys
@@ -346,7 +365,15 @@ require(["fuse"], function (Fuse) {
       const libBaseUrl = EXTRA_SOURCES[lib];
       const cacheKey = `lib-search-${lib}`;
       try {
-        const data = await getFromIDB(cacheKey);
+        let data = await getFromIDB(cacheKey);
+        if (!data) {
+          const url = `${libBaseUrl}/_static/search.json`;
+          const res = await fetch(url);
+          if (res.ok) {
+            data = await res.json();
+            await saveToIDB(cacheKey, data);
+          }
+        }
         if (data) {
           const enrichedEntries = data.map((entry) => ({
             title: entry.title,
@@ -484,7 +511,7 @@ require(["fuse"], function (Fuse) {
   // Initialize search input if query param is present
   const urlParams = new URLSearchParams(window.location.search);
   const initialQuery = urlParams.get("q");
-  if (initialQuery) {
+  if (initialQuery && searchInput) {
     searchInput.value = initialQuery;
   }
 
@@ -492,6 +519,7 @@ require(["fuse"], function (Fuse) {
    * Unified search trigger for input events.
    */
   const triggerSearch = () => {
+    if (!searchInput) return;
     const query = searchInput.value.trim();
     if (query) {
       handleSearchInput();
@@ -499,11 +527,17 @@ require(["fuse"], function (Fuse) {
   };
 
   // Set up event listeners
-  searchInput.addEventListener("input", triggerSearch);
+  searchInput?.addEventListener("input", triggerSearch);
   resultLimit?.addEventListener("change", performSearch);
-  SEARCH_BAR.addEventListener("input", (e) => {
-    searchInput.value = e.target.value;
-    triggerSearch();
+  SEARCH_BAR?.addEventListener("input", (e) => {
+    if (!searchInput || e.target === searchInput) {
+      triggerSearch();
+      return;
+    }
+    if (typeof e.target?.value === "string") {
+      searchInput.value = e.target.value;
+      triggerSearch();
+    }
   });
 
   // Initialize search engine/data
