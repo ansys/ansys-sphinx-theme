@@ -14,6 +14,9 @@ let SEARCH_BAR,
 /**
  * Load fuse.js from CDN and initialize search functionality.
  */
+/**
+ * Load fuse.js from CDN and initialize search functionality.
+ */
 require.config({
   paths: {
     fuse: `https://cdn.jsdelivr.net/npm/fuse.js@${FUSE_VERSION}/dist/fuse.min`,
@@ -22,7 +25,6 @@ require.config({
 
 require(["fuse"], (Fuse) => {
   /**
-   * Debounce utility to limit function execution rate.
    * @param {Function} func
    * @param {number} delay
    * @returns {Function}
@@ -36,7 +38,7 @@ require(["fuse"], (Fuse) => {
   };
 
   /**
-   * Truncate text for preview.
+   * Truncate text to a preview snippet.
    * @param {string} text
    * @param {number} maxLength
    * @returns {string}
@@ -45,7 +47,7 @@ require(["fuse"], (Fuse) => {
     text.length <= maxLength ? text : `${text.slice(0, maxLength)}...`;
 
   /**
-   * Get full path using Sphinx's data-content_root.
+   * Resolve a doc-relative path using Sphinx's data-content_root attribute.
    * @param {string} targetFile
    * @returns {string}
    */
@@ -55,17 +57,12 @@ require(["fuse"], (Fuse) => {
     return `${contentRoot}${targetFile}`;
   };
 
-  /**
-   * Navigate to a given URL.
-   * @param {string} href
-   */
+  /** @param {string} href */
   const navigateToHref = (href) => {
     window.location.href = getDynamicPath(href);
   };
 
-  /**
-   * Expand the search input UI.
-   */
+  /** Expand the search input and show the results overlay. */
   function expandSearchInput() {
     RESULTS_CONTAINER.style.display = "flex";
     SEARCH_INPUT.classList.add("expanded");
@@ -79,9 +76,7 @@ require(["fuse"], (Fuse) => {
     if (modalSidebar) modalSidebar.style.opacity = "0.1";
   }
 
-  /**
-   * Collapse and reset the search UI.
-   */
+  /** Collapse the search input, clear results, and restore page opacity. */
   function collapseSearchInput() {
     RESULTS_CONTAINER.style.display = "none";
     SEARCH_INPUT.classList.remove("expanded");
@@ -95,9 +90,7 @@ require(["fuse"], (Fuse) => {
     if (modalSidebar) modalSidebar.style.opacity = "1";
   }
 
-  /**
-   * Show banner when no results found.
-   */
+  /** Show a "no results" banner in the results container. */
   function noResultsFoundBanner() {
     RESULTS_CONTAINER.innerHTML = "";
     RESULTS_CONTAINER.style.display = "flex";
@@ -109,9 +102,7 @@ require(["fuse"], (Fuse) => {
     RESULTS_CONTAINER.appendChild(banner);
   }
 
-  /**
-   * Show a temporary searching indicator.
-   */
+  /** Show a transient "Searching…" indicator while Fuse is running. */
   function searchingForResultsBanner() {
     RESULTS_CONTAINER.innerHTML = "";
     RESULTS_CONTAINER.style.display = "flex";
@@ -123,7 +114,7 @@ require(["fuse"], (Fuse) => {
   }
 
   /**
-   * Display search results from Fuse.
+   * Render Fuse results into the dropdown, appending a "Show all results" link.
    * @param {Array} results
    */
   function displayResults(results) {
@@ -172,7 +163,7 @@ require(["fuse"], (Fuse) => {
   }
 
   /**
-   * Focus the currently selected result item.
+   * Scroll the currently highlighted result item into view.
    * @param {NodeList} resultsItems
    */
   function focusSelected(resultsItems) {
@@ -186,7 +177,8 @@ require(["fuse"], (Fuse) => {
   }
 
   /**
-   * Handle keyboard navigation inside search input.
+   * Handle keyboard navigation: arrows move selection, Enter navigates or opens
+   * the advanced search page, Escape collapses.
    * @param {KeyboardEvent} event
    */
   function handleKeyDownSearchInput(event) {
@@ -200,18 +192,14 @@ require(["fuse"], (Fuse) => {
         break;
       case "Enter":
         event.preventDefault();
-        if (event.ctrlKey || event.metaKey) {
-          const query = SEARCH_INPUT.value.trim();
-          collapseSearchInput();
-          window.location.href = ADVANCE_SEARCH_PATH + "?q=" + query;
-        } else if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultItems.length) {
+        if (CURRENT_INDEX >= 0 && CURRENT_INDEX < resultItems.length) {
           const href = resultItems[CURRENT_INDEX].dataset.href;
           collapseSearchInput();
           navigateToHref(href);
-        } else if (resultItems.length > 0) {
-          const href = resultItems[0].dataset.href;
+        } else {
+          const query = SEARCH_INPUT.value.trim();
           collapseSearchInput();
-          navigateToHref(href);
+          window.location.href = ADVANCE_SEARCH_PATH + "?q=" + query;
         }
         break;
       case "ArrowDown":
@@ -248,10 +236,7 @@ require(["fuse"], (Fuse) => {
     }
   }
 
-  /**
-   * Handle input events (including paste via mouse or keyboard shortcuts).
-   * The 'input' event fires after the value has changed, covering all paste methods.
-   */
+  // 'input' fires after value change, covering keyboard shortcuts and mouse paste.
   function handleInputEvent() {
     if (!SEARCH_INPUT.value.trim()) {
       RESULTS_CONTAINER.style.display = "none";
@@ -265,9 +250,6 @@ require(["fuse"], (Fuse) => {
     handleSearchInput();
   }
 
-  /**
-   * Handle search query input with debounce.
-   */
   const handleSearchInput = debounce(
     () => {
       const query = SEARCH_INPUT.value.trim();
@@ -286,7 +268,8 @@ require(["fuse"], (Fuse) => {
   );
 
   /**
-   * Initialize and bind search elements.
+   * Select the correct search bar and results container based on viewport width,
+   * then bind input listeners.
    */
   function setupSearchElements() {
     if (window.innerWidth < 1200) {
@@ -313,7 +296,7 @@ require(["fuse"], (Fuse) => {
   }
 
   /**
-   * Handle global keydown events for search shortcuts.
+   * Global shortcut handler: Escape collapses, Ctrl+K expands.
    * @param {KeyboardEvent} event
    */
   function handleGlobalKeyDown(event) {
@@ -322,7 +305,7 @@ require(["fuse"], (Fuse) => {
   }
 
   /**
-   * Collapse search if clicking outside.
+   * Collapse the search UI when the user clicks outside it.
    * @param {MouseEvent} event
    */
   function handleGlobalClick(event) {
@@ -335,7 +318,7 @@ require(["fuse"], (Fuse) => {
   }
 
   /**
-   * Initialize Fuse with the given data and options.
+   * Create the Fuse instance and mark the page as search-ready.
    * @param {Array} data
    * @param {Object} options
    */

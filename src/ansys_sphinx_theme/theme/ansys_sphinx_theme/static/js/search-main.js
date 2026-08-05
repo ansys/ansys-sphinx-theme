@@ -1,15 +1,12 @@
 /**
- * search-main.js
- *
- * Main search logic for the documentation site. Handles search index loading, filtering, and UI updates.
- * Uses Fuse.js for fuzzy searching and IndexedDB for caching search data.
- *
+ * @file search-main.js
+ * @description Main search logic for the documentation site. Handles search index
+ * loading, filtering, and UI updates. Uses Fuse.js for fuzzy searching and
+ * IndexedDB for caching search data.
  */
 
-// DOM Elements
 const SEARCH_BAR = document.getElementById("search-bar");
 
-// Configure RequireJS for Fuse.js
 require.config({
   paths: {
     fuse: "https://cdn.jsdelivr.net/npm/fuse.js@6.6.2/dist/fuse.min",
@@ -18,9 +15,9 @@ require.config({
 
 /**
  * Open or create an IndexedDB database for caching search indexes.
- * @param {string} name - Name of the database.
- * @param {number} version - Version of the database.
- * @returns {Promise<IDBDatabase>} Promise resolving to the database instance.
+ * @param {string} name - Database name.
+ * @param {number} version - Database version.
+ * @returns {Promise<IDBDatabase>}
  */
 function openDB(name = "search-cache", version = 1) {
   return new Promise((resolve, reject) => {
@@ -42,9 +39,9 @@ function openDB(name = "search-cache", version = 1) {
 }
 
 /**
- * Retrieve a value from IndexedDB by key.
- * @param {string} key - The key to look up in the object store.
- * @returns {Promise<any>} Promise resolving to the retrieved value.
+ * Retrieve a cached value from IndexedDB by key.
+ * @param {string} key
+ * @returns {Promise<any>}
  */
 async function getFromIDB(key) {
   const db = await openDB();
@@ -59,9 +56,9 @@ async function getFromIDB(key) {
 
 /**
  * Save a key-value pair to IndexedDB.
- * @param {string} key - The key to store the value under.
- * @param {any} value - The value to store.
- * @returns {Promise<boolean>} Promise resolving when saving is complete.
+ * @param {string} key
+ * @param {any} value
+ * @returns {Promise<boolean>}
  */
 async function saveToIDB(key, value) {
   const db = await openDB();
@@ -77,9 +74,6 @@ async function saveToIDB(key, value) {
   });
 }
 
-/**
- * Main search logic, loaded after Fuse.js is available.
- */
 require(["fuse"], function (Fuse) {
   let fuse;
   let searchData = [];
@@ -90,7 +84,6 @@ require(["fuse"], function (Fuse) {
   const searchPageContainer = document.querySelector(".bd-search-container");
 
   /**
-   * Debounce utility to limit function execution rate.
    * @param {Function} func
    * @param {number} delay
    * @returns {Function}
@@ -104,8 +97,7 @@ require(["fuse"], function (Fuse) {
   };
 
   /**
-   * Initialize the search system by loading the document search index and library indexes.
-   * Sets up filter dropdowns and triggers initial search if needed.
+   * Load the main search index and all library indexes, then set up the filter UI.
    */
   async function initializeSearch() {
     // Build sidebar scaffolding early so filter UI is visible even if
@@ -152,7 +144,7 @@ require(["fuse"], function (Fuse) {
   }
 
   /**
-   * Sets up the filter dropdown and its toggle interactions in the sidebar.
+   * Build the filter sidebar: toggle sections for Documents and Library filters.
    */
   function setupFilterDropdown() {
     const dropdownContainer =
@@ -216,7 +208,7 @@ require(["fuse"], function (Fuse) {
   }
 
   /**
-   * Show the object ID dropdown for document filtering.
+   * Populate the Documents filter dropdown with objectID checkboxes.
    */
   function showObjectIdDropdown() {
     const dropdown = document.getElementById("objectid-dropdown");
@@ -236,7 +228,7 @@ require(["fuse"], function (Fuse) {
   }
 
   /**
-   * Show the library dropdown for library filtering.
+   * Populate the Library filter dropdown with one checkbox per extra source.
    */
   function showLibraryDropdown() {
     const dropdown = document.getElementById("library-dropdown");
@@ -253,11 +245,11 @@ require(["fuse"], function (Fuse) {
   }
 
   /**
-   * Create a checkbox item for a filter dropdown.
-   * @param {string} value - Value for the checkbox.
-   * @param {Array} selectedArray - Array of selected values.
-   * @param {Function} onChange - Callback on change.
-   * @returns {HTMLDivElement} Checkbox item div.
+   * Create a labelled checkbox element for a filter dropdown.
+   * @param {string} value
+   * @param {Array} selectedArray - Mutated in-place on toggle.
+   * @param {Function} onChange
+   * @returns {HTMLDivElement}
    */
   function createCheckboxItem(value, selectedArray, onChange) {
     const div = document.createElement("div");
@@ -284,7 +276,7 @@ require(["fuse"], function (Fuse) {
   }
 
   /**
-   * Render chips for selected filters and bind remove logic.
+   * Re-render the row of chips that represent active filter selections.
    */
   function renderSelectedChips() {
     const container = document.getElementById("selected-chips");
@@ -316,14 +308,10 @@ require(["fuse"], function (Fuse) {
   }
 
   /**
-   * Compute a final relevance score for a Fuse.js result.
-   *
-   * Fuse.js assigns a fuzziness score in [0, 1]:
-   *   0 = perfect match, 1 = complete mismatch
-   * Reference: https://www.fusejs.io/fuzzy-search.html
-   *
-   * @param {Object} result - A Fuse.js result object with .score and .matches.
-   * @returns {number} Relevance score.
+   * Compute a relevance score for a Fuse.js result.
+   * Fuse score: 0 = perfect match, 1 = complete mismatch; boosted by matched field weight.
+   * @param {Object} result - Fuse.js result with .score and .matches.
+   * @returns {number}
    */
   function computeRelevance(result) {
     const fieldWeights = { section: 3, title: 2, text: 1, objectID: 0.5 };
@@ -335,11 +323,14 @@ require(["fuse"], function (Fuse) {
   }
 
   /**
-   * Perform the search and update the results UI.
+   * Run the current query against all indexes and update the results UI.
    */
   async function performSearch() {
     const query = document.getElementById("search-input").value.trim();
     if (!fuse) return;
+    const url = new URL(window.location);
+    url.searchParams.set("q", query);
+    history.replaceState({}, "", url);
     const resultsContainer = document.getElementById("search-results");
     resultsContainer.innerHTML = "Searching...";
     let docResults = [];
@@ -405,10 +396,10 @@ require(["fuse"], function (Fuse) {
   }
 
   /**
-   * Highlight search query in the results.
-   * @param {Array} results - Array of result objects.
-   * @param {string} query - Search query.
-   * @returns {Array} Highlighted results.
+   * Wrap matched terms in <span class="search-highlight"> and trim body text to a context snippet.
+   * @param {Array} results
+   * @param {string} query
+   * @returns {Array}
    */
   function highlightResults(results, query) {
     const regex = new RegExp(`(${query})`, "gi");
@@ -442,8 +433,8 @@ require(["fuse"], function (Fuse) {
   }
 
   /**
-   * Display the final search results on the UI.
-   * @param {Array} results - Array of result objects.
+   * Render result cards into the results container.
+   * @param {Array} results
    */
   function displayResults(results) {
     const container = document.getElementById("search-results");
@@ -474,19 +465,14 @@ require(["fuse"], function (Fuse) {
   }
 
   /**
-   * Get the selected result limit from the dropdown.
-   * @returns {number} Result limit.
+   * Read the selected page-size value from the result-limit dropdown.
+   * @returns {number}
    */
   function getSelectedResultLimit() {
     const select = document.getElementById("result-limit");
     return parseInt(select.value, 10) || 10;
   }
 
-  // --- Event Handlers and Initialization ---
-
-  /**
-   * Debounced handler for search input changes.
-   */
   const handleSearchInput = debounce(
     () => {
       const query = document.getElementById("search-input").value.trim();
@@ -497,11 +483,6 @@ require(["fuse"], function (Fuse) {
     parseInt(SEARCH_OPTIONS.delay) || 300,
   );
 
-  /**
-   * Utility to get element by ID.
-   * @param {string} id - Element ID.
-   * @returns {HTMLElement} DOM element.
-   */
   const $ = (id) => document.getElementById(id);
 
   // Elements
@@ -515,14 +496,16 @@ require(["fuse"], function (Fuse) {
     searchInput.value = initialQuery;
   }
 
-  /**
-   * Unified search trigger for input events.
-   */
   const triggerSearch = () => {
     if (!searchInput) return;
     const query = searchInput.value.trim();
     if (query) {
       handleSearchInput();
+    } else {
+      document.getElementById("search-results").innerHTML = "";
+      const url = new URL(window.location);
+      url.searchParams.delete("q");
+      history.replaceState({}, "", url);
     }
   };
 
