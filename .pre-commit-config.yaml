@@ -69,4 +69,3 @@ repos:
   hooks:
     - id: ty
       entry: uv check --quiet --preview-features=check-command --ty-version=0.0.68
-      args: ["--no-project"]

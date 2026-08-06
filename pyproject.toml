@@ -125,7 +125,7 @@ force-sort-within-sections = true
 
 [tool.ty.rules]
 "unresolved-attribute" = "ignore"
-#"unresolved-import" = "ignore"
+"unresolved-import" = "ignore"
 
 [tool.coverage.run]
 source = ["src"]
