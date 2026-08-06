@@ -67,4 +67,5 @@ repos:
   rev: "85487c004b6188a1b2dcb888f1202c3556dc6e9d"  # frozen: v0.0.68
   hooks:
     - id: ty
+      entry: uv check --quiet --preview-features=check-command --ty-version=0.0.68
       args: ["--no-project"]
