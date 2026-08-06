@@ -87,6 +87,37 @@ jobs:
         with:
           python-version: ${{ env.MAIN_PYTHON_VERSION }}
 
+  type-check:
+    name: Type check
+    runs-on: ubuntu-latest
+    needs: changelog
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: "Set up uv"
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          prune-cache: true
+          enable-cache: false
+
+      - name: Create virtual environment
+        run: uv venv .venv
+
+      # TODO: Once dependency update logic has been defined, the handling of ty should align
+      - name: Install dependencies
+        run: |
+          source .venv/bin/activate
+          uv pip install --group type-check
+
+      - name: Run ty
+        run: |
+          source .venv/bin/activate
+          ty check --ignore unresolved-import
+
+
   doc-style:
     name: Doc style
     runs-on: ubuntu-latest
