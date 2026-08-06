@@ -497,7 +497,6 @@ def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None
     changelog_file = changelog_file.stem
     doctree = app.env.get_doctree(changelog_file)
     docs_content = doctree.traverse(nodes.section)
-    html_title = app.config.html_title or app.config.html_short_title or app.config.project
 
     if not docs_content:
         return
@@ -547,7 +546,7 @@ def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None
                 children = children[:sidebar_no_of_contents]
 
         contents = {
-            "title": f"{html_title} {version_title}",
+            "title": f"{version_title}",
             "title_url": f"{changelog_file}.html#{version_node.get('ids')[0]}",
             "children": children,
             "url": f"{changelog_file}.html#{whatsnew_nodes[0]['ids'][0]}",

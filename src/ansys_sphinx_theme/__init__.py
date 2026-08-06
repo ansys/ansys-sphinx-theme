@@ -33,6 +33,16 @@ from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_si
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
 from ansys_sphinx_theme.navbar_dropdown import load_navbar_configuration, update_template_context
+from ansys_sphinx_theme.news_resources import (
+    NewsItemDirective,
+    NewsResourcesTableDirective,
+    NewsResourcesTableNode,
+    get_news_resources_context,
+    merge_news_resources,
+    news_resources_sidebar_pages,
+    purge_news_resources,
+    resolve_news_resources_table,
+)
 from ansys_sphinx_theme.search import (
     create_search_index,
     update_search_config,
@@ -456,32 +466,63 @@ def add_sidebar_context(
 
     whatsnew_pages = whatsnew_sidebar_pages(app)
     cheatsheet_pages = cheatsheet_sidebar_pages(app)
-
-    if not whatsnew_pages and not cheatsheet_pages:
-        return
+    news_resources_pages = news_resources_sidebar_pages(app)
 
     sidebar = context.get("sidebars", [])
 
-    sidebar_mapping = {"cheatsheet": "cheatsheet_sidebar.html", "whatsnew": "whatsnew_sidebar.html"}
-
-    sidebars_to_add = []
-
-    if cheatsheet_pages and pagename in cheatsheet_pages:
-        sidebars_to_add.append("cheatsheet")
-        context["cheatsheet"] = app.config.html_theme_options.get("cheatsheet", {})
-
+    # --- Whatsnew sidebar (independent widget, unchanged) ---
     if whatsnew_pages and pagename in whatsnew_pages:
         whatsnew = context.get("whatsnew", [])
         if hasattr(app.env, "whatsnew"):
             whatsnew.extend(app.env.whatsnew)
         context["whatsnew"] = whatsnew
-        sidebars_to_add.append("whatsnew")
+        if "whatsnew_sidebar.html" not in sidebar:
+            sidebar.append("whatsnew_sidebar.html")
 
-    # Append sidebars
+    # --- Overview sidebar: Package Home + optional Cheatsheet + optional News & Resources +
+    # optional What's New ---
+    # Only rendered when at least one of cheatsheet or news_resources is configured.
+    nr_options = app.config.html_theme_options.get("news_resources") or {}
+    nr_link_page = nr_options.get("link", "")
 
-    for item in sidebars_to_add:
-        if sidebar_mapping[item] not in sidebar:
-            sidebar.append(sidebar_mapping[item])
+    if cheatsheet_pages or news_resources_pages or whatsnew_pages:
+        overview_pages: set = set()
+        if cheatsheet_pages:
+            overview_pages.update(cheatsheet_pages)
+        if news_resources_pages:
+            overview_pages.update(news_resources_pages)
+        if whatsnew_pages:
+            overview_pages.update(whatsnew_pages)
+        # Always show overview on index when either feature is active
+        overview_pages.add("index")
+        # Always show overview on the news & resources target page itself
+        if nr_link_page:
+            overview_pages.add(nr_link_page)
+
+        if pagename in overview_pages:
+            cheatsheet_ctx = (
+                app.config.html_theme_options.get("cheatsheet", {}) if cheatsheet_pages else None
+            )
+            nr_ctx = get_news_resources_context(app) if nr_options else None
+            home_page = getattr(app.config, "master_doc", None) or getattr(
+                app.config, "root_doc", "index"
+            )
+            wn_ctx = None
+            if whatsnew_pages:
+                wn_ctx = context.get("whatsnew", [])
+                if hasattr(app.env, "whatsnew"):
+                    wn_ctx = list(app.env.whatsnew)
+            context["overview_sidebar"] = {
+                "home_page": home_page,
+                "cheatsheet": cheatsheet_ctx,
+                "news_resources": nr_ctx,
+                "whatsnew_items": wn_ctx,
+            }
+            if "overview_sidebar.html" not in sidebar:
+                sidebar.append("overview_sidebar.html")
+            # Remove standalone whatsnew sidebar if overview already shows whatsnew dropdown
+            if wn_ctx and "whatsnew_sidebar.html" in sidebar:
+                sidebar.remove("whatsnew_sidebar.html")
 
     # Update the sidebar context
     context["sidebars"] = sidebar
@@ -669,6 +710,15 @@ def setup(app: Sphinx) -> dict:
     if whatsnew_file and changelog_file:
         app.connect("doctree-read", add_whatsnew_changelog)
         app.connect("doctree-resolved", extract_whatsnew)
+
+    # Register news & resources directives and resolver
+    app.add_node(NewsResourcesTableNode)
+    app.add_directive("news-item", NewsItemDirective)
+    app.add_directive("news-resources-table", NewsResourcesTableDirective)
+    app.connect("env-purge-doc", purge_news_resources)
+    app.connect("env-merge-info", merge_news_resources)
+    app.connect("doctree-resolved", resolve_news_resources_table)
+
     app.connect("html-page-context", add_sidebar_context)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)
