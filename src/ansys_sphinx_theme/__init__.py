@@ -689,7 +689,6 @@ def setup(app: Sphinx) -> dict:
     # Add default HTML configuration
     setup_default_html_theme_options(app)
     load_navbar_configuration(app)
-
     add_default_copyright(app)
 
     # Check for what's new options in the theme configuration

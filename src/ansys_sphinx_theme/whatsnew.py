@@ -22,7 +22,7 @@ from the changelog document, and layer the what's new content on the documentati
 
 import pathlib
 import re
-from typing import Iterator
+from typing import Any, Iterator
 
 from docutils import nodes
 from sphinx.application import Sphinx
@@ -501,12 +501,8 @@ def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None
     if not docs_content:
         return
 
-    whatsnew = []
-    # Initialize the whatsnew attribute if it doesn't exist
-    if not hasattr(app.env, "whatsnew"):
-        app.env.whatsnew = []  # type: ignore[attr-defined]
-    else:
-        app.env.whatsnew = []  # type: ignore[attr-defined]
+    whatsnew: list[Any] = []
+    setattr(app.env, "whatsnew", whatsnew)
 
     # Get a list of nodes whose ids start with "version" that contain "What's new" sections
     versions_nodes = []

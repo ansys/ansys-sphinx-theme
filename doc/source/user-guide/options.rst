@@ -6,6 +6,27 @@ HTML theme options
 In the Sphinx configuration (``conf.py``) file in the ``doc`` directory, you can use the
 ``html_theme_options`` dictionary to customize the Ansys Sphinx theme.
 
+Table of contents
+-----------------
+
+.. table::
+   :class: datatable
+
+   ===========================================  ==============  ==========================================================================================
+   Option                                       Type            Description
+   ===========================================  ==============  ==========================================================================================
+   :ref:`show_breadcrumbs`                      bool            Show breadcrumbs at the top of each page.
+   :ref:`add_hide_icons_in_navbar`              list            Add and hide icons in the navigation bar.
+   :ref:`static_search`                         list            Additional static search options to customize the search experience.
+   :ref:`cheat_sheets`                          list            Add a cheat sheet to the left navigation pane of your documentation.
+   :ref:`whats_new`                             list            Show a "What's new" section in the left navigation pane.
+   :ref:`secondary_sidebar`                     list            Control the secondary sidebar on each page.
+   :ref:`navigation_bar_dropdown`               list            Add a dropdown navigation bar to the top of your documentation.
+   :ref:`announcement_banner`                   list            Add an announcement banner to the top of your documentation pages.
+   ===========================================  ==============  ==========================================================================================
+
+.. _show_breadcrumbs:
+
 Show breadcrumbs
 ----------------
 
@@ -50,6 +71,7 @@ include ``|version|`` in the title:
 
    html_short_title = html_title = "Ansys Sphinx Theme |version|"
 
+.. _add_hide_icons_in_navbar:
 
 Add and hide icons in the navigation bar
 ----------------------------------------
@@ -107,6 +129,8 @@ If you want to hide all icons, use the ``show_icons`` Boolean variable:
         "show_icons": False,
         ...
     }
+
+.. _static_search:
 
 Static search options
 ----------------------
@@ -241,6 +265,7 @@ The search filters are displayed as below:
    :alt: Search filters
 
 
+.. _cheat_sheets:
 
 Cheat sheets
 ------------
@@ -251,9 +276,9 @@ add it to the left navigation pane of your documentation.
 In the ``html_theme_options`` dictionary, you add a child dictionary named ``cheatsheet``
 that contain these keys, in the order given:
 
-#. ``file``: File name including the extension of the cheat sheet. If the file is inside a directory,
+#. ``file``: filename including the extension of the cheat sheet. If the file is inside a directory,
    include the directory name relative to the root of the documentation. For example, if the cheat sheet
-   is in the ``getting_started`` directory, the file name is ``getting_started/cheat_sheet.qmd``.
+   is in the ``getting_started`` directory, the filename is ``getting_started/cheat_sheet.qmd``.
 #. ``title``: Title of the cheat sheet to be displayed in the left navigation pane.
 #. ``pages``: List of names for the pages to include the cheat sheet on. If no value is provided,
    the cheat sheet is displayed only on the main ``index.html`` file.
@@ -266,7 +291,7 @@ Here is an example of how to add the ``cheatsheet`` dictionary to the `html_them
     html_theme_options = (
         {
             "cheatsheet": {
-                "file": "<file name including the extension of the cheat sheet>",
+                "file": "<filename including the extension of the cheat sheet>",
                 "title": "<title of the cheat sheet>",
                 "version": "<version of the cheat sheet>",
                 "pages": "<list of names for the pages to include the cheat sheet on>",  # Optional
@@ -296,6 +321,7 @@ main ``index.rst`` file and the ``learning.rst`` file in its "Getting started" s
     the theme is using `pdf2image`. So you should have the ``poppler`` package installed in your system.
     For more information, see the `pdf2image documentation <https://pypi.org/project/pdf2image/>`_.
 
+.. _whats_new:
 
 What's new section
 ------------------
@@ -398,6 +424,8 @@ The following images show a sample "What's new" section and sidebar in the chang
     shown first in the left navigation pane, followed by the **What's new** section to maintain
     sidebar consistency.
 
+.. _navigation_bar_dropdown:
+
 Navigation bar dropdown
 ------------------------
 This theme supports dropdown navigation bars. The layout is declared using a YAML file contained at any level in the ``doc/source`` directory.
@@ -443,6 +471,9 @@ Each entry in the YAML file may include the following fields:
 .. warning::
 
     You must declare the complete layout of the dropdown navigation bar in the YAML file. Sphinx does not resolve it automatically.
+
+
+.. _secondary_sidebar:
 
 Secondary sidebar
 -----------------
@@ -557,3 +588,65 @@ the ``conf.py`` file, add the following metadata at the very top of the file:
     Page title
     ==========
     ...
+
+.. _announcement_banner:
+
+Announcement banner
+-------------------
+
+The Ansys Sphinx Theme supports announcement banners that can be displayed at the top of documentation pages. These banners can be used to communicate important information, such as product updates, deprecation notices, maintenance alerts, or other announcements.
+
+To configure an announcement banner, use the ``announcement_banner`` option in the ``html_theme_options`` dictionary of your ``conf.py`` file. This option accepts a list of announcement dictionaries, as shown in the following example:
+
+.. code:: python
+
+    html_theme_options = {
+        "announcement_banner": [
+            {
+                "message": "Welcome to the Ansys Sphinx Theme documentation!",
+                "type": "info",
+            },
+            {
+                "message": "This release is deprecated. Please upgrade.",
+                "type": "warning",
+                "link": "https://docs.pyansys.com/version/stable/",
+            },
+            {
+                "message": "Critical security patch required.",
+                "type": "error",
+            },
+            {
+                "message": "New features available in the latest release.",
+                "type": "success",
+            },
+        ],
+    }
+
+Each announcement supports the following keys:
+
+- ``message``: Text displayed in the announcement banner.
+- ``type``: Type of announcement. Supported values are:
+
+  - ``info``: Informational messages.
+  - ``success``: Successful operations or positive updates.
+  - ``warning``: Warnings or deprecation notices.
+  - ``error``: Critical alerts or issues requiring immediate attention.
+
+- ``link`` *(optional)*: URL associated with the announcement. When provided,
+  the banner message becomes clickable and directs users to the specified URL for additional information.
+
+Announcement banners follow this priority order: **Error > Warning > Success > Info**.
+When multiple announcement types are configured, the banner adopts the highest-priority type. For instance,
+if both Error and Warning announcements are available, the landing page banner  displays with the Error styling.
+
+The order of the announcements in the list determines their display order, with the first announcement appearing at the top of the banner.
+
+For example, for the configuration above, below is how the announcement banner appears in the documentation:
+
+.. image:: ../_static/announcement_banner.png
+    :alt: Announcement banner
+
+When the user clicks on the ``view`` button, the banner expands to show all announcements in the order they are defined in the configuration.
+
+.. image:: ../_static/announcement_banner_expanded.png
+    :alt: Expanded announcement banner
