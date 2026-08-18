@@ -21,7 +21,7 @@ import importlib.metadata as importlib_metadata
 import os
 import pathlib
 import re
-from typing import Any
+from typing import Any, Iterable, cast
 
 from docutils import nodes
 from sphinx import addnodes
@@ -511,7 +511,7 @@ def add_sidebar_context(
             if whatsnew_pages:
                 wn_ctx = context.get("whatsnew", [])
                 if hasattr(app.env, "whatsnew"):
-                    wn_ctx = list(app.env.whatsnew)
+                    wn_ctx = list(cast(Iterable[Any], app.env.whatsnew))
             context["overview_sidebar"] = {
                 "home_page": home_page,
                 "cheatsheet": cheatsheet_ctx,
