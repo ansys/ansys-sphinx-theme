@@ -24,7 +24,6 @@ import re
 from typing import Any, Iterable, cast
 
 from docutils import nodes
-from docutils.parsers.rst import directives as _rst_directives
 from sphinx import addnodes
 from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
@@ -56,11 +55,6 @@ from ansys_sphinx_theme.whatsnew import (
 
 __version__ = importlib_metadata.version(__name__.replace(".", "-"))
 logger = logging.getLogger(__name__)
-
-# Register at import time so directives work without adding this package to extensions.
-_rst_directives.register_directive("news-item", NewsItemDirective)
-_rst_directives.register_directive("news-resources-table", NewsResourcesTableDirective)
-
 
 # Declare the fundamental paths of the theme
 THIS_PATH = pathlib.Path(__file__).parent.resolve()
@@ -683,6 +677,11 @@ def setup(app: Sphinx) -> dict:
     app.add_html_theme("ansys_sphinx_theme", str(theme_path))
     app.config.templates_path.append(str(THEME_PATH / "components"))
 
+    # Register news & resources directives and resolver
+    app.add_node(NewsResourcesTableNode)
+    app.add_directive("news-item", NewsItemDirective)
+    app.add_directive("news-resources-table", NewsResourcesTableDirective)
+
     # Add default HTML configuration
     setup_default_html_theme_options(app)
     load_navbar_configuration(app)
@@ -707,10 +706,6 @@ def setup(app: Sphinx) -> dict:
         app.connect("doctree-read", add_whatsnew_changelog)
         app.connect("doctree-resolved", extract_whatsnew)
 
-    # Register news & resources directives and resolver
-    app.add_node(NewsResourcesTableNode)
-    app.add_directive("news-item", NewsItemDirective)
-    app.add_directive("news-resources-table", NewsResourcesTableDirective)
     app.connect("env-purge-doc", purge_news_resources)
     app.connect("env-merge-info", merge_news_resources)
     app.connect("doctree-resolved", resolve_news_resources_table)
