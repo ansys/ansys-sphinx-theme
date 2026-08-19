@@ -172,3 +172,4 @@ package-lock.json
 # BackstopJS outputs (do not commit)
 tests/backstop_data/
 test-results/
+uv.lock

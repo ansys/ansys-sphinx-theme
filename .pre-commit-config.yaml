@@ -1,14 +1,20 @@
+ci:
+  autofix_commit_msg: 'chore: auto fixes from pre-commit hooks'
+  autoupdate_commit_msg: 'chore: pre-commit automatic update'
+  autoupdate_schedule: weekly
+  skip: [ty]
+
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: 3b3f7c3f57fe9925356faf5fe6230835138be230  # frozen: v0.15.17
+  rev: 65dbdb59d2f2d9c3bdc343c566821ad3319ddaa3  # frozen: v0.16.3
   hooks:
     - id: ruff
       args: [--fix]
     - id: ruff-format
 
 - repo: https://github.com/codespell-project/codespell
-  rev: 2ccb47ff45ad361a21071a7eedda4c37e6ae8c5a  # frozen: v2.4.2
+  rev: 57b21406f092110c18776e39b0bda50d37c945c8  # frozen: v2.4.3
   hooks:
   - id: codespell
     args: ["--ignore-words", "doc/styles/config/vocabularies/ANSYS/accept.txt", "-w"]
@@ -29,7 +35,7 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 8ef330cbb7204d388aa7a620f9549bcea8009663  # frozen: 0.37.3
+  rev: c4654a7e007c9619a5eb63c39a456572a0fa1851  # frozen: 0.38.0
   hooks:
     - id: check-github-workflows
 
@@ -44,7 +50,7 @@ repos:
 
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: 9257c6050c0261b8c57e712f632dc4a8010109a9  # frozen: v1.25.2
+  rev: 451b56af716f9f0d0c2b816503a3fd0cf8b036fa  # frozen: v1.29.0
   hooks:
     - id: zizmor
       args:
@@ -53,7 +59,12 @@ repos:
 
 # Do not use this tool with proprietary ansys source code.
 - repo: "https://github.com/djlint/djLint"
-  rev: a8264ddb425b07a8bd1bfd758c4d8d938ed064ad  # frozen: v1.39.2
+  rev: 76675b68608b5643655650bf461b7d2abb2e2a52  # frozen: v1.44.2
   hooks:
     - id: djlint-jinja
       types_or: ["html"]
+
+- repo: https://github.com/astral-sh/ty-pre-commit
+  rev: "757b1b0ee6dce6b1541bbe70218055b62aaeb051"  # frozen: v0.0.72
+  hooks:
+    - id: ty
