@@ -718,8 +718,6 @@ def setup(app: Sphinx) -> dict:
 
     # Register news & resources directives and resolver
     app.add_node(NewsResourcesTableNode)
-    app.add_directive("news-item", NewsItemDirective)
-    app.add_directive("news-resources-table", NewsResourcesTableDirective)
     app.connect("env-purge-doc", purge_news_resources)
     app.connect("env-merge-info", merge_news_resources)
     app.connect("doctree-resolved", resolve_news_resources_table)
