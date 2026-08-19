@@ -24,6 +24,7 @@ import re
 from typing import Any, Iterable, cast
 
 from docutils import nodes
+from docutils.parsers.rst import directives as _rst_directives
 from sphinx import addnodes
 from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
@@ -56,6 +57,10 @@ from ansys_sphinx_theme.whatsnew import (
 
 __version__ = importlib_metadata.version(__name__.replace(".", "-"))
 logger = logging.getLogger(__name__)
+
+# Register at import time so directives work without adding this package to extensions.
+_rst_directives.register_directive("news-item", NewsItemDirective)
+_rst_directives.register_directive("news-resources-table", NewsResourcesTableDirective)
 
 
 # Declare the fundamental paths of the theme
