@@ -672,15 +672,16 @@ def setup(app: Sphinx) -> dict:
         Dictionary containing application status.
 
     """
+    # Register news & resources directives unconditionally so non-HTML builders
+    # (e.g. LaTeX/PDF) can parse sources that contain ``.. news-item::`` directives.
+    app.add_node(NewsResourcesTableNode)
+    app.add_directive("news-item", NewsItemDirective)
+    app.add_directive("news-resources-table", NewsResourcesTableDirective)
+
     # Add the theme configuration
     theme_path = get_html_theme_path()
     app.add_html_theme("ansys_sphinx_theme", str(theme_path))
     app.config.templates_path.append(str(THEME_PATH / "components"))
-
-    # Register news & resources directives and resolver
-    app.add_node(NewsResourcesTableNode)
-    app.add_directive("news-item", NewsItemDirective)
-    app.add_directive("news-resources-table", NewsResourcesTableDirective)
 
     # Add default HTML configuration
     setup_default_html_theme_options(app)
