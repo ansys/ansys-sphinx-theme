@@ -65,7 +65,7 @@ def get_whatsnew_options(app: Sphinx) -> tuple:
     changelog_file = whatsnew_options.get("changelog_file_name")
 
     # The source directory of the documentation: {repository_root}/doc/source
-    doc_src_dir = app.env.srcdir
+    doc_src_dir = app.srcdir
 
     if whatsnew_file is not None:
         whatsnew_file = pathlib.Path(doc_src_dir) / whatsnew_file
