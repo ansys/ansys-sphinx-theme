@@ -363,6 +363,16 @@ def revert_exclude_patterns(app, env):
 
 def setup(app: Sphinx) -> Dict[str, str | bool]:
     """Sphinx hooks to add to the setup."""
+    from ansys_sphinx_theme.news_resources import (
+        NewsItemDirective,
+        NewsResourcesTableDirective,
+        NewsResourcesTableNode,
+    )
+
+    # Register directives for all builders (LaTeX/PDF doesn't load html_theme).
+    app.add_node(NewsResourcesTableNode)
+    app.add_directive("news-item", NewsItemDirective)
+    app.add_directive("news-resources-table", NewsResourcesTableDirective)
     app.connect("env-updated", revert_exclude_patterns)
     return {
         "parallel_read_safe": True,
