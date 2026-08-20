@@ -658,6 +658,18 @@ def add_default_copyright(app: Sphinx) -> None:
     app.config.copyright = f"{current_year} Synopsys, Inc. and ANSYS, Inc. All rights reserved"
 
 
+def _exclude_news_resources_for_non_html(app: Sphinx) -> None:
+    """Exclude the news & resources page from non-HTML builders (e.g. LaTeX/PDF)."""
+    if app.builder.name == "html":
+        return
+    nr_options = app.config.html_theme_options.get("news_resources") or {}
+    if not nr_options:
+        return
+    page = nr_options.get("link")
+    if page:
+        app.config.exclude_patterns.append(f"{page}.rst")
+
+
 def setup(app: Sphinx) -> dict:
     """Connect to the Sphinx theme app.
 
@@ -677,6 +689,7 @@ def setup(app: Sphinx) -> dict:
     app.add_node(NewsResourcesTableNode)
     app.add_directive("news-item", NewsItemDirective)
     app.add_directive("news-resources-table", NewsResourcesTableDirective)
+    app.connect("builder-inited", _exclude_news_resources_for_non_html)
 
     # Add the theme configuration
     theme_path = get_html_theme_path()
