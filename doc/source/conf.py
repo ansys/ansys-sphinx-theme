@@ -111,6 +111,7 @@ html_js_files = ["https://cdn.plot.ly/plotly-3.0.1.min.js"]
 
 # Sphinx extensions
 extensions = [
+    "ansys_sphinx_theme",
     "numpydoc",
     "sphinx_design",
     "sphinx.ext.autodoc",
@@ -361,8 +362,14 @@ def revert_exclude_patterns(app, env):
     env.config.exclude_patterns = excluded_pattern
 
 
+def _exclude_html_only_pages(app):
+    if app.builder.name != "html":
+        app.config.exclude_patterns.append("news_resources.rst")
+
+
 def setup(app: Sphinx) -> Dict[str, str | bool]:
     """Sphinx hooks to add to the setup."""
+    app.connect("builder-inited", _exclude_html_only_pages)
     app.connect("env-updated", revert_exclude_patterns)
     return {
         "parallel_read_safe": True,
