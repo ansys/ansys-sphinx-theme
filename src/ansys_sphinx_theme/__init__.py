@@ -29,6 +29,7 @@ from sphinx.addnodes import toctree
 from sphinx.application import Sphinx
 from sphinx.util import logging
 
+from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_sidebar_pages
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
 from ansys_sphinx_theme.navbar_dropdown import load_navbar_configuration, update_template_context
@@ -463,6 +464,7 @@ def add_sidebar_context(
     context["ast_page_toc_in_primary"] = getattr(app, "_ast_page_toc_in_primary", False)
 
     whatsnew_pages = whatsnew_sidebar_pages(app)
+    cheatsheet_pages = cheatsheet_sidebar_pages(app)
     news_resources_pages = news_resources_sidebar_pages(app)
 
     sidebar = context.get("sidebars", [])
@@ -482,8 +484,10 @@ def add_sidebar_context(
     nr_options = app.config.html_theme_options.get("news_resources") or {}
     nr_link_page = nr_options.get("link", "")
 
-    if news_resources_pages or whatsnew_pages:
+    if cheatsheet_pages or news_resources_pages or whatsnew_pages:
         overview_pages: set = set()
+        if cheatsheet_pages:
+            overview_pages.update(cheatsheet_pages)
         if news_resources_pages:
             overview_pages.update(news_resources_pages)
         if whatsnew_pages:
@@ -495,6 +499,9 @@ def add_sidebar_context(
             overview_pages.add(nr_link_page)
 
         if pagename in overview_pages:
+            cheatsheet_ctx = (
+                app.config.html_theme_options.get("cheatsheet", {}) if cheatsheet_pages else None
+            )
             nr_ctx = get_news_resources_context(app) if nr_options else None
             home_page = getattr(app.config, "master_doc", None) or getattr(
                 app.config, "root_doc", "index"
@@ -506,6 +513,7 @@ def add_sidebar_context(
                     wn_ctx = list(cast(Iterable[Any], app.env.whatsnew))
             context["overview_sidebar"] = {
                 "home_page": home_page,
+                "cheatsheet": cheatsheet_ctx,
                 "news_resources": nr_ctx,
                 "whatsnew_items": wn_ctx,
             }
@@ -715,6 +723,7 @@ def setup(app: Sphinx) -> dict:
     app.add_css_file("https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css")
     app.add_css_file("https://www.nerdfonts.com/assets/css/webfont.css")
     app.connect("builder-inited", configure_theme_logo)
+    app.connect("builder-inited", build_quarto_cheatsheet)
 
     if whatsnew_file and changelog_file:
         app.connect("doctree-read", add_whatsnew_changelog)
