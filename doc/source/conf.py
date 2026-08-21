@@ -79,6 +79,22 @@ html_theme_options: dict[str, Any] = {
         "Examples": ["examples/"],
         "Contributing": ["contribute/"],
     },
+    "news_resources": {
+        "pages": ["index"],
+        "link": "news_resources",
+        "title": "News and resources",
+    },
+    "cheatsheet": {
+        "file": "cheat_sheet/cheat_sheet.qmd",
+        "title": "Ansys Sphinx Theme cheat sheet",
+        "version": f"{version}",
+        "pages": ["index"],
+    },
+    "whatsnew": {
+        "whatsnew_file_name": "../changelog.d/whatsnew.yml",
+        "changelog_file_name": "changelog.rst",
+        "sidebar_pages": ["changelog", "index"],
+    },
     "announcement_banner": [
         {
             "message": "From version `1.10.0`, the ansys_sphinx_theme package supports new "
@@ -95,6 +111,7 @@ html_js_files = ["https://cdn.plot.ly/plotly-3.0.1.min.js"]
 
 # Sphinx extensions
 extensions = [
+    "ansys_sphinx_theme",
     "numpydoc",
     "sphinx_design",
     "sphinx.ext.autodoc",
