@@ -96,8 +96,7 @@ require(["fuse"], (Fuse) => {
     RESULTS_CONTAINER.style.display = "flex";
     const banner = document.createElement("div");
     banner.className = "warning-banner";
-    banner.textContent =
-      "No results found. Press Ctrl+Enter for extended search.";
+    banner.textContent = "No results found. Press Enter for extended search.";
     banner.style.fontStyle = "italic";
     RESULTS_CONTAINER.appendChild(banner);
   }
@@ -151,7 +150,7 @@ require(["fuse"], (Fuse) => {
     advancedSearchItem.style.justifyContent = "space-between";
     advancedSearchItem.style.alignItems = "center";
     advancedSearchItem.dataset.href = ADVANCE_SEARCH_PATH + "?q=" + query;
-    advancedSearchItem.innerHTML = `<a href="${ADVANCE_SEARCH_PATH}?q=${query}">Show all results</a> <span style="font-size: 0.8em; color: gray;">Ctrl + Enter</span>`;
+    advancedSearchItem.innerHTML = `<a href="${ADVANCE_SEARCH_PATH}?q=${query}">Show all results</a> <span style="font-size: 0.8em; color: gray;">Enter</span>`;
     advancedSearchItem.addEventListener("click", () => {
       window.location.href =
         ADVANCE_SEARCH_PATH + "?q=" + SEARCH_INPUT.value.trim();
