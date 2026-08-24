@@ -103,7 +103,9 @@ require(["fuse"], function (Fuse) {
     // Build sidebar scaffolding early so filter UI is visible even if
     // search index/network loading fails.
     setupFilterDropdown();
-    showLibraryDropdown();
+    if (Object.keys(EXTRA_SOURCES).length > 0) {
+      showLibraryDropdown();
+    }
 
     try {
       const cacheKey = "main-search-index";
@@ -232,6 +234,7 @@ require(["fuse"], function (Fuse) {
    */
   function showLibraryDropdown() {
     const dropdown = document.getElementById("library-dropdown");
+    if (!dropdown) return;
     dropdown.innerHTML = "";
     for (const lib in EXTRA_SOURCES) {
       const checkbox = createCheckboxItem(lib, selectedLibraries, () => {
