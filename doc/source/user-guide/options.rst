@@ -269,11 +269,11 @@ This key should be a dictionary where each key is the name of the source and the
 .. code-block:: python
 
     html_theme_options = {
-        "search_extra_sources":
-        {
+        "search_extra_sources": {
             "PyMAPDL": "https://mapdl.docs.pyansys.com/version/stable/",
             "PyAnsys": "https://docs.pyansys.com/version/stable/",
-        }
+        },
+    }
 
 Search filters
 ^^^^^^^^^^^^^^
