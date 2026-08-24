@@ -214,6 +214,7 @@ require(["fuse"], function (Fuse) {
    */
   function showObjectIdDropdown() {
     const dropdown = document.getElementById("objectid-dropdown");
+    if (!dropdown) return;
     dropdown.innerHTML = "";
     const objectIDs = [
       ...new Set(searchData.map((item) => item.objectID)),
@@ -317,7 +318,13 @@ require(["fuse"], function (Fuse) {
    * @returns {number}
    */
   function computeRelevance(result) {
-    const fieldWeights = { section: 3, title: 2, text: 1, objectID: 0.5 };
+    // Build weight map from SEARCH_OPTIONS.keys
+    const configKeys = Array.isArray(SEARCH_OPTIONS.keys)
+      ? SEARCH_OPTIONS.keys
+      : [];
+    const fieldWeights = configKeys.length
+      ? Object.fromEntries(configKeys.map((k) => [k.name, k.weight ?? 1]))
+      : { section: 3, title: 3, text: 1, objectID: 0.5 };
     const matches = result.matches || [];
     const fieldWeight = matches.length
       ? Math.max(...matches.map((m) => fieldWeights[m.key] || 1))
