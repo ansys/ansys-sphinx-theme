@@ -160,7 +160,7 @@ Search result ranking
 ~~~~~~~~~~~~~~~~~~~~~
 
 By default, the theme assigns the following Fuse.js field weights so that
-section headings and page titles rank above body text:
+section headings and page titles rank over the body text:
 
 .. list-table::
    :header-rows: 1
