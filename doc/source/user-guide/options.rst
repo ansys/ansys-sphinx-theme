@@ -199,7 +199,7 @@ You can override the weights by supplying a ``keys`` list in ``static_search``:
 
 The ``includeScore`` and ``includeMatches`` options are enabled by default so
 that match highlighting and relevance sorting work out of the box. You can
-disable them if you do not need that information:
+turn off these options if you do not need that information:
 
 .. code-block:: python
 
@@ -227,7 +227,7 @@ Here is a full example combining the most commonly used options:
 .. note::
 
     All other options are available in the `Fuse.js documentation <https://fusejs.io/api/options.html>`_.
-    Any key you set takes precedence over the theme defaults — values you omit
+    Any key you set takes precedence over the theme defaults; values you omit
     are filled in automatically.
 
 
