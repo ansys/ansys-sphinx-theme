@@ -17,6 +17,86 @@
       )
     -}}
   </div>
+  <script>
+    (function () {
+      function updateSidebarSectionTitle() {
+        var nav = document.querySelector(".bd-docs-nav");
+        if (!nav) return;
+
+        var title = nav.querySelector(".bd-links__title");
+        if (!title) return;
+
+        function topBreadcrumbTitle() {
+          var breadcrumbs = document.querySelector(".bd-breadcrumbs");
+          if (!breadcrumbs) return "";
+
+          var homeItem = breadcrumbs.querySelector(".breadcrumb-home");
+          var item = homeItem ? homeItem.nextElementSibling : null;
+          var activeText = "";
+          while (item) {
+            if (item.classList && item.classList.contains("breadcrumb-item")) {
+              var link = item.querySelector("a.nav-link");
+              var text = link ? link.textContent.trim() : "";
+              if (!text) {
+                var active = item.querySelector(".ellipsis");
+                text = active ? active.textContent.trim() : "";
+              }
+
+              if (text) {
+                if (item.classList.contains("active")) {
+                  activeText = text;
+                } else {
+                  return text;
+                }
+              }
+            }
+            item = item.nextElementSibling;
+          }
+
+          return activeText;
+        }
+
+        function firstDirectLink(li) {
+          var child = li ? li.firstElementChild : null;
+          while (child) {
+            if (child.tagName === "A") return child;
+            child = child.nextElementSibling;
+          }
+          return null;
+        }
+
+        var sectionLink = nav.querySelector(".bd-toc-item li.toctree-l1.current > a");
+        if (!sectionLink) {
+          var currentLink = nav.querySelector(".bd-toc-item li.current > a");
+          if (currentLink) {
+            var topLevelItem = currentLink.closest("li.toctree-l1");
+            sectionLink = firstDirectLink(topLevelItem) || currentLink;
+          }
+        }
+
+        if (!sectionLink) {
+          var firstTopLevel = nav.querySelector(".bd-toc-item li.toctree-l1");
+          sectionLink = firstDirectLink(firstTopLevel) || nav.querySelector(".bd-toc-item li > a");
+        }
+
+        var sectionTitle = topBreadcrumbTitle();
+        if (!sectionTitle) {
+          sectionTitle = sectionLink ? sectionLink.textContent.trim() : "";
+        }
+        if (!sectionTitle) return;
+
+        title.textContent = sectionTitle;
+        nav.setAttribute("aria-label", sectionTitle);
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", updateSidebarSectionTitle);
+        return;
+      }
+
+      updateSidebarSectionTitle();
+    })();
+  </script>
   {%- if ast_page_toc_in_primary and page_toc | length >= 1 %}
   <div id="ast-inline-page-toc" class="ast-inline-toc-hidden">{{ page_toc }}</div>
   <script>

@@ -23,6 +23,7 @@ const NESTED_PAGE = "http://localhost:8000/user-guide/options.html";
 // A shallower page to exercise the "no li.current fallback" path in the primary
 // sidebar injection script.
 const SECTION_ROOT_PAGE = "http://localhost:8000/user-guide.html";
+const TOP_NAV_PAGE = "http://localhost:8000/getting-started.html";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -74,6 +75,82 @@ test("secondary sidebar: page TOC is visible with default options", async ({
   // Verify it actually contains heading anchors.
   const links = await pageTocNav.$$("a.nav-link, a.reference");
   expect(links.length).toBeGreaterThan(0);
+});
+
+test("primary sidebar: section navigation title matches top breadcrumb title", async ({
+  page,
+}) => {
+  await page.goto(NESTED_PAGE);
+
+  const sidebarTitle = page.locator(".bd-docs-nav .bd-links__title");
+  await expect(sidebarTitle).toHaveCount(1);
+
+  const expectedTitle = await page.evaluate(() => {
+    const breadcrumbs = document.querySelector(".bd-breadcrumbs");
+    if (breadcrumbs) {
+      const homeItem = breadcrumbs.querySelector(".breadcrumb-home");
+      let item = homeItem?.nextElementSibling || null;
+      let activeText = null;
+      while (item) {
+        if (item.classList?.contains("breadcrumb-item")) {
+          const link = item.querySelector("a.nav-link");
+          let text = link?.textContent?.trim();
+          if (!text) {
+            text = item.querySelector(".ellipsis")?.textContent?.trim();
+          }
+          if (text) {
+            if (item.classList.contains("active")) {
+              activeText = text;
+            } else {
+              return text;
+            }
+          }
+        }
+        item = item.nextElementSibling;
+      }
+      if (activeText) return activeText;
+    }
+
+    function firstDirectLink(li) {
+      let child = li?.firstElementChild || null;
+      while (child) {
+        if (child.tagName === "A") return child;
+        child = child.nextElementSibling;
+      }
+      return null;
+    }
+
+    const nav = document.querySelector(".bd-docs-nav");
+    if (!nav) return null;
+
+    let link = nav.querySelector(".bd-toc-item li.toctree-l1.current > a");
+    if (!link) {
+      const currentLink = nav.querySelector(".bd-toc-item li.current > a");
+      if (currentLink) {
+        const topLevelItem = currentLink.closest("li.toctree-l1");
+        link = firstDirectLink(topLevelItem) || currentLink;
+      }
+    }
+
+    if (!link) {
+      const firstTopLevel = nav.querySelector(".bd-toc-item li.toctree-l1");
+      link = firstDirectLink(firstTopLevel) || nav.querySelector(".bd-toc-item li > a");
+    }
+
+    return link?.textContent?.trim() || null;
+  });
+
+  if (!expectedTitle) test.skip("No sidebar section link found");
+  await expect(sidebarTitle).toHaveText(expectedTitle);
+});
+
+test("primary sidebar: top-level page title is shown for top navigation pages", async ({
+  page,
+}) => {
+  await page.goto(TOP_NAV_PAGE);
+  await expect(page.locator(".bd-docs-nav .bd-links__title")).toHaveText(
+    "Getting started",
+  );
 });
 
 test("secondary sidebar: edit-this-page link is present", async ({ page }) => {
