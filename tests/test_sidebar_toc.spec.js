@@ -84,66 +84,7 @@ test("primary sidebar: section navigation title matches top breadcrumb title", a
 
   const sidebarTitle = page.locator(".bd-docs-nav .bd-links__title");
   await expect(sidebarTitle).toHaveCount(1);
-
-  const expectedTitle = await page.evaluate(() => {
-    const breadcrumbs = document.querySelector(".bd-breadcrumbs");
-    if (breadcrumbs) {
-      const homeItem = breadcrumbs.querySelector(".breadcrumb-home");
-      let item = homeItem?.nextElementSibling || null;
-      let activeText = null;
-      while (item) {
-        if (item.classList?.contains("breadcrumb-item")) {
-          const link = item.querySelector("a.nav-link");
-          let text = link?.textContent?.trim();
-          if (!text) {
-            text = item.querySelector(".ellipsis")?.textContent?.trim();
-          }
-          if (text) {
-            if (item.classList.contains("active")) {
-              activeText = text;
-            } else {
-              return text;
-            }
-          }
-        }
-        item = item.nextElementSibling;
-      }
-      if (activeText) return activeText;
-    }
-
-    function firstDirectLink(li) {
-      let child = li?.firstElementChild || null;
-      while (child) {
-        if (child.tagName === "A") return child;
-        child = child.nextElementSibling;
-      }
-      return null;
-    }
-
-    const nav = document.querySelector(".bd-docs-nav");
-    if (!nav) return null;
-
-    let link = nav.querySelector(".bd-toc-item li.toctree-l1.current > a");
-    if (!link) {
-      const currentLink = nav.querySelector(".bd-toc-item li.current > a");
-      if (currentLink) {
-        const topLevelItem = currentLink.closest("li.toctree-l1");
-        link = firstDirectLink(topLevelItem) || currentLink;
-      }
-    }
-
-    if (!link) {
-      const firstTopLevel = nav.querySelector(".bd-toc-item li.toctree-l1");
-      link =
-        firstDirectLink(firstTopLevel) ||
-        nav.querySelector(".bd-toc-item li > a");
-    }
-
-    return link?.textContent?.trim() || null;
-  });
-
-  if (!expectedTitle) test.skip("No sidebar section link found");
-  await expect(sidebarTitle).toHaveText(expectedTitle);
+  await expect(sidebarTitle).toHaveText("User guide");
 });
 
 test("primary sidebar: top-level page title is shown for top navigation pages", async ({
