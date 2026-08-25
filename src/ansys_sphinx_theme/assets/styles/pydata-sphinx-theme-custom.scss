@@ -46,7 +46,8 @@
 // sidebar content. Every custom sidebar component must include the
 // `ast-sidebar-widget` class on its root element — this rule then works
 // automatically without any CSS changes for new components.
-.bd-sidebar-primary:not(:has(nav.bd-links li)):not(:has(.ast-sidebar-widget)) {
+// The search page sidebar is also considered a custom sidebar component.
+.bd-sidebar-primary:not(:has(nav.bd-links li)):not(:has(.ast-sidebar-widget)):not(:has(.search-page-sidebar)) {
   display: none;
 }
 nav.bd-links p.bd-links__title,
