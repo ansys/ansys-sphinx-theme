@@ -451,8 +451,19 @@ def add_sidebar_context(
     doctree : docutils.nodes.document
         Document tree for the page.
     """
-    # Expose flag to Jinja templates (used by sidebar-nav-bs.html).
+    # Expose metadata to Jinja templates (used by sidebar-nav-bs.html).
     context["ast_page_toc_in_primary"] = getattr(app, "_ast_page_toc_in_primary", False)
+
+    print("Adding sidebar context for page:", pagename)
+    print("Title from context:", context.get("title"))
+    print("---------------------")
+    ast_section_title = context.get("title") or context.get("pagename") or "Section Navigation"
+    if not isinstance(ast_section_title, str):
+        ast_section_title = "Section Navigation"
+    ast_section_title = ast_section_title.replace("_", " ").strip()
+    if not ast_section_title:
+        ast_section_title = "Section Navigation"
+    context["ast_section_title"] = ast_section_title
 
     whatsnew_pages = whatsnew_sidebar_pages(app)
     cheatsheet_pages = cheatsheet_sidebar_pages(app)

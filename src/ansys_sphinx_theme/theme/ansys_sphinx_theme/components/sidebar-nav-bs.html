@@ -4,8 +4,9 @@
 {% set show_nav_level = meta['html_theme.show_nav_level'] if (meta is defined and meta is not none and 'html_theme.show_nav_level' in meta) else theme_show_nav_level %}
 {% set page_toc = generate_toc_html() if ast_page_toc_in_primary else '' %}
 <nav class="bd-docs-nav bd-links"
-     aria-label="{{ _('Section Navigation') }}">
-  <p class="bd-links__title" role="heading" aria-level="1">{{ _("Section Navigation") }}</p>
+     aria-label="{{ ast_section_title|e }}"
+     data-section-title="{{ ast_section_title|e }}">
+  <p class="bd-links__title" role="heading" aria-level="1">{{ ast_section_title|e }}</p>
   <div class="bd-toc-item navbar-nav">
     {{- generate_toctree_html(
       "sidebar",
@@ -19,82 +20,17 @@
   </div>
   <script>
     (function () {
-      function updateSidebarSectionTitle() {
-        var nav = document.querySelector(".bd-docs-nav");
-        if (!nav) return;
+      var nav = document.querySelector(".bd-docs-nav");
+      if (!nav) return;
 
-        var title = nav.querySelector(".bd-links__title");
-        if (!title) return;
+      var title = nav.querySelector(".bd-links__title");
+      if (!title) return;
 
-        function topBreadcrumbTitle() {
-          var breadcrumbs = document.querySelector(".bd-breadcrumbs");
-          if (!breadcrumbs) return "";
+      var sectionTitle = nav.getAttribute("data-section-title") || title.textContent.trim();
+      if (!sectionTitle) return;
 
-          var homeItem = breadcrumbs.querySelector(".breadcrumb-home");
-          var item = homeItem ? homeItem.nextElementSibling : null;
-          var activeText = "";
-          while (item) {
-            if (item.classList && item.classList.contains("breadcrumb-item")) {
-              var link = item.querySelector("a.nav-link");
-              var text = link ? link.textContent.trim() : "";
-              if (!text) {
-                var active = item.querySelector(".ellipsis");
-                text = active ? active.textContent.trim() : "";
-              }
-
-              if (text) {
-                if (item.classList.contains("active")) {
-                  activeText = text;
-                } else {
-                  return text;
-                }
-              }
-            }
-            item = item.nextElementSibling;
-          }
-
-          return activeText;
-        }
-
-        function firstDirectLink(li) {
-          var child = li ? li.firstElementChild : null;
-          while (child) {
-            if (child.tagName === "A") return child;
-            child = child.nextElementSibling;
-          }
-          return null;
-        }
-
-        var sectionLink = nav.querySelector(".bd-toc-item li.toctree-l1.current > a");
-        if (!sectionLink) {
-          var currentLink = nav.querySelector(".bd-toc-item li.current > a");
-          if (currentLink) {
-            var topLevelItem = currentLink.closest("li.toctree-l1");
-            sectionLink = firstDirectLink(topLevelItem) || currentLink;
-          }
-        }
-
-        if (!sectionLink) {
-          var firstTopLevel = nav.querySelector(".bd-toc-item li.toctree-l1");
-          sectionLink = firstDirectLink(firstTopLevel) || nav.querySelector(".bd-toc-item li > a");
-        }
-
-        var sectionTitle = topBreadcrumbTitle();
-        if (!sectionTitle) {
-          sectionTitle = sectionLink ? sectionLink.textContent.trim() : "";
-        }
-        if (!sectionTitle) return;
-
-        title.textContent = sectionTitle;
-        nav.setAttribute("aria-label", sectionTitle);
-      }
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", updateSidebarSectionTitle);
-        return;
-      }
-
-      updateSidebarSectionTitle();
+      title.textContent = sectionTitle;
+      nav.setAttribute("aria-label", sectionTitle);
     })();
   </script>
   {%- if ast_page_toc_in_primary and page_toc | length >= 1 %}
