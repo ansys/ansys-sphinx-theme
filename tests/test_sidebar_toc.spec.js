@@ -134,7 +134,9 @@ test("primary sidebar: section navigation title matches top breadcrumb title", a
 
     if (!link) {
       const firstTopLevel = nav.querySelector(".bd-toc-item li.toctree-l1");
-      link = firstDirectLink(firstTopLevel) || nav.querySelector(".bd-toc-item li > a");
+      link =
+        firstDirectLink(firstTopLevel) ||
+        nav.querySelector(".bd-toc-item li > a");
     }
 
     return link?.textContent?.trim() || null;
