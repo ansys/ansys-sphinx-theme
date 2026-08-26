@@ -428,6 +428,39 @@ def configure_theme_logo(app: Sphinx):
         theme_options["logo"] = logo_option
 
 
+def _normalize_sidebar_title(value: Any) -> str:
+    """Normalize sidebar title values from template context."""
+    if not isinstance(value, str):
+        return ""
+    return value.replace("_", " ").strip()
+
+
+def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) -> str:
+    """Return the section title displayed in the primary sidebar."""
+    root_doc = pagename.split("/", 1)[0]
+    env_titles = getattr(getattr(app, "env", None), "titles", {})
+    root_title_node = env_titles.get(root_doc) if hasattr(env_titles, "get") else None
+    if root_title_node is not None:
+        root_title = _normalize_sidebar_title(root_title_node.astext())
+        if root_title:
+            return root_title
+
+    parents = context.get("parents")
+    if isinstance(parents, list):
+        for parent in parents:
+            if not isinstance(parent, dict):
+                continue
+            parent_title = _normalize_sidebar_title(parent.get("title"))
+            if parent_title:
+                return parent_title
+
+    return (
+        _normalize_sidebar_title(context.get("title"))
+        or _normalize_sidebar_title(pagename)
+        or "Section Navigation"
+    )
+
+
 def add_sidebar_context(
     app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
 ) -> None:
@@ -453,13 +486,7 @@ def add_sidebar_context(
     """
     # Expose metadata to Jinja templates (used by sidebar-nav-bs.html).
     context["ast_page_toc_in_primary"] = getattr(app, "_ast_page_toc_in_primary", False)
-    ast_section_title = context.get("title") or context.get("pagename") or "Section Navigation"
-    if not isinstance(ast_section_title, str):
-        ast_section_title = "Section Navigation"
-    ast_section_title = ast_section_title.replace("_", " ").strip()
-    if not ast_section_title:
-        ast_section_title = "Section Navigation"
-    context["ast_section_title"] = ast_section_title
+    context["ast_section_title"] = _resolve_sidebar_section_title(app, context, pagename)
 
     whatsnew_pages = whatsnew_sidebar_pages(app)
     cheatsheet_pages = cheatsheet_sidebar_pages(app)

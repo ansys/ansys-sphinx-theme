@@ -83,15 +83,31 @@ test("primary sidebar: section navigation title matches top breadcrumb title", a
   await page.goto(NESTED_PAGE);
 
   const sidebarTitle = page.locator(".bd-docs-nav .bd-links__title");
-  const activeBreadcrumb = page
-    .locator(
-      '.bd-breadcrumb li.breadcrumb-item.active, nav[aria-label="Breadcrumb"] li.breadcrumb-item.active',
-    )
-    .first();
-
   await expect(sidebarTitle).toHaveCount(1);
-  await expect(activeBreadcrumb).toHaveCount(1);
-  const expectedTitle = (await activeBreadcrumb.textContent())?.trim();
+  const expectedTitle = await page.evaluate(() => {
+    const breadcrumbItems = Array.from(
+      document.querySelectorAll(
+        '.bd-breadcrumb li.breadcrumb-item, nav[aria-label="Breadcrumb"] li.breadcrumb-item',
+      ),
+    );
+    const homeIndex = breadcrumbItems.findIndex((item) =>
+      item.classList.contains("breadcrumb-home"),
+    );
+    const candidates = breadcrumbItems.slice(homeIndex >= 0 ? homeIndex + 1 : 0);
+
+    for (const item of candidates) {
+      if (item.classList.contains("active")) continue;
+      const link = item.querySelector("a.nav-link, a");
+      const text = link?.textContent?.trim();
+      if (text) return text;
+    }
+
+    const activeItem = breadcrumbItems.find((item) =>
+      item.classList.contains("active"),
+    );
+    return activeItem?.textContent?.trim() || "";
+  });
+
   expect(expectedTitle).toBeTruthy();
   await expect(sidebarTitle).toHaveText(expectedTitle);
 });
