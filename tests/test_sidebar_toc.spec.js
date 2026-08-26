@@ -93,7 +93,9 @@ test("primary sidebar: section navigation title matches top breadcrumb title", a
     const homeIndex = breadcrumbItems.findIndex((item) =>
       item.classList.contains("breadcrumb-home"),
     );
-    const candidates = breadcrumbItems.slice(homeIndex >= 0 ? homeIndex + 1 : 0);
+    const candidates = breadcrumbItems.slice(
+      homeIndex >= 0 ? homeIndex + 1 : 0,
+    );
 
     for (const item of candidates) {
       if (item.classList.contains("active")) continue;
