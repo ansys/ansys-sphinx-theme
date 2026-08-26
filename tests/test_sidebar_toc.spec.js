@@ -83,8 +83,17 @@ test("primary sidebar: section navigation title matches top breadcrumb title", a
   await page.goto(NESTED_PAGE);
 
   const sidebarTitle = page.locator(".bd-docs-nav .bd-links__title");
+  const activeBreadcrumb = page
+    .locator(
+      '.bd-breadcrumb li.breadcrumb-item.active, nav[aria-label="Breadcrumb"] li.breadcrumb-item.active',
+    )
+    .first();
+
   await expect(sidebarTitle).toHaveCount(1);
-  await expect(sidebarTitle).toHaveText("User guide");
+  await expect(activeBreadcrumb).toHaveCount(1);
+  const expectedTitle = (await activeBreadcrumb.textContent())?.trim();
+  expect(expectedTitle).toBeTruthy();
+  await expect(sidebarTitle).toHaveText(expectedTitle);
 });
 
 test("primary sidebar: top-level page title is shown for top navigation pages", async ({
