@@ -430,11 +430,24 @@ def configure_theme_logo(app: Sphinx):
 
 
 def _normalize_sidebar_title(value: Any) -> str:
-    """Return a plain-text sidebar title from a Jinja context value.
+    """Normalize a sidebar-title value into plain text.
 
-    Parent titles built by Sphinx are HTML fragments (for example,
-    ``"<code>foo</code>"``), so tags are stripped and entities decoded before
-    whitespace is collapsed.
+    Parameters
+    ----------
+    value : Any
+        Value extracted from the Sphinx/Jinja page context.
+
+    Returns
+    -------
+    str
+        Normalized plain-text title. Returns an empty string when ``value`` is
+        not a string.
+
+    Notes
+    -----
+    Parent titles in Sphinx context can be HTML fragments (for example,
+    ``"<code>foo</code>"``). This helper removes HTML tags, decodes HTML
+    entities, and collapses repeated whitespace.
     """
     if not isinstance(value, str):
         return ""
@@ -446,16 +459,31 @@ def _normalize_sidebar_title(value: Any) -> str:
 
 
 def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) -> str:
-    """Return the section title displayed in the primary sidebar.
+    """Resolve the section title displayed in the primary sidebar.
 
-    Resolution order:
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Active Sphinx application instance.
+    context : dict
+        Template context for the current page.
+    pagename : str
+        Current document name (for example, ``"user-guide/options"``).
 
-    1. The top-level document derived from the first path segment of
-       ``pagename`` (using ``env.titles`` for the plain-text title).
-    2. The outermost ancestor from ``context["parents"]`` (populated by Sphinx
-       from the master toctree).
-    3. The current page's own title.
-    4. ``"Section Navigation"`` as the last resort.
+    Returns
+    -------
+    str
+        Plain-text section title for sidebar rendering.
+
+    Notes
+    -----
+    Title resolution uses this precedence:
+
+    1. Top-level document title derived from the first path segment of
+       ``pagename`` using ``app.env.titles``.
+    2. Outermost ancestor title from ``context["parents"]``.
+    3. Current page title from ``context["title"]``.
+    4. ``"Section Navigation"`` as a final fallback.
     """
     env_titles = getattr(getattr(app, "env", None), "titles", None) or {}
 
