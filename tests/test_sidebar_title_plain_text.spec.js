@@ -8,7 +8,9 @@ const API_PAGES = [
   "http://localhost:8000/examples/api/examples/samples/ExamplePydanticClass.html",
 ];
 
-test("sidebar section title renders plain text on API pages", async ({ page }) => {
+test("sidebar section title renders plain text on API pages", async ({
+  page,
+}) => {
   for (const url of API_PAGES) {
     await page.goto(url);
     const title = page.locator(".bd-docs-nav .bd-links__title");
