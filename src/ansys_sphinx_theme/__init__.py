@@ -17,6 +17,7 @@
 """Module for the Ansys Sphinx theme."""
 
 import datetime
+import html
 import importlib.metadata as importlib_metadata
 import os
 import pathlib
@@ -429,17 +430,37 @@ def configure_theme_logo(app: Sphinx):
 
 
 def _normalize_sidebar_title(value: Any) -> str:
-    """Normalize sidebar title values from template context."""
+    """Return a plain-text sidebar title from a Jinja context value.
+
+    Parent titles built by Sphinx are HTML fragments (for example,
+    ``"<code>foo</code>"``), so tags are stripped and entities decoded before
+    whitespace is collapsed.
+    """
     if not isinstance(value, str):
         return ""
-    return value.replace("_", " ").strip()
+
+    if "<" in value:
+        value = re.sub(r"<[^>]+>", "", value)
+    value = html.unescape(value)
+    return " ".join(value.split())
 
 
 def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) -> str:
-    """Return the section title displayed in the primary sidebar."""
+    """Return the section title displayed in the primary sidebar.
+
+    Resolution order:
+
+    1. The top-level document derived from the first path segment of
+       ``pagename`` (using ``env.titles`` for the plain-text title).
+    2. The outermost ancestor from ``context["parents"]`` (populated by Sphinx
+       from the master toctree).
+    3. The current page's own title.
+    4. ``"Section Navigation"`` as the last resort.
+    """
+    env_titles = getattr(getattr(app, "env", None), "titles", None) or {}
+
     root_doc = pagename.split("/", 1)[0]
-    env_titles = getattr(getattr(app, "env", None), "titles", {})
-    root_title_node = env_titles.get(root_doc) if hasattr(env_titles, "get") else None
+    root_title_node = env_titles.get(root_doc)
     if root_title_node is not None:
         root_title = _normalize_sidebar_title(root_title_node.astext())
         if root_title:
@@ -454,11 +475,7 @@ def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) ->
             if parent_title:
                 return parent_title
 
-    return (
-        _normalize_sidebar_title(context.get("title"))
-        or _normalize_sidebar_title(pagename)
-        or "Section Navigation"
-    )
+    return _normalize_sidebar_title(context.get("title")) or "Section Navigation"
 
 
 def add_sidebar_context(

@@ -4,8 +4,7 @@
 {% set show_nav_level = meta['html_theme.show_nav_level'] if (meta is defined and meta is not none and 'html_theme.show_nav_level' in meta) else theme_show_nav_level %}
 {% set page_toc = generate_toc_html() if ast_page_toc_in_primary else '' %}
 <nav class="bd-docs-nav bd-links"
-     aria-label="{{ ast_section_title|e }}"
-     data-section-title="{{ ast_section_title|e }}">
+     aria-label="{{ ast_section_title|e }}">
   <p class="bd-links__title" role="heading" aria-level="1">{{ ast_section_title|e }}</p>
   <div class="bd-toc-item navbar-nav">
     {{- generate_toctree_html(
@@ -18,21 +17,6 @@
       )
     -}}
   </div>
-  <script>
-    (function () {
-      var nav = document.querySelector(".bd-docs-nav");
-      if (!nav) return;
-
-      var title = nav.querySelector(".bd-links__title");
-      if (!title) return;
-
-      var sectionTitle = nav.getAttribute("data-section-title") || title.textContent.trim();
-      if (!sectionTitle) return;
-
-      title.textContent = sectionTitle;
-      nav.setAttribute("aria-label", sectionTitle);
-    })();
-  </script>
   {%- if ast_page_toc_in_primary and page_toc | length >= 1 %}
   <div id="ast-inline-page-toc" class="ast-inline-toc-hidden">{{ page_toc }}</div>
   <script>
