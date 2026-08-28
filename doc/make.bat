@@ -51,7 +51,7 @@ if exist %AUTOAPI_OUTDIR% rmdir /S /Q %AUTOAPI_OUTDIR%
 
 :serve
 cd ../
-stb serve $(DOCSDIR)/$(SOURCEDIR)
+stb serve %DOCSDIR%/%SOURCEDIR%
 
 
 :end
