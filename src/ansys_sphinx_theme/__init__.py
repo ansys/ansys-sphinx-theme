@@ -625,19 +625,22 @@ def add_mcp_server_context(
         return
 
     if not isinstance(mcp_options, dict):
-        logger.warning(
-            "The 'mcp_server' theme option must be a dictionary with 'url' and "
-            "optionally 'project_name' keys. Skipping MCP server banner."
+        raise ValueError(
+            "The 'mcp_server' theme option must be a dictionary with a required "
+            "'url' key and an optional 'project_name' key."
         )
-        return
 
-    url = mcp_options.get("url", "").strip()
-    if not url:
-        logger.warning(
-            "The 'mcp_server' theme option is missing the required 'url' key. "
-            "Skipping MCP server banner."
+    url = mcp_options.get("url")
+    if not isinstance(url, str) or not url.strip():
+        raise ValueError(
+            "The 'mcp_server' theme option is missing the required non-empty 'url' string."
         )
-        return
+
+    project_name = mcp_options.get("project_name", "MCP Server")
+    if not isinstance(project_name, str):
+        raise ValueError(
+            "The 'mcp_server' theme option 'project_name' must be a string when provided."
+        )
 
     # Only inject context on the landing (index) page
     index_page = app.config.root_doc or "index"
@@ -645,8 +648,8 @@ def add_mcp_server_context(
         return
 
     context["mcp_server"] = {
-        "url": url,
-        "project_name": mcp_options.get("project_name", "MCP Server"),
+        "url": url.strip(),
+        "project_name": project_name,
     }
 
 
