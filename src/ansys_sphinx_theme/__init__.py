@@ -602,6 +602,57 @@ def add_tooltip_after_build(app: Sphinx, exception):
             html_file.write_text(new_text, encoding="utf-8")
 
 
+def add_mcp_server_context(
+    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
+) -> None:
+    """Inject MCP server banner data into the template context on the landing page.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    pagename : str
+        Name of the current page.
+    templatename : str
+        Name of the template being used.
+    context : dict
+        Context dictionary for the page.
+    doctree : docutils.nodes.document
+        Document tree for the page.
+    """
+    mcp_options = app.config.html_theme_options.get("mcp_server")
+    if not mcp_options:
+        return
+
+    if not isinstance(mcp_options, dict):
+        raise ValueError(
+            "The 'mcp_server' theme option must be a dictionary with a required "
+            "'url' key and an optional 'project_name' key."
+        )
+
+    url = mcp_options.get("url")
+    if not isinstance(url, str) or not url.strip():
+        raise ValueError(
+            "The 'mcp_server' theme option is missing the required non-empty 'url' string."
+        )
+
+    project_name = mcp_options.get("project_name", "MCP Server")
+    if not isinstance(project_name, str):
+        raise ValueError(
+            "The 'mcp_server' theme option 'project_name' must be a string when provided."
+        )
+
+    # Only inject context on the landing (index) page
+    index_page = app.config.root_doc or "index"
+    if pagename != index_page:
+        return
+
+    context["mcp_server"] = {
+        "url": url.strip(),
+        "project_name": project_name,
+    }
+
+
 def add_default_copyright(app: Sphinx) -> None:
     """Add a default copyright notice to the Sphinx configuration.
 
@@ -674,6 +725,7 @@ def setup(app: Sphinx) -> dict:
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", update_search_sidebar_context)
     app.connect("html-page-context", update_template_context)
+    app.connect("html-page-context", add_mcp_server_context)
     app.connect("doctree-resolved", resolve_home_entry)
 
     app.connect("build-finished", replace_html_tag)
