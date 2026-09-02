@@ -56,7 +56,7 @@ all = [
 
 [dependency-groups]
 type-check = [
-    "ty==0.0.73",
+    "ty==0.0.75",
 ]
 doc = [
     "jupytext==1.19.5",
@@ -66,18 +66,18 @@ doc = [
     "pandas==3.0.5",
     "Pillow>=9.0",
     "plotly==6.9.0",
-    "PyGitHub==2.9.1",
+    "PyGitHub==2.10.0",
     "pyvista[jupyter]==0.48.4",
     "PyYAML==6.0.3",
     "requests==2.34.2",
-    "sphinx-autoapi==3.8.0",
+    "sphinx-autoapi==3.8.1",
     "sphinx-copybutton==0.5.2",
     "sphinx-design==0.7.0",
     "sphinx-gallery==0.21.0",
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.3.2",
-    "tox==4.60.0",
+    "tox==4.60.1",
     "pydantic==2.13.4"
 ]
 [project.entry-points."sphinx.html_themes"]

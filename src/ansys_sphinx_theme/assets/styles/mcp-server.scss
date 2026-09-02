@@ -1,0 +1,71 @@
+/* MCP Server banner - rendered as a standard Sphinx admonition. */
+.admonition.ast-mcp-server-banner {
+  margin-bottom: 1.5rem;
+  border-left-width: 0.25rem;
+  border-left-color: var(--ast-admonition-info-border, #1a78c2);
+  background: var(--ast-color-enable-card-background, #fff);
+
+  > .admonition-title::after {
+    content: "\f1e6" !important; // fa-plug
+  }
+}
+
+.ast-mcp-server-banner {
+  &__body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__text {
+    margin: 0;
+    font-size: var(--ast-admonitions-font-size, 0.875rem);
+    color: var(--ast-color-text, inherit);
+  }
+
+  &__actions {
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.375rem 0.875rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--ast-admonition-info-border, #1a78c2);
+    background: transparent;
+    color: var(--ast-color-link, #1e6ddc);
+    font-size: 0.875rem;
+    font-weight: var(--ast-font-weight-semibold, 600);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      background: var(--ast-admonition-info-border, #1a78c2);
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .ast-mcp-server-banner {
+    &__body {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    &__actions,
+    &__link {
+      width: 100%;
+    }
+
+    &__link {
+      justify-content: center;
+    }
+  }
+}
