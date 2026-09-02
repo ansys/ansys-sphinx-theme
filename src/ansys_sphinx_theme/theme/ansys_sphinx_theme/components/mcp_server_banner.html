@@ -6,21 +6,22 @@
 {% if mcp_server and mcp_server.get('url') %}
   {% set mcp_url = mcp_server.get('url') %}
   {% set mcp_project = mcp_server.get('project_name', 'MCP Server') %}
-<div class="ast-mcp-server-banner" role="complementary" aria-label="MCP Server">
-  <div class="ast-mcp-server-banner__icon" aria-hidden="true"></div>
+<div class="admonition note ast-mcp-server-banner" role="note" aria-label="MCP Server">
+  <p class="admonition-title">MCP Server available</p>
   <div class="ast-mcp-server-banner__body">
-    <span class="ast-mcp-server-banner__title">MCP Server available</span>
-    <span class="ast-mcp-server-banner__text">
+    <p class="ast-mcp-server-banner__text">
       Use <strong>{{ mcp_project }}</strong> directly from your AI assistant.
       Connect your MCP client to integrate this library into your AI-driven workflows.
-    </span>
+    </p>
+    <p class="ast-mcp-server-banner__actions">
+      <a class="ast-mcp-server-banner__link"
+         href="{{ mcp_url | e }}"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Learn more about {{ mcp_project }}">
+        Learn more
+      </a>
+    </p>
   </div>
-  <a class="ast-mcp-server-banner__link"
-     href="{{ mcp_url | e }}"
-     target="_blank"
-     rel="noopener noreferrer"
-     aria-label="Learn more about {{ mcp_project }}">
-    Learn more
-  </a>
 </div>
 {% endif %}
