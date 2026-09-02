@@ -8,6 +8,108 @@ Release notes
 
 .. towncrier release notes start
 
+`1.11.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.11.0>`_ (September 02, 2026)
+=================================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Feat: add weighted score
+          - `#928 <https://github.com/ansys/ansys-sphinx-theme/pull/928>`_
+
+        * - Migrate to \`ty-pre-commit\` hook
+          - `#1082 <https://github.com/ansys/ansys-sphinx-theme/pull/1082>`_
+
+        * - Feat: adding MCP Server banner feature
+          - `#1105 <https://github.com/ansys/ansys-sphinx-theme/pull/1105>`_
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Bump ty from 0.0.65 to 0.0.67
+          - `#1086 <https://github.com/ansys/ansys-sphinx-theme/pull/1086>`_
+
+        * - Bump notebook from 7.6.1 to 7.6.2
+          - `#1089 <https://github.com/ansys/ansys-sphinx-theme/pull/1089>`_
+
+        * - Build: bump ty from 0.0.67 to 0.0.70
+          - `#1090 <https://github.com/ansys/ansys-sphinx-theme/pull/1090>`_
+
+        * - Build: bump tox from 4.58.0 to 4.59.0
+          - `#1092 <https://github.com/ansys/ansys-sphinx-theme/pull/1092>`_
+
+        * - Build: bump ty from 0.0.70 to 0.0.71
+          - `#1094 <https://github.com/ansys/ansys-sphinx-theme/pull/1094>`_
+
+        * - Build: bump ty from 0.0.71 to 0.0.72
+          - `#1096 <https://github.com/ansys/ansys-sphinx-theme/pull/1096>`_
+
+        * - Build: bump tox from 4.59.0 to 4.60.0
+          - `#1097 <https://github.com/ansys/ansys-sphinx-theme/pull/1097>`_
+
+        * - Build: bump ty from 0.0.72 to 0.0.73
+          - `#1100 <https://github.com/ansys/ansys-sphinx-theme/pull/1100>`_
+
+        * - Build: bump pygithub from 2.9.1 to 2.10.0
+          - `#1102 <https://github.com/ansys/ansys-sphinx-theme/pull/1102>`_
+
+        * - Build: bump sphinx-autoapi from 3.8.0 to 3.8.1
+          - `#1106 <https://github.com/ansys/ansys-sphinx-theme/pull/1106>`_
+
+        * - Build: bump tox from 4.60.0 to 4.60.1
+          - `#1107 <https://github.com/ansys/ansys-sphinx-theme/pull/1107>`_
+
+        * - Build: bump ty from 0.0.73 to 0.0.75
+          - `#1109 <https://github.com/ansys/ansys-sphinx-theme/pull/1109>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Update CHANGELOG for v1.10.0
+          - `#1078 <https://github.com/ansys/ansys-sphinx-theme/pull/1078>`_
+
+        * - Bump pypa/gh-action-pypi-publish from 1.14.1 to 1.14.2 in the actions group
+          - `#1080 <https://github.com/ansys/ansys-sphinx-theme/pull/1080>`_
+
+        * - Bump version 1.11.dev0
+          - `#1081 <https://github.com/ansys/ansys-sphinx-theme/pull/1081>`_
+
+        * - Update missing or outdated files
+          - `#1083 <https://github.com/ansys/ansys-sphinx-theme/pull/1083>`_
+
+        * - Pre-commit automatic update
+          - `#1085 <https://github.com/ansys/ansys-sphinx-theme/pull/1085>`_
+
+        * - Ci: bump the actions group across 1 directory with 14 updates
+          - `#1087 <https://github.com/ansys/ansys-sphinx-theme/pull/1087>`_
+
+        * - Chore: pre-commit automatic update
+          - `#1091 <https://github.com/ansys/ansys-sphinx-theme/pull/1091>`_, `#1099 <https://github.com/ansys/ansys-sphinx-theme/pull/1099>`_, `#1108 <https://github.com/ansys/ansys-sphinx-theme/pull/1108>`_
+
+        * - Ci: bump the actions group with 14 updates
+          - `#1093 <https://github.com/ansys/ansys-sphinx-theme/pull/1093>`_, `#1104 <https://github.com/ansys/ansys-sphinx-theme/pull/1104>`_, `#1110 <https://github.com/ansys/ansys-sphinx-theme/pull/1110>`_
+
+        * - Ci: bump the actions group with 15 updates
+          - `#1095 <https://github.com/ansys/ansys-sphinx-theme/pull/1095>`_
+
+        * - Ci: bump astral-sh/setup-uv from 10.0.0 to 10.0.1 in the actions group
+          - `#1098 <https://github.com/ansys/ansys-sphinx-theme/pull/1098>`_
+
+
 `1.10.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.10.0>`_ (August 04, 2026)
 ==============================================================================================
 
