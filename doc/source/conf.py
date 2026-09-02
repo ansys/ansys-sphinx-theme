@@ -87,10 +87,6 @@ html_theme_options: dict[str, Any] = {
             "link": "https://sphinxdocs.ansys.com/version/dev/user-guide/options.html#announcement-banner",
         },
     ],
-    "mcp_server": {
-        "url": "https://github.com/ansys/pymechanical-mcp",
-        "project_name": "PyMechanical MCP Server",
-    },
 }
 
 
