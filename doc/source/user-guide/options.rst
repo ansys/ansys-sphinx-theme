@@ -23,6 +23,7 @@ Table of contents
    :ref:`secondary_sidebar`                     list            Control the secondary sidebar on each page.
    :ref:`navigation_bar_dropdown`               list            Add a dropdown navigation bar to the top of your documentation.
    :ref:`announcement_banner`                   list            Add an announcement banner to the top of your documentation pages.
+   :ref:`mcp_server`                            dict            Promote an MCP server on the landing page with a banner linking to its repository.
    ===========================================  ==============  ==========================================================================================
 
 .. _show_breadcrumbs:
@@ -691,3 +692,49 @@ When the user clicks on the ``view`` button, the banner expands to show all anno
 
 .. image:: ../_static/announcement_banner_expanded.png
     :alt: Expanded announcement banner
+
+.. _mcp_server:
+
+MCP server banner
+-----------------
+
+Many Ansys libraries provide a companion `Model Context Protocol (MCP) <https://modelcontextprotocol.io/>`_
+server that exposes library functionality to AI assistants and tools.
+To promote the MCP server from your library's documentation landing page, add the
+``mcp_server`` dictionary to ``html_theme_options`` in your ``conf.py`` file:
+
+.. code-block:: python
+
+    html_theme_options = {
+        ...,
+        "mcp_server": {
+            "url": "https://github.com/ansys/pymechanical-mcp",
+            "project_name": "PyMechanical MCP Server",
+        },
+    }
+
+The dictionary supports the following keys:
+
+- ``url`` *(required)*: URL pointing to the MCP server repository or documentation.
+- ``project_name`` *(optional)*: Human-readable name for the MCP server. Defaults to
+  ``"MCP Server"`` if not provided.
+
+When configured, a banner is displayed at the top of the documentation landing page
+(``index.html``). The banner includes:
+
+- A brief description inviting users to connect their AI assistant to the library.
+- A **Learn more** link that opens the configured ``url`` in a new tab.
+
+The banner is shown **only on the landing page** and does not appear on any other page.
+
+Example configuration for ``PyMechanical``:
+
+.. code-block:: python
+
+    html_theme_options = {
+        "github_url": "https://github.com/ansys/pymechanical",
+        "mcp_server": {
+            "url": "https://github.com/ansys/pymechanical-mcp",
+            "project_name": "PyMechanical MCP Server",
+        },
+    }

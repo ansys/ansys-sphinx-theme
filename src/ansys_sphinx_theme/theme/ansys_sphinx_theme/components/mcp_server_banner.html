@@ -1,0 +1,27 @@
+{#
+  MCP Server Banner
+  Displayed on the index (landing) page when the `mcp_server` theme option is configured.
+  Expected context variable: `mcp_server` with keys `url` and `project_name`.
+#}
+{% if mcp_server and mcp_server.get('url') %}
+  {% set mcp_url = mcp_server.get('url') %}
+  {% set mcp_project = mcp_server.get('project_name', 'MCP Server') %}
+<div class="admonition note ast-mcp-server-banner" role="note" aria-label="MCP Server">
+  <p class="admonition-title">MCP Server available</p>
+  <div class="ast-mcp-server-banner__body">
+    <p class="ast-mcp-server-banner__text">
+      Use <strong>{{ mcp_project }}</strong> directly from your AI assistant.
+      Connect your MCP client to integrate this library into your AI-driven workflows.
+    </p>
+    <p class="ast-mcp-server-banner__actions">
+      <a class="ast-mcp-server-banner__link"
+         href="{{ mcp_url | e }}"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Learn more about {{ mcp_project }}">
+        Learn more
+      </a>
+    </p>
+  </div>
+</div>
+{% endif %}
