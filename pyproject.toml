@@ -78,7 +78,7 @@ doc = [
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.3.2",
     "tox==4.60.1",
-    "pydantic==2.13.4"
+    "pydantic==2.13.5"
 ]
 [project.entry-points."sphinx.html_themes"]
 "ansys_sphinx_theme" = "ansys_sphinx_theme"
