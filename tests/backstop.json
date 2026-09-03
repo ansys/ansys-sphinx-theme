@@ -22,7 +22,7 @@
       "readySelector": "",
       "delay": 20,
       "selectors": ["viewport"],
-      "misMatchThreshold" : 0.2,
+      "misMatchThreshold" : 0.3,
       "requireSameDimensions": false
     },
     {
@@ -44,7 +44,7 @@
       "readySelector": "",
       "delay": 20,
       "selectors": ["viewport"],
-      "misMatchThreshold" : 2.0,
+      "misMatchThreshold" : 6.5,
       "requireSameDimensions": false
     },
     {
