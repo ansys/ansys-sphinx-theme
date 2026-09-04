@@ -385,7 +385,8 @@ img {
   padding-bottom: 1em;
 }
 
-html[data-theme="dark"] .bd-content img:not(.only-dark):not(.dark-light) {
+html[data-theme="dark"] .bd-content img:not(.only-dark):not(.dark-light),
+html[data-mode="dark"] .bd-content img:not(.only-dark):not(.dark-light) {
   background: transparent;
 }
 
