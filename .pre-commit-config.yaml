@@ -7,7 +7,7 @@ ci:
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: 1f1e8bf348ff38fc88619a38d3ca4d9c56abea49  # frozen: v0.16.5
+  rev: 321478e58f4938179c6b86e4ddfa923d1547a49b  # frozen: v0.16.6
   hooks:
     - id: ruff
       args: [--fix]
@@ -38,6 +38,8 @@ repos:
   rev: c4654a7e007c9619a5eb63c39a456572a0fa1851  # frozen: 0.38.0
   hooks:
     - id: check-github-workflows
+    - id: check-dependabot
+
 
 - repo: https://github.com/ansys/pre-commit-hooks
   rev: 55c5b6a5439abd847613579c6924da750e8b78b2  # frozen: v0.8.0
@@ -59,12 +61,18 @@ repos:
 
 # Do not use this tool with proprietary ansys source code.
 - repo: "https://github.com/djlint/djLint"
-  rev: 76675b68608b5643655650bf461b7d2abb2e2a52  # frozen: v1.44.2
+  rev: cbd8491a57c5f7fb51c335447cc963ecf0000b56  # frozen: v1.45.0
   hooks:
     - id: djlint-jinja
       types_or: ["html"]
 
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "015fb27be57627143ada502af8a2c9bb3ad3a7c2"  # frozen: v0.0.76
+  rev: "743d21e292f7a36ed70cc2318aa3c8711b1e0437"  # frozen: v0.0.78
   hooks:
     - id: ty
+
+- repo: https://github.com/ansys/pre-commit-hooks
+  rev: fe736c9
+  hooks:
+    - id: pyansys-quality-report
+      args: [--repo-root, ., --all, --fix-missing]
