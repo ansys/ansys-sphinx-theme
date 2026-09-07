@@ -329,7 +329,7 @@ JavaScript
 - Keep scripts focused and avoid duplicating logic across files.
 - Prefer small, readable functions with clear responsibilities.
 - If the behavior affects custom theme interactions, validate the result in the documentation and,
-when appropriate, add or update tests.
+  when appropriate, add or update tests.
 
 Theme option updates
 --------------------
