@@ -8,25 +8,7 @@ Provide a brief but clear overview of the change and the problem it addresses.
 
 ## Issue reference
 
-Please reference the relevant issue or discussion in the PR description.
-
-- Use a closing reference such as: `Fixes #<issue-number>`
-- If the work was prompted by a GitHub issue comment or discussion, briefly summarize the request here.
-- If the change modifies a public theme option, configuration variable, CSS behavior, or JavaScript behavior, include the related issue and note any required documentation updates.
-
-## Changes made
-
-- [ ] Briefly describe the main implementation change.
-- [ ] List the files, components, or sections updated.
-- [ ] Document any new configuration options, CSS variables, JavaScript behavior, or example updates.
-- [ ] Note any visual or UX changes affecting the rendered theme.
-
-## Validation
-
-- [ ] I have tested the change locally.
-- [ ] I have verified the affected documentation pages or examples render correctly.
-- [ ] I have added or updated tests where relevant.
-- [ ] I have checked the rendered output for the affected component or page.
+**Please reference the relevant issue or discussion in the PR description.**
 
 ## Checklist
 
