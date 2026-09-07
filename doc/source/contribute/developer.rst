@@ -243,6 +243,10 @@ To modify the SCSS files, follow these steps:
      ``src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/`` directory.
      These files are regenerated during each build process, so avoid editing them directly.
 
+     Only changes made to the ``SCSS`` source files are considered valid theme updates.
+     Modifying the generated ``CSS`` files has no impact because the source of truth is the
+     ``SCSS`` files.
+
 4. Build the documentation and serve it locally using any of the following commands:
 
    .. tab-set::
