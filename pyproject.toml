@@ -11,7 +11,7 @@ theme-name = "ansys_sphinx_theme"
 [project]
 # Check https://flit.readthedocs.io/en/latest/pyproject_toml.html for all available sections
 name = "ansys-sphinx-theme"
-version = "1.11.dev0"
+version = "1.12.dev0"
 description = "A theme devised by ANSYS, Inc. for Sphinx documentation."
 readme = "README.rst"
 requires-python = ">=3.12,<4"
@@ -32,7 +32,7 @@ dependencies = [
     "importlib-metadata>=4.0",
     "Jinja2>=3.1.2",
     "pdf2image>=1.17.0",
-    "pydata-sphinx-theme>=0.15.4,<0.21",
+    "pydata-sphinx-theme>=0.15.4,<0.22",
     "PyYAML>=6.0",
     "Sphinx>=6.1.0",
 ]
@@ -56,7 +56,7 @@ all = [
 
 [dependency-groups]
 type-check = [
-    "ty==0.0.75",
+    "ty==0.0.77",
 ]
 doc = [
     "jupytext==1.19.5",
@@ -77,8 +77,8 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.3.2",
-    "tox==4.60.1",
-    "pydantic==2.13.4"
+    "tox==4.61.1",
+    "pydantic==2.13.5"
 ]
 [project.entry-points."sphinx.html_themes"]
 "ansys_sphinx_theme" = "ansys_sphinx_theme"
