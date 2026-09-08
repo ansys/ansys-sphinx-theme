@@ -32,14 +32,14 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=f424389c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=e2106dfe" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=fd6457a4" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=f424389c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/ansys-sphinx-theme.css?v=e2106dfe" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
@@ -94,8 +94,6 @@
     <script src="../_static/searchtools.js"></script>
     <script src="../_static/language_data.js"></script>
     <script src="../searchindex.js"></script>
-  
-  
   
   <meta name="robots" content="noindex, follow" />
   </head>
@@ -357,7 +355,7 @@
         <!-- djlint:on -->
         <!-- djlint:off H023-->
         <!-- use entity reference for &times; -->
-        <button class="ast-announcement-close" id="ast-announcement-close" aria-label="Close announcement">&times;</button>
+        <button type="button" class="ast-announcement-close" id="ast-announcement-close" aria-label="Close announcement">&times;</button>
         <!-- djlint:on -->
     </div>
 </div>
@@ -370,7 +368,7 @@
         <div class="ast-announcement-modal-body"
              data-ast-items='[{"link": "https://sphinxdocs.ansys.com/version/dev/user-guide/options.html#announcement-banner", "message": "From version `1.10.0`, the ansys_sphinx_theme package supports new announcement banner features.", "type": "info"}]'>
         </div>
-        <button class="ast-announcement-modal-close" id="ast-announcement-modal-close" aria-label="Close">&times;</button>
+        <button type="button" class="ast-announcement-modal-close" id="ast-announcement-modal-close" aria-label="Close">&times;</button>
     </div>
 </div>
 <!-- djlint:on -->
@@ -861,6 +859,9 @@ The primary SCSS files include:</p>
 <p>The built SCSS files are stored in the
 <code class="docutils literal notranslate"><span class="pre">src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/</span></code> directory.
 These files are regenerated during each build process, so avoid editing them directly.</p>
+<p>Only changes made to the <code class="docutils literal notranslate"><span class="pre">SCSS</span></code> source files are considered valid theme updates.
+Modifying the generated <code class="docutils literal notranslate"><span class="pre">CSS</span></code> files has no impact because the source of truth is the
+<code class="docutils literal notranslate"><span class="pre">SCSS</span></code> files.</p>
 </div>
 </div></blockquote>
 <ol class="arabic" start="4">
@@ -917,6 +918,52 @@ in the default web browser. SCSS file changes are monitored, and the documentati
 trigger automatic rebuilds.</p>
 </div>
 </section>
+<section id="html-css-and-javascript-guidelines">
+<h4>HTML, CSS, and JavaScript guidelines<a class="headerlink" href="#html-css-and-javascript-guidelines" title="Link to this heading">#</a></h4>
+<p>When contributing to the theme, follow the same file conventions used throughout the project so changes remain maintainable and easy to review.</p>
+</section>
+</section>
+<section id="html-templates">
+<h3>HTML templates<a class="headerlink" href="#html-templates" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Place custom HTML templates under <code class="docutils literal notranslate"><span class="pre">src/ansys_sphinx_theme/theme/ansys_sphinx_theme/</span></code>.</p></li>
+<li><p>Prefer small, focused template overrides instead of large rewrites of the upstream PyData theme.</p></li>
+<li><p>Keep template logic readable and maintainable. Avoid embedding complex business logic directly into templates when
+a Python helper or configuration hook is more appropriate.</p></li>
+<li><p>If a change affects page layout or navigation, verify the rendered output in the documentation and check the affected pages visually.</p></li>
+</ul>
+</section>
+<section id="css-and-scss">
+<h3>CSS and SCSS<a class="headerlink" href="#css-and-scss" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Keep styles organized under <code class="docutils literal notranslate"><span class="pre">src/ansys_sphinx_theme/assets/styles/</span></code>.</p></li>
+<li><p>Prefer editing the source SCSS files instead of the generated CSS bundle in
+<code class="docutils literal notranslate"><span class="pre">src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/</span></code>.</p></li>
+<li><p>Keep selectors specific and scoped to the theme to reduce unintended side effects.</p></li>
+<li><p>When a change introduces a new option, variable, or visual behavior, document it in the relevant
+user-guide page and update any examples that depend on the behavior.</p></li>
+</ul>
+</section>
+<section id="javascript">
+<h3>JavaScript<a class="headerlink" href="#javascript" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Store JavaScript files under <code class="docutils literal notranslate"><span class="pre">src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/js/</span></code>.</p></li>
+<li><p>Keep scripts focused and avoid duplicating logic across files.</p></li>
+<li><p>Prefer small, readable functions with clear responsibilities.</p></li>
+<li><p>If the behavior affects custom theme interactions, validate the result in the documentation and,
+when appropriate, add or update tests.</p></li>
+</ul>
+</section>
+<section id="theme-option-updates">
+<h3>Theme option updates<a class="headerlink" href="#theme-option-updates" title="Link to this heading">#</a></h3>
+<p>If a change adds, renames, or modifies a public theme option, configuration key, or supported behavior,
+make sure to update the appropriate documentation in the user guide and examples. This includes:</p>
+<ul class="simple">
+<li><p>the option documentation in <code class="docutils literal notranslate"><span class="pre">doc/source/user-guide/options.rst</span></code> or the relevant page,</p></li>
+<li><p>any examples that rely on the option,</p></li>
+<li><p>and any configuration tables or references that describe the theme capabilities.</p></li>
+</ul>
+<p>This requirement applies to new options, new visual defaults, and changes to how users configure the theme.</p>
 </section>
 <section id="build-the-documentation">
 <h3>Build the documentation<a class="headerlink" href="#build-the-documentation" title="Link to this heading">#</a></h3>
@@ -1006,8 +1053,13 @@ files and rebuild the documentation automatically.</p>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adhere-to-code-style">Adhere to code style</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customize-the-theme">Customize the theme</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#customize-the-scss-files">Customize the SCSS files</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#html-css-and-javascript-guidelines">HTML, CSS, and JavaScript guidelines</a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#html-templates">HTML templates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#css-and-scss">CSS and SCSS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#javascript">JavaScript</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theme-option-updates">Theme option updates</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-documentation">Build the documentation</a></li>
 </ul>
 </li>
