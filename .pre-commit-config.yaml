@@ -61,18 +61,13 @@ repos:
 
 # Do not use this tool with proprietary ansys source code.
 - repo: "https://github.com/djlint/djLint"
-  rev: cbd8491a57c5f7fb51c335447cc963ecf0000b56  # frozen: v1.45.0
+  rev: 4fcf1e595b401de170064a973da7cfd66924f468  # frozen: v1.46.0
   hooks:
     - id: djlint-jinja
       types_or: ["html"]
 
 - repo: https://github.com/astral-sh/ty-pre-commit
   rev: "743d21e292f7a36ed70cc2318aa3c8711b1e0437"  # frozen: v0.0.78
-  hooks:
-    - id: ty
-
-- repo: https://github.com/ansys/pre-commit-hooks
-  rev: e48c33b
   hooks:
     - id: pyansys-quality-report
       args: [--repo-root, ., --all, --fix-missing]
