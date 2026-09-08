@@ -69,6 +69,7 @@ doc = [
     "PyGitHub==2.10.0",
     "pyvista[jupyter]==0.48.4",
     "PyYAML==6.0.3",
+    "quarto-cli==1.10.18",
     "requests==2.34.2",
     "sphinx-autoapi==3.8.1",
     "sphinx-copybutton==0.5.2",
