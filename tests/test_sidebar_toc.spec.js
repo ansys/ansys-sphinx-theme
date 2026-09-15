@@ -23,6 +23,7 @@ const NESTED_PAGE = "http://localhost:8000/user-guide/options.html";
 // A shallower page to exercise the "no li.current fallback" path in the primary
 // sidebar injection script.
 const SECTION_ROOT_PAGE = "http://localhost:8000/user-guide.html";
+const TOP_NAV_PAGE = "http://localhost:8000/getting-started.html";
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -74,6 +75,52 @@ test("secondary sidebar: page TOC is visible with default options", async ({
   // Verify it actually contains heading anchors.
   const links = await pageTocNav.$$("a.nav-link, a.reference");
   expect(links.length).toBeGreaterThan(0);
+});
+
+test("primary sidebar: section navigation title matches top breadcrumb title", async ({
+  page,
+}) => {
+  await page.goto(NESTED_PAGE);
+
+  const sidebarTitle = page.locator(".bd-docs-nav .bd-links__title");
+  await expect(sidebarTitle).toHaveCount(1);
+  const expectedTitle = await page.evaluate(() => {
+    const breadcrumbItems = Array.from(
+      document.querySelectorAll(
+        '.bd-breadcrumb li.breadcrumb-item, nav[aria-label="Breadcrumb"] li.breadcrumb-item',
+      ),
+    );
+    const homeIndex = breadcrumbItems.findIndex((item) =>
+      item.classList.contains("breadcrumb-home"),
+    );
+    const candidates = breadcrumbItems.slice(
+      homeIndex >= 0 ? homeIndex + 1 : 0,
+    );
+
+    for (const item of candidates) {
+      if (item.classList.contains("active")) continue;
+      const link = item.querySelector("a.nav-link, a");
+      const text = link?.textContent?.trim();
+      if (text) return text;
+    }
+
+    const activeItem = breadcrumbItems.find((item) =>
+      item.classList.contains("active"),
+    );
+    return activeItem?.textContent?.trim() || "";
+  });
+
+  expect(expectedTitle).toBeTruthy();
+  await expect(sidebarTitle).toHaveText(expectedTitle);
+});
+
+test("primary sidebar: top-level page title is shown for top navigation pages", async ({
+  page,
+}) => {
+  await page.goto(TOP_NAV_PAGE);
+  await expect(page.locator(".bd-docs-nav .bd-links__title")).toHaveText(
+    "Getting started",
+  );
 });
 
 test("secondary sidebar: edit-this-page link is present", async ({ page }) => {
