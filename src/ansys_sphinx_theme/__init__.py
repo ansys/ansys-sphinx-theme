@@ -538,7 +538,7 @@ def resolve_home_entry(app: Sphinx, doctree: nodes.document, docname: str) -> No
 
     # Get the root TOC
     root_toc = app.env.tocs[app.config.root_doc]
-    if not root_toc:
+    if root_toc is None:
         return
 
     for toc in root_toc.findall(addnodes.toctree):
