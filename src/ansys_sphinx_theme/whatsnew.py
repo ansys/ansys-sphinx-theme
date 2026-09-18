@@ -65,7 +65,7 @@ def get_whatsnew_options(app: Sphinx) -> tuple:
     changelog_file = whatsnew_options.get("changelog_file_name")
 
     # The source directory of the documentation: {repository_root}/doc/source
-    doc_src_dir = app.env.srcdir
+    doc_src_dir = app.srcdir
 
     if whatsnew_file is not None:
         whatsnew_file = pathlib.Path(doc_src_dir) / whatsnew_file
@@ -497,7 +497,6 @@ def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None
     changelog_file = changelog_file.stem
     doctree = app.env.get_doctree(changelog_file)
     docs_content = doctree.traverse(nodes.section)
-    html_title = app.config.html_title or app.config.html_short_title or app.config.project
 
     if not docs_content:
         return
@@ -547,7 +546,7 @@ def extract_whatsnew(app: Sphinx, doctree: nodes.document, docname: str) -> None
                 children = children[:sidebar_no_of_contents]
 
         contents = {
-            "title": f"{html_title} {version_title}",
+            "title": f"{version_title}",
             "title_url": f"{changelog_file}.html#{version_node.get('ids')[0]}",
             "children": children,
             "url": f"{changelog_file}.html#{whatsnew_nodes[0]['ids'][0]}",
