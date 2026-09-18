@@ -30,3 +30,6 @@
    {%- endfor %}
    {% endif %}
    {% endblock %}
+
+
+.. ansys-minigallery:: {{ module }}.{{ objname }}

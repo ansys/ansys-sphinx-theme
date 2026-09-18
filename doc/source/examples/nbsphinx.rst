@@ -8,3 +8,4 @@ This example shows how the Ansys Sphinx Theme renders a Jupyter notebook using t
 .. nbgallery::
 
    nbsphinx/jupyter-notebook.ipynb
+   nbsphinx/minigallery-demo.ipynb

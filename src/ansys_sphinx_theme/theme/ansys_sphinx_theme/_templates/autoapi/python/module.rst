@@ -250,3 +250,10 @@ Module detail
 {% endif %}
 
 {# ---------------------- End module detail description -------------------- #}
+
+{# -------- Begin minigallery section -------- #}
+{# Only show on module pages, not on package/subpackage pages (__init__.py). #}
+{% if is_own_page and obj.type != "package" %}
+.. ansys-minigallery:: {{ obj.id }}
+{% endif %}
+{# --------- End minigallery section --------- #}
