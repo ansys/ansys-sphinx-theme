@@ -7,7 +7,7 @@ ci:
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: e8f7d69b957a30acb2c875078d5fd012de24b64c  # frozen: v0.16.7
+  rev: 2eeb5678de71a00c0902cbda7105d328432f72cb  # frozen: v0.16.8
   hooks:
     - id: ruff
       args: [--fix]
@@ -59,12 +59,12 @@ repos:
 
 # Do not use this tool with proprietary ansys source code.
 - repo: "https://github.com/djlint/djLint"
-  rev: 152599a9c13abe14c25b8bdf023c8306975ddc3f  # frozen: v1.46.1
+  rev: b8b8c45322b3f38e5933a8088991b0f0d8cd45c2  # frozen: v1.46.2
   hooks:
     - id: djlint-jinja
       types_or: ["html"]
 
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "166c7027240501d219155fe71ad9817f8d69237b"  # frozen: v0.0.80
+  rev: "e7729e08f9d338183032340a067053ca5e16e6a8"  # frozen: v0.0.82
   hooks:
     - id: ty
