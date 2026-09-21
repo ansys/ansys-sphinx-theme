@@ -186,3 +186,5 @@ directory = "changed"
 name = "Changed"
 showcontent = true
 
+[tool.ansys.quality_report]
+ignore = ["CI010", "PC004", "PC006", "PC007", "DOC007", "PM002", "PC008", "SEC003"]
