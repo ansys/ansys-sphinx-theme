@@ -66,8 +66,14 @@ repos:
     - id: djlint-jinja
       types_or: ["html"]
 
+# - repo: https://github.com/astral-sh/ty-pre-commit
+#   rev: "743d21e292f7a36ed70cc2318aa3c8711b1e0437"  # frozen: v0.0.78
+#   hooks:
+#     - id: ty
+
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: "6271611"
+  rev: "969dee9"
   hooks:
     - id: pyansys-quality-report
-      args: [--repo-root, ., --all, --fix-missing]
+      # args:
+      # - --family=cicd
