@@ -38,6 +38,11 @@
   {% include "components/announcement_banner.html" %}
 {% endblock docs_navbar %}
 
+{% block docs_body %}
+  {% include "components/mcp_server_banner.html" %}
+  {{ super() }}
+{% endblock docs_body %}
+
 {%- block content %}
   {{ super() }}
   {% if theme_use_ansys_search %}

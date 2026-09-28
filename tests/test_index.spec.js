@@ -147,6 +147,27 @@ test("Test theme switcher", async ({ page }) => {
   await expect(page.locator("html")).toHaveAttribute("data-mode", "dark");
 });
 
+test("Test dark mode selectors for data-mode attribute", async ({ page }) => {
+  await page.goto("http://localhost:8000");
+  const rootStyles = await page.evaluate(() => {
+    document.documentElement.removeAttribute("data-theme");
+    document.documentElement.setAttribute("data-mode", "dark");
+    const computed = getComputedStyle(document.documentElement);
+    return {
+      background: computed
+        .getPropertyValue("--ast-search-bar-enable-background")
+        .trim(),
+      text: computed.getPropertyValue("--ast-search-bar-enable-text").trim(),
+      bodyColor: getComputedStyle(document.body).color,
+    };
+  });
+
+  expect(rootStyles.background).not.toBe("");
+  expect(rootStyles.text).not.toBe("");
+  expect(rootStyles.background).not.toBe("rgb(0, 0, 0)");
+  expect(rootStyles.bodyColor).not.toBe("rgb(0, 0, 0)");
+});
+
 test("Test breadcrumbs", async ({ page }) => {
   await page.goto("http://localhost:8000/user-guide/configuration.html");
   const breadcrumbs = await page.$(
