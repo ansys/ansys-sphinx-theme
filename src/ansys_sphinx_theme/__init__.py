@@ -429,13 +429,16 @@ def configure_theme_logo(app: Sphinx):
         theme_options["logo"] = logo_option
 
 
-def _normalize_sidebar_title(value: Any) -> str:
+def _normalize_sidebar_title(value: Any, *, from_pagename: bool = False) -> str:
     """Normalize a sidebar-title value into plain text.
 
     Parameters
     ----------
     value : Any
         Value extracted from the Sphinx/Jinja page context.
+
+    from_pagename : bool, default: False
+        Whether ``value`` comes from a docname/pagename fallback.
 
     Returns
     -------
@@ -455,7 +458,14 @@ def _normalize_sidebar_title(value: Any) -> str:
     if "<" in value:
         value = re.sub(r"<[^>]+>", "", value)
     value = html.unescape(value)
-    return " ".join(value.split())
+    value = " ".join(value.split())
+
+    # Preserve human-authored titles; prettify only fallback docnames.
+    if from_pagename:
+        value = value.replace("_", " ").replace("-", " ")
+        value = " ".join(value.split())
+
+    return value
 
 
 def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) -> str:
@@ -503,7 +513,15 @@ def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) ->
             if parent_title:
                 return parent_title
 
-    return _normalize_sidebar_title(context.get("title")) or "Section Navigation"
+    context_title = _normalize_sidebar_title(context.get("title"))
+    if context_title:
+        return context_title
+
+    pagename_title = _normalize_sidebar_title(context.get("pagename"), from_pagename=True)
+    if pagename_title:
+        return pagename_title
+
+    return "Section Navigation"
 
 
 def add_sidebar_context(
