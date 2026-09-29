@@ -1,0 +1,77 @@
+{#
+  Overview Sidebar
+  Renders an "Overview" section styled identically to the pydata-sphinx-theme
+  sidebar navigation (bd-links). Contains:
+    - Package Home link (always shown)
+    - Cheatsheet link + thumbnail (if cheatsheet is configured)
+    - News & Resources link (if news_resources is configured)
+#}
+{% if overview_sidebar %}
+<nav class="bd-links sidebar-overview" aria-label="{{ _('Overview') }}">
+  <div class="bd-toc-item navbar-nav">
+    <ul class="bd-sidenav">
+
+      {# --- Package Home --- #}
+      <li class="{% if pagename == overview_sidebar.home_page %}current {% endif %}">
+        <p class="bd-links__title" role="heading" aria-level="2"><a href="{{ pathto(overview_sidebar.home_page) }}" class="reference internal">
+          {{ _("Package Home") }}
+          </a>
+        </p>
+      </li>
+
+      {# --- Cheatsheet --- #}
+      {% if overview_sidebar.cheatsheet %}
+        {% set cs = overview_sidebar.cheatsheet %}
+        {% set cs_output = pathto(cs.get('output_dir', ''), 1) %}
+        <li>
+          <p class="bd-links__title" role="heading" aria-level="2"><a href="{{ cs_output }}" target="_blank" rel="noopener noreferrer"
+             class="sidebar-overview-cs-link">
+            {{ _("Cheatsheet") }}
+            <span class="sidebar-overview-pdf-badge">PDF</span>
+          </a></p>
+        </li>
+      {% endif %}
+
+      {# --- News & Resources --- #}
+      {% if overview_sidebar.news_resources %}
+        {% set nr = overview_sidebar.news_resources %}
+        {% set nr_title = nr.get('title', 'News & Resources') %}
+        {% set nr_link = nr.get('link', '') %}
+        <li class="{% if pagename == nr_link %}current {% endif %}">
+          <p class="bd-links__title" role="heading" aria-level="2">
+            <a href="{{ pathto(nr_link) }}" class="reference internal">
+              {{ nr_title }}
+            </a>
+          </p>
+        </li>
+      {% endif %}
+
+      {# --- What's New dropdown --- #}
+      {% if overview_sidebar.whatsnew_items %}
+
+        {% for wn in overview_sidebar.whatsnew_items %}
+          <li class="whatsnew-overview-item">
+            <details>
+              <summary>
+                <p class="whatsnew-overview-item-title" role="heading" aria-level="2"><a href="{{ wn.title_url }}">{{ wn.title }}</a></p>
+              </summary>
+              {% if wn.children %}
+                <ul class="bd-sidenav">
+                  {% for child in wn.children %}
+                    <li>
+                      <a href="{{ wn.url }}#{{ child.astext().replace(' ', '-').lower() }}" class="reference internal">
+                        {{ child.astext() }}
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+            </details>
+          </li>
+        {% endfor %}
+      {% endif %}
+
+    </ul>
+  </div>
+</nav>
+{% endif %}

@@ -1,0 +1,17 @@
+{#
+  News & Resources Sidebar
+  Displays a link to the News & Resources page in the sidebar.
+  Mirrors cheatsheet_sidebar.html in structure.
+#}
+{% if news_resources_sidebar %}
+  {% set nr_title = news_resources_sidebar.get('title', 'News & Resources') %}
+  {% set nr_link = news_resources_sidebar.get('link', '') %}
+  <div class="sidebar-news-resources ast-sidebar-widget" aria-label="{{ nr_title }}">
+    <h4>{{ nr_title }}</h4>
+    <a href="{{ pathto(nr_link) }}" class="news-resources-sidebar-link">
+      <span class="news-resources-sidebar-icon" aria-hidden="true">📰</span>
+      {{ nr_title }}
+    </a>
+  </div>
+  <link rel="stylesheet" href="{{ pathto('_static/css/news_resources.css', 1) }}">
+{% endif %}
