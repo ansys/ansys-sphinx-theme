@@ -429,7 +429,9 @@ def configure_theme_logo(app: Sphinx):
         theme_options["logo"] = logo_option
 
 
-def _normalize_sidebar_title(value: Any, *, from_pagename: bool = False) -> str:
+def _normalize_sidebar_title(
+    value: Any, *, from_pagename: bool = False, from_html_context: bool = False
+) -> str:
     """Normalize a sidebar-title value into plain text.
 
     Parameters
@@ -440,6 +442,10 @@ def _normalize_sidebar_title(value: Any, *, from_pagename: bool = False) -> str:
     from_pagename : bool, default: False
         Whether ``value`` comes from a docname/pagename fallback.
 
+    from_html_context : bool, default: False
+        Whether ``value`` comes from rendered HTML template context values.
+        When ``True``, known HTML tags are stripped before entity decoding.
+
     Returns
     -------
     str
@@ -449,14 +455,15 @@ def _normalize_sidebar_title(value: Any, *, from_pagename: bool = False) -> str:
     Notes
     -----
     Parent titles in Sphinx context can be HTML fragments (for example,
-    ``"<code>foo</code>"``). This helper removes HTML tags, decodes HTML
-    entities, and collapses repeated whitespace.
+    ``"<code>foo</code>"``). For these values, set ``from_html_context=True``
+    to remove tags before entity decoding. Plain-text values (for example,
+    ``app.env.titles[root_doc].astext()``) should not be treated as markup.
     """
     if not isinstance(value, str):
         return ""
 
-    if "<" in value:
-        value = re.sub(r"<[^>]+>", "", value)
+    if from_html_context and "<" in value:
+        value = re.sub(r"</?[A-Za-z][^>]*>", "", value)
     value = html.unescape(value)
     value = " ".join(value.split())
 
@@ -509,11 +516,11 @@ def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) ->
         for parent in parents:
             if not isinstance(parent, dict):
                 continue
-            parent_title = _normalize_sidebar_title(parent.get("title"))
+            parent_title = _normalize_sidebar_title(parent.get("title"), from_html_context=True)
             if parent_title:
                 return parent_title
 
-    context_title = _normalize_sidebar_title(context.get("title"))
+    context_title = _normalize_sidebar_title(context.get("title"), from_html_context=True)
     if context_title:
         return context_title
 
