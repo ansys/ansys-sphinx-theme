@@ -60,6 +60,7 @@ type-check = [
 ]
 doc = [
     "jupytext==1.19.5",
+    "kaleido==1.4.0",
     "nbsphinx==0.9.8",
     "notebook==7.6.3",
     "numpydoc==1.11.0",
