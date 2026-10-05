@@ -34,8 +34,10 @@ test("sidebar section title renders plain text on API pages", async ({
     // include escaped entities (for example, "&lt;"), which is expected.
     expect(sidebarTitleState.html).not.toContain("<code");
 
-    if (/[<>]/.test(sidebarTitleState.text)) {
+    if (sidebarTitleState.text.includes("<")) {
       expect(sidebarTitleState.html).toContain("&lt;");
+    }
+    if (sidebarTitleState.text.includes(">")) {
       expect(sidebarTitleState.html).toContain("&gt;");
     }
   }
