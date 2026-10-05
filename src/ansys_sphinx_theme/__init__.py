@@ -496,20 +496,13 @@ def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) ->
     -----
     Title resolution uses this precedence:
 
-    1. Top-level document title derived from the first path segment of
+    1. Outermost ancestor title from ``context["parents"]``.
+    2. Top-level document title derived from the first path segment of
        ``pagename`` using ``app.env.titles``.
-    2. Outermost ancestor title from ``context["parents"]``.
     3. Current page title from ``context["title"]``.
     4. ``"Section Navigation"`` as a final fallback.
     """
     env_titles = getattr(getattr(app, "env", None), "titles", None) or {}
-
-    root_doc = pagename.split("/", 1)[0]
-    root_title_node = env_titles.get(root_doc)
-    if root_title_node is not None:
-        root_title = _normalize_sidebar_title(root_title_node.astext())
-        if root_title:
-            return root_title
 
     parents = context.get("parents")
     if isinstance(parents, list):
@@ -519,6 +512,13 @@ def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) ->
             parent_title = _normalize_sidebar_title(parent.get("title"), from_html_context=True)
             if parent_title:
                 return parent_title
+
+    root_doc = pagename.split("/", 1)[0]
+    root_title_node = env_titles.get(root_doc)
+    if root_title_node is not None:
+        root_title = _normalize_sidebar_title(root_title_node.astext())
+        if root_title:
+            return root_title
 
     context_title = _normalize_sidebar_title(context.get("title"), from_html_context=True)
     if context_title:
