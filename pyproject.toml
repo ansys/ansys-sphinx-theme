@@ -32,7 +32,7 @@ dependencies = [
     "importlib-metadata>=4.0",
     "Jinja2>=3.1.2",
     "pdf2image>=1.17.0",
-    "pydata-sphinx-theme>=0.15.4,<0.22",
+    "pydata-sphinx-theme>=0.15.4,<0.23",
     "PyYAML>=6.0",
     "Sphinx>=6.1.0",
 ]
@@ -78,7 +78,7 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.3.2",
-    "tox==4.64.3",
+    "tox==4.64.5",
     "pydantic==2.13.5"
 ]
 [project.entry-points."sphinx.html_themes"]
