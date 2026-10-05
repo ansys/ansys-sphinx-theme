@@ -46,7 +46,7 @@ test("sidebar section title is always non-empty on docs pages", async ({
 }) => {
   const urls = [
     "http://localhost:8000/user-guide/options.html",
-    "http://localhost:8000/getting-started/index.html",
+    "http://localhost:8000/getting-started.html",
   ];
 
   for (const url of urls) {
