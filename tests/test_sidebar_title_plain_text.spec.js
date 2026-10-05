@@ -33,6 +33,11 @@ test("sidebar section title renders plain text on API pages", async ({
     // If title text contains literal angle brackets, HTML serialization may
     // include escaped entities (for example, "&lt;"), which is expected.
     expect(sidebarTitleState.html).not.toContain("<code");
+
+    if (/[<>]/.test(sidebarTitleState.text)) {
+      expect(sidebarTitleState.html).toContain("&lt;");
+      expect(sidebarTitleState.html).toContain("&gt;");
+    }
   }
 });
 
@@ -47,7 +52,11 @@ test("sidebar section title is always non-empty on docs pages", async ({
   for (const url of urls) {
     await page.goto(url);
     const title = page.locator(".bd-docs-nav .bd-links__title");
+    const nav = page.locator(".bd-docs-nav");
     await expect(title).toHaveCount(1);
     await expect(title).not.toHaveText(/^\s*$/);
+    const titleText = ((await title.textContent()) || "").trim();
+    expect(titleText).toBeTruthy();
+    await expect(nav).toHaveAttribute("aria-label", titleText);
   }
 });
