@@ -17,6 +17,7 @@
 """Module for the Ansys Sphinx theme."""
 
 import datetime
+import html
 import importlib.metadata as importlib_metadata
 import os
 import pathlib
@@ -428,6 +429,108 @@ def configure_theme_logo(app: Sphinx):
         theme_options["logo"] = logo_option
 
 
+def _normalize_sidebar_title(
+    value: Any, *, from_pagename: bool = False, from_html_context: bool = False
+) -> str:
+    """Normalize a sidebar-title value into plain text.
+
+    Parameters
+    ----------
+    value : Any
+        Value extracted from the Sphinx/Jinja page context.
+
+    from_pagename : bool, default: False
+        Whether ``value`` comes from a docname/pagename fallback.
+
+    from_html_context : bool, default: False
+        Whether ``value`` comes from rendered HTML template context values.
+        When ``True``, known HTML tags are stripped before entity decoding.
+
+    Returns
+    -------
+    str
+        Normalized plain-text title. Returns an empty string when ``value`` is
+        not a string.
+
+    Notes
+    -----
+    Parent titles in Sphinx context can be HTML fragments (for example,
+    ``"<code>foo</code>"``). For these values, set ``from_html_context=True``
+    to remove tags before entity decoding. Plain-text values (for example,
+    ``app.env.titles[root_doc].astext()``) should not be treated as markup.
+    """
+    if not isinstance(value, str):
+        return ""
+
+    if from_html_context and "<" in value:
+        value = re.sub(r"</?[A-Za-z][^>]*>", "", value)
+    value = html.unescape(value)
+    value = " ".join(value.split())
+
+    # Preserve human-authored titles; prettify only fallback docnames.
+    if from_pagename:
+        value = value.replace("_", " ").replace("-", " ")
+        value = " ".join(value.split())
+
+    return value
+
+
+def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) -> str:
+    """Resolve the section title displayed in the primary sidebar.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Active Sphinx application instance.
+    context : dict
+        Template context for the current page.
+    pagename : str
+        Current document name (for example, ``"user-guide/options"``).
+
+    Returns
+    -------
+    str
+        Plain-text section title for sidebar rendering.
+
+    Notes
+    -----
+    Title resolution uses this precedence:
+
+    1. Outermost ancestor title from ``context["parents"]``.
+    2. Top-level document title derived from the first path segment of
+       ``pagename`` using ``app.env.titles``.
+    3. Current page title from ``context["title"]``.
+    4. ``"Section Navigation"`` as a final fallback.
+    """
+    env_titles = getattr(getattr(app, "env", None), "titles", None) or {}
+
+    parents = context.get("parents")
+    if isinstance(parents, list):
+        for parent in parents:
+            if not isinstance(parent, dict):
+                continue
+            parent_title = _normalize_sidebar_title(parent.get("title"), from_html_context=True)
+            if parent_title:
+                return parent_title
+
+    root_doc = pagename.split("/", 1)[0]
+    root_title_node = env_titles.get(root_doc)
+    if root_title_node is not None:
+        root_title = _normalize_sidebar_title(root_title_node.astext())
+        if root_title:
+            return root_title
+
+    context_title = _normalize_sidebar_title(context.get("title"), from_html_context=True)
+    if context_title:
+        return context_title
+
+    pagename_title = _normalize_sidebar_title(context.get("pagename"), from_pagename=True)
+    if pagename_title:
+        return pagename_title
+
+    return "Section Navigation"
+
+
 def add_sidebar_context(
     app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
 ) -> None:
@@ -451,8 +554,9 @@ def add_sidebar_context(
     doctree : docutils.nodes.document
         Document tree for the page.
     """
-    # Expose flag to Jinja templates (used by sidebar-nav-bs.html).
+    # Expose metadata to Jinja templates (used by sidebar-nav-bs.html).
     context["ast_page_toc_in_primary"] = getattr(app, "_ast_page_toc_in_primary", False)
+    context["ast_section_title"] = _resolve_sidebar_section_title(app, context, pagename)
 
     whatsnew_pages = whatsnew_sidebar_pages(app)
     cheatsheet_pages = cheatsheet_sidebar_pages(app)
