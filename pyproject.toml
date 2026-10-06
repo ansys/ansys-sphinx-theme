@@ -187,4 +187,4 @@ name = "Changed"
 showcontent = true
 
 [tool.ansys.quality_report]
-ignore = ["CI010", "PC004", "PC006", "PC007", "DOC007", "PM002", "PC008", "SEC003"]
+ignore = ["CI010", "PC00", "PC0074", "PC006", "DOC007", "PM002", "SEC003"]
