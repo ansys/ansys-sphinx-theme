@@ -32,7 +32,7 @@ dependencies = [
     "importlib-metadata>=4.0",
     "Jinja2>=3.1.2",
     "pdf2image>=1.17.0",
-    "pydata-sphinx-theme>=0.15.4,<0.22",
+    "pydata-sphinx-theme>=0.15.4,<0.23",
     "PyYAML>=6.0",
     "Sphinx>=6.1.0",
 ]
@@ -56,16 +56,17 @@ all = [
 
 [dependency-groups]
 type-check = [
-    "ty==0.0.83",
+    "ty==0.0.84",
 ]
 doc = [
     "jupytext==1.19.5",
+    "kaleido==1.4.0",
     "nbsphinx==0.9.8",
     "notebook==7.6.3",
     "numpydoc==1.11.0",
     "pandas==3.0.6",
     "Pillow>=9.0",
-    "plotly==7.0.0",
+    "plotly==7.1.0",
     "PyGitHub==2.10.0",
     "pyvista[jupyter]==0.49.0",
     "PyYAML==6.0.3",
@@ -78,7 +79,7 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.3.2",
-    "tox==4.63.0",
+    "tox==4.64.5",
     "pydantic==2.13.5"
 ]
 [project.entry-points."sphinx.html_themes"]

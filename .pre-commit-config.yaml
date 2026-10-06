@@ -7,7 +7,7 @@ ci:
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: 2eeb5678de71a00c0902cbda7105d328432f72cb  # frozen: v0.16.8
+  rev: f12be1ebaa5351c1fc76472de98db2c3446c8253  # frozen: v0.16.10
   hooks:
     - id: ruff
       args: [--fix]
@@ -35,7 +35,7 @@ repos:
 
 # this validates our github workflow files
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: c4654a7e007c9619a5eb63c39a456572a0fa1851  # frozen: 0.38.0
+  rev: 4f85d46a92dc17713078e5de73f8a13190edf6fc  # frozen: 0.38.2
   hooks:
     - id: check-github-workflows
 
@@ -59,12 +59,12 @@ repos:
 
 # Do not use this tool with proprietary ansys source code.
 - repo: "https://github.com/djlint/djLint"
-  rev: b8b8c45322b3f38e5933a8088991b0f0d8cd45c2  # frozen: v1.46.2
+  rev: 97266b950ee135d6ef89c9ace9d88baadced6f67  # frozen: v1.46.4
   hooks:
     - id: djlint-jinja
       types_or: ["html"]
 
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "e7729e08f9d338183032340a067053ca5e16e6a8"  # frozen: v0.0.82
+  rev: "6972e4c5a7e9f45f05a2f30b668f221f43b770c9"  # frozen: v0.0.84
   hooks:
     - id: ty

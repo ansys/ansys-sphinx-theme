@@ -6,6 +6,7 @@ import subprocess
 from typing import Any, Dict, List
 
 from github import Github
+import plotly.graph_objects as go
 import plotly.io as pio
 import pyvista
 import requests
@@ -24,6 +25,19 @@ from ansys_sphinx_theme import (
 )
 
 pio.renderers.default = "sphinx_gallery"
+
+
+def _plotly_static_export_available() -> bool:
+    """Return ``True`` when Plotly static image export is available."""
+    try:
+        go.Figure().to_image(format="png")
+    except Exception:
+        return False
+    return True
+
+
+PLOTLY_STATIC_EXPORT_AVAILABLE = _plotly_static_export_available()
+
 THIS_PATH = Path(__file__).parent.resolve()
 PYANSYS_LIGHT_SQUARE = (THIS_PATH / "_static" / "pyansys_light_square.png").resolve()
 EXAMPLE_PATH = (THIS_PATH / "examples" / "sphinx_examples").resolve()
@@ -290,6 +304,10 @@ else:
 
     # Gallery of examples
     extensions.extend(["nbsphinx", "sphinx_gallery.gen_gallery"])
+    image_scrapers: tuple[str, ...] = ("pyvista", "matplotlib")
+    if PLOTLY_STATIC_EXPORT_AVAILABLE:
+        image_scrapers += ("plotly.io._sg_scraper.plotly_sg_scraper",)
+
     sphinx_gallery_conf = {
         # path to your examples scripts
         "examples_dirs": ["examples/sphinx-gallery/"],
@@ -300,7 +318,7 @@ else:
         # Remove the "Download all examples" button from the top level gallery
         "download_all_examples": False,
         # Modules for which function level galleries are created.  In
-        "image_scrapers": ("pyvista", "matplotlib", "plotly.io._sg_scraper.plotly_sg_scraper"),
+        "image_scrapers": image_scrapers,
         "default_thumb_file": str(PYANSYS_LIGHT_SQUARE),
     }
     pyvista.BUILDING_GALLERY = True
