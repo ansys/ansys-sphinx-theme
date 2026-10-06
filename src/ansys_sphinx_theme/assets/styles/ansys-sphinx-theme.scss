@@ -9,6 +9,7 @@
 @import "whatsnew";
 @import "nbsphinx";
 @import "announcement";
+@import "mcp-server";
 
 /*
 * Code cell
@@ -64,4 +65,8 @@ p.rubric {
     color: var(--pst-color-on-surface);
     font-weight: bold;
     opacity: 1;
+}
+
+.highlight span.linenos {
+  opacity: 0.4 !important;
 }

@@ -17,6 +17,7 @@
 """Module for the Ansys Sphinx theme."""
 
 import datetime
+import html
 import importlib.metadata as importlib_metadata
 import os
 import pathlib
@@ -428,6 +429,108 @@ def configure_theme_logo(app: Sphinx):
         theme_options["logo"] = logo_option
 
 
+def _normalize_sidebar_title(
+    value: Any, *, from_pagename: bool = False, from_html_context: bool = False
+) -> str:
+    """Normalize a sidebar-title value into plain text.
+
+    Parameters
+    ----------
+    value : Any
+        Value extracted from the Sphinx/Jinja page context.
+
+    from_pagename : bool, default: False
+        Whether ``value`` comes from a docname/pagename fallback.
+
+    from_html_context : bool, default: False
+        Whether ``value`` comes from rendered HTML template context values.
+        When ``True``, known HTML tags are stripped before entity decoding.
+
+    Returns
+    -------
+    str
+        Normalized plain-text title. Returns an empty string when ``value`` is
+        not a string.
+
+    Notes
+    -----
+    Parent titles in Sphinx context can be HTML fragments (for example,
+    ``"<code>foo</code>"``). For these values, set ``from_html_context=True``
+    to remove tags before entity decoding. Plain-text values (for example,
+    ``app.env.titles[root_doc].astext()``) should not be treated as markup.
+    """
+    if not isinstance(value, str):
+        return ""
+
+    if from_html_context and "<" in value:
+        value = re.sub(r"</?[A-Za-z][^>]*>", "", value)
+    value = html.unescape(value)
+    value = " ".join(value.split())
+
+    # Preserve human-authored titles; prettify only fallback docnames.
+    if from_pagename:
+        value = value.replace("_", " ").replace("-", " ")
+        value = " ".join(value.split())
+
+    return value
+
+
+def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) -> str:
+    """Resolve the section title displayed in the primary sidebar.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Active Sphinx application instance.
+    context : dict
+        Template context for the current page.
+    pagename : str
+        Current document name (for example, ``"user-guide/options"``).
+
+    Returns
+    -------
+    str
+        Plain-text section title for sidebar rendering.
+
+    Notes
+    -----
+    Title resolution uses this precedence:
+
+    1. Outermost ancestor title from ``context["parents"]``.
+    2. Top-level document title derived from the first path segment of
+       ``pagename`` using ``app.env.titles``.
+    3. Current page title from ``context["title"]``.
+    4. ``"Section Navigation"`` as a final fallback.
+    """
+    env_titles = getattr(getattr(app, "env", None), "titles", None) or {}
+
+    parents = context.get("parents")
+    if isinstance(parents, list):
+        for parent in parents:
+            if not isinstance(parent, dict):
+                continue
+            parent_title = _normalize_sidebar_title(parent.get("title"), from_html_context=True)
+            if parent_title:
+                return parent_title
+
+    root_doc = pagename.split("/", 1)[0]
+    root_title_node = env_titles.get(root_doc)
+    if root_title_node is not None:
+        root_title = _normalize_sidebar_title(root_title_node.astext())
+        if root_title:
+            return root_title
+
+    context_title = _normalize_sidebar_title(context.get("title"), from_html_context=True)
+    if context_title:
+        return context_title
+
+    pagename_title = _normalize_sidebar_title(context.get("pagename"), from_pagename=True)
+    if pagename_title:
+        return pagename_title
+
+    return "Section Navigation"
+
+
 def add_sidebar_context(
     app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
 ) -> None:
@@ -451,8 +554,9 @@ def add_sidebar_context(
     doctree : docutils.nodes.document
         Document tree for the page.
     """
-    # Expose flag to Jinja templates (used by sidebar-nav-bs.html).
+    # Expose metadata to Jinja templates (used by sidebar-nav-bs.html).
     context["ast_page_toc_in_primary"] = getattr(app, "_ast_page_toc_in_primary", False)
+    context["ast_section_title"] = _resolve_sidebar_section_title(app, context, pagename)
 
     whatsnew_pages = whatsnew_sidebar_pages(app)
     cheatsheet_pages = cheatsheet_sidebar_pages(app)
@@ -538,7 +642,7 @@ def resolve_home_entry(app: Sphinx, doctree: nodes.document, docname: str) -> No
 
     # Get the root TOC
     root_toc = app.env.tocs[app.config.root_doc]
-    if not root_toc:
+    if root_toc is None:
         return
 
     for toc in root_toc.findall(addnodes.toctree):
@@ -600,6 +704,57 @@ def add_tooltip_after_build(app: Sphinx, exception):
 
         if new_text != text:
             html_file.write_text(new_text, encoding="utf-8")
+
+
+def add_mcp_server_context(
+    app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
+) -> None:
+    """Inject MCP server banner data into the template context on the landing page.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Application instance for rendering the documentation.
+    pagename : str
+        Name of the current page.
+    templatename : str
+        Name of the template being used.
+    context : dict
+        Context dictionary for the page.
+    doctree : docutils.nodes.document
+        Document tree for the page.
+    """
+    mcp_options = app.config.html_theme_options.get("mcp_server")
+    if not mcp_options:
+        return
+
+    if not isinstance(mcp_options, dict):
+        raise ValueError(
+            "The 'mcp_server' theme option must be a dictionary with a required "
+            "'url' key and an optional 'project_name' key."
+        )
+
+    url = mcp_options.get("url")
+    if not isinstance(url, str) or not url.strip():
+        raise ValueError(
+            "The 'mcp_server' theme option is missing the required non-empty 'url' string."
+        )
+
+    project_name = mcp_options.get("project_name", "MCP Server")
+    if not isinstance(project_name, str):
+        raise ValueError(
+            "The 'mcp_server' theme option 'project_name' must be a string when provided."
+        )
+
+    # Only inject context on the landing (index) page
+    index_page = app.config.root_doc or "index"
+    if pagename != index_page:
+        return
+
+    context["mcp_server"] = {
+        "url": url.strip(),
+        "project_name": project_name,
+    }
 
 
 def add_default_copyright(app: Sphinx) -> None:
@@ -674,6 +829,7 @@ def setup(app: Sphinx) -> dict:
     app.connect("html-page-context", fix_edit_html_page_context)
     app.connect("html-page-context", update_search_sidebar_context)
     app.connect("html-page-context", update_template_context)
+    app.connect("html-page-context", add_mcp_server_context)
     app.connect("doctree-resolved", resolve_home_entry)
 
     app.connect("build-finished", replace_html_tag)

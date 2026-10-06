@@ -243,6 +243,10 @@ To modify the SCSS files, follow these steps:
      ``src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/`` directory.
      These files are regenerated during each build process, so avoid editing them directly.
 
+     Only changes made to the ``SCSS`` source files are considered valid theme updates.
+     Modifying the generated ``CSS`` files has no impact because the source of truth is the
+     ``SCSS`` files.
+
 4. Build the documentation and serve it locally using any of the following commands:
 
    .. tab-set::
@@ -294,6 +298,50 @@ To modify the SCSS files, follow these steps:
    trigger automatic rebuilds.
 
 
+HTML, CSS, and JavaScript guidelines
+************************************
+
+When contributing to the theme, follow the same file conventions used throughout the project so changes remain maintainable and easy to review.
+
+HTML templates
+--------------
+
+- Place custom HTML templates under ``src/ansys_sphinx_theme/theme/ansys_sphinx_theme/``.
+- Prefer small, focused template overrides instead of large rewrites of the upstream PyData theme.
+- Keep template logic readable and maintainable. Avoid embedding complex business logic directly into templates when
+  a Python helper or configuration hook is more appropriate.
+- If a change affects page layout or navigation, verify the rendered output in the documentation and check the affected pages visually.
+
+CSS and SCSS
+-------------
+
+- Keep styles organized under ``src/ansys_sphinx_theme/assets/styles/``.
+- Prefer editing the source SCSS files instead of the generated CSS bundle in
+  ``src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/``.
+- Keep selectors specific and scoped to the theme to reduce unintended side effects.
+- When a change introduces a new option, variable, or visual behavior, document it in the relevant
+  user-guide page and update any examples that depend on the behavior.
+
+JavaScript
+----------
+
+- Store JavaScript files under ``src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/js/``.
+- Keep scripts focused and avoid duplicating logic across files.
+- Prefer small, readable functions with clear responsibilities.
+- If the behavior affects custom theme interactions, validate the result in the documentation and,
+  when appropriate, add or update tests.
+
+Theme option updates
+--------------------
+
+If a change adds, renames, or modifies a public theme option, configuration key, or supported behavior,
+make sure to update the appropriate documentation in the user guide and examples. This includes:
+
+- the option documentation in ``doc/source/user-guide/options.rst`` or the relevant page,
+- any examples that rely on the option,
+- and any configuration tables or references that describe the theme capabilities.
+
+This requirement applies to new options, new visual defaults, and changes to how users configure the theme.
 
 
 Build the documentation

@@ -23,6 +23,7 @@ Table of contents
    :ref:`secondary_sidebar`                     list            Control the secondary sidebar on each page.
    :ref:`navigation_bar_dropdown`               list            Add a dropdown navigation bar to the top of your documentation.
    :ref:`announcement_banner`                   list            Add an announcement banner to the top of your documentation pages.
+   :ref:`mcp_server`                            dict            Promote an MCP server on the landing page with a banner linking to its repository.
    ===========================================  ==============  ==========================================================================================
 
 .. _show_breadcrumbs:
@@ -156,8 +157,61 @@ To exclude files or directories from the search index, you can use the
 of strings representing the directories or files to exclude from the search
 index.
 
-Here is an example of how to add the ``static_search`` dictionary to the
-``html_theme_options`` dictionary:
+Search result ranking
+~~~~~~~~~~~~~~~~~~~~~
+
+By default, the theme assigns the following Fuse.js field weights so that
+section headings and page titles rank over the body text:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 20 15 65
+
+   * - Field
+     - Default weight
+     - Description
+   * - ``section``
+     - 3
+     - Section heading extracted from the page.
+   * - ``title``
+     - 3
+     - Full breadcrumb title of the page.
+   * - ``text``
+     - 1
+     - Body text of the section.
+   * - ``objectID``
+     - 0.5
+     - Internal document identifier.
+
+You can override the weights by supplying a ``keys`` list in ``static_search``:
+
+.. code-block:: python
+
+    html_theme_options = {
+        "static_search": {
+            "keys": [
+                {"name": "section", "weight": 5},
+                {"name": "title", "weight": 3},
+                {"name": "text", "weight": 1},
+                {"name": "objectID", "weight": 0.5},
+            ],
+        },
+    }
+
+The ``includeScore`` and ``includeMatches`` options are enabled by default so
+that match highlighting and relevance sorting work out of the box. You can
+turn off these options if you do not need that information:
+
+.. code-block:: python
+
+    html_theme_options = {
+        "static_search": {
+            "includeScore": False,
+            "includeMatches": False,
+        },
+    }
+
+Here is a full example combining the most commonly used options:
 
 .. code-block:: python
 
@@ -174,20 +228,8 @@ Here is an example of how to add the ``static_search`` dictionary to the
 .. note::
 
     All other options are available in the `Fuse.js documentation <https://fusejs.io/api/options.html>`_.
-
-Here is an example of how to add the ``static_search`` dictionary to the
-``html_theme_options`` dictionary:
-
-.. code-block:: python
-
-    html_theme_options = {
-        "static_search": {
-            "threshold": 0.5,
-            "limit": 10,
-            "minMatchCharLength": 1,
-            "delay": 300,
-        },
-    }
+    Any key you set takes precedence over the theme defaults; values you omit
+    are filled in automatically.
 
 
 .. note::
@@ -228,11 +270,11 @@ This key should be a dictionary where each key is the name of the source and the
 .. code-block:: python
 
     html_theme_options = {
-        "search_extra_sources":
-        {
+        "search_extra_sources": {
             "PyMAPDL": "https://mapdl.docs.pyansys.com/version/stable/",
             "PyAnsys": "https://docs.pyansys.com/version/stable/",
-        }
+        },
+    }
 
 Search filters
 ^^^^^^^^^^^^^^
@@ -650,3 +692,49 @@ When the user clicks on the ``view`` button, the banner expands to show all anno
 
 .. image:: ../_static/announcement_banner_expanded.png
     :alt: Expanded announcement banner
+
+.. _mcp_server:
+
+MCP server banner
+-----------------
+
+Many Ansys libraries provide a companion `Model Context Protocol (MCP) <https://modelcontextprotocol.io/>`_
+server that exposes library functionality to AI assistants and tools.
+To promote the MCP server from your library's documentation landing page, add the
+``mcp_server`` dictionary to ``html_theme_options`` in your ``conf.py`` file:
+
+.. code-block:: python
+
+    html_theme_options = {
+        ...,
+        "mcp_server": {
+            "url": "https://github.com/ansys/pymechanical-mcp",
+            "project_name": "PyMechanical MCP Server",
+        },
+    }
+
+The dictionary supports the following keys:
+
+- ``url`` *(required)*: URL pointing to the MCP server repository or documentation.
+- ``project_name`` *(optional)*: Human-readable name for the MCP server. Defaults to
+  ``"MCP Server"`` if not provided.
+
+When configured, a banner is displayed at the top of the documentation landing page
+(``index.html``). The banner includes:
+
+- A brief description inviting users to connect their AI assistant to the library.
+- A **Learn more** link that opens the configured ``url`` in a new tab.
+
+The banner is shown **only on the landing page** and does not appear on any other page.
+
+Example configuration for ``PyMechanical``:
+
+.. code-block:: python
+
+    html_theme_options = {
+        "github_url": "https://github.com/ansys/pymechanical",
+        "mcp_server": {
+            "url": "https://github.com/ansys/pymechanical-mcp",
+            "project_name": "PyMechanical MCP Server",
+        },
+    }
