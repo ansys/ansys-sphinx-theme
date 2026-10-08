@@ -72,9 +72,10 @@ repos:
     - id: ty
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: "8176209"
+  rev: "fada8ee"
   hooks:
     - id: pyansys-quality-report
-      # args: [--repo-root, ., --show-all]
+      args: [--repo-root, ., --show-all]
+      # verbose: true
       # args:
       # - --family=cicd

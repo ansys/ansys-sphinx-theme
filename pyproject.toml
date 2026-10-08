@@ -187,4 +187,8 @@ name = "Changed"
 showcontent = true
 
 [tool.ansys.quality_report]
-ignore = ["CI010", "PC00", "PC0074", "PC006", "DOC007", "PM002", "SEC003"]
+ignore = [
+    "CI012", # Missing pytest actions
+    "DOC007", # Missing API reference
+    "SEC003", # The gitleaks hook is configured.
+]
