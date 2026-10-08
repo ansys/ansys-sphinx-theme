@@ -187,3 +187,9 @@ directory = "changed"
 name = "Changed"
 showcontent = true
 
+[tool.ansys.quality_report]
+ignore = [
+    "CI012", # Missing pytest actions
+    "DOC007", # Missing API reference
+    "SEC003", # The gitleaks hook is configured.
+]
