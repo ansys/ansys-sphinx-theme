@@ -155,8 +155,6 @@ Attribute detail
 
 .. py:attribute:: value_with_default2
    :type:  float
-   :value: None
-
 
    
    A simple optional parameter using field for default value and description.
@@ -181,8 +179,6 @@ Attribute detail
 
 .. py:attribute:: value_with_constraints
    :type:  float
-   :value: None
-
 
    
    A optional parameter with constraints using field for default value, description and constraints.
