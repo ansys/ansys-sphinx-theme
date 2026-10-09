@@ -53,7 +53,6 @@ To wire it into the sidebar configure ``html_theme_options`` in ``conf.py``::
 """
 
 from urllib.parse import urlsplit
-import uuid as _uuid
 
 from docutils import nodes
 from docutils.parsers.rst import Directive, directives
@@ -196,15 +195,17 @@ def resolve_news_resources_table(app: Sphinx, doctree: nodes.document, docname: 
         entry for entry in getattr(app.env, "news_resources", []) if entry.get("docname") == docname
     ]
 
+    entries = _sort_entries(entries)
+
     if not placeholder_list:
         # Auto-inject the table when the page has news-item directives but no
         # explicit news-resources-table directive.
-        if any(e["docname"] == docname for e in entries):
-            doctree.append(_build_table(entries))
+        if entries:
+            doctree.append(_build_table(entries, "nr-0"))
         return
 
-    for placeholder in placeholder_list:
-        raw_node = _build_table(entries)
+    for index, placeholder in enumerate(placeholder_list):
+        raw_node = _build_table(entries, f"nr-{index}")
         placeholder.replace_self(raw_node)
 
 
@@ -218,6 +219,12 @@ import html as _html_mod  # noqa: E402 (needed after node definitions)
 def _e(text: str) -> str:
     """HTML-escape a string for safe inline insertion."""
     return _html_mod.escape(str(text), quote=True)
+
+
+def _sort_entries(entries: list[NewsResourceEntry]) -> list[NewsResourceEntry]:
+    """Order entries newest first, undated last, independent of file read order."""
+    by_content = sorted(entries, key=_entry_key)
+    return sorted(by_content, key=lambda e: (bool(e.get("date")), e.get("date", "")), reverse=True)
 
 
 def _entry_key(entry: NewsResourceEntry) -> tuple[str, str, str, str, str, str]:
@@ -252,13 +259,15 @@ def _badge_cls(entry_type: str) -> str:
     return _BADGE_TYPE_MAP.get(entry_type.lower(), "other")
 
 
-def _build_table(entries: list[NewsResourceEntry]) -> nodes.raw:
+def _build_table(entries: list[NewsResourceEntry], wrapper_id: str) -> nodes.raw:
     """Build a raw HTML card list with type/author filter buttons.
 
     Parameters
     ----------
     entries : list[dict]
         List of news/resource entry dicts.
+    wrapper_id : str
+        HTML ID of the wrapper element, unique within the page.
 
     Returns
     -------
@@ -281,7 +290,6 @@ def _build_table(entries: list[NewsResourceEntry]) -> nodes.raw:
             seen_authors.append(e["author"])
 
     parts: list = []
-    wrapper_id = "nr-" + _uuid.uuid4().hex[:8]
     parts.append(f'<div class="nr-wrapper" id="{wrapper_id}">')
 
     # --- Filter bar ---
