@@ -193,9 +193,7 @@ def resolve_news_resources_table(app: Sphinx, doctree: nodes.document, docname: 
 
     # Collect only entries for the current document.
     entries: list[NewsResourceEntry] = [
-        entry
-        for entry in getattr(app.env, "news_resources", [])
-        if entry.get("docname") == docname
+        entry for entry in getattr(app.env, "news_resources", []) if entry.get("docname") == docname
     ]
 
     if not placeholder_list:
