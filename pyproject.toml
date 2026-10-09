@@ -55,6 +55,10 @@ all = [
 ]
 
 [dependency-groups]
+browser-test = [
+    "pytest>=8.0",
+    "pytest-playwright>=0.7",
+]
 type-check = [
     "ty==0.0.84",
 ]
@@ -116,6 +120,7 @@ ignore = [
 "__init__.py" = ["F401"]
 "doc/source/examples/sphinx-gallery/sphinx-gallery.py" = ["D205", "E402", "D400"]
 "src/ansys_sphinx_theme/extension/linkcode.py" = ["E501"]
+"tests/test_browser_*.py" = ["D103"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"

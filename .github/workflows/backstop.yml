@@ -52,7 +52,8 @@ jobs:
       - name: Build documentation
         run: |
           source .venv/bin/activate
-          uv pip install --group doc .
+          uv pip install --group doc --group browser-test .
+          python -m playwright install --with-deps chromium
           xvfb-run make -C doc html
 
       - name: Serve documentation
@@ -63,6 +64,7 @@ jobs:
 
       - name: Run BackstopJS tests
         run: |
+          source .venv/bin/activate
           npm run test
 
       - name: Upload Backstop report (if failed)
