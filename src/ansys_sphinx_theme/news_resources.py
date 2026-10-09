@@ -164,13 +164,8 @@ def merge_news_resources(app: Sphinx, env, docnames, other) -> None:
         return
     if not hasattr(env, "news_resources"):
         env.news_resources = []
-    # Avoid duplicates in case of re-merge
-    existing = {_entry_key(e) for e in env.news_resources}
-    for entry in other.news_resources:
-        entry_key = _entry_key(entry)
-        if entry_key not in existing:
-            env.news_resources.append(entry)
-            existing.add(entry_key)
+    # Workers read disjoint docs, so no de-duplication: repeated entries are legitimate.
+    env.news_resources.extend(e for e in other.news_resources if e["docname"] in docnames)
 
 
 def resolve_news_resources_table(app: Sphinx, doctree: nodes.document, docname: str) -> None:
@@ -218,18 +213,6 @@ import html as _html_mod  # noqa: E402 (needed after node definitions)
 def _e(text: str) -> str:
     """HTML-escape a string for safe inline insertion."""
     return _html_mod.escape(str(text), quote=True)
-
-
-def _entry_key(entry: NewsResourceEntry) -> tuple[str, str, str, str, str, str]:
-    """Build a stable identity for duplicate detection during env merge."""
-    return (
-        entry.get("docname", ""),
-        entry.get("title", ""),
-        entry.get("type", ""),
-        entry.get("author", ""),
-        entry.get("date", ""),
-        entry.get("link", ""),
-    )
 
 
 def _is_safe_external_link(link: str) -> bool:
