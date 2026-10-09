@@ -1,0 +1,174 @@
+
+
+
+
+
+
+:class:`ExampleDataClass`
+=========================
+
+
+.. py:class:: examples.samples.ExampleDataClass
+
+   
+   An example dataclass.
+
+
+   :Parameters:
+
+       **value** : :class:`python:float`
+           A mandatory parameter.
+
+       **value_with_default** : :class:`python:float`, :obj:`optional`
+           An optional parameter with a default value of 3.14.
+
+       **value_with_default_field** : :class:`python:float`, :obj:`optional`
+           An optional parameter using field for the default value.
+           Default is 3.14.
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .. rubric:: Examples
+
+   >>> example = ExampleDataClass(value=42)
+   >>> example.value
+   42
+   >>> example.value_with_default
+   3.14
+   >>> example.value_with_default_field
+   3.14
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:currentmodule:: ExampleDataClass
+
+Overview
+--------
+
+.. tab-set::
+
+
+
+
+
+   .. tab-item:: Attributes
+
+      .. list-table::
+          :header-rows: 0
+          :widths: auto
+
+          * - :py:attr:`~value`
+            - A mandatory parameter.
+          * - :py:attr:`~value_with_default`
+            - An optional parameter with a default value.
+          * - :py:attr:`~value_with_default_field`
+            - An optional parameter using field for the default value.
+
+
+
+
+
+
+Import detail
+-------------
+
+.. code-block:: python
+
+    from examples.samples import ExampleDataClass
+
+
+Attribute detail
+----------------
+
+.. py:attribute:: value
+   :type:  float
+
+   
+   A mandatory parameter.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:attribute:: value_with_default
+   :type:  float
+   :value: 3.14
+
+
+   
+   An optional parameter with a default value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:attribute:: value_with_default_field
+   :type:  float
+   :value: 3.14
+
+
+   
+   An optional parameter using field for the default value.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+
+
+
