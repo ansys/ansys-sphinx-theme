@@ -52,8 +52,7 @@ To wire it into the sidebar configure ``html_theme_options`` in ``conf.py``::
     }
 """
 
-import html as _html  # noqa: F401 (used in _e helper below)
-from typing import List, Optional
+from urllib.parse import urlsplit
 import uuid as _uuid
 
 from docutils import nodes
@@ -66,6 +65,9 @@ logger = logging.getLogger(__name__)
 
 class NewsResourcesTableNode(nodes.General, nodes.Element):
     """Placeholder node replaced by the real table during ``doctree-resolved``."""
+
+
+NewsResourceEntry = dict[str, str]
 
 
 class NewsItemDirective(Directive):
@@ -138,8 +140,6 @@ class NewsResourcesTableDirective(Directive):
     def run(self) -> list:
         """Insert a placeholder node that will be resolved later."""
         node = NewsResourcesTableNode()
-        node.document = self.state.document
-        self.state.nested_parse(self.content, self.content_offset, node)
         return [node]
 
 
@@ -165,10 +165,12 @@ def merge_news_resources(app: Sphinx, env, docnames, other) -> None:
     if not hasattr(env, "news_resources"):
         env.news_resources = []
     # Avoid duplicates in case of re-merge
-    existing = {(e["docname"], e["title"]) for e in env.news_resources}
+    existing = {_entry_key(e) for e in env.news_resources}
     for entry in other.news_resources:
-        if (entry["docname"], entry["title"]) not in existing:
+        entry_key = _entry_key(entry)
+        if entry_key not in existing:
             env.news_resources.append(entry)
+            existing.add(entry_key)
 
 
 def resolve_news_resources_table(app: Sphinx, doctree: nodes.document, docname: str) -> None:
@@ -187,12 +189,14 @@ def resolve_news_resources_table(app: Sphinx, doctree: nodes.document, docname: 
     docname : str
         Name of the document being resolved.
     """
-    placeholder_list = list(
-        doctree.traverse(lambda n: n.__class__.__name__ == "NewsResourcesTableNode")
-    )
+    placeholder_list = list(doctree.traverse(NewsResourcesTableNode))
 
-    # Collect all entries regardless of which document defined them
-    entries: list = getattr(app.env, "news_resources", [])
+    # Collect only entries for the current document.
+    entries: list[NewsResourceEntry] = [
+        entry
+        for entry in getattr(app.env, "news_resources", [])
+        if entry.get("docname") == docname
+    ]
 
     if not placeholder_list:
         # Auto-inject the table when the page has news-item directives but no
@@ -218,6 +222,25 @@ def _e(text: str) -> str:
     return _html_mod.escape(str(text), quote=True)
 
 
+def _entry_key(entry: NewsResourceEntry) -> tuple[str, str, str, str, str, str]:
+    """Build a stable identity for duplicate detection during env merge."""
+    return (
+        entry.get("docname", ""),
+        entry.get("title", ""),
+        entry.get("type", ""),
+        entry.get("author", ""),
+        entry.get("date", ""),
+        entry.get("link", ""),
+    )
+
+
+def _is_safe_external_link(link: str) -> bool:
+    """Return ``True`` only for http(s) links suitable for ``href``."""
+    if not link:
+        return False
+    return urlsplit(link).scheme.lower() in {"http", "https"}
+
+
 # Badge CSS modifier per type (case-insensitive); unknown types get 'other'.
 _BADGE_TYPE_MAP = {
     "video": "video",
@@ -231,7 +254,7 @@ def _badge_cls(entry_type: str) -> str:
     return _BADGE_TYPE_MAP.get(entry_type.lower(), "other")
 
 
-def _build_table(entries: list) -> nodes.raw:
+def _build_table(entries: list[NewsResourceEntry]) -> nodes.raw:
     """Build a raw HTML card list with type/author filter buttons.
 
     Parameters
@@ -250,8 +273,8 @@ def _build_table(entries: list) -> nodes.raw:
 
     # Collect unique types (deduplicated case-insensitively) and authors.
     # seen_types: lowercase key -> display label (title-case of first occurrence)
-    seen_types: dict = {}
-    seen_authors: list = []
+    seen_types: dict[str, str] = {}
+    seen_authors: list[str] = []
     for e in entries:
         key = e["type"].lower()
         if key not in seen_types:
@@ -310,6 +333,13 @@ def _build_table(entries: list) -> nodes.raw:
         description = entry.get("description", "")
         author = entry["author"]
         date = entry.get("date", "")
+        safe_link = link if _is_safe_external_link(link) else ""
+        if link and not safe_link:
+            logger.warning(
+                "Unsupported news-resource link scheme in entry '%s'. "
+                "Only http(s) links are rendered as clickable URLs.",
+                title,
+            )
 
         parts.append(
             f'<div class="nr-row" data-type="{_e(etype.lower())}" data-author="{_e(author)}">'
@@ -320,9 +350,9 @@ def _build_table(entries: list) -> nodes.raw:
 
         # Content: title (linked if :link: provided) + description
         parts.append('<div class="nr-content">')
-        if link:
+        if safe_link:
             parts.append(
-                f'<a href="{_e(link)}" class="nr-title"'
+                f'<a href="{_e(safe_link)}" class="nr-title"'
                 f' target="_blank" rel="noopener noreferrer">{_e(title)}</a>'
             )
         else:
@@ -482,7 +512,7 @@ def _build_table(entries: list) -> nodes.raw:
     return nodes.raw("", "\n".join(parts), format="html")
 
 
-def news_resources_sidebar_pages(app: Sphinx) -> Optional[List[str]]:
+def news_resources_sidebar_pages(app: Sphinx) -> list[str] | None:
     """Return the list of pages that should display the news & resources sidebar widget.
 
     Parameters
@@ -492,7 +522,7 @@ def news_resources_sidebar_pages(app: Sphinx) -> Optional[List[str]]:
 
     Returns
     -------
-    Optional[List[str]]
+    list[str] | None
         List of page names, or ``None`` if the feature is not configured.
     """
     html_theme_options = app.config.html_theme_options
@@ -500,10 +530,12 @@ def news_resources_sidebar_pages(app: Sphinx) -> Optional[List[str]]:
     if not news_resources_options:
         return None
     pages = news_resources_options.get("pages", ["index"])
-    return [pages] if isinstance(pages, str) else pages
+    if isinstance(pages, str):
+        return [pages]
+    return list(pages)
 
 
-def get_news_resources_context(app: Sphinx) -> Optional[dict]:
+def get_news_resources_context(app: Sphinx) -> dict[str, str] | None:
     """Return the news & resources context dict for Jinja templates.
 
     Parameters
@@ -513,7 +545,7 @@ def get_news_resources_context(app: Sphinx) -> Optional[dict]:
 
     Returns
     -------
-    Optional[dict]
+    dict[str, str] | None
         Context dict with ``link`` and ``title`` keys, or ``None`` if not configured.
     """
     html_theme_options = app.config.html_theme_options
