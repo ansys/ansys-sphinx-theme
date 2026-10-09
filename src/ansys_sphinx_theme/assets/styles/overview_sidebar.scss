@@ -1,0 +1,117 @@
+/*
+ * Links, active state and hover reuse pydata's .bd-links rules automatically
+ * because we use the same HTML structure (bd-links, bd-toc-item, bd-sidenav,
+ * li.current). Only the extras below are needed.
+ *
+ * Separator from the section above; remove any extra top padding pydata adds
+ */
+nav.bd-links.sidebar-overview {
+  padding-top: 0.25rem;
+  margin-top: 0.25rem;
+
+  // Plain text headings — no bold
+  p.bd-links__title {
+    font-weight: normal;
+  }
+
+  // Align the list flush-left (no extra indent beyond pydata's own .65rem link padding)
+  .bd-sidenav {
+    padding-left: 0;
+
+    // More spacing between items + font size
+    li > a {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+      line-height: 1.5rem;
+      font-size: 0.875rem; // 14px
+    }
+  }
+}
+/* Cheatsheet link — PDF badge sits inline via inherited flex from common rule */
+.sidebar-overview-cs-link {
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+
+/* PDF badge */
+.sidebar-overview-pdf-badge {
+  flex-shrink: 0;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  background: #ececec;
+  color: var(--pst-color-text-muted, #4b5563);
+}
+
+// what's new overview summary arrow
+
+.whatsnew-overview-item summary {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  width: 100%;
+}
+.whatsnew-overview-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.whatsnew-overview-item summary::after {
+  content: "›";
+  margin-right: 0.5rem;
+  color: var(--ast-sidebar-primary-text);
+      font-size: 1.5rem;
+}
+
+.whatsnew-overview-item details[open] summary::after {
+  transform: rotate(90deg);
+}
+
+// Shared token — single source of truth for item padding
+$_nr-item-padding: 4px 24px;
+$_nr-item-radius: var(--ast-sphinx-design-border-radius);
+
+
+.bd-sidenav .bd-links__title a{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.bd-sidenav .bd-links__title a, .whatsnew-overview-item summary {
+  padding: $_nr-item-padding;
+  color: var(--pst-color-text-base) !important;
+  border-radius: $_nr-item-radius;
+  line-height: 1.5rem;
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.whatsnew-overview-item summary a {
+  width: auto;
+  color: var(--pst-color-text-base) !important;
+  line-height: 1.5rem;
+}
+
+p.whatsnew-overview-item-title{
+  margin-bottom: 0;
+}
+
+.bd-sidenav .bd-links__title a:hover, .whatsnew-overview-item summary:hover {
+  color: var(--ast-sidebar-primary-text) !important;
+  background: var(--ast-sidebar-hover-background);
+  box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
+  border-radius: $_nr-item-radius;
+  text-decoration: none;
+}
+
+.bd-sidenav .bd-links__title a.active, .bd-sidenav .bd-links__title a.current {
+    color: var(--ast-color-text);
+    background: var(--ast-sidebar-active-background);
+    text-decoration: none;
+    box-shadow: 1px 1px 2px 0px var(--ast-sidebar-active-background);
+    border-radius: var(--ast-sphinx-design-border-radius);
+    font-weight: var(--ast-font-weight-bold);
+}
