@@ -56,10 +56,10 @@ all = [
 
 [dependency-groups]
 type-check = [
-    "ty==0.0.84",
+    "ty==0.0.85",
 ]
 doc = [
-    "jupytext==1.19.5",
+    "jupytext==1.19.6",
     "kaleido==1.4.0",
     "nbsphinx==0.9.8",
     "notebook==7.6.3",
@@ -79,7 +79,7 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.3.2",
-    "tox==4.64.8",
+    "tox==4.64.9",
     "pydantic==2.13.5"
 ]
 [project.entry-points."sphinx.html_themes"]
