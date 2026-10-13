@@ -7,7 +7,7 @@ ci:
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: f12be1ebaa5351c1fc76472de98db2c3446c8253  # frozen: v0.16.10
+  rev: 44b5042edab9382aba712eed4f9c7bab7a3d6a3e  # frozen: v0.17.0
   hooks:
     - id: ruff
       args: [--fix]
@@ -65,6 +65,6 @@ repos:
       types_or: ["html"]
 
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "6972e4c5a7e9f45f05a2f30b668f221f43b770c9"  # frozen: v0.0.84
+  rev: "ded8634232ffc633dc66d44f1b0dfe2bdf766542"  # frozen: v0.0.86
   hooks:
     - id: ty
