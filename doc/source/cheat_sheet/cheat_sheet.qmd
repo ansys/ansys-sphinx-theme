@@ -1,0 +1,206 @@
+---
+title: 'Ansys Sphinx Theme cheat-sheet'
+format: cheat_sheet-pdf
+params:
+  version: main
+footer: ansys-sphinx-theme
+footerlinks:
+  - urls: 'https://sphinxdocs.ansys.com'
+    text: Documentation
+  - urls: 'https://sphinxdocs.ansys.com/version/stable/getting-started/installation.html'
+    text: Getting started
+  - urls: 'https://sphinxdocs.ansys.com/version/stable/user-guide/options.html'
+    text: Theme options
+  - urls: 'https://sphinxdocs.ansys.com/version/stable/user-guide/autoapi.html'
+    text: AutoAPI
+  - urls: 'https://github.com/ansys/ansys-sphinx-theme'
+    text: GitHub
+execute:
+    eval: false
+latex-clean: true
+jupyter:
+  jupytext:
+    text_representation:
+      extension: .qmd
+      format_name: quarto
+      format_version: '1.0'
+      jupytext_version: 1.16.1
+  kernelspec:
+    display_name: Python 3 (ipykernel)
+    language: python
+    name: python3
+---
+
+# Basic Configuration
+
+```{python}
+#| eval: false
+from ansys_sphinx_theme import ansys_favicon, get_version_match, __version__
+
+html_theme = "ansys_sphinx_theme"
+html_favicon = ansys_favicon
+html_short_title = html_title = "My Library"
+html_theme_options = {
+    "github_url": "https://github.com/ansys/my-library",
+    "contact_mail": "pyansys.core@ansys.com",
+    "logo": "ansys",           # "ansys" | "pyansys" | "no_logo"
+    "logo_link": "https://www.ansys.com",
+    "show_breadcrumbs": True,
+    "additional_breadcrumbs": [("PyAnsys", "https://docs.pyansys.com/")],
+    "collapse_navigation": True,
+    "pygments_light_style": "friendly",
+    "pygments_dark_style": "monokai",
+}
+```
+
+# Version Switcher
+
+```{python}
+#| eval: false
+html_theme_options = {
+    "switcher": {
+        "json_url": f"https://{cname}/versions.json",
+        "version_match": get_version_match(__version__),
+    },
+}
+# get_version_match("0.11.0dev0") → "dev"
+# get_version_match("0.11.2")     → "0.11"
+```
+
+# Navigation Bar & Sidebar
+
+```{python}
+#| eval: false
+html_theme_options = {
+    "navbar_end": ["search-button-field", "version-switcher",
+                   "theme-switcher", "navbar-icon-links"],
+    "icon_links": [{"name": "GitHub",
+                    "url": "https://github.com/ansys/my-lib",
+                    "icon": "fa-brands fa-github"}],
+    "hidden_icons": ["GitHub"],    # hide specific icons
+    "show_icons": False,            # hide all icons
+    "secondary_sidebar_items": ["page-toc", "edit-this-page", "sourcelink"],
+    "show_page_toc": True,
+    "show_source_button": True,
+}
+```
+
+# Search
+
+```{python}
+#| eval: false
+html_theme_options = {
+    "static_search": {
+        "threshold": 0.5, "limit": 10,
+        "delay": 300,               # ms debounce; 0 to disable
+        "files_to_exclude": ["api/", "_build"],
+    },
+    "search_extra_sources": {      # multi-index search
+        "PyAnsys": "https://docs.pyansys.com/version/stable/",
+    },
+    "search_filters": {            # result grouping
+        "User Guide": ["user-guide/", "getting-started/"],
+        "Release Notes": ["changelog"],
+        "Examples": ["examples/"],
+    },
+}
+# Serve locally to test (required for CORS):
+# python -m http.server  →  http://localhost:8000
+```
+
+# Cheat Sheet Sidebar
+
+```{python}
+#| eval: false
+html_theme_options = {
+    "cheatsheet": {
+        "file": "cheat_sheet/cheat_sheet.qmd",
+        "title": "Ansys Sphinx Theme cheat sheet",
+        "version": f"{version}",
+        "pages": ["index"],
+    },
+}
+```
+
+# AutoAPI Extension
+
+```{python}
+#| eval: false
+extensions = ["ansys_sphinx_theme.extension.autoapi"]
+
+html_theme_options = {
+    "ansys_sphinx_theme_autoapi": {
+        "project": "My Library",
+        "output": "api",
+        "directory": "src/ansys",
+        "use_implicit_namespaces": True,
+        "own_page_level": "class",
+        "options": ["members", "undoc-members",
+                    "show-inheritance", "show-module-summary"],
+        "member_order": "bysource",  # "alphabetical" | "groupwise"
+        "package_depth": 3,
+    }
+}
+```
+
+# Linkcode Extension
+
+```{python}
+#| eval: false
+extensions = ["ansys_sphinx_theme.extension.linkcode"]
+
+link_code_library = "ansys/my-library"
+link_code_source  = "src"
+link_code_branch  = "main"
+# or via html_context:
+html_context = {"github_user": "ansys", "github_repo": "my-library",
+                "github_version": "main", "source_path": "src"}
+```
+
+# PDF Cover Page & 404
+
+```{python}
+#| eval: false
+from ansys_sphinx_theme import (
+    ansys_logo_white, ansys_logo_white_cropped,
+    watermark, latex, generate_404,
+)
+from sphinx.builders.latex import LaTeXBuilder
+
+LaTeXBuilder.supported_image_types = ["image/png", "image/pdf", "image/svg+xml"]
+latex_additional_files = [watermark, ansys_logo_white, ansys_logo_white_cropped]
+latex_elements = {"preamble": latex.generate_preamble(html_title)}
+latex_engine = "xelatex"
+
+notfound_context = {"body": generate_404()}
+notfound_no_urls_prefix = True
+```
+
+# What's New Section
+
+`pip install ansys-sphinx-theme[changelog]`
+
+Create `doc/changelog.d/whatsnew.yml`:
+
+```{python}
+#| eval: false
+# fragments:
+#   - title: Feature title
+#     version: 0.11.0
+#     content: |
+#       RST description.
+```
+
+Enable in `conf.py`:
+
+```{python}
+#| eval: false
+html_theme_options = {
+    "whatsnew": {
+        "file": "changelog.d/whatsnew.yml",
+        "title": "What's new",
+        "version": f"{version}",
+        "pages": ["index"],
+    },
+}
+```
