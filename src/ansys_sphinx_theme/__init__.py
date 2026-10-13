@@ -17,11 +17,12 @@
 """Module for the Ansys Sphinx theme."""
 
 import datetime
+import html
 import importlib.metadata as importlib_metadata
 import os
 import pathlib
 import re
-from typing import Any
+from typing import Any, Iterable, cast
 
 from docutils import nodes
 from sphinx import addnodes
@@ -33,6 +34,16 @@ from ansys_sphinx_theme.cheatsheet import build_quarto_cheatsheet, cheatsheet_si
 from ansys_sphinx_theme.extension.linkcode import DOMAIN_KEYS, sphinx_linkcode_resolve
 from ansys_sphinx_theme.latex import generate_404
 from ansys_sphinx_theme.navbar_dropdown import load_navbar_configuration, update_template_context
+from ansys_sphinx_theme.news_resources import (
+    NewsItemDirective,
+    NewsResourcesTableDirective,
+    NewsResourcesTableNode,
+    get_news_resources_context,
+    merge_news_resources,
+    news_resources_sidebar_pages,
+    purge_news_resources,
+    resolve_news_resources_table,
+)
 from ansys_sphinx_theme.search import (
     create_search_index,
     update_search_config,
@@ -46,7 +57,6 @@ from ansys_sphinx_theme.whatsnew import (
 
 __version__ = importlib_metadata.version(__name__.replace(".", "-"))
 logger = logging.getLogger(__name__)
-
 
 # Declare the fundamental paths of the theme
 THIS_PATH = pathlib.Path(__file__).parent.resolve()
@@ -428,6 +438,108 @@ def configure_theme_logo(app: Sphinx):
         theme_options["logo"] = logo_option
 
 
+def _normalize_sidebar_title(
+    value: Any, *, from_pagename: bool = False, from_html_context: bool = False
+) -> str:
+    """Normalize a sidebar-title value into plain text.
+
+    Parameters
+    ----------
+    value : Any
+        Value extracted from the Sphinx/Jinja page context.
+
+    from_pagename : bool, default: False
+        Whether ``value`` comes from a docname/pagename fallback.
+
+    from_html_context : bool, default: False
+        Whether ``value`` comes from rendered HTML template context values.
+        When ``True``, known HTML tags are stripped before entity decoding.
+
+    Returns
+    -------
+    str
+        Normalized plain-text title. Returns an empty string when ``value`` is
+        not a string.
+
+    Notes
+    -----
+    Parent titles in Sphinx context can be HTML fragments (for example,
+    ``"<code>foo</code>"``). For these values, set ``from_html_context=True``
+    to remove tags before entity decoding. Plain-text values (for example,
+    ``app.env.titles[root_doc].astext()``) should not be treated as markup.
+    """
+    if not isinstance(value, str):
+        return ""
+
+    if from_html_context and "<" in value:
+        value = re.sub(r"</?[A-Za-z][^>]*>", "", value)
+    value = html.unescape(value)
+    value = " ".join(value.split())
+
+    # Preserve human-authored titles; prettify only fallback docnames.
+    if from_pagename:
+        value = value.replace("_", " ").replace("-", " ")
+        value = " ".join(value.split())
+
+    return value
+
+
+def _resolve_sidebar_section_title(app: Sphinx, context: dict, pagename: str) -> str:
+    """Resolve the section title displayed in the primary sidebar.
+
+    Parameters
+    ----------
+    app : sphinx.application.Sphinx
+        Active Sphinx application instance.
+    context : dict
+        Template context for the current page.
+    pagename : str
+        Current document name (for example, ``"user-guide/options"``).
+
+    Returns
+    -------
+    str
+        Plain-text section title for sidebar rendering.
+
+    Notes
+    -----
+    Title resolution uses this precedence:
+
+    1. Outermost ancestor title from ``context["parents"]``.
+    2. Top-level document title derived from the first path segment of
+       ``pagename`` using ``app.env.titles``.
+    3. Current page title from ``context["title"]``.
+    4. ``"Section Navigation"`` as a final fallback.
+    """
+    env_titles = getattr(getattr(app, "env", None), "titles", None) or {}
+
+    parents = context.get("parents")
+    if isinstance(parents, list):
+        for parent in parents:
+            if not isinstance(parent, dict):
+                continue
+            parent_title = _normalize_sidebar_title(parent.get("title"), from_html_context=True)
+            if parent_title:
+                return parent_title
+
+    root_doc = pagename.split("/", 1)[0]
+    root_title_node = env_titles.get(root_doc)
+    if root_title_node is not None:
+        root_title = _normalize_sidebar_title(root_title_node.astext())
+        if root_title:
+            return root_title
+
+    context_title = _normalize_sidebar_title(context.get("title"), from_html_context=True)
+    if context_title:
+        return context_title
+
+    pagename_title = _normalize_sidebar_title(context.get("pagename"), from_pagename=True)
+    if pagename_title:
+        return pagename_title
+
+    return "Section Navigation"
+
+
 def add_sidebar_context(
     app: Sphinx, pagename: str, templatename: str, context: dict, doctree: nodes.document
 ) -> None:
@@ -451,37 +563,69 @@ def add_sidebar_context(
     doctree : docutils.nodes.document
         Document tree for the page.
     """
-    # Expose flag to Jinja templates (used by sidebar-nav-bs.html).
+    # Expose metadata to Jinja templates (used by sidebar-nav-bs.html).
     context["ast_page_toc_in_primary"] = getattr(app, "_ast_page_toc_in_primary", False)
+    context["ast_section_title"] = _resolve_sidebar_section_title(app, context, pagename)
 
     whatsnew_pages = whatsnew_sidebar_pages(app)
     cheatsheet_pages = cheatsheet_sidebar_pages(app)
-
-    if not whatsnew_pages and not cheatsheet_pages:
-        return
+    news_resources_pages = news_resources_sidebar_pages(app)
 
     sidebar = context.get("sidebars", [])
 
-    sidebar_mapping = {"cheatsheet": "cheatsheet_sidebar.html", "whatsnew": "whatsnew_sidebar.html"}
-
-    sidebars_to_add = []
-
-    if cheatsheet_pages and pagename in cheatsheet_pages:
-        sidebars_to_add.append("cheatsheet")
-        context["cheatsheet"] = app.config.html_theme_options.get("cheatsheet", {})
-
+    # --- Whatsnew sidebar (independent widget, unchanged) ---
     if whatsnew_pages and pagename in whatsnew_pages:
         whatsnew = context.get("whatsnew", [])
         if hasattr(app.env, "whatsnew"):
             whatsnew.extend(app.env.whatsnew)
         context["whatsnew"] = whatsnew
-        sidebars_to_add.append("whatsnew")
+        if "whatsnew_sidebar.html" not in sidebar:
+            sidebar.append("whatsnew_sidebar.html")
 
-    # Append sidebars
+    # --- Overview sidebar: Package Home + optional Cheatsheet + optional News & Resources +
+    # optional What's New ---
+    # Only rendered when at least one of cheatsheet or news_resources is configured.
+    nr_options = app.config.html_theme_options.get("news_resources") or {}
+    nr_link_page = nr_options.get("link", "")
 
-    for item in sidebars_to_add:
-        if sidebar_mapping[item] not in sidebar:
-            sidebar.append(sidebar_mapping[item])
+    if cheatsheet_pages or news_resources_pages or whatsnew_pages:
+        overview_pages: set = set()
+        if cheatsheet_pages:
+            overview_pages.update(cheatsheet_pages)
+        if news_resources_pages:
+            overview_pages.update(news_resources_pages)
+        if whatsnew_pages:
+            overview_pages.update(whatsnew_pages)
+        # Always show overview on index when either feature is active
+        overview_pages.add("index")
+        # Always show overview on the news & resources target page itself
+        if nr_link_page:
+            overview_pages.add(nr_link_page)
+
+        if pagename in overview_pages:
+            cheatsheet_ctx = (
+                app.config.html_theme_options.get("cheatsheet", {}) if cheatsheet_pages else None
+            )
+            nr_ctx = get_news_resources_context(app) if nr_options else None
+            home_page = getattr(app.config, "master_doc", None) or getattr(
+                app.config, "root_doc", "index"
+            )
+            wn_ctx = None
+            if whatsnew_pages:
+                wn_ctx = context.get("whatsnew", [])
+                if hasattr(app.env, "whatsnew"):
+                    wn_ctx = list(cast(Iterable[Any], app.env.whatsnew))
+            context["overview_sidebar"] = {
+                "home_page": home_page,
+                "cheatsheet": cheatsheet_ctx,
+                "news_resources": nr_ctx,
+                "whatsnew_items": wn_ctx,
+            }
+            if "overview_sidebar.html" not in sidebar:
+                sidebar.append("overview_sidebar.html")
+            # Remove standalone whatsnew sidebar if overview already shows whatsnew dropdown
+            if wn_ctx and "whatsnew_sidebar.html" in sidebar:
+                sidebar.remove("whatsnew_sidebar.html")
 
     # Update the sidebar context
     context["sidebars"] = sidebar
@@ -538,7 +682,7 @@ def resolve_home_entry(app: Sphinx, doctree: nodes.document, docname: str) -> No
 
     # Get the root TOC
     root_toc = app.env.tocs[app.config.root_doc]
-    if not root_toc:
+    if root_toc is None:
         return
 
     for toc in root_toc.findall(addnodes.toctree):
@@ -677,6 +821,18 @@ def add_default_copyright(app: Sphinx) -> None:
     app.config.copyright = f"{current_year} Synopsys, Inc. and ANSYS, Inc. All rights reserved"
 
 
+def _exclude_news_resources_for_non_html(app: Sphinx) -> None:
+    """Exclude the news & resources page from non-HTML builders (e.g. LaTeX/PDF)."""
+    if app.builder.name == "html":
+        return
+    nr_options = app.config.html_theme_options.get("news_resources") or {}
+    if not nr_options:
+        return
+    page = nr_options.get("link")
+    if page:
+        app.config.exclude_patterns.append(f"{page}.rst")
+
+
 def setup(app: Sphinx) -> dict:
     """Connect to the Sphinx theme app.
 
@@ -691,6 +847,13 @@ def setup(app: Sphinx) -> dict:
         Dictionary containing application status.
 
     """
+    # Register news & resources directives unconditionally so non-HTML builders
+    # (e.g. LaTeX/PDF) can parse sources that contain ``.. news-item::`` directives.
+    app.add_node(NewsResourcesTableNode)
+    app.add_directive("news-item", NewsItemDirective)
+    app.add_directive("news-resources-table", NewsResourcesTableDirective)
+    app.connect("builder-inited", _exclude_news_resources_for_non_html)
+
     # Add the theme configuration
     theme_path = get_html_theme_path()
     app.add_html_theme("ansys_sphinx_theme", str(theme_path))
@@ -720,6 +883,11 @@ def setup(app: Sphinx) -> dict:
     if whatsnew_file and changelog_file:
         app.connect("doctree-read", add_whatsnew_changelog)
         app.connect("doctree-resolved", extract_whatsnew)
+
+    app.connect("env-purge-doc", purge_news_resources)
+    app.connect("env-merge-info", merge_news_resources)
+    app.connect("doctree-resolved", resolve_news_resources_table)
+
     app.connect("html-page-context", add_sidebar_context)
     app.connect("html-page-context", update_footer_theme)
     app.connect("html-page-context", fix_edit_html_page_context)

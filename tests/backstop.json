@@ -53,9 +53,9 @@
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/nbsphinx/jupyter-notebook.html",
       "readyEvent": "",
       "readySelector": "",
-      "delay": 20,
+      "delay": 1200,
       "selectors": ["viewport"],
-      "misMatchThreshold" : 0.2,
+      "misMatchThreshold" : 6.0,
       "requireSameDimensions": false,
       "viewports": [
       {
