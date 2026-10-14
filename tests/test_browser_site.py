@@ -47,7 +47,9 @@ def test_navbar_links_and_dropdown(page: Page) -> None:
 def test_navbar_end_components(page: Page) -> None:
     open_page(page)
     expect(
-        page.locator('.search-bar input[type="search"], .search-bar input[placeholder*="Search" i]')
+        page.locator(
+            '.search-bar input[type="search"], .search-bar input[placeholder*="Search" i]'
+        ).first
     ).to_be_attached()
     expect(
         page.locator(".version-switcher__button, .version-switcher__container button")
@@ -188,7 +190,7 @@ def test_sphinx_tabs(page: Page) -> None:
 
 def test_tables(page: Page) -> None:
     open_page(page, "examples/table.html")
-    table = page.locator(".pst-scrollable-table-container")
+    table = page.locator(".pst-scrollable-table-container").first
     expect(table).to_be_attached()
     assert table.locator("th").count() > 0
     assert table.locator("tbody tr").count() > 0
@@ -212,7 +214,7 @@ def test_clickable_card_navigation(page: Page) -> None:
     open_page(page, "examples/sphinx-design.html")
     link = page.locator(
         '.sd-card:has(.sd-card-title:has-text("Clickable Card (external)")) a.sd-stretched-link'
-    )
+    ).first
     expect(link).to_be_attached()
     href = link.get_attribute("href") or ""
     target = link.get_attribute("target")
@@ -230,7 +232,7 @@ def test_clickable_card_navigation(page: Page) -> None:
 
 def test_sphinx_design_dropdown(page: Page) -> None:
     open_page(page, "examples/sphinx-design.html")
-    dropdown = page.locator("details.sd-dropdown")
+    dropdown = page.locator("details.sd-dropdown").first
     expect(dropdown).to_be_attached()
     summary = dropdown.locator("summary.sd-summary-title")
     expect(summary).to_be_attached()
