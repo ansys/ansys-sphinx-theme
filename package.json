@@ -9,19 +9,18 @@
         "backstop:ref": "npx backstop reference --config tests/backstop.json",
         "backstop:test": "npx backstop test --config tests/backstop.json",
         "reference-tests": "npm run backstop:clean && npm run backstop:ref && npm run backstop:test",
-        "playwright-test": "npx playwright install && cd tests && npx playwright test",
-        "test": "npm run reference-tests && npm run playwright-test"
+        "browser-test": "python -m pytest -q tests/test_browser_*.py",
+        "test": "npm run reference-tests && npm run browser-test"
     },
     "scriptsDescription": {
         "build:scss": "Compile SCSS to CSS",
         "build:postcss": "Apply PostCSS transformations (autoprefixer, minify, etc.)",
         "build": "Build complete CSS from SCSS and apply PostCSS",
         "reference-tests": "Run BackstopJS visual regression tests (reference and test)",
-        "playwright-test": "Run Playwright end-to-end tests",
-        "test": "Run all tests (visual regression + e2e)"
+        "browser-test": "Run Python Playwright end-to-end tests",
+        "test": "Run all tests (visual regression + browser tests)"
     },
     "devDependencies": {
-        "@playwright/test": "^1.56.0",
         "autoprefixer": "^10.4.21",
         "backstopjs": "^6.3.25",
         "postcss": "^8.5.3",
