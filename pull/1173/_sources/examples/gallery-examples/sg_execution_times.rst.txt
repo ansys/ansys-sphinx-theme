@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:07.084** total execution time for 1 file **from examples/gallery-examples**:
+**00:03.885** total execution time for 1 file **from examples/gallery-examples**:
 
 .. container::
 
@@ -33,5 +33,5 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_examples_gallery-examples_sphinx-gallery.py` (``sphinx-gallery.py``)
-     - 00:07.084
+     - 00:03.885
      - 0.0
