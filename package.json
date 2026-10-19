@@ -9,7 +9,7 @@
         "backstop:ref": "npx backstop reference --config tests/backstop.json",
         "backstop:test": "npx backstop test --config tests/backstop.json",
         "reference-tests": "npm run backstop:clean && npm run backstop:ref && npm run backstop:test",
-        "browser-test": "python -m pytest -q tests/test_browser_*.py",
+        "browser-test": "python -m pytest -q --tracing retain-on-failure tests/test_browser_*.py",
         "test": "npm run reference-tests && npm run browser-test"
     },
     "scriptsDescription": {

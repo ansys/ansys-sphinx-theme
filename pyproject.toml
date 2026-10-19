@@ -120,7 +120,9 @@ ignore = [
 "__init__.py" = ["F401"]
 "doc/source/examples/sphinx-gallery/sphinx-gallery.py" = ["D205", "E402", "D400"]
 "src/ansys_sphinx_theme/extension/linkcode.py" = ["E501"]
-"tests/test_browser_*.py" = ["D103"]
+
+[tool.pytest.ini_options]
+pythonpath = ["tests"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "numpy"

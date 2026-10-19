@@ -55,88 +55,69 @@ def test_navbar_end_components(page: Page) -> None:
     components render in more than one place (e.g. desktop and mobile).
     """
     open_page(page)
-    expect(
-        page.locator(
-            '.search-bar input[type="search"], .search-bar input[placeholder*="Search" i]'
-        ).first
-    ).to_be_attached()
-    expect(
-        page.locator(".version-switcher__button, .version-switcher__container button").first
-    ).to_be_attached()
-    expect(
-        page.locator('button.theme-switch-button, button[aria-label*="Color mode" i]').first
-    ).to_be_attached()
+    expect(page.locator('.search-bar input[type="search"]').first).to_be_attached()
+    expect(page.locator("button.version-switcher__button").first).to_be_attached()
+    expect(page.locator("button.theme-switch-button").first).to_be_attached()
     expect(page.locator('a[href*="github.com/ansys/ansys-sphinx-theme"]').first).to_be_attached()
 
 
 def test_navigation_contains_home_link(page: Page) -> None:
     """Verify the navigation bar has a 'Home' link.
 
-    Skipped when the navigation bar does not render a Home link.
+    Checks the link exists and points to the site root.
     """
     open_page(page)
-    link = page.locator('nav a:has-text("Home"), [role="navigation"] a:has-text("Home")').first
-    if link.count() == 0:
-        pytest.skip("Home link not found in navigation bar")
+    link = page.locator("nav a.nav-link").filter(has_text="Home").first
     expect(link).to_be_attached()
+    expect(link).to_have_attribute("href", re.compile(r"#|index\.html"))
 
 
-def test_sidebar_has_links(page: Page) -> None:
-    """Verify the sidebar is rendered and contains links.
+@pytest.mark.parametrize("path", ("", "user-guide.html"))
+def test_sidebar_has_links(page: Page, path: str) -> None:
+    """Verify the primary sidebar is rendered and contains links.
 
-    Checks the first sidebar or navigation container exists and has at least one link.
+    Opens the home page and the user guide, and checks the primary sidebar has links.
     """
-    open_page(page)
-    sidebar = page.locator(
-        ".bd-sidebar-primary, .bd-sidebar-secondary, .sidebar, nav[role='navigation']"
-    ).first
+    open_page(page, path)
+    sidebar = page.locator(".bd-sidebar-primary").first
     expect(sidebar).to_be_attached()
     expect(sidebar.locator("a").first).to_be_attached()
-    assert sidebar.locator("a").count() > 0
 
 
 def test_version_switcher_exists(page: Page) -> None:
     """Verify the version switcher is rendered.
 
-    Checks an element matching the version switcher markup is attached to the page.
+    Checks the switcher button is attached and shows a non-empty active version.
     """
     open_page(page)
-    expect(
-        page.locator(
-            '.version-switcher, [id*="version-switcher"], [class*="version-switcher"]'
-        ).first
-    ).to_be_attached()
+    button = page.locator("button.version-switcher__button").first
+    expect(button).to_be_attached()
+    expect(button).not_to_be_empty()
 
 
 def test_version_switcher_opens_dropdown(page: Page) -> None:
     """Verify clicking the version switcher opens its menu.
 
-    Clicks the first version switcher element and checks the version list menu is attached.
+    Clicks the first switcher button and checks it is expanded and controls a visible menu.
     """
     open_page(page)
-    switcher = page.locator(
-        '.version-switcher, [id*="version-switcher"], [class*="version-switcher"]'
-    ).first
-    expect(switcher).to_be_attached()
-    switcher.click()
-    expect(
-        page.locator(
-            '.version-switcher__menu, [id*="pst-version-switcher-list-2"]'
-            ', [class*="version-switcher__menu"]'
-        ).first
-    ).to_be_attached()
+    button = page.locator("button.version-switcher__button").first
+    expect(button).to_be_visible()
+    button.click()
+    expect(button).to_have_attribute("aria-expanded", "true")
+    menu_id = button.get_attribute("aria-controls")
+    expect(page.locator(f"[id='{menu_id}']")).to_be_visible()
 
 
 def test_theme_switcher_options(page: Page) -> None:
     """Verify the color mode switcher offers all modes and applies one.
 
     Opens the color mode menu, checks the light, dark and auto buttons exist, selects dark
-    and checks the html element gets data-mode='dark'. Skipped when no switcher exists.
+    and checks the html element gets data-mode='dark'.
     """
     open_page(page)
     switcher = page.locator('button.theme-switch-button[aria-label="Color mode"]').first
-    if switcher.count() == 0:
-        pytest.skip("Theme switcher is not available")
+    expect(switcher).to_be_attached()
     switcher.click()
     menu = page.locator(".theme-switch-container .dropdown-menu").first
     expect(menu).to_be_visible()
@@ -177,13 +158,9 @@ def test_breadcrumbs_exist(page: Page) -> None:
     """Verify breadcrumbs render on a nested page.
 
     Opens user-guide/configuration.html and checks the breadcrumb navigation is attached.
-    Skipped when breadcrumbs are not rendered.
     """
     open_page(page, "user-guide/configuration.html")
-    breadcrumbs = page.locator('.bd-breadcrumb, nav[aria-label="Breadcrumb"]').first
-    if breadcrumbs.count() == 0:
-        pytest.skip("Breadcrumbs not found")
-    expect(breadcrumbs).to_be_attached()
+    expect(page.locator('.bd-breadcrumb, nav[aria-label="Breadcrumb"]').first).to_be_attached()
 
 
 def test_logo_links_home(page: Page) -> None:
@@ -230,26 +207,29 @@ def test_code_block_and_copy_button(page: Page) -> None:
     """Verify code blocks are highlighted and have a working copy button.
 
     Opens user-guide/configuration.html, checks a highlighted block and a copy button are
-    attached, then clicks the copy button.
+    attached, then clicks the copy button and checks it reports success.
     """
     open_page(page, "user-guide/configuration.html")
     expect(page.locator(".highlight").first).to_be_attached()
-    copy_button = page.locator("button.copybtn, .copy-button, .btn-copy").first
+    copy_button = page.locator("button.copybtn").first
     expect(copy_button).to_be_attached()
-    copy_button.click()
+    copy_button.click(force=True)
+    expect(copy_button).to_have_class(re.compile(r"\bsuccess\b"))
 
 
 def test_sphinx_tabs(page: Page) -> None:
     """Verify tab sets render and can be switched.
 
     Opens user-guide/configuration.html, checks a tab set is attached and, when it has more
-    than one tab, clicks the second tab label.
+    than one tab, clicks the second tab label and checks its input becomes checked.
     """
     open_page(page, "user-guide/configuration.html")
-    expect(page.locator(".sd-tab-set, .tab-set, .tab-content").first).to_be_attached()
-    labels = page.locator(".sd-tab-label, .tab-label, .nav-tabs .nav-link")
-    if labels.count() > 1:
-        labels.nth(1).click()
+    tab_set = page.locator(".sd-tab-set").first
+    expect(tab_set).to_be_attached()
+    labels = tab_set.locator("> label.sd-tab-label")
+    assert labels.count() > 1
+    labels.nth(1).click()
+    expect(tab_set.locator("> input").nth(1)).to_be_checked()
 
 
 def test_tables(page: Page) -> None:
@@ -328,16 +308,3 @@ def test_sphinx_design_dropdown(page: Page) -> None:
     summary.click()
     expect(dropdown).to_have_attribute("open", "")
     expect(dropdown.locator(".sd-summary-content")).to_contain_text("Dropdown content")
-
-
-def test_user_guide_sidebar_has_links(page: Page) -> None:
-    """Verify the user guide page sidebar contains links.
-
-    Opens user-guide.html and checks the sidebar is attached and has at least one link.
-    """
-    open_page(page, "user-guide.html")
-    sidebar = page.locator(
-        ".bd-sidebar-primary, .bd-sidebar-secondary, .sidebar, nav[role='navigation']"
-    ).first
-    expect(sidebar).to_be_attached()
-    assert sidebar.locator("a").count() > 0
