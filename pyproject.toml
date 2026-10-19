@@ -60,11 +60,10 @@ browser-test = [
     "pytest-playwright>=0.7",
 ]
 type-check = [
-    "ty==0.0.85",
+    "ty==0.0.86",
 ]
 doc = [
     "jupytext==1.19.6",
-    "kaleido==1.4.0",
     "nbsphinx==0.9.8",
     "notebook==7.6.3",
     "numpydoc==1.11.0",
@@ -72,7 +71,7 @@ doc = [
     "Pillow>=9.0",
     "plotly==7.1.0",
     "PyGitHub==2.10.0",
-    "pyvista[jupyter]==0.49.0",
+    "pyvista[jupyter]==0.49.1",
     "PyYAML==6.0.3",
     "quarto-cli==1.10.19",
     "requests==2.34.2",
@@ -83,8 +82,8 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.3.2",
-    "tox==4.64.10",
-    "pydantic==2.13.5"
+    "tox==4.65.3",
+    "pydantic==2.14.0"
 ]
 [project.entry-points."sphinx.html_themes"]
 "ansys_sphinx_theme" = "ansys_sphinx_theme"
