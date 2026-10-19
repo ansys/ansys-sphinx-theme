@@ -52,12 +52,12 @@ def test_navbar_end_components(page: Page) -> None:
         ).first
     ).to_be_attached()
     expect(
-        page.locator(".version-switcher__button, .version-switcher__container button")
+        page.locator(".version-switcher__button, .version-switcher__container button").first
     ).to_be_attached()
     expect(
-        page.locator('button.theme-switch-button, button[aria-label*="Color mode" i]')
+        page.locator('button.theme-switch-button, button[aria-label*="Color mode" i]').first
     ).to_be_attached()
-    expect(page.locator('a[href*="github.com/ansys/ansys-sphinx-theme"]')).to_be_attached()
+    expect(page.locator('a[href*="github.com/ansys/ansys-sphinx-theme"]').first).to_be_attached()
 
 
 def test_navigation_contains_home_link(page: Page) -> None:
