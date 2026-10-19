@@ -31,6 +31,11 @@ def require_primary_toc(page: Page) -> None:
 
 
 def test_secondary_page_toc_visible_by_default(page: Page) -> None:
+    """Verify the page TOC shows in the secondary sidebar by default.
+
+    Checks the TOC has at least one link. Skipped when the TOC is moved to the primary
+    sidebar or the page TOC is disabled.
+    """
     open_page(page, NESTED_PAGE)
     if is_primary_toc_enabled(page):
         pytest.skip("Page TOC is in the primary sidebar")
@@ -42,6 +47,11 @@ def test_secondary_page_toc_visible_by_default(page: Page) -> None:
 
 
 def test_sidebar_title_matches_top_breadcrumb(page: Page) -> None:
+    """Verify the sidebar title matches the section name in the breadcrumbs.
+
+    Computes the expected title from the first non-home breadcrumb and compares it to the
+    single sidebar title on a nested page.
+    """
     open_page(page, NESTED_PAGE)
     title = page.locator(".bd-docs-nav .bd-links__title")
     expect(title).to_have_count(1)
@@ -64,11 +74,19 @@ def test_sidebar_title_matches_top_breadcrumb(page: Page) -> None:
 
 
 def test_top_level_sidebar_title(page: Page) -> None:
+    """Verify the sidebar title on a top-level page.
+
+    Opens the getting started page and checks the sidebar title is 'Getting started'.
+    """
     open_page(page, TOP_NAV_PAGE)
     expect(page.locator(".bd-docs-nav .bd-links__title")).to_have_text("Getting started")
 
 
 def test_edit_this_page_link_present(page: Page) -> None:
+    """Verify the secondary sidebar edit link points to GitHub.
+
+    Skipped when no edit link is rendered (GitHub context not configured).
+    """
     open_page(page, NESTED_PAGE)
     link = page.locator(
         ".bd-sidebar-secondary .tocsection.editthispage a, "
@@ -81,6 +99,10 @@ def test_edit_this_page_link_present(page: Page) -> None:
 
 
 def test_source_link_present_when_enabled(page: Page) -> None:
+    """Verify the 'Show Source' link is present when enabled.
+
+    Skipped when show_source_button is disabled.
+    """
     open_page(page, NESTED_PAGE)
     link = page.locator(
         '.bd-sidebar-secondary a[href*="_sources"], '
@@ -93,6 +115,11 @@ def test_source_link_present_when_enabled(page: Page) -> None:
 
 
 def test_secondary_sidebar_items(page: Page) -> None:
+    """Verify the secondary sidebar contains the page TOC and edit links.
+
+    Checks the sidebar and the page TOC are attached and, when an edit section exists, that
+    it contains a link. Skipped when the primary sidebar TOC is active.
+    """
     open_page(page, NESTED_PAGE)
     if is_primary_toc_enabled(page):
         pytest.skip("Primary TOC is active")
@@ -106,6 +133,10 @@ def test_secondary_sidebar_items(page: Page) -> None:
 
 
 def test_no_secondary_page_toc_when_disabled(page: Page) -> None:
+    """Verify no page TOC is rendered in the secondary sidebar when disabled.
+
+    Skipped when the page TOC is enabled.
+    """
     open_page(page, NESTED_PAGE)
     if has_secondary_page_toc(page):
         pytest.skip("show_page_toc is enabled")
@@ -114,6 +145,10 @@ def test_no_secondary_page_toc_when_disabled(page: Page) -> None:
 
 
 def test_source_link_absent_when_disabled(page: Page) -> None:
+    """Verify no source link is rendered when it is disabled.
+
+    Skipped when the source link is present.
+    """
     open_page(page, NESTED_PAGE)
     link = page.locator(
         '.bd-sidebar-secondary a[href*="_sources"], '
@@ -126,6 +161,10 @@ def test_source_link_absent_when_disabled(page: Page) -> None:
 
 
 def test_no_primary_toc_when_disabled(page: Page) -> None:
+    """Verify no primary sidebar TOC is injected when the feature is off.
+
+    Skipped when show_page_toc_in_primary_sidebar is enabled.
+    """
     open_page(page, NESTED_PAGE)
     if is_primary_toc_enabled(page):
         pytest.skip("Primary TOC feature is enabled")
@@ -133,6 +172,10 @@ def test_no_primary_toc_when_disabled(page: Page) -> None:
 
 
 def test_no_primary_toc_toggle_when_disabled(page: Page) -> None:
+    """Verify no primary TOC toggle button is rendered when the feature is off.
+
+    Skipped when show_page_toc_in_primary_sidebar is enabled.
+    """
     open_page(page, NESTED_PAGE)
     if is_primary_toc_enabled(page):
         pytest.skip("Primary TOC feature is enabled")
@@ -140,6 +183,10 @@ def test_no_primary_toc_toggle_when_disabled(page: Page) -> None:
 
 
 def test_primary_toc_is_injected_when_enabled(page: Page) -> None:
+    """Verify the page TOC is injected into the primary sidebar.
+
+    Checks the primary TOC exists and contains links. Skipped when the feature is off.
+    """
     open_page(page, NESTED_PAGE)
     require_primary_toc(page)
     toc = page.locator(".bd-sidebar-primary .ast-primary-toc")
@@ -148,6 +195,11 @@ def test_primary_toc_is_injected_when_enabled(page: Page) -> None:
 
 
 def test_primary_toc_toggle_is_accessible(page: Page) -> None:
+    """Verify the primary TOC toggle has accessible attributes.
+
+    Checks the toggle has an aria-label, starts collapsed (aria-expanded='false') and is a
+    button. Skipped when the feature is off or the page has no current nav item.
+    """
     open_page(page, NESTED_PAGE)
     require_primary_toc(page)
     if page.locator(".bd-docs-nav .bd-toc-item li.current").count() == 0:
@@ -159,6 +211,11 @@ def test_primary_toc_toggle_is_accessible(page: Page) -> None:
 
 
 def test_primary_toc_toggle_expands_and_collapses(page: Page) -> None:
+    """Verify the toggle expands and collapses the primary TOC.
+
+    Clicks the toggle twice and checks the TOC visibility, aria-expanded and open class
+    change each time. Skipped when the feature is off or no toggle exists.
+    """
     open_page(page, NESTED_PAGE)
     require_primary_toc(page)
     toggle = page.locator(".ast-toc-toggle")
@@ -177,6 +234,10 @@ def test_primary_toc_toggle_expands_and_collapses(page: Page) -> None:
 
 
 def test_primary_toc_not_duplicated_in_secondary_sidebar(page: Page) -> None:
+    """Verify the page TOC is removed from the secondary sidebar when in the primary one.
+
+    Skipped when the primary TOC feature is off.
+    """
     open_page(page, NESTED_PAGE)
     require_primary_toc(page)
     expect(
@@ -185,6 +246,10 @@ def test_primary_toc_not_duplicated_in_secondary_sidebar(page: Page) -> None:
 
 
 def test_primary_toc_uses_sidebar_sizing_class(page: Page) -> None:
+    """Verify the primary TOC uses the sidebar sizing class.
+
+    Checks the TOC has the 'bd-sidenav' class and not 'section-nav'.
+    """
     open_page(page, NESTED_PAGE)
     require_primary_toc(page)
     toc = page.locator(".ast-primary-toc")
@@ -193,6 +258,11 @@ def test_primary_toc_uses_sidebar_sizing_class(page: Page) -> None:
 
 
 def test_top_level_primary_toc_uses_direct_append_fallback(page: Page) -> None:
+    """Verify top-level pages append the TOC directly without a toggle.
+
+    On the section root page, checks no toggle exists and the nav list is present.
+    Skipped when the feature is off or a current nav item exists.
+    """
     open_page(page, SECTION_ROOT_PAGE)
     require_primary_toc(page)
     if page.locator(".bd-docs-nav .bd-toc-item li.current").count():
@@ -202,6 +272,10 @@ def test_top_level_primary_toc_uses_direct_append_fallback(page: Page) -> None:
 
 
 def test_page_toc_is_not_present_in_both_sidebars(page: Page) -> None:
+    """Verify the page TOC is never rendered in both sidebars at once.
+
+    Checks the primary and secondary TOCs are not both present.
+    """
     open_page(page, NESTED_PAGE)
     primary = page.locator(".ast-primary-toc").count() > 0
     secondary = page.locator("#pst-page-toc-nav, .bd-sidebar-secondary nav.page-toc").count() > 0
@@ -209,6 +283,11 @@ def test_page_toc_is_not_present_in_both_sidebars(page: Page) -> None:
 
 
 def test_primary_toc_scroll_spy_highlights_heading(page: Page) -> None:
+    """Verify scrolling highlights the current heading in the primary TOC.
+
+    Opens the TOC, scrolls to the page bottom and checks exactly one link is bold.
+    Skipped when the feature is off or no toggle exists.
+    """
     open_page(page, NESTED_PAGE)
     require_primary_toc(page)
     toggle = page.locator(".ast-toc-toggle")
@@ -223,6 +302,11 @@ def test_primary_toc_scroll_spy_highlights_heading(page: Page) -> None:
 
 
 def test_scroll_spy_expands_collapsed_toc(page: Page) -> None:
+    """Verify scrolling expands a collapsed primary TOC.
+
+    Scrolls to the page bottom while the TOC is hidden and checks it becomes visible with
+    one highlighted link. Skipped when the feature is off or no toggle exists.
+    """
     open_page(page, NESTED_PAGE)
     require_primary_toc(page)
     toggle = page.locator(".ast-toc-toggle")

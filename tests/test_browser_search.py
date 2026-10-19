@@ -12,7 +12,11 @@ QUERY = "install"
 
 
 def test_search_accepts_query(page: Page) -> None:
-    """Open the search dialog and verify it accepts a query."""
+    """Open the search dialog and verify it accepts a query.
+
+    Opens the home page, clicks the search button (or uses the Cmd/Ctrl+K shortcut when no
+    button exists), then checks the search input becomes visible and keeps the typed text.
+    """
     open_page(page)
     search_button = page.locator(SEARCH_BUTTON).first
     if search_button.count():
