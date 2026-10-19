@@ -4,13 +4,7 @@ import re
 
 from playwright.sync_api import Page, expect
 import pytest
-
-BASE_URL = "http://localhost:8000"
-
-
-def open_page(page: Page, path: str = "") -> None:
-    """Navigate to a generated documentation page."""
-    page.goto(f"{BASE_URL}/{path.lstrip('/')}")
+from test_common.common import open_page
 
 
 def test_homepage_loads(page: Page) -> None:

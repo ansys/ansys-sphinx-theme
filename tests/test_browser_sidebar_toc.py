@@ -4,16 +4,11 @@ import re
 
 from playwright.sync_api import Page, expect
 import pytest
+from test_common.common import open_page
 
-BASE_URL = "http://localhost:8000"
 NESTED_PAGE = "/user-guide/options.html"
 SECTION_ROOT_PAGE = "/user-guide.html"
 TOP_NAV_PAGE = "/getting-started.html"
-
-
-def open_page(page: Page, path: str) -> None:
-    """Navigate to a generated documentation page."""
-    page.goto(f"{BASE_URL}{path}")
 
 
 def is_primary_toc_enabled(page: Page) -> bool:
