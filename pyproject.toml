@@ -67,7 +67,7 @@ doc = [
     "Pillow>=9.0",
     "plotly==7.1.0",
     "PyGitHub==2.10.0",
-    "pyvista[jupyter]==0.49.0",
+    "pyvista[jupyter]==0.49.1",
     "PyYAML==6.0.3",
     "quarto-cli==1.10.19",
     "requests==2.34.2",
@@ -78,7 +78,7 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.3.2",
-    "tox==4.64.10",
+    "tox==4.65.3",
     "pydantic==2.14.0"
 ]
 [project.entry-points."sphinx.html_themes"]
