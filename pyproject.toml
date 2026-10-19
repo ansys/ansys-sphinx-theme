@@ -60,7 +60,7 @@ browser-test = [
     "pytest-playwright>=0.7",
 ]
 type-check = [
-    "ty==0.0.86",
+    "ty==0.0.87",
 ]
 doc = [
     "jupytext==1.19.6",
