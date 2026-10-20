@@ -185,8 +185,7 @@ def test_edit_this_page_button_exists(page: Page) -> None:
     """
     open_page(page, CONFIGURATION_PAGE)
     button = page.locator('.tocsection.editthispage, a:has-text("Edit on GitHub")').first
-    if button.count() == 0:
-        pytest.skip("Edit this page button not found")
+    assert button is not None, "Edit this page button not found"
     expect(button).to_be_attached()
 
 
@@ -198,8 +197,7 @@ def test_show_source_button_exists(page: Page) -> None:
     """
     open_page(page, CONFIGURATION_PAGE)
     button = page.locator('.bd-sidebar-secondary .this-page-menu, a:has-text("Show Source")').first
-    if button.count() == 0:
-        pytest.skip("Show Source button not found")
+    assert button is not None, "Show Source button not found"
     expect(button).to_be_attached()
 
 
