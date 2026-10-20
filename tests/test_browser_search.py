@@ -29,3 +29,38 @@ def test_search_accepts_query(page: Page) -> None:
     expect(search_input).to_be_visible()
     search_input.fill(QUERY)
     expect(search_input).to_have_value(QUERY)
+
+
+def test_static_search_results_appear(page: Page) -> None:
+    """Verify static search results are displayed when a query is entered.
+
+    Opens the home page, enters a search query, and checks that the static search results
+    container becomes visible and contains at least one result.
+    """
+    open_page(page)
+    search_input = page.locator(SEARCH_INPUT).first
+    search_input.fill(QUERY)
+    results = page.locator(".static-search-results").first
+    expect(results).to_be_visible()
+    result_item = page.locator(".result-item").first
+    assert result_item is not None
+    result_item = result_item.first
+    expect(result_item).to_be_attached()
+
+
+def test_enter_key_triggers_search(page: Page) -> None:
+    """Verify pressing the Enter key takes to search.html.
+
+    Opens the home page, enters a search query, presses Enter and
+    check it takes to "search.html" page.
+    """
+    open_page(page)
+    search_input = page.locator(SEARCH_INPUT).first
+    search_input.fill(QUERY)
+    search_input.press("Enter")
+    assert "search.html" in page.url
+    assert f"search.html?q={QUERY}" in page.url
+    # check result items are visible
+    result_item = page.locator(".result-item").first
+    assert result_item is not None
+    expect(result_item).to_be_attached()

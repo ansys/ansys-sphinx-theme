@@ -160,26 +160,16 @@ def test_source_link_absent_when_disabled(page: Page) -> None:
     expect(link).to_have_count(0)
 
 
-def test_no_primary_toc_when_disabled(page: Page) -> None:
-    """Verify no primary sidebar TOC is injected when the feature is off.
+@pytest.mark.parametrize("selector", (".ast-primary-toc", ".ast-toc-toggle"))
+def test_no_primary_toc_elements_when_disabled(page: Page, selector: str) -> None:
+    """Verify no primary sidebar TOC or toggle is rendered when the feature is off.
 
     Skipped when show_page_toc_in_primary_sidebar is enabled.
     """
     open_page(page, NESTED_PAGE)
     if is_primary_toc_enabled(page):
         pytest.skip("Primary TOC feature is enabled")
-    expect(page.locator(".ast-primary-toc")).to_have_count(0)
-
-
-def test_no_primary_toc_toggle_when_disabled(page: Page) -> None:
-    """Verify no primary TOC toggle button is rendered when the feature is off.
-
-    Skipped when show_page_toc_in_primary_sidebar is enabled.
-    """
-    open_page(page, NESTED_PAGE)
-    if is_primary_toc_enabled(page):
-        pytest.skip("Primary TOC feature is enabled")
-    expect(page.locator(".ast-toc-toggle")).to_have_count(0)
+    expect(page.locator(selector)).to_have_count(0)
 
 
 def test_primary_toc_is_injected_when_enabled(page: Page) -> None:
