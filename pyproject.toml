@@ -39,7 +39,7 @@ dependencies = [
 
 [project.optional-dependencies]
 autoapi = [
-    "sphinx-autoapi>=3.7.0",
+    "sphinx-autoapi @ git+https://github.com/moe-ad/sphinx-autoapi@feat/option-to-detect-changed-files-by-content",
     "sphinx-design>=0.6.0",
     "sphinx-jinja>=2.0.2"
 ]
@@ -48,7 +48,7 @@ changelog = [
     "sphinx-design>=0.6.0"
 ]
 all = [
-    "sphinx-autoapi>=3.7.0",
+    "sphinx-autoapi @ git+https://github.com/moe-ad/sphinx-autoapi@feat/option-to-detect-changed-files-by-content",
     "sphinx-design>=0.6.0",
     "sphinx-jinja>=2.0.2",
     "PyYAML>=6.0.3"
@@ -71,7 +71,7 @@ doc = [
     "PyYAML==6.0.3",
     "quarto-cli==1.10.19",
     "requests==2.34.2",
-    "sphinx-autoapi==3.8.1",
+    "sphinx-autoapi @ git+https://github.com/moe-ad/sphinx-autoapi@feat/option-to-detect-changed-files-by-content",
     "sphinx-copybutton==0.5.2",
     "sphinx-design==0.7.0",
     "sphinx-gallery==0.22.1",

@@ -32,6 +32,8 @@ and set the ``ansys_sphinx_theme_autoapi`` theme options in the ``html_theme_opt
 - ``member_order``: The order to document members. By default, this is set to ``bysource``. Other options include
   ``alphabetical``, which orders members by their name (case sensitive), or ``groupwise``, which orders members by their type
   and alphabetically.
+- ``change_detection``: How AutoAPI detects changed files during incremental builds. By default, this is set to ``mtime``. The
+  other option is ``content``.
 
 All these options can be set in the ``conf.py`` file of your Sphinx project.
 
