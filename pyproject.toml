@@ -56,7 +56,7 @@ all = [
 
 [dependency-groups]
 type-check = [
-    "ty==0.0.87",
+    "ty==0.0.88",
 ]
 doc = [
     "jupytext==1.19.6",
