@@ -78,6 +78,6 @@ repos:
       args:
       - --ignore=RM005
       - --show-all
-      verbose: true
+      # verbose: true
       # args:
       # - --family=cicd
