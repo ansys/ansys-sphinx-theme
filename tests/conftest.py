@@ -15,6 +15,7 @@ def documentation_server() -> None:
     except (urllib.error.URLError, OSError) as error:
         pytest.exit(
             f"Documentation is not served at {BASE_URL} ({error}). "
-            "Build and serve the docs, or set ANSYS_THEME_TEST_PORT.",
+            "Build and serve the docs, or set the ANSYS_THEME_TEST_PORT ",
+            "environment variable to the desired port.",
             returncode=2,
         )
