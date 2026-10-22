@@ -72,7 +72,7 @@ repos:
     - id: ty
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: 63f59ad8e482aac2665c04795d5a69751bbecb4d
+  rev: 9866a3baebfc3d7cf51092b65b7845f2caf8223b
   hooks:
     - id: pyansys-quality-report
       args:
