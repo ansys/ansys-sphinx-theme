@@ -16,7 +16,7 @@
     {
       "label": "Ansys Sphinx Theme - Home Page",
       "cookiePath": "backstop_data/engine_scripts/cookies.json",
-      "url": "http://localhost:8000",
+      "url": "/",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev",
       "readyEvent": "",
       "readySelector": "",
@@ -27,7 +27,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - sphinx design example page",
-      "url": "http://localhost:8000/examples/sphinx-design.html",
+      "url": "/examples/sphinx-design.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/sphinx-design.html",
       "readyEvent": "",
       "readySelector": "",
@@ -38,7 +38,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - api reference example page",
-      "url": "http://localhost:8000/examples/api/examples/index.html",
+      "url": "/examples/api/examples/index.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/api/examples/index.html",
       "readyEvent": "",
       "readySelector": "",
@@ -49,7 +49,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - jupyter notebook example page",
-      "url": "http://localhost:8000/examples/nbsphinx/jupyter-notebook.html",
+      "url": "/examples/nbsphinx/jupyter-notebook.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/nbsphinx/jupyter-notebook.html",
       "readyEvent": "",
       "readySelector": "",
@@ -67,7 +67,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - examples- table page",
-      "url": "http://localhost:8000/examples/table.html",
+      "url": "/examples/table.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/table.html",
       "readyEvent": "",
       "readySelector": "",
@@ -78,7 +78,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - admonitions example page",
-      "url": "http://localhost:8000/examples/admonitions.html",
+      "url": "/examples/admonitions.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/admonitions.html",
       "readyEvent": "",
       "readySelector": "",
@@ -89,7 +89,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - gallery examples page",
-      "url": "http://localhost:8000/examples/gallery-examples/index.html",
+      "url": "/examples/gallery-examples/index.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/examples/gallery-examples/index.html",
       "delay": 20,
       "selectors": ["viewport"],
@@ -98,7 +98,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - secondary sidebar (options page)",
-      "url": "http://localhost:8000/user-guide/options.html",
+      "url": "/user-guide/options.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/user-guide/options.html",
       "readyEvent": "",
       "readySelector": "#pst-page-toc-nav, .ast-primary-toc",
@@ -109,7 +109,7 @@
     },
     {
       "label": "Ansys Sphinx Theme - secondary sidebar (configuration page)",
-      "url": "http://localhost:8000/user-guide/configuration.html",
+      "url": "/user-guide/configuration.html",
       "referenceUrl": "https://sphinxdocs.ansys.com/version/dev/user-guide/configuration.html",
       "readyEvent": "",
       "readySelector": "#pst-page-toc-nav, .ast-primary-toc",
