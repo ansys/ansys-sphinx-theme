@@ -661,19 +661,23 @@
 <td><p>list</p></td>
 <td><p>Show a “What’s new” section in the left navigation pane.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#secondary-sidebar"><span class="std std-ref">Secondary sidebar</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#news-resources"><span class="std std-ref">News and resources section</span></a></p></td>
+<td><p>dict</p></td>
+<td><p>Show a filterable news and resources page and add a link to it in the left navigation pane.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#secondary-sidebar"><span class="std std-ref">Secondary sidebar</span></a></p></td>
 <td><p>list</p></td>
 <td><p>Control the secondary sidebar on each page.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#navigation-bar-dropdown"><span class="std std-ref">Navigation bar dropdown</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#navigation-bar-dropdown"><span class="std std-ref">Navigation bar dropdown</span></a></p></td>
 <td><p>list</p></td>
 <td><p>Add a dropdown navigation bar to the top of your documentation.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#announcement-banner"><span class="std std-ref">Announcement banner</span></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#announcement-banner"><span class="std std-ref">Announcement banner</span></a></p></td>
 <td><p>list</p></td>
 <td><p>Add an announcement banner to the top of your documentation pages.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#mcp-server"><span class="std std-ref">MCP server banner</span></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mcp-server"><span class="std std-ref">MCP server banner</span></a></p></td>
 <td><p>dict</p></td>
 <td><p>Promote an MCP server on the landing page with a banner linking to its repository.</p></td>
 </tr>
@@ -1066,9 +1070,7 @@ sidebar consistency.</p>
 </section>
 <section id="news-and-resources-section">
 <span id="news-resources"></span><h2>News and resources section<a class="headerlink" href="#news-and-resources-section" title="Link to this heading">#</a></h2>
-<p>The “News and resources” section is an option that lets you publish a filterable list of
-videos, blog posts, events, and other news about your library on a dedicated page. The theme
-adds a link to this page in the left navigation pane.</p>
+<p>Use the “News and resources” section to publish a filterable list of videos, blog posts, events, and other news on a dedicated page, with a link to it in the left navigation pane.</p>
 <section id="define-entries">
 <h3>Define entries<a class="headerlink" href="#define-entries" title="Link to this heading">#</a></h3>
 <p>Define each entry with the <code class="docutils literal notranslate"><span class="pre">news-item</span></code> directive. The directive body is the description
@@ -1084,19 +1086,49 @@ of the entry. It is rendered as plain text, so RST markup is not interpreted.</p
 </pre></div>
 </div>
 <p>The directive supports the following options:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: Required. Category of the entry, such as <code class="docutils literal notranslate"><span class="pre">Video</span></code>, <code class="docutils literal notranslate"><span class="pre">Blog</span></code>, <code class="docutils literal notranslate"><span class="pre">Event</span></code>, or <code class="docutils literal notranslate"><span class="pre">News</span></code>.
-Types are matched case-insensitively. These four types have their own badge color. Any other
-type uses a generic badge.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: Required. Title of the entry.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">author</span></code>: Required. Author name.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">date</span></code>: Optional. Free-form string, such as <code class="docutils literal notranslate"><span class="pre">2025-01-15</span></code>. Entries with a date are
-sorted by this value, newest first, and listed before entries without a date. Entries
-with the same date, and entries without a date, keep the order of the RST file. Use a
-sortable format such as ISO 8601.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">link</span></code>: Optional. URL that the title links to. Only <code class="docutils literal notranslate"><span class="pre">http</span></code> and <code class="docutils literal notranslate"><span class="pre">https</span></code> URLs are
-rendered as links. Other schemes are ignored and a warning is emitted.</p></li>
-</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 12.0%" />
+<col style="width: 73.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">type</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Category of the entry. Any value is accepted and is matched case-insensitively.
+<code class="docutils literal notranslate"><span class="pre">Video</span></code>, <code class="docutils literal notranslate"><span class="pre">Blog</span></code>, <code class="docutils literal notranslate"><span class="pre">Event</span></code>, and <code class="docutils literal notranslate"><span class="pre">News</span></code> have their own badge color. Any other
+value, such as <code class="docutils literal notranslate"><span class="pre">Webinar</span></code>, uses a neutral badge. See
+<a class="reference internal" href="#news-resources-custom-badge"><span class="std std-ref">Style a custom type</span></a> to style a custom type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">title</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Title of the entry.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">author</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Author name.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">date</span></code></p></td>
+<td><p>Optional</p></td>
+<td><p>Free-form string, such as <code class="docutils literal notranslate"><span class="pre">2025-01-15</span></code>. Entries with a date are sorted by this
+value, newest first, and listed before entries without a date. Entries with the same
+date, and entries without a date, keep the order of the RST file. Use a sortable
+format such as ISO 8601.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">link</span></code></p></td>
+<td><p>Optional</p></td>
+<td><p>URL that the title links to. Only <code class="docutils literal notranslate"><span class="pre">http</span></code> and <code class="docutils literal notranslate"><span class="pre">https</span></code> URLs are rendered as links.
+Other schemes are ignored and a warning is emitted.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="display-the-entries">
 <h3>Display the entries<a class="headerlink" href="#display-the-entries" title="Link to this heading">#</a></h3>
@@ -1109,6 +1141,21 @@ defined. The list includes <strong>Type</strong> and <strong>Author</strong> fil
 <p>If the directive is omitted, the list is appended automatically to the end of any page that
 contains <code class="docutils literal notranslate"><span class="pre">news-item</span></code> directives. Because each page only shows its own entries, define all
 entries on the page that you want to show as the news and resources page.</p>
+</section>
+<section id="style-a-custom-type">
+<span id="news-resources-custom-badge"></span><h3>Style a custom type<a class="headerlink" href="#style-a-custom-type" title="Link to this heading">#</a></h3>
+<p>The theme does not provide an option to register new badge types. To give a custom type its
+own color, add a CSS file to your documentation, for example <code class="docutils literal notranslate"><span class="pre">_static/custom.css</span></code>, and
+register it with <code class="docutils literal notranslate"><span class="pre">html_css_files</span></code> in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>. Each entry has a <code class="docutils literal notranslate"><span class="pre">data-type</span></code> attribute
+containing the lowercased type:</p>
+<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">nr-row</span><span class="o">[</span><span class="nt">data-type</span><span class="o">=</span><span class="s2">"webinar"</span><span class="o">]</span><span class="w"> </span><span class="p">.</span><span class="nc">nr-badge</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#d8c5f0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_css_files</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"custom.css"</span><span class="p">]</span>
+</pre></div>
+</div>
 </section>
 <section id="enable-the-sidebar-link">
 <h3>Enable the sidebar link<a class="headerlink" href="#enable-the-sidebar-link" title="Link to this heading">#</a></h3>
@@ -1123,14 +1170,37 @@ entries on the page that you want to show as the news and resources page.</p>
 </pre></div>
 </div>
 <p>The dictionary contains the following keys:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">link</span></code>: Required. Document name, without the extension and relative to the <code class="docutils literal notranslate"><span class="pre">doc/source</span></code>
-directory, of the page that contains the entries. For example, <code class="docutils literal notranslate"><span class="pre">news_resources</span></code> for
-<code class="docutils literal notranslate"><span class="pre">news_resources.rst</span></code>. If it is missing, a warning is emitted and the link is not valid.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pages</span></code>: Optional. List of document names (or a single name) where the link is shown.
-The default is <code class="docutils literal notranslate"><span class="pre">[&quot;index&quot;]</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">title</span></code>: Optional. Title of the sidebar link. The default is <code class="docutils literal notranslate"><span class="pre">&quot;News</span> <span class="pre">&amp;</span> <span class="pre">Resources&quot;</span></code>.</p></li>
-</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<colgroup>
+<col style="width: 15.0%" />
+<col style="width: 12.0%" />
+<col style="width: 73.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">link</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>Document name, without the extension and relative to the <code class="docutils literal notranslate"><span class="pre">doc/source</span></code> directory, of
+the page that contains the entries. For example, <code class="docutils literal notranslate"><span class="pre">news_resources</span></code> for
+<code class="docutils literal notranslate"><span class="pre">news_resources.rst</span></code>. If it is missing, a warning is emitted and the link is not valid.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pages</span></code></p></td>
+<td><p>Optional</p></td>
+<td><p>List of document names (or a single name) where the link is shown. The default is
+<code class="docutils literal notranslate"><span class="pre">[&quot;index&quot;]</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">title</span></code></p></td>
+<td><p>Optional</p></td>
+<td><p>Title of the sidebar link. The default is <code class="docutils literal notranslate"><span class="pre">&quot;News</span> <span class="pre">&amp;</span> <span class="pre">Resources&quot;</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>The link is shown in the overview sidebar, which also contains the package home link, and
 the <strong>Cheat sheet</strong> and <strong>What’s new</strong> entries when they are configured. This sidebar is always
 shown on the <code class="docutils literal notranslate"><span class="pre">index</span></code> page and on the page set in <code class="docutils literal notranslate"><span class="pre">link</span></code>.</p>
@@ -1441,6 +1511,7 @@ To promote the MCP server from your library’s documentation landing page, add 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#news-and-resources-section">News and resources section</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-entries">Define entries</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#display-the-entries">Display the entries</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#style-a-custom-type">Style a custom type</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enable-the-sidebar-link">Enable the sidebar link</a></li>
 </ul>
 </li>
