@@ -472,9 +472,7 @@ The following images show a sample "What's new" section and sidebar in the chang
 News and resources section
 --------------------------
 
-The "News and resources" section is an option that lets you publish a filterable list of
-videos, blog posts, events, and other news about your library on a dedicated page. The theme
-adds a link to this page in the left navigation pane.
+Use the "News and resources" section to publish a filterable list of videos, blog posts, events, and other news on a dedicated page, with a link to it in the left navigation pane.
 
 Define entries
 ~~~~~~~~~~~~~~
