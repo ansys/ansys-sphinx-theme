@@ -466,6 +466,95 @@ The following images show a sample "What's new" section and sidebar in the chang
     shown first in the left navigation pane, followed by the **What's new** section to maintain
     sidebar consistency.
 
+.. _news_resources:
+
+News and resources section
+--------------------------
+
+The "News and resources" section is an option that lets you publish a filterable list of
+videos, blog posts, events, and other news about your library on a dedicated page. The theme
+adds a link to this page in the left navigation pane.
+
+Define entries
+~~~~~~~~~~~~~~
+
+Define each entry with the ``news-item`` directive. The directive body is the description
+of the entry. It is rendered as plain text, so RST markup is not interpreted.
+
+.. code-block:: rst
+
+    .. news-item::
+        :type: Video
+        :title: PyAnsys 2025 R1 walkthrough
+        :author: PyAnsys Team
+        :date: 2025-01-15
+        :link: https://example.com/video
+
+        Full support for the new solver API and improved mesh handling.
+
+The directive supports the following options:
+
+- ``type``: Required. Category of the entry, such as ``Video``, ``Blog``, ``Event``, or ``News``.
+  Types are matched case-insensitively. These four types have their own badge color. Any other
+  type uses a generic badge.
+- ``title``: Required. Title of the entry.
+- ``author``: Required. Author name.
+- ``date``: Optional. Free-form string, such as ``2025-01-15``. Entries are sorted by this
+  value, newest first, and entries without a date are listed last. Use a sortable format
+  such as ISO 8601.
+- ``link``: Optional. URL that the title links to. Only ``http`` and ``https`` URLs are
+  rendered as links. Other schemes are ignored and a warning is emitted.
+
+Display the entries
+~~~~~~~~~~~~~~~~~~~
+
+Entries are collected per page and rendered as a card list on the same page where they are
+defined. The list includes **Type** and **Author** filters and is paginated with 10 entries per page.
+
+Place the ``news-resources-table`` directive where the list should appear:
+
+.. code-block:: rst
+
+    .. news-resources-table::
+
+If the directive is omitted, the list is appended automatically to the end of any page that
+contains ``news-item`` directives. Because each page only shows its own entries, define all
+entries on the page that you want to show as the news and resources page.
+
+Enable the sidebar link
+~~~~~~~~~~~~~~~~~~~~~~~
+
+To add the link to the left navigation pane, add the following dictionary to ``html_theme_options``:
+
+.. code-block:: python
+
+    html_theme_options = {
+        "news_resources": {
+            "link": "news_resources",
+            "pages": ["index"],
+            "title": "News & Resources",
+        },
+    }
+
+The dictionary contains the following keys:
+
+- ``link``: Required. Document name, without the extension and relative to the ``doc/source``
+  directory, of the page that contains the entries. For example, ``news_resources`` for
+  ``news_resources.rst``. If it is missing, a warning is emitted and the link is not valid.
+- ``pages``: Optional. List of document names (or a single name) where the link is shown.
+  The default is ``["index"]``.
+- ``title``: Optional. Title of the sidebar link. The default is ``"News & Resources"``.
+
+The link is shown in the overview sidebar, which also contains the package home link, and
+the **Cheat sheet** and **What's new** entries when they are configured. This sidebar is always
+shown on the ``index`` page and on the page set in ``link``.
+
+.. note::
+
+    For non-HTML builders, such as LaTeX, the ``news-item`` and ``news-resources-table``
+    directives are still parsed, but the page set in ``link`` is excluded from the build
+    (as ``<link>.rst``).
+
 .. _navigation_bar_dropdown:
 
 Navigation bar dropdown
