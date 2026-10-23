@@ -1104,7 +1104,7 @@ of the entry. It is rendered as plain text, so RST markup is not interpreted.</p
 <td><p>Category of the entry. Any value is accepted and is matched case-insensitively.
 <code class="docutils literal notranslate"><span class="pre">Video</span></code>, <code class="docutils literal notranslate"><span class="pre">Blog</span></code>, <code class="docutils literal notranslate"><span class="pre">Event</span></code>, and <code class="docutils literal notranslate"><span class="pre">News</span></code> have their own badge color. Any other
 value, such as <code class="docutils literal notranslate"><span class="pre">Webinar</span></code>, uses a neutral badge. See
-<a class="reference internal" href="#news-resources-custom-badge"><span class="std std-ref">Style a custom type</span></a> to style a custom type.</p></td>
+<a class="reference internal" href="#news-resources-custom-badge"><span class="std std-ref">Style a custom type</span></a> to set the color of a custom type.</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">title</span></code></p></td>
 <td><p>Yes</p></td>
@@ -1144,18 +1144,21 @@ entries on the page that you want to show as the news and resources page.</p>
 </section>
 <section id="style-a-custom-type">
 <span id="news-resources-custom-badge"></span><h3>Style a custom type<a class="headerlink" href="#style-a-custom-type" title="Link to this heading">#</a></h3>
-<p>The theme does not provide an option to register new badge types. To give a custom type its
-own color, add a CSS file to your documentation, for example <code class="docutils literal notranslate"><span class="pre">_static/custom.css</span></code>, and
-register it with <code class="docutils literal notranslate"><span class="pre">html_css_files</span></code> in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>. Each entry has a <code class="docutils literal notranslate"><span class="pre">data-type</span></code> attribute
-containing the lowercased type:</p>
-<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nc">nr-row</span><span class="o">[</span><span class="nt">data-type</span><span class="o">=</span><span class="s2">"webinar"</span><span class="o">]</span><span class="w"> </span><span class="p">.</span><span class="nc">nr-badge</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">background</span><span class="p">:</span><span class="w"> </span><span class="mh">#d8c5f0</span><span class="p">;</span>
+<p>To set the badge color of a type, including a custom one, add a <code class="docutils literal notranslate"><span class="pre">badge_colors</span></code> dictionary to
+the <code class="docutils literal notranslate"><span class="pre">news_resources</span></code> option in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>. Keys are types (case-insensitive) and values are
+CSS colors (hex, named, or <code class="docutils literal notranslate"><span class="pre">rgb()</span></code>/<code class="docutils literal notranslate"><span class="pre">hsl()</span></code>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_theme_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"news_resources"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"link"</span><span class="p">:</span> <span class="s2">"news_resources"</span><span class="p">,</span>
+        <span class="s2">"badge_colors"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"webinar"</span><span class="p">:</span> <span class="s2">"#d8c5f0"</span><span class="p">,</span>
+            <span class="s2">"video"</span><span class="p">:</span> <span class="s2">"#ffb347"</span><span class="p">,</span>  <span class="c1"># overrides the default color</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_css_files</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"custom.css"</span><span class="p">]</span>
-</pre></div>
-</div>
+<p>Invalid colors are ignored and a warning is emitted.</p>
 </section>
 <section id="enable-the-sidebar-link">
 <h3>Enable the sidebar link<a class="headerlink" href="#enable-the-sidebar-link" title="Link to this heading">#</a></h3>
@@ -1197,6 +1200,11 @@ the page that contains the entries. For example, <code class="docutils literal n
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">title</span></code></p></td>
 <td><p>Optional</p></td>
 <td><p>Title of the sidebar link. The default is <code class="docutils literal notranslate"><span class="pre">&quot;News</span> <span class="pre">&amp;</span> <span class="pre">Resources&quot;</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">badge_colors</span></code></p></td>
+<td><p>Optional</p></td>
+<td><p>Dictionary mapping an entry type to a badge color. See
+<a class="reference internal" href="#news-resources-custom-badge"><span class="std std-ref">Style a custom type</span></a>.</p></td>
 </tr>
 </tbody>
 </table>
