@@ -20,6 +20,7 @@ Table of contents
    :ref:`static_search`                         list            Additional static search options to customize the search experience.
    :ref:`cheat_sheets`                          list            Add a cheat sheet to the left navigation pane of your documentation.
    :ref:`whats_new`                             list            Show a "What's new" section in the left navigation pane.
+   :ref:`news_resources`                        dict            Show a filterable news and resources page and add a link to it in the left navigation pane.
    :ref:`secondary_sidebar`                     list            Control the secondary sidebar on each page.
    :ref:`navigation_bar_dropdown`               list            Add a dropdown navigation bar to the top of your documentation.
    :ref:`announcement_banner`                   list            Add an announcement banner to the top of your documentation pages.
@@ -494,17 +495,35 @@ of the entry. It is rendered as plain text, so RST markup is not interpreted.
 
 The directive supports the following options:
 
-- ``type``: Required. Category of the entry, such as ``Video``, ``Blog``, ``Event``, or ``News``.
-  Types are matched case-insensitively. These four types have their own badge color. Any other
-  type uses a generic badge.
-- ``title``: Required. Title of the entry.
-- ``author``: Required. Author name.
-- ``date``: Optional. Free-form string, such as ``2025-01-15``. Entries with a date are
-  sorted by this value, newest first, and listed before entries without a date. Entries
-  with the same date, and entries without a date, keep the order of the RST file. Use a
-  sortable format such as ISO 8601.
-- ``link``: Optional. URL that the title links to. Only ``http`` and ``https`` URLs are
-  rendered as links. Other schemes are ignored and a warning is emitted.
+.. list-table::
+   :header-rows: 1
+   :widths: 15 12 73
+
+   * - Option
+     - Required
+     - Description
+   * - ``type``
+     - Yes
+     - Category of the entry. Any value is accepted and is matched case-insensitively.
+       ``Video``, ``Blog``, ``Event``, and ``News`` have their own badge color. Any other
+       value, such as ``Webinar``, uses a neutral badge. See
+       :ref:`news_resources_custom_badge` to style a custom type.
+   * - ``title``
+     - Yes
+     - Title of the entry.
+   * - ``author``
+     - Yes
+     - Author name.
+   * - ``date``
+     - Optional
+     - Free-form string, such as ``2025-01-15``. Entries with a date are sorted by this
+       value, newest first, and listed before entries without a date. Entries with the same
+       date, and entries without a date, keep the order of the RST file. Use a sortable
+       format such as ISO 8601.
+   * - ``link``
+     - Optional
+     - URL that the title links to. Only ``http`` and ``https`` URLs are rendered as links.
+       Other schemes are ignored and a warning is emitted.
 
 Display the entries
 ~~~~~~~~~~~~~~~~~~~
@@ -521,6 +540,26 @@ Place the ``news-resources-table`` directive where the list should appear:
 If the directive is omitted, the list is appended automatically to the end of any page that
 contains ``news-item`` directives. Because each page only shows its own entries, define all
 entries on the page that you want to show as the news and resources page.
+
+.. _news_resources_custom_badge:
+
+Style a custom type
+~~~~~~~~~~~~~~~~~~~
+
+The theme does not provide an option to register new badge types. To give a custom type its
+own color, add a CSS file to your documentation, for example ``_static/custom.css``, and
+register it with ``html_css_files`` in ``conf.py``. Each entry has a ``data-type`` attribute
+containing the lowercased type:
+
+.. code-block:: css
+
+    .nr-row[data-type="webinar"] .nr-badge {
+        background: #d8c5f0;
+    }
+
+.. code-block:: python
+
+    html_css_files = ["custom.css"]
 
 Enable the sidebar link
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -539,12 +578,25 @@ To add the link to the left navigation pane, add the following dictionary to ``h
 
 The dictionary contains the following keys:
 
-- ``link``: Required. Document name, without the extension and relative to the ``doc/source``
-  directory, of the page that contains the entries. For example, ``news_resources`` for
-  ``news_resources.rst``. If it is missing, a warning is emitted and the link is not valid.
-- ``pages``: Optional. List of document names (or a single name) where the link is shown.
-  The default is ``["index"]``.
-- ``title``: Optional. Title of the sidebar link. The default is ``"News & Resources"``.
+.. list-table::
+   :header-rows: 1
+   :widths: 15 12 73
+
+   * - Key
+     - Required
+     - Description
+   * - ``link``
+     - Yes
+     - Document name, without the extension and relative to the ``doc/source`` directory, of
+       the page that contains the entries. For example, ``news_resources`` for
+       ``news_resources.rst``. If it is missing, a warning is emitted and the link is not valid.
+   * - ``pages``
+     - Optional
+     - List of document names (or a single name) where the link is shown. The default is
+       ``["index"]``.
+   * - ``title``
+     - Optional
+     - Title of the sidebar link. The default is ``"News & Resources"``.
 
 The link is shown in the overview sidebar, which also contains the package home link, and
 the **Cheat sheet** and **What's new** entries when they are configured. This sidebar is always
