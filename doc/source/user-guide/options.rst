@@ -499,9 +499,10 @@ The directive supports the following options:
   type uses a generic badge.
 - ``title``: Required. Title of the entry.
 - ``author``: Required. Author name.
-- ``date``: Optional. Free-form string, such as ``2025-01-15``. Entries are sorted by this
-  value, newest first, and entries without a date are listed last. Use a sortable format
-  such as ISO 8601.
+- ``date``: Optional. Free-form string, such as ``2025-01-15``. Entries with a date are
+  sorted by this value, newest first, and listed before entries without a date. Entries
+  with the same date, and entries without a date, keep the order of the RST file. Use a
+  sortable format such as ISO 8601.
 - ``link``: Optional. URL that the title links to. Only ``http`` and ``https`` URLs are
   rendered as links. Other schemes are ignored and a warning is emitted.
 

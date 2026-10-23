@@ -222,9 +222,8 @@ def _e(text: str) -> str:
 
 
 def _sort_entries(entries: list[NewsResourceEntry]) -> list[NewsResourceEntry]:
-    """Order entries newest first, undated last, independent of file read order."""
-    by_content = sorted(entries, key=_entry_key)
-    return sorted(by_content, key=lambda e: (bool(e.get("date")), e.get("date", "")), reverse=True)
+    """Order dated entries newest first, then undated ones; ties keep source order."""
+    return sorted(entries, key=lambda e: (bool(e.get("date")), e.get("date", "")), reverse=True)
 
 
 def _entry_key(entry: NewsResourceEntry) -> tuple[str, str, str, str, str, str]:
