@@ -505,7 +505,7 @@ The directive supports the following options:
      - Category of the entry. Any value is accepted and is matched case-insensitively.
        ``Video``, ``Blog``, ``Event``, and ``News`` have their own badge color. Any other
        value, such as ``Webinar``, uses a neutral badge. See
-       :ref:`news_resources_custom_badge` to style a custom type.
+       :ref:`news_resources_custom_badge` to set the color of a custom type.
    * - ``title``
      - Yes
      - Title of the entry.
@@ -544,20 +544,23 @@ entries on the page that you want to show as the news and resources page.
 Style a custom type
 ~~~~~~~~~~~~~~~~~~~
 
-The theme does not provide an option to register new badge types. To give a custom type its
-own color, add a CSS file to your documentation, for example ``_static/custom.css``, and
-register it with ``html_css_files`` in ``conf.py``. Each entry has a ``data-type`` attribute
-containing the lowercased type:
-
-.. code-block:: css
-
-    .nr-row[data-type="webinar"] .nr-badge {
-        background: #d8c5f0;
-    }
+To set the badge color of a type, including a custom one, add a ``badge_colors`` dictionary to
+the ``news_resources`` option in ``conf.py``. Keys are types (case-insensitive) and values are
+CSS colors (hex, named, or ``rgb()``/``hsl()``):
 
 .. code-block:: python
 
-    html_css_files = ["custom.css"]
+    html_theme_options = {
+        "news_resources": {
+            "link": "news_resources",
+            "badge_colors": {
+                "webinar": "#d8c5f0",
+                "video": "#ffb347",  # overrides the default color
+            },
+        },
+    }
+
+Invalid colors are ignored and a warning is emitted.
 
 Enable the sidebar link
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -595,6 +598,10 @@ The dictionary contains the following keys:
    * - ``title``
      - Optional
      - Title of the sidebar link. The default is ``"News & Resources"``.
+   * - ``badge_colors``
+     - Optional
+     - Dictionary mapping an entry type to a badge color. See
+       :ref:`news_resources_custom_badge`.
 
 The link is shown in the overview sidebar, which also contains the package home link, and
 the **Cheat sheet** and **What's new** entries when they are configured. This sidebar is always

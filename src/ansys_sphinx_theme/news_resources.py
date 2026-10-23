@@ -48,10 +48,12 @@ To wire it into the sidebar configure ``html_theme_options`` in ``conf.py``::
             "pages": ["index"],       # pages that show the sidebar widget
             "link": "news_resources", # pagename (without .rst) of the table page
             "title": "News & Resources",  # optional, sidebar widget title
+            "badge_colors": {"webinar": "#d8c5f0"},  # optional, badge color per type
         }
     }
 """
 
+import re
 from urllib.parse import urlsplit
 
 from docutils import nodes
@@ -196,16 +198,17 @@ def resolve_news_resources_table(app: Sphinx, doctree: nodes.document, docname: 
     ]
 
     entries = _sort_entries(entries)
+    badge_colors = _get_badge_colors(app)
 
     if not placeholder_list:
         # Auto-inject the table when the page has news-item directives but no
         # explicit news-resources-table directive.
         if entries:
-            doctree.append(_build_table(entries, "nr-0"))
+            doctree.append(_build_table(entries, "nr-0", badge_colors))
         return
 
     for index, placeholder in enumerate(placeholder_list):
-        raw_node = _build_table(entries, f"nr-{index}")
+        raw_node = _build_table(entries, f"nr-{index}", badge_colors)
         placeholder.replace_self(raw_node)
 
 
@@ -258,7 +261,29 @@ def _badge_cls(entry_type: str) -> str:
     return _BADGE_TYPE_MAP.get(entry_type.lower(), "other")
 
 
-def _build_table(entries: list[NewsResourceEntry], wrapper_id: str) -> nodes.raw:
+# Accepts hex, named, and rgb()/hsl() colors; rejects anything that could escape the style value.
+_CSS_COLOR_RE = re.compile(r"^(#[0-9a-fA-F]{3,8}|[a-zA-Z]+|(rgb|hsl)a?\([0-9\s,.%/]+\))$")
+
+
+def _get_badge_colors(app: Sphinx) -> dict[str, str]:
+    """Return the ``badge_colors`` theme option with lowercased types and valid colors."""
+    options = app.config.html_theme_options.get("news_resources") or {}
+    colors: dict[str, str] = {}
+    for entry_type, color in (options.get("badge_colors") or {}).items():
+        if isinstance(color, str) and _CSS_COLOR_RE.match(color.strip()):
+            colors[str(entry_type).lower()] = color.strip()
+        else:
+            logger.warning(
+                "Ignoring invalid color %r for news-resources badge type '%s'.", color, entry_type
+            )
+    return colors
+
+
+def _build_table(
+    entries: list[NewsResourceEntry],
+    wrapper_id: str,
+    badge_colors: dict[str, str] | None = None,
+) -> nodes.raw:
     """Build a raw HTML card list with type/author filter buttons.
 
     Parameters
@@ -351,7 +376,9 @@ def _build_table(entries: list[NewsResourceEntry], wrapper_id: str) -> nodes.raw
         )
 
         # Type badge
-        parts.append(f'<span class="nr-badge nr-badge--{_e(bc)}">{_e(etype)}</span>')
+        badge_color = (badge_colors or {}).get(etype.lower())
+        badge_style = f' style="background: {_e(badge_color)}"' if badge_color else ""
+        parts.append(f'<span class="nr-badge nr-badge--{_e(bc)}"{badge_style}>{_e(etype)}</span>')
 
         # Content: title (linked if :link: provided) + description
         parts.append('<div class="nr-content">')
