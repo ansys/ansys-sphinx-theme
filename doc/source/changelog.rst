@@ -8,6 +8,22 @@ Release notes
 
 .. towncrier release notes start
 
+`1.12.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.12.1>`_ (October 26, 2026)
+===============================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Docs: add documentation for news and resources option
+          - `#1192 <https://github.com/ansys/ansys-sphinx-theme/pull/1192>`_
+
+
 `1.12.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.12.0>`_ (October 22, 2026)
 ===============================================================================================
 
