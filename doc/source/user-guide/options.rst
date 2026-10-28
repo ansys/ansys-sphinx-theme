@@ -20,6 +20,7 @@ Table of contents
    :ref:`static_search`                         list            Additional static search options to customize the search experience.
    :ref:`cheat_sheets`                          list            Add a cheat sheet to the left navigation pane of your documentation.
    :ref:`whats_new`                             list            Show a "What's new" section in the left navigation pane.
+   :ref:`news_resources`                        dict            Show a filterable news and resources page and add a link to it in the left navigation pane.
    :ref:`secondary_sidebar`                     list            Control the secondary sidebar on each page.
    :ref:`navigation_bar_dropdown`               list            Add a dropdown navigation bar to the top of your documentation.
    :ref:`announcement_banner`                   list            Add an announcement banner to the top of your documentation pages.
@@ -473,6 +474,152 @@ The following images show a sample "What's new" section and sidebar in the chang
     If you are displaying both the **What's new** and **Cheat sheet** sections, the **Cheat sheet** section is
     shown first in the left navigation pane, followed by the **What's new** section to maintain
     sidebar consistency.
+
+.. _news_resources:
+
+News and resources section
+--------------------------
+
+Use the "News and resources" section to publish a filterable list of videos, blog posts, events, and other news on a dedicated page, with a link to it in the left navigation pane.
+
+Define entries
+~~~~~~~~~~~~~~
+
+Define each entry with the ``news-item`` directive. The directive body is the description
+of the entry. It is rendered as plain text, so RST markup is not interpreted.
+
+.. code-block:: rst
+
+    .. news-item::
+        :type: Video
+        :title: PyAnsys 2025 R1 walkthrough
+        :author: PyAnsys Team
+        :date: 2025-01-15
+        :link: https://example.com/video
+
+        Full support for the new solver API and improved mesh handling.
+
+The directive supports the following options:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 15 12 73
+
+   * - Option
+     - Required
+     - Description
+   * - ``type``
+     - Yes
+     - Category of the entry. Any value is accepted and is matched case-insensitively.
+       ``Video``, ``Blog``, ``Event``, and ``News`` have their own badge color. Any other
+       value, such as ``Webinar``, uses a neutral badge. See
+       :ref:`news_resources_custom_badge` to set the color of a custom type.
+   * - ``title``
+     - Yes
+     - Title of the entry.
+   * - ``author``
+     - Yes
+     - Author name.
+   * - ``date``
+     - Optional
+     - Free-form string, such as ``2025-01-15``. Entries with a date are sorted by this
+       value, newest first, and listed before entries without a date. Entries with the same
+       date, and entries without a date, keep the order of the RST file. Use a sortable
+       format such as ISO 8601.
+   * - ``link``
+     - Optional
+     - URL that the title links to. Only ``http`` and ``https`` URLs are rendered as links.
+       Other schemes are ignored and a warning is emitted.
+
+Display the entries
+~~~~~~~~~~~~~~~~~~~
+
+Entries are collected per page and rendered as a card list on the same page where they are
+defined. The list includes **Type** and **Author** filters and is paginated with 10 entries per page.
+
+Place the ``news-resources-table`` directive where the list should appear:
+
+.. code-block:: rst
+
+    .. news-resources-table::
+
+If the directive is omitted, the list is appended automatically to the end of any page that
+contains ``news-item`` directives. Because each page only shows its own entries, define all
+entries on the page that you want to show as the news and resources page.
+
+.. _news_resources_custom_badge:
+
+Style a custom type
+~~~~~~~~~~~~~~~~~~~
+
+To set the badge color of a type, including a custom one, add a ``badge_colors`` dictionary to
+the ``news_resources`` option in ``conf.py``. Keys are types (case-insensitive) and values are
+CSS colors (hex, named, or ``rgb()``/``hsl()``):
+
+.. code-block:: python
+
+    html_theme_options = {
+        "news_resources": {
+            "link": "news_resources",
+            "badge_colors": {
+                "webinar": "#d8c5f0",
+                "video": "#ffb347",  # overrides the default color
+            },
+        },
+    }
+
+Invalid colors are ignored and a warning is emitted.
+
+Enable the sidebar link
+~~~~~~~~~~~~~~~~~~~~~~~
+
+To add the link to the left navigation pane, add the following dictionary to ``html_theme_options``:
+
+.. code-block:: python
+
+    html_theme_options = {
+        "news_resources": {
+            "link": "news_resources",
+            "pages": ["index"],
+            "title": "News & Resources",
+        },
+    }
+
+The dictionary contains the following keys:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 15 12 73
+
+   * - Key
+     - Required
+     - Description
+   * - ``link``
+     - Yes
+     - Document name, without the extension and relative to the ``doc/source`` directory, of
+       the page that contains the entries. For example, ``news_resources`` for
+       ``news_resources.rst``. If it is missing, a warning is emitted and the link is not valid.
+   * - ``pages``
+     - Optional
+     - List of document names (or a single name) where the link is shown. The default is
+       ``["index"]``.
+   * - ``title``
+     - Optional
+     - Title of the sidebar link. The default is ``"News & Resources"``.
+   * - ``badge_colors``
+     - Optional
+     - Dictionary mapping an entry type to a badge color. See
+       :ref:`news_resources_custom_badge`.
+
+The link is shown in the overview sidebar, which also contains the package home link, and
+the **Cheat sheet** and **What's new** entries when they are configured. This sidebar is always
+shown on the ``index`` page and on the page set in ``link``.
+
+.. note::
+
+    For non-HTML builders, such as LaTeX, the ``news-item`` and ``news-resources-table``
+    directives are still parsed, but the page set in ``link`` is excluded from the build
+    (as ``<link>.rst``).
 
 .. _navigation_bar_dropdown:
 

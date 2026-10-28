@@ -61,13 +61,3 @@
       - changed-files:
           - all-globs-to-all-files: ['THIS-NEVER-MATCHES-A-FILE']
 
-'hacktoberfest':
-  - all:
-      - changed-files:
-          - all-globs-to-all-files: ['THIS-NEVER-MATCHES-A-FILE']
-
-'hacktoberfest-accepted':
-  - all:
-      - changed-files:
-          - all-globs-to-all-files: ['THIS-NEVER-MATCHES-A-FILE']
-

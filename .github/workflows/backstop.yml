@@ -21,7 +21,7 @@ env:
 
 jobs:
   backstop-tests:
-    name: Visual regression tests
+    name: Visual regression and browser tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -35,7 +35,7 @@ jobs:
           node-version: ${{ env.NODE_VERSION }}
 
       - name: Install uv
-        uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+        uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa # v10.3.1
         with:
           python-version: ${{ env.PYTHON_VERSION }}
 
@@ -68,21 +68,36 @@ jobs:
           python -m playwright install --with-deps chromium
           xvfb-run make -C doc html
 
-      - name: Serve documentation
-        run: npx http-server -u -p 8000 ./doc/_build/html &
+      - name: Serve documentation for BackstopJS
+        run: |
+          PORT=$(python3 -c "import socket; s = socket.socket(); s.bind(('127.0.0.1', 0)); print(s.getsockname()[1])")
+          echo "BACKSTOP_BASE_URL=http://localhost:${PORT}" >> "$GITHUB_ENV"
+          npx http-server -u -p "${PORT}" ./doc/_build/html &
 
       - name: Check if server is up
-        run: curl -I http://localhost:8000
+        run: curl -fsSI --retry 10 --retry-connrefused --retry-delay 1 "$BACKSTOP_BASE_URL"
 
       - name: Run BackstopJS tests
+        run: npm run reference-tests
+
+      - name: Run browser tests
+        if: ${{ !cancelled() }}
         run: |
           source .venv/bin/activate
-          npm run test
+          npm run browser-test
 
       - name: Upload Backstop report (if failed)
         if: failure()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: backstop-report
-          path: backstop_data/html_report
+          path: tests/backstop_data/html_report
+
+      - name: Upload Playwright traces (if failed)
+        if: failure()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: playwright-traces
+          path: test-results
+          if-no-files-found: ignore
 

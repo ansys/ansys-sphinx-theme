@@ -6,8 +6,8 @@
         "build:postcss": "postcss src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css -o src/ansys_sphinx_theme/theme/ansys_sphinx_theme/static/styles/ansys-sphinx-theme.css",
         "build": "npm run build:scss && npm run build:postcss",
         "backstop:clean": "find tests/backstop_data/bitmaps_test -mindepth 1 -delete || true && find tests/backstop_data/bitmaps_reference -mindepth 1 -delete || true",
-        "backstop:ref": "npx backstop reference --config tests/backstop.json",
-        "backstop:test": "npx backstop test --config tests/backstop.json",
+        "backstop:ref": "npx backstop reference --config tests/backstop.config.js",
+        "backstop:test": "npx backstop test --config tests/backstop.config.js",
         "reference-tests": "npm run backstop:clean && npm run backstop:ref && npm run backstop:test",
         "browser-test": "python -m pytest -q --tracing retain-on-failure tests/test_browser_*.py",
         "test": "npm run reference-tests && npm run browser-test"

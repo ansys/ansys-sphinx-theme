@@ -8,6 +8,245 @@ Release notes
 
 .. towncrier release notes start
 
+`1.12.1 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.12.1>`_ (October 26, 2026)
+===============================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Docs: add documentation for news and resources option
+          - `#1192 <https://github.com/ansys/ansys-sphinx-theme/pull/1192>`_
+
+
+`1.12.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.12.0>`_ (October 22, 2026)
+===============================================================================================
+
+.. tab-set::
+
+
+  .. tab-item:: Added
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Feat: news and resources architecture
+          - `#1041 <https://github.com/ansys/ansys-sphinx-theme/pull/1041>`_
+
+        * - Fix: show actual section title in sidebar
+          - `#1101 <https://github.com/ansys/ansys-sphinx-theme/pull/1101>`_
+
+        * - Chore(version): bump version 1.12.dev0
+          - `#1116 <https://github.com/ansys/ansys-sphinx-theme/pull/1116>`_
+
+        * - Feat: migrate browser tests from JavaScript playwright to Python playwright
+          - `#1165 <https://github.com/ansys/ansys-sphinx-theme/pull/1165>`_
+
+
+  .. tab-item:: Dependencies
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Build: update pydata-sphinx-theme requirement from <0.21,>=0.15.4 to >=0.15.4,<0.22
+          - `#1112 <https://github.com/ansys/ansys-sphinx-theme/pull/1112>`_
+
+        * - Build: bump pydantic from 2.13.4 to 2.13.5
+          - `#1114 <https://github.com/ansys/ansys-sphinx-theme/pull/1114>`_
+
+        * - Build: bump ty from 0.0.75 to 0.0.77
+          - `#1119 <https://github.com/ansys/ansys-sphinx-theme/pull/1119>`_
+
+        * - Build: bump tox from 4.60.1 to 4.61.1
+          - `#1120 <https://github.com/ansys/ansys-sphinx-theme/pull/1120>`_
+
+        * - Build: bump tox from 4.61.1 to 4.61.2
+          - `#1125 <https://github.com/ansys/ansys-sphinx-theme/pull/1125>`_
+
+        * - Build: bump ty from 0.0.77 to 0.0.78
+          - `#1126 <https://github.com/ansys/ansys-sphinx-theme/pull/1126>`_
+
+        * - Build: bump tox from 4.61.2 to 4.61.3
+          - `#1128 <https://github.com/ansys/ansys-sphinx-theme/pull/1128>`_
+
+        * - Build: bump ty from 0.0.78 to 0.0.79
+          - `#1129 <https://github.com/ansys/ansys-sphinx-theme/pull/1129>`_
+
+        * - Build: bump ty from 0.0.79 to 0.0.80
+          - `#1131 <https://github.com/ansys/ansys-sphinx-theme/pull/1131>`_
+
+        * - Build: bump tox from 4.61.3 to 4.61.4
+          - `#1132 <https://github.com/ansys/ansys-sphinx-theme/pull/1132>`_
+
+        * - Build: bump pyvista from 0.48.4 to 0.49.0
+          - `#1133 <https://github.com/ansys/ansys-sphinx-theme/pull/1133>`_
+
+        * - Build: bump ty from 0.0.80 to 0.0.81
+          - `#1135 <https://github.com/ansys/ansys-sphinx-theme/pull/1135>`_
+
+        * - Build: bump ty from 0.0.81 to 0.0.82
+          - `#1138 <https://github.com/ansys/ansys-sphinx-theme/pull/1138>`_
+
+        * - Build: bump tox from 4.61.4 to 4.61.5
+          - `#1139 <https://github.com/ansys/ansys-sphinx-theme/pull/1139>`_
+
+        * - Build: bump numpydoc from 1.10.0 to 1.11.0
+          - `#1140 <https://github.com/ansys/ansys-sphinx-theme/pull/1140>`_
+
+        * - Build: bump pandas from 3.0.5 to 3.0.6
+          - `#1141 <https://github.com/ansys/ansys-sphinx-theme/pull/1141>`_
+
+        * - Build: bump sphinx-gallery from 0.21.0 to 0.22.0
+          - `#1142 <https://github.com/ansys/ansys-sphinx-theme/pull/1142>`_
+
+        * - Build: bump sphinx-gallery from 0.22.0 to 0.22.1
+          - `#1143 <https://github.com/ansys/ansys-sphinx-theme/pull/1143>`_
+
+        * - Build: bump plotly from 6.9.0 to 7.0.0
+          - `#1144 <https://github.com/ansys/ansys-sphinx-theme/pull/1144>`_
+
+        * - Build: bump tox from 4.61.5 to 4.63.0
+          - `#1145 <https://github.com/ansys/ansys-sphinx-theme/pull/1145>`_
+
+        * - Build: bump notebook from 7.6.2 to 7.6.3
+          - `#1146 <https://github.com/ansys/ansys-sphinx-theme/pull/1146>`_
+
+        * - Build: bump ty from 0.0.82 to 0.0.83
+          - `#1147 <https://github.com/ansys/ansys-sphinx-theme/pull/1147>`_
+
+        * - Build: bump plotly from 7.0.0 to 7.1.0
+          - `#1148 <https://github.com/ansys/ansys-sphinx-theme/pull/1148>`_
+
+        * - Build: bump ty from 0.0.83 to 0.0.84
+          - `#1152 <https://github.com/ansys/ansys-sphinx-theme/pull/1152>`_
+
+        * - Build: bump tox from 4.63.0 to 4.64.0
+          - `#1153 <https://github.com/ansys/ansys-sphinx-theme/pull/1153>`_
+
+        * - Build: bump tox from 4.64.0 to 4.64.3
+          - `#1154 <https://github.com/ansys/ansys-sphinx-theme/pull/1154>`_
+
+        * - Build: update pydata-sphinx-theme requirement from <0.22,>=0.15.4 to >=0.15.4,<0.23
+          - `#1155 <https://github.com/ansys/ansys-sphinx-theme/pull/1155>`_
+
+        * - Build: bump tox from 4.64.3 to 4.64.5
+          - `#1156 <https://github.com/ansys/ansys-sphinx-theme/pull/1156>`_
+
+        * - Build: bump tox from 4.64.5 to 4.64.7
+          - `#1158 <https://github.com/ansys/ansys-sphinx-theme/pull/1158>`_
+
+        * - Build: bump tox from 4.64.7 to 4.64.8
+          - `#1160 <https://github.com/ansys/ansys-sphinx-theme/pull/1160>`_
+
+        * - Build: bump jupytext from 1.19.5 to 1.19.6
+          - `#1161 <https://github.com/ansys/ansys-sphinx-theme/pull/1161>`_
+
+        * - Build: bump ty from 0.0.84 to 0.0.85
+          - `#1162 <https://github.com/ansys/ansys-sphinx-theme/pull/1162>`_
+
+        * - Build: bump tox from 4.64.8 to 4.64.9
+          - `#1163 <https://github.com/ansys/ansys-sphinx-theme/pull/1163>`_
+
+        * - Build: bump quarto-cli from 1.10.18 to 1.10.19
+          - `#1167 <https://github.com/ansys/ansys-sphinx-theme/pull/1167>`_
+
+        * - Build: bump tox from 4.64.9 to 4.64.10
+          - `#1168 <https://github.com/ansys/ansys-sphinx-theme/pull/1168>`_
+
+        * - Build: bump ty from 0.0.85 to 0.0.86
+          - `#1171 <https://github.com/ansys/ansys-sphinx-theme/pull/1171>`_
+
+        * - Build: bump pydantic from 2.13.5 to 2.14.0
+          - `#1172 <https://github.com/ansys/ansys-sphinx-theme/pull/1172>`_
+
+        * - Build: update pydata-sphinx-theme requirement from <0.23,>=0.15.4 to >=0.15.4,<0.24
+          - `#1173 <https://github.com/ansys/ansys-sphinx-theme/pull/1173>`_
+
+        * - Build: bump pyvista from 0.49.0 to 0.49.1
+          - `#1175 <https://github.com/ansys/ansys-sphinx-theme/pull/1175>`_
+
+        * - Build: bump pydantic from 2.14.0 to 2.14.1
+          - `#1176 <https://github.com/ansys/ansys-sphinx-theme/pull/1176>`_
+
+        * - Build: bump tox from 4.64.10 to 4.65.3
+          - `#1177 <https://github.com/ansys/ansys-sphinx-theme/pull/1177>`_
+
+        * - Build: bump ty from 0.0.86 to 0.0.87
+          - `#1178 <https://github.com/ansys/ansys-sphinx-theme/pull/1178>`_
+
+        * - Build: bump tox from 4.65.3 to 4.65.5
+          - `#1180 <https://github.com/ansys/ansys-sphinx-theme/pull/1180>`_
+
+        * - Build: bump tox from 4.65.5 to 4.65.6
+          - `#1181 <https://github.com/ansys/ansys-sphinx-theme/pull/1181>`_
+
+        * - Build: bump ty from 0.0.87 to 0.0.88
+          - `#1182 <https://github.com/ansys/ansys-sphinx-theme/pull/1182>`_
+
+        * - Build: bump ty from 0.0.88 to 0.0.89
+          - `#1185 <https://github.com/ansys/ansys-sphinx-theme/pull/1185>`_
+
+
+  .. tab-item:: Maintenance
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Ci: bump the actions group with 14 updates
+          - `#1115 <https://github.com/ansys/ansys-sphinx-theme/pull/1115>`_, `#1127 <https://github.com/ansys/ansys-sphinx-theme/pull/1127>`_
+
+        * - Chore: pre-commit automatic update
+          - `#1124 <https://github.com/ansys/ansys-sphinx-theme/pull/1124>`_, `#1130 <https://github.com/ansys/ansys-sphinx-theme/pull/1130>`_, `#1137 <https://github.com/ansys/ansys-sphinx-theme/pull/1137>`_, `#1151 <https://github.com/ansys/ansys-sphinx-theme/pull/1151>`_, `#1157 <https://github.com/ansys/ansys-sphinx-theme/pull/1157>`_, `#1164 <https://github.com/ansys/ansys-sphinx-theme/pull/1164>`_, `#1179 <https://github.com/ansys/ansys-sphinx-theme/pull/1179>`_
+
+        * - Ci: bump astral-sh/setup-uv from 10.0.1 to 10.1.0 in the actions group
+          - `#1134 <https://github.com/ansys/ansys-sphinx-theme/pull/1134>`_
+
+        * - Ci: bump astral-sh/setup-uv from 10.1.0 to 10.2.0 in the actions group
+          - `#1149 <https://github.com/ansys/ansys-sphinx-theme/pull/1149>`_
+
+        * - Ci: bump the actions group across 1 directory with 4 updates
+          - `#1174 <https://github.com/ansys/ansys-sphinx-theme/pull/1174>`_
+
+
+  .. tab-item:: Miscellaneous
+
+    .. list-table::
+        :header-rows: 0
+        :widths: auto
+
+        * - Chore: update CHANGELOG for v1.11.0
+          - `#1113 <https://github.com/ansys/ansys-sphinx-theme/pull/1113>`_
+
+        * - Fix: dark theme search sidebar
+          - `#1118 <https://github.com/ansys/ansys-sphinx-theme/pull/1118>`_
+
+        * - Docs: add pull request template
+          - `#1121 <https://github.com/ansys/ansys-sphinx-theme/pull/1121>`_
+
+        * - Docs: add guidelines for js, css and html
+          - `#1122 <https://github.com/ansys/ansys-sphinx-theme/pull/1122>`_
+
+        * - Docs: fix \`notebook\` examples plot
+          - `#1136 <https://github.com/ansys/ansys-sphinx-theme/pull/1136>`_
+
+        * - Fix: improve readability by lowering  opacity in code blocks
+          - `#1150 <https://github.com/ansys/ansys-sphinx-theme/pull/1150>`_
+
+        * - Maint: remove unwanted \`doc-build\` dependency
+          - `#1170 <https://github.com/ansys/ansys-sphinx-theme/pull/1170>`_
+
+        * - Fix: add an environment variable for the port in tests
+          - `#1184 <https://github.com/ansys/ansys-sphinx-theme/pull/1184>`_
+
+
 `1.11.0 <https://github.com/ansys/ansys-sphinx-theme/releases/tag/v1.11.0>`_ (September 02, 2026)
 =================================================================================================
 
