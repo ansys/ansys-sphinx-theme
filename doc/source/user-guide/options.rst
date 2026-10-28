@@ -281,7 +281,15 @@ Search filters
 ^^^^^^^^^^^^^^
 
 To organize and group search results, you can define custom filters using the ``search_filters`` key.
-This key should be a dictionary where each key represents a filter label and the corresponding value is a list of directories or file paths that belong to that filter.
+This key should be a dictionary where each key represents a filter label and the corresponding value is a list of folders, pages, or glob patterns that belong to that filter.
+
+- ``"examples/"`` matches the ``examples`` page and every page inside the ``examples`` folder.
+- ``"changelog"`` matches only the ``changelog`` page (or a folder with that name).
+- ``"examples/api/*"`` is a glob pattern (``*``, ``?`` and ``[]`` are supported) matched against the whole document name.
+
+When ``search_filters`` is defined, only the documents that match at least one filter are searchable.
+To keep a page out of the search results, do not list it in any filter. To exclude a page that
+matches a filter, use ``files_to_exclude`` in the ``static_search`` dictionary.
 
 **Example:**
 
