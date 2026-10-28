@@ -194,3 +194,7 @@ directory = "changed"
 name = "Changed"
 showcontent = true
 
+[tool.ansys.quality_report]
+ignore = [
+    "RM005", # Missing Installation section in readme
+]

@@ -38,6 +38,8 @@ repos:
   rev: 39478bf2c099a58683d3f1aedf675105318b078d  # frozen: 0.39.0
   hooks:
     - id: check-github-workflows
+    - id: check-dependabot
+
 
 - repo: https://github.com/ansys/pre-commit-hooks
   rev: 55c5b6a5439abd847613579c6924da750e8b78b2  # frozen: v0.8.0
@@ -68,3 +70,14 @@ repos:
   rev: "ae754a05e63248249a242ce594d8eaa88cbb989d"  # frozen: v0.0.92
   hooks:
     - id: ty
+
+- repo: https://github.com/ansys/pre-commit-hooks
+  rev: 232af4d871b1bf6e0b5a586aca03315cba191417
+  hooks:
+    - id: pyansys-quality-report
+      args:
+      - --ignore=RM005
+      - --show-all
+      verbose: true
+      # args:
+      # - --family=cicd
