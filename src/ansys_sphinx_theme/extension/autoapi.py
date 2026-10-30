@@ -70,7 +70,6 @@ def add_autoapi_theme_option(app: Sphinx, config: Dict[str, Any]) -> None:
     config["autoapi_ignore"] = autoapi.get("ignore", [])
     config["autoapi_add_toctree_entry"] = autoapi.get("add_toctree_entry", True)
     config["autoapi_member_order"] = autoapi.get("member_order", "bysource")
-    config["autoapi_change_detection"] = autoapi.get("change_detection", "mtime")
 
     # HACK: The ``autoapi_dirs`` should be given as a relative path to the conf.py.
     autoapi_dir = autoapi.get("directory", "src/ansys")
