@@ -44,6 +44,8 @@ updates:
       default-days: 7
       exclude:
         - "ansys/pre-commit-hooks/*"
+    ignore:
+      - dependency-name: "astral-sh/ty-pre-commit"
     labels:
       - "maintenance"
     commit-message:
