@@ -135,6 +135,9 @@ force-sort-within-sections = true
 "unresolved-attribute" = "ignore"
 "unresolved-import" = "ignore"
 
+[tool.uv]
+required-environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
 [tool.coverage.run]
 source = ["src"]
 
@@ -193,4 +196,3 @@ showcontent = true
 directory = "changed"
 name = "Changed"
 showcontent = true
-
