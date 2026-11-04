@@ -56,7 +56,7 @@ all = [
 
 [dependency-groups]
 browser-test = [
-    "pytest==9.1.1",
+    "pytest==9.2.0",
     "pytest-playwright==0.10.0",
 ]
 type-check = [
@@ -135,6 +135,9 @@ force-sort-within-sections = true
 "unresolved-attribute" = "ignore"
 "unresolved-import" = "ignore"
 
+[tool.uv]
+required-environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
 [tool.coverage.run]
 source = ["src"]
 
@@ -193,4 +196,3 @@ showcontent = true
 directory = "changed"
 name = "Changed"
 showcontent = true
-
