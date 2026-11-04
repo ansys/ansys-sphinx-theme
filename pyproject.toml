@@ -56,7 +56,7 @@ all = [
 
 [dependency-groups]
 browser-test = [
-    "pytest==9.1.1",
+    "pytest==9.2.0",
     "pytest-playwright==0.10.0",
 ]
 type-check = [
