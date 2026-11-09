@@ -75,7 +75,7 @@ doc = [
     "PyYAML==6.0.3",
     "quarto-cli==1.10.20",
     "requests==2.34.2",
-    "sphinx-autoapi==3.8.1",
+    "sphinx-autoapi==3.9.0",
     "sphinx-copybutton==0.5.2",
     "sphinx-design==0.7.0",
     "sphinx-gallery==0.22.1",
