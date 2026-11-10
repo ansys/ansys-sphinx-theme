@@ -15,7 +15,7 @@
 .. _Tox: https://tox.wiki/en/stable/
 
 .. dependency docs links
-.. _sphinx_design_examples: https://github.com/executablebooks/sphinx-design/tree/furo-theme/docs/snippets/rst
+.. _sphinx_design_examples: https://github.com/executablebooks/sphinx-design/tree/v0.7.0/docs/snippets/rst
 .. _sphinx_design_docs: https://sphinx-design.readthedocs.io/en/latest/index.html
 .. _pydata_examples: https://pydata-sphinx-theme.readthedocs.io/en/stable/examples/kitchen-sink/index.html
 .. _pydata_logo: https://pydata-sphinx-theme.readthedocs.io/en/stable/user_guide/branding.html#different-logos-for-light-and-dark-mode
