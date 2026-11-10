@@ -1,5 +1,6 @@
 """Sphinx documentation configuration file."""
 
+from importlib.metadata import version as distribution_version
 import os
 from pathlib import Path
 import subprocess
@@ -210,7 +211,10 @@ jinja_contexts: dict[str, dict[str, Any]] = {
 
 
 def extract_example_links(
-    repo_fullname: str, path_relative_to_root: str, exclude_files: List[str] = []
+    repo_fullname: str,
+    path_relative_to_root: str,
+    exclude_files: List[str] = [],
+    ref: str = "",
 ) -> List[str]:
     """
     Extract example links from a specific GitHub repository.
@@ -223,6 +227,8 @@ def extract_example_links(
         Path relative to the root of the repository to extract example links from.
     exclude_files : list of str
         A list of files to exclude from the returned example links.
+    ref : str, optional
+        Git reference to read from. Defaults to the repository's default branch.
 
     Returns
     -------
@@ -231,13 +237,15 @@ def extract_example_links(
     """
     g = Github()
     repo = g.get_repo(repo_fullname)
-    contents = repo.get_contents(path_relative_to_root)
+    contents = repo.get_contents(path_relative_to_root, ref=ref)
     if not isinstance(contents, list):
         contents = [contents]
     example_links = []
     for content in contents:
         if content.type == "dir":
-            example_links.extend(extract_example_links(repo_fullname, content.path, exclude_files))
+            example_links.extend(
+                extract_example_links(repo_fullname, content.path, exclude_files, ref=ref)
+            )
         elif content.type == "file":
             if content.name not in exclude_files:
                 example_links.append(content.download_url)
@@ -329,6 +337,7 @@ Download this example as a :download:`Jupyter notebook </{{ env.docname }}.ipynb
         "executablebooks/sphinx-design",
         "docs/snippets/rst",
         exclude_files=["article-info.txt"],
+        ref=f"v{distribution_version('sphinx-design')}",
     )
     file_names = download_and_process_files(example_links)
 
