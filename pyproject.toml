@@ -132,8 +132,8 @@ combine-as-imports = true
 force-sort-within-sections = true
 
 [tool.ty.rules]
-"unresolved-attribute" = "ignore"
-"unresolved-import" = "ignore"
+"missing-attribute" = "ignore"
+"import-not-found" = "ignore"
 
 [tool.uv]
 required-environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
