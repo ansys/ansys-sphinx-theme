@@ -193,6 +193,9 @@ html[data-mode="light"] {
   --sd-color-secondary-highlight: var(--ast-color-hover-card-background);
   --sd-color-secondary-bg: var(--ast-color-sphinx-design-background);
   --ast-sd-bg-secondary-hover: var(--ast-color-hover-card-background);
+  --ast-sd-badge-secondary: #d9d9d9;
+  --ast-sd-badge-secondary-highlight: #c4c4c4;
+  --ast-sd-badge-secondary-outline: #595959;
   --ast-background-tab-focus: #d9d9d9;
   --ast-background-tab-hover: #ececec;
   --ast-tab-border-color: #d9d9d9;
@@ -364,6 +367,10 @@ html[data-mode="dark"] {
   --sd-color-secondary-highlight: var(--ast-color-hover-card-background);
   --sd-color-secondary-bg: var(--ast-color-sphinx-design-background);
   --ast-sd-bg-secondary-hover: var(--ast-color-hover-card-background);
+  --ast-sd-badge-secondary: #4a4a4a;
+  --ast-sd-badge-secondary-highlight: #5a5a5a;
+  --ast-sd-badge-secondary-outline: #a6a6a6;
+  --sd-color-info-text: #d5d5d5;
   --ast-background-tab-focus: #2d2d2d;
   --ast-background-tab-hover: #3d3d3d;
   --ast-tab-border-color: #e5e5e5;

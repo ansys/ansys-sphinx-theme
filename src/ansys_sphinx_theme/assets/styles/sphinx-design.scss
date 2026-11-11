@@ -23,6 +23,22 @@ $border-radius: var(--ast-sphinx-design-border-radius);
 }
 
 /**
+ * Sphinx design badge styles
+ *
+ * `--sd-color-secondary` equals the card background so secondary buttons blend
+ * into cards. Badges need their own secondary color to stay visible in cards.
+ */
+.sd-badge {
+  --sd-color-secondary: var(--ast-sd-badge-secondary);
+  --sd-color-secondary-highlight: var(--ast-sd-badge-secondary-highlight);
+
+  &.sd-outline-secondary {
+    --sd-color-secondary: var(--ast-sd-badge-secondary-outline);
+    --sd-color-secondary-highlight: var(--ast-sd-badge-secondary-outline);
+  }
+}
+
+/**
  * Blockquote styles
  */
 blockquote {
