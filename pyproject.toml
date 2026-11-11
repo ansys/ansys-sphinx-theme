@@ -82,7 +82,7 @@ doc = [
     "sphinx-jinja==2.0.2",
     "sphinx-notfound-page==1.1.0",
     "sphinx-theme-builder[cli]==0.3.2",
-    "tox==4.67.11",
+    "tox==4.67.12",
     "pydantic==2.14.2"
 ]
 [project.entry-points."sphinx.html_themes"]
