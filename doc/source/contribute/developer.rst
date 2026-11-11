@@ -233,7 +233,8 @@ To modify the SCSS files, follow these steps:
 
    .. code-block:: bash
 
-      python -m pip install -e '.[doc]'
+      python -m pip install --upgrade pip
+      python -m pip install --group doc -e .
 
    This command installs the library in editable mode and builds the SCSS files.
 
@@ -352,9 +353,13 @@ run the following commands:
 
 1. Install the required dependencies by running::
 
-    python -m pip install -e .[doc]
+    python -m pip install --upgrade pip
+    python -m pip install --group doc -e .
 
-2. Build the documentation by running::
+2. Install `Pandoc <https://pandoc.org/installing.html>`_.
+   It is required by ``nbsphinx`` to build notebook-based documentation pages.
+
+3. Build the documentation by running::
 
     # On Linux or macOS
     make -C doc/ html
@@ -362,7 +367,7 @@ run the following commands:
     # On Windows
     doc\make.bat html
 
-3. The documentation is built in the ``doc/_build/html`` directory. Open the
+4. The documentation is built in the ``doc/_build/html`` directory. Open the
    ``index.html`` file in your browser to view the documentation.
 
 You can clean the build directory by running::
