@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sphinx-Gallery &#8212; Ansys Sphinx Theme</title>
+  
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=18bd87630a240e9c25be" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=e717c1d8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/ansys-sphinx-theme.css?v=e717c1d8" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://www.nerdfonts.com/assets/css/webfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=c83e6b79" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../_static/scripts/fontawesome.js?digest=18bd87630a240e9c25be"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be" />
+
+
+  <!-- Include desired assets -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  
+  
+  
+  
+
+  
+    <link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
+  
+    <script src="../../_static/documentation_options.js?v=95914287"></script>
+    <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gallery-examples/sphinx-gallery';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.23.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://sphinxdocs.ansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Sphinx AutoAPI" href="../sphinx-autoapi.html" />
+    <link rel="prev" title="Sphinx-Gallery" href="index.html" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="color-scheme" content="light dark"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.13.dev0" />
+  
+    
+    <script src="../../_static/searchtools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script src="../../searchindex.js"></script>
+  
+  <link rel="canonical" href="https://sphinxdocs.ansys.com/version/stable/examples/gallery-examples/sphinx-gallery.html" />
+  <meta name="robots" content="noindex, follow" />
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button type="button" class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="https://www.ansys.com/">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/ansys_logo_transparent_black.png" class="logo__image only-light" alt="Ansys Sphinx Theme - Home"/>
+    <img src="../../_static/ansys_logo_transparent_white.png" class="logo__image only-dark pst-js-only" alt="Ansys Sphinx Theme - Home"/>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="Ansys Sphinx Theme home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user-guide.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../../contribute.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav>
+</div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+      
+        <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/ansys-sphinx-theme" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+
+  
+    <button type="button" class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+  
+
+  
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+<div class="ast-announcement-wrap" role="region" aria-label="Announcement">
+    <div class="ast-announcement info">
+        <span class="ast-announcement-icon" aria-hidden="true"></span>
+        <span class="ast-announcement-text" id="ast-announcement-text">From version `1.10.0`, the ansys_sphinx_theme package supports new announcement banner features.</span>
+        <!-- djlint:off H021-->
+        <!-- for inline styles -->
+        <a class="ast-announcement-details-btn" id="ast-announcement-details-btn"
+           href=""
+           data-ast-url=""
+           aria-label="View notifications"
+           style="display:none">View</a>
+        <!-- djlint:on -->
+        <!-- djlint:off H023-->
+        <!-- use entity reference for &times; -->
+        <button type="button" class="ast-announcement-close" id="ast-announcement-close" aria-label="Close announcement">&times;</button>
+        <!-- djlint:on -->
+    </div>
+</div>
+
+<!-- Modal overlay -->
+<!-- djlint:off H023-->
+<!-- use entity reference for &times; -->
+<div class="ast-announcement-overlay" id="ast-announcement-overlay" role="dialog" aria-modal="true" aria-label="Announcement details">
+    <div class="ast-announcement-modal info">
+        <div class="ast-announcement-modal-body"
+             data-ast-items='[{"link": "https://sphinxdocs.ansys.com/version/dev/user-guide/options.html#announcement-banner", "message": "From version `1.10.0`, the ansys_sphinx_theme package supports new announcement banner features.", "type": "info"}]'>
+        </div>
+        <button type="button" class="ast-announcement-modal-close" id="ast-announcement-modal-close" aria-label="Close">&times;</button>
+    </div>
+</div>
+<!-- djlint:on -->
+
+<script src="../../_static/js/announcement_banner.js"
+        data-base-url="../../"></script>
+
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../index.html" title="Ansys Sphinx Theme home">Home</a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting-started.html">
+    Getting started
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user-guide.html">
+    User guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../../examples.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../changelog.html">
+    Release notes
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../contribute.html">
+    Contribute
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/index.html">
+    API reference
+  </a>
+</li>
+
+  </ul>
+</nav>
+</div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<div class="search-bar pst-js-only" id="search-bar">
+  <form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="search" class="form-control" name="q" placeholder="Search the docs ..."
+      aria-label="Search the docs ..." autocomplete="off" autocorrect="off"
+      autocapitalize="off" spellcheck="false" />
+    <span class="search-button__kbd-shortcut">
+      <kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd>
+    </span>
+  </form>
+  
+  <div id="static-search-results" class="static-search-results" style="display:none;" tabindex="0"></div>
+  
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button type="button" class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button type="button" class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/ansys-sphinx-theme" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button type="button" id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+    <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
+  </svg>
+  <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
+  <span class="pst-expand-sidebar-label">Expand Sidebar</span>
+</button></div>
+        <div class="sidebar-primary-item">
+
+
+<nav class="bd-docs-nav bd-links"
+     aria-label="Examples">
+  <p class="bd-links__title" role="heading" aria-level="1">Examples</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Sphinx extensions</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../sphinx-design.html">Sphinx design</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../nbsphinx.html">Jupyter notebook - nbsphinx</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Sphinx-Gallery</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a aria-current="page" class="current reference internal" href="#">Sphinx-Gallery</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../sphinx-autoapi.html">Sphinx AutoAPI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Documentation components</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../table.html">Table</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../admonitions.html">Admonitions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../examples.html" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Sphinx-Gallery</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Sphinx-Gallery</span></li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+  
+
+  
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gallery-examples-sphinx-gallery-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="sphinx-gallery">
+<span id="sphx-glr-examples-gallery-examples-sphinx-gallery-py"></span><h1>Sphinx-Gallery<a class="headerlink" href="#sphinx-gallery" title="Link to this heading">#</a></h1>
+<p>This example shows how to add a new example when using <a class="reference external" href="https://sphinx-gallery.github.io/">Sphinx-Gallery</a>.</p>
+<p>To use Sphinx-Gallery, first install the package with this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>sphinx-gallery
+</pre></div>
+</div>
+<p>Then, add the package to the <code class="docutils literal notranslate"><span class="pre">extensions</span></code> variable in your Sphinx <code class="docutils literal notranslate"><span class="pre">conf.py</span></code> file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="w">
+</span>    <span class="s2">&quot;</span><span class="s2">sphinx_gallery.gen_gallery</span><span class="s2">&quot;</span><span class="p">,</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></pre></div></div>
+<section id="plot-a-simple-sphere-using-pyvista">
+<h2>Plot a simple sphere using PyVista<a class="headerlink" href="#plot-a-simple-sphere-using-pyvista" title="Link to this heading">#</a></h2>
+<p>This code plots a simple sphere using PyVista.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span class="kn">import</span><span class="w"> </span><span class="nn">pyvista</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pv</span><span class="w">
+</span><span class="w">
+</span><span class="n">pv</span><span class="o">.</span><span class="n">set_jupyter_backend</span><span class="p">(</span><span class="s2">&quot;</span><span class="s2">html</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="n">sphere</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Sphere</span><span class="p">(</span><span class="p">)</span><span class="w">
+</span><span class="n">sphere</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="p">)</span><span class="w">
+</span></pre></div></div>
+<img src="../../_images/sphx_glr_sphinx-gallery_001.png" srcset="../../_images/sphx_glr_sphinx-gallery_001.png" alt="sphinx gallery" class = "sphx-glr-single-img"/><p>Plot a simple sphere using PyVista with a plotter</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span class="n">plotter</span> <span class="o">=</span> <span class="n">pv</span><span class="o">.</span><span class="n">Plotter</span><span class="p">(</span><span class="n">notebook</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="w">
+</span><span class="n">plotter</span><span class="o">.</span><span class="n">add_mesh</span><span class="p">(</span><span class="n">sphere</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">white</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="w">
+</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="str"><span class="n">plotter</span><span class="o">.</span><span class="n">title</span></a> <span class="o">=</span> <span class="s2">&quot;</span><span class="s2">3D Sphere Visualization</span><span class="s2">&quot;</span><span class="w">
+</span><span class="n">plotter</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="p">)</span><span class="w">
+</span></pre></div></div>
+<img src="../../_images/sphx_glr_sphinx-gallery_002.png" srcset="../../_images/sphx_glr_sphinx-gallery_002.png" alt="sphinx gallery" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;trame_pyvista.jupyter.EmbeddableWidget object at 0x7f455d102a50&gt;
+</pre></div>
+</div>
+</section>
+<section id="figures-with-matplotlib">
+<h2>Figures with Matplotlib<a class="headerlink" href="#figures-with-matplotlib" title="Link to this heading">#</a></h2>
+<p>This example shows how to render a figure using Matplotlib.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="nn">.</span><span class="nn">pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span><span class="w">
+</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="w">
+</span><span class="w">
+</span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="float"><span class="n">np</span><span class="o">.</span><span class="n">pi</span></a><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="p">)</span><span class="w">
+</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">blue</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;</span><span class="s2">$</span><span class="s2">\</span><span class="s2">cos</span><span class="s2">{</span><span class="s2">(t)}$</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
+</span><span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">red</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;</span><span class="s2">$</span><span class="s2">\</span><span class="s2">sin</span><span class="s2">{</span><span class="s2">(t)}$</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="s2">Time [time units]</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
+</span><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;</span><span class="s2">Amplitude [distance units]</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
+</span><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;</span><span class="s2">Trigonometric functions</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="p">)</span><span class="w">
+</span></pre></div></div>
+<img src="../../_images/sphx_glr_sphinx-gallery_003.png" srcset="../../_images/sphx_glr_sphinx-gallery_003.png" alt="Trigonometric functions" class = "sphx-glr-single-img"/></section>
+<section id="figures-with-plotly">
+<h2>Figures with Plotly<a class="headerlink" href="#figures-with-plotly" title="Link to this heading">#</a></h2>
+<p>This example shows how to render a figure using Plotly.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span class="kn">import</span><span class="w"> </span><span class="nn">plotly</span><span class="nn">.</span><span class="nn">graph_objs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span><span class="w">
+</span><span class="w">
+</span><span class="c1"># More info: https://plotly.com/python/renderers/</span><span class="w">
+</span><span class="w">
+</span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/functions.html#float" title="float"><span class="n">np</span><span class="o">.</span><span class="n">pi</span></a><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="n">cos_trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">lines</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">cos(t)</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
+</span><span class="n">sin_trace</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span><span class="p">)</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">lines</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">sin(t)</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="dict"><span class="n">data</span></a><span class="o">=</span><span class="p">[</span><span class="n">cos_trace</span><span class="p">,</span> <span class="n">sin_trace</span><span class="p">]</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="n">fig</span><span class="w">
+</span></pre></div></div>
+<div class="output_subarea output_html rendered_html output_result">
+<div style="height:525px; width:100%;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" integrity="sha256-O24V1F27f8pb0glCkelh3cVHLNiHAJ5gCaVtq2aNch8=" crossorigin="anonymous"></script>                <div id="8f9387cc-bbd1-408f-ac98-2994b92c415f" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("8f9387cc-bbd1-408f-ac98-2994b92c415f")) {                    Plotly.newPlot(                        "8f9387cc-bbd1-408f-ac98-2994b92c415f",                        [{"mode":"lines","name":"cos(t)","x":{"dtype":"f8","bdata":"AAAAAAAAAACRGkt8Vz+wP5EaS3xXP8A\u002f2qdwOgNfyD+RGkt8Vz\u002fQPzXhXVstT9Q\u002f2qdwOgNf2D9+boMZ2W7cP5EaS3xXP+A\u002f433Ua0JH4j814V1bLU\u002fkP4dE50oYV+Y\u002f2qdwOgNf6D8sC\u002fop7mbqP35ugxnZbuw\u002f0NEMCcR27j+RGkt8Vz\u002fwPzrMD\u002fRMQ\u002fE\u002f433Ua0JH8j+ML5njN0vzPzXhXVstT\u002fQ\u002f3pIi0yJT9T+HROdKGFf2PzD2q8INW\u002fc\u002f2qdwOgNf+D+DWTWy+GL5PywL+inuZvo\u002f1by+oeNq+z9+boMZ2W78PycgSJHOcv0\u002f0NEMCcR2\u002fj95g9GAuXr\u002fP5EaS3xXPwBAZnMtOFLBAEA6zA\u002f0TEMBQA8l8q9HxQFA433Ua0JHAkC41rYnPckCQIwvmeM3SwNAYYh7nzLNA0A14V1bLU8EQAo6QBco0QRA3pIi0yJTBUCz6wSPHdUFQIdE50oYVwZAXJ3JBhPZBkAw9qvCDVsHQAVPjn4I3QdA2qdwOgNfCECuAFP2\u002feAIQINZNbL4YglAV7IXbvPkCUAsC\u002fop7mYKQABk3OXo6ApA1by+oeNqC0CpFaFd3uwLQH5ugxnZbgxAUsdl1dPwDEAnIEiRznINQPt4Kk3J9A1A0NEMCcR2DkCkKu\u002fEvvgOQHmD0YC5eg9ATdyzPLT8D0CRGkt8Vz8QQPtGPNpUgBBAZnMtOFLBEEDQnx6WTwIRQDrMD\u002fRMQxFApPgAUkqEEUAPJfKvR8URQHlR4w1FBhJA433Ua0JHEkBNqsXJP4gSQLjWtic9yRJAIgOohToKE0CML5njN0sTQPZbikE1jBNAYYh7nzLNE0DLtGz9Lw4UQDXhXVstTxRAoA1PuSqQFEAKOkAXKNEUQHRmMXUlEhVA3pIi0yJTFUBJvxMxIJQVQLPrBI8d1RVAHRj27BoWFkCHROdKGFcWQPJw2KgVmBZAXJ3JBhPZFkDGybpkEBoXQDD2q8INWxdAmyKdIAucF0AFT45+CN0XQG97f9wFHhhA2qdwOgNfGEBE1GGYAKAYQK4AU\u002fb94BhAGC1EVPshGUA="},"y":{"dtype":"f8","bdata":"AAAAAAAA8D+VSynBge\u002fvP2j6BgUYvu8\u002fJek3u\u002fVr7z8jfxaOb\u002fnuP\u002fFJcov7Zu4\u002fXLHeqjC17T9+NRQyxuTsP1+hBPiS9us\u002fuvBkh4zr6j9WMpEhxsTpPzlQz6Jvg+g\u002ftDkVSdQo5z+WUJVeWbblP0ATccl8LeQ\u002fA6sNgtOP4j9cLKDxB9\u002fgP1a1P3WwOd4\u002fthLH2SiW2j+KU4hOOdfWP1tDY1G+ANM\u002fjFrgSlktzj+Mcwt+GjrGPyLsuGvkX7w\u002fcyCwKKhcqD\u002fN+ijPKj+QvwzJ6KS5SbS\u002f3kQPZF83wr9P3qvaGjfKv5OAwi7oDdG\u002fPSGBd67u1L83i\u002fTn4LnYv4vJmF6Wa9y\u002fAgAAAAAA4L\u002fP5tyRtrnhv860DJEnYeO\u002fhlh3f5705L\u002fbPrV2e3Lmv11Sx9Q02ee\u002fJuDa0Vgn6b9dHHf9jlvqv4pZi6GZdOu\u002fwfLvCVdx7L\u002fZTwivwlDtvxstUkL2Ee6\u002fV1DNmyq07r9D8kaHuDbvvwQ9tXAZme+\u002fXjTx7ufa778HB0As4PvvvwcHQCzg+++\u002fXjTx7ufa778EPbVwGZnvv0PyRoe4Nu+\u002fV1DNmyq07r8cLVJC9hHuv9lPCK\u002fCUO2\u002fwvLvCVdx7L+JWYuhmXTrv14cd\u002f2OW+q\u002fJeDa0Vgn6b9eUsfUNNnnv9o+tXZ7cua\u002fiFh3f5705L\u002fMtAyRJ2Hjv9Hm3JG2ueG\u002f+f\u002f\u002f\u002f\u002f\u002f\u002f37+IyZhelmvcvzeL9Ofgudi\u002fQSGBd67u1L+MgMIu6A3Rv0jeq9oaN8q\u002f3kQPZF83wr8eyeikuUm0v1T6KM8qP5C\u002fkCCwKKhcqD8R7Lhr5F+8P3xzC34aOsY\u002fk1rgSlktzj9bQ2NRvgDTP4ZTiE4519Y\u002fvRLH2SiW2j9ZtT91sDneP1wsoPEH3+A\u002fAasNgtOP4j9DE3HJfC3kP5dQlV5ZtuU\u002ftDkVSdQo5z83UM+ib4PoP1cykSHGxOk\u002fuvBkh4zr6j9foQT4kvbrP301FDLG5Ow\u002fXbHeqjC17T\u002fxSXKL+2buPyN\u002fFo5v+e4\u002fJuk3u\u002fVr7z9o+gYFGL7vP5VLKcGB7+8\u002fAAAAAAAA8D8="},"type":"scatter"},{"mode":"lines","name":"sin(t)","x":{"dtype":"f8","bdata":"AAAAAAAAAACRGkt8Vz+wP5EaS3xXP8A\u002f2qdwOgNfyD+RGkt8Vz\u002fQPzXhXVstT9Q\u002f2qdwOgNf2D9+boMZ2W7cP5EaS3xXP+A\u002f433Ua0JH4j814V1bLU\u002fkP4dE50oYV+Y\u002f2qdwOgNf6D8sC\u002fop7mbqP35ugxnZbuw\u002f0NEMCcR27j+RGkt8Vz\u002fwPzrMD\u002fRMQ\u002fE\u002f433Ua0JH8j+ML5njN0vzPzXhXVstT\u002fQ\u002f3pIi0yJT9T+HROdKGFf2PzD2q8INW\u002fc\u002f2qdwOgNf+D+DWTWy+GL5PywL+inuZvo\u002f1by+oeNq+z9+boMZ2W78PycgSJHOcv0\u002f0NEMCcR2\u002fj95g9GAuXr\u002fP5EaS3xXPwBAZnMtOFLBAEA6zA\u002f0TEMBQA8l8q9HxQFA433Ua0JHAkC41rYnPckCQIwvmeM3SwNAYYh7nzLNA0A14V1bLU8EQAo6QBco0QRA3pIi0yJTBUCz6wSPHdUFQIdE50oYVwZAXJ3JBhPZBkAw9qvCDVsHQAVPjn4I3QdA2qdwOgNfCECuAFP2\u002feAIQINZNbL4YglAV7IXbvPkCUAsC\u002fop7mYKQABk3OXo6ApA1by+oeNqC0CpFaFd3uwLQH5ugxnZbgxAUsdl1dPwDEAnIEiRznINQPt4Kk3J9A1A0NEMCcR2DkCkKu\u002fEvvgOQHmD0YC5eg9ATdyzPLT8D0CRGkt8Vz8QQPtGPNpUgBBAZnMtOFLBEEDQnx6WTwIRQDrMD\u002fRMQxFApPgAUkqEEUAPJfKvR8URQHlR4w1FBhJA433Ua0JHEkBNqsXJP4gSQLjWtic9yRJAIgOohToKE0CML5njN0sTQPZbikE1jBNAYYh7nzLNE0DLtGz9Lw4UQDXhXVstTxRAoA1PuSqQFEAKOkAXKNEUQHRmMXUlEhVA3pIi0yJTFUBJvxMxIJQVQLPrBI8d1RVAHRj27BoWFkCHROdKGFcWQPJw2KgVmBZAXJ3JBhPZFkDGybpkEBoXQDD2q8INWxdAmyKdIAucF0AFT45+CN0XQG97f9wFHhhA2qdwOgNfGEBE1GGYAKAYQK4AU\u002fb94BhAGC1EVPshGUA="},"y":{"dtype":"f8","bdata":"AAAAAAAAAAADhrXMjDywP\u002fCDAnguNMA\u002fkayggGI5yD+aiNkBzxLQP9ofIiFb+NM\u002f+5MNU1HJ1z+CQNqEwoHbPxlNPurYHd8\u002fC1i7+O1M4T9GhZoMGvniPxwWPFK3keQ\u002fABg\u002flCAV5j+GGZN4xoHnP4hAIRwx1ug\u002flkFFlgER6j93zoZi8zDrPzKcHq\u002fdNOw\u002fEyzujrQb7T\u002fB8a4NiuTtP\u002f0jPCWPju4\u002f3176khQZ7z8XHIGMi4PvPzTGy1KGze8\u002fg6xao7j27z\u002fvOc8G+P7vP2Zmsvw75u8\u002f70I4BJ6s7z+\u002fl\u002feBWVLvPwOssILL1+4\u002fxVNiW3I97j+TIxAn7YPtP1EHwCL7q+w\u002fqUxY6Hq26z+RVimJaaTqP5aCD4nhduk\u002foSg6uxkv6D+158MBZM7mP9OHZvErVuU\u002f8XixWvXH4z8mRkW6WiXiP2ITsJELcOA\u002f8qg+VZVT3T\u002fagWKM2KjZP\u002fgLinSo49U\u002fv412\u002fecH0j\u002flKaSyIjPMP+bENsZjOcQ\u002f3FNHxZdVuD+s23zJpD6gP8nbfMmkPqC\u002f6lNHxZdVuL\u002ftxDbGYznEv9wppLIiM8y\u002fwo12\u002fecH0r\u002f0C4p0qOPVv92BYozYqNm\u002f7qg+VZVT3b9jE7CRC3DgvyRGRbpaJeK\u002f83ixWvXH47\u002fRh2bxK1blv7fnwwFkzua\u002foCg6uxkv6L+Xgg+J4Xbpv5BWKYlppOq\u002frExY6Hq2679SB8Ai+6vsv5MjECftg+2\u002fxFNiW3I97r8ErLCCy9fuv7+X94FZUu+\u002f70I4BJ6s779lZrL8O+bvv+85zwb4\u002fu+\u002fg6xao7j27780xstShs3vvxgcgYyLg++\u002f3176khQZ77\u002f9Izwlj47uv8Lxrg2K5O2\u002fEizujrQb7b8xnB6v3TTsv3fOhmLzMOu\u002fl0FFlgER6r+GQCEcMdbov4UZk3jGgee\u002fABg\u002flCAV5r8fFjxSt5Hkv0SFmgwa+eK\u002fCli7+O1M4b8bTT7q2B3fv4dA2oTCgdu\u002f9ZMNU1HJ17\u002fZHyIhW\u002fjTv52I2QHPEtC\u002fgKyggGI5yL\u002fogwJ4LjTAvwSGtcyMPLC\u002fB1wUMyamsbw="},"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05}}}},                        {"responsive": true}                    )                };            </script>        </div>
+</div>
+<br />
+<br /><div class="highlight-Python notranslate"><div class="highlight"><pre><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="w">
+</span><span class="kn">import</span><span class="w"> </span><span class="nn">plotly</span><span class="nn">.</span><span class="nn">express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span><span class="w">
+</span><span class="w">
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">tips</span><span class="p">(</span><span class="p">)</span><span class="w">
+</span><span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="w">
+</span>    <span class="n">df</span><span class="p">,</span><span class="w">
+</span>    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">sex</span><span class="s2">&quot;</span><span class="p">,</span><span class="w">
+</span>    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">total_bill</span><span class="s2">&quot;</span><span class="p">,</span><span class="w">
+</span>    <span class="n">facet_col</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">day</span><span class="s2">&quot;</span><span class="p">,</span><span class="w">
+</span>    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">smoker</span><span class="s2">&quot;</span><span class="p">,</span><span class="w">
+</span>    <span class="n">barmode</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">group</span><span class="s2">&quot;</span><span class="p">,</span><span class="w">
+</span>    <span class="n">template</span><span class="o">=</span><span class="s2">&quot;</span><span class="s2">presentation+plotly</span><span class="s2">&quot;</span><span class="p">,</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span><span class="w">
+</span><span class="n">fig</span><span class="w">
+</span></pre></div></div>
+<div class="output_subarea output_html rendered_html output_result">
+<div style="height:400px; width:100%;">            <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script><script>if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}</script>                <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-4.1.1.min.js" integrity="sha256-O24V1F27f8pb0glCkelh3cVHLNiHAJ5gCaVtq2aNch8=" crossorigin="anonymous"></script>                <div id="6f34d35f-e577-4b94-b726-2552a64f0c8d" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("6f34d35f-e577-4b94-b726-2552a64f0c8d")) {                    Plotly.newPlot(                        "6f34d35f-e577-4b94-b726-2552a64f0c8d",                        [{"alignmentgroup":"True","hovertemplate":"smoker=No\u003cbr\u003eday=Sun\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"No","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"No","offsetgroup":"No","orientation":"v","showlegend":true,"textposition":"auto","x":["Female","Male","Male","Male","Female","Male","Male","Male","Male","Male","Male","Female","Male","Male","Female","Male","Female","Male","Female","Male","Male","Male","Male","Male","Male","Male","Male","Male","Male","Female","Female","Male","Male","Male","Male","Male","Female","Female","Male","Male","Male","Male","Male","Male","Female","Male","Female","Female","Male","Male","Male","Female","Male","Male","Male","Male","Male"],"xaxis":"x","y":{"dtype":"f8","bdata":"PQrXo3D9MECuR+F6FK4kQMP1KFyPAjVArkfhehSuN0DXo3A9Cpc4QArXo3A9SjlACtejcD2KIUDhehSuR+E6QBSuR+F6FC5Aj8L1KFyPLUAK16NwPYokQOF6FK5HoUFA16NwPQrXLkCuR+F6FG4yQClcj8L1qC1AFK5H4XqUNUApXI\u002fC9agkQArXo3A9SjBAuB6F61H4MED2KFyPwnUxQOF6FK5H4StAXI\u002fC9ShcI0BmZmZmZmY+QArXo3A9SjJAexSuR+E6NkAzMzMzMzNAQM3MzMzMjDxACtejcD0KMkAUrkfhehQpQBSuR+F6lCRASOF6FK5nQUDhehSuR+EjQI\u002fC9ShcjzlAPQrXo3B9M0ApXI\u002fC9QhDQDMzMzMz8zdA9ihcj8K1OUCPwvUoXE8xQK5H4XoU7j1ApHA9CtcjLEDD9Shcj0IqQMP1KFyPQjFAzczMzMyMOECF61G4HsUzQJqZmZmZ2T1A9ihcj8IVSEAAAAAAAAA5QEjhehSuxypAPQrXo3B9MEAAAAAAAIA1QFK4HoXrUSlA9ihcj8I1MEAfhetRuJ4rQIXrUbgehThAw\u002fUoXI\u002fCNED2KFyPwrU\u002fQHE9CtejsDRA"},"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=No\u003cbr\u003eday=Sat\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"No","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"No","offsetgroup":"No","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Male","Female","Female","Male","Male","Male","Male","Male","Male","Female","Male","Male","Female","Female","Male","Male","Male","Female","Male","Male","Male","Female","Male","Male","Male","Female","Male","Male","Female","Female","Male","Female","Male","Male","Female","Male","Male","Male","Male","Male","Male","Female","Male","Male"],"xaxis":"x2","y":{"dtype":"f8","bdata":"ZmZmZmamNEDsUbgehesxQArXo3A9SjRACtejcD2KL0D2KFyPwrVDQFK4HoXr0TNAj8L1KFzPMUA9CtejcL0qQOF6FK5HYSlAMzMzMzOzNUBmZmZmZqYzQJqZmZmZGSNAmpmZmZlZMkAfhetRuB4uQHE9CtejsDRASOF6FK7HMUCPwvUoXA84QI\u002fC9ShcTzBArkfhehTuMEBxPQrXo7AyQIXrUbgeRT9ACtejcD0KMEApXI\u002fC9Wg6QMP1KFyPIkhA16NwPQqXMUAUrkfhehQ0QDMzMzMzczBAexSuR+E6NEAK16NwPQooQFK4HoXrETFA9ihcj8J1LUCF61G4HgUlQOxRuB6F6zRAPQrXo3A9MkAAAAAAAAAsQAAAAAAAAB1ACtejcD0qSEAzMzMzM3M0QI\u002fC9ShcjypAuB6F61E4J0AK16NwPYolQKRwPQrXIyRACtejcD3qQUBI4XoUrgc9QFK4HoXr0TFA"},"yaxis":"y2","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=No\u003cbr\u003eday=Thur\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"No","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"No","offsetgroup":"No","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Male","Male","Male","Female","Male","Female","Male","Male","Male","Male","Female","Female","Female","Male","Female","Male","Male","Female","Female","Male","Female","Female","Male","Male","Female","Female","Female","Female","Female","Female","Female","Female","Female","Male","Male","Female","Female","Female","Female","Female","Male","Male","Male","Female"],"xaxis":"x3","y":{"dtype":"f8","bdata":"MzMzMzMzO0DD9Shcj8I2QArXo3A9SjFAKVyPwvWoMECkcD0K1yMkQPYoXI\u002fC9S9ACtejcD1qQUCPwvUoXA8qQEjhehSuRzJA9ihcj8K1OEApXI\u002fC9Sg1QM3MzMzMTCVAXI\u002fC9SjcKEAUrkfhehQ4QOF6FK5HYSdA16NwPQrXKkCF61G4HoUsQGZmZmZm5i9A9ihcj8L1KEDNzMzMzMw9QArXo3A9CiFACtejcD0KLUDD9Shcj8ImQFK4HoXr0TZAFK5H4XoUM0CF61G4HkU0QNejcD0KVyZAhetRuB6FKEDD9Shcj0IyQIXrUbgeBSFAKVyPwvWoJEDNzMzMzEwsQFK4HoXrUSpAuB6F61F4MUBmZmZmZiZBQLgehetRmERAzczMzMwMO0CuR+F6FG4wQDMzMzMzsyBApHA9CtejMkA9CtejcL0nQI\u002fC9ShcjyNACtejcD0KHkA9CtejcD0eQEjhehSuxzJA"},"yaxis":"y3","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=No\u003cbr\u003eday=Fri\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"No","marker":{"color":"#636efa","pattern":{"shape":""}},"name":"No","offsetgroup":"No","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Female","Male","Female"],"xaxis":"x4","y":{"dtype":"f8","bdata":"PQrXo3B9NkAAAAAAAMA2QOxRuB6F6yhA9ihcj8L1L0A="},"yaxis":"y4","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=Yes\u003cbr\u003eday=Sun\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Yes","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"Yes","offsetgroup":"Yes","orientation":"v","showlegend":true,"textposition":"auto","x":["Female","Male","Male","Male","Male","Male","Male","Female","Male","Male","Male","Male","Male","Male","Female","Male","Female","Male","Male"],"xaxis":"x","y":{"dtype":"f8","bdata":"w\u002fUoXI+CMUAAAAAAAAAdQJqZmZmZ2T9AUrgehevRMEAzMzMzM3NAQKRwPQrX4zFA9ihcj8L1LEAzMzMzMzMjQHE9CtejUEFAMzMzMzNTQUAUrkfhelQ3QM3MzMzMrEZA7FG4HoUrN0BmZmZmZkZEQGZmZmZm5jRA9ihcj8J1PkBmZmZmZiYyQJqZmZmZGTdA4XoUrkdhL0A="},"yaxis":"y","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=Yes\u003cbr\u003eday=Sat\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Yes","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"Yes","offsetgroup":"Yes","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Male","Male","Male","Male","Male","Female","Male","Female","Female","Male","Female","Female","Male","Male","Male","Female","Female","Female","Male","Male","Male","Male","Male","Female","Male","Male","Female","Female","Female","Male","Male","Male","Female","Female","Male","Male","Male","Male","Male","Female","Male"],"xaxis":"x2","y":{"dtype":"f8","bdata":"4XoUrkcBQ0B7FK5H4XomQArXo3A9SjRAH4XrUbieK0AK16NwPQomQArXo3A9SjJAj8L1KFyPCECF61G4HgUuQFyPwvUo3DpASOF6FK5HOUDsUbgehesxQGZmZmZmJkZA7FG4HoVrNkC4HoXrUbguQD0K16NwfTRA9ihcj8I1OUAfhetRuJ4sQK5H4XoULiVAw\u002fUoXI9CJUBI4XoUrmdJQB+F61G4ni9A16NwPQqXOkA9CtejcF1DQIXrUbgeRThAhetRuB6FKUCPwvUoXA8+QKRwPQrX4zlACtejcD2KKkDsUbgehSs8QM3MzMzMzClAZmZmZmYmPECuR+F6FC4nQPYoXI\u002fC9R5ApHA9CtcjPkAfhetRuB42QMP1KFyPAjhA4XoUrkdhL0CPwvUoXA8vQDMzMzMzMylACtejcD1qQECuR+F6FC47QOxRuB6FqzZA"},"yaxis":"y2","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=Yes\u003cbr\u003eday=Thur\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Yes","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"Yes","offsetgroup":"Yes","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Male","Male","Female","Male","Male","Male","Male","Female","Female","Male","Male","Female","Female","Female","Male","Female"],"xaxis":"x3","y":{"dtype":"f8","bdata":"cT0K16NwM0DXo3A9CldAQAAAAAAAADBAj8L1KFzPM0BxPQrXo3A8QPYoXI\u002fC9S5AFK5H4XqUMECuR+F6FK4kQK5H4XoUjkVAAAAAAAAAKkCF61G4HgUrQPYoXI\u002fCtTJAexSuR+F6KUAAAAAAAAAqQGZmZmZmZjBASOF6FK6HNEC4HoXrUXgwQA=="},"yaxis":"y3","type":"bar"},{"alignmentgroup":"True","hovertemplate":"smoker=Yes\u003cbr\u003eday=Fri\u003cbr\u003esex=%{x}\u003cbr\u003etotal_bill=%{y}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"Yes","marker":{"color":"#EF553B","pattern":{"shape":""}},"name":"Yes","offsetgroup":"Yes","orientation":"v","showlegend":false,"textposition":"auto","x":["Male","Female","Female","Male","Male","Male","Male","Female","Female","Male","Female","Male","Male","Female","Female"],"xaxis":"x4","y":{"dtype":"f8","bdata":"uB6F61H4PEAAAAAAAAAXQFK4HoXrUTBA9ihcj8IVREBI4XoUrkc7QI\u002fC9ShcDyhAw\u002fUoXI8CNUAzMzMzM7MmQMP1KFyPwi5AUrgehetRKEDXo3A9CtcqQClcj8L1KCFA16NwPQrXKkCF61G4HkUwQK5H4XoULiRA"},"yaxis":"y4","type":"bar"}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""},"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"line":{"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scattergeo"}],"scattergl":[{"line":{"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"line":{"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scatterpolargl"}],"scatterpolar":[{"line":{"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scatterpolar"}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"line":{"width":3},"marker":{"size":9},"type":"scatter"}],"scatterternary":[{"line":{"width":3},"marker":{"colorbar":{"outlinewidth":0,"ticks":""},"size":9},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"height":30,"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"height":36,"line":{"color":"white"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f","size":18},"geo":{"bgcolor":"white","lakecolor":"white","landcolor":"#E5ECF6","showlakes":true,"showland":true,"subunitcolor":"white"},"hoverlabel":{"align":"left"},"hovermode":"closest","paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","gridwidth":2,"linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white"}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"ternary":{"aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"bgcolor":"#E5ECF6","caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"title":{"x":0.05},"xaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,0.235],"title":{"text":"sex"}},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"total_bill"}},"xaxis2":{"anchor":"y2","domain":[0.255,0.49],"matches":"x","title":{"text":"sex"}},"yaxis2":{"anchor":"x2","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis3":{"anchor":"y3","domain":[0.51,0.745],"matches":"x","title":{"text":"sex"}},"yaxis3":{"anchor":"x3","domain":[0.0,1.0],"matches":"y","showticklabels":false},"xaxis4":{"anchor":"y4","domain":[0.7649999999999999,0.9999999999999999],"matches":"x","title":{"text":"sex"}},"yaxis4":{"anchor":"x4","domain":[0.0,1.0],"matches":"y","showticklabels":false},"annotations":[{"font":{},"showarrow":false,"text":"day=Sun","x":0.1175,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"day=Sat","x":0.3725,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"day=Thur","x":0.6275,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"},{"font":{},"showarrow":false,"text":"day=Fri","x":0.8824999999999998,"xanchor":"center","xref":"paper","y":1.0,"yanchor":"bottom","yref":"paper"}],"legend":{"title":{"text":"smoker"},"tracegroupgap":0},"margin":{"t":60},"barmode":"group","height":400},                        {"responsive": true}                    )                };            </script>        </div>
+</div>
+<br />
+<br /></section>
+<section id="render-equations-using-ipython-math">
+<h2>Render equations using IPython <code class="docutils literal notranslate"><span class="pre">math</span></code><a class="headerlink" href="#render-equations-using-ipython-math" title="Link to this heading">#</a></h2>
+<p>This example shows how to render equations using the IPython <code class="docutils literal notranslate"><span class="pre">math</span></code> module.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">IPython</span><span class="nn">.</span><span class="nn">display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Math</span><span class="p">,</span> <span class="n">display</span><span class="w">
+</span><span class="w">
+</span><span class="c1"># LaTeX formatted equation</span><span class="w">
+</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="str"><span class="n">equation</span></a> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;</span><span class="s2">\</span><span class="s2">int</span><span class="s2">\</span><span class="s2">limits_</span><span class="s2">{</span><span class="s2">-</span><span class="s2">\</span><span class="s2">infty}^</span><span class="s2">\</span><span class="s2">infty f(x) </span><span class="s2">\</span><span class="s2">delta(x - x_0) </span><span class="s2">\</span><span class="s2">, dx = f(x_0)</span><span class="s2">&quot;</span><span class="w">
+</span><span class="c1"># Display the equation</span><span class="w">
+</span><span class="n">display</span><span class="p">(</span><span class="n">Math</span><span class="p">(</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/stdtypes.html#str" title="str"><span class="n">equation</span></a><span class="p">)</span><span class="p">)</span><span class="w">
+</span></pre></div></div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Math object&gt;
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">IPython</span><span class="nn">.</span><span class="nn">display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Latex</span><span class="w">
+</span><span class="w">
+</span><span class="n">Latex</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;</span><span class="s2">This is a </span><span class="s2">\</span><span class="s2">LaTeX</span><span class="si">{}</span><span class="s2"> equation: $a^2 + b^2 = c^2$</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
+</span></pre></div></div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;IPython.core.display.Latex object&gt;
+</pre></div>
+</div>
+</section>
+<section id="render-a-table">
+<h2>Render a table<a class="headerlink" href="#render-a-table" title="Link to this heading">#</a></h2>
+<p>This is an example to render a table with Sphinx-Gallery.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>A</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p>A and B</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>False</p></td>
+<td><p>False</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>True</p></td>
+<td><p>False</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-even"><td><p>False</p></td>
+<td><p>True</p></td>
+<td><p>False</p></td>
+</tr>
+<tr class="row-odd"><td><p>True</p></td>
+<td><p>True</p></td>
+<td><p>True</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Render a table using pandas</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span><span class="w">
+</span><span class="w">
+</span><span class="c1"># Create a dictionary of data</span><span class="w">
+</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="dict"><span class="n">data</span></a> <span class="o">=</span> <span class="p">{</span><span class="w">
+</span>    <span class="s2">&quot;</span><span class="s2">A</span><span class="s2">&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span><span class="p">,</span><span class="w">
+</span>    <span class="s2">&quot;</span><span class="s2">B</span><span class="s2">&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span><span class="p">,</span><span class="w">
+</span>    <span class="s2">&quot;</span><span class="s2">C</span><span class="s2">&quot;</span><span class="p">:</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="w">
+</span><span class="c1"># Create DataFrame from the dictionary</span><span class="w">
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><a class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance reference external" href="https://docs.python.org/3/builtins/stdtypes.html#dict" title="dict"><span class="n">data</span></a><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="c1"># Display the DataFrame</span><span class="w">
+</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="p">)</span><span class="w">
+</span></pre></div></div>
+<div class="output_subarea output_html rendered_html output_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>A</th>
+      <th>B</th>
+      <th>C</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>True</td>
+      <td>False</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>False</td>
+      <td>True</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>True</td>
+      <td>False</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>False</td>
+      <td>True</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+<br />
+<br /><p>sphinx_gallery_tags = [“sphinx-gallery-rendered”]</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 8.781 seconds)</p>
+<p class="sphx-glr-example-tags">🏷 Tags: sphinx-gallery-rendered</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-sphinx-gallery-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/714930556b5962c1be400898294d217f/sphinx-gallery.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">sphinx-gallery.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/7f9d1ecb95a7e184e81659ee58d5df01/sphinx-gallery.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">sphinx-gallery.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/198596c7d15fe991154a2ebccb0cd5a6/sphinx-gallery.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">sphinx-gallery.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sphinx-Gallery</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../sphinx-autoapi.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Sphinx AutoAPI</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-a-simple-sphere-using-pyvista">Plot a simple sphere using PyVista</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-with-matplotlib">Figures with Matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-with-plotly">Figures with Plotly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#render-equations-using-ipython-math">Render equations using IPython <code class="docutils literal notranslate"><span class="pre">math</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#render-a-table">Render a table</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+
+  
+  <nav class="tocsection editthispage" aria-label="Edit this page">
+    <a href="https://github.com/ansys/ansys-sphinx-theme/edit/main/doc/source/examples/gallery-examples/sphinx-gallery.rst" rel="noopener noreferrer">
+      <i class="fa-solid fa-pencil" aria-hidden="true"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </nav>
+</div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/examples/gallery-examples/sphinx-gallery.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=18bd87630a240e9c25be"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=18bd87630a240e9c25be"></script>
+
+
+  <!-- Include desired assets -->
+  
+  
+  
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.7/require.min.js"></script>
+
+<script>
+// Passing the search options to the search.js file
+const SEARCH_OPTIONS = JSON.parse('{"includeMatches": true, "includeScore": true, "keys": [{"name": "section", "weight": 3}, {"name": "title", "weight": 3}, {"name": "text", "weight": 1}, {"name": "objectID", "weight": 0.5}], "limit": 10, "threshold": 0.2}');
+const SEARCH_FILE = "../../_static/search.json";
+const ADVANCE_SEARCH_PATH = "../../search.html";
+const EXTRA_SOURCES = JSON.parse('{"Actions": "https://actions.docs.ansys.com/version/stable/", "PyAnsys": "https://docs.pyansys.com/version/stable/"}');
+</script>
+
+
+<script src="../../_static/js/search.js"></script>
+
+  
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2026 Synopsys, Inc. and ANSYS, Inc. All rights reserved.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.2.0.
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<!--
+  Theme Version Footer
+  Displays the Sphinx theme version and the last updated date.
+  Accessibility and semantic improvements included.
+-->
+<footer class="theme-version" aria-label="Theme version and last update">
+  <span>
+    
+      Built with the
+      <a href="https://sphinxdocs.ansys.com/version/stable/index.html" target="_blank" rel="noopener noreferrer">
+        Ansys Sphinx Theme
+      </a>
+      1.13.dev0.
+    
+  </span>
+  <br />
+  <span>Last updated on <time id="ast_build_date"></time></span>
+</footer>
+<script>
+  // Set the last updated date in a readable format
+  (function() {
+    var options = { day: "numeric", month: "long", year: "numeric" };
+    var ast_lastModifiedDate = new Date(document.lastModified);
+    var ast_build_date = ast_lastModifiedDate.toLocaleDateString("en-US", options);
+    var dateElem = document.getElementById("ast_build_date");
+    if (dateElem) {
+      dateElem.textContent = ast_build_date;
+    }
+  })();
+</script></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
