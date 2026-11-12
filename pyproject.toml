@@ -65,7 +65,7 @@ type-check = [
 doc = [
     "jupytext==1.19.6",
     "nbsphinx==0.9.8",
-    "notebook==7.6.4",
+    "notebook==7.6.5",
     "numpydoc==1.11.0",
     "pandas==3.1.1",
     "Pillow>=9.0",
