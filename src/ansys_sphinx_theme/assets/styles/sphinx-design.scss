@@ -23,6 +23,71 @@ $border-radius: var(--ast-sphinx-design-border-radius);
 }
 
 /**
+ * Sphinx design badge styles
+ *
+ * Badges must stay readable on page and card backgrounds in both themes.
+ * `--sd-color-secondary` equals the card background so secondary buttons blend
+ * into cards, so badges use their own secondary color. Fills that match the
+ * background get a neutral edge, and outlines that would vanish use a neutral
+ * gray.
+ */
+.sd-badge {
+  --sd-color-secondary: var(--ast-sd-badge-secondary);
+  --sd-color-secondary-highlight: var(--ast-sd-badge-secondary-highlight);
+  --sd-color-success: var(--ast-sd-badge-success);
+  --sd-color-success-highlight: var(--ast-sd-badge-success-highlight);
+  --sd-color-success-text: var(--ast-sd-badge-success-text);
+
+  &.sd-outline-secondary {
+    --sd-color-secondary: var(--ast-sd-badge-secondary-outline);
+    --sd-color-secondary-highlight: var(--ast-sd-badge-secondary-outline);
+  }
+
+  &.sd-bg-secondary {
+    box-shadow: inset 0 0 0 1px var(--ast-sd-badge-edge);
+  }
+}
+
+html[data-theme="light"] .sd-badge {
+  &.sd-outline-warning {
+    --sd-color-warning: var(--ast-sd-badge-warning-outline);
+    --sd-color-warning-highlight: var(--ast-sd-badge-warning-outline);
+  }
+
+  &.sd-outline-light,
+  &.sd-outline-white {
+    --sd-color-light: var(--ast-sd-badge-secondary-outline);
+    --sd-color-light-highlight: var(--ast-sd-badge-secondary-outline);
+    --sd-color-white: var(--ast-sd-badge-secondary-outline);
+    --sd-color-white-highlight: var(--ast-sd-badge-secondary-outline);
+  }
+
+  &.sd-bg-light,
+  &.sd-bg-white {
+    box-shadow: inset 0 0 0 1px var(--ast-sd-badge-edge);
+  }
+}
+
+html[data-theme="dark"] .sd-badge {
+  --sd-color-info: var(--ast-sd-badge-info);
+  --sd-color-info-highlight: var(--ast-sd-badge-info-highlight);
+  --sd-color-info-text: var(--ast-sd-badge-info-text);
+
+  &.sd-outline-dark,
+  &.sd-outline-black {
+    --sd-color-dark: var(--ast-sd-badge-secondary-outline);
+    --sd-color-dark-highlight: var(--ast-sd-badge-secondary-outline);
+    --sd-color-black: var(--ast-sd-badge-secondary-outline);
+    --sd-color-black-highlight: var(--ast-sd-badge-secondary-outline);
+  }
+
+  &.sd-bg-dark,
+  &.sd-bg-black {
+    box-shadow: inset 0 0 0 1px var(--ast-sd-badge-edge);
+  }
+}
+
+/**
  * Blockquote styles
  */
 blockquote {
