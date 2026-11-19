@@ -29,4 +29,8 @@ This project is licensed under the MIT License.
 
     .. include:: sphinx_examples/{{ filename }}
 
+    .. raw:: html
+
+       <div style="clear: both;"></div>
+
     {% endfor %}
