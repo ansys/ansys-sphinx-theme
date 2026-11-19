@@ -176,6 +176,7 @@ exclude_patterns = [
     "examples/sphinx-gallery/README.rst",
     "sg_execution_times.rst",
     "examples/gallery-examples/*.ipynb",
+    "examples/sphinx_examples/admonitions.rst",
 ]
 rst_epilog = ""
 with Path.open(THIS_PATH / "links.rst", "r") as f:
