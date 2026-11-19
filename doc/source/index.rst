@@ -26,7 +26,7 @@ are included in the theme to make documentation more appealing and user-friendly
 
             Learn how to use the capabilities and features of this theme.
 
-        .. vale off
+             .. vale off
 
         {% if build_examples %}
 
@@ -38,7 +38,7 @@ are included in the theme to make documentation more appealing and user-friendly
 
         {% endif %}
 
-        .. vale on
+             .. vale on
 
         .. grid-item-card:: :material-regular:`people;1.25em` Contribute
             :link: contribute
@@ -64,6 +64,5 @@ are included in the theme to make documentation more appealing and user-friendly
        {% if build_examples %}
        examples.rst
        {% endif %}
-    .. vale on
        changelog
        contribute.rst
