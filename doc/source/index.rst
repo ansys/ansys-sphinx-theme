@@ -26,6 +26,8 @@ are included in the theme to make documentation more appealing and user-friendly
 
             Learn how to use the capabilities and features of this theme.
 
+        .. vale off
+
         {% if build_examples %}
 
         .. grid-item-card:: :material-regular:`file_copy;1.25em` Examples
@@ -35,6 +37,8 @@ are included in the theme to make documentation more appealing and user-friendly
             Explore examples that show how to integrate third-party extensions with this theme.
 
         {% endif %}
+
+        .. vale on
 
         .. grid-item-card:: :material-regular:`people;1.25em` Contribute
             :link: contribute
