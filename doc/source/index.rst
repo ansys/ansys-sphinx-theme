@@ -60,7 +60,6 @@ are included in the theme to make documentation more appealing and user-friendly
 
        getting-started.rst
        user-guide.rst
-    .. vale off
        {% if build_examples %}
        examples.rst
        {% endif %}
