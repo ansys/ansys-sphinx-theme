@@ -89,6 +89,7 @@ pyansys_logo_dark_mode = str((LOGOS_PATH / "pyansys_logo_transparent_white.png")
 pyansys_logo_light_mode = str((LOGOS_PATH / "pyansys_logo_transparent_black.png").absolute())
 ansys_logo_light_mode = str((LOGOS_PATH / "ansys_logo_transparent_black.png").absolute())
 ansys_logo_dark_mode = str((LOGOS_PATH / "ansys_logo_transparent_white.png").absolute())
+pyansys_light_square_logo = str((LOGOS_PATH / "pyansys_light_square.png").absolute())
 
 
 def get_html_theme_path() -> pathlib.Path:
