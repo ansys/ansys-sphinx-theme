@@ -250,6 +250,6 @@ blockquote {
    box-shadow: var(--ast-ring-shadow-focused);
  }
 
-.sd-step>.sd-step-title {
-  font-size: 0.875rem; // 14px
- }
+.sd-step > .sd-step-title {
+  font-size: 0.875rem !important; // 14px
+}
