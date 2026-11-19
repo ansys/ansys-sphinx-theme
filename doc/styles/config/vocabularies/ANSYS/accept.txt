@@ -6,6 +6,9 @@
 (?i)HTML
 (?i)linkcode
 (?i)pydata
+(?i)pandoc
+(?i)nbsphinx
+(?i)pyansys
 (?i)sphinx
 (?i)Sphinx-Gallery
 (?i)theme
