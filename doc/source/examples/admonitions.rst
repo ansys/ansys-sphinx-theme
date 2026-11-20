@@ -19,7 +19,7 @@ The examples included below in this page were originally copyrighted and license
 
 .. jinja:: admonitions
 
-  .. vale off
+    .. vale off
 
     {% for filename in inputs_admonitions %}
 
