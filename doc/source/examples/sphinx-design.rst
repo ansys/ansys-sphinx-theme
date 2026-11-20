@@ -16,6 +16,8 @@ This project is licensed under the MIT License.
 
 .. jinja:: examples
 
+   .. vale off
+
     {% for filename in inputs_examples %}
     {% set title = filename.split('.')[0] %}
 
@@ -30,3 +32,5 @@ This project is licensed under the MIT License.
     .. include:: sphinx_examples/{{ filename }}
 
     {% endfor %}
+
+   .. vale on
