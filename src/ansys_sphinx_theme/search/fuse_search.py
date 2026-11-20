@@ -16,6 +16,7 @@
 
 """Module for generating search indices."""
 
+from fnmatch import fnmatchcase
 import json
 from pathlib import Path
 import re
@@ -169,12 +170,16 @@ class SearchIndex:
 
     @property
     def indices(self):
-        """Generate indices for each section."""
+        """Generate indices for each section.
+
+        Nothing is generated for documents excluded by the ``search_filters`` option.
+        """
+        object_id = filter_search_documents(self.filter_options, self.doc_name, self.parent_title)
+        if object_id is None:
+            return
+        self.object_id = object_id
         for section in self.sections:
             breadcrumbs = self.generate_breadcrumbs(section["title"])
-            self.object_id = filter_search_documents(
-                self.filter_options, self.doc_name, self.parent_title
-            )
             yield {
                 "objectID": self.object_id,
                 "href": f"{self.doc_path}#{section['anchor_id']}",
@@ -190,15 +195,45 @@ def _title_to_anchor(title: str) -> str:
     return re.sub(r"[^\w\s-]", "", title.lower().strip().replace(" ", "-"))
 
 
+def _matches_filter_pattern(pattern: str, doc_name: str) -> bool:
+    """Return whether a document name matches a search filter pattern.
+
+    A pattern ending with ``/`` matches a folder and the page of the same name
+    (``examples/`` matches ``examples`` and ``examples/table``). A pattern with
+    wildcards (``*``, ``?``, ``[]``) is matched as a glob on the whole document
+    name. Any other pattern matches that page, or the folder of the same name.
+    """
+    pattern = pattern.strip()
+    if any(char in pattern for char in "*?["):
+        return fnmatchcase(doc_name, pattern)
+    folder = pattern.rstrip("/")
+    return doc_name == folder or doc_name.startswith(f"{folder}/")
+
+
 def filter_search_documents(filters, doc_name, doc_title):
-    """Filter search documents based on the provided filters."""
+    """Return the search filter label of a document.
+
+    Parameters
+    ----------
+    filters : dict or None
+        Mapping of filter labels to lists of folders, pages or glob patterns.
+    doc_name : str
+        Name of the document.
+    doc_title : str
+        Label used when no filters are configured.
+
+    Returns
+    -------
+    str or None
+        The matching filter label, ``doc_title`` when no filters are configured,
+        or ``None`` when filters are configured and the document matches none of them.
+    """
     if not filters:
         return doc_title
-    for display_doc_name, doc_names in filters.items():
-        for value in doc_names:
-            if doc_name.startswith(value.rstrip("/")):
-                return display_doc_name
-    return doc_title
+    for display_doc_name, patterns in filters.items():
+        if any(_matches_filter_pattern(pattern, doc_name) for pattern in patterns):
+            return display_doc_name
+    return None
 
 
 def create_search_index(app, exception):

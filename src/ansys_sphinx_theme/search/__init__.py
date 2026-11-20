@@ -33,6 +33,8 @@ def update_search_config(app: Sphinx) -> None:
       ``objectID`` = 0.5.
     - **threshold** (*float*) – Fuse.js match threshold (0 = exact, 1 = any).
       Defaults to ``0.2``.
+    - **ignoreLocation** (*bool*) – Match words anywhere in the text instead of only
+      near its start. Defaults to ``True``.
     - **limit** (*int*) – Maximum number of results returned. Defaults to ``10``.
     - **includeScore** (*bool*) – Include Fuse.js score in results. Defaults to
       ``True``.
@@ -55,6 +57,7 @@ def update_search_config(app: Sphinx) -> None:
         ],
     )
     theme_static_options.setdefault("threshold", 0.2)
+    theme_static_options.setdefault("ignoreLocation", True)
     theme_static_options.setdefault("limit", 10)
     theme_static_options.setdefault("includeScore", True)
     theme_static_options.setdefault("includeMatches", True)
