@@ -17,9 +17,10 @@ The examples included below in this page were originally copyrighted and license
   (SPDX-License-Identifier: CC-BY-SA-4.0), as specified by the PyData Sphinx Theme in their examples.
 
 
+.. vale off
+
 .. jinja:: admonitions
 
-    .. vale off
 
     {% for filename in inputs_admonitions %}
 
@@ -27,5 +28,7 @@ The examples included below in this page were originally copyrighted and license
 
     {% endfor %}
 
-    .. vale on
+
+
+.. vale on
 
