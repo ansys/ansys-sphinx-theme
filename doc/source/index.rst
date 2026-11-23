@@ -9,7 +9,7 @@ helping to ensure consistency in its look and feel. Various useful extensions
 are included in the theme to make documentation more appealing and user-friendly.
 
 
-.. vale on
+.. vale off
 
 .. jinja:: main_toctree
 
@@ -54,7 +54,7 @@ are included in the theme to make documentation more appealing and user-friendly
             View the changelog for this project.
 
 
-.. vale off
+.. vale on
 
 .. jinja:: main_toctree
 
