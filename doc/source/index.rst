@@ -8,6 +8,9 @@ This theme is specifically tailored for documentation related to Ansys projects
 helping to ensure consistency in its look and feel. Various useful extensions
 are included in the theme to make documentation more appealing and user-friendly.
 
+
+.. vale on
+
 .. jinja:: main_toctree
 
     .. grid:: 1 2 3 3
@@ -26,7 +29,6 @@ are included in the theme to make documentation more appealing and user-friendly
 
             Learn how to use the capabilities and features of this theme.
 
-             .. vale off
 
         {% if build_examples %}
 
@@ -38,7 +40,6 @@ are included in the theme to make documentation more appealing and user-friendly
 
         {% endif %}
 
-             .. vale on
 
         .. grid-item-card:: :material-regular:`people;1.25em` Contribute
             :link: contribute
@@ -51,6 +52,9 @@ are included in the theme to make documentation more appealing and user-friendly
             :link-type: doc
 
             View the changelog for this project.
+
+
+.. vale off
 
 .. jinja:: main_toctree
 
