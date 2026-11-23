@@ -151,7 +151,7 @@ numpydoc_validation_checks = {
     "RT02",  # The first line of the Returns section should contain only the type
 }
 
-suppress_warnings = ["config.cache"]
+suppress_warnings = ["config.cache", "design.fa-build"]
 
 # The suffix(es) of source filenames.
 source_suffix = ".rst"
