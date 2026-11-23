@@ -14,6 +14,9 @@ Copyright (c) by Chris Sewell (2023),
 available at `sphinx design examples <sphinx_design_examples_>`_.
 This project is licensed under the MIT License.
 
+
+.. vale off
+
 .. jinja:: examples
 
     {% for filename in inputs_examples %}
@@ -30,3 +33,5 @@ This project is licensed under the MIT License.
     .. include:: sphinx_examples/{{ filename }}
 
     {% endfor %}
+
+.. vale on

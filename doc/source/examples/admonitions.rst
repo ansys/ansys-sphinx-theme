@@ -17,11 +17,18 @@ The examples included below in this page were originally copyrighted and license
   (SPDX-License-Identifier: CC-BY-SA-4.0), as specified by the PyData Sphinx Theme in their examples.
 
 
+.. vale off
+
 .. jinja:: admonitions
+
 
     {% for filename in inputs_admonitions %}
 
     .. include:: sphinx_examples/{{ filename }}
 
     {% endfor %}
+
+
+
+.. vale on
 
