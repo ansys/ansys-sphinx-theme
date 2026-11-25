@@ -4,7 +4,7 @@ ci:
 repos:
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: ef6cf06c079dd6b299dfc720b0f14400c9d168e1  # frozen: v0.17.5
+  rev: 9026c9127e153371d7a78dfcb0c45ae2046a3d10  # frozen: v0.17.6
   hooks:
     - id: ruff
       args: [--fix]
@@ -37,7 +37,7 @@ repos:
     - id: check-github-workflows
 
 - repo: https://github.com/ansys/pre-commit-hooks
-  rev: dbcd0a4ad0060f78ac3c7d53d342f510edc48eab  # frozen: v0.8.1
+  rev: 5040e1fffc2867225e12b55a15e11d207663f1a6  # frozen: v0.8.4
   hooks:
   - id: add-license-headers
     files: '(src|doc/source/examples)/.*\.(py)'
@@ -47,7 +47,7 @@ repos:
 
 
 - repo: https://github.com/zizmorcore/zizmor-pre-commit
-  rev: 06a39750ec31860bb44f2acf67182c40016cd1e7  # frozen: v1.32.0
+  rev: c7d31dc612dffdd4d3b2f2b88b9660d3ab057ee8  # frozen: v1.33.1
   hooks:
     - id: zizmor
       args:
@@ -56,12 +56,12 @@ repos:
 
 # Do not use this tool with proprietary ansys source code.
 - repo: "https://github.com/djlint/djLint"
-  rev: d3df7094210c617e56fb64f94b0921be38b74d88  # frozen: v1.51.0
+  rev: ba83fa585bc2e2bf853a8eb50e297c14f0a652b5  # frozen: v1.54.0
   hooks:
     - id: djlint-jinja
       types_or: ["html"]
 
 - repo: https://github.com/astral-sh/ty-pre-commit
-  rev: "d598b95ef3cba3cf3a31c40620c3481ae978e4eb"  # frozen: v0.0.104
+  rev: "31ea340b6f1d06c26485118b1265e49cfc4fb114"  # frozen: v0.0.108
   hooks:
     - id: ty
