@@ -308,7 +308,9 @@ def test_sphinx_design_dropdown(page: Page) -> None:
     shows the expected content.
     """
     open_page(page, SPHINX_DESIGN_PAGE)
-    dropdown = page.locator("details.sd-dropdown").first
+    dropdown = page.locator("details.sd-dropdown").filter(
+        has=page.get_by_text("Dropdown title", exact=True)
+    )
     expect(dropdown).to_be_attached()
     summary = dropdown.locator("summary.sd-summary-title")
     expect(summary).to_be_attached()
@@ -316,4 +318,5 @@ def test_sphinx_design_dropdown(page: Page) -> None:
         summary.click()
     summary.click()
     expect(dropdown).to_have_attribute("open", "")
+    expect(dropdown.locator(".sd-summary-content")).to_be_visible()
     expect(dropdown.locator(".sd-summary-content")).to_contain_text("Dropdown content")

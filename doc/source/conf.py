@@ -151,7 +151,7 @@ numpydoc_validation_checks = {
     "RT02",  # The first line of the Returns section should contain only the type
 }
 
-suppress_warnings = ["config.cache"]
+suppress_warnings = ["config.cache", "design.fa-build"]
 
 # The suffix(es) of source filenames.
 source_suffix = ".rst"
@@ -276,9 +276,11 @@ def download_and_process_files(example_links: List[str]) -> List[str]:
         with open(file_path, "wb") as f:  # noqa: PTH123
             response = requests.get(link)
             content = response.content.decode()
-            lines = content.splitlines()
             # Replace the "target" string with the file name in the example files
-            f.write("\n".join([line.replace("target", file_name) for line in lines]).encode())
+            processed_content = "\n".join(
+                line.replace("target", file_name) for line in content.splitlines()
+            )
+            f.write(f"{processed_content}\n\n".encode())
         file_names.append(file_name)
 
     return file_names

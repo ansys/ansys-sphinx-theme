@@ -314,3 +314,7 @@ blockquote {
    outline: none;
    box-shadow: var(--ast-ring-shadow-focused);
  }
+
+.sd-step > .sd-step-title {
+  font-size: $font-size !important;
+}
